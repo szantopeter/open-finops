@@ -21,7 +21,6 @@
     "@angular/platform-browser-dynamic": "^20.1.0",
     "@angular/router": "^20.1.0",
     "@apollo/client": "3.13.9",
-    "@auth0/auth0-angular": "2.2.3",
     "@tailwindcss/postcss": "^4.0.8",
     "apollo-angular": "^11.0.0",
     "graphql": "^16.10.0",

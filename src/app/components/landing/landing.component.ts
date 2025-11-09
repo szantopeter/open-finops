@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'wk-landing',
@@ -12,19 +11,5 @@ import { AuthService } from '@auth0/auth0-angular';
  */
 export class LandingComponent {
   title = 'angular-template';
-
-  /**
-   *
-   * @param auth0 The Auth0 service.
-   */
-  constructor(private auth0: AuthService) {
-  }
-
-  /**
-   * Logs the user out.
-   */
-  logout(): void {
-    this.auth0.logout();
-  }
 
 }
