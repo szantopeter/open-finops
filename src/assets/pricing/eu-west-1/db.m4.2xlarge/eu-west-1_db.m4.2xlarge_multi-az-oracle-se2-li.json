@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m4.2xlarge",
+  "deployment": "multi-az",
+  "engine": "oracle-se2-li",
+  "license": "li",
+  "onDemand": {
+    "hourly": 3.4013,
+    "daily": 81.6312,
+    "sku": "XBTHANFUGJ75CQW9"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m6idn.8xlarge",
+  "deployment": "single-az",
+  "engine": "Db2-se",
+  "license": null,
+  "onDemand": {
+    "hourly": 4.50554,
+    "daily": 108.13296,
+    "sku": "NQKDNPX65STX5TBA"
+  },
+  "savingsOptions": {
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 32518.03,
+      "hourly": 1.237368,
+      "effectiveHourly": 2.473889,
+      "daily": 59.373334
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 28773.53,
+      "hourly": 0,
+      "effectiveHourly": 3.282401,
+      "daily": 78.777625
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 62671.12,
+      "hourly": 0,
+      "effectiveHourly": 2.383113,
+      "daily": 57.194721
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 3.464596,
+      "effectiveHourly": 3.464596,
+      "daily": 83.150304
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 14780.92,
+      "hourly": 1.68732,
+      "effectiveHourly": 3.373485,
+      "daily": 80.963642
+    },
+    "3yr_No Upfront": null
+  }
+}

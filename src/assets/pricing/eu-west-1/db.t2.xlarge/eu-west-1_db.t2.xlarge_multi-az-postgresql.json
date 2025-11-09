@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.t2.xlarge",
+  "deployment": "multi-az",
+  "engine": "postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.53664,
+    "daily": 12.87936,
+    "sku": "VUDADTAR4RV5E9SP"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

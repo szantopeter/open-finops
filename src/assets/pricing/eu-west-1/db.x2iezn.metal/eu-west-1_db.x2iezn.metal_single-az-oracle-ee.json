@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.x2iezn.metal",
+  "deployment": "single-az",
+  "engine": "oracle-ee",
+  "license": null,
+  "onDemand": {
+    "hourly": 14.0868,
+    "daily": 338.0832,
+    "sku": "874PPQZ36PZ4682N"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

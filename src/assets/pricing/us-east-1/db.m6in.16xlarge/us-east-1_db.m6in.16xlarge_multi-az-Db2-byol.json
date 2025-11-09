@@ -1,0 +1,55 @@
+{
+  "region": "us-east-1",
+  "instance": "db.m6in.16xlarge",
+  "deployment": "multi-az",
+  "engine": "Db2-byol",
+  "license": "byol",
+  "onDemand": {
+    "hourly": 14.2115,
+    "daily": 341.076,
+    "sku": "TE6WXA7EJA938MPX"
+  },
+  "savingsOptions": {
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 197943.46,
+      "hourly": 0,
+      "effectiveHourly": 7.526939,
+      "daily": 180.646549
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 90879.7,
+      "hourly": 0,
+      "effectiveHourly": 10.367294,
+      "daily": 248.815059
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 102708.21,
+      "hourly": 3.908098,
+      "effectiveHourly": 7.81365,
+      "daily": 187.527602
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 10.942812,
+      "effectiveHourly": 10.942812,
+      "daily": 262.627488
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 46685.34,
+      "hourly": 5.329248,
+      "effectiveHourly": 10.654977,
+      "daily": 255.719449
+    },
+    "3yr_No Upfront": null
+  }
+}

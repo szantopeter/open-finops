@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.t2.medium",
+  "deployment": "single-az",
+  "engine": "oracle-ee-byol",
+  "license": "byol",
+  "onDemand": {
+    "hourly": 0.05848,
+    "daily": 1.40352,
+    "sku": "U7QNPQ4V72V7QG26"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

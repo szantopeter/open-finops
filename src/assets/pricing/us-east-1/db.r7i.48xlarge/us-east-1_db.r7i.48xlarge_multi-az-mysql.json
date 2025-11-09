@@ -1,0 +1,41 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r7i.48xlarge",
+  "deployment": "multi-az",
+  "engine": "mysql",
+  "license": null,
+  "onDemand": {
+    "hourly": 41.28,
+    "daily": 990.72,
+    "sku": "KYXD6C8SGFKTSMHE"
+  },
+  "savingsOptions": {
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 227815.72,
+      "hourly": 0,
+      "effectiveHourly": 25.98856,
+      "daily": 623.725448
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 27.6576,
+      "effectiveHourly": 27.6576,
+      "daily": 663.7824
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 117524.16,
+      "hourly": 13.416,
+      "effectiveHourly": 26.822817,
+      "daily": 643.747614
+    },
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

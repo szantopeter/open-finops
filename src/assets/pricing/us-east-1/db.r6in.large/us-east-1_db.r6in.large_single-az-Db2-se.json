@@ -1,0 +1,55 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r6in.large",
+  "deployment": "single-az",
+  "engine": "Db2-se",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.29756,
+    "daily": 7.14144,
+    "sku": "MUS58AGU6TURCF7E"
+  },
+  "savingsOptions": {
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 4143.48,
+      "hourly": 0,
+      "effectiveHourly": 0.157559,
+      "daily": 3.78141
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 1902.32,
+      "hourly": 0,
+      "effectiveHourly": 0.217012,
+      "daily": 5.208268
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 2150,
+      "hourly": 0.081786,
+      "effectiveHourly": 0.163541,
+      "daily": 3.92499
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 976.96,
+      "hourly": 0.111542,
+      "effectiveHourly": 0.222991,
+      "daily": 5.351778
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 0.229018,
+      "effectiveHourly": 0.229018,
+      "daily": 5.496432
+    },
+    "3yr_No Upfront": null
+  }
+}

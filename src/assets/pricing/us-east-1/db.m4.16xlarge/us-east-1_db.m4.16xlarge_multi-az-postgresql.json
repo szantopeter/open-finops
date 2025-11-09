@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.m4.16xlarge",
+  "deployment": "multi-az",
+  "engine": "postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 10.05168,
+    "daily": 241.24032,
+    "sku": "XE4GUWYGD36V7KCZ"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

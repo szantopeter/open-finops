@@ -1,0 +1,55 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r5b.xlarge",
+  "deployment": "multi-az",
+  "engine": "sqlserver-se",
+  "license": null,
+  "onDemand": {
+    "hourly": 2.832324,
+    "daily": 67.975776,
+    "sku": "DAEAX8ARQU2MRSF5"
+  },
+  "savingsOptions": {
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 58057.74,
+      "hourly": 0,
+      "effectiveHourly": 2.207686,
+      "daily": 52.984476
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 11165.38,
+      "hourly": 1.27452,
+      "effectiveHourly": 2.548234,
+      "daily": 61.157625
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 29773.2,
+      "hourly": 1.13262,
+      "effectiveHourly": 2.264767,
+      "daily": 54.354406
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 21833.68,
+      "hourly": 0,
+      "effectiveHourly": 2.490723,
+      "daily": 59.777358
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 2.66256,
+      "effectiveHourly": 2.66256,
+      "daily": 63.90144
+    },
+    "3yr_No Upfront": null
+  }
+}

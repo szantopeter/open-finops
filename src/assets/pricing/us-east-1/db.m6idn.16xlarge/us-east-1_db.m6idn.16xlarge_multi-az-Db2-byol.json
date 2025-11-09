@@ -1,0 +1,55 @@
+{
+  "region": "us-east-1",
+  "instance": "db.m6idn.16xlarge",
+  "deployment": "multi-az",
+  "engine": "Db2-byol",
+  "license": "byol",
+  "onDemand": {
+    "hourly": 16.2368,
+    "daily": 389.6832,
+    "sku": "6PXSTFHDWE595FUH"
+  },
+  "savingsOptions": {
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 103831.24,
+      "hourly": 0,
+      "effectiveHourly": 11.844769,
+      "daily": 284.274442
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 53338.06,
+      "hourly": 6.0888,
+      "effectiveHourly": 12.173452,
+      "daily": 292.16285
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 226152.48,
+      "hourly": 0,
+      "effectiveHourly": 8.599608,
+      "daily": 206.390582
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 12.502336,
+      "effectiveHourly": 12.502336,
+      "daily": 300.056064
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 117343.56,
+      "hourly": 4.46512,
+      "effectiveHourly": 8.927191,
+      "daily": 214.2526
+    },
+    "3yr_No Upfront": null
+  }
+}

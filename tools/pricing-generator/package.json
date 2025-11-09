@@ -1,0 +1,12 @@
+{
+  "name": "pricing-generator",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "generate": "node generate-pricing.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-pricing": "^3.375.0",
+    "minimist": "^1.2.8"
+  }
+}

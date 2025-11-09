@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.t2.medium",
+  "deployment": "multi-az",
+  "engine": "oracle-se2-byol",
+  "license": "byol",
+  "onDemand": {
+    "hourly": 0.12556,
+    "daily": 3.01344,
+    "sku": "Z45X5HR6EXRYB6M9"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

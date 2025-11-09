@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m1.medium",
+  "deployment": "single-az",
+  "engine": "mysql",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.1032,
+    "daily": 2.4768,
+    "sku": "CUZ8R34AF9NWQTAR"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r3.large",
+  "deployment": "single-az",
+  "engine": "oracle-se2-li",
+  "license": "li",
+  "onDemand": {
+    "hourly": 0.42054,
+    "daily": 10.09296,
+    "sku": "JZ8YEN8MT2JGUYZR"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

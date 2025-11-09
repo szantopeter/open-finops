@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m4.large",
+  "deployment": "single-az",
+  "engine": "mysql",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.16598,
+    "daily": 3.98352,
+    "sku": "T5J6NXJJ7Y8WYPS4"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

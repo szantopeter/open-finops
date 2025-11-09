@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.x1e.xlarge",
+  "deployment": "single-az",
+  "engine": "sqlserver-se-li",
+  "license": "li",
+  "onDemand": {
+    "hourly": 2.36156,
+    "daily": 56.67744,
+    "sku": "ZUAN3EB868DTHUCW"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

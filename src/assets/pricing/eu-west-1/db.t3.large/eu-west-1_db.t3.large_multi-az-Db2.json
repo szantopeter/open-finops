@@ -1,0 +1,55 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.t3.large",
+  "deployment": "multi-az",
+  "engine": "Db2",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.26832,
+    "daily": 6.43968,
+    "sku": "PJR6253G9Y39JMFD"
+  },
+  "savingsOptions": {
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 1497.26,
+      "hourly": 0,
+      "effectiveHourly": 0.170803,
+      "daily": 4.099274
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 0.183094,
+      "effectiveHourly": 0.183094,
+      "daily": 4.394256
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 763.68,
+      "hourly": 0.087204,
+      "effectiveHourly": 0.174322,
+      "daily": 4.183737
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 3109.76,
+      "hourly": 0,
+      "effectiveHourly": 0.118251,
+      "daily": 2.83802
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 1586.7,
+      "hourly": 0.060372,
+      "effectiveHourly": 0.120707,
+      "daily": 2.896977
+    },
+    "3yr_No Upfront": null
+  }
+}

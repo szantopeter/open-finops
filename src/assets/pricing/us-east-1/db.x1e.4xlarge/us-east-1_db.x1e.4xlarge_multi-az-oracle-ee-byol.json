@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.x1e.4xlarge",
+  "deployment": "multi-az",
+  "engine": "oracle-ee-byol",
+  "license": "byol",
+  "onDemand": {
+    "hourly": 9.63974,
+    "daily": 231.35376,
+    "sku": "F7WTXTSPGMJ3XV65"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

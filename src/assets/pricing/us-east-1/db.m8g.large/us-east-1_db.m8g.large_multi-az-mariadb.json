@@ -1,0 +1,41 @@
+{
+  "region": "us-east-1",
+  "instance": "db.m8g.large",
+  "deployment": "multi-az",
+  "engine": "mariadb",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.28896,
+    "daily": 6.93504,
+    "sku": "WTM2UW5UBXDW2QV2"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 0.1935,
+      "effectiveHourly": 0.1935,
+      "daily": 4.644
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 821.3,
+      "hourly": 0.09374,
+      "effectiveHourly": 0.187432,
+      "daily": 4.498357
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 1597.02,
+      "hourly": 0,
+      "effectiveHourly": 0.182183,
+      "daily": 4.372403
+    },
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

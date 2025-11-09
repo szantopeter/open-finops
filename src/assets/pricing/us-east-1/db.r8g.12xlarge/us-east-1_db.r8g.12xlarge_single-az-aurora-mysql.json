@@ -1,0 +1,41 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r8g.12xlarge",
+  "deployment": "single-az",
+  "engine": "aurora-mysql",
+  "license": null,
+  "onDemand": {
+    "hourly": 7.40976,
+    "daily": 177.83424,
+    "sku": "G3U5TFC9K5C7Y7PN"
+  },
+  "savingsOptions": {
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 14042.94,
+      "hourly": 1.60304,
+      "effectiveHourly": 3.205018,
+      "daily": 76.920435
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 3.30498,
+      "effectiveHourly": 3.30498,
+      "daily": 79.31952
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 27226.74,
+      "hourly": 0,
+      "effectiveHourly": 3.105948,
+      "daily": 74.542751
+    },
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

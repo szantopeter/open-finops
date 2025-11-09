@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r4.4xlarge",
+  "deployment": "multi-az",
+  "engine": "sqlserver-ee-li",
+  "license": "li",
+  "onDemand": {
+    "hourly": 17.53024,
+    "daily": 420.72576,
+    "sku": "K3PT7ECSMKG5AAXD"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

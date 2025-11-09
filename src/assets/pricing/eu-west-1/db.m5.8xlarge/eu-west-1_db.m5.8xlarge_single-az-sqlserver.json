@@ -1,0 +1,55 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m5.8xlarge",
+  "deployment": "single-az",
+  "engine": "sqlserver",
+  "license": null,
+  "onDemand": {
+    "hourly": 4.38944,
+    "daily": 105.34656,
+    "sku": "ASYRXVG64MRK99UJ"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 16.372852,
+      "effectiveHourly": 16.372852,
+      "daily": 392.948448
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 68297.76,
+      "hourly": 7.796588,
+      "effectiveHourly": 15.587799,
+      "daily": 374.107188
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 133864.16,
+      "hourly": 0,
+      "effectiveHourly": 15.270838,
+      "daily": 366.500096
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 30809.5,
+      "hourly": 0,
+      "effectiveHourly": 1.171553,
+      "daily": 28.117271
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 15719.08,
+      "hourly": 0.59813,
+      "effectiveHourly": 1.195859,
+      "daily": 28.700618
+    },
+    "3yr_No Upfront": null
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r7i.3xlarge.tpc2.mem4x",
+  "deployment": "multi-az",
+  "engine": "oracle-ee-byol",
+  "license": "byol",
+  "onDemand": {
+    "hourly": 11.5584,
+    "daily": 277.4016,
+    "sku": "XXVE5TURASX2JJ7D"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

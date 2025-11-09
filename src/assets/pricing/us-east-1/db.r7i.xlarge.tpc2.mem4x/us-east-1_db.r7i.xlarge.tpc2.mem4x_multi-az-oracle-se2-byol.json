@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r7i.xlarge.tpc2.mem4x",
+  "deployment": "multi-az",
+  "engine": "oracle-se2-byol",
+  "license": "byol",
+  "onDemand": {
+    "hourly": 3.44,
+    "daily": 82.56,
+    "sku": "4C8CGFKKGEJTJ9UC"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

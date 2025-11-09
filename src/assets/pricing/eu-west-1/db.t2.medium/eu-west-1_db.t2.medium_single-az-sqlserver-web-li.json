@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.t2.medium",
+  "deployment": "single-az",
+  "engine": "sqlserver-web-li",
+  "license": "li",
+  "onDemand": {
+    "hourly": 0.25198,
+    "daily": 6.04752,
+    "sku": "F5F2UFF4RHZH438R"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

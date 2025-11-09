@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r4.8xlarge",
+  "deployment": "single-az",
+  "engine": "oracle-ee-byol",
+  "license": "byol",
+  "onDemand": {
+    "hourly": 3.649152,
+    "daily": 87.579648,
+    "sku": "RP28H2DMRW26PZ38"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r4.4xlarge",
+  "deployment": "single-az",
+  "engine": "mariadb",
+  "license": null,
+  "onDemand": {
+    "hourly": 1.6512,
+    "daily": 39.6288,
+    "sku": "RCHXQVY88JDFVTDQ"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

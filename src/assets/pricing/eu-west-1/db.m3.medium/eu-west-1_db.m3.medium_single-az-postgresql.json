@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m3.medium",
+  "deployment": "single-az",
+  "engine": "postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.08944,
+    "daily": 2.14656,
+    "sku": "P9Y3ZCMSVY2C6KZD"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

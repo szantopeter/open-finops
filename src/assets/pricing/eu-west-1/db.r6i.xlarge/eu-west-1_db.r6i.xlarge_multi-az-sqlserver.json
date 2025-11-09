@@ -1,0 +1,55 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r6i.xlarge",
+  "deployment": "multi-az",
+  "engine": "sqlserver",
+  "license": null,
+  "onDemand": {
+    "hourly": 1.38288,
+    "daily": 33.18912,
+    "sku": "D8VG2TAZE958BMUX"
+  },
+  "savingsOptions": {
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 10096.4,
+      "hourly": 0,
+      "effectiveHourly": 0.383923,
+      "daily": 9.214146
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 5151.4,
+      "hourly": 0.195994,
+      "effectiveHourly": 0.39188,
+      "daily": 9.405111
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 4929.52,
+      "hourly": 0,
+      "effectiveHourly": 0.562345,
+      "daily": 13.49629
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 2515.5,
+      "hourly": 0.287154,
+      "effectiveHourly": 0.574115,
+      "daily": 13.77876
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 0.603032,
+      "effectiveHourly": 0.603032,
+      "daily": 14.472768
+    },
+    "3yr_No Upfront": null
+  }
+}

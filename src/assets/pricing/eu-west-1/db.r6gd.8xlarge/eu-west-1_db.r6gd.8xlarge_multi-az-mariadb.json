@@ -1,0 +1,55 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r6gd.8xlarge",
+  "deployment": "multi-az",
+  "engine": "mariadb",
+  "license": null,
+  "onDemand": {
+    "hourly": 7.86986,
+    "daily": 188.87664,
+    "sku": "9P66FYDCQVW8WYGZ"
+  },
+  "savingsOptions": {
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 25851.6,
+      "hourly": 2.95109,
+      "effectiveHourly": 5.900166,
+      "daily": 141.603984
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 6.05956,
+      "effectiveHourly": 6.05956,
+      "daily": 145.42944
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 56873.52,
+      "hourly": 2.164104,
+      "effectiveHourly": 4.32676,
+      "daily": 103.842233
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 109610.44,
+      "hourly": 0,
+      "effectiveHourly": 4.168014,
+      "daily": 100.032343
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 50324.62,
+      "hourly": 0,
+      "effectiveHourly": 5.740888,
+      "daily": 137.781301
+    },
+    "3yr_No Upfront": null
+  }
+}

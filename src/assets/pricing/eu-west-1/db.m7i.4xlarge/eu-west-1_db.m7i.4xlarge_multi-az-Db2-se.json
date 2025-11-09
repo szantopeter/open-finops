@@ -1,0 +1,41 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m7i.4xlarge",
+  "deployment": "multi-az",
+  "engine": "Db2-se",
+  "license": null,
+  "onDemand": {
+    "hourly": 2.71072,
+    "daily": 65.05728,
+    "sku": "9MH2WWGWAD7A4BRZ"
+  },
+  "savingsOptions": {
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 7717.42,
+      "hourly": 0.880984,
+      "effectiveHourly": 1.761364,
+      "daily": 42.27275
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 1.816148,
+      "effectiveHourly": 1.816148,
+      "daily": 43.587552
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 14959.92,
+      "hourly": 0,
+      "effectiveHourly": 1.706585,
+      "daily": 40.958038
+    },
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

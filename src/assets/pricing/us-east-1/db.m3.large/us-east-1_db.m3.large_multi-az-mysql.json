@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.m3.large",
+  "deployment": "multi-az",
+  "engine": "mysql",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.3182,
+    "daily": 7.6368,
+    "sku": "FQWSVDX8APMR5HQA"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

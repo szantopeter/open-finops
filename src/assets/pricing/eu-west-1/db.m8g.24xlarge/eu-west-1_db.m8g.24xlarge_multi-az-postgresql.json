@@ -1,0 +1,41 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m8g.24xlarge",
+  "deployment": "multi-az",
+  "engine": "postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 15.35616,
+    "daily": 368.54784,
+    "sku": "BPVHKJWMG8VVEY3D"
+  },
+  "savingsOptions": {
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 84745.26,
+      "hourly": 0,
+      "effectiveHourly": 9.667495,
+      "daily": 232.019876
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 43717.24,
+      "hourly": 4.99058,
+      "effectiveHourly": 9.977717,
+      "daily": 239.4652
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 10.28904,
+      "effectiveHourly": 10.28904,
+      "daily": 246.93696
+    },
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

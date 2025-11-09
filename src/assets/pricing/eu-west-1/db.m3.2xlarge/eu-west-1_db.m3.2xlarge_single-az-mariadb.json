@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m3.2xlarge",
+  "deployment": "single-az",
+  "engine": "mariadb",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.6751,
+    "daily": 16.2024,
+    "sku": "7G2QK69ESVF3CM5K"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

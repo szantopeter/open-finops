@@ -1,0 +1,41 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m7i.48xlarge",
+  "deployment": "multi-az",
+  "engine": "Db2-byol",
+  "license": "byol",
+  "onDemand": {
+    "hourly": 32.52864,
+    "daily": 780.68736,
+    "sku": "ZCENGP4RBAVMAQTY"
+  },
+  "savingsOptions": {
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 92609.04,
+      "hourly": 10.571808,
+      "effectiveHourly": 21.13638,
+      "daily": 507.273124
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 179519.06,
+      "hourly": 0,
+      "effectiveHourly": 20.479017,
+      "daily": 491.496392
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 21.79412,
+      "effectiveHourly": 21.79412,
+      "daily": 523.05888
+    },
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

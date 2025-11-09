@@ -1,0 +1,55 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r6idn.12xlarge",
+  "deployment": "multi-az",
+  "engine": "Db2",
+  "license": null,
+  "onDemand": {
+    "hourly": 17.83898,
+    "daily": 428.13552,
+    "sku": "W63UJJP48SDQ2GTC"
+  },
+  "savingsOptions": {
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 114078.14,
+      "hourly": 0,
+      "effectiveHourly": 13.013705,
+      "daily": 312.328925
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 248472.06,
+      "hourly": 0,
+      "effectiveHourly": 9.448326,
+      "daily": 226.759809
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 128924.32,
+      "hourly": 4.905784,
+      "effectiveHourly": 9.808223,
+      "daily": 235.397333
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 58602.12,
+      "hourly": 6.689682,
+      "effectiveHourly": 13.374843,
+      "daily": 320.996228
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 13.736178,
+      "effectiveHourly": 13.736178,
+      "daily": 329.668272
+    },
+    "3yr_No Upfront": null
+  }
+}

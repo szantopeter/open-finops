@@ -1,0 +1,55 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r6i.4xlarge",
+  "deployment": "multi-az",
+  "engine": "oracle-se2-byol",
+  "license": "byol",
+  "onDemand": {
+    "hourly": 3.55008,
+    "daily": 85.20192,
+    "sku": "X4JWV5G7UKUV3ZTT"
+  },
+  "savingsOptions": {
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 42669.76,
+      "hourly": 0,
+      "effectiveHourly": 1.622547,
+      "daily": 38.941146
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 21768.32,
+      "hourly": 0.828352,
+      "effectiveHourly": 1.656108,
+      "daily": 39.746586
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 20832.64,
+      "hourly": 0,
+      "effectiveHourly": 2.376527,
+      "daily": 57.036659
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 10633.9,
+      "hourly": 1.21389,
+      "effectiveHourly": 2.426975,
+      "daily": 58.247391
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 2.548352,
+      "effectiveHourly": 2.548352,
+      "daily": 61.160448
+    },
+    "3yr_No Upfront": null
+  }
+}

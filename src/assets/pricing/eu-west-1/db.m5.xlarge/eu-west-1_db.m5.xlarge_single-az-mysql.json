@@ -1,0 +1,55 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m5.xlarge",
+  "deployment": "single-az",
+  "engine": "mysql",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.14104,
+    "daily": 3.38496,
+    "sku": "XC8GJ45PP9C9HPD5"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 0.238392,
+      "effectiveHourly": 0.238392,
+      "daily": 5.721408
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 994.16,
+      "hourly": 0.11352,
+      "effectiveHourly": 0.226931,
+      "daily": 5.446342
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 2047.66,
+      "hourly": 0.077916,
+      "effectiveHourly": 0.15578,
+      "daily": 3.738713
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 4014.48,
+      "hourly": 0,
+      "effectiveHourly": 0.152653,
+      "daily": 3.663683
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 1948.76,
+      "hourly": 0,
+      "effectiveHourly": 0.222309,
+      "daily": 5.335414
+    },
+    "3yr_No Upfront": null
+  }
+}

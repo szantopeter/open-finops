@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m2.4xlarge",
+  "deployment": "single-az",
+  "engine": "postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 1.30032,
+    "daily": 31.20768,
+    "sku": "AZFQ8K29RURG9Y2R"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

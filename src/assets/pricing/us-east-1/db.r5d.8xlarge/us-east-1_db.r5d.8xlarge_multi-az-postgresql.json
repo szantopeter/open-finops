@@ -1,0 +1,55 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r5d.8xlarge",
+  "deployment": "multi-az",
+  "engine": "postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 7.86298,
+    "daily": 188.71152,
+    "sku": "KREJT9C3VVRFXVM6"
+  },
+  "savingsOptions": {
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 318087.34,
+      "hourly": 12.103812,
+      "effectiveHourly": 24.199308,
+      "daily": 580.783379
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 623450.98,
+      "hourly": 0,
+      "effectiveHourly": 23.707163,
+      "daily": 568.971918
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 219362.78,
+      "hourly": 0,
+      "effectiveHourly": 25.024273,
+      "daily": 600.58256
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 111919.54,
+      "hourly": 12.776246,
+      "effectiveHourly": 25.543705,
+      "daily": 613.048905
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 26.830022,
+      "effectiveHourly": 26.830022,
+      "daily": 643.920528
+    },
+    "3yr_No Upfront": null
+  }
+}

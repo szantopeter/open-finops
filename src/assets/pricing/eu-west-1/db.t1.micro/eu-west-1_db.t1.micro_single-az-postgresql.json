@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.t1.micro",
+  "deployment": "single-az",
+  "engine": "postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.03268,
+    "daily": 0.78432,
+    "sku": "MDQNHGWRC5P6V8BX"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r7i.48xlarge",
+  "deployment": "single-az",
+  "engine": "postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 20.64,
+    "daily": 495.36,
+    "sku": "VWVBZFRVB7Z83ZFX"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 13.8288,
+      "effectiveHourly": 13.8288,
+      "daily": 331.8912
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 58762.08,
+      "hourly": 6.708,
+      "effectiveHourly": 13.411408,
+      "daily": 321.873807
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 113907.86,
+      "hourly": 0,
+      "effectiveHourly": 12.99428,
+      "daily": 311.862725
+    },
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

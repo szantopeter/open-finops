@@ -1,0 +1,55 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m5d.4xlarge",
+  "deployment": "single-az",
+  "engine": "postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 1.59616,
+    "daily": 38.30784,
+    "sku": "KB44GCE4HTC9BS6J"
+  },
+  "savingsOptions": {
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 12081.28,
+      "hourly": 0,
+      "effectiveHourly": 1.378197,
+      "daily": 33.076742
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 1.477652,
+      "effectiveHourly": 1.477652,
+      "daily": 35.463648
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 6163.62,
+      "hourly": 0.703652,
+      "effectiveHourly": 1.40678,
+      "daily": 33.76272
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 22230.14,
+      "hourly": 0,
+      "effectiveHourly": 0.845316,
+      "daily": 20.287602
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 11534.32,
+      "hourly": 0.438944,
+      "effectiveHourly": 0.877545,
+      "daily": 21.061071
+    },
+    "3yr_No Upfront": null
+  }
+}

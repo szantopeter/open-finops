@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m7i.metal-24xl",
+  "deployment": "single-az",
+  "engine": "oracle-ee",
+  "license": null,
+  "onDemand": {
+    "hourly": 6.09912,
+    "daily": 146.37888,
+    "sku": "ZC7274ZPA26Q4WNM"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

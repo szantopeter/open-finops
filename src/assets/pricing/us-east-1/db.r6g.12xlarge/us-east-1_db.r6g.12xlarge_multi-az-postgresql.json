@@ -1,0 +1,55 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r6g.12xlarge",
+  "deployment": "multi-az",
+  "engine": "postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 9.2794,
+    "daily": 222.7056,
+    "sku": "CKD36M78GN4AKA4B"
+  },
+  "savingsOptions": {
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 43112.66,
+      "hourly": 1.640536,
+      "effectiveHourly": 3.279926,
+      "daily": 78.718207
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 5.120698,
+      "effectiveHourly": 5.120698,
+      "daily": 122.896752
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 41859.64,
+      "hourly": 0,
+      "effectiveHourly": 4.775227,
+      "daily": 114.605448
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 21357.24,
+      "hourly": 2.4381,
+      "effectiveHourly": 4.874472,
+      "daily": 116.987336
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 84495,
+      "hourly": 0,
+      "effectiveHourly": 3.212982,
+      "daily": 77.111567
+    },
+    "3yr_No Upfront": null
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.x2iedn.metal",
+  "deployment": "single-az",
+  "engine": "oracle-ee",
+  "license": null,
+  "onDemand": {
+    "hourly": 47.12112,
+    "daily": 1130.90688,
+    "sku": "TRGDGAS887SKJ2AQ"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

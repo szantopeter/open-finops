@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.m1.small",
+  "deployment": "single-az",
+  "engine": "postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.0516,
+    "daily": 1.2384,
+    "sku": "HATJRBAVBXJBBE3S"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

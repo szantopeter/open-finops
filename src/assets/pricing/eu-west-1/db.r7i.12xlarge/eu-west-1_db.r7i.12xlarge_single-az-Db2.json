@@ -1,0 +1,41 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r7i.12xlarge",
+  "deployment": "single-az",
+  "engine": "Db2",
+  "license": null,
+  "onDemand": {
+    "hourly": 5.7792,
+    "daily": 138.7008,
+    "sku": "CWAUDTY2HDP9K4ZR"
+  },
+  "savingsOptions": {
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 36447.66,
+      "hourly": 0,
+      "effectiveHourly": 4.157844,
+      "daily": 99.788254
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 4.42556,
+      "effectiveHourly": 4.42556,
+      "daily": 106.21344
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 18803.9,
+      "hourly": 2.14656,
+      "effectiveHourly": 4.291655,
+      "daily": 102.999712
+    },
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

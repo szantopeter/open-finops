@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.t2.micro",
+  "deployment": "multi-az",
+  "engine": "oracle-se2-byol",
+  "license": "byol",
+  "onDemand": {
+    "hourly": 0.02924,
+    "daily": 0.70176,
+    "sku": "GU8VCGMC6N4R2NND"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

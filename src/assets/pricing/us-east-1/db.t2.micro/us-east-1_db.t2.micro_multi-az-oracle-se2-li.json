@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.t2.micro",
+  "deployment": "multi-az",
+  "engine": "oracle-se2-li",
+  "license": "li",
+  "onDemand": {
+    "hourly": 0.0645,
+    "daily": 1.548,
+    "sku": "WYXY9PYCNAJXCKH9"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

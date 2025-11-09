@@ -1,0 +1,55 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.x2g.4xlarge",
+  "deployment": "multi-az",
+  "engine": "mariadb",
+  "license": null,
+  "onDemand": {
+    "hourly": 5.38016,
+    "daily": 129.12384,
+    "sku": "YGZ2RE933ZPWSDWE"
+  },
+  "savingsOptions": {
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 59353.76,
+      "hourly": 0,
+      "effectiveHourly": 2.256969,
+      "daily": 54.167246
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 29205.6,
+      "hourly": 0,
+      "effectiveHourly": 3.331691,
+      "daily": 79.960575
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 30383.8,
+      "hourly": 1.156184,
+      "effectiveHourly": 2.311549,
+      "daily": 55.477186
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 3.549048,
+      "effectiveHourly": 3.549048,
+      "daily": 85.177152
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 14838.44,
+      "hourly": 1.693856,
+      "effectiveHourly": 3.386583,
+      "daily": 81.277978
+    },
+    "3yr_No Upfront": null
+  }
+}

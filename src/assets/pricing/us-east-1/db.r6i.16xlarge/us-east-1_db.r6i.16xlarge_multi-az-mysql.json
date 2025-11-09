@@ -1,0 +1,55 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r6i.16xlarge",
+  "deployment": "multi-az",
+  "engine": "mysql",
+  "license": null,
+  "onDemand": {
+    "hourly": 13.2096,
+    "daily": 317.0304,
+    "sku": "C23K32AUTB423DGN"
+  },
+  "savingsOptions": {
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 386289.63,
+      "hourly": 0,
+      "effectiveHourly": 44.066808,
+      "daily": 1057.603379
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 46.078877,
+      "effectiveHourly": 46.078877,
+      "daily": 1105.893058
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 195314.99,
+      "hourly": 22.296231,
+      "effectiveHourly": 44.577201,
+      "daily": 1069.852825
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 1148448.3,
+      "hourly": 0,
+      "effectiveHourly": 43.670557,
+      "daily": 1048.093361
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 585942.94,
+      "hourly": 22.296188,
+      "effectiveHourly": 44.577082,
+      "daily": 1069.849959
+    },
+    "3yr_No Upfront": null
+  }
+}

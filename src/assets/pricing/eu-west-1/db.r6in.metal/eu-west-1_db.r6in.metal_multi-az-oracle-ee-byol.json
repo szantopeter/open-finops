@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r6in.metal",
+  "deployment": "multi-az",
+  "engine": "oracle-ee-byol",
+  "license": "byol",
+  "onDemand": {
+    "hourly": 32.03328,
+    "daily": 768.79872,
+    "sku": "NYFMT497E7MEMQCB"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

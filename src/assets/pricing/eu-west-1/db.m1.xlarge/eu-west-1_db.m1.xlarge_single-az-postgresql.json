@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m1.xlarge",
+  "deployment": "single-az",
+  "engine": "postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.44548,
+    "daily": 10.69152,
+    "sku": "RW69D4DBPG237FCS"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}
