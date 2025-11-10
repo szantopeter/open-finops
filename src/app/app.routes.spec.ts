@@ -1,5 +1,3 @@
-import { AuthGuard } from '@auth0/auth0-angular';
-
 import { routes } from './app.routes';
 
 describe('App Routes', () => {
@@ -7,7 +5,8 @@ describe('App Routes', () => {
     expect(routes.length).toBe(1);
     const route = routes[0];
     expect(route.path).toBe('');
-    expect(route.canActivate).toEqual([AuthGuard]);
+  // Authentication was removed; ensure canActivate is not required
+  expect(route.canActivate == null || route.canActivate.length === 0).toBeTrue();
     expect(typeof route.loadComponent).toBe('function');
   });
 

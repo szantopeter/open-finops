@@ -6,6 +6,8 @@ The purpose of this project is to analyse current AWS RDS Reserved Instance port
 - AWS RDS pricing data will be downloaded by the pricing-generator tool that has to be run manually. 
 
 ## Business logic
+- Never make any guess, estimate, heuristics or shortcut when you make calculation. If something can't be calculated it has to be explicitly called out
+- Error handling must be explicit, if any calculation fails it has to be explicitly disaplyed to the user
 - RIs have to be matched by the appropriate pricing category, by all of the following fields : instance class, region, multi AZ, engine, edition, upfront payment, duration. 
 - Pricing data must be read from static files under assets/pricing . The file name contains the 
 - To calculate the monthly RI cost the logic is this

@@ -1,0 +1,3 @@
+Account Name,Account ID,Reservation ID,RI Type,Instance Type,Region,multiAZ,Product,State,Term,Utilization,Count,Units,Currency Code,Net Savings,Unrealized Savings,Start,End
+WFS-AWS-SysOps-Prod-KE-Account,649170366416,ri-2024-11-21-21-16-48-420,No Upfront,db.r5.xlarge,eu-west-1,true,"oracle-se2 (byol)",active,1 year,0.9684340,1,16.0000000,USD,249.8410000,8.7000000,2024-11-21,2025-11-21
+WFS-AWS-SysOps-KE-Lower-Account,410728501395,ri-2024-11-21-21-19-30-249,No Upfront,db.r5.xlarge,eu-west-1,false,"oracle-se2 (byol)",active,1 year,0.9684340,1,8.0000000,USD,125.7000000,4.3750000,2024-11-21,2025-11-21

@@ -1,28 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AuthModule, AuthService } from '@auth0/auth0-angular';
-
-import { environment, getEnv } from 'src/environments/environment';
 
 import { LandingComponent } from './landing.component';
+import { RiImportUploadComponent } from '../../ri-analytics/components/ri-import-upload/ri-import-upload.component';
+import { RiImportPreviewComponent } from '../../ri-analytics/components/ri-import-preview/ri-import-preview.component';
 
 describe('LandingComponent', () => {
   let component: LandingComponent;
   let fixture: ComponentFixture<LandingComponent>;
-  let authService: AuthService;
+  // Auth removed: no AuthService used in tests
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      providers: [
-        AuthService
-      ],
-      imports: [AuthModule.forRoot(environment.auth0[getEnv()]), LandingComponent]
+      imports: [LandingComponent, RiImportUploadComponent, RiImportPreviewComponent]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(LandingComponent);
-    component = fixture.componentInstance;
-    authService = TestBed.inject(AuthService);
-    fixture.detectChanges();
+  fixture = TestBed.createComponent(LandingComponent);
+  fixture.detectChanges();
   });
 
   it('should create the app', () => {
@@ -37,16 +31,12 @@ describe('LandingComponent', () => {
     expect(app.title).toEqual('angular-template');
   });
 
-  it('should render title', () => {
+  it('should render main heading', () => {
     const fixture = TestBed.createComponent(LandingComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('angular-template app is running!');
+    expect(compiled.querySelector('h1')?.textContent).toContain('RDS Reserved Instances');
   });
 
-  it('should logout when method called',() => {
-    const spy = spyOn(authService,'logout');
-    component.logout();
-    expect(spy).toHaveBeenCalled();
-  });
+  // Auth removed: no logout test
 });
