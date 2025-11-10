@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RiImportService } from '../../services/ri-import.service';
 import { RiDataService } from '../../services/ri-data.service';
+import { StorageService } from '../../../core/services/storage.service';
+import { PageStateService } from '../../../core/services/page-state.service';
 
 @Component({
   selector: 'app-ri-import-upload',
@@ -18,7 +20,12 @@ import { RiDataService } from '../../services/ri-data.service';
 export class RiImportUploadComponent {
   lastError?: string;
 
-  constructor(private readonly parser: RiImportService, private readonly data: RiDataService) {}
+  constructor(
+    private readonly parser: RiImportService,
+    private readonly data: RiDataService,
+    private readonly storage: StorageService,
+    private readonly pageState: PageStateService,
+  ) {}
 
   async onFile(event: Event) {
     this.lastError = undefined;
@@ -31,6 +38,11 @@ export class RiImportUploadComponent {
       this.data.clear();
       return;
     }
-    if (res.import) this.data.setImport(res.import);
+    if (res.import) {
+      this.data.setImport(res.import);
+      // persist via generic storage and notify the framework coordinator
+      await this.storage.set('ri-import', res.import as any);
+      await this.pageState.saveKey('ri-import');
+    }
   }
 }

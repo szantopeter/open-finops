@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { map } from 'rxjs/operators';
 import { RiDataService } from '../../services/ri-data.service';
+import { PageStateService } from '../../../core/services/page-state.service';
+import { StorageService } from '../../../core/services/storage.service';
 
 @Component({
   selector: 'app-ri-import-preview',
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="p-4 mt-4 border rounded">
+  <div class="p-4 border rounded">
       <ng-container *ngIf="counts$ | async as c; else empty">
         <div *ngIf="c.total === 0">No rows</div>
         <div *ngIf="c.total > 0">
@@ -22,7 +24,7 @@ import { RiDataService } from '../../services/ri-data.service';
     </div>
   `,
 })
-export class RiImportPreviewComponent {
+export class RiImportPreviewComponent implements OnDestroy {
   import$ = this.data.currentImport$;
   counts$ = this.import$.pipe(
     map((imp) => {
@@ -56,5 +58,29 @@ export class RiImportPreviewComponent {
     })
   );
 
-  constructor(private readonly data: RiDataService) {}
+  private readonly unregister: () => void = () => {};
+
+  constructor(private readonly data: RiDataService, private readonly pageState: PageStateService, private readonly storage: StorageService) {
+    this.unregister = this.pageState.register(
+      'ri-import',
+      // load callback: restore saved RiImport into RiDataService
+      async (s) => {
+        const stored = await s.get('ri-import');
+        if (stored && this.data && typeof (this.data as any).setImport === 'function') {
+          (this.data as any).setImport(stored as any);
+        }
+      },
+      // save callback: persist current import from RiDataService
+      async (s) => {
+        const { firstValueFrom } = await import('rxjs');
+        const cur = await firstValueFrom(this.data.currentImport$ as any);
+        if (cur) await s.set('ri-import', cur as any);
+        else await s.remove('ri-import');
+      },
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.unregister();
+  }
 }
