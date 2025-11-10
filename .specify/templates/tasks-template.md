@@ -249,3 +249,17 @@ With multiple developers:
 - Commit after each task or logical group
 - Stop at any checkpoint to validate story independently
 - Avoid: vague tasks, same file conflicts, cross-story dependencies that break independence
+
+## Constitution-driven tasks
+
+Include the following task types when relevant to the feature:
+
+- Pricing ingestion & mapping tasks (ensure pricing files exist in `assets/pricing`)
+- Exact-match rule implementation tasks (matching by instance class, region,
+  multiAZ, engine, edition, upfront, duration)
+- Persistence & migration tasks (implement versioned storage keys, migrations)
+- Audit & result model tasks (record intermediate values and assumptions)
+- Error-state handling tasks (implement UI and logging for explicit failures)
+
+Add these to the Phase and Story lists as applicable; if any are omitted, document
+the reason in the plan's Complexity Tracking section.

@@ -77,6 +77,20 @@
 
 ## Requirements *(mandatory)*
 
+## Constitution Check *(mandatory)*
+
+Before implementation, each spec MUST include:
+- A clear statement of input sources (e.g., Cloudability CSV) and which fields
+  will be used for pricing match.
+- Exact pricing match requirements when applicable (instance class, region,
+  multiAZ, engine, edition, upfront, duration).
+- Explicit error-state semantics for incomplete calculations.
+- Storage key versioning strategy if the feature persists imports or results.
+
+This section is mandatory for feature acceptance and will be validated during
+CI compliance checks.
+
+
 <!--
   ACTION REQUIRED: The content in this section represents placeholders.
   Fill them out with the right functional requirements.

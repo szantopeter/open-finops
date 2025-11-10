@@ -30,8 +30,20 @@
 ## Constitution Check
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+Gates determined based on the project's constitution. At minimum, verify:
+
+- Input sources are identified and mapped to `assets/pricing` where applicable.
+- Required pricing matching fields are documented for this feature (instance class,
+  region, multiAZ, engine, edition, upfront, duration) when calculations are
+  involved.
+- Storage/migration considerations are listed when the feature persists data
+  (use versioned keys like `ri-import:v1`).
+- Any calculation that cannot be completed MUST have an error mode described.
+
+If any of the checks above cannot be satisfied at plan time, document the gap and
+an explicit mitigation path in the Complexity Tracking section.
 
 ## Project Structure
 

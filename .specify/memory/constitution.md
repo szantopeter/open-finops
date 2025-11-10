@@ -1,50 +1,137 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+- Version change: none → 1.0.0
+- Modified principles: AGENTS.md content promoted to constitution baseline
+- Added sections: Governance, Consistency propagation checklist
+- Removed sections: none (template fully replaced)
+- Templates requiring updates:
+	- .specify/templates/plan-template.md ⚠ pending
+	- .specify/templates/spec-template.md ⚠ pending
+	- .specify/templates/tasks-template.md ⚠ pending
+	- .specify/templates/commands/*.md ⚠ pending
+	- README.md, docs/quickstart.md ⚠ pending
+- Follow-up TODOs:
+	- TODO(RATIFICATION_DATE): confirm original adoption date
+	- Ensure templates listed above are updated to include Constitution Check
+-->
+
+# AWS RDS RI Portfolio Optimizer Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### PRINCIPLE 1 — Single source of truth for inputs
+The RDS RI portfolio input is the Cloudability CSV export. The CSV structure is fixed and
+MUST be treated as authoritative. AWS RDS pricing data MUST be stored as static files
+under `assets/pricing` and MUST be consumed only from those files for deterministic
+calculations.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+Rationale: Determinism and auditability require a single, immutable source per input
+type.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### PRINCIPLE 2 — No guessing; explicit failures
+Calculations MUST NOT use heuristics, guesses, or silent defaults. If a required value is
+unavailable or ambiguous, the code MUST surface a clear error. Any calculation that
+cannot be completed MUST produce an explicit error state that is visible to the user
+and recorded in logs.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+Rationale: Financial analysis requires traceability and explicit error handling.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### PRINCIPLE 3 — Exact matching for pricing
+Every RI row MUST be matched to pricing data by all of the following fields: instance
+class, region, multiAZ, engine, edition, upfront payment, duration. Matching logic is
+business logic and MUST be implemented in services distinct from UI components.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+Rationale: Accurate cost computation depends on complete and exact matching.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### PRINCIPLE 4 — Calculation semantics
+Monthly RI cost calculation MUST follow these steps:
+1. Match the RI to pricing.
+2. Calculate how many days in the month the RI was active.
+3. Multiply the daily RI cost by active days and by the `count` field.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+Equivalent steps MUST be followed for on‑demand cost calculations using on‑demand
+daily prices. All intermediate values and assumptions used in the computation MUST be
+preserved in the result model for audit.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+Rationale: Ensure reproducibility and allow line‑by‑line inspection.
+
+### PRINCIPLE 5 — Separation of concerns
+Business logic MUST be implemented in services and pure functions fully covered by
+unit tests; UI components MUST only render prepared models and emit user intents.
+Avoid imperative subscriptions in components; prefer RxJS and async pipes; use OnPush
+change detection where possible.
+
+Rationale: Testability and maintainability.
+
+### PRINCIPLE 6 — Persistence & state
+Local persistence for UI state and parsed imports MUST use IndexedDB (via an async
+wrapper) for large payloads; small synchronous metadata MAY be mirrored in
+`localStorage`. Server upload is REQUIRED to obtain OS-level file creation timestamps
+when those are necessary; browser File APIs provide only `lastModified`.
+
+Rationale: Reliability and correct metadata.
+
+### PRINCIPLE 7 — Testing & quality gates
+Business logic MUST be 100% unit tested for positive and negative cases. Overall code
+coverage MUST be ≥ 80% for all modules. Tests MUST mock external dependencies and
+run in CI with headless Chrome. Linting and pre-push hooks MUST pass before merge.
+
+Rationale: Confidence and regression prevention.
+
+### PRINCIPLE 8 — Tooling & tech stack
+Adopt and enforce the project's frontend tech standards: Angular 20+, TypeScript 5.8+
+(strict), Tailwind + SCSS, RxJS, Apollo Angular, Auth0 Angular, Jasmine/Karma,
+ESLint with `@wk/eslint-config`, GraphQL Code Generator, and Husky for Git hooks.
+Charting libraries may be chosen per feature (ECharts recommended for heavy
+analytics).
+
+Rationale: Consistency across the codebase and operational familiarity.
+
+### PRINCIPLE 9 — Error reporting & UX
+Errors from business logic MUST be surfaced in the UI with clear messages and an
+optional "view details" for diagnostics. Long-running parsing or computation tasks
+MUST report progress and allow cancellation.
+
+Rationale: User trust and responsiveness.
+
+## Implementation constraints
+- Storage keys MUST be versioned (for example `ri-import:v1`). Components MUST
+	implement migration logic when evolving persisted models.
+- Parser code MUST be pure and decomposed into small helper functions for
+	maintainability and to satisfy lint complexity rules.
+- Pricing files under `assets/pricing` MUST include metadata required for exact
+	matching (instance class, region, multiAZ, engine, edition, upfront, duration).
+
+## Development workflow & quality gates
+- Business logic development MUST be test-first where feasible. Unit tests must
+	cover both happy and error paths.
+- CI MUST run linting, tests and a coverage check. Any failure MUST block merges.
+- Pre-push Git hooks MUST run linting and tests locally to avoid breaking CI.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+To propose an amendment, open a PR titled `chore(constitution): <short description>`
+with the proposed change and a migration plan if needed. Major changes require a
+MAJOR version bump; new principles or significant expansions require a MINOR bump;
+document-only changes require a PATCH bump. At least two maintainers MUST approve
+the amendment PR before merging.
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+CI MUST include a compliance review step for changes touching business logic or
+templates; it verifies test coverage, linter success, and that compute models
+record required audit fields. Compliance failures MUST block merge.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+## Consistency propagation checklist
+The following templates and docs MUST be reviewed and updated where necessary:
+- `.specify/templates/plan-template.md` — ensure a Constitution Check step is
+	present. ⚠ pending
+- `.specify/templates/spec-template.md` — ensure required sections for audit data
+	and error states are present. ⚠ pending
+- `.specify/templates/tasks-template.md` — ensure task categories include pricing
+	ingestion, matching rules and persistence migration. ⚠ pending
+- `.specify/templates/commands/*.md` — ensure no agent-specific references remain.
+	⚠ pending
+- `README.md`, `docs/quickstart.md` — add summary of governance and how to run
+	compliance checks. ⚠ pending
+
+## Versioning metadata
+**Version**: 1.0.0 | **Ratified**: TODO(RATIFICATION_DATE) | **Last Amended**: 2025-11-10
+
