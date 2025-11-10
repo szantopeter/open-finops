@@ -1,9 +1,10 @@
-import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, OnDestroy } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { RiDataService } from '../../services/ri-data.service';
+
 import { PageStateService } from '../../../core/services/page-state.service';
 import { StorageService } from '../../../core/services/storage.service';
+import { RiDataService } from '../../services/ri-data.service';
 
 @Component({
   selector: 'app-ri-import-preview',
@@ -15,21 +16,21 @@ import { StorageService } from '../../../core/services/storage.service';
         <div *ngIf="c.total === 0">No rows</div>
         <div *ngIf="c.total > 0">
           <div *ngIf="c.metadata">
-            Reserved Instance data overview: Data extract is date {{ c.ageText }} ({{ c.displayDate }}). 
+            Reserved Instance data overview: Data extract is date {{ c.ageText }} ({{ c.displayDate }}).
             Total RIs <strong>{{ c.total }}</strong> coming from <strong>{{ c.unique }}</strong> purchases.
           </div>
         </div>
       </ng-container>
       <ng-template #empty><div>No import loaded</div></ng-template>
     </div>
-  `,
+  `
 })
 export class RiImportPreviewComponent implements OnDestroy {
   import$ = this.data.currentImport$;
   counts$ = this.import$.pipe(
     map((imp) => {
       if (!imp) return { total: 0, unique: 0 };
-  const total = imp.rows.reduce((acc, r) => acc + (r.count ?? 0), 0);
+      const total = imp.rows.reduce((acc, r) => acc + (r.count ?? 0), 0);
       // Prefer Reservation ID if present in raw; otherwise fall back to composite key
       // unique RIs here should reflect number of rows (distinct RI entries)
       const unique = imp.rows.length;
@@ -54,7 +55,7 @@ export class RiImportPreviewComponent implements OnDestroy {
         }
       }
 
-  return { total, unique, metadata: imp.metadata, ageText, displayDate };
+      return { total, unique, metadata: imp.metadata, ageText, displayDate };
     })
   );
 
@@ -76,7 +77,7 @@ export class RiImportPreviewComponent implements OnDestroy {
         const cur = await firstValueFrom(this.data.currentImport$ as any);
         if (cur) await s.set('ri-import', cur as any);
         else await s.remove('ri-import');
-      },
+      }
     );
   }
 

@@ -6,7 +6,7 @@ export class StorageService {
   async set<T>(key: string, value: T): Promise<void> {
     try {
       await set(key, value as any);
-    } catch (e) {
+    } catch {
       // fallback to localStorage
       try {
         localStorage.setItem(key, JSON.stringify(value));
@@ -20,7 +20,7 @@ export class StorageService {
     try {
       const v = await get(key);
       return (v ?? null) as T | null;
-    } catch (e) {
+    } catch {
       try {
         const s = localStorage.getItem(key);
         return s ? (JSON.parse(s) as T) : null;

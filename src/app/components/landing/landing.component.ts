@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { RiImportUploadComponent } from '../../ri-analytics/components/ri-import-upload/ri-import-upload.component';
+
 import { RiImportPreviewComponent } from '../../ri-analytics/components/ri-import-preview/ri-import-preview.component';
+import { RiImportUploadComponent } from '../../ri-analytics/components/ri-import-upload/ri-import-upload.component';
 
 @Component({
   selector: 'wk-landing',

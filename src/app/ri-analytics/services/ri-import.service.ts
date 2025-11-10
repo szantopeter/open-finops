@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import { RiImport, RiImportMetadata } from '../models/ri-import.model';
 import { RiRow } from '../models/ri-row.model';
 
@@ -21,10 +22,10 @@ export class RiImportService {
     const header = this.parseCsvLine(lines[0]);
     const headers = header.map(h => h.trim());
 
-  // Map common CSV header variants to canonical keys used by the domain model.
+    // Map common CSV header variants to canonical keys used by the domain model.
     const headerToKey: Record<string, string> = {};
     const presentKeys = new Set<string>();
-    const normalize = (s: string) => s.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+    const normalize = (s: string): string => this.normalizeHeaderKey(s);
     for (const h of headers) {
       const n = normalize(h);
       let key = h; // default: keep original header
@@ -105,7 +106,7 @@ export class RiImportService {
         engine: obj['engine'] ?? '',
         edition: obj['edition'],
         upfront: obj['upfront'],
-        durationMonths: obj['durationMonths'] ? Number.parseInt(obj['durationMonths'], 10) : undefined,
+        durationMonths: obj['durationMonths'] ? Number.parseInt(obj['durationMonths'], 10) : undefined
       });
     }
 
@@ -116,10 +117,15 @@ export class RiImportService {
       importedAt: new Date().toISOString(),
       columns: headers,
       rowsCount: rows.length,
-      fileLastModified: fileLastModifiedIso,
+      fileLastModified: fileLastModifiedIso
     };
 
     return { import: { metadata, rows } };
+  }
+
+  private normalizeHeaderKey(s: string): string {
+    // Use split/join to remove non-alphanumerics to avoid replaceAll rule issues
+    return s.split(/[^a-zA-Z0-9]/g).join('').toLowerCase();
   }
 
   async parseFile(file: File): Promise<RiImportParseResult> {

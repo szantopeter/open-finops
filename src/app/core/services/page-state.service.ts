@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+
 import { StorageService } from './storage.service';
 
 type LoadFn = (storage: StorageService) => Promise<void> | void;

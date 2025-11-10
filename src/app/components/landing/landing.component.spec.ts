@@ -1,11 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LandingComponent } from './landing.component';
-import { RiImportUploadComponent } from '../../ri-analytics/components/ri-import-upload/ri-import-upload.component';
 import { RiImportPreviewComponent } from '../../ri-analytics/components/ri-import-preview/ri-import-preview.component';
+import { RiImportUploadComponent } from '../../ri-analytics/components/ri-import-upload/ri-import-upload.component';
 
 describe('LandingComponent', () => {
-  let component: LandingComponent;
   let fixture: ComponentFixture<LandingComponent>;
   // Auth removed: no AuthService used in tests
 
@@ -15,8 +14,8 @@ describe('LandingComponent', () => {
     })
       .compileComponents();
 
-  fixture = TestBed.createComponent(LandingComponent);
-  fixture.detectChanges();
+    fixture = TestBed.createComponent(LandingComponent);
+    fixture.detectChanges();
   });
 
   it('should create the app', () => {

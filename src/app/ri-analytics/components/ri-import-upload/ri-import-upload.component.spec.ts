@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { RiImportUploadComponent } from './ri-import-upload.component';
-import { RiImportService } from '../../services/ri-import.service';
-import { RiDataService } from '../../services/ri-data.service';
-import { StorageService } from '../../../core/services/storage.service';
 import { PageStateService } from '../../../core/services/page-state.service';
+import { StorageService } from '../../../core/services/storage.service';
+import { RiDataService } from '../../services/ri-data.service';
+import { RiImportService } from '../../services/ri-import.service';
 
 describe('RiImportUploadComponent', () => {
   let fixture: ComponentFixture<RiImportUploadComponent>;
@@ -24,15 +25,15 @@ describe('RiImportUploadComponent', () => {
         { provide: RiImportService, useValue: parserSpy },
         { provide: RiDataService, useValue: dataSpy },
         { provide: StorageService, useValue: storageSpy },
-        { provide: PageStateService, useValue: pageStateSpy },
-      ],
+        { provide: PageStateService, useValue: pageStateSpy }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(RiImportUploadComponent);
     fixture.detectChanges();
   });
 
-  function makeFile(text: string, name = 'f.csv') {
+  function makeFile(text: string, name = 'f.csv'): File {
     const blob = new Blob([text], { type: 'text/csv' });
     return new File([blob], name, { type: 'text/csv' });
   }

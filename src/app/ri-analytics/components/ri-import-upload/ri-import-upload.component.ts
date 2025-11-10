@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RiImportService } from '../../services/ri-import.service';
-import { RiDataService } from '../../services/ri-data.service';
-import { StorageService } from '../../../core/services/storage.service';
+import { Component } from '@angular/core';
+
 import { PageStateService } from '../../../core/services/page-state.service';
+import { StorageService } from '../../../core/services/storage.service';
+import { RiDataService } from '../../services/ri-data.service';
+import { RiImportService } from '../../services/ri-import.service';
 
 @Component({
   selector: 'app-ri-import-upload',
@@ -15,7 +16,7 @@ import { PageStateService } from '../../../core/services/page-state.service';
       <input type="file" (change)="onFile($event)" accept=".csv,text/csv" />
       <div *ngIf="lastError" class="text-red-600 mt-2">{{ lastError }}</div>
     </div>
-  `,
+  `
 })
 export class RiImportUploadComponent {
   lastError?: string;
@@ -24,10 +25,10 @@ export class RiImportUploadComponent {
     private readonly parser: RiImportService,
     private readonly data: RiDataService,
     private readonly storage: StorageService,
-    private readonly pageState: PageStateService,
+    private readonly pageState: PageStateService
   ) {}
 
-  async onFile(event: Event) {
+  async onFile(event: Event): Promise<void> {
     this.lastError = undefined;
     const input = event.target as HTMLInputElement;
     if (!input.files || input.files.length === 0) return;

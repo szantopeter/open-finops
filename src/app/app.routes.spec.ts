@@ -5,8 +5,8 @@ describe('App Routes', () => {
     expect(routes.length).toBe(1);
     const route = routes[0];
     expect(route.path).toBe('');
-  // Authentication was removed; ensure canActivate is not required
-  expect(route.canActivate == null || route.canActivate.length === 0).toBeTrue();
+    // Authentication was removed; ensure canActivate is not required
+    expect(route.canActivate == null || route.canActivate.length === 0).toBeTrue();
     expect(typeof route.loadComponent).toBe('function');
   });
 

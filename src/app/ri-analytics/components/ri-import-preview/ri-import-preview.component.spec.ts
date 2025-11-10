@@ -1,6 +1,6 @@
-import { ComponentFixture } from '@angular/core/testing';
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture , TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
+
 import { RiImportPreviewComponent } from './ri-import-preview.component';
 import { RiDataService } from '../../services/ri-data.service';
 
@@ -35,12 +35,12 @@ describe('RiImportPreviewComponent', () => {
     // text content should contain the human-readable sentence
     expect(el.textContent).toContain('Reserved Instance data overview: Data extract is date');
     expect(el.textContent).toContain('(2024-11-21)');
-  // check totals and uniques numeric values exist (fixture has total=3, unique=2)
-  expect(el.textContent).toContain('Total RIs');
-  expect(el.textContent).toContain('coming from');
-  // ensure strong tags are used for the numbers in the rendered HTML
-  const html = el.innerHTML;
-  expect(html).toMatch(/<strong>\s*3\s*<\/strong>/);
-  expect(html).toMatch(/<strong>\s*2\s*<\/strong>/);
+    // check totals and uniques numeric values exist (fixture has total=3, unique=2)
+    expect(el.textContent).toContain('Total RIs');
+    expect(el.textContent).toContain('coming from');
+    // ensure strong tags are used for the numbers in the rendered HTML
+    const html = el.innerHTML;
+    expect(html).toMatch(/<strong>\s*3\s*<\/strong>/);
+    expect(html).toMatch(/<strong>\s*2\s*<\/strong>/);
   });
 });
