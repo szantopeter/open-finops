@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r5.4xlarge",
+  "deployment": "single-az",
+  "engine": "oracle-ee",
+  "license": null,
+  "onDemand": {
+    "hourly": 2.86208,
+    "daily": 68.68992,
+    "sku": "29W4GQ5TGW585EKJ"
+  },
+  "savingsOptions": null
+}

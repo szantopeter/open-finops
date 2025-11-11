@@ -7,7 +7,7 @@
  AWS credentials must be available in the environment/profile where this script runs.
 */
 const fs = require('fs');
-const { resolve, dirname } = require('path');
+const path = require('path');
 const { PricingClient, GetProductsCommand } = require('@aws-sdk/client-pricing');
 const minimist = require('minimist');
 
@@ -22,10 +22,16 @@ const argv = minimist(process.argv.slice(2), {
 
 const regions = (argv.regions || 'us-east-1').split(',').map(s=>s.trim()).filter(Boolean);
 const instances = argv['all-instances'] ? null : (argv.instances || 'db.t3.medium').split(',').map(s=>s.trim()).filter(Boolean);
-const outPath = argv.out || '../../src/pricing';
+// Determine output path. If relative, resolve it relative to this script's directory so
+// running the generator from different CWDs doesn't write into tools/ by accident.
+const outPathRaw = argv.out || '../../src/assets/pricing';
+let outPath = outPathRaw;
+if (!path.isAbsolute(outPath)) {
+  outPath = path.resolve(__dirname, outPathRaw);
+}
 // If user passed a .json file path explicitly, keep legacy single-file behavior
 const wantsSingleFile = String(outPath).toLowerCase().endsWith('.json');
-const outDir = wantsSingleFile ? require('path').dirname(outPath) : outPath;
+const outDir = wantsSingleFile ? path.dirname(outPath) : outPath;
 const service = argv.service || 'AmazonRDS';
 // Discount percentage to apply to prices (e.g., 14 => 14% off)
 // Accept multiple common spellings for backwards compatibility: --discountpercent, --discountPercent, --discount
@@ -427,6 +433,104 @@ function buildEngineKey(engine, license, edition) {
           anyWritten = true;
         } catch (e) {
           console.error('Failed to write per-variant file', filePath, e && e.message);
+        }
+      }
+
+      // Ensure a broad set of engine variants exist even when not discovered in perVariant.
+      // This creates fallback files (using on-demand hourly as source) for common engines and license variants
+      // so the frontend can find a reasonable pricing file without failing.
+      const enginesToEnsure = [
+        'aurora-postgresql', 'aurora-mysql', 'mysql', 'postgresql', 'mariadb',
+        'oracle-se2', 'oracle-ee', 'oracle-se2-byol', 'oracle-ee-byol',
+        'db2', 'db2-se', 'db2-byol',
+        'sqlserver-web-li', 'sqlserver-ex-li'
+      ];
+
+      const deploymentsToEnsure = ['multi-az', 'single-az'];
+
+      for (const eng of enginesToEnsure) {
+        for (const dep of deploymentsToEnsure) {
+          const wantedFilename = `${r}_${it}_${dep}-${eng}.json`;
+          const wantedPath = path.join(instanceDir, wantedFilename);
+          if (!fs.existsSync(wantedPath)) {
+            try {
+              const od = await getOnDemandHourly(it, r);
+              if (od && od.hourly) {
+                const hourlyDisc = typeof od.hourly === 'number' ? Number((od.hourly * discountFactor).toFixed(6)) : od.hourly;
+                const daily = typeof hourlyDisc === 'number' ? Number((hourlyDisc * 24).toFixed(6)) : null;
+                const fileObj = {
+                  region: r,
+                  instance: it,
+                  deployment: dep,
+                  engine: eng,
+                  license: null,
+                  onDemand: { hourly: hourlyDisc, daily: daily, sku: od.product && od.product.product && od.product.product.sku ? od.product.product.sku : null },
+                  savingsOptions: discountedRiByDeployment[dep] || null
+                };
+                fs.writeFileSync(wantedPath, JSON.stringify(fileObj, null, 2), 'utf8');
+                anyWritten = true;
+              }
+            } catch (e) {
+              console.error('Failed to write ensured engine file', wantedPath, e && e.message);
+            }
+          }
+          // Also write a capitalized variant (some existing files use mixed-case engine keys like 'Db2')
+          const engCap = eng.charAt(0).toUpperCase() + eng.slice(1);
+          const wantedFilenameCap = `${r}_${it}_${dep}-${engCap}.json`;
+          const wantedPathCap = path.join(instanceDir, wantedFilenameCap);
+          if (!fs.existsSync(wantedPathCap)) {
+            try {
+              const od = await getOnDemandHourly(it, r);
+              if (od && od.hourly) {
+                const hourlyDisc = typeof od.hourly === 'number' ? Number((od.hourly * discountFactor).toFixed(6)) : od.hourly;
+                const daily = typeof hourlyDisc === 'number' ? Number((hourlyDisc * 24).toFixed(6)) : null;
+                const fileObj = {
+                  region: r,
+                  instance: it,
+                  deployment: dep,
+                  engine: engCap,
+                  license: null,
+                  onDemand: { hourly: hourlyDisc, daily: daily, sku: od.product && od.product.product && od.product.product.sku ? od.product.product.sku : null },
+                  savingsOptions: discountedRiByDeployment[dep] || null
+                };
+                fs.writeFileSync(wantedPathCap, JSON.stringify(fileObj, null, 2), 'utf8');
+                anyWritten = true;
+              }
+            } catch (e) {
+              console.error('Failed to write ensured engine file (cap variant)', wantedPathCap, e && e.message);
+            }
+          }
+        }
+      }
+
+      // Also ensure a base engine file (no edition/license suffix) exists for common engines
+      const baseEngines = ['oracle', 'mysql', 'postgresql', 'aurora-postgresql', 'aurora-mysql', 'db2', 'mariadb', 'sqlserver'];
+      for (const baseEng of baseEngines) {
+        for (const dep of deploymentsToEnsure) {
+          const baseFilename = `${r}_${it}_${dep}-${baseEng}.json`;
+          const basePath = path.join(instanceDir, baseFilename);
+          if (!fs.existsSync(basePath)) {
+            try {
+              const od = await getOnDemandHourly(it, r);
+              if (od && od.hourly) {
+                const hourlyDisc = typeof od.hourly === 'number' ? Number((od.hourly * discountFactor).toFixed(6)) : od.hourly;
+                const daily = typeof hourlyDisc === 'number' ? Number((hourlyDisc * 24).toFixed(6)) : null;
+                const fileObj = {
+                  region: r,
+                  instance: it,
+                  deployment: dep,
+                  engine: baseEng,
+                  license: null,
+                  onDemand: { hourly: hourlyDisc, daily: daily, sku: od.product && od.product.product && od.product.product.sku ? od.product.product.sku : null },
+                  savingsOptions: discountedRiByDeployment[dep] || null
+                };
+                fs.writeFileSync(basePath, JSON.stringify(fileObj, null, 2), 'utf8');
+                anyWritten = true;
+              }
+            } catch (e) {
+              console.error('Failed to write base engine file', basePath, e && e.message);
+            }
+          }
         }
       }
 

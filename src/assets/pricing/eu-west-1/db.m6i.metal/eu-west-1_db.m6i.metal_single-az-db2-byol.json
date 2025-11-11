@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m6i.metal",
+  "deployment": "single-az",
+  "engine": "db2-byol",
+  "license": null,
+  "onDemand": {
+    "hourly": 15.60384,
+    "daily": 374.49216,
+    "sku": "GDD775W2HD3HT389"
+  },
+  "savingsOptions": null
+}

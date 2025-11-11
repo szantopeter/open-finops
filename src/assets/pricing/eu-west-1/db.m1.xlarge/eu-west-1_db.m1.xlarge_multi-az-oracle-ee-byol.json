@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m1.xlarge",
+  "deployment": "multi-az",
+  "engine": "oracle-ee-byol",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.8514,
+    "daily": 20.4336,
+    "sku": "25EESAGWQPJB394W"
+  },
+  "savingsOptions": null
+}

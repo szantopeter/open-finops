@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r6i.xlarge",
+  "deployment": "multi-az",
+  "engine": "sqlserver-web-li",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.44376,
+    "daily": 10.65024,
+    "sku": "24C6N46GGBJWE65T"
+  },
+  "savingsOptions": null
+}

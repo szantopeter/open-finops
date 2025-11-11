@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m3.xlarge",
+  "deployment": "single-az",
+  "engine": "sqlserver-ex-li",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.344,
+    "daily": 8.256,
+    "sku": "2EWBUUMR3VWTAPZ7"
+  },
+  "savingsOptions": null
+}

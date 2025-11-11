@@ -1,18 +1,24 @@
 <!--
 Sync Impact Report
-- Version change: none → 1.0.0
-- Modified principles: AGENTS.md content promoted to constitution baseline
-- Added sections: Governance, Consistency propagation checklist
-- Removed sections: none (template fully replaced)
+- Version change: 1.0.0 → 1.1.0
+- Modified principles: 
+  - PRINCIPLE 7: Enhanced to emphasize 100% business logic coverage requirement
+  - Development workflow section: Strengthened TDD requirement from "where feasible" to "MUST follow"
+- Added sections: 
+  - PRINCIPLE 10 — Test-driven development workflow (new principle with explicit red-green-refactor cycle)
+- Removed sections: none
 - Templates requiring updates:
-	- .specify/templates/plan-template.md ⚠ pending
-	- .specify/templates/spec-template.md ⚠ pending
-	- .specify/templates/tasks-template.md ⚠ pending
-	- .specify/templates/commands/*.md ⚠ pending
-	- README.md, docs/quickstart.md ⚠ pending
-- Follow-up TODOs:
-	- TODO(RATIFICATION_DATE): confirm original adoption date
-	- Ensure templates listed above are updated to include Constitution Check
+	- .specify/templates/plan-template.md ✅ updated (Constitution Check present)
+	- .specify/templates/spec-template.md ✅ updated (Constitution Check present)
+	- .specify/templates/tasks-template.md ✅ updated (TDD guidance added to all test sections)
+	- .specify/templates/checklist-template.md ✅ updated (Constitution Check guidance present)
+	- .specify/templates/commands/*.md ⚠ pending (no critical updates needed)
+	- README.md, docs/quickstart.md ⚠ pending (recommended but not critical)
+- Follow-up TODOs: none
+- Amendment rationale: Added formal TDD requirement as PRINCIPLE 10 to enforce test-first
+  workflow for all business logic. This is a MINOR version bump per governance rules
+  (new principle added). The principle codifies existing practice and ensures consistent
+  application across all features.
 -->
 
 # AWS RDS RI Portfolio Optimizer Constitution
@@ -94,6 +100,21 @@ MUST report progress and allow cancellation.
 
 Rationale: User trust and responsiveness.
 
+### PRINCIPLE 10 — Test-driven development workflow
+All business logic implementation MUST follow test-driven development (TDD). For each
+new service method, model method, or calculation function:
+1. Write the unit test FIRST with clear assertions for expected behavior
+2. Run the test and verify it FAILS (red phase)
+3. Implement the minimal code to make the test PASS (green phase)
+4. Refactor if needed while keeping tests green
+
+Tests MUST be written before implementation code. Implementations submitted without
+corresponding failing-first test evidence MAY be rejected in code review.
+
+Rationale: TDD ensures testable design, complete test coverage, and prevents
+implementation bias. Writing tests first forces clear thinking about interfaces,
+edge cases, and error conditions before code is written.
+
 ## Implementation constraints
 - Storage keys MUST be versioned (for example `ri-import:v1`). Components MUST
 	implement migration logic when evolving persisted models.
@@ -103,8 +124,11 @@ Rationale: User trust and responsiveness.
 	matching (instance class, region, multiAZ, engine, edition, upfront, duration).
 
 ## Development workflow & quality gates
-- Business logic development MUST be test-first where feasible. Unit tests must
-	cover both happy and error paths.
+- Business logic development MUST follow test-driven development (TDD) as specified in
+	PRINCIPLE 10. Write tests first, observe them fail, then implement.
+- Unit tests MUST cover both happy and error paths with 100% coverage for business
+	logic.
+- Overall code coverage MUST be ≥ 80% for all modules.
 - CI MUST run linting, tests and a coverage check. Any failure MUST block merges.
 - Pre-push Git hooks MUST run linting and tests locally to avoid breaking CI.
 
@@ -122,16 +146,18 @@ record required audit fields. Compliance failures MUST block merge.
 ## Consistency propagation checklist
 The following templates and docs MUST be reviewed and updated where necessary:
 - `.specify/templates/plan-template.md` — ensure a Constitution Check step is
-	present. ⚠ pending
+	present. ✅ updated
 - `.specify/templates/spec-template.md` — ensure required sections for audit data
-	and error states are present. ⚠ pending
+	and error states are present. ✅ updated
 - `.specify/templates/tasks-template.md` — ensure task categories include pricing
-	ingestion, matching rules and persistence migration. ⚠ pending
+	ingestion, matching rules, persistence migration, and TDD workflow. ✅ updated
+- `.specify/templates/checklist-template.md` — ensure Constitution Check guidance
+	is included. ✅ updated
 - `.specify/templates/commands/*.md` — ensure no agent-specific references remain.
-	⚠ pending
+	⚠ pending (no critical updates needed)
 - `README.md`, `docs/quickstart.md` — add summary of governance and how to run
-	compliance checks. ⚠ pending
+	compliance checks. ⚠ pending (recommended but not critical)
 
 ## Versioning metadata
-**Version**: 1.0.0 | **Ratified**: TODO(RATIFICATION_DATE) | **Last Amended**: 2025-11-10
+**Version**: 1.1.0 | **Ratified**: 2025-11-10 | **Last Amended**: 2025-11-11
 

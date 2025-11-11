@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m6id.12xlarge",
+  "deployment": "single-az",
+  "engine": "oracle-ee",
+  "license": null,
+  "onDemand": {
+    "hourly": 5.11184,
+    "daily": 122.68416,
+    "sku": "44KXK7QXMB7J8TYR"
+  },
+  "savingsOptions": null
+}

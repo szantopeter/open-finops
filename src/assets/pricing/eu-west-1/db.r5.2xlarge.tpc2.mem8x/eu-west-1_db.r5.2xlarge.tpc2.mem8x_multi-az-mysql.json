@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r5.2xlarge.tpc2.mem8x",
+  "deployment": "multi-az",
+  "engine": "mysql",
+  "license": null,
+  "onDemand": {
+    "hourly": 14.20032,
+    "daily": 340.80768,
+    "sku": "5REFG2AZE8GG4Y37"
+  },
+  "savingsOptions": null
+}

@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m7i.48xlarge",
+  "deployment": "single-az",
+  "engine": "sqlserver-web-li",
+  "license": null,
+  "onDemand": {
+    "hourly": 14.8608,
+    "daily": 356.6592,
+    "sku": "535H7DRZY9XC3Z8J"
+  },
+  "savingsOptions": null
+}

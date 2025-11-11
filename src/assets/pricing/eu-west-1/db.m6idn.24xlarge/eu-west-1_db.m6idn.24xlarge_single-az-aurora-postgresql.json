@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m6idn.24xlarge",
+  "deployment": "single-az",
+  "engine": "aurora-postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 13.51576,
+    "daily": 324.37824,
+    "sku": "52RZ6UK6FP7BGP75"
+  },
+  "savingsOptions": null
+}

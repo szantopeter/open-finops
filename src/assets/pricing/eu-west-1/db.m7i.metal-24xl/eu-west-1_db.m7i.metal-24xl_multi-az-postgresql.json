@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m7i.metal-24xl",
+  "deployment": "multi-az",
+  "engine": "postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 6.09912,
+    "daily": 146.37888,
+    "sku": "25MCZXCRZ8QJYZNQ"
+  },
+  "savingsOptions": null
+}

@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m5.xlarge",
+  "deployment": "single-az",
+  "engine": "db2-byol",
+  "license": null,
+  "onDemand": {
+    "hourly": 1.09736,
+    "daily": 26.33664,
+    "sku": "2A8BNTWS72VZ7G56"
+  },
+  "savingsOptions": null
+}

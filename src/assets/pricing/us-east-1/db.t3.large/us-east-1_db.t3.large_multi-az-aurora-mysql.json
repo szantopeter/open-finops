@@ -1,0 +1,13 @@
+{
+  "region": "us-east-1",
+  "instance": "db.t3.large",
+  "deployment": "multi-az",
+  "engine": "aurora-mysql",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.1247,
+    "daily": 2.9928,
+    "sku": "5489E7MRWFBZGMP6"
+  },
+  "savingsOptions": null
+}

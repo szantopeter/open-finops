@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r3.8xlarge",
+  "deployment": "single-az",
+  "engine": "oracle-ee-byol",
+  "license": null,
+  "onDemand": {
+    "hourly": 3.6249,
+    "daily": 86.9976,
+    "sku": "3KHZWKR6BDZAUABM"
+  },
+  "savingsOptions": null
+}

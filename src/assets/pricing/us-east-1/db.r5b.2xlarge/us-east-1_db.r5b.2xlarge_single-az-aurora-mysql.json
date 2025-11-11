@@ -1,0 +1,13 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r5b.2xlarge",
+  "deployment": "single-az",
+  "engine": "aurora-mysql",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.94944,
+    "daily": 22.78656,
+    "sku": "2BE3R84EYYF2EGWE"
+  },
+  "savingsOptions": null
+}

@@ -1,0 +1,13 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r5b.8xlarge",
+  "deployment": "single-az",
+  "engine": "aurora-postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 8.14592,
+    "daily": 195.50208,
+    "sku": "62UH7DWH5M28F2E6"
+  },
+  "savingsOptions": null
+}

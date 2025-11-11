@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { PageStateService } from '../../../core/services/page-state.service';
 import { StorageService } from '../../../core/services/storage.service';
 import { RiDataService } from '../../services/ri-data.service';
+import { RiImportService } from '../../services/ri-import.service';
 
 @Component({
   selector: 'app-ri-import-preview',
@@ -61,14 +62,51 @@ export class RiImportPreviewComponent implements OnDestroy {
 
   private readonly unregister: () => void = () => {};
 
-  constructor(private readonly data: RiDataService, private readonly pageState: PageStateService, private readonly storage: StorageService) {
+  constructor(
+    private readonly data: RiDataService, 
+    private readonly pageState: PageStateService, 
+    private readonly storage: StorageService,
+    private readonly importer: RiImportService
+  ) {
     this.unregister = this.pageState.register(
       'ri-import',
       // load callback: restore saved RiImport into RiDataService
       async (s) => {
         const stored = await s.get('ri-import');
         if (stored && this.data && typeof (this.data as any).setImport === 'function') {
-          (this.data as any).setImport(stored as any);
+          // Re-normalize stored data to ensure old imports with un-normalized engine/edition fields
+          // get updated to match current normalization logic (e.g., 'oracle-se2 (byol)' → engine='oracle', edition='se2-byol')
+          const storedImport = stored as any;
+          if (storedImport.rows && Array.isArray(storedImport.rows)) {
+            // Serialize rows back to CSV format and re-parse to apply current normalization
+            const headers = ['startDate', 'endDate', 'count', 'instanceClass', 'region', 'multiAZ', 'engine', 'edition', 'upfront', 'durationMonths'];
+            const csvLines = [headers.join(',')];
+            for (const row of storedImport.rows) {
+              const vals = headers.map(h => {
+                const val = (row as any)[h];
+                // Quote values that might contain commas or special chars
+                if (val === null || val === undefined) return '';
+                const str = String(val);
+                return str.includes(',') || str.includes('"') ? `"${str.replace(/"/g, '""')}"` : str;
+              });
+              csvLines.push(vals.join(','));
+            }
+            const csv = csvLines.join('\n');
+            const parsed = this.importer.parseText(csv, storedImport.metadata?.source ?? 'storage');
+            if (parsed.import) {
+              // Preserve original metadata but update rows with normalized data
+              const normalized = {
+                ...parsed.import,
+                metadata: storedImport.metadata // keep original metadata (importedAt, fileLastModified, etc.)
+              };
+              (this.data as any).setImport(normalized);
+              // Re-save the normalized version
+              await s.set('ri-import', normalized);
+              return;
+            }
+          }
+          // Fallback: if re-parsing fails, use stored data as-is
+          (this.data as any).setImport(storedImport);
         }
       },
       // save callback: persist current import from RiDataService

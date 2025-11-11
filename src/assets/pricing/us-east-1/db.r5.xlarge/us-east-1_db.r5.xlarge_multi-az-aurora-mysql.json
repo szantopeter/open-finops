@@ -1,0 +1,13 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r5.xlarge",
+  "deployment": "multi-az",
+  "engine": "aurora-mysql",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.877888,
+    "daily": 21.069312,
+    "sku": "347HPSMPCM52HSXB"
+  },
+  "savingsOptions": null
+}

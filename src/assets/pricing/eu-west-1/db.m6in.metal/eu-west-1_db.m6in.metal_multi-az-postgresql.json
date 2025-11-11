@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m6in.metal",
+  "deployment": "multi-az",
+  "engine": "postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 11.80608,
+    "daily": 283.34592,
+    "sku": "DK6YKF6FM8H7MEJP"
+  },
+  "savingsOptions": null
+}

@@ -82,6 +82,8 @@ Examples of foundational tasks (adjust based on your project):
 ### Tests for User Story 1 (OPTIONAL - only if tests requested) ⚠️
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
+> **Constitution PRINCIPLE 10**: All business logic MUST follow TDD (test-driven development).
+> Write test → Verify it fails (red) → Implement code → Verify it passes (green) → Refactor
 
 - [ ] T010 [P] [US1] Contract test for [endpoint] in tests/contract/test_[name].py
 - [ ] T011 [P] [US1] Integration test for [user journey] in tests/integration/test_[name].py
@@ -107,6 +109,9 @@ Examples of foundational tasks (adjust based on your project):
 
 ### Tests for User Story 2 (OPTIONAL - only if tests requested) ⚠️
 
+> **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
+> **Constitution PRINCIPLE 10**: All business logic MUST follow TDD (test-driven development).
+
 - [ ] T018 [P] [US2] Contract test for [endpoint] in tests/contract/test_[name].py
 - [ ] T019 [P] [US2] Integration test for [user journey] in tests/integration/test_[name].py
 
@@ -128,6 +133,9 @@ Examples of foundational tasks (adjust based on your project):
 **Independent Test**: [How to verify this story works on its own]
 
 ### Tests for User Story 3 (OPTIONAL - only if tests requested) ⚠️
+
+> **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
+> **Constitution PRINCIPLE 10**: All business logic MUST follow TDD (test-driven development).
 
 - [ ] T024 [P] [US3] Contract test for [endpoint] in tests/contract/test_[name].py
 - [ ] T025 [P] [US3] Integration test for [user journey] in tests/integration/test_[name].py

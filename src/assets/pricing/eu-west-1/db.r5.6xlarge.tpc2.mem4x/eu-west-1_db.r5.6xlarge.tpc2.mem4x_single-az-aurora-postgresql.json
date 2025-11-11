@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r5.6xlarge.tpc2.mem4x",
+  "deployment": "single-az",
+  "engine": "aurora-postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 10.64164,
+    "daily": 255.39936,
+    "sku": "4KYXD45WT8J9R3NY"
+  },
+  "savingsOptions": null
+}

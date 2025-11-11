@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r5.4xlarge.tpc2.mem2x",
+  "deployment": "single-az",
+  "engine": "db2-byol",
+  "license": null,
+  "onDemand": {
+    "hourly": 7.10016,
+    "daily": 170.40384,
+    "sku": "6SXMS9QCCABZGAH7"
+  },
+  "savingsOptions": null
+}

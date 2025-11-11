@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m6g.8xlarge",
+  "deployment": "multi-az",
+  "engine": "oracle-se2",
+  "license": null,
+  "onDemand": {
+    "hourly": 4.62336,
+    "daily": 110.96064,
+    "sku": "39WGCHVRC876ASQ3"
+  },
+  "savingsOptions": null
+}

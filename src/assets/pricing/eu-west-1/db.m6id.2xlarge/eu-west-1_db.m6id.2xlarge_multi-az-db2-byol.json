@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m6id.2xlarge",
+  "deployment": "multi-az",
+  "engine": "db2-byol",
+  "license": null,
+  "onDemand": {
+    "hourly": 1.70624,
+    "daily": 40.94976,
+    "sku": "5ZY5Q963VRWR2NBV"
+  },
+  "savingsOptions": null
+}

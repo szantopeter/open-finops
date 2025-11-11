@@ -1,0 +1,13 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r6i.large",
+  "deployment": "single-az",
+  "engine": "oracle",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.63984,
+    "daily": 15.35616,
+    "sku": "3AQYDDBZ79N5EHHA"
+  },
+  "savingsOptions": null
+}

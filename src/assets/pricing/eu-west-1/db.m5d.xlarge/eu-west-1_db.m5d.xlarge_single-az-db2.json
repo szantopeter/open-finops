@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m5d.xlarge",
+  "deployment": "single-az",
+  "engine": "db2",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.39904,
+    "daily": 9.57696,
+    "sku": "29P5FPPKR9F4JW7U"
+  },
+  "savingsOptions": null
+}

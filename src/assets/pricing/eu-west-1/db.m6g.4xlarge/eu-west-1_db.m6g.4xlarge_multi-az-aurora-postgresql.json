@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m6g.4xlarge",
+  "deployment": "multi-az",
+  "engine": "aurora-postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 2.42176,
+    "daily": 58.12224,
+    "sku": "853ATDMJN43S4AD5"
+  },
+  "savingsOptions": null
+}

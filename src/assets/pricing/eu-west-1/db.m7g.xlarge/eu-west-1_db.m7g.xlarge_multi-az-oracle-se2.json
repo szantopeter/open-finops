@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m7g.xlarge",
+  "deployment": "multi-az",
+  "engine": "oracle-se2",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.6407,
+    "daily": 15.3768,
+    "sku": "D8WP4N48BSBUC69K"
+  },
+  "savingsOptions": null
+}

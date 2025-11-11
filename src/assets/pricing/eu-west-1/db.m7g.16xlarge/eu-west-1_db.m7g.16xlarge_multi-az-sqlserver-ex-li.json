@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m7g.16xlarge",
+  "deployment": "multi-az",
+  "engine": "sqlserver-ex-li",
+  "license": null,
+  "onDemand": {
+    "hourly": 5.12474,
+    "daily": 122.99376,
+    "sku": "7AVRF3JBQS8U53ZY"
+  },
+  "savingsOptions": null
+}

@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m6id.4xlarge",
+  "deployment": "multi-az",
+  "engine": "oracle-ee",
+  "license": null,
+  "onDemand": {
+    "hourly": 1.70366,
+    "daily": 40.88784,
+    "sku": "3ZKT4KPPPK336PJQ"
+  },
+  "savingsOptions": null
+}

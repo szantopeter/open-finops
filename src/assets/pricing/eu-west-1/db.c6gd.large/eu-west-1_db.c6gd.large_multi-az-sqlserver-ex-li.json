@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.c6gd.large",
+  "deployment": "multi-az",
+  "engine": "sqlserver-ex-li",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.459756,
+    "daily": 11.034144,
+    "sku": "GVDFWSK9SWXGY2T4"
+  },
+  "savingsOptions": null
+}

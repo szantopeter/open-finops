@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m7i.metal-48xl",
+  "deployment": "single-az",
+  "engine": "sqlserver-web-li",
+  "license": null,
+  "onDemand": {
+    "hourly": 24.39648,
+    "daily": 585.51552,
+    "sku": "CJ2WPTDDEPYF4A3Q"
+  },
+  "savingsOptions": null
+}

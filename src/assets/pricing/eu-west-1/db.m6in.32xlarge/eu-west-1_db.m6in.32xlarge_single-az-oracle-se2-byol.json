@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m6in.32xlarge",
+  "deployment": "single-az",
+  "engine": "oracle-se2-byol",
+  "license": null,
+  "onDemand": {
+    "hourly": 15.76896,
+    "daily": 378.45504,
+    "sku": "2HSPW247GCSVHU5Z"
+  },
+  "savingsOptions": null
+}

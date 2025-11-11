@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LandingComponent } from './landing.component';
 import { RiImportPreviewComponent } from '../../ri-analytics/components/ri-import-preview/ri-import-preview.component';
 import { RiImportUploadComponent } from '../../ri-analytics/components/ri-import-upload/ri-import-upload.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('LandingComponent', () => {
   let fixture: ComponentFixture<LandingComponent>;
@@ -10,7 +11,7 @@ describe('LandingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LandingComponent, RiImportUploadComponent, RiImportPreviewComponent]
+      imports: [LandingComponent, RiImportUploadComponent, RiImportPreviewComponent, HttpClientTestingModule]
     })
       .compileComponents();
 

@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r5.4xlarge.tpc2.mem4x",
+  "deployment": "multi-az",
+  "engine": "db2",
+  "license": null,
+  "onDemand": {
+    "hourly": 7.10016,
+    "daily": 170.40384,
+    "sku": "3H27NH9NEQP4Q8WQ"
+  },
+  "savingsOptions": null
+}

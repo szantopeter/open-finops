@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m6i.16xlarge",
+  "deployment": "multi-az",
+  "engine": "aurora-mysql",
+  "license": null,
+  "onDemand": {
+    "hourly": 10.40256,
+    "daily": 249.66144,
+    "sku": "325HD6PNU37X9PE7"
+  },
+  "savingsOptions": null
+}

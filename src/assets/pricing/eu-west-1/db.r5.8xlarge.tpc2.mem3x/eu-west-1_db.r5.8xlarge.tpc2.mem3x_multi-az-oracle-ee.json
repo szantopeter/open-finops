@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r5.8xlarge.tpc2.mem3x",
+  "deployment": "multi-az",
+  "engine": "oracle-ee",
+  "license": null,
+  "onDemand": {
+    "hourly": 10.64164,
+    "daily": 255.39936,
+    "sku": "6ZNRAHGDHCERKGWV"
+  },
+  "savingsOptions": null
+}

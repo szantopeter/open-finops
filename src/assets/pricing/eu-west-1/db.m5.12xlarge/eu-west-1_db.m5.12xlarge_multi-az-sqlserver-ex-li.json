@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m5.12xlarge",
+  "deployment": "multi-az",
+  "engine": "sqlserver-ex-li",
+  "license": null,
+  "onDemand": {
+    "hourly": 3.90096,
+    "daily": 93.62304,
+    "sku": "22AURN5QMXH9FTBB"
+  },
+  "savingsOptions": null
+}

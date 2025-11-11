@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.c6gd.medium",
+  "deployment": "single-az",
+  "engine": "postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.229878,
+    "daily": 5.517072,
+    "sku": "GCBFDVME28VVESNY"
+  },
+  "savingsOptions": null
+}

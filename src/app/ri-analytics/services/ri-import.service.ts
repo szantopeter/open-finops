@@ -95,6 +95,92 @@ export class RiImportService {
 
       const count = Number.parseInt((obj['count'] ?? objRaw['Count'] ?? '0') as string, 10) || 0;
 
+      // --- Enhanced normalization for engine/edition/license and duration ---
+      const rawEngine = (obj['engine'] ?? objRaw['Product'] ?? objRaw['Product'] ?? '') as string;
+      const rawEditionField = (obj['edition'] ?? objRaw['Edition'] ?? '') as string;
+      // prefer an explicit license field if present (some CSVs expose it)
+      const rawLicenseField = (obj['license'] ?? objRaw['License'] ?? '') as string;
+
+      // derive duration from common Term values (e.g. '1 year' -> 12)
+      let durationMonths: number | undefined = undefined;
+      const termRaw = (obj['term'] ?? objRaw['Term'] ?? objRaw['term'] ?? '') as string;
+      if (termRaw) {
+        const t = termRaw.toString().toLowerCase();
+        if (t.includes('1 year') || t.includes('1yr') || t.includes('12')) durationMonths = 12;
+        else if (t.includes('3 year') || t.includes('3yr') || t.includes('36')) durationMonths = 36;
+      }
+
+      // Clean engine string and extract parenthetical license tokens
+      const engineStr = (rawEngine || '').toString();
+      const parenMatch = engineStr.match(/\(([^)]+)\)/);
+      const parenToken = parenMatch ? parenMatch[1].toString().toLowerCase() : null;
+      const engineNoParen = engineStr.replace(/\([^)]+\)/, '').trim();
+      const engineBaseLower = engineNoParen.toString().toLowerCase();
+
+      // Normalize engine family (same rules as used in the chart component)
+      const normalizeEngine = (dbEngine: string) => {
+        const lower = (dbEngine || '').toString().toLowerCase();
+        if (lower.includes('aurora') && lower.includes('mysql')) return 'aurora-mysql';
+        if (lower.includes('aurora') && (lower.includes('postgres') || lower.includes('postgresql'))) return 'aurora-postgresql';
+        if (lower.includes('mysql')) return 'mysql';
+        if (lower.includes('postgres') || lower.includes('postgresql')) return 'postgresql';
+        if (lower.includes('mariadb')) return 'mariadb';
+        if (lower.includes('oracle')) return 'oracle';
+        if (lower.includes('sql server') || lower.includes('sqlserver')) return 'sqlserver';
+        return dbEngine || '';
+      };
+
+      const enginesWithVariants = new Set(['oracle', 'db2', 'sqlserver']);
+
+      // Derive edition: prefer explicit edition field; else try to extract from engine token
+      let editionOnly: string | null = null;
+      const explicitEdition = (rawEditionField || '').toString();
+      if (explicitEdition) {
+        // strip parentheses inside edition if present
+        editionOnly = explicitEdition.replace(/\([^)]+\)/, '').trim() || null;
+      } else {
+        // if engineNoParen contains hyphenated tokens like 'oracle-se2', take the tail as edition
+        if (engineNoParen.includes('-')) {
+          const parts = engineNoParen.split(/[-\s]+/).map(p => p.trim()).filter(Boolean);
+          if (parts.length > 1) editionOnly = parts.slice(1).join('-');
+        }
+      }
+
+      // Normalize license token: prefer parenthesis content, else license field
+      let licenseToken: string | null = null;
+      if (parenToken) licenseToken = parenToken;
+      else if (rawLicenseField) licenseToken = rawLicenseField.toString().toLowerCase();
+      if (licenseToken) {
+        // normalize common phrases
+        if (licenseToken.includes('bring') || licenseToken.includes('byol')) licenseToken = 'byol';
+        else if (licenseToken.includes('license') || licenseToken.includes('included') || licenseToken.includes('li')) licenseToken = 'li';
+      }
+
+      // Final normalized tokens
+      const engineNormalizedBase = normalizeEngine(engineBaseLower || editionOnly || '');
+      
+      // For engines that support editions (oracle, sqlserver, db2), keep engine and edition separate
+      // For other engines, append license to the engine token itself
+      let finalEngineToken = engineNormalizedBase;
+      let finalEdition: string | null = null;
+      
+      if (enginesWithVariants.has(engineNormalizedBase)) {
+        // Keep engine as base (e.g., 'oracle')
+        finalEngineToken = engineNormalizedBase;
+        // Build edition with license suffix (e.g., 'se2-byol')
+        if (editionOnly) finalEdition = editionOnly.toString();
+        if (finalEdition && licenseToken) finalEdition = `${finalEdition}-${licenseToken}`;
+        else if (!finalEdition && licenseToken) finalEdition = licenseToken;
+      } else {
+        // For engines without editions (mysql, postgresql, etc.), append license to engine
+        if (licenseToken) finalEngineToken = `${engineNormalizedBase}-${licenseToken}`;
+      }
+
+      // If durationMonths was not derived from Term, attempt to read numeric durationMonths field
+      if (durationMonths === undefined) {
+        durationMonths = obj['durationMonths'] ? Number.parseInt(obj['durationMonths'], 10) : undefined;
+      }
+
       rows.push({
         raw: objRaw,
         startDate: startIso,
@@ -103,10 +189,10 @@ export class RiImportService {
         instanceClass: (obj['instanceClass'] ?? obj['Instance Type'] ?? objRaw['Instance Type'] ?? '') as string,
         region: (obj['region'] ?? objRaw['Region'] ?? '') as string,
         multiAZ: ((obj['multiAZ'] ?? objRaw['multiAZ'] ?? objRaw['multiAz'] ?? '') as string).toLowerCase() === 'true',
-        engine: obj['engine'] ?? '',
-        edition: obj['edition'],
-        upfront: obj['upfront'],
-        durationMonths: obj['durationMonths'] ? Number.parseInt(obj['durationMonths'], 10) : undefined
+        engine: finalEngineToken,
+        edition: finalEdition,
+        upfront: obj['upfront'] ?? obj['RI Type'] ?? objRaw['RI Type'] ?? objRaw['RI Type'],
+        durationMonths: durationMonths,
       });
     }
 

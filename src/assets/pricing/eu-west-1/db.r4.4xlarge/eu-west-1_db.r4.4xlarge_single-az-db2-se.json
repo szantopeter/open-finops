@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r4.4xlarge",
+  "deployment": "single-az",
+  "engine": "db2-se",
+  "license": null,
+  "onDemand": {
+    "hourly": 3.649152,
+    "daily": 87.579648,
+    "sku": "33U3Q26QMD643YMC"
+  },
+  "savingsOptions": null
+}

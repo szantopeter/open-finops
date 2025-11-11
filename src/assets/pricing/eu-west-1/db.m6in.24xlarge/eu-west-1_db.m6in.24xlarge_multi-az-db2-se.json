@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m6in.24xlarge",
+  "deployment": "multi-az",
+  "engine": "db2-se",
+  "license": null,
+  "onDemand": {
+    "hourly": 23.65344,
+    "daily": 567.68256,
+    "sku": "4JY88NUUBCBWH2HD"
+  },
+  "savingsOptions": null
+}

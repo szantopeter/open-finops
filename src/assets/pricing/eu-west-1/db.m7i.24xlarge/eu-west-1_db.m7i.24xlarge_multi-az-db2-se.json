@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m7i.24xlarge",
+  "deployment": "multi-az",
+  "engine": "db2-se",
+  "license": null,
+  "onDemand": {
+    "hourly": 16.26432,
+    "daily": 390.34368,
+    "sku": "4D99PXE3V2MJT7J4"
+  },
+  "savingsOptions": null
+}

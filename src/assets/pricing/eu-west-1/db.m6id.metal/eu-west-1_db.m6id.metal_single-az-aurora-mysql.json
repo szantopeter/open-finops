@@ -1,0 +1,13 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m6id.metal",
+  "deployment": "single-az",
+  "engine": "aurora-mysql",
+  "license": null,
+  "onDemand": {
+    "hourly": 10.23744,
+    "daily": 245.69856,
+    "sku": "NGU8X535R769PTNE"
+  },
+  "savingsOptions": null
+}
