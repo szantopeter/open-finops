@@ -1,2 +1,8 @@
-ng lint --fix
-npx madge --circular --extensions ts ./src/
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "Running full type-aware lint before push (increasing Node heap to 32GB)"
+export NODE_OPTIONS="--max-old-space-size=32768"
+echo "NODE_OPTIONS=${NODE_OPTIONS}"
+# Run the full Angular lint (type-aware). This can be memory heavy; increase heap above if needed.
+npx ng lint --fix

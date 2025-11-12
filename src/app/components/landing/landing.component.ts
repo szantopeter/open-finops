@@ -16,6 +16,6 @@ import { MonthlyCostChartComponent } from '../../ri-analytics/components/monthly
  * The landing component of the application.
  */
 export class LandingComponent {
-  title = 'angular-template';
+  title = 'aws-rds-ri-portfolio-optimiser';
 
 }

@@ -25,10 +25,10 @@ describe('LandingComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should have as title \'angular-template\'', () => {
+  it('should have as title \'aws-rds-ri-portfolio-optimiser\'', () => {
     const fixture = TestBed.createComponent(LandingComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular-template');
+    expect(app.title).toEqual('aws-rds-ri-portfolio-optimiser');
   });
 
   it('should render main heading', () => {
