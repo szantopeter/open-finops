@@ -37,46 +37,40 @@
           text-align: center;
         }
 
-        .savings-amount {
-          font-size: 24px;
-          font-weight: bold;
-          color: #2e7d32;
-          text-align: center;
-          margin-bottom: 8px;
-        }
+        .year-breakdown {
+          .savings-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
 
-        .savings-percentage {
-          font-size: 18px;
-          color: #2e7d32;
-          text-align: center;
-          margin-bottom: 20px;
-          font-weight: 500;
-        }
-
-        .savings-breakdown {
-          border-top: 1px solid #e0e0e0;
-          padding-top: 16px;
-
-          .breakdown-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-
-            &:last-child {
-              margin-bottom: 0;
+            th, td {
+              padding: 8px 6px;
+              text-align: left;
+              border-bottom: 1px solid #e0e0e0;
             }
 
-            .label {
-              font-size: 14px;
-              color: #666;
-              font-weight: 500;
-            }
-
-            .value {
-              font-size: 14px;
-              color: #333;
+            th {
+              background-color: #f8f9fa;
               font-weight: 600;
+              color: #333;
+              border-bottom: 2px solid #e0e0e0;
+            }
+
+            td {
+              color: #666;
+
+              &:first-child {
+                font-weight: 600;
+                color: #333;
+              }
+
+              &:not(:first-child) {
+                text-align: right;
+              }
+            }
+
+            tr:hover {
+              background-color: #f8f9fa;
             }
           }
         }
@@ -95,7 +89,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #999;
+    color: #666;
   }
 
   // Responsive design

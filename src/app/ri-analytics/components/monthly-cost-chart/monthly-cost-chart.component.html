@@ -39,17 +39,33 @@
     <div class="savings-widget">
       <div class="savings-card">
         <h3>Total Period Savings</h3>
-        <div class="savings-amount">${{ totalSavingsAmount | number:'1.2-2' }}</div>
-        <div class="savings-percentage">{{ totalSavingsPercentage | number:'1.2-2' }}%</div>
-        <div class="savings-breakdown">
-          <div class="breakdown-item">
-            <span class="label">RI Cost:</span>
-            <span class="value">${{ totalRiCost | number:'1.2-2' }}</span>
-          </div>
-          <div class="breakdown-item">
-            <span class="label">On-Demand Cost:</span>
-            <span class="value">${{ totalOnDemandCost | number:'1.2-2' }}</span>
-          </div>
+        <div class="year-breakdown" *ngIf="yearSavingsBreakdown.length > 0">
+          <table class="savings-table">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th *ngFor="let yearData of yearSavingsBreakdown">{{ yearData.year }} {{ yearData.isPartial ? '(Partial)' : '(Full)' }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>RI Cost</td>
+                <td *ngFor="let yearData of yearSavingsBreakdown">${{ yearData.riCost | number:'1.2-2' }}</td>
+              </tr>
+              <tr>
+                <td>On-Demand Cost</td>
+                <td *ngFor="let yearData of yearSavingsBreakdown">${{ yearData.onDemandCost | number:'1.2-2' }}</td>
+              </tr>
+              <tr>
+                <td>Savings Amount</td>
+                <td *ngFor="let yearData of yearSavingsBreakdown">${{ yearData.savingsAmount | number:'1.2-2' }}</td>
+              </tr>
+              <tr>
+                <td>Savings Percentage</td>
+                <td *ngFor="let yearData of yearSavingsBreakdown">{{ yearData.savingsPercentage | number:'1.2-2' }}%</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

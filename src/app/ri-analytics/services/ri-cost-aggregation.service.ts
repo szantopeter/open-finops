@@ -647,14 +647,20 @@ export class RiCostAggregationService {
         if (month >= currentMonth) {
           year1Months++;
           for (const groupData of Object.values(monthlyData[monthKey])) {
-            year1Savings += groupData.savingsAmount;
+            // Recalculate savings to include renewal costs if present
+            const totalCost = groupData.riCost + (groupData.renewalCost || 0);
+            const actualSavings = groupData.onDemandCost - totalCost;
+            year1Savings += actualSavings;
           }
         }
       } else if (year === currentYear + 1) {
         // Next year - full year
         year2Months++;
         for (const groupData of Object.values(monthlyData[monthKey])) {
-          year2Savings += groupData.savingsAmount;
+          // Recalculate savings to include renewal costs if present
+          const totalCost = groupData.riCost + (groupData.renewalCost || 0);
+          const actualSavings = groupData.onDemandCost - totalCost;
+          year2Savings += actualSavings;
         }
       }
     }

@@ -172,4 +172,339 @@ describe('RiCostAggregationService (TDD)', () => {
     expect(group.savingsAmount).toBeCloseTo(600, 2);
     expect(group.savingsPercentage).toBeCloseTo(40, 2);
   });
+
+  describe('Renewal Functionality', () => {
+    it('detectExpiringRis filters RIs that expire before projection end', () => {
+      const now = new Date();
+      const currentYear = now.getUTCFullYear();
+      const projectionEnd = new Date(Date.UTC(currentYear + 1, 11, 31)); // End of next year
+
+      const rows: SampleRiRow[] = [
+        // RI that expires before projection end
+        {
+          instanceClass: 'db.r5.large',
+          region: 'us-east-1',
+          multiAz: false,
+          engine: 'mysql',
+          upfrontPayment: 'No Upfront',
+          durationMonths: 12,
+          startDate: '2024-01-01',
+          endDate: `${currentYear}-06-30`, // Expires this year
+          count: 1
+        },
+        // RI that expires after projection end
+        {
+          instanceClass: 'db.r5.large',
+          region: 'us-east-1',
+          multiAz: false,
+          engine: 'mysql',
+          upfrontPayment: 'No Upfront',
+          durationMonths: 12,
+          startDate: '2024-01-01',
+          endDate: `${currentYear + 2}-01-01`, // Expires in 2 years
+          count: 1
+        },
+        // Ongoing RI (no end date)
+        {
+          instanceClass: 'db.r5.large',
+          region: 'us-east-1',
+          multiAz: false,
+          engine: 'mysql',
+          upfrontPayment: 'No Upfront',
+          durationMonths: 12,
+          startDate: '2024-01-01',
+          count: 1
+        }
+      ];
+
+      // Access private method via type assertion
+      const expiringRis = (service as any).detectExpiringRis(rows as any[], projectionEnd);
+
+      expect(expiringRis.length).toBe(1);
+      expect(expiringRis[0].endDate).toBe(`${currentYear}-06-30`);
+    });
+
+    it('calculateRenewalProjection returns null for ongoing RIs', () => {
+      const pricingIndex = new Map<string, PricingRecord>();
+
+      const ongoingRi: SampleRiRow = {
+        instanceClass: 'db.r5.large',
+        region: 'us-east-1',
+        multiAz: false,
+        engine: 'mysql',
+        upfrontPayment: 'No Upfront',
+        durationMonths: 12,
+        startDate: '2024-01-01',
+        count: 1
+        // No endDate - ongoing RI
+      };
+
+      const projection = (service as any).calculateRenewalProjection(ongoingRi as any, pricingIndex);
+      expect(projection).toBeNull();
+    });
+
+    it('calculateRenewalProjection returns null when no matching pricing', () => {
+      const pricingIndex = new Map<string, PricingRecord>();
+
+      const expiredRi: SampleRiRow = {
+        instanceClass: 'db.r5.large',
+        region: 'us-east-1',
+        multiAz: false,
+        engine: 'mysql',
+        upfrontPayment: 'No Upfront',
+        durationMonths: 12,
+        startDate: '2024-01-01',
+        endDate: '2024-12-31',
+        count: 1
+      };
+
+      const projection = (service as any).calculateRenewalProjection(expiredRi as any, pricingIndex);
+      expect(projection).toBeNull();
+    });
+
+    it('calculateRenewalProjection calculates correct renewal costs', () => {
+      const pricing = new PricingRecord({
+        instanceClass: 'db.r5.large',
+        region: 'us-east-1',
+        multiAz: false,
+        engine: 'mysql',
+        edition: null,
+        upfrontPayment: 'No Upfront',
+        durationMonths: 12,
+        dailyReservedRate: 25.5,
+        dailyOnDemandRate: 45
+      });
+
+      const pricingIndex = new Map<string, PricingRecord>();
+      pricingIndex.set('db.r5.large|us-east-1|false|mysql||no upfront|12', pricing);
+
+      const expiredRi: SampleRiRow = {
+        instanceClass: 'db.r5.large',
+        region: 'us-east-1',
+        multiAz: false,
+        engine: 'mysql',
+        upfrontPayment: 'No Upfront',
+        durationMonths: 12,
+        startDate: '2024-01-01',
+        endDate: '2024-12-31',
+        count: 2
+      };
+
+      const projection = (service as any).calculateRenewalProjection(expiredRi as any, pricingIndex);
+
+      expect(projection).toBeTruthy();
+      expect(projection.originalRi).toBe(expiredRi);
+      expect(projection.pricing).toBe(pricing);
+      // Monthly cost = dailyRate * 30 * count = 25.50 * 30 * 2 = 1530
+      expect(projection.monthlyCost).toBe(1530);
+      // Renewal starts January 1st, 2025 (month after expiration)
+      expect(projection.renewalStart.getUTCFullYear()).toBe(2025);
+      expect(projection.renewalStart.getUTCMonth()).toBe(0); // January (0-based)
+      expect(projection.renewalStart.getUTCDate()).toBe(1);
+    });
+
+    it('calculateRenewalProjection handles different count values', () => {
+      const pricing = new PricingRecord({
+        instanceClass: 'db.r5.large',
+        region: 'us-east-1',
+        multiAz: false,
+        engine: 'mysql',
+        edition: null,
+        upfrontPayment: 'No Upfront',
+        durationMonths: 12,
+        dailyReservedRate: 20,
+        dailyOnDemandRate: 40
+      });
+
+      const pricingIndex = new Map<string, PricingRecord>();
+      pricingIndex.set('db.r5.large|us-east-1|false|mysql||no upfront|12', pricing);
+
+      const testCases = [
+        { count: 1, expectedCost: 600 }, // 20 * 30 * 1
+        { count: 3, expectedCost: 1800 }, // 20 * 30 * 3
+        { count: undefined, expectedCost: 600 } // Default to 1
+      ];
+
+      for (const { count, expectedCost } of testCases) {
+        const expiredRi: SampleRiRow = {
+          instanceClass: 'db.r5.large',
+          region: 'us-east-1',
+          multiAz: false,
+          engine: 'mysql',
+          upfrontPayment: 'No Upfront',
+          durationMonths: 12,
+          startDate: '2024-01-01',
+          endDate: '2024-12-31',
+          count
+        };
+
+        const projection = (service as any).calculateRenewalProjection(expiredRi as any, pricingIndex);
+        expect(projection.monthlyCost).toBe(expectedCost);
+      }
+    });
+
+    it('calculateSavingsBreakdown aggregates savings by year correctly', () => {
+      const now = new Date();
+      const currentYear = now.getUTCFullYear();
+      const currentMonth = now.getUTCMonth() + 1;
+
+      // Create mock monthly data
+      const monthlyData: Record<string, Record<string, any>> = {};
+
+      // Add data for current year (remaining months)
+      for (let month = currentMonth; month <= 12; month++) {
+        const monthKey = `${currentYear}-${month.toString().padStart(2, '0')}`;
+        monthlyData[monthKey] = {
+          'MySQL RIs': {
+            savingsAmount: 1000,
+            riCost: 2000,
+            onDemandCost: 3000,
+            renewalCost: 0
+          }
+        };
+      }
+
+      // Add data for next year (full year)
+      for (let month = 1; month <= 12; month++) {
+        const monthKey = `${currentYear + 1}-${month.toString().padStart(2, '0')}`;
+        monthlyData[monthKey] = {
+          'MySQL RIs': {
+            savingsAmount: 1500,
+            riCost: 2500,
+            onDemandCost: 4000,
+            renewalCost: 0
+          }
+        };
+      }
+
+      const breakdown = service.calculateSavingsBreakdown(monthlyData as any);
+
+      const remainingMonthsInYear1 = 13 - currentMonth;
+      expect(breakdown.year1.months).toBe(remainingMonthsInYear1);
+      expect(breakdown.year1.totalSavings).toBe(1000 * remainingMonthsInYear1);
+      expect(breakdown.year1.year).toBe(currentYear);
+
+      expect(breakdown.year2.months).toBe(12);
+      expect(breakdown.year2.totalSavings).toBe(1500 * 12);
+      expect(breakdown.year2.year).toBe(currentYear + 1);
+
+      expect(breakdown.total).toBe(breakdown.year1.totalSavings + breakdown.year2.totalSavings);
+    });
+
+    it('calculateSavingsBreakdown handles empty data', () => {
+      const monthlyData: Record<string, Record<string, any>> = {};
+
+      const breakdown = service.calculateSavingsBreakdown(monthlyData as any);
+
+      expect(breakdown.year1.months).toBe(0);
+      expect(breakdown.year1.totalSavings).toBe(0);
+      expect(breakdown.year2.months).toBe(0);
+      expect(breakdown.year2.totalSavings).toBe(0);
+      expect(breakdown.total).toBe(0);
+    });
+
+    it('calculateSavingsBreakdown includes renewal costs in savings calculation', () => {
+      const now = new Date();
+      const currentYear = now.getUTCFullYear();
+
+      const monthlyData: Record<string, Record<string, any>> = {
+        [`${currentYear}-12`]: {
+          'MySQL RIs': {
+            savingsAmount: 500, // Original savings
+            riCost: 1000,
+            onDemandCost: 2000,
+            renewalCost: 300 // Additional renewal cost reduces savings
+          }
+        }
+      };
+
+      const breakdown = service.calculateSavingsBreakdown(monthlyData as any);
+
+      // Savings should be onDemand - (riCost + renewalCost) = 2000 - (1000 + 300) = 700
+      expect(breakdown.year1.totalSavings).toBe(700);
+    });
+
+    it('aggregateMonthlyCosts includes renewal projections in results', () => {
+      const now = new Date();
+      const currentYear = now.getUTCFullYear();
+
+      // RI that expires this year
+      const expiredRi: SampleRiRow = {
+        instanceClass: 'db.r5.large',
+        region: 'us-east-1',
+        multiAz: false,
+        engine: 'mysql',
+        upfrontPayment: 'No Upfront',
+        durationMonths: 12,
+        startDate: '2024-01-01',
+        endDate: `${currentYear}-06-30`,
+        count: 1
+      };
+
+      const pricing = new PricingRecord({
+        instanceClass: 'db.r5.large',
+        region: 'us-east-1',
+        multiAz: false,
+        engine: 'mysql',
+        edition: null,
+        upfrontPayment: 'No Upfront',
+        durationMonths: 12,
+        dailyReservedRate: 25,
+        dailyOnDemandRate: 50
+      });
+
+      const aggregates = service.aggregateMonthlyCosts([expiredRi as any], [pricing]);
+
+      // Check that renewal months have renewalCost
+      const renewalMonthKey = `${currentYear}-07`; // July (first month after expiration)
+      expect(aggregates[renewalMonthKey]).toBeDefined();
+
+      const groupData = Object.values(aggregates[renewalMonthKey])[0] as any;
+      expect(groupData.renewalCost).toBeDefined();
+      expect(groupData.renewalCost).toBeGreaterThan(0);
+
+      // Check that on-demand cost is also calculated for renewal period
+      expect(groupData.onDemandCost).toBeGreaterThan(0);
+    });
+
+    it('aggregateMonthlyCosts handles RIs with no matching renewal pricing', () => {
+      const now = new Date();
+      const currentYear = now.getUTCFullYear();
+
+      // RI that expires but has no matching pricing for renewal
+      const expiredRi: SampleRiRow = {
+        instanceClass: 'db.r5.large',
+        region: 'us-east-1',
+        multiAz: false,
+        engine: 'mysql',
+        upfrontPayment: 'All Upfront', // Different upfront payment
+        durationMonths: 12,
+        startDate: '2024-01-01',
+        endDate: `${currentYear}-06-30`,
+        count: 1
+      };
+
+      const pricing = new PricingRecord({
+        instanceClass: 'db.r5.large',
+        region: 'us-east-1',
+        multiAz: false,
+        engine: 'mysql',
+        edition: null,
+        upfrontPayment: 'No Upfront', // Doesn't match RI upfront payment
+        durationMonths: 12,
+        dailyReservedRate: 25,
+        dailyOnDemandRate: 50
+      });
+
+      const aggregates = service.aggregateMonthlyCosts([expiredRi as any], [pricing]);
+
+      // Should not have any data since upfront payments don't match
+      const originalMonthKey = `${currentYear}-06`;
+      expect(aggregates[originalMonthKey]).toBeUndefined();
+
+      // Renewal month should not exist when there's no matching renewal pricing
+      const renewalMonthKey = `${currentYear}-07`;
+      expect(aggregates[renewalMonthKey]).toBeUndefined();
+    });
+  });
 });

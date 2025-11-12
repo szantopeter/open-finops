@@ -34,6 +34,9 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
   totalRiCost = 0;
   totalOnDemandCost = 0;
 
+  // Year-by-year savings breakdown
+  yearSavingsBreakdown: Array<{ year: number; savingsAmount: number; savingsPercentage: number; riCost: number; onDemandCost: number; isPartial: boolean }> = [];
+
   constructor(
     private readonly dataService: RiDataService,
     private readonly matcher: RiPricingMatcherService,
@@ -233,6 +236,38 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
 
       const totalSavingsAmount = totalOnDemandCost - totalRiCost;
       const totalSavingsPercentage = totalOnDemandCost > 0 ? (totalSavingsAmount / totalOnDemandCost) * 100 : 0;
+
+      // Calculate year-by-year savings breakdown
+      const yearData: Record<number, { riCost: number; onDemandCost: number; months: string[] }> = {};
+      for (const month of months) {
+        const year = Number.parseInt(month.split('-')[0]);
+        if (!yearData[year]) {
+          yearData[year] = { riCost: 0, onDemandCost: 0, months: [] };
+        }
+        yearData[year].months.push(month);
+
+        const groupsData = aggregates[month] || {};
+        yearData[year].riCost += Object.values(groupsData).reduce((sum: number, g: MonthlyCostData) => sum + (g.riCost || 0) + (g.renewalCost || 0), 0);
+        yearData[year].onDemandCost += Object.values(groupsData).reduce((sum: number, g: MonthlyCostData) => sum + (g.onDemandCost || 0), 0);
+      }
+
+      // Sort years and determine if each year is partial (doesn't have 12 months)
+      const sortedYears = Object.keys(yearData).map(Number).sort((a, b) => a - b);
+      this.yearSavingsBreakdown = sortedYears.map(year => {
+        const data = yearData[year];
+        const savingsAmount = data.onDemandCost - data.riCost;
+        const savingsPercentage = data.onDemandCost > 0 ? (savingsAmount / data.onDemandCost) * 100 : 0;
+        const isPartial = data.months.length < 12;
+
+        return {
+          year,
+          savingsAmount,
+          savingsPercentage,
+          riCost: data.riCost,
+          onDemandCost: data.onDemandCost,
+          isPartial
+        };
+      });
 
       // Update component properties for the widget
       this.totalSavingsAmount = totalSavingsAmount;
