@@ -1,0 +1,55 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.x2g.8xlarge",
+  "deployment": "single-az",
+  "engine": "sqlserver",
+  "license": null,
+  "onDemand": {
+    "hourly": 6.10944,
+    "daily": 146.62656,
+    "sku": "3EJYEQD3ZKQ5H76A"
+  },
+  "savingsOptions": {
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 29408.56,
+      "hourly": 0,
+      "effectiveHourly": 3.354844,
+      "daily": 80.51625
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 4.028584,
+      "effectiveHourly": 4.028584,
+      "daily": 96.686016
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 14971.74,
+      "hourly": 1.709078,
+      "effectiveHourly": 3.417011,
+      "daily": 82.008262
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 57748.14,
+      "hourly": 0,
+      "effectiveHourly": 2.195914,
+      "daily": 52.70193
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 31279.92,
+      "hourly": 1.19024,
+      "effectiveHourly": 2.379681,
+      "daily": 57.112345
+    },
+    "3yr_No Upfront": null
+  }
+}

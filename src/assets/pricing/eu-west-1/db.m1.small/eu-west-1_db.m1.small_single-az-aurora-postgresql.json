@@ -9,5 +9,12 @@
     "daily": 1.2384,
     "sku": "6CSV3ER2T5CTMQQM"
   },
-  "savingsOptions": null
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
 }

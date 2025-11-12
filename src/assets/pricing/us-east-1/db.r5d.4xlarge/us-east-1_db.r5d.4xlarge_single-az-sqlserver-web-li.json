@@ -3,11 +3,11 @@
   "instance": "db.r5d.4xlarge",
   "deployment": "single-az",
   "engine": "sqlserver-web-li",
-  "license": "li",
+  "license": null,
   "onDemand": {
-    "hourly": 3.24822,
-    "daily": 77.95728,
-    "sku": "DUE645VVC5A9Q6FA"
+    "hourly": 5.40338,
+    "daily": 129.68112,
+    "sku": "2JBV6RRBR5H5PQK3"
   },
   "savingsOptions": {
     "1yr_No Upfront": {

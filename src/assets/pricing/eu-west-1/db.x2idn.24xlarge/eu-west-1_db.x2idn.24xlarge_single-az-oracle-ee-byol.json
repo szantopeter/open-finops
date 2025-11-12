@@ -3,11 +3,11 @@
   "instance": "db.x2idn.24xlarge",
   "deployment": "single-az",
   "engine": "oracle-ee-byol",
-  "license": "byol",
+  "license": null,
   "onDemand": {
-    "hourly": 17.3376,
-    "daily": 416.1024,
-    "sku": "V66P6RTD4UZSBM5R"
+    "hourly": 34.6752,
+    "daily": 832.2048,
+    "sku": "4XPNYWSD68CMXPS6"
   },
   "savingsOptions": {
     "3yr_Partial Upfront": {

@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.c6gd.12xlarge",
+  "deployment": "single-az",
+  "engine": "mysql",
+  "license": null,
+  "onDemand": {
+    "hourly": 9.84528,
+    "daily": 236.28672,
+    "sku": "7NS6F4MWZ9HZSAB5"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

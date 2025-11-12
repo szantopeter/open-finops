@@ -9,5 +9,33 @@
     "daily": 390.34368,
     "sku": "4D99PXE3V2MJT7J4"
   },
-  "savingsOptions": null
+  "savingsOptions": {
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 5.44896,
+      "effectiveHourly": 5.44896,
+      "daily": 130.77504
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 44877.38,
+      "hourly": 0,
+      "effectiveHourly": 5.119482,
+      "daily": 122.86757
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 23150.34,
+      "hourly": 2.64278,
+      "effectiveHourly": 5.283704,
+      "daily": 126.808896
+    },
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
 }

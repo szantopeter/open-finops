@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r3.xlarge",
+  "deployment": "multi-az",
+  "engine": "db2",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.817,
+    "daily": 19.608,
+    "sku": "53MS37Y2UP35FTXK"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

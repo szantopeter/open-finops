@@ -2,12 +2,12 @@
   "region": "us-east-1",
   "instance": "db.m6i.8xlarge",
   "deployment": "single-az",
-  "engine": "Db2-se",
+  "engine": "db2-se",
   "license": null,
   "onDemand": {
-    "hourly": 2.44928,
-    "daily": 58.78272,
-    "sku": "EJJPP7YB6C2UN6XD"
+    "hourly": 22.89922,
+    "daily": 549.58128,
+    "sku": "24D9F28MCV5JJQVM"
   },
   "savingsOptions": {
     "1yr_Partial Upfront": {

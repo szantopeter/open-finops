@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r4.8xlarge",
+  "deployment": "multi-az",
+  "engine": "sqlserver-web-li",
+  "license": null,
+  "onDemand": {
+    "hourly": 20.9152,
+    "daily": 501.9648,
+    "sku": "6YR5MBUZPJDPEUT2"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

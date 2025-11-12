@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r6id.metal",
+  "deployment": "multi-az",
+  "engine": "oracle-se2-byol",
+  "license": null,
+  "onDemand": {
+    "hourly": 12.30144,
+    "daily": 295.23456,
+    "sku": "6GD79FZNPYUE6MV8"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

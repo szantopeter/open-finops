@@ -1,0 +1,41 @@
+{
+  "region": "us-east-1",
+  "instance": "db.m8g.16xlarge",
+  "deployment": "single-az",
+  "engine": "db2",
+  "license": null,
+  "onDemand": {
+    "hourly": 4.62336,
+    "daily": 110.96064,
+    "sku": "5A4WH8SERMB53EAF"
+  },
+  "savingsOptions": {
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 25516.2,
+      "hourly": 0,
+      "effectiveHourly": 2.910814,
+      "daily": 69.859548
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 13161.44,
+      "hourly": 1.50242,
+      "effectiveHourly": 3.003839,
+      "daily": 72.092138
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 3.09772,
+      "effectiveHourly": 3.09772,
+      "daily": 74.34528
+    },
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

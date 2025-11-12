@@ -5,9 +5,9 @@
   "engine": "mariadb",
   "license": null,
   "onDemand": {
-    "hourly": 0.2064,
-    "daily": 4.9536,
-    "sku": "8XU9X5FBD2B44C5U"
+    "hourly": 0.63984,
+    "daily": 15.35616,
+    "sku": "4DE74737JZ9BD7MX"
   },
   "savingsOptions": {
     "1yr_All Upfront": {

@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.t2.xlarge",
+  "deployment": "single-az",
+  "engine": "aurora-postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.50224,
+    "daily": 12.05376,
+    "sku": "5PPM5PX9XDY6PT3Q"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r7i.metal-48xl",
+  "deployment": "single-az",
+  "engine": "mysql",
+  "license": null,
+  "onDemand": {
+    "hourly": 30.96,
+    "daily": 743.04,
+    "sku": "49MHXMDXQ79W8AMC"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

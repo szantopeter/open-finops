@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.x1e.2xlarge",
+  "deployment": "single-az",
+  "engine": "aurora-mysql",
+  "license": null,
+  "onDemand": {
+    "hourly": 11.21096,
+    "daily": 269.06304,
+    "sku": "2QKB24H33CEEBAPK"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "region": "us-east-1",
+  "instance": "db.m7i.2xlarge",
+  "deployment": "multi-az",
+  "engine": "oracle-ee",
+  "license": null,
+  "onDemand": {
+    "hourly": 1.22464,
+    "daily": 29.39136,
+    "sku": "25CSM7WBC8M3RXTA"
+  },
+  "savingsOptions": {
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 6758.54,
+      "hourly": 0,
+      "effectiveHourly": 0.770995,
+      "daily": 18.50388
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 3486.55,
+      "hourly": 0.398008,
+      "effectiveHourly": 0.795743,
+      "daily": 19.097851
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 0.82044,
+      "effectiveHourly": 0.82044,
+      "daily": 19.69056
+    },
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

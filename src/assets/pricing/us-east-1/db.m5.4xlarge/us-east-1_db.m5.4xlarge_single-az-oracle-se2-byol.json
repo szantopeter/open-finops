@@ -3,11 +3,11 @@
   "instance": "db.m5.4xlarge",
   "deployment": "single-az",
   "engine": "oracle-se2-byol",
-  "license": "byol",
+  "license": null,
   "onDemand": {
-    "hourly": 1.17648,
-    "daily": 28.23552,
-    "sku": "CEMMSRUZDM966UT7"
+    "hourly": 3.67994,
+    "daily": 88.31856,
+    "sku": "5CCQZQKHXZHCVWEM"
   },
   "savingsOptions": {
     "1yr_All Upfront": {

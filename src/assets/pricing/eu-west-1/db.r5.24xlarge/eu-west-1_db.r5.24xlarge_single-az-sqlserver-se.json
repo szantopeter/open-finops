@@ -5,9 +5,9 @@
   "engine": "sqlserver-se",
   "license": null,
   "onDemand": {
-    "hourly": 16.59456,
-    "daily": 398.26944,
-    "sku": "A8SZ3DV92UEQN7N3"
+    "hourly": 36.751584,
+    "daily": 882.038016,
+    "sku": "9F49JT8WMHQ8QZCM"
   },
   "savingsOptions": {
     "1yr_No Upfront": {

@@ -1,0 +1,55 @@
+{
+  "region": "us-east-1",
+  "instance": "db.t4g.small",
+  "deployment": "multi-az",
+  "engine": "oracle-ee",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.0559,
+    "daily": 1.3416,
+    "sku": "5SY529FVXY3EARD8"
+  },
+  "savingsOptions": {
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 686.28,
+      "hourly": 0,
+      "effectiveHourly": 0.026097,
+      "daily": 0.62631
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 325.94,
+      "hourly": 0,
+      "effectiveHourly": 0.037182,
+      "daily": 0.892375
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 350.02,
+      "hourly": 0.01333,
+      "effectiveHourly": 0.026639,
+      "daily": 0.639354
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 167.7,
+      "hourly": 0.019178,
+      "effectiveHourly": 0.038309,
+      "daily": 0.91941
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 0.03999,
+      "effectiveHourly": 0.03999,
+      "daily": 0.95976
+    },
+    "3yr_No Upfront": null
+  }
+}

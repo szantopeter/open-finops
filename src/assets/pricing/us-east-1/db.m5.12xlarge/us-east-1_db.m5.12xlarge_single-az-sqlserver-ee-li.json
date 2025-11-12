@@ -5,9 +5,9 @@
   "engine": "sqlserver-ee-li",
   "license": "li",
   "onDemand": {
-    "hourly": 22.12608,
-    "daily": 531.02592,
-    "sku": "CYRJAKRBVS7RHTHY"
+    "hourly": 24.10752,
+    "daily": 578.58048,
+    "sku": "BM26VHWEX59EYZZ8"
   },
   "savingsOptions": {
     "1yr_Partial Upfront": {

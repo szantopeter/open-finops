@@ -226,6 +226,21 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
           type: 'bar',
           stack: 'ri',
           itemStyle: { color: groupColors[g] },
+          emphasis: {
+            focus: 'series',
+            itemStyle: {
+              shadowBlur: 10,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            },
+            label: {
+              show: true,
+              position: 'top',
+              formatter: (params: any) => `$${params.value.toFixed(2)}`,
+              fontSize: 12,
+              fontWeight: 'bold',
+              color: '#000'
+            }
+          },
           label: index === 0 ? {
             show: true,
             position: 'bottom',
@@ -243,6 +258,21 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
           type: 'bar',
           stack: 'ondemand',
           itemStyle: { color: groupColors[g] },
+          emphasis: {
+            focus: 'series',
+            itemStyle: {
+              shadowBlur: 10,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            },
+            label: {
+              show: true,
+              position: 'top',
+              formatter: (params: any) => `$${params.value.toFixed(2)}`,
+              fontSize: 12,
+              fontWeight: 'bold',
+              color: '#000'
+            }
+          },
           label: index === 0 ? {
             show: true,
             position: 'bottom',

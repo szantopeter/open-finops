@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.x1e.4xlarge",
+  "deployment": "multi-az",
+  "engine": "sqlserver-ex-li",
+  "license": null,
+  "onDemand": {
+    "hourly": 5.7792,
+    "daily": 138.7008,
+    "sku": "5MAUMK3ACZ9W9846"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

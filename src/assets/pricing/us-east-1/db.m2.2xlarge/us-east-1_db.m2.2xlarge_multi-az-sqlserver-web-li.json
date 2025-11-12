@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.m2.2xlarge",
+  "deployment": "multi-az",
+  "engine": "sqlserver-web-li",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.5934,
+    "daily": 14.2416,
+    "sku": "88NSA6NPVTWNQZXP"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

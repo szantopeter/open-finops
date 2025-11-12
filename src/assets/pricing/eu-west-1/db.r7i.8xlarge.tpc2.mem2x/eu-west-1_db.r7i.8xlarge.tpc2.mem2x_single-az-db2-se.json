@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r7i.8xlarge.tpc2.mem2x",
+  "deployment": "single-az",
+  "engine": "db2-se",
+  "license": null,
+  "onDemand": {
+    "hourly": 7.7056,
+    "daily": 184.9344,
+    "sku": "JBFF8J62F2YEF2E7"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r6i.4xlarge.tpc2.mem3x",
+  "deployment": "single-az",
+  "engine": "oracle-se2",
+  "license": null,
+  "onDemand": {
+    "hourly": 10.64164,
+    "daily": 255.39936,
+    "sku": "3D4NYCBU3S45ADG8"
+  },
+  "savingsOptions": {
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 31721.1,
+      "hourly": 0,
+      "effectiveHourly": 3.618651,
+      "daily": 86.847638
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 34985.66,
+      "hourly": 1.33128,
+      "effectiveHourly": 2.661635,
+      "daily": 63.879225
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 67172.88,
+      "hourly": 0,
+      "effectiveHourly": 2.554296,
+      "daily": 61.303107
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 3.834052,
+      "effectiveHourly": 3.834052,
+      "daily": 92.017248
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 16327.1,
+      "hourly": 1.863792,
+      "effectiveHourly": 3.72634,
+      "daily": 89.432171
+    },
+    "3yr_No Upfront": null
+  }
+}

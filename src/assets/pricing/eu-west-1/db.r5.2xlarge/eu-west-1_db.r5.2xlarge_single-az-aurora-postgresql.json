@@ -5,9 +5,9 @@
   "engine": "aurora-postgresql",
   "license": null,
   "onDemand": {
-    "hourly": 1.1008,
-    "daily": 26.4192,
-    "sku": "RJZH5KHH64QW4KT5"
+    "hourly": 1.785704,
+    "daily": 42.856896,
+    "sku": "2Q3ZHN9XCAT7YPNC"
   },
   "savingsOptions": {
     "1yr_All Upfront": {

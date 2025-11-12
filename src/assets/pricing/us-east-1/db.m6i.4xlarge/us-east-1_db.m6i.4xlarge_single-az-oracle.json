@@ -1,0 +1,55 @@
+{
+  "region": "us-east-1",
+  "instance": "db.m6i.4xlarge",
+  "deployment": "single-az",
+  "engine": "oracle",
+  "license": null,
+  "onDemand": {
+    "hourly": 2.35296,
+    "daily": 56.47104,
+    "sku": "2JREGSYMCH28MFK8"
+  },
+  "savingsOptions": {
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 17057.27,
+      "hourly": 0,
+      "effectiveHourly": 0.648615,
+      "daily": 15.566758
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 0.942904,
+      "effectiveHourly": 0.942904,
+      "daily": 22.629696
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 4022.94,
+      "hourly": 0.45924,
+      "effectiveHourly": 0.918165,
+      "daily": 22.035976
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 7831.33,
+      "hourly": 0,
+      "effectiveHourly": 0.893376,
+      "daily": 21.441019
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 8850.48,
+      "hourly": 0.336776,
+      "effectiveHourly": 0.673322,
+      "daily": 16.159717
+    },
+    "3yr_No Upfront": null
+  }
+}

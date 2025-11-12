@@ -3,11 +3,11 @@
   "instance": "db.t3.xlarge",
   "deployment": "single-az",
   "engine": "sqlserver-ex-li",
-  "license": "li",
+  "license": null,
   "onDemand": {
-    "hourly": 0.301,
-    "daily": 7.224,
-    "sku": "NG2B6PWQK4347K99"
+    "hourly": 0.89784,
+    "daily": 21.54816,
+    "sku": "23Q5PJHJKGSCUVFH"
   },
   "savingsOptions": {
     "3yr_Partial Upfront": {

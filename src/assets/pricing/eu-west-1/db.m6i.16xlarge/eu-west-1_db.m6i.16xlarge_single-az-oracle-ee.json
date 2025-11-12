@@ -9,5 +9,47 @@
     "daily": 249.66144,
     "sku": "325HD6PNU37X9PE7"
   },
-  "savingsOptions": null
+  "savingsOptions": {
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 29914.24,
+      "hourly": 0,
+      "effectiveHourly": 3.41253,
+      "daily": 81.900726
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 31444.18,
+      "hourly": 1.196518,
+      "effectiveHourly": 2.392205,
+      "daily": 57.412923
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 61617.28,
+      "hourly": 0,
+      "effectiveHourly": 2.343041,
+      "daily": 56.232973
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 3.66016,
+      "effectiveHourly": 3.66016,
+      "daily": 87.84384
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 15266.72,
+      "hourly": 1.74279,
+      "effectiveHourly": 3.484373,
+      "daily": 83.624961
+    },
+    "3yr_No Upfront": null
+  }
 }

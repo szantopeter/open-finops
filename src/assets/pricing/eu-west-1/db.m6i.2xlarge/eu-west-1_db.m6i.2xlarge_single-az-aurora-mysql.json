@@ -9,5 +9,47 @@
     "daily": 97.56528,
     "sku": "267STXSTBGZKD5RP"
   },
-  "savingsOptions": null
+  "savingsOptions": {
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 3.780655,
+      "effectiveHourly": 3.780655,
+      "daily": 90.73571
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 16025.09,
+      "hourly": 1.829349,
+      "effectiveHourly": 3.657446,
+      "daily": 87.778701
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 31694.08,
+      "hourly": 0,
+      "effectiveHourly": 3.615569,
+      "daily": 86.773665
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 3930.2,
+      "hourly": 0.149554,
+      "effectiveHourly": 0.299002,
+      "daily": 7.176063
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 7702.16,
+      "hourly": 0,
+      "effectiveHourly": 0.29288,
+      "daily": 7.029121
+    },
+    "3yr_No Upfront": null
+  }
 }

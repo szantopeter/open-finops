@@ -5,8 +5,8 @@
   "engine": "oracle-se2-byol",
   "license": "byol",
   "onDemand": {
-    "hourly": 1.031,
-    "daily": 24.744,
+    "hourly": 0.88666,
+    "daily": 21.27984,
     "sku": "2DV3WTJK6MPH2ZFQ"
   },
   "savingsOptions": {
@@ -14,41 +14,41 @@
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
-      "hourly": 0.6825,
-      "effectiveHourly": 0.6825,
-      "daily": 16.38
+      "hourly": 0.58695,
+      "effectiveHourly": 0.58695,
+      "daily": 14.0868
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
-      "upfront": 11701,
+      "upfront": 10062.86,
       "hourly": 0,
-      "effectiveHourly": 0.444939,
-      "daily": 10.678531
+      "effectiveHourly": 0.382648,
+      "daily": 9.183537
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
-      "upfront": 2847,
-      "hourly": 0.325,
-      "effectiveHourly": 0.649778,
-      "daily": 15.594661
+      "upfront": 2448.42,
+      "hourly": 0.2795,
+      "effectiveHourly": 0.558809,
+      "daily": 13.411408
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
-      "upfront": 5970,
-      "hourly": 0.2272,
-      "effectiveHourly": 0.454213,
-      "daily": 10.901123
+      "upfront": 5134.2,
+      "hourly": 0.195392,
+      "effectiveHourly": 0.390623,
+      "daily": 9.374966
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
-      "upfront": 5580,
+      "upfront": 4798.8,
       "hourly": 0,
-      "effectiveHourly": 0.63655,
-      "daily": 15.277207
+      "effectiveHourly": 0.547433,
+      "daily": 13.138398
     },
     "3yr_No Upfront": null
   }

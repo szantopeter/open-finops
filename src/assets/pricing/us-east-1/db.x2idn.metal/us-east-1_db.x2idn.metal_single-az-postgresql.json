@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.x2idn.metal",
+  "deployment": "single-az",
+  "engine": "postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 28.896,
+    "daily": 693.504,
+    "sku": "6KRP7Z7CP5YH8JRF"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

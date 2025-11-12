@@ -5,9 +5,9 @@
   "engine": "mariadb",
   "license": null,
   "onDemand": {
-    "hourly": 0.4128,
-    "daily": 9.9072,
-    "sku": "QKG7BM49HAMDF45C"
+    "hourly": 0.877888,
+    "daily": 21.069312,
+    "sku": "347HPSMPCM52HSXB"
   },
   "savingsOptions": {
     "1yr_Partial Upfront": {

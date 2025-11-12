@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.t2.medium",
+  "deployment": "multi-az",
+  "engine": "sqlserver-ex-li",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.05848,
+    "daily": 1.40352,
+    "sku": "4CDJJFQHW6NQ7T2B"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

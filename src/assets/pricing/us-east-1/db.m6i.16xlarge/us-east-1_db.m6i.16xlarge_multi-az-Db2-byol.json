@@ -2,12 +2,12 @@
   "region": "us-east-1",
   "instance": "db.m6i.16xlarge",
   "deployment": "multi-az",
-  "engine": "Db2-byol",
-  "license": "byol",
+  "engine": "db2-byol",
+  "license": null,
   "onDemand": {
-    "hourly": 9.79712,
-    "daily": 235.13088,
-    "sku": "UX5A5ZCD8F8KNC7W"
+    "hourly": 16.512,
+    "daily": 396.288,
+    "sku": "4E5VXBKSA8R388NY"
   },
   "savingsOptions": {
     "1yr_No Upfront": {

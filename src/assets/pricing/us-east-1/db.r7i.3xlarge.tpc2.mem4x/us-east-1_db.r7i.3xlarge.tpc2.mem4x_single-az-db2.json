@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r7i.3xlarge.tpc2.mem4x",
+  "deployment": "single-az",
+  "engine": "db2",
+  "license": null,
+  "onDemand": {
+    "hourly": 10.32,
+    "daily": 247.68,
+    "sku": "HZEHV6QEGCVVSCSP"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

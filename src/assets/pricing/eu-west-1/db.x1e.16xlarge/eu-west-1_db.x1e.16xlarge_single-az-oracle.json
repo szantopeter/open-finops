@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.x1e.16xlarge",
+  "deployment": "single-az",
+  "engine": "oracle",
+  "license": null,
+  "onDemand": {
+    "hourly": 75.55874,
+    "daily": 1813.40976,
+    "sku": "9ADS9P8NPEN6QX9Z"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

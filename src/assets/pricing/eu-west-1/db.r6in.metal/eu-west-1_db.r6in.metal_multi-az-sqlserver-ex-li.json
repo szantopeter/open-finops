@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r6in.metal",
+  "deployment": "multi-az",
+  "engine": "sqlserver-ex-li",
+  "license": null,
+  "onDemand": {
+    "hourly": 16.01664,
+    "daily": 384.39936,
+    "sku": "7RHNZWJD8T6NMV65"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

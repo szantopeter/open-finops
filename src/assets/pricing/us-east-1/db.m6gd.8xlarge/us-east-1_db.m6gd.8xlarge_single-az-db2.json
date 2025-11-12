@@ -1,0 +1,55 @@
+{
+  "region": "us-east-1",
+  "instance": "db.m6gd.8xlarge",
+  "deployment": "single-az",
+  "engine": "db2",
+  "license": null,
+  "onDemand": {
+    "hourly": 2.56882,
+    "daily": 61.65168,
+    "sku": "3DSFJWDCPC7DV9GU"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 1.977828,
+      "effectiveHourly": 1.977828,
+      "daily": 47.467872
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 8437.46,
+      "hourly": 0.9632,
+      "effectiveHourly": 1.925721,
+      "daily": 46.217306
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 18563.1,
+      "hourly": 0.706318,
+      "effectiveHourly": 1.412193,
+      "daily": 33.892631
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 16425.14,
+      "hourly": 0,
+      "effectiveHourly": 1.873733,
+      "daily": 44.969582
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 35776,
+      "hourly": 0,
+      "effectiveHourly": 1.360407,
+      "daily": 32.649783
+    },
+    "3yr_No Upfront": null
+  }
+}

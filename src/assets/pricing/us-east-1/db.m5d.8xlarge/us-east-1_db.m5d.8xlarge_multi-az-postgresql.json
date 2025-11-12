@@ -5,9 +5,9 @@
   "engine": "postgresql",
   "license": null,
   "onDemand": {
-    "hourly": 8.0496,
-    "daily": 193.1904,
-    "sku": "R6KPU9329YGB6TQK"
+    "hourly": 17.75728,
+    "daily": 426.17472,
+    "sku": "329V2UPDU494GNYA"
   },
   "savingsOptions": {
     "1yr_Partial Upfront": {

@@ -1,0 +1,55 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r6gd.xlarge",
+  "deployment": "single-az",
+  "engine": "db2-byol",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.88494,
+    "daily": 21.23856,
+    "sku": "67EJSAC68M6TZET5"
+  },
+  "savingsOptions": {
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 1452.54,
+      "hourly": 0.165894,
+      "effectiveHourly": 0.331595,
+      "daily": 7.958294
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 2828.54,
+      "hourly": 0,
+      "effectiveHourly": 0.322672,
+      "daily": 7.74412
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 0.34056,
+      "effectiveHourly": 0.34056,
+      "daily": 8.17344
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 6160.18,
+      "hourly": 0,
+      "effectiveHourly": 0.234245,
+      "daily": 5.621884
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 3196.62,
+      "hourly": 0.121604,
+      "effectiveHourly": 0.243158,
+      "daily": 5.835785
+    },
+    "3yr_No Upfront": null
+  }
+}

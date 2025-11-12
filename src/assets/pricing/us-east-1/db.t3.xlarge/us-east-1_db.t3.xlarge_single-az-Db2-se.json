@@ -2,12 +2,12 @@
   "region": "us-east-1",
   "instance": "db.t3.xlarge",
   "deployment": "single-az",
-  "engine": "Db2-se",
+  "engine": "db2-se",
   "license": null,
   "onDemand": {
-    "hourly": 0.2494,
-    "daily": 5.9856,
-    "sku": "RHP59ZK3CQWKV3HS"
+    "hourly": 0.89784,
+    "daily": 21.54816,
+    "sku": "23Q5PJHJKGSCUVFH"
   },
   "savingsOptions": {
     "3yr_Partial Upfront": {

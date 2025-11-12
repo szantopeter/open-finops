@@ -1,0 +1,41 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.m7i.12xlarge",
+  "deployment": "single-az",
+  "engine": "sqlserver",
+  "license": null,
+  "onDemand": {
+    "hourly": 4.06608,
+    "daily": 97.58592,
+    "sku": "33NC2FWMSXMBE2SM"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 2.72448,
+      "effectiveHourly": 2.72448,
+      "daily": 65.38752
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 11575.6,
+      "hourly": 1.32139,
+      "effectiveHourly": 2.641901,
+      "daily": 63.405626
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 22442.56,
+      "hourly": 0,
+      "effectiveHourly": 2.560182,
+      "daily": 61.44438
+    },
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

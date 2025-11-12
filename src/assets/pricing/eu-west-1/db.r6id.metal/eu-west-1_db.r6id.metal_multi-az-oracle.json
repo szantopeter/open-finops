@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r6id.metal",
+  "deployment": "multi-az",
+  "engine": "oracle",
+  "license": null,
+  "onDemand": {
+    "hourly": 13.70496,
+    "daily": 328.91904,
+    "sku": "8W3A3THACT48Q4H6"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r5b.6xlarge.tpc2.mem4x",
+  "deployment": "multi-az",
+  "engine": "aurora-mysql",
+  "license": null,
+  "onDemand": {
+    "hourly": 22.75732,
+    "daily": 546.17568,
+    "sku": "MY6PPWCZP8YVB799"
+  },
+  "savingsOptions": {
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 69737.4,
+      "hourly": 7.960848,
+      "effectiveHourly": 15.916289,
+      "daily": 381.990947
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 135488.7,
+      "hourly": 0,
+      "effectiveHourly": 15.45616,
+      "daily": 370.947844
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 286918.36,
+      "hourly": 0,
+      "effectiveHourly": 10.910273,
+      "daily": 261.846553
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 149436.18,
+      "hourly": 5.68632,
+      "effectiveHourly": 11.368736,
+      "daily": 272.849667
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 16.376636,
+      "effectiveHourly": 16.376636,
+      "daily": 393.039264
+    },
+    "3yr_No Upfront": null
+  }
+}

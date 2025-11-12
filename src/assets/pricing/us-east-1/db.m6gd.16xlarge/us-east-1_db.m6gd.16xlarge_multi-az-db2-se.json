@@ -1,0 +1,55 @@
+{
+  "region": "us-east-1",
+  "instance": "db.m6gd.16xlarge",
+  "deployment": "multi-az",
+  "engine": "db2-se",
+  "license": null,
+  "onDemand": {
+    "hourly": 10.27442,
+    "daily": 246.58608,
+    "sku": "4HP527QC92MC8A38"
+  },
+  "savingsOptions": {
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 65702.28,
+      "hourly": 0,
+      "effectiveHourly": 7.495127,
+      "daily": 179.883039
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 33751.56,
+      "hourly": 3.852886,
+      "effectiveHourly": 7.703166,
+      "daily": 184.875999
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 143104.86,
+      "hourly": 0,
+      "effectiveHourly": 5.441663,
+      "daily": 130.599918
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 74252.4,
+      "hourly": 2.825444,
+      "effectiveHourly": 5.648944,
+      "daily": 135.574654
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 7.911226,
+      "effectiveHourly": 7.911226,
+      "daily": 189.869424
+    },
+    "3yr_No Upfront": null
+  }
+}

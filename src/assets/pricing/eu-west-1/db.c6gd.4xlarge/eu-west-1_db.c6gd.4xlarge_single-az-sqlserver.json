@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.c6gd.4xlarge",
+  "deployment": "single-az",
+  "engine": "sqlserver",
+  "license": null,
+  "onDemand": {
+    "hourly": 3.678048,
+    "daily": 88.273152,
+    "sku": "8WC7YMM4TSW65FJS"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

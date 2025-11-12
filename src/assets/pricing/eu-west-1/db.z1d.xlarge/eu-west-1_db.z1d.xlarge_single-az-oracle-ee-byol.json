@@ -3,11 +3,11 @@
   "instance": "db.z1d.xlarge",
   "deployment": "single-az",
   "engine": "oracle-ee-byol",
-  "license": "byol",
+  "license": null,
   "onDemand": {
-    "hourly": 0.65704,
-    "daily": 15.76896,
-    "sku": "EQ2EMXUVH2EQ5J6U"
+    "hourly": 1.00534,
+    "daily": 24.12816,
+    "sku": "4XEGUKBXJVXA4Z7B"
   },
   "savingsOptions": {
     "3yr_Partial Upfront": {

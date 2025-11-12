@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.c6gd.xlarge",
+  "deployment": "single-az",
+  "engine": "db2",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.82044,
+    "daily": 19.69056,
+    "sku": "6ZK6KQQCS3KFVU9C"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

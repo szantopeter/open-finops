@@ -2,12 +2,12 @@
   "region": "eu-west-1",
   "instance": "db.m6i.xlarge",
   "deployment": "single-az",
-  "engine": "Db2-byol",
-  "license": "byol",
+  "engine": "db2-byol",
+  "license": null,
   "onDemand": {
-    "hourly": 0.33884,
-    "daily": 8.13216,
-    "sku": "ET8EY8RW6NFF5WU9"
+    "hourly": 0.54868,
+    "daily": 13.16832,
+    "sku": "37MMYWZ8FYZAKDVJ"
   },
   "savingsOptions": {
     "3yr_Partial Upfront": {

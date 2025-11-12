@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.t1.micro",
+  "deployment": "single-az",
+  "engine": "oracle-ee",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.0602,
+    "daily": 1.4448,
+    "sku": "44ZHGUVDRTMQ7RCQ"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

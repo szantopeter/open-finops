@@ -1,0 +1,55 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r6i.xlarge.tpc2.mem2x",
+  "deployment": "single-az",
+  "engine": "db2",
+  "license": null,
+  "onDemand": {
+    "hourly": 1.60304,
+    "daily": 38.47296,
+    "sku": "CMMB3HFA55P8MQ7P"
+  },
+  "savingsOptions": {
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 2457.88,
+      "hourly": 0.280532,
+      "effectiveHourly": 0.56092,
+      "daily": 13.462077
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 0.57706,
+      "effectiveHourly": 0.57706,
+      "daily": 13.84944
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 5265.78,
+      "hourly": 0.20038,
+      "effectiveHourly": 0.400615,
+      "daily": 9.61476
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 4774.72,
+      "hourly": 0,
+      "effectiveHourly": 0.544686,
+      "daily": 13.072471
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 10111.02,
+      "hourly": 0,
+      "effectiveHourly": 0.384478,
+      "daily": 9.227488
+    },
+    "3yr_No Upfront": null
+  }
+}

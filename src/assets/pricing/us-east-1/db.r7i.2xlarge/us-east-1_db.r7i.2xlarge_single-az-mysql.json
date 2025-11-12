@@ -5,9 +5,9 @@
   "engine": "mysql",
   "license": null,
   "onDemand": {
-    "hourly": 0.42656,
-    "daily": 10.23744,
-    "sku": "AU7WVG4N4CAU7CBP"
+    "hourly": 0.86,
+    "daily": 20.64,
+    "sku": "ANXSZSXHCTP8VP33"
   },
   "savingsOptions": {
     "1yr_All Upfront": {

@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.t2.large",
+  "deployment": "multi-az",
+  "engine": "aurora-mysql",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.12556,
+    "daily": 3.01344,
+    "sku": "2WNACBTGDEN58QNM"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

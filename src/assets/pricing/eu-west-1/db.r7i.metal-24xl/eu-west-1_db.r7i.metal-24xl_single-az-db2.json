@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r7i.metal-24xl",
+  "deployment": "single-az",
+  "engine": "db2",
+  "license": null,
+  "onDemand": {
+    "hourly": 8.6688,
+    "daily": 208.0512,
+    "sku": "8M6BAAHST5SHQCPP"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

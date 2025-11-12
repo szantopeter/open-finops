@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.m3.large",
+  "deployment": "multi-az",
+  "engine": "oracle",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.77658,
+    "daily": 18.63792,
+    "sku": "37RHNJ8JBZWJNFW9"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

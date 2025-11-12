@@ -1,0 +1,55 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r6i.8xlarge.tpc2.mem3x",
+  "deployment": "single-az",
+  "engine": "db2-se",
+  "license": null,
+  "onDemand": {
+    "hourly": 21.28414,
+    "daily": 510.81936,
+    "sku": "EDJRTVYKV2VFVSC5"
+  },
+  "savingsOptions": {
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 69972.18,
+      "hourly": 2.66256,
+      "effectiveHourly": 5.323301,
+      "daily": 127.759236
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 134346.62,
+      "hourly": 0,
+      "effectiveHourly": 5.108625,
+      "daily": 122.607
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 63441.34,
+      "hourly": 0,
+      "effectiveHourly": 7.237205,
+      "daily": 173.692923
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 7.66819,
+      "effectiveHourly": 7.66819,
+      "daily": 184.03656
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 32653.34,
+      "hourly": 3.727584,
+      "effectiveHourly": 7.452583,
+      "daily": 178.861989
+    },
+    "3yr_No Upfront": null
+  }
+}

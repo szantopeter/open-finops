@@ -1,0 +1,55 @@
+{
+  "region": "us-east-1",
+  "instance": "db.t3.small",
+  "deployment": "multi-az",
+  "engine": "sqlserver-ex-li",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.05848,
+    "daily": 1.40352,
+    "sku": "AJAGF3JHES423UG5"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 0.041108,
+      "effectiveHourly": 0.041108,
+      "daily": 0.986592
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 368.94,
+      "hourly": 0.014018,
+      "effectiveHourly": 0.028047,
+      "daily": 0.673133
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 172,
+      "hourly": 0.019608,
+      "effectiveHourly": 0.039229,
+      "daily": 0.941502
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 723.26,
+      "hourly": 0,
+      "effectiveHourly": 0.027503,
+      "daily": 0.660059
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 336.26,
+      "hourly": 0,
+      "effectiveHourly": 0.038359,
+      "daily": 0.92063
+    },
+    "3yr_No Upfront": null
+  }
+}

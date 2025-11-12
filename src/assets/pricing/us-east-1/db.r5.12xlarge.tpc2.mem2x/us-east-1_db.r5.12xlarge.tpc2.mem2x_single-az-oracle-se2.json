@@ -1,0 +1,55 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r5.12xlarge.tpc2.mem2x",
+  "deployment": "single-az",
+  "engine": "oracle-se2",
+  "license": null,
+  "onDemand": {
+    "hourly": 19.23648,
+    "daily": 461.67552,
+    "sku": "RC8BUM284FGNP5GP"
+  },
+  "savingsOptions": {
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 23207.1,
+      "hourly": 2.64923,
+      "effectiveHourly": 5.296629,
+      "daily": 127.119097
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 45486.26,
+      "hourly": 0,
+      "effectiveHourly": 5.188942,
+      "daily": 124.534593
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 91699.22,
+      "hourly": 0,
+      "effectiveHourly": 3.486928,
+      "daily": 83.68626
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 5.56334,
+      "effectiveHourly": 5.56334,
+      "daily": 133.52016
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 46785.72,
+      "hourly": 1.780286,
+      "effectiveHourly": 3.559346,
+      "daily": 85.424304
+    },
+    "3yr_No Upfront": null
+  }
+}

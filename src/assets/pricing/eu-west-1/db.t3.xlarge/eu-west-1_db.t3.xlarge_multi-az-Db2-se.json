@@ -2,12 +2,12 @@
   "region": "eu-west-1",
   "instance": "db.t3.xlarge",
   "deployment": "multi-az",
-  "engine": "Db2-se",
+  "engine": "db2-se",
   "license": null,
   "onDemand": {
-    "hourly": 0.53664,
-    "daily": 12.87936,
-    "sku": "NH4HP7CFTQQQBTH6"
+    "hourly": 1.83524,
+    "daily": 44.04576,
+    "sku": "2S7A25J2YNDBNDCW"
   },
   "savingsOptions": {
     "1yr_No Upfront": {

@@ -2,12 +2,12 @@
   "region": "eu-west-1",
   "instance": "db.x2iedn.4xlarge",
   "deployment": "multi-az",
-  "engine": "Db2",
+  "engine": "db2",
   "license": null,
   "onDemand": {
-    "hourly": 15.70704,
-    "daily": 376.96896,
-    "sku": "9X7PDVZKVCBD9D5P"
+    "hourly": 23.211744,
+    "daily": 557.081856,
+    "sku": "39B46K78YZK7GWVF"
   },
   "savingsOptions": {
     "1yr_All Upfront": {

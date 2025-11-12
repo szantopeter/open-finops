@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.t2.2xlarge",
+  "deployment": "multi-az",
+  "engine": "db2-byol",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.46784,
+    "daily": 11.22816,
+    "sku": "3DHF6Q79SXP7PRWC"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

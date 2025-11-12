@@ -5,9 +5,9 @@
   "engine": "aurora-mysql",
   "license": null,
   "onDemand": {
-    "hourly": 0.64844,
-    "daily": 15.56256,
-    "sku": "9FMZCTZ9R9FXQYR4"
+    "hourly": 0.877888,
+    "daily": 21.069312,
+    "sku": "347HPSMPCM52HSXB"
   },
   "savingsOptions": {
     "1yr_Partial Upfront": {

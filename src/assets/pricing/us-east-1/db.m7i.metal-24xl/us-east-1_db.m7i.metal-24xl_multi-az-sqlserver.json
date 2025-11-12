@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.m7i.metal-24xl",
+  "deployment": "multi-az",
+  "engine": "sqlserver",
+  "license": null,
+  "onDemand": {
+    "hourly": 5.51088,
+    "daily": 132.26112,
+    "sku": "79TG4XAF9622E8R6"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

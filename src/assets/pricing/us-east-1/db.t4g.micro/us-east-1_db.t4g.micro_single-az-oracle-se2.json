@@ -1,0 +1,55 @@
+{
+  "region": "us-east-1",
+  "instance": "db.t4g.micro",
+  "deployment": "single-az",
+  "engine": "oracle-se2",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.01376,
+    "daily": 0.33024,
+    "sku": "7ZDZZQC8W6QQEW6U"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 0.009976,
+      "effectiveHourly": 0.009976,
+      "daily": 0.239424
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 87.72,
+      "hourly": 0.003354,
+      "effectiveHourly": 0.00669,
+      "daily": 0.160551
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 42.14,
+      "hourly": 0.004816,
+      "effectiveHourly": 0.009623,
+      "daily": 0.230957
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 81.7,
+      "hourly": 0,
+      "effectiveHourly": 0.00932,
+      "daily": 0.223683
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 171.14,
+      "hourly": 0,
+      "effectiveHourly": 0.006508,
+      "daily": 0.156185
+    },
+    "3yr_No Upfront": null
+  }
+}

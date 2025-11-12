@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.t2.medium",
+  "deployment": "single-az",
+  "engine": "db2",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.2666,
+    "daily": 6.3984,
+    "sku": "33FX6JK3MKHW36G3"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

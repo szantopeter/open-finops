@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.m4.16xlarge",
+  "deployment": "single-az",
+  "engine": "db2-byol",
+  "license": null,
+  "onDemand": {
+    "hourly": 9.632,
+    "daily": 231.168,
+    "sku": "6CKE4SNQ9UFB7DND"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

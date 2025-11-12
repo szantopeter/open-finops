@@ -1,0 +1,55 @@
+{
+  "region": "us-east-1",
+  "instance": "db.x2iezn.2xlarge",
+  "deployment": "single-az",
+  "engine": "db2-byol",
+  "license": null,
+  "onDemand": {
+    "hourly": 2.61096,
+    "daily": 62.66304,
+    "sku": "HCNJN4VSRVG585KC"
+  },
+  "savingsOptions": {
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 17154.42,
+      "hourly": 0.65274,
+      "effectiveHourly": 1.305049,
+      "daily": 31.321174
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 1.879874,
+      "effectiveHourly": 1.879874,
+      "daily": 45.116976
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 32935.42,
+      "hourly": 0,
+      "effectiveHourly": 1.252392,
+      "daily": 30.057422
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 15553.1,
+      "hourly": 0,
+      "effectiveHourly": 1.774253,
+      "daily": 42.582067
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 8004.88,
+      "hourly": 0.913836,
+      "effectiveHourly": 1.82701,
+      "daily": 43.848231
+    },
+    "3yr_No Upfront": null
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.x1e.16xlarge",
+  "deployment": "multi-az",
+  "engine": "oracle-se2-byol",
+  "license": null,
+  "onDemand": {
+    "hourly": 34.01042,
+    "daily": 816.25008,
+    "sku": "3JU76MBG2C38U3JH"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

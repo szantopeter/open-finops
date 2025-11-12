@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r6in.metal",
+  "deployment": "multi-az",
+  "engine": "mariadb",
+  "license": null,
+  "onDemand": {
+    "hourly": 14.28288,
+    "daily": 342.78912,
+    "sku": "4Q4WYRFUJ6BAUCGM"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

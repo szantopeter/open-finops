@@ -1,0 +1,55 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.t4g.medium",
+  "deployment": "single-az",
+  "engine": "sqlserver",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.06708,
+    "daily": 1.60992,
+    "sku": "BDJS7KUN3YT66YPR"
+  },
+  "savingsOptions": {
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 199.52,
+      "hourly": 0.02279,
+      "effectiveHourly": 0.045551,
+      "daily": 1.093216
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 792.92,
+      "hourly": 0,
+      "effectiveHourly": 0.030152,
+      "daily": 0.723632
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 387.86,
+      "hourly": 0,
+      "effectiveHourly": 0.044246,
+      "daily": 1.061903
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 431.72,
+      "hourly": 0.016426,
+      "effectiveHourly": 0.032843,
+      "daily": 0.788219
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 0.052288,
+      "effectiveHourly": 0.052288,
+      "daily": 1.254912
+    },
+    "3yr_No Upfront": null
+  }
+}

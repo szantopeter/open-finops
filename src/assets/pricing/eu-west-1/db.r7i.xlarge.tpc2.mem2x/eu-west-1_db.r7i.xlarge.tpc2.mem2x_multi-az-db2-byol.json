@@ -1,0 +1,20 @@
+{
+  "region": "eu-west-1",
+  "instance": "db.r7i.xlarge.tpc2.mem2x",
+  "deployment": "multi-az",
+  "engine": "db2-byol",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.9632,
+    "daily": 23.1168,
+    "sku": "6N5PMJ75WKS2RX29"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

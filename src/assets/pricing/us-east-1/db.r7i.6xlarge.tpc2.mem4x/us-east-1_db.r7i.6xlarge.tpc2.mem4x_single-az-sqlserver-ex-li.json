@@ -1,0 +1,20 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r7i.6xlarge.tpc2.mem4x",
+  "deployment": "single-az",
+  "engine": "sqlserver-ex-li",
+  "license": null,
+  "onDemand": {
+    "hourly": 20.64,
+    "daily": 495.36,
+    "sku": "D9G25236QUBMK6S7"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_No Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

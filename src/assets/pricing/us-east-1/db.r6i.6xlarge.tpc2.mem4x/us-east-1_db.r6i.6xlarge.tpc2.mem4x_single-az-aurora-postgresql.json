@@ -1,0 +1,55 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r6i.6xlarge.tpc2.mem4x",
+  "deployment": "single-az",
+  "engine": "aurora-postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 19.23648,
+    "daily": 461.67552,
+    "sku": "76R5K79USPD6PMPE"
+  },
+  "savingsOptions": {
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 63191.94,
+      "hourly": 2.40456,
+      "effectiveHourly": 4.807478,
+      "daily": 115.379474
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 121327.94,
+      "hourly": 0,
+      "effectiveHourly": 4.61358,
+      "daily": 110.725932
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 29489.4,
+      "hourly": 3.366384,
+      "effectiveHourly": 6.730449,
+      "daily": 161.530793
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 57294.06,
+      "hourly": 0,
+      "effectiveHourly": 6.535942,
+      "daily": 156.862587
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 6.92515,
+      "effectiveHourly": 6.92515,
+      "daily": 166.2036
+    },
+    "3yr_No Upfront": null
+  }
+}

@@ -9,5 +9,47 @@
     "daily": 204.04704,
     "sku": "3DS2HEZJHFURGKQS"
   },
-  "savingsOptions": null
+  "savingsOptions": {
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 26072.62,
+      "hourly": 2.976288,
+      "effectiveHourly": 5.950577,
+      "daily": 142.813855
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 107268.66,
+      "hourly": 0,
+      "effectiveHourly": 4.078966,
+      "daily": 97.895195
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 50654.86,
+      "hourly": 0,
+      "effectiveHourly": 5.77856,
+      "daily": 138.685448
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 55869.04,
+      "hourly": 2.12592,
+      "effectiveHourly": 4.25038,
+      "daily": 102.009112
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 6.122684,
+      "effectiveHourly": 6.122684,
+      "daily": 146.944416
+    },
+    "3yr_No Upfront": null
+  }
 }
