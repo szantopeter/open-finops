@@ -114,14 +114,47 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
             this.missingPricing = missing || [];
             this.matcher.loadPricingData(records as any);
             const aggregates = this.aggregator.aggregateMonthlyCosts(rows as any, records as any);
-            // If aggregator reports unmatched rows, surface a friendly error to the UI
-            if (this.aggregator.lastUnmatchedCount && this.aggregator.lastUnmatchedCount > 0) {
-              const sample = this.aggregator.lastUnmatchedSamples && this.aggregator.lastUnmatchedSamples.length > 0
-                ? this.aggregator.lastUnmatchedSamples[0]
-                : null;
-              const sampleText = sample ? `${sample.key}` : 'see console for examples';
-              this.error = `Could not match ${this.aggregator.lastUnmatchedCount} import row(s) to pricing records. First unmatched key: ${sampleText}`;
-              console.log('[MonthlyCostChart] Setting UI error:', this.error);
+            // Check for all types of errors and surface them to the UI
+            const allErrors = [
+              ...this.aggregator.lastErrors.unmatchedPricing,
+              ...this.aggregator.lastErrors.invalidPricing,
+              ...this.aggregator.lastErrors.missingRates,
+              ...this.aggregator.lastErrors.zeroActiveDays,
+              ...this.aggregator.lastErrors.zeroCount
+            ];
+
+            if (allErrors.length > 0) {
+              const errorSummary = {
+                unmatchedPricing: this.aggregator.lastErrors.unmatchedPricing.length,
+                invalidPricing: this.aggregator.lastErrors.invalidPricing.length,
+                missingRates: this.aggregator.lastErrors.missingRates.length,
+                zeroActiveDays: this.aggregator.lastErrors.zeroActiveDays.length,
+                zeroCount: this.aggregator.lastErrors.zeroCount.length
+              };
+
+              const errorMessages = [];
+              if (errorSummary.unmatchedPricing > 0) {
+                const sample = this.aggregator.lastErrors.unmatchedPricing[0];
+                errorMessages.push(`${errorSummary.unmatchedPricing} unmatched pricing record(s) (e.g., ${sample.key})`);
+              }
+              if (errorSummary.invalidPricing > 0) {
+                const sample = this.aggregator.lastErrors.invalidPricing[0];
+                errorMessages.push(`${errorSummary.invalidPricing} invalid pricing record(s) (e.g., ${sample.key})`);
+              }
+              if (errorSummary.missingRates > 0) {
+                const sample = this.aggregator.lastErrors.missingRates[0];
+                errorMessages.push(`${errorSummary.missingRates} missing rate(s) (e.g., ${sample.reason})`);
+              }
+              if (errorSummary.zeroActiveDays > 0) {
+                const sample = this.aggregator.lastErrors.zeroActiveDays[0];
+                errorMessages.push(`${errorSummary.zeroActiveDays} zero active day(s) (e.g., ${sample.reason})`);
+              }
+              if (errorSummary.zeroCount > 0) {
+                errorMessages.push(`${errorSummary.zeroCount} zero count(s)`);
+              }
+
+              this.error = `Calculation errors found: ${errorMessages.join('; ')}`;
+              console.log('[MonthlyCostChart] Setting comprehensive UI error:', this.error);
               // Immediately request change detection so the template reflects the error right away
               try {
                 this.cdr.detectChanges();
@@ -135,10 +168,6 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
             for (const m of Object.keys(aggregates)) groupCount = Math.max(groupCount, Object.keys(aggregates[m] || {}).length);
             console.log('[MonthlyCostChart] Aggregates summary - months:', monthCount, 'max groups/month:', groupCount);
             this.data = aggregates;
-            // keep any error message set earlier by the aggregator diagnostics; only clear if there were no unmatched rows
-            if (!this.aggregator.lastUnmatchedCount || this.aggregator.lastUnmatchedCount === 0) {
-              this.error = null;
-            }
             // Trigger change detection and defer render to next tick so DOM updates are present
             this.cdr.detectChanges();
             setTimeout(() => this.renderChart(aggregates), 0);
@@ -190,7 +219,6 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
       const groups = Array.from(groupMap.entries())
         .sort((a, b) => b[1] - a[1]) // descending by total cost
         .map(([group]) => group);
-      console.log('[MonthlyCostChart] Groups found and sorted by cost:', groups.length, groups);
 
       // Calculate total savings for the entire period
       const totalRiCost = months.reduce((total, month) => {
@@ -221,92 +249,175 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
 
       const series = [
         // RI stack first
-        ...groups.map((g, index) => ({
-          name: `${g} (RI)`,
-          type: 'bar',
-          stack: 'ri',
-          itemStyle: { color: groupColors[g] },
-          emphasis: {
-            focus: 'series',
-            itemStyle: {
-              shadowBlur: 10,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
+        ...groups.map((g, index) => {
+          const data = months.map((m) => (aggregates[m][g]?.riCost ?? 0));
+          return {
+            name: `${g} (RI)`,
+            type: 'bar',
+            stack: 'ri',
+            itemStyle: { color: groupColors[g] },
+            emphasis: {
+              focus: 'series',
+              itemStyle: {
+                shadowBlur: 10,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              },
+              label: {
+                show: true,
+                position: 'top',
+                formatter: (params: any): string => `$${params.value.toFixed(2)}`,
+                fontSize: 12,
+                fontWeight: 'bold',
+                color: '#000'
+              }
             },
-            label: {
+            label: index === 0 ? {
               show: true,
-              position: 'top',
-              formatter: (params: any): string => `$${params.value.toFixed(2)}`,
-              fontSize: 12,
+              position: 'bottom',
+              offset: [0, 20], // Offset down to position below month labels
+              formatter: 'RI',
+              fontSize: 11,
               fontWeight: 'bold',
               color: '#000'
-            }
-          },
-          label: index === 0 ? {
-            show: true,
-            position: 'bottom',
-            offset: [0, 20], // Offset down to position below month labels
-            formatter: 'RI',
-            fontSize: 11,
-            fontWeight: 'bold',
-            color: '#000'
-          } : undefined,
-          data: months.map((m) => (aggregates[m][g]?.riCost ?? 0))
-        })),
+            } : undefined,
+            data
+          };
+        }),
         // On-Demand stack second
-        ...groups.map((g, index) => ({
-          name: `${g} (OD)`,
-          type: 'bar',
-          stack: 'ondemand',
-          itemStyle: { color: groupColors[g] },
-          emphasis: {
-            focus: 'series',
-            itemStyle: {
-              shadowBlur: 10,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
+        ...groups.map((g, index) => {
+          const data = months.map((m) => (aggregates[m][g]?.onDemandCost ?? 0));
+          return {
+            name: `${g} (OD)`,
+            type: 'bar',
+            stack: 'ondemand',
+            itemStyle: { color: groupColors[g] },
+            emphasis: {
+              focus: 'series',
+              itemStyle: {
+                shadowBlur: 10,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              },
+              label: {
+                show: true,
+                position: 'top',
+                formatter: (params: any): string => `$${params.value.toFixed(2)}`,
+                fontSize: 12,
+                fontWeight: 'bold',
+                color: '#000'
+              }
             },
-            label: {
+            label: index === 0 ? {
               show: true,
-              position: 'top',
-              formatter: (params: any): string => `$${params.value.toFixed(2)}`,
-              fontSize: 12,
+              position: 'bottom',
+              offset: [0, 20], // Offset down to position below month labels
+              formatter: 'OD',
+              fontSize: 11,
               fontWeight: 'bold',
               color: '#000'
-            }
-          },
-          label: index === 0 ? {
-            show: true,
-            position: 'bottom',
-            offset: [0, 20], // Offset down to position below month labels
-            formatter: 'OD',
-            fontSize: 11,
-            fontWeight: 'bold',
-            color: '#000'
-          } : undefined,
-          data: months.map((m) => (aggregates[m][g]?.onDemandCost ?? 0))
-        }))
+            } : undefined,
+            data
+          };
+        })
       ];
 
       const option = {
         tooltip: {
-          trigger: 'axis',
+          trigger: 'item',
           axisPointer: { type: 'shadow' },
-          formatter: (params: any): string => {
-            const month = params[0].name;
-            // Group params by group (strip (RI) and (On-Demand) suffixes)
-            const groupData: Record<string, { ri: number, onDemand: number }> = {};
-            for (const p of params) {
-              // Extract group name by removing the suffix
-              const groupName = p.seriesName.replace(/ \((RI|OD)\)$/, '');
-              const isRi = p.seriesName.endsWith('(RI)');
-              if (isRi) {
-                groupData[groupName] = groupData[groupName] || { ri: 0, onDemand: 0 };
-                groupData[groupName].ri = p.value;
-              } else {
-                groupData[groupName] = groupData[groupName] || { ri: 0, onDemand: 0 };
-                groupData[groupName].onDemand = p.value;
+          confine: false,
+          extraCssText: 'max-height: calc(100vh - 20px) !important; overflow-y: auto !important; overflow-x: hidden !important; box-sizing: border-box !important;',
+          position: function (point: number[], params: any, dom: HTMLElement, rect: any, size: { contentSize: number[], viewSize: number[] }): number[] | string {
+            // point is [x, y] mouse position RELATIVE TO CHART CONTAINER
+            // size.contentSize is [width, height] of tooltip
+            // rect is the chart container's bounding rectangle
+
+            const [mouseX, mouseY] = point;
+            const [tooltipWidth, tooltipHeight] = size.contentSize;
+            const viewWidth = window.innerWidth;
+            const viewHeight = window.innerHeight;
+
+            // Get chart container position in viewport
+            const chartRect = rect;
+            const chartOffsetX = chartRect.x || 0;
+            const chartOffsetY = chartRect.y || 0;
+
+            // Convert mouse position to viewport coordinates
+            const absMouseX = mouseX + chartOffsetX;
+            const absMouseY = mouseY + chartOffsetY;
+
+            let absY: number;
+
+            // Calculate possible positions IN VIEWPORT COORDINATES
+            const absAboveY = absMouseY - tooltipHeight - 10; // Above mouse
+            const absBelowY = absMouseY + 10; // Below mouse
+
+            // Check if positions fit in viewport
+            const aboveFits = absAboveY >= 0;
+            const belowFits = absBelowY + tooltipHeight <= viewHeight;
+
+            if (aboveFits) {
+              // Prefer above if it fits
+              absY = absAboveY;
+            } else if (belowFits) {
+              // Use below only if above doesn't fit but below does
+              absY = absBelowY;
+            } else {
+              // Neither above nor below fits - pin to top with small margin for better UX
+              absY = 10;
+            }
+
+            // Handle horizontal positioning IN VIEWPORT COORDINATES
+            let absX = absMouseX + 10; // Default: slightly to the right of mouse
+            if (absX + tooltipWidth > viewWidth - 10) {
+              absX = absMouseX - tooltipWidth - 10; // Move to left of mouse
+              if (absX < 10) {
+                absX = 10; // Ensure minimum margin
               }
             }
-            // Build table
+
+            // Apply bounds checking to x
+            absX = Math.max(10, Math.min(absX, viewWidth - tooltipWidth - 10));
+
+            // Convert back to chart-relative coordinates
+            const chartRelativeX = absX - chartOffsetX;
+            const chartRelativeY = absY - chartOffsetY;
+
+            return [chartRelativeX, chartRelativeY];
+          },
+          formatter: (params: any): string => {
+            // For item trigger, params is a single series data point
+            const month = params.name;
+            const hoveredSeriesName = params.seriesName;
+            const hoveredGroup = hoveredSeriesName.replace(/ \((RI|OD)\)$/, '');
+
+            // We need all series data for this month to build the full table
+            // Get the chart instance and extract data from all series
+            const chart = this.chartInstance;
+            if (!chart) return '';
+
+            const option = chart.getOption();
+            const allSeries = option.series as any[];
+            const monthIndex = months.indexOf(month);
+            if (monthIndex === -1) return '';
+
+            // Build group data from all series for this month
+            const groupData: Record<string, { ri: number, onDemand: number }> = {};
+            for (const series of allSeries) {
+              const seriesName = series.name;
+              const groupName = seriesName.replace(/ \((RI|OD)\)$/, '');
+              const isRi = seriesName.endsWith('(RI)');
+              const value = (series.data as number[])[monthIndex] ?? 0;
+
+              if (isRi) {
+                groupData[groupName] = groupData[groupName] || { ri: 0, onDemand: 0 };
+                groupData[groupName].ri = value;
+              } else {
+                groupData[groupName] = groupData[groupName] || { ri: 0, onDemand: 0 };
+                groupData[groupName].onDemand = value;
+              }
+            }
+
+            // Build table only for groups that have non-zero costs in this month
             let table = `<strong>${month}</strong><br/>` +
               '<table style="border-collapse: collapse; width: 100%;">' +
               '<tr>' +
@@ -317,11 +428,20 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
               '</tr>';
             let totalRiCost = 0;
             let totalOnDemandCost = 0;
-            for (const g of groups) {
+
+            // Filter groups to only include those with non-zero costs for this month
+            const activeGroups = groups.filter(g => {
+              const data = groupData[g] || { ri: 0, onDemand: 0 };
+              return data.ri > 0 || data.onDemand > 0;
+            });
+
+            for (const g of activeGroups) {
               const data = groupData[g] || { ri: 0, onDemand: 0 };
               const savingsPct = data.onDemand > 0 ? ((data.onDemand - data.ri) / data.onDemand * 100) : 0;
               const colorBox = `<div style="display: inline-block; width: 12px; height: 12px; background-color: ${groupColors[g]}; margin-right: 4px; border: 1px solid #666;"></div>`;
-              table += '<tr>' +
+              const isHovered = g === hoveredGroup;
+              const rowStyle = isHovered ? 'background-color: #f0f8ff; font-weight: bold;' : '';
+              table += `<tr style="${rowStyle}">` +
                 `<td style="border: 1px solid #ddd; padding: 4px;">${colorBox}${g}</td>` +
                 `<td style="border: 1px solid #ddd; padding: 4px;">$${data.ri.toFixed(2)}</td>` +
                 `<td style="border: 1px solid #ddd; padding: 4px;">$${data.onDemand.toFixed(2)}</td>` +

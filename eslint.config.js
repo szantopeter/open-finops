@@ -41,6 +41,7 @@ module.exports = tseslint.config(
       "@typescript-eslint/no-empty-function": "off",
       "import/no-unresolved": "off",
       "complexity": "off",
+      "no-constant-condition": "off",
     },
   },
   {

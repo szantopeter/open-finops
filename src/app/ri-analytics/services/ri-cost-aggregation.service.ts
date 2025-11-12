@@ -26,12 +26,95 @@ export class RiCostAggregationService {
   public lastUnmatchedSamples: Array<{ key: string; row: any }> = [];
   private readonly UNMATCHED_CAP = 1000;
 
+  // Comprehensive error tracking
+  public lastErrors: {
+    unmatchedPricing: Array<{ key: string; row: any; reason: string }>;
+    invalidPricing: Array<{ key: string; row: any; reason: string }>;
+    missingRates: Array<{ key: string; row: any; pricing: any; reason: string }>;
+    zeroActiveDays: Array<{ key: string; row: any; monthKey: string; activeDays: number; reason: string }>;
+    zeroCount: Array<{ key: string; row: any; reason: string }>;
+  } = {
+      unmatchedPricing: [],
+      invalidPricing: [],
+      missingRates: [],
+      zeroActiveDays: [],
+      zeroCount: []
+    };
+
   constructor() {}
 
+  private addZeroCountError(key: string, row: RiRow): void {
+    if (this.lastErrors.zeroCount.length < this.UNMATCHED_CAP) {
+      this.lastErrors.zeroCount.push({
+        key,
+        row: {
+          instanceClass: row.instanceClass,
+          region: row.region,
+          multiAz: String(row.multiAz),
+          engine: row.engine,
+          edition: row.edition ?? null,
+          upfrontPayment: row.upfrontPayment,
+          durationMonths: row.durationMonths,
+          startDate: row.startDate,
+          endDate: row.endDate ?? null,
+          count: row.count ?? 1
+        },
+        reason: 'RI count is zero or null'
+      });
+    }
+  }
+
+  private addZeroActiveDaysError(key: string, row: RiRow, monthKey: string, activeDays: number): void {
+    if (this.lastErrors.zeroActiveDays.length < this.UNMATCHED_CAP) {
+      this.lastErrors.zeroActiveDays.push({
+        key,
+        row: {
+          instanceClass: row.instanceClass,
+          region: row.region,
+          multiAz: String(row.multiAz),
+          engine: row.engine,
+          edition: row.edition ?? null,
+          upfrontPayment: row.upfrontPayment,
+          durationMonths: row.durationMonths,
+          startDate: row.startDate,
+          endDate: row.endDate ?? null,
+          count: row.count ?? 1
+        },
+        monthKey,
+        activeDays,
+        reason: `RI is not active in month ${monthKey} (start: ${row.startDate}, end: ${row.endDate || 'ongoing'})`
+      });
+    }
+  }
+
+  private addMissingRateError(key: string, row: RiRow, pricing: PricingRecord, rateType: 'reserved' | 'onDemand'): void {
+    if (this.lastErrors.missingRates.length < this.UNMATCHED_CAP) {
+      this.lastErrors.missingRates.push({
+        key,
+        row: {
+          instanceClass: row.instanceClass,
+          region: row.region,
+          multiAz: String(row.multiAz),
+          engine: row.engine,
+          edition: row.edition ?? null,
+          upfrontPayment: row.upfrontPayment,
+          durationMonths: row.durationMonths,
+          startDate: row.startDate,
+          endDate: row.endDate ?? null,
+          count: row.count ?? 1
+        },
+        pricing: {
+          dailyReservedRate: pricing.dailyReservedRate,
+          dailyOnDemandRate: pricing.dailyOnDemandRate,
+          upfrontCost: pricing.upfrontCost
+        },
+        reason: `Missing daily ${rateType === 'reserved' ? 'reserved' : 'on-demand'} rate in pricing data`
+      });
+    }
+  }
+
   private toHumanReadableKey(criteria: RiMatchingCriteria): string {
-    const az = criteria.multiAz ? 'Multi AZ' : 'Single AZ';
-    const edition = criteria.edition ? ` ${criteria.edition}` : '';
-    return `${criteria.instanceClass} ${criteria.region} ${az} ${criteria.engine}${edition}`;
+    return `${criteria.instanceClass} ${criteria.region} ${criteria.multiAz ? 'Multi-AZ' : 'Single-AZ'} ${criteria.engine}${criteria.edition ? ` ${criteria.edition}` : ''} ${criteria.upfrontPayment} ${criteria.durationMonths}mo`;
   }
 
   private toMonthKey(date: Date): string {
@@ -207,6 +290,15 @@ export class RiCostAggregationService {
     this.lastUnmatchedCount = 0;
     this.lastUnmatchedSamples = [];
 
+    // Reset error tracking
+    this.lastErrors = {
+      unmatchedPricing: [],
+      invalidPricing: [],
+      missingRates: [],
+      zeroActiveDays: [],
+      zeroCount: []
+    };
+
     for (const row of rows) {
       const criteria = new RiMatchingCriteria({
         instanceClass: row.instanceClass,
@@ -221,9 +313,9 @@ export class RiCostAggregationService {
       const pricing = this.matcherIndex.get(key);
       if (!pricing) {
         unmatchedCount++;
-        // store up to UNMATCHED_CAP samples for UI consumption
-        if (this.lastUnmatchedSamples.length < this.UNMATCHED_CAP) {
-          this.lastUnmatchedSamples.push({ key, row: {
+        const errorEntry = {
+          key,
+          row: {
             instanceClass: row.instanceClass,
             region: row.region,
             multiAz: String(row.multiAz),
@@ -234,12 +326,20 @@ export class RiCostAggregationService {
             startDate: row.startDate,
             endDate: row.endDate ?? null,
             count: row.count ?? 1
-          } });
+          },
+          reason: 'No matching pricing record found for this RI configuration'
+        };
+        // store up to UNMATCHED_CAP samples for UI consumption
+        if (this.lastUnmatchedSamples.length < this.UNMATCHED_CAP) {
+          this.lastUnmatchedSamples.push(errorEntry);
+        }
+        if (this.lastErrors.unmatchedPricing.length < this.UNMATCHED_CAP) {
+          this.lastErrors.unmatchedPricing.push(errorEntry);
         }
         // keep console noise limited to the first few unmatched rows for debugging
         if (unmatchedCount <= 5) {
           console.warn('[RiCostAggregation] No pricing match for row key:', key);
-          console.warn('[RiCostAggregation] Row fields:', this.lastUnmatchedSamples[this.lastUnmatchedSamples.length - 1].row);
+          console.warn('[RiCostAggregation] Row fields:', errorEntry.row);
         }
         // skip unmatched
         continue;
@@ -248,8 +348,9 @@ export class RiCostAggregationService {
       // Validate pricing data: reserved rate must be <= on-demand rate
       if (pricing.dailyReservedRate && pricing.dailyOnDemandRate && pricing.dailyReservedRate > pricing.dailyOnDemandRate) {
         unmatchedCount++;
-        if (this.lastUnmatchedSamples.length < this.UNMATCHED_CAP) {
-          this.lastUnmatchedSamples.push({ key: key + ' (invalid pricing: reserved > on-demand)', row: {
+        const errorEntry = {
+          key: key + ' (invalid pricing: reserved > on-demand)',
+          row: {
             instanceClass: row.instanceClass,
             region: row.region,
             multiAz: String(row.multiAz),
@@ -260,7 +361,14 @@ export class RiCostAggregationService {
             startDate: row.startDate,
             endDate: row.endDate ?? null,
             count: row.count ?? 1
-          } });
+          },
+          reason: `Invalid pricing data: reserved rate (${pricing.dailyReservedRate}) > on-demand rate (${pricing.dailyOnDemandRate})`
+        };
+        if (this.lastUnmatchedSamples.length < this.UNMATCHED_CAP) {
+          this.lastUnmatchedSamples.push(errorEntry);
+        }
+        if (this.lastErrors.invalidPricing.length < this.UNMATCHED_CAP) {
+          this.lastErrors.invalidPricing.push(errorEntry);
         }
         if (unmatchedCount <= 5) {
           console.warn('[RiCostAggregation] Invalid pricing data for row key:', key, 'reserved rate > on-demand rate');
@@ -304,8 +412,29 @@ export class RiCostAggregationService {
         const activeEnd = end && end < monthEnd ? end : monthEnd;
         const activeDays = Math.max(0, Math.ceil((activeEnd.getTime() - activeStart.getTime()) / (1000 * 60 * 60 * 24)) + 1);
 
+        // Check for zero count
+        if (!(row.count || 1)) {
+          this.addZeroCountError(key, row);
+        }
+
+        // Check for zero active days
+        if (activeDays === 0) {
+          this.addZeroActiveDaysError(key, row, monthKey, activeDays);
+        }
+
         // compute costs
         const dailyRate = pricing.dailyReservedRate ?? 0;
+        const onDemandDailyRate = pricing.dailyOnDemandRate ?? 0;
+
+        // Check for missing rates
+        if (!pricing.dailyReservedRate) {
+          this.addMissingRateError(key, row, pricing, 'reserved');
+        }
+
+        if (!pricing.dailyOnDemandRate) {
+          this.addMissingRateError(key, row, pricing, 'onDemand');
+        }
+
         const recurringCost = dailyRate * activeDays * (row.count || 1);
 
         // upfront only in the month containing the start date
@@ -320,7 +449,6 @@ export class RiCostAggregationService {
         result[monthKey][groupKey].riCost += total;
 
         // calculate on-demand cost
-        const onDemandDailyRate = pricing.dailyOnDemandRate ?? 0;
         const onDemandCost = onDemandDailyRate * activeDays * (row.count || 1);
         result[monthKey][groupKey].onDemandCost += onDemandCost;
 
