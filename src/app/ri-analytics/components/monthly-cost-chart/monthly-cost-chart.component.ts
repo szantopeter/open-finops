@@ -320,8 +320,9 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
             for (const g of groups) {
               const data = groupData[g] || { ri: 0, onDemand: 0 };
               const savingsPct = data.onDemand > 0 ? ((data.onDemand - data.ri) / data.onDemand * 100) : 0;
+              const colorBox = `<div style="display: inline-block; width: 12px; height: 12px; background-color: ${groupColors[g]}; margin-right: 4px; border: 1px solid #666;"></div>`;
               table += '<tr>' +
-                `<td style="border: 1px solid #ddd; padding: 4px;">${g}</td>` +
+                `<td style="border: 1px solid #ddd; padding: 4px;">${colorBox}${g}</td>` +
                 `<td style="border: 1px solid #ddd; padding: 4px;">$${data.ri.toFixed(2)}</td>` +
                 `<td style="border: 1px solid #ddd; padding: 4px;">$${data.onDemand.toFixed(2)}</td>` +
                 `<td style="border: 1px solid #ddd; padding: 4px;">${savingsPct.toFixed(1)}%</td>` +
