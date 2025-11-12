@@ -21,15 +21,15 @@ describe('MonthlyCostChartComponent (unit)', () => {
   const mockPricingLoader = {
     loadAllPricing: (): any => ({
       subscribe: (handlers: any): any => ({
-        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+
         next: function(v: any): void {
           handlers?.next?.(v);
         },
-        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+
         error: function(e: any): void {
           handlers?.error?.(e);
         },
-        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+
         unsubscribe: function(): void {
         }
       })
@@ -37,15 +37,15 @@ describe('MonthlyCostChartComponent (unit)', () => {
     // component calls loadPricingForPaths(paths) in runtime; provide a minimal implementation
     loadPricingForPaths: (): any => ({
       subscribe: (handlers: any): any => ({
-        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+
         next: function(v: any): void {
           handlers?.next?.(v);
         },
-        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+
         error: function(e: any): void {
           handlers?.error?.(e);
         },
-        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+
         unsubscribe: function(): void {
         }
       })
