@@ -31,8 +31,27 @@
     </ul>
   </div>
   <div *ngIf="!data && !error" class="empty">No reservation data available for the selected period.</div>
-  <div *ngIf="data" class="chart-container">
-    <!-- ECharts will be initialized here -->
-    <div id="monthly-cost-chart-root" style="width:100%;height:600px;"></div>
+  <div *ngIf="data" class="chart-and-widget-container">
+    <div class="chart-container">
+      <!-- ECharts will be initialized here -->
+      <div id="monthly-cost-chart-root" style="width:100%;height:600px;"></div>
+    </div>
+    <div class="savings-widget">
+      <div class="savings-card">
+        <h3>Total Period Savings</h3>
+        <div class="savings-amount">${{ totalSavingsAmount | number:'1.2-2' }}</div>
+        <div class="savings-percentage">{{ totalSavingsPercentage | number:'1.2-2' }}%</div>
+        <div class="savings-breakdown">
+          <div class="breakdown-item">
+            <span class="label">RI Cost:</span>
+            <span class="value">${{ totalRiCost | number:'1.2-2' }}</span>
+          </div>
+          <div class="breakdown-item">
+            <span class="label">On-Demand Cost:</span>
+            <span class="value">${{ totalOnDemandCost | number:'1.2-2' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

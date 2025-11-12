@@ -58,7 +58,7 @@ describe('RiCostAggregationService (TDD)', () => {
     expect(nov).toBeDefined();
     const groupKeys = Object.keys(nov || {});
     expect(groupKeys.length).toBeGreaterThan(0);
-    const total = Object.values(nov || {}).reduce((s: number, v: any) => s + v.totalCost, 0);
+    const total = Object.values(nov || {}).reduce((s: number, v: any) => s + v.riCost, 0);
     expect(total).toBeCloseTo(450, 2);
   });
 
@@ -92,11 +92,84 @@ describe('RiCostAggregationService (TDD)', () => {
     const sep = aggregates['2025-09'];
     const oct = aggregates['2025-10'];
     expect(sep).toBeDefined();
-    // In September the upfront should be present
-    const sepTotal = Object.values(sep || {}).reduce((s: number, v: any) => s + v.totalCost, 0);
+    const sepTotal = Object.values(sep || {}).reduce((s: number, v: any) => s + v.riCost, 0);
     expect(sepTotal).toBeGreaterThanOrEqual(3600);
     // In October the upfront should not be present (only recurring)
-    const octTotal = Object.values(oct || {}).reduce((s: number, v: any) => s + v.totalCost, 0);
+    const octTotal = Object.values(oct || {}).reduce((s: number, v: any) => s + v.riCost, 0);
     expect(octTotal).toBeLessThan(3600);
+  });
+
+  it('calculates on-demand cost correctly', () => {
+    const pricing = new PricingRecord({
+      instanceClass: 'db.r5.large',
+      region: 'us-east-1',
+      multiAz: false,
+      engine: 'mysql',
+      edition: null,
+      upfrontPayment: 'No Upfront',
+      durationMonths: 36,
+      dailyReservedRate: 30,
+      dailyOnDemandRate: 50
+    });
+
+    const ri: SampleRiRow = {
+      instanceClass: 'db.r5.large',
+      region: 'us-east-1',
+      multiAz: false,
+      engine: 'mysql',
+      edition: null,
+      upfrontPayment: 'No Upfront',
+      durationMonths: 36,
+      startDate: '2025-11-01',
+      count: 1
+    };
+
+    const aggregates = service.aggregateMonthlyCosts([ri as any], [pricing]);
+
+    const novKey = '2025-11';
+    const nov = aggregates[novKey];
+    expect(nov).toBeDefined();
+    const groupKeys = Object.keys(nov || {});
+    expect(groupKeys.length).toBeGreaterThan(0);
+    const group = nov[groupKeys[0]];
+    // November has 30 days, so on-demand cost = 50 * 30 = 1500
+    expect(group.onDemandCost).toBeCloseTo(1500, 2);
+  });
+
+  it('calculates savings correctly', () => {
+    const pricing = new PricingRecord({
+      instanceClass: 'db.r5.large',
+      region: 'us-east-1',
+      multiAz: false,
+      engine: 'mysql',
+      edition: null,
+      upfrontPayment: 'No Upfront',
+      durationMonths: 36,
+      dailyReservedRate: 30,
+      dailyOnDemandRate: 50
+    });
+
+    const ri: SampleRiRow = {
+      instanceClass: 'db.r5.large',
+      region: 'us-east-1',
+      multiAz: false,
+      engine: 'mysql',
+      edition: null,
+      upfrontPayment: 'No Upfront',
+      durationMonths: 36,
+      startDate: '2025-11-01',
+      count: 1
+    };
+
+    const aggregates = service.aggregateMonthlyCosts([ri as any], [pricing]);
+
+    const novKey = '2025-11';
+    const nov = aggregates[novKey];
+    const group = nov[Object.keys(nov)[0]];
+    // RI cost = 30 * 30 = 900, on-demand = 50 * 30 = 1500
+    // savings amount = 1500 - 900 = 600
+    // savings % = (1 - 900/1500) * 100 = 40
+    expect(group.savingsAmount).toBeCloseTo(600, 2);
+    expect(group.savingsPercentage).toBeCloseTo(40, 2);
   });
 });

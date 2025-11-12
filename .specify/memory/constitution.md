@@ -1,11 +1,9 @@
 <!--
 Sync Impact Report
-- Version change: 1.0.0 → 1.1.0
+- Version change: 1.1.0 → 1.1.1
 - Modified principles: 
-  - PRINCIPLE 7: Enhanced to emphasize 100% business logic coverage requirement
-  - Development workflow section: Strengthened TDD requirement from "where feasible" to "MUST follow"
-- Added sections: 
-  - PRINCIPLE 10 — Test-driven development workflow (new principle with explicit red-green-refactor cycle)
+  - PRINCIPLE 9: Strengthened error handling to explicitly prohibit graceful handling of incomplete data
+- Added sections: none
 - Removed sections: none
 - Templates requiring updates:
 	- .specify/templates/plan-template.md ✅ updated (Constitution Check present)
@@ -15,10 +13,7 @@ Sync Impact Report
 	- .specify/templates/commands/*.md ⚠ pending (no critical updates needed)
 	- README.md, docs/quickstart.md ⚠ pending (recommended but not critical)
 - Follow-up TODOs: none
-- Amendment rationale: Added formal TDD requirement as PRINCIPLE 10 to enforce test-first
-  workflow for all business logic. This is a MINOR version bump per governance rules
-  (new principle added). The principle codifies existing practice and ensures consistent
-  application across all features.
+- Amendment rationale: Clarified PRINCIPLE 9 to explicitly state that incomplete data must always display error messages, never handle gracefully. This is a PATCH version bump as it's a clarification of existing principle.
 -->
 
 # AWS RDS RI Portfolio Optimizer Constitution
@@ -94,11 +89,11 @@ analytics).
 Rationale: Consistency across the codebase and operational familiarity.
 
 ### PRINCIPLE 9 — Error reporting & UX
-Errors from business logic MUST be surfaced in the UI with clear messages and an
-optional "view details" for diagnostics. Long-running parsing or computation tasks
-MUST report progress and allow cancellation.
+Errors from business logic MUST always display an error message in the UI, never handle
+incomplete data gracefully. Long-running parsing or computation tasks MUST report
+progress and allow cancellation.
 
-Rationale: User trust and responsiveness.
+Rationale: User trust and responsiveness require explicit error visibility.
 
 ### PRINCIPLE 10 — Test-driven development workflow
 All business logic implementation MUST follow test-driven development (TDD). For each
@@ -159,5 +154,5 @@ The following templates and docs MUST be reviewed and updated where necessary:
 	compliance checks. ⚠ pending (recommended but not critical)
 
 ## Versioning metadata
-**Version**: 1.1.0 | **Ratified**: 2025-11-10 | **Last Amended**: 2025-11-11
+**Version**: 1.1.1 | **Ratified**: 2025-11-10 | **Last Amended**: 2025-11-12
 

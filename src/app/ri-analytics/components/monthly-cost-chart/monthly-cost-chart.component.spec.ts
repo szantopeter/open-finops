@@ -69,7 +69,7 @@ describe('MonthlyCostChartComponent (unit)', () => {
   });
 
   it('updates data when import provided', (): void => {
-    mockAggregator.aggregateMonthlyCosts = () => ({ '2025-11': { group1: { totalCost: 123, details: [] } } }) as any;
+    mockAggregator.aggregateMonthlyCosts = () => ({ '2025-11': { group1: { monthKey: '2025-11', groupKey: 'group1', riCost: 123, onDemandCost: 200, savingsAmount: 77, savingsPercentage: 38.5, details: [] } } }) as any;
     const comp = new MonthlyCostChartComponent(mockDataService, mockMatcher, mockAggregator, mockCdr, mockPricingLoader);
     (window as any).echarts = { init: () => ({ setOption: () => {} }) };
     comp.ngOnInit();

@@ -39,7 +39,7 @@ describe('RiCostAggregationService extra edge cases', () => {
     const aggregates = service.aggregateMonthlyCosts([ri], [pricing]);
     const nov = aggregates['2025-11'];
     expect(nov).toBeDefined();
-    const total = Object.values(nov || {}).reduce((s: number, v: any) => s + v.totalCost, 0);
+    const total = Object.values(nov || {}).reduce((s: number, v: any) => s + v.riCost, 0);
     // expected 10 * 20 = 200
     expect(total).toBeCloseTo(200, 6);
   });
@@ -63,7 +63,7 @@ describe('RiCostAggregationService extra edge cases', () => {
     const nov = aggregates['2025-11'];
     expect(nov).toBeDefined();
     // day count for November = 30, recurring = dailyRate * days * totalCount = 2 * 30 * 3 = 180
-    const total = Object.values(nov || {}).reduce((s: number, v: any) => s + v.totalCost, 0);
+    const total = Object.values(nov || {}).reduce((s: number, v: any) => s + v.riCost, 0);
     expect(total).toBeCloseTo(180, 6);
   });
 
@@ -95,7 +95,7 @@ describe('RiCostAggregationService extra edge cases', () => {
     const aggregates = service.aggregateMonthlyCosts([ri], [pricing]);
     const nov = aggregates['2025-11'];
     expect(nov).toBeDefined();
-    const total = Object.values(nov || {}).reduce((s: number, v: any) => s + v.totalCost, 0);
+    const total = Object.values(nov || {}).reduce((s: number, v: any) => s + v.riCost, 0);
     // upfront = 1000 * 3 = 3000, recurring = daily * days * count = 1 * 30 * 3 = 90, total = 3090
     expect(total).toBeCloseTo(3090, 6);
   });

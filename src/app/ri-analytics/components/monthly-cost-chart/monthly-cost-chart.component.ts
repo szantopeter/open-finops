@@ -10,6 +10,7 @@ import { PricingDataService } from '../../services/pricing-data.service';
 import { RiCostAggregationService } from '../../services/ri-cost-aggregation.service';
 import { RiDataService } from '../../services/ri-data.service';
 import { RiPricingMatcherService } from '../../services/ri-pricing-matcher.service';
+import { MonthlyCostData } from '../../models/monthly-cost-data.model';
 
 
 @Component({
@@ -26,6 +27,12 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
   private sub: Subscription | null = null;
   // Keep a reference to the chart instance so we can reuse or dispose it
   private chartInstance: any = null;
+
+  // Total savings data for the widget
+  totalSavingsAmount = 0;
+  totalSavingsPercentage = 0;
+  totalRiCost = 0;
+  totalOnDemandCost = 0;
 
   constructor(
     private readonly dataService: RiDataService,
@@ -163,37 +170,93 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
     }
   }
 
-  private renderChart(aggregates: any): void {
+  private renderChart(aggregates: Record<string, Record<string, MonthlyCostData>>): void {
     console.log('[MonthlyCostChart] renderChart start');
     try {
       echarts.use([BarChart, GridComponent, TooltipComponent, LegendComponent, CanvasRenderer]);
       if (!echarts) return;
-      // Convert aggregates { 'YYYY-MM': { groupKey: { totalCost } } } to ECharts series
+      // Convert aggregates { 'YYYY-MM': { groupKey: { riCost, onDemandCost, savingsAmount, savingsPercentage } } } to ECharts series
       const months = Object.keys(aggregates).sort();
       console.log('[MonthlyCostChart] Months found:', months.length);
-      // determine group keys
-      const groupSet = new Set<string>();
+
+      // Determine group keys and sort by total cost descending
+      const groupMap = new Map<string, number>();
       for (const m of months) {
-        for (const g of Object.keys(aggregates[m])) groupSet.add(g);
+        for (const g of Object.keys(aggregates[m])) {
+          const cost = aggregates[m][g]?.riCost || 0;
+          groupMap.set(g, (groupMap.get(g) || 0) + cost);
+        }
       }
-      const groups = Array.from(groupSet);
-      console.log('[MonthlyCostChart] Groups found:', groups.length);
-      const series = groups.map((g) => ({ name: g, type: 'bar', stack: 'total', data: months.map((m) => (aggregates[m][g]?.totalCost ?? 0)) }));
+      const groups = Array.from(groupMap.entries())
+        .sort((a, b) => b[1] - a[1]) // descending by total cost
+        .map(([group]) => group);
+      console.log('[MonthlyCostChart] Groups found and sorted by cost:', groups.length, groups);
 
-      // Calculate dynamic top spacing based on number of legend items
-      // Legend items with long names need more space - estimate 4-5 items per row
-      const itemsPerRow = 4; // More conservative for long legend names
-      const legendRows = Math.ceil(groups.length / itemsPerRow);
-      const legendHeight = legendRows * 40; // 40px per row to accommodate wrapping
-      const topSpacing = legendHeight + 50; // Extra padding below legend
+      // Calculate total on-demand per month
+      const monthOnDemand = months.map(month => {
+        const groupsData = aggregates[month] || {};
+        return Object.values(groupsData).reduce((sum: number, g: MonthlyCostData) => sum + (g.onDemandCost || 0), 0);
+      });
 
-      console.log('[MonthlyCostChart] Legend calculation - items:', groups.length, 'rows:', legendRows, 'topSpacing:', topSpacing);
+      // Calculate total savings for the entire period
+      const totalRiCost = months.reduce((total, month) => {
+        const groupsData = aggregates[month] || {};
+        return total + Object.values(groupsData).reduce((sum: number, g: MonthlyCostData) => sum + (g.riCost || 0), 0);
+      }, 0);
+
+      const totalOnDemandCost = months.reduce((total, month) => {
+        const groupsData = aggregates[month] || {};
+        return total + Object.values(groupsData).reduce((sum: number, g: MonthlyCostData) => sum + (g.onDemandCost || 0), 0);
+      }, 0);
+
+      const totalSavingsAmount = totalOnDemandCost - totalRiCost;
+      const totalSavingsPercentage = totalOnDemandCost > 0 ? (totalSavingsAmount / totalOnDemandCost) * 100 : 0;
+
+      // Update component properties for the widget
+      this.totalSavingsAmount = totalSavingsAmount;
+      this.totalSavingsPercentage = totalSavingsPercentage;
+      this.totalRiCost = totalRiCost;
+      this.totalOnDemandCost = totalOnDemandCost;
+
+      const series = [
+        ...groups.map((g) => ({ name: g, type: 'bar', stack: 'ri', data: months.map((m) => (aggregates[m][g]?.riCost ?? 0)) })),
+        {
+          name: 'On-Demand Cost',
+          type: 'bar',
+          stack: null, // separate bar
+          data: monthOnDemand
+        }
+      ];
 
       const option = {
-        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: { type: 'shadow' },
+          formatter: (params: any) => {
+            const month = params[0].name;
+            let tooltipLines = [`<strong>${month}</strong>`];
+            let riTotal = 0;
+            let onDemandTotal = 0;
+
+            for (const p of params) {
+              if (p.seriesName === 'On-Demand Cost') {
+                onDemandTotal = p.value;
+                tooltipLines.push(`<span style="display:inline-block;width:10px;height:10px;background-color:${p.color};margin-right:5px;border-radius:2px;"></span>${p.seriesName}: $${p.value.toFixed(2)}`);
+              } else {
+                riTotal += p.value;
+                tooltipLines.push(`<span style="display:inline-block;width:10px;height:10px;background-color:${p.color};margin-right:5px;border-radius:2px;"></span>${p.seriesName}: $${p.value.toFixed(2)}`);
+              }
+            }
+
+            const savingsTotal = onDemandTotal - riTotal;
+            const avgSavingsPct = onDemandTotal > 0 ? (savingsTotal / onDemandTotal) * 100 : 0;
+            tooltipLines.push(`Monthly Savings: $${savingsTotal.toFixed(2)} (${avgSavingsPct.toFixed(2)}%)`);
+            return tooltipLines.join('<br/>');
+          }
+        },
         legend: {
-          data: groups,
-          top: 5,
+          data: [...groups, 'On-Demand Cost'],
+          bottom: 0,
           left: 'center',
           orient: 'horizontal',
           itemGap: 10,
@@ -203,10 +266,10 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
           padding: [5, 5, 10, 5]
         },
         grid: {
-          top: topSpacing,
+          top: 20,
           left: '3%',
           right: '4%',
-          bottom: '10%',
+          bottom: '35%',
           containLabel: true
         },
         xAxis: { type: 'category', data: months },
@@ -221,25 +284,14 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
         return; // template should provide container
       }
 
-      // Try to reuse an existing instance attached to the DOM
-      let chart: any = null;
-      try {
-        chart = (echarts as any).getInstanceByDom
-          ? (echarts as any).getInstanceByDom(container)
-          : null;
-      } catch {
-        chart = null;
+      // Always dispose of the old chart and create a new one to ensure proper sizing
+      if (this.chartInstance && typeof this.chartInstance.dispose === 'function') {
+        console.log('[MonthlyCostChart] Disposing old chart instance');
+        this.chartInstance.dispose();
       }
 
-      if (!chart) {
-        // No existing instance, create a new one
-        console.log('[MonthlyCostChart] Creating new echarts instance');
-        chart = echarts.init(container as any);
-      } else {
-        console.log('[MonthlyCostChart] Reusing existing echarts instance');
-      }
-
-      // Save reference for later disposal
+      console.log('[MonthlyCostChart] Creating new echarts instance');
+      const chart = echarts.init(container as any);
       this.chartInstance = chart;
       chart.setOption(option, true);
       console.log('[MonthlyCostChart] Chart option set');

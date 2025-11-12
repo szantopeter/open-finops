@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { PricingRecord } from '../models/pricing-record.model';
 import { RiMatchingCriteria } from '../models/ri-matching-criteria.model';
+import { MonthlyCostData } from '../models/monthly-cost-data.model';
 
 interface RiRow {
   instanceClass: string;
@@ -26,6 +27,12 @@ export class RiCostAggregationService {
   private readonly UNMATCHED_CAP = 1000;
 
   constructor() {}
+
+  private toHumanReadableKey(criteria: RiMatchingCriteria): string {
+    const az = criteria.multiAz ? 'Multi AZ' : 'Single AZ';
+    const edition = criteria.edition ? ` ${criteria.edition}` : '';
+    return `${criteria.instanceClass} ${criteria.region} ${az} ${criteria.engine}${edition}`;
+  }
 
   private toMonthKey(date: Date): string {
     const y = date.getUTCFullYear();
@@ -186,14 +193,14 @@ export class RiCostAggregationService {
     }
   }
 
-  aggregateMonthlyCosts(rows: RiRow[], pricingRecords: PricingRecord[]): Record<string, Record<string, { totalCost: number; details: any[] }>> {
+  aggregateMonthlyCosts(rows: RiRow[], pricingRecords: PricingRecord[]): Record<string, Record<string, MonthlyCostData>> {
     // Load pricing into index
     this.loadPricingData(pricingRecords);
 
     console.log('[RiCostAggregation] Loaded pricing index with', this.matcherIndex.size, 'entries');
     console.log('[RiCostAggregation] Sample pricing keys:', Array.from(this.matcherIndex.keys()).slice(0, 3));
 
-    const result: Record<string, Record<string, { totalCost: number; details: any[] }>> = {};
+    const result: Record<string, Record<string, MonthlyCostData>> = {};
 
     let matchedCount = 0;
     let unmatchedCount = 0;
@@ -285,10 +292,20 @@ export class RiCostAggregationService {
         const total = recurringCost + upfront;
 
         if (!result[monthKey]) result[monthKey] = {};
-        const groupKey = key;
-        if (!result[monthKey][groupKey]) result[monthKey][groupKey] = { totalCost: 0, details: [] };
-        result[monthKey][groupKey].totalCost += total;
-        result[monthKey][groupKey].details.push({ row, pricing, recurringCost, upfront, activeDays });
+        const groupKey = this.toHumanReadableKey(criteria);
+        if (!result[monthKey][groupKey]) result[monthKey][groupKey] = { monthKey, groupKey, riCost: 0, onDemandCost: 0, savingsAmount: 0, savingsPercentage: 0, details: [] };
+        result[monthKey][groupKey].riCost += total;
+
+        // calculate on-demand cost
+        const onDemandDailyRate = pricing.dailyOnDemandRate ?? 0;
+        const onDemandCost = onDemandDailyRate * activeDays * (row.count || 1);
+        result[monthKey][groupKey].onDemandCost += onDemandCost;
+
+        // update savings
+        result[monthKey][groupKey].savingsAmount = result[monthKey][groupKey].onDemandCost - result[monthKey][groupKey].riCost;
+        result[monthKey][groupKey].savingsPercentage = result[monthKey][groupKey].onDemandCost > 0 ? (1 - result[monthKey][groupKey].riCost / result[monthKey][groupKey].onDemandCost) * 100 : 0;
+
+        result[monthKey][groupKey].details.push({ row, pricing, recurringCost, upfront, activeDays, onDemandCost });
       }
     }
 
