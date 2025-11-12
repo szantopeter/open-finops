@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
+import { MonthlyCostData } from '../models/monthly-cost-data.model';
 import { PricingRecord } from '../models/pricing-record.model';
 import { RiMatchingCriteria } from '../models/ri-matching-criteria.model';
-import { MonthlyCostData } from '../models/monthly-cost-data.model';
 
 interface RiRow {
   instanceClass: string;

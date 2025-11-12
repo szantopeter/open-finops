@@ -6,11 +6,11 @@ import * as echarts from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
 import { Subscription } from 'rxjs';
 
+import { MonthlyCostData } from '../../models/monthly-cost-data.model';
 import { PricingDataService } from '../../services/pricing-data.service';
 import { RiCostAggregationService } from '../../services/ri-cost-aggregation.service';
 import { RiDataService } from '../../services/ri-data.service';
 import { RiPricingMatcherService } from '../../services/ri-pricing-matcher.service';
-import { MonthlyCostData } from '../../models/monthly-cost-data.model';
 
 
 @Component({
@@ -235,7 +235,7 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
             label: {
               show: true,
               position: 'top',
-              formatter: (params: any) => `$${params.value.toFixed(2)}`,
+              formatter: (params: any): string => `$${params.value.toFixed(2)}`,
               fontSize: 12,
               fontWeight: 'bold',
               color: '#000'
@@ -267,7 +267,7 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
             label: {
               show: true,
               position: 'top',
-              formatter: (params: any) => `$${params.value.toFixed(2)}`,
+              formatter: (params: any): string => `$${params.value.toFixed(2)}`,
               fontSize: 12,
               fontWeight: 'bold',
               color: '#000'
@@ -290,7 +290,7 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
         tooltip: {
           trigger: 'axis',
           axisPointer: { type: 'shadow' },
-          formatter: (params: any) => {
+          formatter: (params: any): string => {
             const month = params[0].name;
             // Group params by group (strip (RI) and (On-Demand) suffixes)
             const groupData: Record<string, { ri: number, onDemand: number }> = {};
@@ -307,19 +307,36 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
               }
             }
             // Build table
-            let table = `<strong>${month}</strong><br/><table style="border-collapse: collapse; width: 100%;"><tr><th style="border: 1px solid #ddd; padding: 4px;">Group</th><th style="border: 1px solid #ddd; padding: 4px;">RI Cost</th><th style="border: 1px solid #ddd; padding: 4px;">On-Demand</th><th style="border: 1px solid #ddd; padding: 4px;">Savings %</th></tr>`;
+            let table = `<strong>${month}</strong><br/>` +
+              '<table style="border-collapse: collapse; width: 100%;">' +
+              '<tr>' +
+              '<th style="border: 1px solid #ddd; padding: 4px;">Group</th>' +
+              '<th style="border: 1px solid #ddd; padding: 4px;">RI Cost</th>' +
+              '<th style="border: 1px solid #ddd; padding: 4px;">On-Demand</th>' +
+              '<th style="border: 1px solid #ddd; padding: 4px;">Savings %</th>' +
+              '</tr>';
             let totalRiCost = 0;
             let totalOnDemandCost = 0;
             for (const g of groups) {
               const data = groupData[g] || { ri: 0, onDemand: 0 };
               const savingsPct = data.onDemand > 0 ? ((data.onDemand - data.ri) / data.onDemand * 100) : 0;
-              table += `<tr><td style="border: 1px solid #ddd; padding: 4px;">${g}</td><td style="border: 1px solid #ddd; padding: 4px;">$${data.ri.toFixed(2)}</td><td style="border: 1px solid #ddd; padding: 4px;">$${data.onDemand.toFixed(2)}</td><td style="border: 1px solid #ddd; padding: 4px;">${savingsPct.toFixed(2)}%</td></tr>`;
+              table += '<tr>' +
+                `<td style="border: 1px solid #ddd; padding: 4px;">${g}</td>` +
+                `<td style="border: 1px solid #ddd; padding: 4px;">$${data.ri.toFixed(2)}</td>` +
+                `<td style="border: 1px solid #ddd; padding: 4px;">$${data.onDemand.toFixed(2)}</td>` +
+                `<td style="border: 1px solid #ddd; padding: 4px;">${savingsPct.toFixed(1)}%</td>` +
+                '</tr>';
               totalRiCost += data.ri;
               totalOnDemandCost += data.onDemand;
             }
             // Add summary row
             const totalSavingsPct = totalOnDemandCost > 0 ? ((totalOnDemandCost - totalRiCost) / totalOnDemandCost * 100) : 0;
-            table += `<tr style="border-top: 2px solid #000; font-weight: bold;"><td style="border: 1px solid #ddd; padding: 4px;">TOTAL</td><td style="border: 1px solid #ddd; padding: 4px;">$${totalRiCost.toFixed(2)}</td><td style="border: 1px solid #ddd; padding: 4px;">$${totalOnDemandCost.toFixed(2)}</td><td style="border: 1px solid #ddd; padding: 4px;">${totalSavingsPct.toFixed(2)}%</td></tr>`;
+            table += '<tr style="border-top: 2px solid #000; font-weight: bold;">' +
+              '<td style="border: 1px solid #ddd; padding: 4px;">TOTAL</td>' +
+              `<td style="border: 1px solid #ddd; padding: 4px;">$${totalRiCost.toFixed(2)}</td>` +
+              `<td style="border: 1px solid #ddd; padding: 4px;">$${totalOnDemandCost.toFixed(2)}</td>` +
+              `<td style="border: 1px solid #ddd; padding: 4px;">${totalSavingsPct.toFixed(2)}%</td>` +
+              '</tr>';
             table += '</table>';
             return table;
           }
