@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+
 import { RiCostAggregationService } from './ri-cost-aggregation.service';
 import { PricingRecord } from '../models/pricing-record.model';
 
@@ -33,7 +34,7 @@ describe('RiCostAggregationService (TDD)', () => {
       edition: null,
       upfrontPayment: 'No Upfront',
       durationMonths: 36,
-      dailyReservedRate: 30,
+      dailyReservedRate: 30
     });
 
     const ri: SampleRiRow = {
@@ -45,7 +46,7 @@ describe('RiCostAggregationService (TDD)', () => {
       upfrontPayment: 'No Upfront',
       durationMonths: 36,
       startDate: '2025-11-16',
-      count: 1,
+      count: 1
     };
 
     const aggregates = service.aggregateMonthlyCosts([ri as any], [pricing]);
@@ -72,7 +73,7 @@ describe('RiCostAggregationService (TDD)', () => {
       upfrontPayment: 'All Upfront',
       durationMonths: 36,
       upfrontCost: 3600,
-      dailyReservedRate: 10,
+      dailyReservedRate: 10
     });
 
     const ri = {
@@ -84,7 +85,7 @@ describe('RiCostAggregationService (TDD)', () => {
       upfrontPayment: 'All Upfront',
       durationMonths: 36,
       startDate: '2025-09-10',
-      count: 1,
+      count: 1
     } as SampleRiRow;
 
     const aggregates = service.aggregateMonthlyCosts([ri as any], [pricing]);

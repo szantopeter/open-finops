@@ -39,7 +39,7 @@ export class RiMatchingCriteria implements RiMatchingCriteriaProps {
       this.engine?.trim() ?? '',
       (this.edition ?? '').toString().trim(),
       this.upfrontPayment?.toString().trim() ?? '',
-      String(this.durationMonths),
+      String(this.durationMonths)
     ];
     return parts.join('|').toLowerCase();
   }

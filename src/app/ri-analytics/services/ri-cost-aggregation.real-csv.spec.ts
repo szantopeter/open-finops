@@ -1,7 +1,8 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+
 import { RiCostAggregationService } from './ri-cost-aggregation.service';
 import { RiImportService } from './ri-import.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { PricingRecord } from '../models/pricing-record.model';
 // Use an inline sample CSV (same as src/assets/cloudability-small.csv) so tests run in browser
 const SAMPLE_CSV = `Account Name,Account ID,Reservation ID,RI Type,Instance Type,Region,multiAZ,Product,State,Term,Utilization,Count,Units,Currency Code,Net Savings,Unrealized Savings,Start,End
@@ -22,7 +23,7 @@ describe('RiCostAggregationService with real CSV', () => {
   });
 
   it('loads assets/cloudability-rds-reservations.csv and returns aggregates', () => {
-  const parsed = importer.parseText(SAMPLE_CSV, 'test-sample');
+    const parsed = importer.parseText(SAMPLE_CSV, 'test-sample');
     expect(parsed.errors).toBeUndefined();
     expect(parsed.import).toBeDefined();
     const imp = parsed.import as any;
@@ -54,7 +55,7 @@ describe('RiCostAggregationService with real CSV', () => {
         durationMonths: r.durationMonths ?? 12,
         startDate: r.startDate,
         endDate: r.endDate,
-        count: r.count ?? 1,
+        count: r.count ?? 1
       };
     });
 
@@ -67,7 +68,7 @@ describe('RiCostAggregationService with real CSV', () => {
       edition: rr.edition ?? null,
       upfrontPayment: (rr.upfrontPayment && rr.upfrontPayment.toString().toLowerCase().includes('no')) ? 'No Upfront' : 'No Upfront',
       durationMonths: rr.durationMonths || 12,
-      dailyReservedRate: 10, // synthetic small rate so totals are > 0
+      dailyReservedRate: 10 // synthetic small rate so totals are > 0
     }));
 
     const aggregates = service.aggregateMonthlyCosts(rows as any, pricingRecords as any);

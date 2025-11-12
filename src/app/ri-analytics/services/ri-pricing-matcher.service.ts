@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+
 import { PricingRecord } from '../models/pricing-record.model';
 import { RiMatchingCriteria } from '../models/ri-matching-criteria.model';
 
-export type MatchResult = { matched: boolean; pricing?: PricingRecord; reason?: string };
+export interface MatchResult { matched: boolean; pricing?: PricingRecord; reason?: string }
 
 @Injectable({ providedIn: 'root' })
 export class RiPricingMatcherService {
@@ -13,7 +14,7 @@ export class RiPricingMatcherService {
   /**
    * Load pricing data array into an internal index for fast exact-match lookup
    */
-  loadPricingData(records: PricingRecord[]) {
+  loadPricingData(records: PricingRecord[]): void {
     this.index.clear();
     for (const r of records) {
       const key = new RiMatchingCriteria({
@@ -23,7 +24,7 @@ export class RiPricingMatcherService {
         engine: r.engine,
         edition: r.edition ?? null,
         upfrontPayment: r.upfrontPayment,
-        durationMonths: r.durationMonths,
+        durationMonths: r.durationMonths
       }).toKey();
       this.index.set(key, r);
     }

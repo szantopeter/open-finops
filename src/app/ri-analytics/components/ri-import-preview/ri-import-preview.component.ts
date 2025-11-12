@@ -63,8 +63,8 @@ export class RiImportPreviewComponent implements OnDestroy {
   private readonly unregister: () => void = () => {};
 
   constructor(
-    private readonly data: RiDataService, 
-    private readonly pageState: PageStateService, 
+    private readonly data: RiDataService,
+    private readonly pageState: PageStateService,
     private readonly storage: StorageService,
     private readonly importer: RiImportService
   ) {

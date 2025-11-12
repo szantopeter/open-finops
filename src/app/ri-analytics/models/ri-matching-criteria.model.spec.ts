@@ -1,7 +1,7 @@
 import { RiMatchingCriteria } from './ri-matching-criteria.model';
 
 describe('RiMatchingCriteria', () => {
-  it('toKey should be stable and normalized', () => {
+  it('toKey should be stable and normalized', (): void => {
     const a = new RiMatchingCriteria({
       instanceClass: 'db.r5.large',
       region: 'us-east-1',
@@ -9,7 +9,7 @@ describe('RiMatchingCriteria', () => {
       engine: 'mysql',
       edition: 'standard',
       upfrontPayment: 'No Upfront',
-      durationMonths: 36,
+      durationMonths: 36
     });
 
     const b = new RiMatchingCriteria({
@@ -19,13 +19,13 @@ describe('RiMatchingCriteria', () => {
       engine: 'mysql',
       edition: 'standard',
       upfrontPayment: 'No Upfront',
-      durationMonths: 36,
+      durationMonths: 36
     });
 
     expect(a.toKey()).toBe(b.toKey());
   });
 
-  it('equals returns true only when all seven fields match exactly (case-insensitive)', () => {
+  it('equals returns true only when all seven fields match exactly (case-insensitive)', (): void => {
     const base = new RiMatchingCriteria({
       instanceClass: 'db.r5.large',
       region: 'us-east-1',
@@ -33,7 +33,7 @@ describe('RiMatchingCriteria', () => {
       engine: 'postgres',
       edition: null,
       upfrontPayment: 'All Upfront',
-      durationMonths: 12,
+      durationMonths: 12
     });
 
     const equal = new RiMatchingCriteria({
@@ -43,7 +43,7 @@ describe('RiMatchingCriteria', () => {
       engine: 'postgres',
       edition: null,
       upfrontPayment: 'All Upfront',
-      durationMonths: 12,
+      durationMonths: 12
     });
 
     const different = new RiMatchingCriteria({
@@ -53,14 +53,14 @@ describe('RiMatchingCriteria', () => {
       engine: 'postgres',
       edition: null,
       upfrontPayment: 'All Upfront',
-      durationMonths: 12,
+      durationMonths: 12
     });
 
     expect(base.equals(equal)).toBeTrue();
     expect(base.equals(different)).toBeFalse();
   });
 
-  it('equals returns false when other is null/undefined', () => {
+  it('equals returns false when other is null/undefined', (): void => {
     const a = new RiMatchingCriteria({
       instanceClass: 'db.r5.large',
       region: 'us-east-1',
@@ -68,12 +68,10 @@ describe('RiMatchingCriteria', () => {
       engine: 'postgres',
       edition: null,
       upfrontPayment: 'All Upfront',
-      durationMonths: 12,
+      durationMonths: 12
     });
 
-    // @ts-ignore
     expect(a.equals(null)).toBeFalse();
-    // @ts-ignore
     expect(a.equals(undefined)).toBeFalse();
   });
 });

@@ -10,7 +10,7 @@ describe('PricingRecord', () => {
       edition: 'standard',
       upfrontPayment: 'No Upfront',
       durationMonths: 36,
-      dailyReservedRate: 1.23,
+      dailyReservedRate: 1.23
     });
 
     const result = r.validate();
@@ -27,7 +27,7 @@ describe('PricingRecord', () => {
       engine: '',
       edition: null,
       upfrontPayment: '',
-      durationMonths: 0,
+      durationMonths: 0
     });
 
     const result = r.validate();

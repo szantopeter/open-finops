@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 import { forkJoin, Observable, throwError } from 'rxjs';
+import { catchError, map, mergeMap } from 'rxjs/operators';
+
 import { PricingRecord, PricingRecordProps } from '../models/pricing-record.model';
 
 @Injectable({ providedIn: 'root' })
@@ -42,7 +43,7 @@ export class PricingDataService {
     // For each path, attempt to GET it, but convert errors to null so a single 404 doesn't fail all.
     const requests = paths.map((p) => this.http.get<any>(`/assets/pricing/${p}`).pipe(
       // map success to payload, errors become null
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
       catchError(() => [null] as any)
     ));
 
@@ -92,7 +93,7 @@ export class PricingDataService {
               durationMonths,
               dailyOnDemandRate: fileObj.onDemand?.daily ?? fileObj.onDemand?.hourly ? (fileObj.onDemand.hourly * 24) : undefined,
               dailyReservedRate: dailyReservedRate,
-              upfrontCost: upfrontCost,
+              upfrontCost: upfrontCost
             });
             records.push(pr);
           }

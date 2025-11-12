@@ -1,11 +1,13 @@
-import { TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { RiCostAggregationService } from './ri-cost-aggregation.service';
-import { RiImportService } from './ri-import.service';
-import { RiDataService } from './ri-data.service';
-import { StorageService } from '../../core/services/storage.service';
 import { HttpClientModule } from '@angular/common/http';
-import { PricingDataService } from './pricing-data.service';
+import { TestBed } from '@angular/core/testing';
 import { firstValueFrom } from 'rxjs';
+
+import { PricingDataService } from './pricing-data.service';
+import { RiCostAggregationService } from './ri-cost-aggregation.service';
+import { RiDataService } from './ri-data.service';
+import { RiImportService } from './ri-import.service';
+import { StorageService } from '../../core/services/storage.service';
+
 
 // This spec clears persisted import state, triggers the SAMPLE_IMPORT initializer
 // (which fetches /assets/cloudability-rds-reservations.csv on first run), then
@@ -22,7 +24,7 @@ describe('Capture unmatched diagnostics (headless)', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      providers: [RiCostAggregationService, RiImportService, RiDataService, StorageService, PricingDataService],
+      providers: [RiCostAggregationService, RiImportService, RiDataService, StorageService, PricingDataService]
     });
     service = TestBed.inject(RiCostAggregationService);
     dataService = TestBed.inject(RiDataService);
@@ -67,7 +69,7 @@ describe('Capture unmatched diagnostics (headless)', () => {
         durationMonths: r.durationMonths ?? 36,
         startDate: r.startDate,
         endDate: r.endDate,
-        count: r.count ?? 1,
+        count: r.count ?? 1
       }));
 
       // Build candidate pricing file paths using the same logic as the chart component

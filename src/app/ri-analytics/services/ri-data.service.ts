@@ -9,13 +9,13 @@ export class RiDataService {
   public currentImport$ = this._current.asObservable();
 
   setImport(value: RiImport): void {
-    // eslint-disable-next-line no-console
+
     console.debug('[RiDataService] setImport called with', value);
     this._current.next(value);
   }
 
   clear(): void {
-    // eslint-disable-next-line no-console
+
     console.debug('[RiDataService] clear called');
     this._current.next(null);
   }

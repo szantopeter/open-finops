@@ -118,7 +118,7 @@ export class RiImportService {
       const engineBaseLower = engineNoParen.toString().toLowerCase();
 
       // Normalize engine family (same rules as used in the chart component)
-      const normalizeEngine = (dbEngine: string) => {
+      const normalizeEngine = (dbEngine: string): string => {
         const lower = (dbEngine || '').toString().toLowerCase();
         if (lower.includes('aurora') && lower.includes('mysql')) return 'aurora-mysql';
         if (lower.includes('aurora') && (lower.includes('postgres') || lower.includes('postgresql'))) return 'aurora-postgresql';
@@ -158,12 +158,12 @@ export class RiImportService {
 
       // Final normalized tokens
       const engineNormalizedBase = normalizeEngine(engineBaseLower || editionOnly || '');
-      
+
       // For engines that support editions (oracle, sqlserver, db2), keep engine and edition separate
       // For other engines, append license to the engine token itself
       let finalEngineToken = engineNormalizedBase;
       let finalEdition: string | null = null;
-      
+
       if (enginesWithVariants.has(engineNormalizedBase)) {
         // Keep engine as base (e.g., 'oracle')
         finalEngineToken = engineNormalizedBase;
@@ -192,7 +192,7 @@ export class RiImportService {
         engine: finalEngineToken,
         edition: finalEdition,
         upfront: obj['upfront'] ?? obj['RI Type'] ?? objRaw['RI Type'] ?? objRaw['RI Type'],
-        durationMonths: durationMonths,
+        durationMonths: durationMonths
       });
     }
 

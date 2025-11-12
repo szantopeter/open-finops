@@ -1,9 +1,10 @@
 import { Provider } from '@angular/core';
-import { RiDataService } from './services/ri-data.service';
-import { StorageService } from '../core/services/storage.service';
-import { RiImportService } from './services/ri-import.service';
 
-async function loadSampleIfMissing(storage: StorageService, parser: RiImportService, ds: RiDataService) {
+import { RiDataService } from './services/ri-data.service';
+import { RiImportService } from './services/ri-import.service';
+import { StorageService } from '../core/services/storage.service';
+
+async function loadSampleIfMissing(storage: StorageService, parser: RiImportService, ds: RiDataService): Promise<void> {
   try {
     const existing = await storage.get('ri-import');
     if (existing) return;
@@ -18,7 +19,9 @@ async function loadSampleIfMissing(storage: StorageService, parser: RiImportServ
     const parsed = parser.parseText(txt, 'sample-assets');
     if (parsed && parsed.import) {
       ds.setImport(parsed.import as any);
-      try { await storage.set('ri-import', parsed.import as any); } catch { /* ignore */ }
+      try {
+        await storage.set('ri-import', parsed.import as any);
+      } catch { /* ignore */ }
     }
   } catch (e) {
     // ignore failures silently — app should continue without sample
@@ -32,5 +35,5 @@ export const SAMPLE_IMPORT_PROVIDER: Provider = {
     return async () => loadSampleIfMissing(storage, parser, ds);
   },
   deps: [StorageService, RiImportService, RiDataService],
-  multi: true as any,
+  multi: true as any
 };

@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+
 import { RiPricingMatcherService } from './ri-pricing-matcher.service';
 import { PricingRecord } from '../models/pricing-record.model';
 import { RiMatchingCriteria } from '../models/ri-matching-criteria.model';
@@ -20,7 +21,7 @@ describe('RiPricingMatcherService', () => {
       edition: 'standard',
       upfrontPayment: 'No Upfront',
       durationMonths: 36,
-      dailyReservedRate: 1.5,
+      dailyReservedRate: 1.5
     });
 
     service.loadPricingData([record]);
@@ -32,7 +33,7 @@ describe('RiPricingMatcherService', () => {
       engine: 'mysql',
       edition: 'standard',
       upfrontPayment: 'No Upfront',
-      durationMonths: 36,
+      durationMonths: 36
     });
 
     const result = service.matchRiToPricing(criteria);
@@ -50,7 +51,7 @@ describe('RiPricingMatcherService', () => {
       engine: 'mysql',
       edition: 'standard',
       upfrontPayment: 'No Upfront',
-      durationMonths: 36,
+      durationMonths: 36
     });
     const result = service.matchRiToPricing(criteria);
     expect(result.matched).toBeFalse();
@@ -66,7 +67,7 @@ describe('RiPricingMatcherService', () => {
       edition: 'standard',
       upfrontPayment: 'No Upfront',
       durationMonths: 36,
-      dailyReservedRate: 1.5,
+      dailyReservedRate: 1.5
     });
     service.loadPricingData([record]);
 
@@ -77,7 +78,7 @@ describe('RiPricingMatcherService', () => {
       engine: 'mysql',
       edition: 'standard',
       upfrontPayment: 'No Upfront',
-      durationMonths: 36,
+      durationMonths: 36
     });
 
     const criteriaB = new RiMatchingCriteria({
@@ -87,7 +88,7 @@ describe('RiPricingMatcherService', () => {
       engine: 'mysql',
       edition: 'standard',
       upfrontPayment: 'No Upfront',
-      durationMonths: 36,
+      durationMonths: 36
     });
 
     const results = service.batchMatchRisToPricing([criteriaA, criteriaB]);

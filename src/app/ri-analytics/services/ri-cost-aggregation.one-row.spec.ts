@@ -1,11 +1,13 @@
-import { TestBed } from '@angular/core/testing';
-import { RiCostAggregationService } from './ri-cost-aggregation.service';
-import { RiImportService } from './ri-import.service';
-import { RiDataService } from './ri-data.service';
-import { StorageService } from '../../core/services/storage.service';
 import { HttpClientModule } from '@angular/common/http';
-import { PricingDataService } from './pricing-data.service';
+import { TestBed } from '@angular/core/testing';
 import { firstValueFrom } from 'rxjs';
+
+import { PricingDataService } from './pricing-data.service';
+import { RiCostAggregationService } from './ri-cost-aggregation.service';
+import { RiDataService } from './ri-data.service';
+import { RiImportService } from './ri-import.service';
+import { StorageService } from '../../core/services/storage.service';
+
 
 describe('RiCostAggregationService one-line cloudability CSV', () => {
   let aggregator: RiCostAggregationService;
@@ -15,14 +17,14 @@ describe('RiCostAggregationService one-line cloudability CSV', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      providers: [RiCostAggregationService, RiImportService, RiDataService, StorageService, PricingDataService],
+      providers: [RiCostAggregationService, RiImportService, RiDataService, StorageService, PricingDataService]
     });
     aggregator = TestBed.inject(RiCostAggregationService);
     importer = TestBed.inject(RiImportService);
     pricingSvc = TestBed.inject(PricingDataService);
   });
 
-  it('loads one cloudability row and matches pricing file oracle-se2-byol', async () => {
+  it('loads one cloudability row and matches pricing file oracle-se2-byol', async (): Promise<void> => {
     // Fetch the one-line CSV asset served by Karma
     const res = await fetch('/assets/cloudability-one-line.csv');
     expect(res.ok).toBeTrue();
@@ -39,7 +41,7 @@ describe('RiCostAggregationService one-line cloudability CSV', () => {
     console.log('[one-row spec] Parsed row:', JSON.stringify(r, null, 2));
 
     // Map to aggregator shape (minimal transformation)
-    const normalizeUpfront = (u: any) => {
+    const normalizeUpfront = (u: any): string => {
       const raw = (u ?? '').toString().trim().toLowerCase();
       if (!raw) return 'No Upfront';
       if (raw.includes('no') && raw.includes('up')) return 'No Upfront';
@@ -52,13 +54,13 @@ describe('RiCostAggregationService one-line cloudability CSV', () => {
       instanceClass: r.instanceClass,
       region: r.region,
       multiAz: r.multiAZ ?? false,
-      engine: r.engine,  // already normalized by import service
-      edition: r.edition,  // already normalized by import service
+      engine: r.engine, // already normalized by import service
+      edition: r.edition, // already normalized by import service
       upfrontPayment: normalizeUpfront(r.upfront),
       durationMonths: r.durationMonths ?? 36,
       startDate: r.startDate,
       endDate: r.endDate,
-      count: r.count ?? 1,
+      count: r.count ?? 1
     } as any;
 
     console.log('[one-row spec] Mapped row for aggregation:', JSON.stringify(row, null, 2));
@@ -76,7 +78,7 @@ describe('RiCostAggregationService one-line cloudability CSV', () => {
     const loaded = await firstValueFrom(pricingSvc.loadPricingForPaths([fileName]));
     expect(loaded).toBeDefined();
     console.log('[one-row spec] Loaded pricing records:', loaded.records.length, 'missing:', loaded.missing.length);
-    
+
     // At least one pricing record should be loaded for that file
     expect(loaded.records.length).toBeGreaterThan(0);
 

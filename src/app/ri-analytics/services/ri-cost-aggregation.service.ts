@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import { PricingRecord } from '../models/pricing-record.model';
 import { RiMatchingCriteria } from '../models/ri-matching-criteria.model';
 
@@ -26,13 +27,13 @@ export class RiCostAggregationService {
 
   constructor() {}
 
-  private toMonthKey(date: Date) {
+  private toMonthKey(date: Date): string {
     const y = date.getUTCFullYear();
     const m = (date.getUTCMonth() + 1).toString().padStart(2, '0');
     return `${y}-${m}`;
   }
 
-  loadPricingData(records: PricingRecord[]) {
+  loadPricingData(records: PricingRecord[]): void {
     this.matcherIndex.clear();
     for (const r of records) {
       const key = new RiMatchingCriteria({
@@ -42,7 +43,7 @@ export class RiCostAggregationService {
         engine: r.engine,
         edition: r.edition ?? null,
         upfrontPayment: r.upfrontPayment,
-        durationMonths: r.durationMonths,
+        durationMonths: r.durationMonths
       }).toKey();
       this.matcherIndex.set(key, r);
       // Fallback index: if engine token contains hyphens (e.g. 'oracle-se2-byol') and
@@ -64,13 +65,13 @@ export class RiCostAggregationService {
               engine: baseEngine,
               edition: editionPart,
               upfrontPayment: r.upfrontPayment,
-              durationMonths: r.durationMonths,
+              durationMonths: r.durationMonths
             }).toKey();
             // only set if missing to avoid overwriting an existing exact match
             if (!this.matcherIndex.has(altKey)) this.matcherIndex.set(altKey, r);
           }
         }
-      
+
         // Symmetric fallback: if the pricing record has an explicit edition but the engine
         // token is the base engine (no hyphen), index an alternative key where the engine
         // and edition are combined into the engine token (e.g. engine='oracle', edition='se2'
@@ -88,14 +89,14 @@ export class RiCostAggregationService {
               engine: combinedEngine,
               edition: null,
               upfrontPayment: r.upfrontPayment,
-              durationMonths: r.durationMonths,
+              durationMonths: r.durationMonths
             }).toKey();
             if (!this.matcherIndex.has(altKey2)) this.matcherIndex.set(altKey2, r);
           }
         } catch {
           // swallow
         }
-        
+
         // Additional tolerant fallbacks: many pricing edition tokens include a license
         // suffix like '-byol' or '-se2-byol'. Create alternate keys that strip common
         // license suffixes so rows with edition 'se2' will match records with edition
@@ -118,7 +119,7 @@ export class RiCostAggregationService {
                 engine: r.engine,
                 edition: strippedEdition,
                 upfrontPayment: r.upfrontPayment,
-                durationMonths: r.durationMonths,
+                durationMonths: r.durationMonths
               }).toKey();
               if (!this.matcherIndex.has(altKey3)) this.matcherIndex.set(altKey3, r);
 
@@ -133,7 +134,7 @@ export class RiCostAggregationService {
                   engine: combinedEngineStripped,
                   edition: null,
                   upfrontPayment: r.upfrontPayment,
-                  durationMonths: r.durationMonths,
+                  durationMonths: r.durationMonths
                 }).toKey();
                 if (!this.matcherIndex.has(altKey4)) this.matcherIndex.set(altKey4, r);
               }
@@ -155,7 +156,7 @@ export class RiCostAggregationService {
                 engine: strippedEngine,
                 edition: null,
                 upfrontPayment: r.upfrontPayment,
-                durationMonths: r.durationMonths,
+                durationMonths: r.durationMonths
               }).toKey();
               if (!this.matcherIndex.has(altKey5)) this.matcherIndex.set(altKey5, r);
 
@@ -170,7 +171,7 @@ export class RiCostAggregationService {
                   engine: baseEngine,
                   edition: editionPart,
                   upfrontPayment: r.upfrontPayment,
-                  durationMonths: r.durationMonths,
+                  durationMonths: r.durationMonths
                 }).toKey();
                 if (!this.matcherIndex.has(altKey6)) this.matcherIndex.set(altKey6, r);
               }
@@ -185,19 +186,19 @@ export class RiCostAggregationService {
     }
   }
 
-  aggregateMonthlyCosts(rows: RiRow[], pricingRecords: PricingRecord[]): { [month: string]: { [groupKey: string]: { totalCost: number; details: any[] } } } {
+  aggregateMonthlyCosts(rows: RiRow[], pricingRecords: PricingRecord[]): Record<string, Record<string, { totalCost: number; details: any[] }>> {
     // Load pricing into index
     this.loadPricingData(pricingRecords);
 
     console.log('[RiCostAggregation] Loaded pricing index with', this.matcherIndex.size, 'entries');
     console.log('[RiCostAggregation] Sample pricing keys:', Array.from(this.matcherIndex.keys()).slice(0, 3));
 
-    const result: { [month: string]: { [groupKey: string]: { totalCost: number; details: any[] } } } = {};
+    const result: Record<string, Record<string, { totalCost: number; details: any[] }>> = {};
 
-  let matchedCount = 0;
-  let unmatchedCount = 0;
-  this.lastUnmatchedCount = 0;
-  this.lastUnmatchedSamples = [];
+    let matchedCount = 0;
+    let unmatchedCount = 0;
+    this.lastUnmatchedCount = 0;
+    this.lastUnmatchedSamples = [];
 
     for (const row of rows) {
       const criteria = new RiMatchingCriteria({
@@ -207,7 +208,7 @@ export class RiCostAggregationService {
         engine: row.engine,
         edition: row.edition ?? null,
         upfrontPayment: row.upfrontPayment as any,
-        durationMonths: row.durationMonths,
+        durationMonths: row.durationMonths
       });
       const key = criteria.toKey();
       const pricing = this.matcherIndex.get(key);
@@ -225,7 +226,7 @@ export class RiCostAggregationService {
             durationMonths: row.durationMonths,
             startDate: row.startDate,
             endDate: row.endDate ?? null,
-            count: row.count ?? 1,
+            count: row.count ?? 1
           } });
         }
         // keep console noise limited to the first few unmatched rows for debugging
@@ -266,7 +267,7 @@ export class RiCostAggregationService {
         const [y, m] = monthKey.split('-').map((v) => parseInt(v, 10));
         const monthStart = new Date(Date.UTC(y, m - 1, 1));
         const monthEnd = new Date(Date.UTC(y, m, 0)); // last day
-        const daysInMonth = monthEnd.getUTCDate();
+        // daysInMonth unused: intentionally omitted
 
         // determine active days in this month
         const activeStart = start > monthStart ? start : monthStart;
@@ -291,8 +292,8 @@ export class RiCostAggregationService {
       }
     }
 
-  this.lastUnmatchedCount = unmatchedCount;
-  console.log('[RiCostAggregation] Matching summary - matched:', matchedCount, 'unmatched:', unmatchedCount);
+    this.lastUnmatchedCount = unmatchedCount;
+    console.log('[RiCostAggregation] Matching summary - matched:', matchedCount, 'unmatched:', unmatchedCount);
     console.log('[RiCostAggregation] Result has', Object.keys(result).length, 'months');
 
     return result;

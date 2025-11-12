@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+
 import { RiCostAggregationService } from './ri-cost-aggregation.service';
 import { PricingRecord } from '../models/pricing-record.model';
 
@@ -19,7 +20,7 @@ describe('RiCostAggregationService extra edge cases', () => {
       edition: null,
       upfrontPayment: 'No Upfront',
       durationMonths: 36,
-      dailyReservedRate: 10,
+      dailyReservedRate: 10
     });
 
     const ri = {
@@ -32,7 +33,7 @@ describe('RiCostAggregationService extra edge cases', () => {
       durationMonths: 36,
       startDate: '2025-11-01',
       endDate: '2025-11-20', // active 20 days in Nov
-      count: 1,
+      count: 1
     } as any;
 
     const aggregates = service.aggregateMonthlyCosts([ri], [pricing]);
@@ -52,7 +53,7 @@ describe('RiCostAggregationService extra edge cases', () => {
       edition: null,
       upfrontPayment: 'No Upfront',
       durationMonths: 36,
-      dailyReservedRate: 2,
+      dailyReservedRate: 2
     });
 
     const riA = { ...pricing, startDate: '2025-11-01', count: 1 } as any;
@@ -76,7 +77,7 @@ describe('RiCostAggregationService extra edge cases', () => {
       upfrontPayment: 'All Upfront',
       durationMonths: 36,
       upfrontCost: 1000,
-      dailyReservedRate: 1,
+      dailyReservedRate: 1
     });
 
     const ri = {
@@ -88,7 +89,7 @@ describe('RiCostAggregationService extra edge cases', () => {
       upfrontPayment: 'All Upfront',
       durationMonths: 36,
       startDate: '2025-11-01',
-      count: 3,
+      count: 3
     } as any;
 
     const aggregates = service.aggregateMonthlyCosts([ri], [pricing]);

@@ -1,4 +1,5 @@
 import { Provider } from '@angular/core';
+
 import { RiDataService } from './services/ri-data.service';
 import { getEnv } from '../../environments/environment';
 
@@ -37,16 +38,16 @@ export const DEV_SEED_PROVIDER: Provider = {
   provide: 'APP_INIT_RI_SEED',
   useFactory: (ds: RiDataService) => {
     return () => {
-      // eslint-disable-next-line no-console
+
       console.debug('[DEV_SEED] Initializer called, environment:', getEnv());
       if (getEnv() === 'dev') {
-        // eslint-disable-next-line no-console
+
         console.debug('[DEV_SEED] Loading demo import with', demoImport.rows.length, 'rows');
         ds.setImport(demoImport as any);
-        // eslint-disable-next-line no-console
+
         console.debug('[DEV_SEED] Demo import loaded successfully');
       } else {
-        // eslint-disable-next-line no-console
+
         console.debug('[DEV_SEED] Not in dev environment, skipping seed data');
       }
     };

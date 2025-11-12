@@ -1,21 +1,23 @@
-import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Subscription } from 'rxjs';
-import { RiDataService } from '../../services/ri-data.service';
-import { RiPricingMatcherService } from '../../services/ri-pricing-matcher.service';
-import { RiCostAggregationService } from '../../services/ri-cost-aggregation.service';
-import { PricingDataService } from '../../services/pricing-data.service';
-import * as echarts from 'echarts/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { BarChart } from 'echarts/charts';
 import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
+import * as echarts from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
+import { Subscription } from 'rxjs';
+
+import { PricingDataService } from '../../services/pricing-data.service';
+import { RiCostAggregationService } from '../../services/ri-cost-aggregation.service';
+import { RiDataService } from '../../services/ri-data.service';
+import { RiPricingMatcherService } from '../../services/ri-pricing-matcher.service';
+
 
 @Component({
   selector: 'app-monthly-cost-chart',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './monthly-cost-chart.component.html',
-  styleUrls: ['./monthly-cost-chart.component.scss'],
+  styleUrls: ['./monthly-cost-chart.component.scss']
 })
 export class MonthlyCostChartComponent implements OnInit, OnDestroy {
   data: any | null = null;
@@ -34,7 +36,7 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-  console.log('[MonthlyCostChart] init - subscribing to currentImport$');
+    console.log('[MonthlyCostChart] init - subscribing to currentImport$');
     this.sub = this.dataService.currentImport$.subscribe((imp) => {
       console.log('[MonthlyCostChart] import emitted - rows:', imp?.rows?.length ?? 0);
       if (!imp || !imp.rows || imp.rows.length === 0) {
@@ -47,7 +49,7 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
 
       try {
         // Import service already normalized all fields - just pass through with upfront normalization
-        const normalizeUpfront = (u: any) => {
+        const normalizeUpfront = (u: any): string => {
           const raw = (u ?? '').toString().trim().toLowerCase();
           if (!raw) return 'No Upfront';
           if (raw.includes('no') && raw.includes('up')) return 'No Upfront';
@@ -65,13 +67,13 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
           instanceClass: r.instanceClass,
           region: r.region,
           multiAz: r.multiAz ?? r.multiAZ ?? false,
-          engine: r.engine,  // already normalized by import service
-          edition: r.edition,  // already normalized by import service
+          engine: r.engine, // already normalized by import service
+          edition: r.edition, // already normalized by import service
           upfrontPayment: normalizeUpfront(r.upfront ?? r.upfrontPayment),
           durationMonths: r.durationMonths ?? r.duration ?? 36,
           startDate: r.startDate,
           endDate: r.endDate,
-          count: r.count || 1,
+          count: r.count || 1
         }));
 
         // Determine the pricing file paths needed for the import rows. The files are organized
@@ -82,14 +84,14 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
           const region = r.region;
           const instance = r.instanceClass;
           const deployment = r.multiAz ? 'multi-az' : 'single-az';
-          
+
           // Build engineKey for file path by combining engine + edition if present
           // e.g., engine='oracle', edition='se2-byol' → engineKey='oracle-se2-byol'
           let engineKey = r.engine || 'mysql';
           if (r.edition) {
             engineKey = `${engineKey}-${r.edition}`;
           }
-          
+
           // Build the path matching generator's convention
           const p = `${region}/${instance}/${region}_${instance}_${deployment}-${engineKey}.json`;
           candidatePaths.add(p);
@@ -99,26 +101,28 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
         console.log('[MonthlyCostChart] Requesting pricing files:', paths.length, 'files', paths.length ? 'sample:' + paths.slice(0, 5).join(',') : '');
 
         // Load the specific pricing files we constructed; PricingDataService will fetch them.
-  this.pricingLoader.loadPricingForPaths(paths).subscribe({
+        this.pricingLoader.loadPricingForPaths(paths).subscribe({
           next: ({ records, missing }) => {
             console.log('[MonthlyCostChart] Pricing loaded - records:', records.length, 'missing:', missing.length);
             this.missingPricing = missing || [];
             this.matcher.loadPricingData(records as any);
-                const aggregates = this.aggregator.aggregateMonthlyCosts(rows as any, records as any);
-                // If aggregator reports unmatched rows, surface a friendly error to the UI
-                if (this.aggregator.lastUnmatchedCount && this.aggregator.lastUnmatchedCount > 0) {
-                  const sample = this.aggregator.lastUnmatchedSamples && this.aggregator.lastUnmatchedSamples.length > 0
-                    ? this.aggregator.lastUnmatchedSamples[0]
-                    : null;
-                  const sampleText = sample ? `${sample.key}` : 'see console for examples';
-                  this.error = `Could not match ${this.aggregator.lastUnmatchedCount} import row(s) to pricing records. First unmatched key: ${sampleText}`;
-                  console.log('[MonthlyCostChart] Setting UI error:', this.error);
-                  // Immediately request change detection so the template reflects the error right away
-                  try { this.cdr.detectChanges(); } catch (e) { /* ignore */ }
-                } else {
-                  this.error = null;
-                }
-                // concise aggregate summary
+            const aggregates = this.aggregator.aggregateMonthlyCosts(rows as any, records as any);
+            // If aggregator reports unmatched rows, surface a friendly error to the UI
+            if (this.aggregator.lastUnmatchedCount && this.aggregator.lastUnmatchedCount > 0) {
+              const sample = this.aggregator.lastUnmatchedSamples && this.aggregator.lastUnmatchedSamples.length > 0
+                ? this.aggregator.lastUnmatchedSamples[0]
+                : null;
+              const sampleText = sample ? `${sample.key}` : 'see console for examples';
+              this.error = `Could not match ${this.aggregator.lastUnmatchedCount} import row(s) to pricing records. First unmatched key: ${sampleText}`;
+              console.log('[MonthlyCostChart] Setting UI error:', this.error);
+              // Immediately request change detection so the template reflects the error right away
+              try {
+                this.cdr.detectChanges();
+              } catch { /* ignore */ }
+            } else {
+              this.error = null;
+            }
+            // concise aggregate summary
             const monthCount = Object.keys(aggregates).length;
             let groupCount = 0;
             for (const m of Object.keys(aggregates)) groupCount = Math.max(groupCount, Object.keys(aggregates[m] || {}).length);
@@ -132,13 +136,13 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
             this.cdr.detectChanges();
             setTimeout(() => this.renderChart(aggregates), 0);
           },
-          error: (err) => {
-            console.error('[MonthlyCostChart] Error loading pricing:', err);
-            this.error = String(err?.message ?? err);
+          error: (_err: any): void => {
+            console.error('[MonthlyCostChart] Error loading pricing:', _err);
+            this.error = String(_err?.message ?? _err);
             this.data = null;
             this.missingPricing = paths;
-          },
-  });
+          }
+        });
       } catch (err: any) {
         console.error('[MonthlyCostChart] Exception during processing:', err);
         this.error = err?.message ?? String(err);
@@ -154,27 +158,27 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
         console.log('[MonthlyCostChart] Disposing echarts instance');
         this.chartInstance.dispose();
       }
-    } catch (e) {
+    } catch {
       // ignore
     }
   }
 
-  private renderChart(aggregates: any) {
+  private renderChart(aggregates: any): void {
     console.log('[MonthlyCostChart] renderChart start');
     try {
       echarts.use([BarChart, GridComponent, TooltipComponent, LegendComponent, CanvasRenderer]);
       if (!echarts) return;
       // Convert aggregates { 'YYYY-MM': { groupKey: { totalCost } } } to ECharts series
-  const months = Object.keys(aggregates).sort();
-  console.log('[MonthlyCostChart] Months found:', months.length);
+      const months = Object.keys(aggregates).sort();
+      console.log('[MonthlyCostChart] Months found:', months.length);
       // determine group keys
       const groupSet = new Set<string>();
       for (const m of months) {
         for (const g of Object.keys(aggregates[m])) groupSet.add(g);
       }
-  const groups = Array.from(groupSet);
-  console.log('[MonthlyCostChart] Groups found:', groups.length);
-  const series = groups.map((g) => ({ name: g, type: 'bar', stack: 'total', data: months.map((m) => (aggregates[m][g]?.totalCost ?? 0)) }));
+      const groups = Array.from(groupSet);
+      console.log('[MonthlyCostChart] Groups found:', groups.length);
+      const series = groups.map((g) => ({ name: g, type: 'bar', stack: 'total', data: months.map((m) => (aggregates[m][g]?.totalCost ?? 0)) }));
 
       // Calculate dynamic top spacing based on number of legend items
       // Legend items with long names need more space - estimate 4-5 items per row
@@ -187,7 +191,7 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
 
       const option = {
         tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-        legend: { 
+        legend: {
           data: groups,
           top: 5,
           left: 'center',
@@ -207,7 +211,7 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
         },
         xAxis: { type: 'category', data: months },
         yAxis: { type: 'value' },
-        series,
+        series
       };
 
       // find or create container
@@ -223,7 +227,7 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
         chart = (echarts as any).getInstanceByDom
           ? (echarts as any).getInstanceByDom(container)
           : null;
-      } catch (e) {
+      } catch {
         chart = null;
       }
 
@@ -239,19 +243,19 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
       this.chartInstance = chart;
       chart.setOption(option, true);
       console.log('[MonthlyCostChart] Chart option set');
-      
+
       // Force resize to ensure chart renders correctly
       setTimeout(() => {
         try {
           chart.resize();
           console.log('[MonthlyCostChart] Chart resized');
-        } catch (e) {
-          console.error('[MonthlyCostChart] Resize error:', e);
+        } catch {
+          console.error('[MonthlyCostChart] Resize error');
         }
       }, 100);
     } catch (err) {
       // swallow render errors but set error state
-      // eslint-disable-next-line no-console
+
       console.error('[MonthlyCostChart] Error rendering chart:', err);
       this.error = String(err?.message ?? err);
     }
