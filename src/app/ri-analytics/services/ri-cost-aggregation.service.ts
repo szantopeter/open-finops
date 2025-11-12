@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 
 import { MonthlyCostData } from '../models/monthly-cost-data.model';
 import { PricingRecord } from '../models/pricing-record.model';
+import { RenewalProjection } from '../models/renewal-projection.model';
 import { RiMatchingCriteria } from '../models/ri-matching-criteria.model';
+import { SavingsBreakdown, SavingsYearData } from '../models/savings-breakdown.model';
 
 interface RiRow {
   instanceClass: string;
@@ -33,12 +35,14 @@ export class RiCostAggregationService {
     missingRates: Array<{ key: string; row: any; pricing: any; reason: string }>;
     zeroActiveDays: Array<{ key: string; row: any; monthKey: string; activeDays: number; reason: string }>;
     zeroCount: Array<{ key: string; row: any; reason: string }>;
+    renewalErrors: Array<{ key: string; row: any; reason: string }>; // Errors specific to renewal calculations
   } = {
       unmatchedPricing: [],
       invalidPricing: [],
       missingRates: [],
       zeroActiveDays: [],
-      zeroCount: []
+      zeroCount: [],
+      renewalErrors: [] // Initialize empty array for renewal errors
     };
 
   constructor() {}
@@ -121,6 +125,79 @@ export class RiCostAggregationService {
     const y = date.getUTCFullYear();
     const m = (date.getUTCMonth() + 1).toString().padStart(2, '0');
     return `${y}-${m}`;
+  }
+
+  private detectExpiringRis(rows: RiRow[], projectionEnd: Date): RiRow[] {
+    return rows.filter(row => {
+      if (!row.endDate) return false; // Ongoing RIs don't expire
+      const endDate = new Date(row.endDate + 'T00:00:00Z');
+      return endDate <= projectionEnd;
+    });
+  }
+
+  private calculateRenewalProjection(originalRi: RiRow, pricingIndex: Map<string, PricingRecord>): RenewalProjection | null {
+    if (!originalRi.endDate) return null; // Cannot renew ongoing RI
+
+    const criteria = new RiMatchingCriteria({
+      instanceClass: originalRi.instanceClass,
+      region: originalRi.region,
+      multiAz: originalRi.multiAz,
+      engine: originalRi.engine,
+      edition: originalRi.edition ?? null,
+      upfrontPayment: originalRi.upfrontPayment as any,
+      durationMonths: originalRi.durationMonths
+    });
+    const key = criteria.toKey();
+    const pricing = pricingIndex.get(key);
+
+    if (!pricing) {
+      // Track renewal error
+      if (this.lastErrors.renewalErrors.length < this.UNMATCHED_CAP) {
+        this.lastErrors.renewalErrors.push({
+          key,
+          row: {
+            instanceClass: originalRi.instanceClass,
+            region: originalRi.region,
+            multiAz: String(originalRi.multiAz),
+            engine: originalRi.engine,
+            edition: originalRi.edition ?? null,
+            upfrontPayment: originalRi.upfrontPayment,
+            durationMonths: originalRi.durationMonths,
+            startDate: originalRi.startDate,
+            endDate: originalRi.endDate,
+            count: originalRi.count ?? 1
+          },
+          reason: 'No matching pricing record found for renewal calculation'
+        });
+      }
+      return null;
+    }
+
+    // Calculate renewal start date (month after expiration)
+    const expirationDate = new Date(originalRi.endDate + 'T00:00:00Z');
+    const renewalStart = new Date(Date.UTC(expirationDate.getUTCFullYear(), expirationDate.getUTCMonth() + 1, 1));
+
+    // Calculate renewal end date (if duration is specified)
+    let renewalEnd: Date | undefined;
+    if (originalRi.durationMonths) {
+      renewalEnd = new Date(renewalStart);
+      renewalEnd.setUTCMonth(renewalEnd.getUTCMonth() + originalRi.durationMonths);
+    }
+
+    // Calculate monthly renewal cost (same as original RI cost calculation)
+    const dailyRate = pricing.dailyReservedRate ?? 0;
+    const count = originalRi.count || 1;
+
+    // For renewal, we only care about the recurring monthly cost (upfront is already paid)
+    const monthlyCost = dailyRate * 30 * count; // Approximate monthly cost
+
+    return {
+      originalRi,
+      renewalStart,
+      renewalEnd,
+      pricing,
+      monthlyCost
+    };
   }
 
   loadPricingData(records: PricingRecord[]): void {
@@ -296,7 +373,8 @@ export class RiCostAggregationService {
       invalidPricing: [],
       missingRates: [],
       zeroActiveDays: [],
-      zeroCount: []
+      zeroCount: [],
+      renewalErrors: []
     };
 
     for (const row of rows) {
@@ -460,10 +538,145 @@ export class RiCostAggregationService {
       }
     }
 
+    // Calculate renewal projections
+    const now = new Date();
+    const currentYear = now.getUTCFullYear();
+    const projectionEnd = new Date(Date.UTC(currentYear + 1, 11, 31)); // End of next calendar year
+
+    const expiringRis = this.detectExpiringRis(rows, projectionEnd);
+    console.log('[RiCostAggregation] Found', expiringRis.length, 'expiring RIs for renewal projection');
+
+    for (const expiringRi of expiringRis) {
+      const renewalProjection = this.calculateRenewalProjection(expiringRi, this.matcherIndex);
+      if (!renewalProjection) continue; // Skip if renewal calculation failed
+
+      // Calculate months where renewal is active
+      const renewalMonths: string[] = [];
+      const renewalCurrent = new Date(renewalProjection.renewalStart);
+
+      // Project renewal for up to the duration or until projection end
+      const maxMonths = expiringRi.durationMonths || 12; // Default to 1 year if no duration
+      let renewalMonthCount = 0;
+
+      while (renewalCurrent <= projectionEnd && renewalMonthCount < maxMonths) {
+        const monthKey = this.toMonthKey(renewalCurrent);
+        renewalMonths.push(monthKey);
+        renewalCurrent.setUTCMonth(renewalCurrent.getUTCMonth() + 1);
+        renewalMonthCount++;
+      }
+
+      // Add renewal costs to monthly data
+      for (const monthKey of renewalMonths) {
+        if (!result[monthKey]) result[monthKey] = {};
+
+        const criteria = new RiMatchingCriteria({
+          instanceClass: expiringRi.instanceClass,
+          region: expiringRi.region,
+          multiAz: expiringRi.multiAz,
+          engine: expiringRi.engine,
+          edition: expiringRi.edition ?? null,
+          upfrontPayment: expiringRi.upfrontPayment as any,
+          durationMonths: expiringRi.durationMonths
+        });
+        const groupKey = this.toHumanReadableKey(criteria);
+
+        if (!result[monthKey][groupKey]) {
+          // Create entry if it doesn't exist (renewal-only month)
+          result[monthKey][groupKey] = {
+            monthKey,
+            groupKey,
+            riCost: 0,
+            onDemandCost: 0,
+            savingsAmount: 0,
+            savingsPercentage: 0,
+            details: []
+          };
+        }
+
+        // Add renewal cost (no upfront for renewals)
+        result[monthKey][groupKey].renewalCost = (result[monthKey][groupKey].renewalCost || 0) + renewalProjection.monthlyCost;
+
+        // Calculate on-demand equivalent for renewal period
+        const [y, m] = monthKey.split('-').map((v) => Number.parseInt(v, 10));
+        const monthEnd = new Date(Date.UTC(y, m, 0));
+        const daysInMonth = monthEnd.getUTCDate();
+        const onDemandDailyRate = renewalProjection.pricing.dailyOnDemandRate ?? 0;
+        const renewalOnDemandCost = onDemandDailyRate * daysInMonth * (expiringRi.count || 1);
+
+        // Update on-demand cost and savings for renewal months
+        result[monthKey][groupKey].onDemandCost += renewalOnDemandCost;
+        result[monthKey][groupKey].savingsAmount = result[monthKey][groupKey].onDemandCost - (result[monthKey][groupKey].riCost + (result[monthKey][groupKey].renewalCost || 0));
+        result[monthKey][groupKey].savingsPercentage = result[monthKey][groupKey].onDemandCost > 0 ?
+          (1 - (result[monthKey][groupKey].riCost + (result[monthKey][groupKey].renewalCost || 0)) / result[monthKey][groupKey].onDemandCost) * 100 : 0;
+
+        result[monthKey][groupKey].details.push({
+          row: expiringRi,
+          pricing: renewalProjection.pricing,
+          recurringCost: renewalProjection.monthlyCost,
+          upfront: 0, // No upfront for renewals
+          activeDays: daysInMonth,
+          onDemandCost: renewalOnDemandCost,
+          isRenewal: true
+        });
+      }
+    }
+
     this.lastUnmatchedCount = unmatchedCount;
     console.log('[RiCostAggregation] Matching summary - matched:', matchedCount, 'unmatched:', unmatchedCount);
     console.log('[RiCostAggregation] Result has', Object.keys(result).length, 'months');
 
     return result;
+  }
+
+  calculateSavingsBreakdown(monthlyData: Record<string, Record<string, MonthlyCostData>>): SavingsBreakdown {
+    const now = new Date();
+    const currentYear = now.getUTCFullYear();
+    const currentMonth = now.getUTCMonth() + 1; // 1-based
+
+    let year1Savings = 0;
+    let year2Savings = 0;
+    let year1Months = 0;
+    let year2Months = 0;
+
+    // Iterate through all months in the data
+    for (const monthKey of Object.keys(monthlyData).sort((a, b) => a.localeCompare(b))) {
+      const [year, month] = monthKey.split('-').map((v) => Number.parseInt(v, 10));
+
+      if (year === currentYear) {
+        // Current year - count from current month onward
+        if (month >= currentMonth) {
+          year1Months++;
+          for (const groupData of Object.values(monthlyData[monthKey])) {
+            year1Savings += groupData.savingsAmount;
+          }
+        }
+      } else if (year === currentYear + 1) {
+        // Next year - full year
+        year2Months++;
+        for (const groupData of Object.values(monthlyData[monthKey])) {
+          year2Savings += groupData.savingsAmount;
+        }
+      }
+    }
+
+    const year1: SavingsYearData = {
+      year: currentYear,
+      months: year1Months,
+      totalSavings: year1Savings,
+      label: year1Months > 0 ? `${currentYear} (${new Date(currentYear, currentMonth - 1).toLocaleDateString('en-US', { month: 'short' })}-Dec)` : `${currentYear}`
+    };
+
+    const year2: SavingsYearData = {
+      year: currentYear + 1,
+      months: year2Months,
+      totalSavings: year2Savings,
+      label: `${currentYear + 1} (Jan-Dec)`
+    };
+
+    return {
+      year1,
+      year2,
+      total: year1Savings + year2Savings
+    };
   }
 }

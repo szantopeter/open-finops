@@ -223,7 +223,7 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
       // Calculate total savings for the entire period
       const totalRiCost = months.reduce((total, month) => {
         const groupsData = aggregates[month] || {};
-        return total + Object.values(groupsData).reduce((sum: number, g: MonthlyCostData) => sum + (g.riCost || 0), 0);
+        return total + Object.values(groupsData).reduce((sum: number, g: MonthlyCostData) => sum + (g.riCost || 0) + (g.renewalCost || 0), 0);
       }, 0);
 
       const totalOnDemandCost = months.reduce((total, month) => {
@@ -248,13 +248,13 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
       }
 
       const series = [
-        // RI stack first
+        // RI bars - all groups stack together
         ...groups.map((g, index) => {
-          const data = months.map((m) => (aggregates[m][g]?.riCost ?? 0));
+          const riData = months.map((m) => (aggregates[m][g]?.riCost ?? 0));
           return {
             name: `${g} (RI)`,
             type: 'bar',
-            stack: 'ri',
+            stack: 'ri', // All RI bars stack together
             itemStyle: { color: groupColors[g] },
             emphasis: {
               focus: 'series',
@@ -280,16 +280,54 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
               fontWeight: 'bold',
               color: '#000'
             } : undefined,
-            data
+            data: riData
           };
         }),
-        // On-Demand stack second
+        // Renewal bars - all groups stack together
+        ...groups.map((g, index) => {
+          const renewalData = months.map((m) => (aggregates[m][g]?.renewalCost ?? 0));
+          const hasRenewalData = renewalData.some(value => value > 0);
+          if (!hasRenewalData) return null; // Skip if no renewal data for this group
+
+          return {
+            name: `${g} (Renewal)`,
+            type: 'bar',
+            stack: 'renewal', // All renewal bars stack together
+            itemStyle: { color: groupColors[g] }, // Use same color as the group
+            emphasis: {
+              focus: 'series',
+              itemStyle: {
+                shadowBlur: 10,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              },
+              label: {
+                show: true,
+                position: 'top',
+                formatter: (params: any): string => `$${params.value.toFixed(2)}`,
+                fontSize: 12,
+                fontWeight: 'bold',
+                color: '#000'
+              }
+            },
+            label: index === 0 ? {
+              show: true,
+              position: 'bottom',
+              offset: [0, 35], // Offset further down for renewal label
+              formatter: 'RI+',
+              fontSize: 11,
+              fontWeight: 'bold',
+              color: '#000'
+            } : undefined,
+            data: renewalData
+          };
+        }).filter(s => s !== null),
+        // On-Demand bars - all groups stack together
         ...groups.map((g, index) => {
           const data = months.map((m) => (aggregates[m][g]?.onDemandCost ?? 0));
           return {
             name: `${g} (OD)`,
             type: 'bar',
-            stack: 'ondemand',
+            stack: 'ondemand', // All on-demand bars stack together
             itemStyle: { color: groupColors[g] },
             emphasis: {
               focus: 'series',
@@ -309,7 +347,7 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
             label: index === 0 ? {
               show: true,
               position: 'bottom',
-              offset: [0, 20], // Offset down to position below month labels
+              offset: [0, 50], // Offset even further down for OD label
               formatter: 'OD',
               fontSize: 11,
               fontWeight: 'bold',
@@ -388,7 +426,7 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
             // For item trigger, params is a single series data point
             const month = params.name;
             const hoveredSeriesName = params.seriesName;
-            const hoveredGroup = hoveredSeriesName.replace(/ \((RI|OD)\)$/, '');
+            const hoveredGroup = hoveredSeriesName.replace(/ \((RI|Renewal|OD)\)$/, '');
 
             // We need all series data for this month to build the full table
             // Get the chart instance and extract data from all series
@@ -401,18 +439,23 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
             if (monthIndex === -1) return '';
 
             // Build group data from all series for this month
-            const groupData: Record<string, { ri: number, onDemand: number }> = {};
+            const groupData: Record<string, { ri: number, renewal: number, onDemand: number }> = {};
             for (const series of allSeries) {
               const seriesName = series.name;
-              const groupName = seriesName.replace(/ \((RI|OD)\)$/, '');
+              const groupName = seriesName.replace(/ \((RI|Renewal|OD)\)$/, '');
               const isRi = seriesName.endsWith('(RI)');
+              const isRenewal = seriesName.endsWith('(Renewal)');
+              const isOnDemand = seriesName.endsWith('(OD)');
               const value = (series.data as number[])[monthIndex] ?? 0;
 
               if (isRi) {
-                groupData[groupName] = groupData[groupName] || { ri: 0, onDemand: 0 };
+                groupData[groupName] = groupData[groupName] || { ri: 0, renewal: 0, onDemand: 0 };
                 groupData[groupName].ri = value;
-              } else {
-                groupData[groupName] = groupData[groupName] || { ri: 0, onDemand: 0 };
+              } else if (isRenewal) {
+                groupData[groupName] = groupData[groupName] || { ri: 0, renewal: 0, onDemand: 0 };
+                groupData[groupName].renewal = value;
+              } else if (isOnDemand) {
+                groupData[groupName] = groupData[groupName] || { ri: 0, renewal: 0, onDemand: 0 };
                 groupData[groupName].onDemand = value;
               }
             }
@@ -423,38 +466,45 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
               '<tr>' +
               '<th style="border: 1px solid #ddd; padding: 4px;">Group</th>' +
               '<th style="border: 1px solid #ddd; padding: 4px;">RI Cost</th>' +
+              '<th style="border: 1px solid #ddd; padding: 4px;">Renewal</th>' +
               '<th style="border: 1px solid #ddd; padding: 4px;">On-Demand</th>' +
               '<th style="border: 1px solid #ddd; padding: 4px;">Savings %</th>' +
               '</tr>';
             let totalRiCost = 0;
+            let totalRenewalCost = 0;
             let totalOnDemandCost = 0;
 
             // Filter groups to only include those with non-zero costs for this month
             const activeGroups = groups.filter(g => {
-              const data = groupData[g] || { ri: 0, onDemand: 0 };
-              return data.ri > 0 || data.onDemand > 0;
+              const data = groupData[g] || { ri: 0, renewal: 0, onDemand: 0 };
+              return data.ri > 0 || data.renewal > 0 || data.onDemand > 0;
             });
 
             for (const g of activeGroups) {
-              const data = groupData[g] || { ri: 0, onDemand: 0 };
-              const savingsPct = data.onDemand > 0 ? ((data.onDemand - data.ri) / data.onDemand * 100) : 0;
+              const data = groupData[g] || { ri: 0, renewal: 0, onDemand: 0 };
+              const totalCost = data.ri + data.renewal;
+              const savingsPct = data.onDemand > 0 ? ((data.onDemand - totalCost) / data.onDemand * 100) : 0;
               const colorBox = `<div style="display: inline-block; width: 12px; height: 12px; background-color: ${groupColors[g]}; margin-right: 4px; border: 1px solid #666;"></div>`;
               const isHovered = g === hoveredGroup;
               const rowStyle = isHovered ? 'background-color: #f0f8ff; font-weight: bold;' : '';
               table += `<tr style="${rowStyle}">` +
                 `<td style="border: 1px solid #ddd; padding: 4px;">${colorBox}${g}</td>` +
                 `<td style="border: 1px solid #ddd; padding: 4px;">$${data.ri.toFixed(2)}</td>` +
+                `<td style="border: 1px solid #ddd; padding: 4px;">$${data.renewal.toFixed(2)}</td>` +
                 `<td style="border: 1px solid #ddd; padding: 4px;">$${data.onDemand.toFixed(2)}</td>` +
                 `<td style="border: 1px solid #ddd; padding: 4px;">${savingsPct.toFixed(1)}%</td>` +
                 '</tr>';
               totalRiCost += data.ri;
+              totalRenewalCost += data.renewal;
               totalOnDemandCost += data.onDemand;
             }
             // Add summary row
-            const totalSavingsPct = totalOnDemandCost > 0 ? ((totalOnDemandCost - totalRiCost) / totalOnDemandCost * 100) : 0;
+            const totalCombinedCost = totalRiCost + totalRenewalCost;
+            const totalSavingsPct = totalOnDemandCost > 0 ? ((totalOnDemandCost - totalCombinedCost) / totalOnDemandCost * 100) : 0;
             table += '<tr style="border-top: 2px solid #000; font-weight: bold;">' +
               '<td style="border: 1px solid #ddd; padding: 4px;">TOTAL</td>' +
               `<td style="border: 1px solid #ddd; padding: 4px;">$${totalRiCost.toFixed(2)}</td>` +
+              `<td style="border: 1px solid #ddd; padding: 4px;">$${totalRenewalCost.toFixed(2)}</td>` +
               `<td style="border: 1px solid #ddd; padding: 4px;">$${totalOnDemandCost.toFixed(2)}</td>` +
               `<td style="border: 1px solid #ddd; padding: 4px;">${totalSavingsPct.toFixed(2)}%</td>` +
               '</tr>';
@@ -466,7 +516,7 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
           top: 20,
           left: '3%',
           right: '4%',
-          bottom: '55%', // Increased significantly to make room for both month and RI/OD labels
+          bottom: '70%', // Increased further to make room for RI/Renewal/OD labels
           containLabel: true
         },
         xAxis: {
