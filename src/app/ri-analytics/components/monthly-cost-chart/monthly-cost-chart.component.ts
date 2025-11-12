@@ -192,12 +192,6 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
         .map(([group]) => group);
       console.log('[MonthlyCostChart] Groups found and sorted by cost:', groups.length, groups);
 
-      // Calculate total on-demand per month
-      const monthOnDemand = months.map(month => {
-        const groupsData = aggregates[month] || {};
-        return Object.values(groupsData).reduce((sum: number, g: MonthlyCostData) => sum + (g.onDemandCost || 0), 0);
-      });
-
       // Calculate total savings for the entire period
       const totalRiCost = months.reduce((total, month) => {
         const groupsData = aggregates[month] || {};
@@ -218,14 +212,48 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
       this.totalRiCost = totalRiCost;
       this.totalOnDemandCost = totalOnDemandCost;
 
+      // Create color mapping for groups
+      const colors = ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc'];
+      const groupColors: Record<string, string> = {};
+      for (const [index, g] of groups.entries()) {
+        groupColors[g] = colors[index % colors.length];
+      }
+
       const series = [
-        ...groups.map((g) => ({ name: g, type: 'bar', stack: 'ri', data: months.map((m) => (aggregates[m][g]?.riCost ?? 0)) })),
-        {
-          name: 'On-Demand Cost',
+        // RI stack first
+        ...groups.map((g, index) => ({
+          name: `${g} (RI)`,
           type: 'bar',
-          stack: null, // separate bar
-          data: monthOnDemand
-        }
+          stack: 'ri',
+          itemStyle: { color: groupColors[g] },
+          label: index === 0 ? {
+            show: true,
+            position: 'bottom',
+            offset: [0, 20], // Offset down to position below month labels
+            formatter: 'RI',
+            fontSize: 11,
+            fontWeight: 'bold',
+            color: '#000'
+          } : undefined,
+          data: months.map((m) => (aggregates[m][g]?.riCost ?? 0))
+        })),
+        // On-Demand stack second
+        ...groups.map((g, index) => ({
+          name: `${g} (OD)`,
+          type: 'bar',
+          stack: 'ondemand',
+          itemStyle: { color: groupColors[g] },
+          label: index === 0 ? {
+            show: true,
+            position: 'bottom',
+            offset: [0, 20], // Offset down to position below month labels
+            formatter: 'OD',
+            fontSize: 11,
+            fontWeight: 'bold',
+            color: '#000'
+          } : undefined,
+          data: months.map((m) => (aggregates[m][g]?.onDemandCost ?? 0))
+        }))
       ];
 
       const option = {
@@ -234,45 +262,54 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
           axisPointer: { type: 'shadow' },
           formatter: (params: any) => {
             const month = params[0].name;
-            let tooltipLines = [`<strong>${month}</strong>`];
-            let riTotal = 0;
-            let onDemandTotal = 0;
-
+            // Group params by group (strip (RI) and (On-Demand) suffixes)
+            const groupData: Record<string, { ri: number, onDemand: number }> = {};
             for (const p of params) {
-              if (p.seriesName === 'On-Demand Cost') {
-                onDemandTotal = p.value;
-                tooltipLines.push(`<span style="display:inline-block;width:10px;height:10px;background-color:${p.color};margin-right:5px;border-radius:2px;"></span>${p.seriesName}: $${p.value.toFixed(2)}`);
+              // Extract group name by removing the suffix
+              const groupName = p.seriesName.replace(/ \((RI|OD)\)$/, '');
+              const isRi = p.seriesName.endsWith('(RI)');
+              if (isRi) {
+                groupData[groupName] = groupData[groupName] || { ri: 0, onDemand: 0 };
+                groupData[groupName].ri = p.value;
               } else {
-                riTotal += p.value;
-                tooltipLines.push(`<span style="display:inline-block;width:10px;height:10px;background-color:${p.color};margin-right:5px;border-radius:2px;"></span>${p.seriesName}: $${p.value.toFixed(2)}`);
+                groupData[groupName] = groupData[groupName] || { ri: 0, onDemand: 0 };
+                groupData[groupName].onDemand = p.value;
               }
             }
-
-            const savingsTotal = onDemandTotal - riTotal;
-            const avgSavingsPct = onDemandTotal > 0 ? (savingsTotal / onDemandTotal) * 100 : 0;
-            tooltipLines.push(`Monthly Savings: $${savingsTotal.toFixed(2)} (${avgSavingsPct.toFixed(2)}%)`);
-            return tooltipLines.join('<br/>');
+            // Build table
+            let table = `<strong>${month}</strong><br/><table style="border-collapse: collapse; width: 100%;"><tr><th style="border: 1px solid #ddd; padding: 4px;">Group</th><th style="border: 1px solid #ddd; padding: 4px;">RI Cost</th><th style="border: 1px solid #ddd; padding: 4px;">On-Demand</th><th style="border: 1px solid #ddd; padding: 4px;">Savings %</th></tr>`;
+            let totalRiCost = 0;
+            let totalOnDemandCost = 0;
+            for (const g of groups) {
+              const data = groupData[g] || { ri: 0, onDemand: 0 };
+              const savingsPct = data.onDemand > 0 ? ((data.onDemand - data.ri) / data.onDemand * 100) : 0;
+              table += `<tr><td style="border: 1px solid #ddd; padding: 4px;">${g}</td><td style="border: 1px solid #ddd; padding: 4px;">$${data.ri.toFixed(2)}</td><td style="border: 1px solid #ddd; padding: 4px;">$${data.onDemand.toFixed(2)}</td><td style="border: 1px solid #ddd; padding: 4px;">${savingsPct.toFixed(2)}%</td></tr>`;
+              totalRiCost += data.ri;
+              totalOnDemandCost += data.onDemand;
+            }
+            // Add summary row
+            const totalSavingsPct = totalOnDemandCost > 0 ? ((totalOnDemandCost - totalRiCost) / totalOnDemandCost * 100) : 0;
+            table += `<tr style="border-top: 2px solid #000; font-weight: bold;"><td style="border: 1px solid #ddd; padding: 4px;">TOTAL</td><td style="border: 1px solid #ddd; padding: 4px;">$${totalRiCost.toFixed(2)}</td><td style="border: 1px solid #ddd; padding: 4px;">$${totalOnDemandCost.toFixed(2)}</td><td style="border: 1px solid #ddd; padding: 4px;">${totalSavingsPct.toFixed(2)}%</td></tr>`;
+            table += '</table>';
+            return table;
           }
-        },
-        legend: {
-          data: [...groups, 'On-Demand Cost'],
-          bottom: 0,
-          left: 'center',
-          orient: 'horizontal',
-          itemGap: 10,
-          itemWidth: 25,
-          itemHeight: 14,
-          textStyle: { fontSize: 11 },
-          padding: [5, 5, 10, 5]
         },
         grid: {
           top: 20,
           left: '3%',
           right: '4%',
-          bottom: '35%',
+          bottom: '55%', // Increased significantly to make room for both month and RI/OD labels
           containLabel: true
         },
-        xAxis: { type: 'category', data: months },
+        xAxis: {
+          type: 'category',
+          data: months,
+          axisLabel: {
+            interval: 0,
+            fontSize: 12,
+            offset: -20 // Move month labels up to make room for RI/OD labels below
+          }
+        },
         yAxis: { type: 'value' },
         series
       };

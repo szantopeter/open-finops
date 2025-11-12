@@ -321,6 +321,8 @@ function buildEngineKey(engine, license, edition) {
   // Prepare metadata (minimal manifest)
   const metadata = { fetchedAt: new Date().toISOString(), source: service, discountPercentApplied: discountPercent };
   const summary = { currency: 'USD', regions: {} };
+  const errors = []; // Collect validation errors
+  
   for (const r of regions) {
     summary.regions[r] = { instanceClasses: {} };
     
@@ -344,6 +346,8 @@ function buildEngineKey(engine, license, edition) {
         console.log('NOT FOUND');
         continue;
       }
+
+      console.error(`Found ${products.length} raw products for ${it} @ ${r}`);
 
       // Prepare directories
       const path = require('path');
@@ -428,11 +432,28 @@ function buildEngineKey(engine, license, edition) {
           // savingsOptions: may be null if no RI terms found for that deployment
           savingsOptions: discountedRiByDeployment[rec.deployment] || null
         };
-        try {
-          fs.writeFileSync(filePath, JSON.stringify(fileObj, null, 2), 'utf8');
-          anyWritten = true;
-        } catch (e) {
-          console.error('Failed to write per-variant file', filePath, e && e.message);
+
+        // Validate that on-demand price > reserved prices
+        let isValid = true;
+        if (fileObj.onDemand.daily && fileObj.savingsOptions) {
+          for (const [key, sav] of Object.entries(fileObj.savingsOptions)) {
+            if (sav && typeof sav.daily === 'number' && sav.daily >= fileObj.onDemand.daily) {
+              errors.push(`Invalid pricing for ${filename}: reserved ${key} daily (${sav.daily}) >= on-demand daily (${fileObj.onDemand.daily})`);
+              isValid = false;
+              break;
+            }
+          }
+        }
+
+        if (isValid) {
+          try {
+            fs.writeFileSync(filePath, JSON.stringify(fileObj, null, 2), 'utf8');
+            anyWritten = true;
+          } catch (e) {
+            console.error('Failed to write per-variant file', filePath, e && e.message);
+          }
+        } else {
+          console.error(`Skipping invalid file: ${filename}`);
         }
       }
 
@@ -446,11 +467,11 @@ function buildEngineKey(engine, license, edition) {
         'sqlserver-web-li', 'sqlserver-ex-li'
       ];
 
-      const deploymentsToEnsure = ['multi-az', 'single-az'];
+      const deploymentsToEnsure = ['Single-AZ', 'Multi-AZ'];
 
       for (const eng of enginesToEnsure) {
         for (const dep of deploymentsToEnsure) {
-          const wantedFilename = `${r}_${it}_${dep}-${eng}.json`;
+          const wantedFilename = `${r}_${it}_${dep.toLowerCase()}-${eng}.json`;
           const wantedPath = path.join(instanceDir, wantedFilename);
           if (!fs.existsSync(wantedPath)) {
             try {
@@ -461,14 +482,31 @@ function buildEngineKey(engine, license, edition) {
                 const fileObj = {
                   region: r,
                   instance: it,
-                  deployment: dep,
+                  deployment: dep.toLowerCase(),
                   engine: eng,
                   license: null,
                   onDemand: { hourly: hourlyDisc, daily: daily, sku: od.product && od.product.product && od.product.product.sku ? od.product.product.sku : null },
                   savingsOptions: discountedRiByDeployment[dep] || null
                 };
-                fs.writeFileSync(wantedPath, JSON.stringify(fileObj, null, 2), 'utf8');
-                anyWritten = true;
+
+                // Validate ensured files too
+                let isValid = true;
+                if (fileObj.onDemand.daily && fileObj.savingsOptions) {
+                  for (const [key, sav] of Object.entries(fileObj.savingsOptions)) {
+                    if (sav && typeof sav.daily === 'number' && sav.daily >= fileObj.onDemand.daily) {
+                      errors.push(`Invalid pricing for ensured ${wantedFilename}: reserved ${key} daily (${sav.daily}) >= on-demand daily (${fileObj.onDemand.daily})`);
+                      isValid = false;
+                      break;
+                    }
+                  }
+                }
+
+                if (isValid) {
+                  fs.writeFileSync(wantedPath, JSON.stringify(fileObj, null, 2), 'utf8');
+                  anyWritten = true;
+                } else {
+                  console.error(`Skipping invalid ensured file: ${wantedFilename}`);
+                }
               }
             } catch (e) {
               console.error('Failed to write ensured engine file', wantedPath, e && e.message);
@@ -476,7 +514,7 @@ function buildEngineKey(engine, license, edition) {
           }
           // Also write a capitalized variant (some existing files use mixed-case engine keys like 'Db2')
           const engCap = eng.charAt(0).toUpperCase() + eng.slice(1);
-          const wantedFilenameCap = `${r}_${it}_${dep}-${engCap}.json`;
+          const wantedFilenameCap = `${r}_${it}_${dep.toLowerCase()}-${engCap}.json`;
           const wantedPathCap = path.join(instanceDir, wantedFilenameCap);
           if (!fs.existsSync(wantedPathCap)) {
             try {
@@ -487,14 +525,31 @@ function buildEngineKey(engine, license, edition) {
                 const fileObj = {
                   region: r,
                   instance: it,
-                  deployment: dep,
+                  deployment: dep.toLowerCase(),
                   engine: engCap,
                   license: null,
                   onDemand: { hourly: hourlyDisc, daily: daily, sku: od.product && od.product.product && od.product.product.sku ? od.product.product.sku : null },
                   savingsOptions: discountedRiByDeployment[dep] || null
                 };
-                fs.writeFileSync(wantedPathCap, JSON.stringify(fileObj, null, 2), 'utf8');
-                anyWritten = true;
+
+                // Validate capitalized variant files too
+                let isValid = true;
+                if (fileObj.onDemand.daily && fileObj.savingsOptions) {
+                  for (const [key, sav] of Object.entries(fileObj.savingsOptions)) {
+                    if (sav && typeof sav.daily === 'number' && sav.daily >= fileObj.onDemand.daily) {
+                      errors.push(`Invalid pricing for ensured capitalized ${wantedFilenameCap}: reserved ${key} daily (${sav.daily}) >= on-demand daily (${fileObj.onDemand.daily})`);
+                      isValid = false;
+                      break;
+                    }
+                  }
+                }
+
+                if (isValid) {
+                  fs.writeFileSync(wantedPathCap, JSON.stringify(fileObj, null, 2), 'utf8');
+                  anyWritten = true;
+                } else {
+                  console.error(`Skipping invalid ensured capitalized file: ${wantedFilenameCap}`);
+                }
               }
             } catch (e) {
               console.error('Failed to write ensured engine file (cap variant)', wantedPathCap, e && e.message);
@@ -507,7 +562,54 @@ function buildEngineKey(engine, license, edition) {
       const baseEngines = ['oracle', 'mysql', 'postgresql', 'aurora-postgresql', 'aurora-mysql', 'db2', 'mariadb', 'sqlserver'];
       for (const baseEng of baseEngines) {
         for (const dep of deploymentsToEnsure) {
-          const baseFilename = `${r}_${it}_${dep}-${baseEng}.json`;
+          const baseFilename = `${r}_${it}_${dep.toLowerCase()}-${baseEng}.json`;
+          const basePath = path.join(instanceDir, baseFilename);
+          if (!fs.existsSync(basePath)) {
+            try {
+              const od = await getOnDemandHourly(it, r);
+              if (od && od.hourly) {
+                const hourlyDisc = typeof od.hourly === 'number' ? Number((od.hourly * discountFactor).toFixed(6)) : od.hourly;
+                const daily = typeof hourlyDisc === 'number' ? Number((hourlyDisc * 24).toFixed(6)) : null;
+                const fileObj = {
+                  region: r,
+                  instance: it,
+                  deployment: dep.toLowerCase(),
+                  engine: baseEng,
+                  license: null,
+                  onDemand: { hourly: hourlyDisc, daily: daily, sku: od.product && od.product.product && od.product.product.sku ? od.product.product.sku : null },
+                  savingsOptions: discountedRiByDeployment[dep] || null
+                };
+
+                // Validate base engine files too
+                let isValid = true;
+                if (fileObj.onDemand.daily && fileObj.savingsOptions) {
+                  for (const [key, sav] of Object.entries(fileObj.savingsOptions)) {
+                    if (sav && typeof sav.daily === 'number' && sav.daily >= fileObj.onDemand.daily) {
+                      errors.push(`Invalid pricing for base engine ${baseFilename}: reserved ${key} daily (${sav.daily}) >= on-demand daily (${fileObj.onDemand.daily})`);
+                      isValid = false;
+                      break;
+                    }
+                  }
+                }
+
+                if (isValid) {
+                  fs.writeFileSync(basePath, JSON.stringify(fileObj, null, 2), 'utf8');
+                  anyWritten = true;
+                } else {
+                  console.error(`Skipping invalid base engine file: ${baseFilename}`);
+                }
+              }
+            } catch (e) {
+              console.error('Failed to write base engine file', basePath, e && e.message);
+            }
+          }
+        }
+      }
+
+      // Also ensure a base engine file (no edition/license suffix) exists for common engines
+      for (const baseEng of baseEngines) {
+        for (const dep of deploymentsToEnsure) {
+          const baseFilename = `${r}_${it}_${dep.toLowerCase()}-${baseEng}.json`;
           const basePath = path.join(instanceDir, baseFilename);
           if (!fs.existsSync(basePath)) {
             try {
@@ -524,8 +626,25 @@ function buildEngineKey(engine, license, edition) {
                   onDemand: { hourly: hourlyDisc, daily: daily, sku: od.product && od.product.product && od.product.product.sku ? od.product.product.sku : null },
                   savingsOptions: discountedRiByDeployment[dep] || null
                 };
-                fs.writeFileSync(basePath, JSON.stringify(fileObj, null, 2), 'utf8');
-                anyWritten = true;
+
+                // Validate base engine files too
+                let isValid = true;
+                if (fileObj.onDemand.daily && fileObj.savingsOptions) {
+                  for (const [key, sav] of Object.entries(fileObj.savingsOptions)) {
+                    if (sav && typeof sav.daily === 'number' && sav.daily >= fileObj.onDemand.daily) {
+                      errors.push(`Invalid pricing for base engine ${baseFilename}: reserved ${key} daily (${sav.daily}) >= on-demand daily (${fileObj.onDemand.daily})`);
+                      isValid = false;
+                      break;
+                    }
+                  }
+                }
+
+                if (isValid) {
+                  fs.writeFileSync(basePath, JSON.stringify(fileObj, null, 2), 'utf8');
+                  anyWritten = true;
+                } else {
+                  console.error(`Skipping invalid base engine file: ${baseFilename}`);
+                }
               }
             } catch (e) {
               console.error('Failed to write base engine file', basePath, e && e.message);
@@ -542,4 +661,14 @@ function buildEngineKey(engine, license, edition) {
   const metaPath = require('path').join(outDir, 'metadata.json');
   fs.writeFileSync(metaPath, JSON.stringify(metadata, null, 2), 'utf8');
   console.log('Wrote metadata:', metaPath);
+
+  // Display error summary
+  if (errors.length > 0) {
+    console.error(`\nValidation Errors Summary (${errors.length} files skipped):`);
+    for (const error of errors) {
+      console.error(`- ${error}`);
+    }
+  } else {
+    console.log('\nNo validation errors - all files generated successfully.');
+  }
 })();

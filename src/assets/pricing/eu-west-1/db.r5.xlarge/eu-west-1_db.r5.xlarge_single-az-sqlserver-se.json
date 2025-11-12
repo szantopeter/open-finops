@@ -5,50 +5,50 @@
   "engine": "sqlserver-se",
   "license": null,
   "onDemand": {
-    "hourly": 0.69144,
-    "daily": 16.59456,
+    "hourly": 0.804,
+    "daily": 19.296,
     "sku": "JDGRAMKTJ43C6Y2B"
   },
   "savingsOptions": {
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
-      "upfront": 7079.52,
-      "hourly": 0.269438,
-      "effectiveHourly": 0.538642,
-      "daily": 12.927402
+      "upfront": 8232,
+      "hourly": 0.3133,
+      "effectiveHourly": 0.626328,
+      "daily": 15.031863
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
-      "upfront": 13876.1,
+      "upfront": 16135,
       "hourly": 0,
-      "effectiveHourly": 0.527649,
-      "daily": 12.663564
+      "effectiveHourly": 0.613545,
+      "daily": 14.725074
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
-      "upfront": 2696.96,
-      "hourly": 0.30788,
-      "effectiveHourly": 0.615542,
-      "daily": 14.772994
+      "upfront": 3136,
+      "hourly": 0.358,
+      "effectiveHourly": 0.715746,
+      "daily": 17.1779
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
-      "upfront": 5286.42,
+      "upfront": 6147,
       "hourly": 0,
-      "effectiveHourly": 0.60306,
-      "daily": 14.473429
+      "effectiveHourly": 0.701232,
+      "daily": 16.829569
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
-      "hourly": 0.646548,
-      "effectiveHourly": 0.646548,
-      "daily": 15.517152
+      "hourly": 0.7518,
+      "effectiveHourly": 0.7518,
+      "daily": 18.0432
     },
     "3yr_No Upfront": null
   }

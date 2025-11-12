@@ -5,9 +5,51 @@
   "engine": "db2",
   "license": null,
   "onDemand": {
-    "hourly": 0.7697,
-    "daily": 18.4728,
+    "hourly": 0.895,
+    "daily": 21.48,
     "sku": "24BJ7JA99SHDWNV8"
   },
-  "savingsOptions": null
+  "savingsOptions": {
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 0.6825,
+      "effectiveHourly": 0.6825,
+      "daily": 16.38
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 11701,
+      "hourly": 0,
+      "effectiveHourly": 0.444939,
+      "daily": 10.678531
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 2847,
+      "hourly": 0.325,
+      "effectiveHourly": 0.649778,
+      "daily": 15.594661
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 5970,
+      "hourly": 0.2272,
+      "effectiveHourly": 0.454213,
+      "daily": 10.901123
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 5580,
+      "hourly": 0,
+      "effectiveHourly": 0.63655,
+      "daily": 15.277207
+    },
+    "3yr_No Upfront": null
+  }
 }

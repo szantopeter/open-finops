@@ -244,6 +244,29 @@ export class RiCostAggregationService {
         // skip unmatched
         continue;
       }
+
+      // Validate pricing data: reserved rate must be <= on-demand rate
+      if (pricing.dailyReservedRate && pricing.dailyOnDemandRate && pricing.dailyReservedRate > pricing.dailyOnDemandRate) {
+        unmatchedCount++;
+        if (this.lastUnmatchedSamples.length < this.UNMATCHED_CAP) {
+          this.lastUnmatchedSamples.push({ key: key + ' (invalid pricing: reserved > on-demand)', row: {
+            instanceClass: row.instanceClass,
+            region: row.region,
+            multiAz: String(row.multiAz),
+            engine: row.engine,
+            edition: row.edition ?? null,
+            upfrontPayment: row.upfrontPayment,
+            durationMonths: row.durationMonths,
+            startDate: row.startDate,
+            endDate: row.endDate ?? null,
+            count: row.count ?? 1
+          } });
+        }
+        if (unmatchedCount <= 5) {
+          console.warn('[RiCostAggregation] Invalid pricing data for row key:', key, 'reserved rate > on-demand rate');
+        }
+        continue;
+      }
       matchedCount++;
 
       const start = new Date(row.startDate + 'T00:00:00Z');
