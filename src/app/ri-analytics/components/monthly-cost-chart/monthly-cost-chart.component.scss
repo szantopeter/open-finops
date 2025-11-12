@@ -111,3 +111,10 @@
     }
   }
 }
+
+// Global styles for ECharts tooltip to ensure it stays within viewport
+::ng-deep .echarts-tooltip {
+  max-height: calc(100vh - 20px) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
