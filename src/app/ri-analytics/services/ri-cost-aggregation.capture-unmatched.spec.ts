@@ -55,7 +55,7 @@ describe('Capture unmatched diagnostics (headless)', () => {
       }
 
       // Set the import into RiDataService as the initializer would do
-      (dataService as any).setImport(parsed.riPortfolio);
+      (dataService as any).setRiPortfolio(parsed.riPortfolio);
       console.log('[CaptureSpec] parsed import rows:', (parsed.riPortfolio as any).rows?.length ?? 0);
 
       const imp = parsed.riPortfolio as any;
@@ -93,7 +93,7 @@ describe('Capture unmatched diagnostics (headless)', () => {
       try {
         // use firstValueFrom to await the observable
         loaded = await firstValueFrom(pricingSvc.loadPricingForPaths(pricingPaths));
-        console.log('[CaptureSpec] Loaded pricingRecords:', loaded.pricingRecords.length, 'missing:', loaded.missing.length);
+        console.log('[CaptureSpec] Loaded pricingRecords:', loaded.pricingRecords.length, 'missing:', loaded.missingFiles.length);
       } catch (e) {
         console.warn('[CaptureSpec] Pricing load failed:', e?.message ?? e);
       }

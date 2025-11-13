@@ -127,6 +127,28 @@ export class RiCostAggregationService {
     return `${y}-${m}`;
   }
 
+  private calculateUnionDays(periods: Array<{start: Date, end: Date, count: number}>): number {
+    if (periods.length === 0) return 0;
+    console.log(`[calculateUnionDays] Input periods: ${periods.length}`, periods.map(p => ({ start: p.start.toISOString(), end: p.end.toISOString(), count: p.count })));
+    // Sort periods by start date
+    periods.sort((a, b) => a.start.getTime() - b.start.getTime());
+    let union = 0;
+    let currentEnd = new Date(periods[0].start.getTime() - 1); // Before first
+    for (const p of periods) {
+      if (p.start > currentEnd) {
+        // No overlap, add full period
+        union += Math.ceil((p.end.getTime() - p.start.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+        currentEnd = p.end;
+      } else if (p.end > currentEnd) {
+        // Overlap, add extension
+        union += Math.ceil((p.end.getTime() - currentEnd.getTime()) / (1000 * 60 * 60 * 24));
+        currentEnd = p.end;
+      }
+    }
+    console.log(`[calculateUnionDays] Union days: ${union}`);
+    return union;
+  }
+
   private detectExpiringRis(rows: RiRow[], projectionEnd: Date): RiRow[] {
     return rows.filter(row => {
       if (!row.endDate) return false; // Ongoing RIs don't expire
@@ -184,19 +206,11 @@ export class RiCostAggregationService {
       renewalEnd.setUTCMonth(renewalEnd.getUTCMonth() + originalRi.durationMonths);
     }
 
-    // Calculate monthly renewal cost (same as original RI cost calculation)
-    const dailyRate = pricing.dailyReservedRate ?? 0;
-    const count = originalRi.count || 1;
-
-    // For renewal, we only care about the recurring monthly cost (upfront is already paid)
-    const monthlyCost = dailyRate * 30 * count; // Approximate monthly cost
-
     return {
       originalRi,
       renewalStart,
       renewalEnd,
-      pricing,
-      monthlyCost
+      pricing
     };
   }
 
@@ -354,6 +368,7 @@ export class RiCostAggregationService {
   }
 
   aggregateMonthlyCosts(rows: RiRow[], pricingRecords: PricingRecord[]): Record<string, Record<string, MonthlyCostData>> {
+    console.log(`[RiCostAggregation] Starting aggregation with ${rows.length} RI rows and ${pricingRecords.length} pricing records`);
     // Load pricing into index
     this.loadPricingData(pricingRecords);
 
@@ -502,7 +517,6 @@ export class RiCostAggregationService {
 
         // compute costs
         const dailyRate = pricing.dailyReservedRate ?? 0;
-        const onDemandDailyRate = pricing.dailyOnDemandRate ?? 0;
 
         // Check for missing rates
         if (!pricing.dailyReservedRate) {
@@ -523,18 +537,17 @@ export class RiCostAggregationService {
 
         if (!result[monthKey]) result[monthKey] = {};
         const groupKey = this.toHumanReadableKey(criteria);
-        if (!result[monthKey][groupKey]) result[monthKey][groupKey] = { monthKey, groupKey, riCost: 0, onDemandCost: 0, savingsAmount: 0, savingsPercentage: 0, details: [] };
+        if (!result[monthKey][groupKey]) result[monthKey][groupKey] = { monthKey, groupKey, riCost: 0, onDemandCost: 0, savingsAmount: 0, savingsPercentage: 0, details: [], coveredPeriods: [] };
         result[monthKey][groupKey].riCost += total;
 
-        // calculate on-demand cost
-        const onDemandCost = onDemandDailyRate * activeDays * (row.count || 1);
-        result[monthKey][groupKey].onDemandCost += onDemandCost;
+        // Add covered period instead of calculating on-demand cost here
+        result[monthKey][groupKey].coveredPeriods!.push({ start: activeStart, end: activeEnd, count: row.count || 1 });
 
-        // update savings
+        // update savings (will be recalculated later)
         result[monthKey][groupKey].savingsAmount = result[monthKey][groupKey].onDemandCost - result[monthKey][groupKey].riCost;
         result[monthKey][groupKey].savingsPercentage = result[monthKey][groupKey].onDemandCost > 0 ? (1 - result[monthKey][groupKey].riCost / result[monthKey][groupKey].onDemandCost) * 100 : 0;
 
-        result[monthKey][groupKey].details.push({ row, pricing, recurringCost, upfront, activeDays, onDemandCost });
+        result[monthKey][groupKey].details.push({ row, pricing, recurringCost, upfront, activeDays, onDemandCost: 0 }); // onDemandCost will be set later
       }
     }
 
@@ -589,22 +602,36 @@ export class RiCostAggregationService {
             onDemandCost: 0,
             savingsAmount: 0,
             savingsPercentage: 0,
-            details: []
+            details: [],
+            coveredPeriods: []
           };
         }
 
+        // Calculate active days for renewal RI in this month
+        const [y, m] = monthKey.split('-').map((v) => parseInt(v, 10));
+        const monthStart = new Date(Date.UTC(y, m - 1, 1));
+        const monthEnd = new Date(Date.UTC(y, m, 0)); // last day
+
+        const renewalStartDate = renewalProjection.renewalStart;
+        const renewalEndDate = renewalProjection.renewalEnd;
+
+        const activeStart = renewalStartDate > monthStart ? renewalStartDate : monthStart;
+        const activeEnd = renewalEndDate && renewalEndDate < monthEnd ? renewalEndDate : monthEnd;
+        const activeDays = Math.max(0, Math.ceil((activeEnd.getTime() - activeStart.getTime()) / (1000 * 60 * 60 * 24)) + 1);
+
+        // Calculate renewal costs
+        const dailyRate = renewalProjection.pricing.dailyReservedRate ?? 0;
+        const count = expiringRi.count || 1;
+
+        const renewalCost = dailyRate * activeDays * count;
+
         // Add renewal cost (no upfront for renewals)
-        result[monthKey][groupKey].renewalCost = (result[monthKey][groupKey].renewalCost || 0) + renewalProjection.monthlyCost;
+        result[monthKey][groupKey].renewalCost = (result[monthKey][groupKey].renewalCost || 0) + renewalCost;
 
-        // Calculate on-demand equivalent for renewal period
-        const [y, m] = monthKey.split('-').map((v) => Number.parseInt(v, 10));
-        const monthEnd = new Date(Date.UTC(y, m, 0));
-        const daysInMonth = monthEnd.getUTCDate();
-        const onDemandDailyRate = renewalProjection.pricing.dailyOnDemandRate ?? 0;
-        const renewalOnDemandCost = onDemandDailyRate * daysInMonth * (expiringRi.count || 1);
+        // Add covered period for renewal
+        result[monthKey][groupKey].coveredPeriods!.push({ start: activeStart, end: activeEnd, count });
 
-        // Update on-demand cost and savings for renewal months
-        result[monthKey][groupKey].onDemandCost += renewalOnDemandCost;
+        // Update on-demand cost and savings (will be recalculated later)
         result[monthKey][groupKey].savingsAmount = result[monthKey][groupKey].onDemandCost - (result[monthKey][groupKey].riCost + (result[monthKey][groupKey].renewalCost || 0));
         result[monthKey][groupKey].savingsPercentage = result[monthKey][groupKey].onDemandCost > 0 ?
           (1 - (result[monthKey][groupKey].riCost + (result[monthKey][groupKey].renewalCost || 0)) / result[monthKey][groupKey].onDemandCost) * 100 : 0;
@@ -612,12 +639,44 @@ export class RiCostAggregationService {
         result[monthKey][groupKey].details.push({
           row: expiringRi,
           pricing: renewalProjection.pricing,
-          recurringCost: renewalProjection.monthlyCost,
+          recurringCost: renewalCost,
           upfront: 0, // No upfront for renewals
-          activeDays: daysInMonth,
-          onDemandCost: renewalOnDemandCost,
+          activeDays,
+          onDemandCost: 0, // will be set later
           isRenewal: true
         });
+      }
+    }
+
+    // Finalize on-demand costs based on union of covered periods
+    for (const monthKey of Object.keys(result)) {
+      for (const groupKey of Object.keys(result[monthKey])) {
+        const group = result[monthKey][groupKey];
+        if (group.coveredPeriods && group.coveredPeriods.length > 0) {
+          console.log(`[RiCostAggregation] Finalizing ${monthKey} ${groupKey}: ${group.coveredPeriods.length} periods`);
+          // Get pricing from first detail
+          const firstDetail = group.details.find(d => d.pricing);
+          if (firstDetail) {
+            const onDemandDailyRate = firstDetail.pricing.dailyOnDemandRate ?? 0;
+            let onDemandCost = 0;
+            for (const p of group.coveredPeriods) {
+              const periodDays = Math.ceil((p.end.getTime() - p.start.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+              onDemandCost += periodDays * p.count * onDemandDailyRate;
+              console.log(`[RiCostAggregation] Period: ${p.start.toISOString()} to ${p.end.toISOString()}, days: ${periodDays}, count: ${p.count}, cost: ${periodDays * p.count * onDemandDailyRate}`);
+            }
+            group.onDemandCost = onDemandCost;
+            console.log(`[RiCostAggregation] Total onDemandCost: ${group.onDemandCost}`);
+          }
+          // Recalculate savings
+          const totalRiCost = group.riCost + (group.renewalCost || 0);
+          group.savingsAmount = group.onDemandCost - totalRiCost;
+          group.savingsPercentage = group.onDemandCost > 0 ? (1 - totalRiCost / group.onDemandCost) * 100 : 0;
+          console.log(`[RiCostAggregation] Total RI cost: ${totalRiCost}, savings: ${group.savingsAmount}, percentage: ${group.savingsPercentage}%`);
+          // Update details with correct onDemandCost
+          for (const detail of group.details) {
+            detail.onDemandCost = group.onDemandCost / group.details.length; // Approximate per detail
+          }
+        }
       }
     }
 

@@ -7,10 +7,8 @@ import { CanvasRenderer } from 'echarts/renderers';
 import { Subscription } from 'rxjs';
 
 import { MonthlyCostData } from '../../models/monthly-cost-data.model';
-import { PricingDataService } from '../../services/pricing-data.service';
+import { MonthlyCostChartService, ChartData } from '../../services/monthly-cost-chart.service';
 import { RiCostAggregationService } from '../../services/ri-cost-aggregation.service';
-import { RiDataService } from '../../services/ri-data.service';
-import { RiPricingMatcherService } from '../../services/ri-pricing-matcher.service';
 
 
 @Component({
@@ -38,129 +36,29 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
   yearSavingsBreakdown: Array<{ year: number; savingsAmount: number; savingsPercentage: number; riCost: number; onDemandCost: number; isPartial: boolean }> = [];
 
   constructor(
-    private readonly riDataService: RiDataService,
-    private readonly riPricingMatcherService: RiPricingMatcherService,
-    public readonly riCostAggregationService: RiCostAggregationService,
+    private readonly monthlyCostChartService: MonthlyCostChartService,
     private readonly changeDetectorRef: ChangeDetectorRef,
-    private readonly pricingDataService: PricingDataService
+    public readonly riCostAggregationService: RiCostAggregationService
   ) {}
 
   ngOnInit(): void {
-    console.log('[MonthlyCostChart] init - subscribing to currentImport$');
-    this.sub = this.riDataService.riPortfolio$.subscribe((riPortfolio) => {
-      console.log('[MonthlyCostChart] import emitted - rows:', riPortfolio?.rows?.length ?? 0);
-      if (!riPortfolio?.rows || riPortfolio.rows.length === 0) {
-        console.log('[MonthlyCostChart] no import rows - clearing chart');
-        this.data = null;
-        return;
-      }
+    console.log('[MonthlyCostChart] init - subscribing to chartData$');
+    this.sub = this.monthlyCostChartService.chartData$.subscribe((chartData: ChartData) => {
+      console.log('[MonthlyCostChart] chartData emitted');
+      this.data = chartData.aggregates;
+      this.error = chartData.error;
+      this.missingPricing = chartData.missingPricing;
+      this.totalSavingsAmount = chartData.totalSavingsAmount;
+      this.totalSavingsPercentage = chartData.totalSavingsPercentage;
+      this.totalRiCost = chartData.totalRiCost;
+      this.totalOnDemandCost = chartData.totalOnDemandCost;
+      this.yearSavingsBreakdown = chartData.yearSavingsBreakdown;
 
-      console.log('[MonthlyCostChart] Processing import rows:', riPortfolio.rows.length);
+      // Trigger change detection
+      this.changeDetectorRef.detectChanges();
 
-      try {
-
-        const rows = riPortfolio.rows;
-
-        // Determine the pricing file paths needed for the import rows. The files are organized
-        // under /assets/pricing/{region}/{instance}/{region}_{instance}_{deployment}-{engine}.json
-        // For pricing paths, combine engine+edition (import service keeps them separate for matching)
-        const candidatePaths = new Set<string>();
-        for (const r of rows) {
-          const region = r.region;
-          const instance = r.instanceClass;
-          const deployment = r.multiAz ? 'multi-az' : 'single-az';
-
-          // Build engineKey for file path by combining engine + edition if present
-          // e.g., engine='oracle', edition='se2-byol' → engineKey='oracle-se2-byol'
-          let engineKey = r.engine || 'mysql';
-          if (r.edition) {
-            engineKey = `${engineKey}-${r.edition}`;
-          }
-
-          // Build the path matching generator's convention
-          const p = `${region}/${instance}/${region}_${instance}_${deployment}-${engineKey}.json`;
-          candidatePaths.add(p);
-        }
-
-        const paths = Array.from(candidatePaths);
-        console.log('[MonthlyCostChart] Requesting pricing files:', paths.length, 'files', paths.length ? 'sample:' + paths.slice(0, 5).join(',') : '');
-
-        // Load the specific pricing files we constructed; PricingDataService will fetch them.
-        this.pricingDataService.loadPricingForPaths(paths).subscribe({
-          next: ({ pricingRecords, missingFiles }) => {
-            console.log('[MonthlyCostChart] Pricing loaded - records:', pricingRecords.length, 'missing:', missingFiles.length);
-            this.missingPricing = missingFiles || [];
-            this.riPricingMatcherService.loadPricingData(pricingRecords as any);
-            const aggregates = this.riCostAggregationService.aggregateMonthlyCosts(rows as any, pricingRecords as any);
-            // Check for all types of errors and surface them to the UI
-            const allErrors = [
-              ...this.riCostAggregationService.lastErrors.unmatchedPricing,
-              ...this.riCostAggregationService.lastErrors.invalidPricing,
-              ...this.riCostAggregationService.lastErrors.missingRates,
-              ...this.riCostAggregationService.lastErrors.zeroActiveDays,
-              ...this.riCostAggregationService.lastErrors.zeroCount
-            ];
-
-            if (allErrors.length > 0) {
-              const errorSummary = {
-                unmatchedPricing: this.riCostAggregationService.lastErrors.unmatchedPricing.length,
-                invalidPricing: this.riCostAggregationService.lastErrors.invalidPricing.length,
-                missingRates: this.riCostAggregationService.lastErrors.missingRates.length,
-                zeroActiveDays: this.riCostAggregationService.lastErrors.zeroActiveDays.length,
-                zeroCount: this.riCostAggregationService.lastErrors.zeroCount.length
-              };
-
-              const errorMessages = [];
-              if (errorSummary.unmatchedPricing > 0) {
-                const sample = this.riCostAggregationService.lastErrors.unmatchedPricing[0];
-                errorMessages.push(`${errorSummary.unmatchedPricing} unmatched pricing record(s) (e.g., ${sample.key})`);
-              }
-              if (errorSummary.invalidPricing > 0) {
-                const sample = this.riCostAggregationService.lastErrors.invalidPricing[0];
-                errorMessages.push(`${errorSummary.invalidPricing} invalid pricing record(s) (e.g., ${sample.key})`);
-              }
-              if (errorSummary.missingRates > 0) {
-                const sample = this.riCostAggregationService.lastErrors.missingRates[0];
-                errorMessages.push(`${errorSummary.missingRates} missing rate(s) (e.g., ${sample.reason})`);
-              }
-              if (errorSummary.zeroActiveDays > 0) {
-                const sample = this.riCostAggregationService.lastErrors.zeroActiveDays[0];
-                errorMessages.push(`${errorSummary.zeroActiveDays} zero active day(s) (e.g., ${sample.reason})`);
-              }
-              if (errorSummary.zeroCount > 0) {
-                errorMessages.push(`${errorSummary.zeroCount} zero count(s)`);
-              }
-
-              this.error = `Calculation errors found: ${errorMessages.join('; ')}`;
-              console.log('[MonthlyCostChart] Setting comprehensive UI error:', this.error);
-              // Immediately request change detection so the template reflects the error right away
-              try {
-                this.changeDetectorRef.detectChanges();
-              } catch { /* ignore */ }
-            } else {
-              this.error = null;
-            }
-            // concise aggregate summary
-            const monthCount = Object.keys(aggregates).length;
-            let groupCount = 0;
-            for (const m of Object.keys(aggregates)) groupCount = Math.max(groupCount, Object.keys(aggregates[m] || {}).length);
-            console.log('[MonthlyCostChart] Aggregates summary - months:', monthCount, 'max groups/month:', groupCount);
-            this.data = aggregates;
-            // Trigger change detection and defer render to next tick so DOM updates are present
-            this.changeDetectorRef.detectChanges();
-            setTimeout(() => this.renderChart(aggregates), 0);
-          },
-          error: (_err: any): void => {
-            console.error('[MonthlyCostChart] Error loading pricing:', _err);
-            this.error = String(_err?.message ?? _err);
-            this.data = null;
-            this.missingPricing = paths;
-          }
-        });
-      } catch (err: any) {
-        console.error('[MonthlyCostChart] Exception during processing:', err);
-        this.error = err?.message ?? String(err);
-        this.data = null;
+      if (this.data) {
+        setTimeout(() => this.renderChart(this.data), 0);
       }
     });
   }
@@ -197,58 +95,6 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
       const groups = Array.from(groupMap.entries())
         .sort((a, b) => b[1] - a[1]) // descending by total cost
         .map(([group]) => group);
-
-      // Calculate total savings for the entire period
-      const totalRiCost = months.reduce((total, month) => {
-        const groupsData = aggregates[month] || {};
-        return total + Object.values(groupsData).reduce((sum: number, g: MonthlyCostData) => sum + (g.riCost || 0) + (g.renewalCost || 0), 0);
-      }, 0);
-
-      const totalOnDemandCost = months.reduce((total, month) => {
-        const groupsData = aggregates[month] || {};
-        return total + Object.values(groupsData).reduce((sum: number, g: MonthlyCostData) => sum + (g.onDemandCost || 0), 0);
-      }, 0);
-
-      const totalSavingsAmount = totalOnDemandCost - totalRiCost;
-      const totalSavingsPercentage = totalOnDemandCost > 0 ? (totalSavingsAmount / totalOnDemandCost) * 100 : 0;
-
-      // Calculate year-by-year savings breakdown
-      const yearData: Record<number, { riCost: number; onDemandCost: number; months: string[] }> = {};
-      for (const month of months) {
-        const year = Number.parseInt(month.split('-')[0]);
-        if (!yearData[year]) {
-          yearData[year] = { riCost: 0, onDemandCost: 0, months: [] };
-        }
-        yearData[year].months.push(month);
-
-        const groupsData = aggregates[month] || {};
-        yearData[year].riCost += Object.values(groupsData).reduce((sum: number, g: MonthlyCostData) => sum + (g.riCost || 0) + (g.renewalCost || 0), 0);
-        yearData[year].onDemandCost += Object.values(groupsData).reduce((sum: number, g: MonthlyCostData) => sum + (g.onDemandCost || 0), 0);
-      }
-
-      // Sort years and determine if each year is partial (doesn't have 12 months)
-      const sortedYears = Object.keys(yearData).map(Number).sort((a, b) => a - b);
-      this.yearSavingsBreakdown = sortedYears.map(year => {
-        const data = yearData[year];
-        const savingsAmount = data.onDemandCost - data.riCost;
-        const savingsPercentage = data.onDemandCost > 0 ? (savingsAmount / data.onDemandCost) * 100 : 0;
-        const isPartial = data.months.length < 12;
-
-        return {
-          year,
-          savingsAmount,
-          savingsPercentage,
-          riCost: data.riCost,
-          onDemandCost: data.onDemandCost,
-          isPartial
-        };
-      });
-
-      // Update component properties for the widget
-      this.totalSavingsAmount = totalSavingsAmount;
-      this.totalSavingsPercentage = totalSavingsPercentage;
-      this.totalRiCost = totalRiCost;
-      this.totalOnDemandCost = totalOnDemandCost;
 
       // Create color mapping for groups
       const colors = ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc'];

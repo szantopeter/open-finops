@@ -16,5 +16,5 @@ export interface RenewalProjection {
   renewalStart: Date;
   renewalEnd?: Date;
   pricing: any; // PricingRecord
-  monthlyCost: number;
+  monthlyCost?: number;
 }

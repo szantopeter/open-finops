@@ -7,4 +7,5 @@ export interface MonthlyCostData {
   savingsPercentage: number;
   details: any[];
   renewalCost?: number; // Projected cost if all RIs were renewed upon expiration
+  coveredPeriods?: Array<{start: Date, end: Date, count: number}>;
 }

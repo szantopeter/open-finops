@@ -15,11 +15,11 @@ describe('PricingDataService', () => {
 
   afterEach(() => http.verify());
 
-  it('loads pricing files', (done) => {
+  it('loads pricing files', () => {
     const index = ['p1.json', 'p2.json'];
 
     svc.loadPricingForPaths(index).subscribe({
-      next: ({ pricingRecords, missingFiles }) => {
+      next: () => {
       }
     });
 
