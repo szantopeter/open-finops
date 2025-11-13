@@ -5,7 +5,7 @@ import { firstValueFrom } from 'rxjs';
 import { PricingDataService } from './pricing-data.service';
 import { RiCostAggregationService } from './ri-cost-aggregation.service';
 import { RiDataService } from './ri-data.service';
-import { RiImportService } from './ri-import.service';
+import { RiCSVParserService } from './ri-import.service';
 import { StorageService } from '../../core/services/storage.service';
 
 
@@ -18,17 +18,17 @@ import { StorageService } from '../../core/services/storage.service';
 describe('Capture unmatched diagnostics (headless)', () => {
   let service: RiCostAggregationService;
   let dataService: RiDataService;
-  let importer: RiImportService;
+  let importer: RiCSVParserService;
   let storage: StorageService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      providers: [RiCostAggregationService, RiImportService, RiDataService, StorageService, PricingDataService]
+      providers: [RiCostAggregationService, RiCSVParserService, RiDataService, StorageService, PricingDataService]
     });
     service = TestBed.inject(RiCostAggregationService);
     dataService = TestBed.inject(RiDataService);
-    importer = TestBed.inject(RiImportService);
+    importer = TestBed.inject(RiCSVParserService);
     storage = TestBed.inject(StorageService);
   });
 
@@ -49,16 +49,16 @@ describe('Capture unmatched diagnostics (headless)', () => {
       }
       const txt = await res.text();
       const parsed = importer.parseText(txt, 'capture-spec');
-      if (!parsed || !parsed.import) {
+      if (!parsed?.riPortfolio) {
         console.log('[CaptureSpec] parser returned no import');
         return;
       }
 
       // Set the import into RiDataService as the initializer would do
-      (dataService as any).setImport(parsed.import);
-      console.log('[CaptureSpec] parsed import rows:', (parsed.import as any).rows?.length ?? 0);
+      (dataService as any).setImport(parsed.riPortfolio);
+      console.log('[CaptureSpec] parsed import rows:', (parsed.riPortfolio as any).rows?.length ?? 0);
 
-      const imp = parsed.import as any;
+      const imp = parsed.riPortfolio as any;
       const rows = imp.rows.map((r: any) => ({
         instanceClass: r.instanceClass,
         region: r.region,
@@ -89,16 +89,16 @@ describe('Capture unmatched diagnostics (headless)', () => {
 
       // Load pricing files via PricingDataService - non-failing for missing files
       const pricingSvc = TestBed.inject(PricingDataService);
-      let loaded: { records: any[]; missing: string[] } = { records: [], missing: [] };
+      let loaded: { pricingRecords: any[]; missingFiles: string[] } = { pricingRecords: [], missingFiles: [] };
       try {
         // use firstValueFrom to await the observable
         loaded = await firstValueFrom(pricingSvc.loadPricingForPaths(pricingPaths));
-        console.log('[CaptureSpec] Loaded pricingRecords:', loaded.records.length, 'missing:', loaded.missing.length);
+        console.log('[CaptureSpec] Loaded pricingRecords:', loaded.pricingRecords.length, 'missing:', loaded.missing.length);
       } catch (e) {
         console.warn('[CaptureSpec] Pricing load failed:', e?.message ?? e);
       }
 
-      const aggregates = service.aggregateMonthlyCosts(rows as any, loaded.records as any);
+      const aggregates = service.aggregateMonthlyCosts(rows, loaded.pricingRecords as any);
       console.log('[CaptureSpec] Aggregates computed (months):', Object.keys(aggregates).length);
     } catch (e) {
       console.error('[CaptureSpec] Exception during fetch/parse:', e);

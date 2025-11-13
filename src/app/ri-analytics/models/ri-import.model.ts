@@ -11,7 +11,7 @@ export interface RiImportMetadata {
   version?: string;
 }
 
-export interface RiImport {
+export interface RiPorftolio {
   metadata: RiImportMetadata;
   rows: RiRow[];
 }

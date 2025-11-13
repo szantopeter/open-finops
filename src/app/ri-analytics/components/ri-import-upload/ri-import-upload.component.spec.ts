@@ -4,11 +4,11 @@ import { RiImportUploadComponent } from './ri-import-upload.component';
 import { PageStateService } from '../../../core/services/page-state.service';
 import { StorageService } from '../../../core/services/storage.service';
 import { RiDataService } from '../../services/ri-data.service';
-import { RiImportService } from '../../services/ri-import.service';
+import { RiCSVParserService } from '../../services/ri-import.service';
 
 describe('RiImportUploadComponent', () => {
   let fixture: ComponentFixture<RiImportUploadComponent>;
-  let parserSpy: jasmine.SpyObj<RiImportService>;
+  let parserSpy: jasmine.SpyObj<RiCSVParserService>;
   let dataSpy: jasmine.SpyObj<RiDataService>;
   let storageSpy: jasmine.SpyObj<StorageService>;
   let pageStateSpy: jasmine.SpyObj<PageStateService>;
@@ -22,7 +22,7 @@ describe('RiImportUploadComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RiImportUploadComponent],
       providers: [
-        { provide: RiImportService, useValue: parserSpy },
+        { provide: RiCSVParserService, useValue: parserSpy },
         { provide: RiDataService, useValue: dataSpy },
         { provide: StorageService, useValue: storageSpy },
         { provide: PageStateService, useValue: pageStateSpy }
@@ -54,13 +54,13 @@ describe('RiImportUploadComponent', () => {
   it('persists and notifies when parser returns import', async () => {
     const file = makeFile('a,b,c\n1,2,3\n');
     const imp = { metadata: { source: 'test', importedAt: new Date().toISOString(), columns: [], rowsCount: 1 }, rows: [] } as any;
-    parserSpy.parseFile.and.resolveTo({ import: imp });
+    parserSpy.parseFile.and.resolveTo({ riPortfolio: imp });
 
     const input = fixture.nativeElement.querySelector('input') as HTMLInputElement;
     Object.defineProperty(input, 'files', { value: [file] });
     await fixture.componentInstance.onFile({ target: input } as any);
 
-    expect(dataSpy.setImport).toHaveBeenCalledWith(imp);
+    expect(dataSpy.setRiPortfolio).toHaveBeenCalledWith(imp);
     expect(storageSpy.set).toHaveBeenCalledWith('ri-import', imp);
     expect(pageStateSpy.saveKey).toHaveBeenCalledWith('ri-import');
   });

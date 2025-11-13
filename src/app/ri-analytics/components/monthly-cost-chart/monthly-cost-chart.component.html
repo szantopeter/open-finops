@@ -1,11 +1,11 @@
 <div class="monthly-cost-chart">
 
   <div *ngIf="error" class="error">{{ error }}</div>
-  <div *ngIf="aggregator?.lastUnmatchedCount && aggregator.lastUnmatchedCount > 0" class="unmatched-list">
-    <h3>Unmatched import rows ({{ aggregator.lastUnmatchedCount }})</h3>
+  <div *ngIf="riCostAggregationService?.lastUnmatchedCount && riCostAggregationService.lastUnmatchedCount > 0" class="unmatched-list">
+    <h3>Unmatched import rows ({{ riCostAggregationService.lastUnmatchedCount }})</h3>
     <p>The following import rows could not be matched to a pricing record. Each entry shows the composite key and a breakdown of the fields used for matching.</p>
     <ol>
-      <li *ngFor="let s of aggregator.lastUnmatchedSamples">
+      <li *ngFor="let s of riCostAggregationService.lastUnmatchedSamples">
         <strong>{{ s.key }}</strong>
         <ul>
           <li><strong>instanceClass:</strong> {{ s.row.instanceClass }} — the RDS instance type (e.g. db.r5.xlarge)</li>
@@ -38,7 +38,7 @@
     </div>
     <div class="savings-widget">
       <div class="savings-card">
-        <h3>Total Period Savings</h3>
+        <h3>Savings Summary</h3>
         <div class="year-breakdown" *ngIf="yearSavingsBreakdown.length > 0">
           <table class="savings-table">
             <thead>

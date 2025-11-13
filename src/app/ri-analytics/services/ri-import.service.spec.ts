@@ -1,20 +1,20 @@
-import { RiImportService } from './ri-import.service';
+import { RiCSVParserService } from './ri-import.service';
 
 describe('RiImportService', () => {
-  let svc: RiImportService;
+  let svc: RiCSVParserService;
 
   beforeEach(() => {
-    svc = new RiImportService();
+    svc = new RiCSVParserService();
   });
 
   it('parses a minimal CSV', () => {
     const csv = 'startDate,instanceClass,region,count\n2020-01-01,t3.medium,us-east-1,2';
     const res = svc.parseText(csv, 'test');
     expect(res.errors).toBeUndefined();
-    expect(res.import).toBeDefined();
-    if (!res.import) throw new Error('expected import');
-    expect(res.import.rows.length).toBe(1);
-    expect(res.import.rows[0].count).toBe(2);
+    expect(res.riPortfolio).toBeDefined();
+    if (!res.riPortfolio) throw new Error('expected import');
+    expect(res.riPortfolio.rows.length).toBe(1);
+    expect(res.riPortfolio.rows[0].count).toBe(2);
   });
 
   it('reports missing required columns', () => {

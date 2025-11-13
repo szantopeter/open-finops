@@ -33,7 +33,7 @@ describe('RiImportPreview registration', () => {
     // ensure load is executed (the register also triggers an immediate load, but call explicitly)
     await svc.loadKey('ri-import');
 
-    const cur = (await firstValueFrom(ds.currentImport$ as any)) as any;
+    const cur = (await firstValueFrom(ds.riPortfolio$ as any)) as any;
     expect(cur).toBeTruthy();
     expect(cur.metadata.source).toBe('x');
   });

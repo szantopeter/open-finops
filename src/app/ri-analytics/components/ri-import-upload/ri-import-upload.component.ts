@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { PageStateService } from '../../../core/services/page-state.service';
 import { StorageService } from '../../../core/services/storage.service';
 import { RiDataService } from '../../services/ri-data.service';
-import { RiImportService } from '../../services/ri-import.service';
+import { RiCSVParserService, RiImportService } from '../../services/ri-import.service';
 
 @Component({
   selector: 'app-ri-import-upload',
@@ -18,14 +18,17 @@ import { RiImportService } from '../../services/ri-import.service';
     </div>
   `
 })
+
 export class RiImportUploadComponent {
   lastError?: string;
+  RI_IMPORT_KEY = 'ri-import';
 
   constructor(
-    private readonly parser: RiImportService,
-    private readonly data: RiDataService,
-    private readonly storage: StorageService,
-    private readonly pageState: PageStateService
+    private readonly riCSVParserService: RiCSVParserService,
+    private readonly riDataService: RiDataService,
+    private readonly storageService: StorageService,
+    private readonly pageState: PageStateService,
+    private readonly riImportService: RiImportService
   ) {}
 
   async onFile(event: Event): Promise<void> {
@@ -33,17 +36,9 @@ export class RiImportUploadComponent {
     const input = event.target as HTMLInputElement;
     if (!input.files || input.files.length === 0) return;
     const file = input.files[0];
-    const res = await this.parser.parseFile(file);
-    if (res.errors) {
-      this.lastError = res.errors.join('; ');
-      this.data.clear();
-      return;
-    }
-    if (res.import) {
-      this.data.setImport(res.import);
-      // persist via generic storage and notify the framework coordinator
-      await this.storage.set('ri-import', res.import as any);
-      await this.pageState.saveKey('ri-import');
-    }
+
+    const riImportParseResult = await this.riCSVParserService.parseFile(file);
+    const error = await this.riImportService.saveImportResult(riImportParseResult);
+    this.lastError = error;
   }
 }

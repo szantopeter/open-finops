@@ -2,7 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { RiCostAggregationService } from './ri-cost-aggregation.service';
-import { RiImportService } from './ri-import.service';
+import { RiCSVParserService } from './ri-import.service';
 import { PricingRecord } from '../models/pricing-record.model';
 // Use an inline sample CSV (same as src/assets/cloudability-small.csv) so tests run in browser
 const SAMPLE_CSV = `Account Name,Account ID,Reservation ID,RI Type,Instance Type,Region,multiAZ,Product,State,Term,Utilization,Count,Units,Currency Code,Net Savings,Unrealized Savings,Start,End
@@ -12,21 +12,21 @@ WFS-AWS-SysOps-KE-Lower-Account,410728501395,ri-2024-11-21-21-19-30-249,No Upfro
 
 describe('RiCostAggregationService with real CSV', () => {
   let service: RiCostAggregationService;
-  let importer: RiImportService;
+  let importer: RiCSVParserService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
     });
     service = TestBed.inject(RiCostAggregationService);
-    importer = TestBed.inject(RiImportService);
+    importer = TestBed.inject(RiCSVParserService);
   });
 
   it('loads assets/cloudability-rds-reservations.csv and returns aggregates', () => {
     const parsed = importer.parseText(SAMPLE_CSV, 'test-sample');
     expect(parsed.errors).toBeUndefined();
-    expect(parsed.import).toBeDefined();
-    const imp = parsed.import as any;
+    expect(parsed.riPortfolio).toBeDefined();
+    const imp = parsed.riPortfolio as any;
     // Normalize rows similar to MonthlyCostChartComponent
     const rows = imp.rows.map((r: any) => {
       // derive engine and edition from product-like field if present

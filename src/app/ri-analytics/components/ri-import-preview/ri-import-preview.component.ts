@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { PageStateService } from '../../../core/services/page-state.service';
 import { StorageService } from '../../../core/services/storage.service';
 import { RiDataService } from '../../services/ri-data.service';
-import { RiImportService } from '../../services/ri-import.service';
+import { RiCSVParserService } from '../../services/ri-import.service';
 
 @Component({
   selector: 'app-ri-import-preview',
@@ -27,7 +27,7 @@ import { RiImportService } from '../../services/ri-import.service';
   `
 })
 export class RiImportPreviewComponent implements OnDestroy {
-  import$ = this.data.currentImport$;
+  import$ = this.data.riPortfolio$;
   counts$ = this.import$.pipe(
     map((imp) => {
       if (!imp) return { total: 0, unique: 0 };
@@ -66,7 +66,7 @@ export class RiImportPreviewComponent implements OnDestroy {
     private readonly data: RiDataService,
     private readonly pageState: PageStateService,
     private readonly storage: StorageService,
-    private readonly importer: RiImportService
+    private readonly importer: RiCSVParserService
   ) {
     this.unregister = this.pageState.register(
       'ri-import',
@@ -93,10 +93,10 @@ export class RiImportPreviewComponent implements OnDestroy {
             }
             const csv = csvLines.join('\n');
             const parsed = this.importer.parseText(csv, storedImport.metadata?.source ?? 'storage');
-            if (parsed.import) {
+            if (parsed.riPortfolio) {
               // Preserve original metadata but update rows with normalized data
               const normalized = {
-                ...parsed.import,
+                ...parsed.riPortfolio,
                 metadata: storedImport.metadata // keep original metadata (importedAt, fileLastModified, etc.)
               };
               (this.data as any).setImport(normalized);
@@ -112,7 +112,7 @@ export class RiImportPreviewComponent implements OnDestroy {
       // save callback: persist current import from RiDataService
       async (s) => {
         const { firstValueFrom } = await import('rxjs');
-        const cur = await firstValueFrom(this.data.currentImport$ as any);
+        const cur = await firstValueFrom(this.data.riPortfolio$ as any);
         if (cur) await s.set('ri-import', cur as any);
         else await s.remove('ri-import');
       }

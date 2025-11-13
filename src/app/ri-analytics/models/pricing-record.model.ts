@@ -1,3 +1,4 @@
+//TODO why is this interface needed? Could it be implemented without duplicating the fields?
 export interface PricingRecordProps {
   instanceClass: string;
   region: string;

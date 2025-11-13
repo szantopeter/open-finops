@@ -43,7 +43,7 @@ export const DEV_SEED_PROVIDER: Provider = {
       if (getEnv() === 'dev') {
 
         console.debug('[DEV_SEED] Loading demo import with', demoImport.rows.length, 'rows');
-        ds.setImport(demoImport as any);
+        ds.setRiPortfolio(demoImport as any);
 
         console.debug('[DEV_SEED] Demo import loaded successfully');
       } else {

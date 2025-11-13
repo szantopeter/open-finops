@@ -38,53 +38,28 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
   yearSavingsBreakdown: Array<{ year: number; savingsAmount: number; savingsPercentage: number; riCost: number; onDemandCost: number; isPartial: boolean }> = [];
 
   constructor(
-    private readonly dataService: RiDataService,
-    private readonly matcher: RiPricingMatcherService,
-    public readonly aggregator: RiCostAggregationService,
-    private readonly cdr: ChangeDetectorRef,
-    private readonly pricingLoader: PricingDataService
+    private readonly riDataService: RiDataService,
+    private readonly riPricingMatcherService: RiPricingMatcherService,
+    public readonly riCostAggregationService: RiCostAggregationService,
+    private readonly changeDetectorRef: ChangeDetectorRef,
+    private readonly pricingDataService: PricingDataService
   ) {}
 
   ngOnInit(): void {
     console.log('[MonthlyCostChart] init - subscribing to currentImport$');
-    this.sub = this.dataService.currentImport$.subscribe((imp) => {
-      console.log('[MonthlyCostChart] import emitted - rows:', imp?.rows?.length ?? 0);
-      if (!imp || !imp.rows || imp.rows.length === 0) {
+    this.sub = this.riDataService.riPortfolio$.subscribe((riPortfolio) => {
+      console.log('[MonthlyCostChart] import emitted - rows:', riPortfolio?.rows?.length ?? 0);
+      if (!riPortfolio?.rows || riPortfolio.rows.length === 0) {
         console.log('[MonthlyCostChart] no import rows - clearing chart');
         this.data = null;
         return;
       }
 
-      console.log('[MonthlyCostChart] Processing import rows:', imp.rows.length);
+      console.log('[MonthlyCostChart] Processing import rows:', riPortfolio.rows.length);
 
       try {
-        // Import service already normalized all fields - just pass through with upfront normalization
-        const normalizeUpfront = (u: any): string => {
-          const raw = (u ?? '').toString().trim().toLowerCase();
-          if (!raw) return 'No Upfront';
-          if (raw.includes('no') && raw.includes('up')) return 'No Upfront';
-          if (raw.includes('partial') || raw.includes('partial up')) return 'Partial Upfront';
-          if (raw.includes('all') || raw.includes('all up') || raw.includes('allupfront') || raw.includes('all-upfront')) return 'All Upfront';
-          // common alternate spellings
-          if (raw.includes('no-upfront') || raw.includes('noupfront')) return 'No Upfront';
-          if (raw.includes('partial-upfront')) return 'Partial Upfront';
-          if (raw.includes('all-upfront')) return 'All Upfront';
-          // fallback: title-case the raw value replacing hyphens/underscores with spaces
-          return raw.replace(/[-_]+/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
-        };
 
-        const rows = imp.rows.map((r: any) => ({
-          instanceClass: r.instanceClass,
-          region: r.region,
-          multiAz: r.multiAz ?? r.multiAZ ?? false,
-          engine: r.engine, // already normalized by import service
-          edition: r.edition, // already normalized by import service
-          upfrontPayment: normalizeUpfront(r.upfront ?? r.upfrontPayment),
-          durationMonths: r.durationMonths ?? r.duration ?? 36,
-          startDate: r.startDate,
-          endDate: r.endDate,
-          count: r.count || 1
-        }));
+        const rows = riPortfolio.rows;
 
         // Determine the pricing file paths needed for the import rows. The files are organized
         // under /assets/pricing/{region}/{instance}/{region}_{instance}_{deployment}-{engine}.json
@@ -111,45 +86,45 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
         console.log('[MonthlyCostChart] Requesting pricing files:', paths.length, 'files', paths.length ? 'sample:' + paths.slice(0, 5).join(',') : '');
 
         // Load the specific pricing files we constructed; PricingDataService will fetch them.
-        this.pricingLoader.loadPricingForPaths(paths).subscribe({
-          next: ({ records, missing }) => {
-            console.log('[MonthlyCostChart] Pricing loaded - records:', records.length, 'missing:', missing.length);
-            this.missingPricing = missing || [];
-            this.matcher.loadPricingData(records as any);
-            const aggregates = this.aggregator.aggregateMonthlyCosts(rows as any, records as any);
+        this.pricingDataService.loadPricingForPaths(paths).subscribe({
+          next: ({ pricingRecords, missingFiles }) => {
+            console.log('[MonthlyCostChart] Pricing loaded - records:', pricingRecords.length, 'missing:', missingFiles.length);
+            this.missingPricing = missingFiles || [];
+            this.riPricingMatcherService.loadPricingData(pricingRecords as any);
+            const aggregates = this.riCostAggregationService.aggregateMonthlyCosts(rows as any, pricingRecords as any);
             // Check for all types of errors and surface them to the UI
             const allErrors = [
-              ...this.aggregator.lastErrors.unmatchedPricing,
-              ...this.aggregator.lastErrors.invalidPricing,
-              ...this.aggregator.lastErrors.missingRates,
-              ...this.aggregator.lastErrors.zeroActiveDays,
-              ...this.aggregator.lastErrors.zeroCount
+              ...this.riCostAggregationService.lastErrors.unmatchedPricing,
+              ...this.riCostAggregationService.lastErrors.invalidPricing,
+              ...this.riCostAggregationService.lastErrors.missingRates,
+              ...this.riCostAggregationService.lastErrors.zeroActiveDays,
+              ...this.riCostAggregationService.lastErrors.zeroCount
             ];
 
             if (allErrors.length > 0) {
               const errorSummary = {
-                unmatchedPricing: this.aggregator.lastErrors.unmatchedPricing.length,
-                invalidPricing: this.aggregator.lastErrors.invalidPricing.length,
-                missingRates: this.aggregator.lastErrors.missingRates.length,
-                zeroActiveDays: this.aggregator.lastErrors.zeroActiveDays.length,
-                zeroCount: this.aggregator.lastErrors.zeroCount.length
+                unmatchedPricing: this.riCostAggregationService.lastErrors.unmatchedPricing.length,
+                invalidPricing: this.riCostAggregationService.lastErrors.invalidPricing.length,
+                missingRates: this.riCostAggregationService.lastErrors.missingRates.length,
+                zeroActiveDays: this.riCostAggregationService.lastErrors.zeroActiveDays.length,
+                zeroCount: this.riCostAggregationService.lastErrors.zeroCount.length
               };
 
               const errorMessages = [];
               if (errorSummary.unmatchedPricing > 0) {
-                const sample = this.aggregator.lastErrors.unmatchedPricing[0];
+                const sample = this.riCostAggregationService.lastErrors.unmatchedPricing[0];
                 errorMessages.push(`${errorSummary.unmatchedPricing} unmatched pricing record(s) (e.g., ${sample.key})`);
               }
               if (errorSummary.invalidPricing > 0) {
-                const sample = this.aggregator.lastErrors.invalidPricing[0];
+                const sample = this.riCostAggregationService.lastErrors.invalidPricing[0];
                 errorMessages.push(`${errorSummary.invalidPricing} invalid pricing record(s) (e.g., ${sample.key})`);
               }
               if (errorSummary.missingRates > 0) {
-                const sample = this.aggregator.lastErrors.missingRates[0];
+                const sample = this.riCostAggregationService.lastErrors.missingRates[0];
                 errorMessages.push(`${errorSummary.missingRates} missing rate(s) (e.g., ${sample.reason})`);
               }
               if (errorSummary.zeroActiveDays > 0) {
-                const sample = this.aggregator.lastErrors.zeroActiveDays[0];
+                const sample = this.riCostAggregationService.lastErrors.zeroActiveDays[0];
                 errorMessages.push(`${errorSummary.zeroActiveDays} zero active day(s) (e.g., ${sample.reason})`);
               }
               if (errorSummary.zeroCount > 0) {
@@ -160,7 +135,7 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
               console.log('[MonthlyCostChart] Setting comprehensive UI error:', this.error);
               // Immediately request change detection so the template reflects the error right away
               try {
-                this.cdr.detectChanges();
+                this.changeDetectorRef.detectChanges();
               } catch { /* ignore */ }
             } else {
               this.error = null;
@@ -172,7 +147,7 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
             console.log('[MonthlyCostChart] Aggregates summary - months:', monthCount, 'max groups/month:', groupCount);
             this.data = aggregates;
             // Trigger change detection and defer render to next tick so DOM updates are present
-            this.cdr.detectChanges();
+            this.changeDetectorRef.detectChanges();
             setTimeout(() => this.renderChart(aggregates), 0);
           },
           error: (_err: any): void => {

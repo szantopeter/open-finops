@@ -5,7 +5,7 @@ import { provideRouter } from '@angular/router';
 
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
-import { SAMPLE_IMPORT_PROVIDER } from './app/ri-analytics/sample-import-loader';
+import { DEFAULT_IMPORT_PROVIDER } from './app/ri-analytics/sample-import-loader';
 
 
 
@@ -24,12 +24,12 @@ bootstrapApplication(AppComponent, {
           try {
             if (typeof fn === 'function') await fn();
           } catch (err) {
-            console.error('APP_INIT_SAMPLE_IMPORT initializer failed', err);
+            console.error('APP_INIT_DEFAULT_IMPORT initializer failed', err);
           }
         }
       };
-    }, deps: [['APP_INIT_SAMPLE_IMPORT']], multi: true },
-    SAMPLE_IMPORT_PROVIDER
+    }, deps: [['APP_INIT_DEFAULT_IMPORT']], multi: true },
+    DEFAULT_IMPORT_PROVIDER
   ]
 })
   .catch(err => console.error(err));

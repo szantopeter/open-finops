@@ -5,22 +5,22 @@ import { firstValueFrom } from 'rxjs';
 import { PricingDataService } from './pricing-data.service';
 import { RiCostAggregationService } from './ri-cost-aggregation.service';
 import { RiDataService } from './ri-data.service';
-import { RiImportService } from './ri-import.service';
+import { RiCSVParserService } from './ri-import.service';
 import { StorageService } from '../../core/services/storage.service';
 
 
 describe('RiCostAggregationService one-line cloudability CSV', () => {
   let aggregator: RiCostAggregationService;
-  let importer: RiImportService;
+  let importer: RiCSVParserService;
   let pricingSvc: PricingDataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      providers: [RiCostAggregationService, RiImportService, RiDataService, StorageService, PricingDataService]
+      providers: [RiCostAggregationService, RiCSVParserService, RiDataService, StorageService, PricingDataService]
     });
     aggregator = TestBed.inject(RiCostAggregationService);
-    importer = TestBed.inject(RiImportService);
+    importer = TestBed.inject(RiCSVParserService);
     pricingSvc = TestBed.inject(PricingDataService);
   });
 
@@ -32,8 +32,8 @@ describe('RiCostAggregationService one-line cloudability CSV', () => {
 
     const parsed = importer.parseText(txt, 'one-line-spec');
     expect(parsed).toBeDefined();
-    expect(parsed.import).toBeDefined();
-    const imp = (parsed.import as any);
+    expect(parsed.riPortfolio).toBeDefined();
+    const imp = (parsed.riPortfolio as any);
     expect(imp.rows?.length).toBeGreaterThan(0);
 
     // Import service already normalized all fields - use them as-is
@@ -77,12 +77,12 @@ describe('RiCostAggregationService one-line cloudability CSV', () => {
     // Load pricing for that path
     const loaded = await firstValueFrom(pricingSvc.loadPricingForPaths([fileName]));
     expect(loaded).toBeDefined();
-    console.log('[one-row spec] Loaded pricing records:', loaded.records.length, 'missing:', loaded.missing.length);
+    console.log('[one-row spec] Loaded pricing records:', loaded.pricingRecords.length, 'missing:', loaded.missingFiles.length);
 
     // At least one pricing record should be loaded for that file
-    expect(loaded.records.length).toBeGreaterThan(0);
+    expect(loaded.pricingRecords.length).toBeGreaterThan(0);
 
-    const aggregates = aggregator.aggregateMonthlyCosts([row], loaded.records as any);
+    const aggregates = aggregator.aggregateMonthlyCosts([row], loaded.pricingRecords as any);
     console.log('[one-row spec] Aggregation complete - unmatched:', aggregator.lastUnmatchedCount);
 
     // Aggregation should have matched the row (no unmatched rows)

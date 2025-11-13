@@ -6,9 +6,9 @@ export interface RiRow {
   count: number;
   instanceClass: string;
   region: string;
-  multiAZ: boolean;
+  multiAz: boolean;
   engine: string;
   edition?: string;
-  upfront?: string; // e.g., NoUpfront, Partial, AllUpfront
+  upfrontPayment?: string; // e.g., NoUpfront, Partial, AllUpfront
   durationMonths?: number;
 }

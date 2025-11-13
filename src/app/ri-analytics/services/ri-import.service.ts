@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 
-import { RiImport, RiImportMetadata } from '../models/ri-import.model';
+import { RiDataService } from './ri-data.service';
+import { PageStateService } from '../../core/services/page-state.service';
+import { StorageService } from '../../core/services/storage.service';
+import { RiPorftolio, RiImportMetadata } from '../models/ri-import.model';
 import { RiRow } from '../models/ri-row.model';
 
 export interface RiImportParseResult {
-  import?: RiImport;
+  riPortfolio?: RiPorftolio;
   errors?: string[];
 }
 
 const REQUIRED_COLUMNS = ['startDate', 'instanceClass', 'region', 'count'];
 
 @Injectable({ providedIn: 'root' })
-export class RiImportService {
+export class RiCSVParserService {
   // optional fileLastModifiedIso can be provided when the source is a File
   parseText(text: string, source = 'clipboard', fileLastModifiedIso?: string): RiImportParseResult {
     if (!text) return { errors: ['empty input'] };
@@ -177,21 +180,34 @@ export class RiImportService {
       }
 
       // If durationMonths was not derived from Term, attempt to read numeric durationMonths field
-      if (durationMonths === undefined) {
-        durationMonths = obj['durationMonths'] ? Number.parseInt(obj['durationMonths'], 10) : undefined;
-      }
+      durationMonths ??= obj['durationMonths'] ? Number.parseInt(obj['durationMonths'], 10) : undefined;
+
+      // Import service already normalized all fields - just pass through with upfront normalization
+      const normalizeUpfront = (u: any): string => {
+        const raw = (u ?? '').toString().trim().toLowerCase();
+        if (!raw) return 'No Upfront';
+        if (raw.includes('no') && raw.includes('up')) return 'No Upfront';
+        if (raw.includes('partial') || raw.includes('partial up')) return 'Partial Upfront';
+        if (raw.includes('all') || raw.includes('all up') || raw.includes('allupfront') || raw.includes('all-upfront')) return 'All Upfront';
+        // common alternate spellings
+        if (raw.includes('no-upfront') || raw.includes('noupfront')) return 'No Upfront';
+        if (raw.includes('partial-upfront')) return 'Partial Upfront';
+        if (raw.includes('all-upfront')) return 'All Upfront';
+        // fallback: title-case the raw value replacing hyphens/underscores with spaces
+        return raw.replaceAll(/[-_]+/g, ' ').replaceAll(/\b\w/g, (c: string) => c.toUpperCase());
+      };
 
       rows.push({
         raw: objRaw,
         startDate: startIso,
         endDate: obj['endDate'] ? this.normalizeDate(obj['endDate']) ?? undefined : undefined,
         count,
-        instanceClass: (obj['instanceClass'] ?? obj['Instance Type'] ?? objRaw['Instance Type'] ?? '') as string,
-        region: (obj['region'] ?? objRaw['Region'] ?? '') as string,
-        multiAZ: ((obj['multiAZ'] ?? objRaw['multiAZ'] ?? objRaw['multiAz'] ?? '') as string).toLowerCase() === 'true',
+        instanceClass: (obj['instanceClass'] ?? obj['Instance Type'] ?? objRaw['Instance Type'] ?? ''),
+        region: (obj['region'] ?? objRaw['Region'] ?? ''),
+        multiAz: ((obj['multiAZ'] ?? objRaw['multiAZ'] ?? objRaw['multiAz'] ?? '')).toLowerCase() === 'true',
         engine: finalEngineToken,
         edition: finalEdition,
-        upfront: obj['upfront'] ?? obj['RI Type'] ?? objRaw['RI Type'] ?? objRaw['RI Type'],
+        upfrontPayment: normalizeUpfront(obj['upfront'] ?? obj['RI Type'] ?? objRaw['RI Type'] ?? objRaw['RI Type']),
         durationMonths: durationMonths
       });
     }
@@ -206,7 +222,7 @@ export class RiImportService {
       fileLastModified: fileLastModifiedIso
     };
 
-    return { import: { metadata, rows } };
+    return { riPortfolio: { metadata, rows } };
   }
 
   private normalizeHeaderKey(s: string): string {
@@ -256,5 +272,52 @@ export class RiImportService {
     const d = new Date(input);
     if (Number.isNaN(d.getTime())) return null;
     return d.toISOString().slice(0, 10);
+  }
+}
+
+@Injectable({ providedIn: 'root' })
+export class RiImportService {
+  RI_IMPORT_KEY = 'ri-import';
+
+  constructor(
+    private readonly storageService: StorageService,
+    private readonly riCSVParserService: RiCSVParserService,
+    private readonly riDataService: RiDataService,
+    private readonly pageState: PageStateService
+  ) {}
+
+  async saveImportResult(riImportParseResult: RiImportParseResult): Promise<string | null> {
+    if (riImportParseResult.errors) {
+      this.riDataService.clear();
+      return riImportParseResult.errors.join('; ');
+    }
+    if (riImportParseResult.riPortfolio) {
+      this.riDataService.setRiPortfolio(riImportParseResult.riPortfolio);
+      // persist via generic storage and notify the framework coordinator
+      await this.storageService.set(this.RI_IMPORT_KEY, riImportParseResult.riPortfolio as any);
+      await this.pageState.saveKey(this.RI_IMPORT_KEY);
+    }
+    return null;
+  }
+
+  async loadDefaultRiPortfolioIfMissing(): Promise<void> {
+    try {
+      const existing = await this.storageService.get(this.RI_IMPORT_KEY);
+      if (existing) {
+        this.riDataService.setRiPortfolio(existing as RiPorftolio);
+        return;
+      }
+
+      const res = await fetch('/assets/cloudability-rds-reservations.csv');
+      if (!res.ok) return;
+      const txt = await res.text();
+
+      const parsed = await this.riCSVParserService.parseText(txt, 'default-assets');
+
+      await this.saveImportResult(parsed);
+
+    } catch (e) {
+      console.error('[DEFAULT_IMPORT] failed to load default import', e);
+    }
   }
 }
