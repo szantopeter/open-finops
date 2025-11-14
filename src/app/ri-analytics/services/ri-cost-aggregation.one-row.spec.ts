@@ -82,7 +82,7 @@ describe('RiCostAggregationService one-line cloudability CSV', () => {
     // At least one pricing record should be loaded for that file
     expect(loaded.pricingRecords.length).toBeGreaterThan(0);
 
-    const aggregates = aggregator.aggregateMonthlyCosts([row], loaded.pricingRecords as any);
+    const aggregates = aggregator.calculateAggregation({ groupingMode: 'ri-type' }, [row], loaded.pricingRecords as any);
     console.log('[one-row spec] Aggregation complete - unmatched:', aggregator.lastUnmatchedCount);
 
     // Aggregation should have matched the row (no unmatched rows)

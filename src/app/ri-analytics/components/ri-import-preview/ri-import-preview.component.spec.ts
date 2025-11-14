@@ -1,8 +1,12 @@
 import { ComponentFixture , TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { of } from 'rxjs';
 
 import { RiImportPreviewComponent } from './ri-import-preview.component';
+import { PageStateService } from '../../../core/services/page-state.service';
+import { StorageService } from '../../../core/services/storage.service';
 import { RiDataService } from '../../services/ri-data.service';
+import { RiCSVParserService } from '../../services/ri-import.service';
 
 describe('RiImportPreviewComponent', () => {
   let fixture: ComponentFixture<RiImportPreviewComponent>;
@@ -11,10 +15,14 @@ describe('RiImportPreviewComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RiImportPreviewComponent],
       providers: [
+        PageStateService,
+        StorageService,
+        RiCSVParserService,
+        { provide: Router, useValue: { events: of() } },
         {
           provide: RiDataService,
           useValue: {
-            currentImport$: of({
+            riPortfolio$: of({
               metadata: { source: 'test', importedAt: '2024-11-21T12:00:00.000Z', columns: ['Reservation ID', 'Instance Type', 'Region', 'Start'], rowsCount: 2 },
               rows: [
                 { raw: { 'Reservation ID': 'r1', 'Instance Type': 'db.t3.small', 'Region': 'eu-west-1', 'Start': '2024-11-01' }, startDate: '2024-11-01', count: 2, instanceClass: 'db.t3.small', region: 'eu-west-1' },

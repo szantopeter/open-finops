@@ -36,7 +36,7 @@ describe('RiCostAggregationService extra edge cases', () => {
       count: 1
     } as any;
 
-    const aggregates = service.aggregateMonthlyCosts([ri], [pricing]);
+    const aggregates = service.calculateAggregation({ groupingMode: 'ri-type' }, [ri], [pricing]);
     const nov = aggregates['2025-11'];
     expect(nov).toBeDefined();
     const total = Object.values(nov || {}).reduce((s: number, v: any) => s + v.riCost, 0);
@@ -59,7 +59,7 @@ describe('RiCostAggregationService extra edge cases', () => {
     const riA = { ...pricing, startDate: '2025-11-01', count: 1 } as any;
     const riB = { ...pricing, startDate: '2025-11-01', count: 2 } as any; // two instances
 
-    const aggregates = service.aggregateMonthlyCosts([riA, riB], [pricing]);
+    const aggregates = service.calculateAggregation({ groupingMode: 'ri-type' }, [riA, riB], [pricing]);
     const nov = aggregates['2025-11'];
     expect(nov).toBeDefined();
     // day count for November = 30, recurring = dailyRate * days * totalCount = 2 * 30 * 3 = 180
@@ -92,7 +92,7 @@ describe('RiCostAggregationService extra edge cases', () => {
       count: 3
     } as any;
 
-    const aggregates = service.aggregateMonthlyCosts([ri], [pricing]);
+    const aggregates = service.calculateAggregation({ groupingMode: 'ri-type' }, [ri], [pricing]);
     const nov = aggregates['2025-11'];
     expect(nov).toBeDefined();
     const total = Object.values(nov || {}).reduce((s: number, v: any) => s + v.riCost, 0);

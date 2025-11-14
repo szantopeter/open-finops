@@ -15,7 +15,7 @@ describe('RiImportUploadComponent', () => {
 
   beforeEach(async () => {
     parserSpy = jasmine.createSpyObj('RiImportService', ['parseFile']);
-    dataSpy = jasmine.createSpyObj('RiDataService', ['setImport', 'clear'], { currentImport$: null as any });
+    dataSpy = jasmine.createSpyObj('RiDataService', ['setRiPortfolio', 'clear'], { riPortfolio$: null as any });
     storageSpy = jasmine.createSpyObj('StorageService', ['set', 'get', 'remove']);
     pageStateSpy = jasmine.createSpyObj('PageStateService', ['saveKey']);
 

@@ -49,7 +49,7 @@ describe('RiCostAggregationService (TDD)', () => {
       count: 1
     };
 
-    const aggregates = service.aggregateMonthlyCosts([ri as any], [pricing]);
+    const aggregates = service.calculateAggregation({ groupingMode: 'ri-type' }, [ri as any], [pricing]);
 
     // For November 2025: days in month = 30, active days = 15 (16..30 inclusive)
     // expected cost = dailyReservedRate * activeDays = 30 * 15 = 450
@@ -88,7 +88,7 @@ describe('RiCostAggregationService (TDD)', () => {
       count: 1
     } as SampleRiRow;
 
-    const aggregates = service.aggregateMonthlyCosts([ri as any], [pricing]);
+    const aggregates = service.calculateAggregation({ groupingMode: 'ri-type' }, [ri as any], [pricing]);
     const sep = aggregates['2025-09'];
     const oct = aggregates['2025-10'];
     expect(sep).toBeDefined();
@@ -124,7 +124,7 @@ describe('RiCostAggregationService (TDD)', () => {
       count: 1
     };
 
-    const aggregates = service.aggregateMonthlyCosts([ri as any], [pricing]);
+    const aggregates = service.calculateAggregation({ groupingMode: 'ri-type' }, [ri as any], [pricing]);
 
     const novKey = '2025-11';
     const nov = aggregates[novKey];
@@ -161,7 +161,7 @@ describe('RiCostAggregationService (TDD)', () => {
       count: 1
     };
 
-    const aggregates = service.aggregateMonthlyCosts([ri as any], [pricing]);
+    const aggregates = service.calculateAggregation({ groupingMode: 'ri-type' }, [ri as any], [pricing]);
 
     const novKey = '2025-11';
     const nov = aggregates[novKey];
@@ -424,7 +424,7 @@ describe('RiCostAggregationService (TDD)', () => {
       expect(breakdown.year1.totalSavings).toBe(700);
     });
 
-    it('aggregateMonthlyCosts includes renewal projections in results', () => {
+    it('calculateAggregation includes renewal projections in results', () => {
       const now = new Date();
       const currentYear = now.getUTCFullYear();
 
@@ -453,7 +453,7 @@ describe('RiCostAggregationService (TDD)', () => {
         dailyOnDemandRate: 50
       });
 
-      const aggregates = service.aggregateMonthlyCosts([expiredRi as any], [pricing]);
+      const aggregates = service.calculateAggregation({ groupingMode: 'ri-type' }, [expiredRi as any], [pricing]);
 
       // Check that renewal months have renewalCost
       const renewalMonthKey = `${currentYear}-07`; // July (first month after expiration)
@@ -467,7 +467,7 @@ describe('RiCostAggregationService (TDD)', () => {
       expect(groupData.onDemandCost).toBeGreaterThan(0);
     });
 
-    it('aggregateMonthlyCosts handles RIs with no matching renewal pricing', () => {
+    it('calculateAggregation handles RIs with no matching renewal pricing', () => {
       const now = new Date();
       const currentYear = now.getUTCFullYear();
 
@@ -496,7 +496,7 @@ describe('RiCostAggregationService (TDD)', () => {
         dailyOnDemandRate: 50
       });
 
-      const aggregates = service.aggregateMonthlyCosts([expiredRi as any], [pricing]);
+      const aggregates = service.calculateAggregation({ groupingMode: 'ri-type' }, [expiredRi as any], [pricing]);
 
       // Should not have any data since upfront payments don't match
       const originalMonthKey = `${currentYear}-06`;

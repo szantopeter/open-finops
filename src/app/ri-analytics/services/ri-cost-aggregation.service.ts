@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { AggregationRequest } from '../models/aggregation-request.model';
 import { MonthlyCostData } from '../models/monthly-cost-data.model';
 import { PricingRecord } from '../models/pricing-record.model';
 import { RenewalProjection } from '../models/renewal-projection.model';
@@ -374,7 +375,18 @@ export class RiCostAggregationService {
     }
   }
 
-  aggregateMonthlyCosts(rows: RiRow[], pricingRecords: PricingRecord[], renewalOptions?: { upfrontPayment: string, durationMonths: number }): Record<string, Record<string, MonthlyCostData>> {
+  calculateAggregation(request: AggregationRequest, rows: RiRow[], pricingRecords: PricingRecord[]): Record<string, Record<string, MonthlyCostData>> {
+    switch (request.groupingMode) {
+    case 'ri-type':
+      return this.aggregateMonthlyCostsByRiType(rows, pricingRecords, request.renewalOptions);
+    case 'cost-type':
+      return this.aggregateMonthlyCostsByCostType(rows, pricingRecords, request.renewalOptions);
+    default:
+      throw new Error(`Unsupported grouping mode: ${request.groupingMode}`);
+    }
+  }
+
+  aggregateMonthlyCostsByRiType(rows: RiRow[], pricingRecords: PricingRecord[], renewalOptions?: { upfrontPayment: string, durationMonths: number }): Record<string, Record<string, MonthlyCostData>> {
     console.log(`[RiCostAggregation] Starting aggregation with ${rows.length} RI rows and ${pricingRecords.length} pricing records`);
     // Load pricing into index
     this.loadPricingData(pricingRecords);
@@ -632,8 +644,14 @@ export class RiCostAggregationService {
 
         const renewalCost = dailyRate * activeDays * count;
 
-        // Add renewal cost (no upfront for renewals)
-        result[monthKey][groupKey].renewalCost = (result[monthKey][groupKey].renewalCost || 0) + renewalCost;
+        // Add upfront cost for "All Upfront" renewals in the first month of renewal
+        const isFirstRenewalMonth = renewalProjection.renewalStart.getUTCFullYear() === monthStart.getUTCFullYear() &&
+                                   renewalProjection.renewalStart.getUTCMonth() === monthStart.getUTCMonth();
+        const renewalUpfront = (renewalOptions?.upfrontPayment === 'All Upfront' && isFirstRenewalMonth) ?
+                              (renewalProjection.pricing.upfrontCost ?? 0) * count : 0;
+
+        // Add renewal cost (recurring + upfront)
+        result[monthKey][groupKey].renewalCost = (result[monthKey][groupKey].renewalCost || 0) + renewalCost + renewalUpfront;
 
         // Add covered period for renewal
         result[monthKey][groupKey].coveredPeriods!.push({ start: activeStart, end: activeEnd, count });
@@ -647,7 +665,7 @@ export class RiCostAggregationService {
           row: expiringRi,
           pricing: renewalProjection.pricing,
           recurringCost: renewalCost,
-          upfront: 0, // No upfront for renewals
+          upfront: renewalUpfront,
           activeDays,
           onDemandCost: 0, // will be set later
           isRenewal: true
@@ -689,6 +707,364 @@ export class RiCostAggregationService {
 
     this.lastUnmatchedCount = unmatchedCount;
     console.log('[RiCostAggregation] Matching summary - matched:', matchedCount, 'unmatched:', unmatchedCount);
+    console.log('[RiCostAggregation] Result has', Object.keys(result).length, 'months');
+
+    return result;
+  }
+
+  aggregateMonthlyCostsByCostType(rows: RiRow[], pricingRecords: PricingRecord[], renewalOptions?: { upfrontPayment: string, durationMonths: number }): Record<string, Record<string, MonthlyCostData>> {
+    console.log(`[RiCostAggregation] Starting cost-type aggregation with ${rows.length} RI rows and ${pricingRecords.length} pricing records`);
+    // Load pricing into index
+    this.loadPricingData(pricingRecords);
+
+    console.log('[RiCostAggregation] Loaded pricing index with', this.matcherIndex.size, 'entries');
+
+    const result: Record<string, Record<string, MonthlyCostData>> = {};
+
+    let matchedCount = 0;
+    let unmatchedCount = 0;
+    this.lastUnmatchedCount = 0;
+    this.lastUnmatchedSamples = [];
+
+    // Reset error tracking
+    this.lastErrors = {
+      unmatchedPricing: [],
+      invalidPricing: [],
+      missingRates: [],
+      zeroActiveDays: [],
+      zeroCount: [],
+      renewalErrors: []
+    };
+
+    for (const row of rows) {
+      const criteria = new RiMatchingCriteria({
+        instanceClass: row.instanceClass,
+        region: row.region,
+        multiAz: row.multiAz,
+        engine: row.engine,
+        edition: row.edition ?? null,
+        upfrontPayment: row.upfrontPayment as any,
+        durationMonths: row.durationMonths
+      });
+      const key = criteria.toKey();
+      const pricing = this.matcherIndex.get(key);
+      if (!pricing) {
+        unmatchedCount++;
+        const errorEntry = {
+          key,
+          row: {
+            instanceClass: row.instanceClass,
+            region: row.region,
+            multiAz: String(row.multiAz),
+            engine: row.engine,
+            edition: row.edition ?? null,
+            upfrontPayment: row.upfrontPayment,
+            durationMonths: row.durationMonths,
+            startDate: row.startDate,
+            endDate: row.endDate ?? null,
+            count: row.count ?? 1
+          },
+          reason: 'No matching pricing record found for this RI configuration'
+        };
+        if (this.lastUnmatchedSamples.length < this.UNMATCHED_CAP) {
+          this.lastUnmatchedSamples.push(errorEntry);
+        }
+        if (this.lastErrors.unmatchedPricing.length < this.UNMATCHED_CAP) {
+          this.lastErrors.unmatchedPricing.push(errorEntry);
+        }
+        if (unmatchedCount <= 5) {
+          console.warn('[RiCostAggregation] No pricing match for row key:', key);
+        }
+        continue;
+      }
+
+      // Validate pricing data
+      if (pricing.dailyReservedRate && pricing.dailyOnDemandRate && pricing.dailyReservedRate > pricing.dailyOnDemandRate) {
+        unmatchedCount++;
+        const errorEntry = {
+          key: key + ' (invalid pricing: reserved > on-demand)',
+          row: {
+            instanceClass: row.instanceClass,
+            region: row.region,
+            multiAz: String(row.multiAz),
+            engine: row.engine,
+            edition: row.edition ?? null,
+            upfrontPayment: row.upfrontPayment,
+            durationMonths: row.durationMonths,
+            startDate: row.startDate,
+            endDate: row.endDate ?? null,
+            count: row.count ?? 1
+          },
+          reason: `Invalid pricing data: reserved rate (${pricing.dailyReservedRate}) > on-demand rate (${pricing.dailyOnDemandRate})`
+        };
+        if (this.lastUnmatchedSamples.length < this.UNMATCHED_CAP) {
+          this.lastUnmatchedSamples.push(errorEntry);
+        }
+        if (this.lastErrors.invalidPricing.length < this.UNMATCHED_CAP) {
+          this.lastErrors.invalidPricing.push(errorEntry);
+        }
+        if (unmatchedCount <= 5) {
+          console.warn('[RiCostAggregation] Invalid pricing data for row key:', key, 'reserved rate > on-demand rate');
+        }
+        continue;
+      }
+      matchedCount++;
+
+      const start = new Date(row.startDate + 'T00:00:00Z');
+      const end = row.endDate ? new Date(row.endDate + 'T00:00:00Z') : null;
+
+      // iterate months from start to end (or start + durationMonths)
+      const monthsToCover: string[] = [];
+      const current = new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth(), 1));
+      const lastMonth = end ? new Date(Date.UTC(end.getUTCFullYear(), end.getUTCMonth(), 1)) : null;
+
+      const limitMonths = row.durationMonths || 1;
+      let countedMonths = 0;
+
+      while (true) {
+        const monthKey = this.toMonthKey(current);
+        monthsToCover.push(monthKey);
+        countedMonths++;
+        if (lastMonth && current.getUTCFullYear() === lastMonth.getUTCFullYear() && current.getUTCMonth() === lastMonth.getUTCMonth()) break;
+        if (!lastMonth && countedMonths >= limitMonths) break;
+        current.setUTCMonth(current.getUTCMonth() + 1);
+        if (countedMonths > 2400) break;
+      }
+
+      for (const monthKey of monthsToCover) {
+        // compute month start/end
+        const [y, m] = monthKey.split('-').map((v) => parseInt(v, 10));
+        const monthStart = new Date(Date.UTC(y, m - 1, 1));
+        const monthEnd = new Date(Date.UTC(y, m, 0));
+
+        // determine active days in this month
+        const activeStart = start > monthStart ? start : monthStart;
+        const activeEnd = end && end < monthEnd ? end : monthEnd;
+        const activeDays = Math.max(0, Math.ceil((activeEnd.getTime() - activeStart.getTime()) / (1000 * 60 * 60 * 24)) + 1);
+
+        if (!(row.count || 1)) {
+          this.addZeroCountError(key, row);
+        }
+
+        if (activeDays === 0) {
+          this.addZeroActiveDaysError(key, row, monthKey, activeDays);
+        }
+
+        const count = row.count || 1;
+        const dailyReservedRate = pricing.dailyReservedRate ?? 0;
+        const dailyOnDemandRate = pricing.dailyOnDemandRate ?? 0;
+
+        if (!pricing.dailyReservedRate) {
+          this.addMissingRateError(key, row, pricing, 'reserved');
+        }
+
+        if (!pricing.dailyOnDemandRate) {
+          this.addMissingRateError(key, row, pricing, 'onDemand');
+        }
+
+        // Calculate costs for this month
+        const recurringCost = dailyReservedRate * activeDays * count;
+        const onDemandCost = dailyOnDemandRate * activeDays * count;
+        const isFirstMonth = start.getUTCFullYear() === monthStart.getUTCFullYear() && start.getUTCMonth() === monthStart.getUTCMonth();
+        const upfront = isFirstMonth ? (pricing.upfrontCost ?? 0) * count : 0;
+
+        // Group by cost type
+        const costTypes = [
+          { key: 'Savings Upfront', cost: upfront, onDemandCost: 0 },
+          { key: 'Savings Monthly', cost: recurringCost, onDemandCost: 0 },
+          { key: 'On Demand Monthly', cost: 0, onDemandCost: onDemandCost }
+        ];
+
+        for (const costType of costTypes) {
+          if (!result[monthKey]) result[monthKey] = {};
+          if (!result[monthKey][costType.key]) {
+            result[monthKey][costType.key] = {
+              monthKey,
+              groupKey: costType.key,
+              riCost: 0,
+              onDemandCost: 0,
+              savingsAmount: 0,
+              savingsPercentage: 0,
+              details: [],
+              coveredPeriods: []
+            };
+          }
+
+          result[monthKey][costType.key].riCost += costType.cost;
+          result[monthKey][costType.key].onDemandCost += costType.onDemandCost;
+
+          // Add covered period
+          result[monthKey][costType.key].coveredPeriods!.push({ start: activeStart, end: activeEnd, count });
+
+          // Update savings
+          result[monthKey][costType.key].savingsAmount = result[monthKey][costType.key].onDemandCost - result[monthKey][costType.key].riCost;
+          result[monthKey][costType.key].savingsPercentage = result[monthKey][costType.key].onDemandCost > 0 ?
+            (1 - result[monthKey][costType.key].riCost / result[monthKey][costType.key].onDemandCost) * 100 : 0;
+
+          result[monthKey][costType.key].details.push({
+            row,
+            pricing,
+            recurringCost: costType.key === 'Savings Monthly' ? recurringCost : 0,
+            upfront: costType.key === 'Savings Upfront' ? upfront : 0,
+            activeDays,
+            onDemandCost: costType.onDemandCost
+          });
+        }
+      }
+    }
+
+    // Calculate renewal projections for cost-type aggregation
+    const now = new Date();
+    const currentYear = now.getUTCFullYear();
+    const projectionEnd = new Date(Date.UTC(currentYear + 1, 11, 31));
+
+    const expiringRis = this.detectExpiringRis(rows, projectionEnd);
+    console.log('[RiCostAggregation] Found', expiringRis.length, 'expiring RIs for renewal projection (cost-type)');
+
+    for (const expiringRi of expiringRis) {
+      const renewalProjection = this.calculateRenewalProjection(expiringRi, this.matcherIndex, renewalOptions);
+      if (!renewalProjection) continue;
+
+      const renewalMonths: string[] = [];
+      const renewalCurrent = new Date(renewalProjection.renewalStart);
+
+      const maxMonths = renewalOptions?.durationMonths || expiringRi.durationMonths || 12;
+      let renewalMonthCount = 0;
+
+      while (renewalCurrent <= projectionEnd && renewalMonthCount < maxMonths) {
+        const monthKey = this.toMonthKey(renewalCurrent);
+        renewalMonths.push(monthKey);
+        renewalCurrent.setUTCMonth(renewalCurrent.getUTCMonth() + 1);
+        renewalMonthCount++;
+      }
+
+      for (const monthKey of renewalMonths) {
+        if (!result[monthKey]) result[monthKey] = {};
+
+        const [y, m] = monthKey.split('-').map((v) => parseInt(v, 10));
+        const monthStart = new Date(Date.UTC(y, m - 1, 1));
+        const monthEnd = new Date(Date.UTC(y, m, 0));
+
+        const renewalStartDate = renewalProjection.renewalStart;
+        const renewalEndDate = renewalProjection.renewalEnd;
+
+        const activeStart = renewalStartDate > monthStart ? renewalStartDate : monthStart;
+        const activeEnd = renewalEndDate && renewalEndDate < monthEnd ? renewalEndDate : monthEnd;
+        const activeDays = Math.max(0, Math.ceil((activeEnd.getTime() - activeStart.getTime()) / (1000 * 60 * 60 * 24)) + 1);
+
+        const dailyRate = renewalProjection.pricing.dailyReservedRate ?? 0;
+        const count = expiringRi.count || 1;
+
+        const renewalCost = dailyRate * activeDays * count;
+
+        // Add upfront cost for "All Upfront" renewals in the first month of renewal
+        const isFirstRenewalMonth = renewalProjection.renewalStart.getUTCFullYear() === monthStart.getUTCFullYear() &&
+                                   renewalProjection.renewalStart.getUTCMonth() === monthStart.getUTCMonth();
+        const renewalUpfront = (renewalOptions?.upfrontPayment === 'All Upfront' && isFirstRenewalMonth) ?
+                              (renewalProjection.pricing.upfrontCost ?? 0) * count : 0;
+
+        // Add renewal cost to appropriate cost-type groups
+        if (renewalOptions?.upfrontPayment === 'All Upfront') {
+          // For All Upfront, add upfront to "Savings Upfront" and recurring to "Savings Monthly"
+          if (!result[monthKey]['Savings Upfront']) {
+            result[monthKey]['Savings Upfront'] = {
+              monthKey,
+              groupKey: 'Savings Upfront',
+              riCost: 0,
+              onDemandCost: 0,
+              savingsAmount: 0,
+              savingsPercentage: 0,
+              details: [],
+              coveredPeriods: []
+            };
+          }
+
+          if (!result[monthKey]['Savings Monthly']) {
+            result[monthKey]['Savings Monthly'] = {
+              monthKey,
+              groupKey: 'Savings Monthly',
+              riCost: 0,
+              onDemandCost: 0,
+              savingsAmount: 0,
+              savingsPercentage: 0,
+              details: [],
+              coveredPeriods: []
+            };
+          }
+
+          result[monthKey]['Savings Upfront'].renewalCost = (result[monthKey]['Savings Upfront'].renewalCost || 0) + renewalUpfront;
+          result[monthKey]['Savings Monthly'].renewalCost = (result[monthKey]['Savings Monthly'].renewalCost || 0) + renewalCost;
+
+          result[monthKey]['Savings Upfront'].coveredPeriods!.push({ start: activeStart, end: activeEnd, count });
+          result[monthKey]['Savings Monthly'].coveredPeriods!.push({ start: activeStart, end: activeEnd, count });
+
+          // Update savings for both groups
+          result[monthKey]['Savings Upfront'].savingsAmount = result[monthKey]['Savings Upfront'].onDemandCost - (result[monthKey]['Savings Upfront'].riCost + (result[monthKey]['Savings Upfront'].renewalCost || 0));
+          result[monthKey]['Savings Upfront'].savingsPercentage = result[monthKey]['Savings Upfront'].onDemandCost > 0 ?
+            (1 - (result[monthKey]['Savings Upfront'].riCost + (result[monthKey]['Savings Upfront'].renewalCost || 0)) / result[monthKey]['Savings Upfront'].onDemandCost) * 100 : 0;
+
+          result[monthKey]['Savings Monthly'].savingsAmount = result[monthKey]['Savings Monthly'].onDemandCost - (result[monthKey]['Savings Monthly'].riCost + (result[monthKey]['Savings Monthly'].renewalCost || 0));
+          result[monthKey]['Savings Monthly'].savingsPercentage = result[monthKey]['Savings Monthly'].onDemandCost > 0 ?
+            (1 - (result[monthKey]['Savings Monthly'].riCost + (result[monthKey]['Savings Monthly'].renewalCost || 0)) / result[monthKey]['Savings Monthly'].onDemandCost) * 100 : 0;
+
+          result[monthKey]['Savings Upfront'].details.push({
+            row: expiringRi,
+            pricing: renewalProjection.pricing,
+            recurringCost: 0,
+            upfront: renewalUpfront,
+            activeDays,
+            onDemandCost: 0,
+            isRenewal: true
+          });
+
+          result[monthKey]['Savings Monthly'].details.push({
+            row: expiringRi,
+            pricing: renewalProjection.pricing,
+            recurringCost: renewalCost,
+            upfront: 0,
+            activeDays,
+            onDemandCost: 0,
+            isRenewal: true
+          });
+        } else {
+          // For other payment types, add everything to "Savings Monthly"
+          if (!result[monthKey]['Savings Monthly']) {
+            result[monthKey]['Savings Monthly'] = {
+              monthKey,
+              groupKey: 'Savings Monthly',
+              riCost: 0,
+              onDemandCost: 0,
+              savingsAmount: 0,
+              savingsPercentage: 0,
+              details: [],
+              coveredPeriods: []
+            };
+          }
+
+          result[monthKey]['Savings Monthly'].renewalCost = (result[monthKey]['Savings Monthly'].renewalCost || 0) + renewalCost + renewalUpfront;
+          result[monthKey]['Savings Monthly'].coveredPeriods!.push({ start: activeStart, end: activeEnd, count });
+
+          // Update savings
+          const totalRiCost = result[monthKey]['Savings Monthly'].riCost + (result[monthKey]['Savings Monthly'].renewalCost || 0);
+          result[monthKey]['Savings Monthly'].savingsAmount = result[monthKey]['Savings Monthly'].onDemandCost - totalRiCost;
+          result[monthKey]['Savings Monthly'].savingsPercentage = result[monthKey]['Savings Monthly'].onDemandCost > 0 ?
+            (1 - totalRiCost / result[monthKey]['Savings Monthly'].onDemandCost) * 100 : 0;
+
+          result[monthKey]['Savings Monthly'].details.push({
+            row: expiringRi,
+            pricing: renewalProjection.pricing,
+            recurringCost: renewalCost,
+            upfront: renewalUpfront,
+            activeDays,
+            onDemandCost: 0,
+            isRenewal: true
+          });
+        }
+      }
+    }
+
+    this.lastUnmatchedCount = unmatchedCount;
+    console.log('[RiCostAggregation] Cost-type aggregation summary - matched:', matchedCount, 'unmatched:', unmatchedCount);
     console.log('[RiCostAggregation] Result has', Object.keys(result).length, 'months');
 
     return result;

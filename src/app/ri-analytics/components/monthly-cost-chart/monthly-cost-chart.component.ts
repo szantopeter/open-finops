@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit, ChangeDetectorRef } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BarChart } from 'echarts/charts';
 import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
 import * as echarts from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
 import { Subscription } from 'rxjs';
 
+import { AggregationRequest } from '../../models/aggregation-request.model';
 import { MonthlyCostData } from '../../models/monthly-cost-data.model';
 import { MonthlyCostChartService, ChartData } from '../../services/monthly-cost-chart.service';
 import { RiCostAggregationService } from '../../services/ri-cost-aggregation.service';
@@ -15,7 +17,7 @@ import { RiRenewalComparisonComponent } from '../ri-renewal-comparison/ri-renewa
 @Component({
   selector: 'app-monthly-cost-chart',
   standalone: true,
-  imports: [CommonModule, RiRenewalComparisonComponent],
+  imports: [CommonModule, FormsModule, RiRenewalComparisonComponent],
   templateUrl: './monthly-cost-chart.component.html',
   styleUrls: ['./monthly-cost-chart.component.scss']
 })
@@ -29,6 +31,9 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
   // Keep a reference to the chart instance so we can reuse or dispose it
   private chartInstance: any = null;
   private modifiedChartInstance: any = null;
+
+  // Grouping mode selection
+  groupingMode: 'ri-type' | 'cost-type' = 'ri-type';
 
   // Total savings data for the widget
   totalSavingsAmount = 0;
@@ -56,9 +61,21 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log('[MonthlyCostChart] init - subscribing to baselineChartData$');
-    this.sub = this.monthlyCostChartService.baselineChartData$.subscribe((chartData: ChartData) => {
-      console.log('[MonthlyCostChart] chartData emitted');
+    this.loadChartData();
+  }
+
+  onGroupingModeChange(): void {
+    this.loadChartData();
+  }
+
+  private loadChartData(): void {
+    // Unsubscribe from previous subscriptions
+    this.sub?.unsubscribe();
+    this.modifiedSub?.unsubscribe();
+
+    console.log(`[MonthlyCostChart] requesting ${this.groupingMode} aggregation for baseline`);
+    this.sub = this.monthlyCostChartService.requestAggregation({ groupingMode: this.groupingMode }).subscribe((chartData: ChartData) => {
+      console.log('[MonthlyCostChart] baseline chartData received');
       this.data = chartData.aggregates;
       this.error = chartData.error;
       this.missingPricing = chartData.missingPricing;
@@ -77,9 +94,12 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
       }
     });
 
-    console.log('[MonthlyCostChart] init - subscribing to renewalChartData$');
-    this.modifiedSub = this.monthlyCostChartService.renewalChartData$.subscribe((chartData: ChartData) => {
-      console.log('[MonthlyCostChart] modifiedChartData emitted');
+    console.log(`[MonthlyCostChart] requesting ${this.groupingMode} aggregation for renewal`);
+    this.modifiedSub = this.monthlyCostChartService.requestAggregation({
+      groupingMode: this.groupingMode,
+      renewalOptions: { upfrontPayment: 'All Upfront', durationMonths: 36 }
+    }).subscribe((chartData: ChartData) => {
+      console.log('[MonthlyCostChart] renewal chartData received');
       this.modifiedData = chartData.aggregates;
 
       // Capture modified chart savings data

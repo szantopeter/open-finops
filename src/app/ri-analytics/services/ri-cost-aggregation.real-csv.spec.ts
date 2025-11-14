@@ -71,7 +71,7 @@ describe('RiCostAggregationService with real CSV', () => {
       dailyReservedRate: 10 // synthetic small rate so totals are > 0
     }));
 
-    const aggregates = service.aggregateMonthlyCosts(rows as any, pricingRecords as any);
+    const aggregates = service.calculateAggregation({ groupingMode: 'ri-type' }, rows as any, pricingRecords as any);
     // Expect non-empty months covering the start date month
     const months = Object.keys(aggregates).sort();
     expect(months.length).toBeGreaterThan(0);

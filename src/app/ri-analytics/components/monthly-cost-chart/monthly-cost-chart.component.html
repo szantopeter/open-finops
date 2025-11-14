@@ -35,6 +35,22 @@
   <div *ngIf="data" class="chart-and-widget-container">
     <div class="chart-container">
       <h2>Current RI Portfolio</h2>
+
+      <!-- Grouping Mode Selector -->
+      <div class="grouping-mode-selector">
+        <label>Group by:</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="groupingMode" value="ri-type" [(ngModel)]="groupingMode" (change)="onGroupingModeChange()">
+            RI Type
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="groupingMode" value="cost-type" [(ngModel)]="groupingMode" (change)="onGroupingModeChange()">
+            Cost Type
+          </label>
+        </div>
+      </div>
+
       <!-- ECharts will be initialized here -->
       <div id="monthly-cost-chart-root" style="width:100%;height:600px;"></div>
     </div>
@@ -75,6 +91,22 @@
   <div *ngIf="modifiedData" class="chart-and-widget-container">
     <div class="chart-container">
       <h2>Scenario: 3-Year Full Upfront Renewals</h2>
+
+      <!-- Grouping Mode Selector -->
+      <div class="grouping-mode-selector">
+        <label>Group by:</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="groupingMode" value="ri-type" [(ngModel)]="groupingMode" (change)="onGroupingModeChange()">
+            RI Type
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="groupingMode" value="cost-type" [(ngModel)]="groupingMode" (change)="onGroupingModeChange()">
+            Cost Type
+          </label>
+        </div>
+      </div>
+
       <!-- ECharts will be initialized here -->
       <div id="monthly-cost-chart-renewal-root" style="width:100%;height:600px;"></div>
     </div>

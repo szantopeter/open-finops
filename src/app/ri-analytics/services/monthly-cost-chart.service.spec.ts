@@ -8,6 +8,7 @@ import { RiCostAggregationService } from './ri-cost-aggregation.service';
 import { RiDataService } from './ri-data.service';
 import { RiCSVParserService } from './ri-import.service';
 import { PricingRecord } from '../models/pricing-record.model';
+import { RiRow } from '../models/ri-row.model';
 
 describe('MonthlyCostChartService - End-to-End Business Logic Test', () => {
   let service: MonthlyCostChartService;
@@ -87,9 +88,9 @@ describe('MonthlyCostChartService - End-to-End Business Logic Test', () => {
     // Emit the portfolio
     riDataService.setRiPortfolio(parseResult.riPortfolio);
 
-    // Wait for chartData
+    // Request aggregation
     return new Promise<void>((resolve) => {
-      service.baselineChartData$.subscribe(chartData => {
+      service.requestAggregation({ groupingMode: 'ri-type' }).subscribe(chartData => {
         if (chartData.aggregates && chartData.yearSavingsBreakdown.length > 0) {
           // Validate that savings percentages are correctly calculated
           chartData.yearSavingsBreakdown.forEach(yearData => {
@@ -100,6 +101,153 @@ describe('MonthlyCostChartService - End-to-End Business Logic Test', () => {
             expect(yearData.savingsPercentage).toBeGreaterThanOrEqual(0);
             expect(yearData.savingsPercentage).toBeLessThanOrEqual(100);
           });
+          resolve();
+        }
+      });
+    });
+  });
+
+  it('should correctly aggregate by cost-type with different upfront payment options', async () => {
+    // Create test RI data with different upfront payment options
+    const testRiRows: RiRow[] = [
+      {
+        instanceClass: 'db.r5.large',
+        region: 'us-east-1',
+        multiAz: false,
+        engine: 'mysql',
+        edition: null,
+        upfrontPayment: 'No Upfront',
+        durationMonths: 12,
+        startDate: '2024-01-01',
+        endDate: '2024-12-31',
+        count: 2,
+        raw: {}
+      },
+      {
+        instanceClass: 'db.r5.large',
+        region: 'us-east-1',
+        multiAz: false,
+        engine: 'mysql',
+        edition: null,
+        upfrontPayment: 'Partial Upfront',
+        durationMonths: 12,
+        startDate: '2024-01-01',
+        endDate: '2024-12-31',
+        count: 1,
+        raw: {}
+      },
+      {
+        instanceClass: 'db.r5.large',
+        region: 'us-east-1',
+        multiAz: false,
+        engine: 'mysql',
+        edition: null,
+        upfrontPayment: 'All Upfront',
+        durationMonths: 12,
+        startDate: '2024-01-01',
+        endDate: '2024-12-31',
+        count: 1,
+        raw: {}
+      }
+    ];
+
+    // Mock pricing data for different upfront payment options
+    pricingDataService.loadPricingForPaths.and.callFake((paths: string[]) => {
+      const pricingRecords = [
+        new PricingRecord({
+          instanceClass: 'db.r5.large',
+          region: 'us-east-1',
+          multiAz: false,
+          engine: 'mysql',
+          edition: null,
+          upfrontPayment: 'No Upfront',
+          durationMonths: 12,
+          dailyReservedRate: 0.8,
+          dailyOnDemandRate: 1.0,
+          upfrontCost: 0
+        }),
+        new PricingRecord({
+          instanceClass: 'db.r5.large',
+          region: 'us-east-1',
+          multiAz: false,
+          engine: 'mysql',
+          edition: null,
+          upfrontPayment: 'Partial Upfront',
+          durationMonths: 12,
+          dailyReservedRate: 0.7,
+          dailyOnDemandRate: 1.0,
+          upfrontCost: 500
+        }),
+        new PricingRecord({
+          instanceClass: 'db.r5.large',
+          region: 'us-east-1',
+          multiAz: false,
+          engine: 'mysql',
+          edition: null,
+          upfrontPayment: 'All Upfront',
+          durationMonths: 12,
+          dailyReservedRate: 0.6,
+          dailyOnDemandRate: 1.0,
+          upfrontCost: 2000
+        })
+      ];
+      return of({ pricingRecords, missingFiles: [] });
+    });
+
+    // Set the test RI portfolio
+    riDataService.setRiPortfolio({
+      metadata: { 
+        source: 'test', 
+        importedAt: new Date().toISOString(),
+        columns: [],
+        rowsCount: testRiRows.length
+      },
+      rows: testRiRows
+    });
+
+    // Test cost-type aggregation
+    return new Promise<void>((resolve) => {
+      service.requestAggregation({ groupingMode: 'cost-type' }).subscribe((chartData: any) => {
+        if (chartData.aggregates) {
+          // Check that we have the expected cost-type groups
+          const monthKeys = Object.keys(chartData.aggregates);
+          expect(monthKeys.length).toBeGreaterThan(0);
+
+          // Check first month data
+          const firstMonthKey = monthKeys[0];
+          const monthData = chartData.aggregates[firstMonthKey];
+
+          // Should have exactly 3 cost-type groups
+          expect(Object.keys(monthData)).toEqual(['Savings Upfront', 'Savings Monthly', 'On Demand Monthly']);
+
+          // Check Savings Upfront group (should include upfront costs from Partial and All Upfront)
+          const upfrontGroup = monthData['Savings Upfront'];
+          expect(upfrontGroup.riCost).toBeGreaterThan(0); // Should have upfront costs
+          expect(upfrontGroup.onDemandCost).toBe(0); // No on-demand costs in upfront group
+
+          // Check Savings Monthly group (should include recurring costs from all RIs)
+          const monthlyGroup = monthData['Savings Monthly'];
+          expect(monthlyGroup.riCost).toBeGreaterThan(0); // Should have recurring costs
+          expect(monthlyGroup.onDemandCost).toBe(0); // No on-demand costs in monthly group
+
+          // Check On Demand Monthly group (should include on-demand equivalent costs)
+          const onDemandGroup = monthData['On Demand Monthly'];
+          expect(onDemandGroup.riCost).toBe(0); // No RI costs in on-demand group
+          expect(onDemandGroup.onDemandCost).toBeGreaterThan(0); // Should have on-demand costs
+
+          // Verify savings calculations
+          expect(upfrontGroup.savingsAmount).toBe(upfrontGroup.onDemandCost - upfrontGroup.riCost);
+          expect(monthlyGroup.savingsAmount).toBe(monthlyGroup.onDemandCost - monthlyGroup.riCost);
+          expect(onDemandGroup.savingsAmount).toBe(onDemandGroup.onDemandCost - onDemandGroup.riCost);
+
+          // Verify savings percentages
+          expect(upfrontGroup.savingsPercentage).toBe(upfrontGroup.onDemandCost > 0 ?
+            (1 - upfrontGroup.riCost / upfrontGroup.onDemandCost) * 100 : 0);
+          expect(monthlyGroup.savingsPercentage).toBe(monthlyGroup.onDemandCost > 0 ?
+            (1 - monthlyGroup.riCost / monthlyGroup.onDemandCost) * 100 : 0);
+          expect(onDemandGroup.savingsPercentage).toBe(onDemandGroup.onDemandCost > 0 ?
+            (1 - onDemandGroup.riCost / onDemandGroup.onDemandCost) * 100 : 0);
+
           resolve();
         }
       });

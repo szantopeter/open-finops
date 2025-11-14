@@ -1,4 +1,4 @@
-import { HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { PricingDataService } from './pricing-data.service';
@@ -8,21 +8,31 @@ describe('PricingDataService', () => {
   let http: HttpTestingController;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({ imports: [], providers: [PricingDataService] });
+    TestBed.configureTestingModule({ 
+      imports: [HttpClientTestingModule], 
+      providers: [PricingDataService] 
+    });
     svc = TestBed.inject(PricingDataService);
     http = TestBed.inject(HttpTestingController);
   });
 
   afterEach(() => http.verify());
 
-  it('loads pricing files', () => {
+  it('loads pricing files', (done) => {
     const index = ['p1.json', 'p2.json'];
 
     svc.loadPricingForPaths(index).subscribe({
-      next: () => {
+      next: (result) => {
+        expect(result.pricingRecords.length).toBe(2);
+        done();
       }
     });
 
+    const req1 = http.expectOne('/assets/pricing/p1.json');
+    req1.flush({ instanceClass: 'db.r5.large', region: 'us-east-1', multiAz: false, engine: 'mysql', upfrontPayment: 'No Upfront', durationMonths: 36, dailyReservedRate: 1 });
+
+    const req2 = http.expectOne('/assets/pricing/p2.json');
+    req2.flush({ instanceClass: 'db.r5.xlarge', region: 'eu-west-1', multiAz: false, engine: 'postgres', upfrontPayment: 'All Upfront', durationMonths: 12, upfrontCost: 100 });
   });
 
   // svc.loadAllPricing().subscribe((records) => {

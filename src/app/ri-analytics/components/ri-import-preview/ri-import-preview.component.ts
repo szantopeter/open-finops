@@ -73,7 +73,7 @@ export class RiImportPreviewComponent implements OnDestroy {
       // load callback: restore saved RiImport into RiDataService
       async (s) => {
         const stored = await s.get('ri-import');
-        if (stored && this.data && typeof (this.data as any).setImport === 'function') {
+        if (stored && this.data && typeof (this.data as any).setRiPortfolio === 'function') {
           // Re-normalize stored data to ensure old imports with un-normalized engine/edition fields
           // get updated to match current normalization logic (e.g., 'oracle-se2 (byol)' → engine='oracle', edition='se2-byol')
           const storedImport = stored as any;
@@ -99,14 +99,14 @@ export class RiImportPreviewComponent implements OnDestroy {
                 ...parsed.riPortfolio,
                 metadata: storedImport.metadata // keep original metadata (importedAt, fileLastModified, etc.)
               };
-              (this.data as any).setImport(normalized);
+              (this.data as any).setRiPortfolio(normalized);
               // Re-save the normalized version
               await s.set('ri-import', normalized);
               return;
             }
           }
           // Fallback: if re-parsing fails, use stored data as-is
-          (this.data as any).setImport(storedImport);
+          (this.data as any).setRiPortfolio(storedImport);
         }
       },
       // save callback: persist current import from RiDataService
