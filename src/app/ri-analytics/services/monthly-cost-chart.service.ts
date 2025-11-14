@@ -23,6 +23,17 @@ export interface ChartData {
     onDemandCost: number;
     isPartial: boolean;
   }>;
+  summaryScenarios: Array<{
+    scenario: string;
+    upfrontPayment: string;
+    durationMonths: number;
+    firstFullYear: number;
+    firstFullYearSavings: number;
+    firstFullYearSavingsPercentage: number;
+    firstFullYearRiCost: number;
+    firstFullYearOnDemandCost: number;
+    maxMonthlyRiSpending: number;
+  }>;
 }
 
 @Injectable({
@@ -37,7 +48,8 @@ export class MonthlyCostChartService {
     totalSavingsPercentage: 0,
     totalRiCost: 0,
     totalOnDemandCost: 0,
-    yearSavingsBreakdown: []
+    yearSavingsBreakdown: [],
+    summaryScenarios: []
   });
 
   private modifiedChartDataSubject = new BehaviorSubject<ChartData>({
@@ -48,7 +60,8 @@ export class MonthlyCostChartService {
     totalSavingsPercentage: 0,
     totalRiCost: 0,
     totalOnDemandCost: 0,
-    yearSavingsBreakdown: []
+    yearSavingsBreakdown: [],
+    summaryScenarios: []
   });
 
   public chartData$: Observable<ChartData> = this.chartDataSubject.asObservable();
@@ -72,7 +85,8 @@ export class MonthlyCostChartService {
         totalSavingsPercentage: 0,
         totalRiCost: 0,
         totalOnDemandCost: 0,
-        yearSavingsBreakdown: []
+        yearSavingsBreakdown: [],
+        summaryScenarios: []
       };
     }
 
@@ -131,7 +145,8 @@ export class MonthlyCostChartService {
       totalSavingsPercentage,
       totalRiCost,
       totalOnDemandCost,
-      yearSavingsBreakdown
+      yearSavingsBreakdown,
+      summaryScenarios: []
     };
   }
 
@@ -214,14 +229,68 @@ export class MonthlyCostChartService {
               error = `Calculation errors found: ${errorMessages.join('; ')}`;
             }
 
-            return { aggregates, modifiedAggregates, error, missingPricing };
+            return { aggregates, modifiedAggregates, error, missingPricing, rows, pricingRecords };
           })
         );
       })
     ).subscribe({
-      next: ({ aggregates, modifiedAggregates, error, missingPricing }: { aggregates: any; modifiedAggregates: any; error: any; missingPricing: any[] }) => {
+      next: ({ aggregates, modifiedAggregates, error, missingPricing, rows, pricingRecords }: { aggregates: any; modifiedAggregates: any; error: any; missingPricing: any[]; rows: any; pricingRecords: any }) => {
         const normalChartData = this.calculateChartData(aggregates, error, missingPricing);
         const modifiedChartData = this.calculateChartData(modifiedAggregates, error, missingPricing); // Use same error for modified
+
+        // Find the latest RI expiry year from the input CSV, then take the next year
+        const expiryDates = rows
+          .map((r: any) => r.endDate)
+          .filter((d: any) => d && d !== 'null')
+          .map((d: string) => new Date(d));
+        const latestExpiry = expiryDates.length > 0 ? new Date(Math.max(...expiryDates.map((d: Date) => d.getTime()))) : null;
+        const comparisonYear = latestExpiry ? latestExpiry.getFullYear() + 1 : null;
+
+        // If no comparison year found, fall back to first full year
+        const fallbackYearData = normalChartData.yearSavingsBreakdown.find(y => !y.isPartial);
+        const targetYear = normalChartData.yearSavingsBreakdown.filter(y => !y.isPartial).pop()?.year || comparisonYear || fallbackYearData?.year || 0;
+
+        // Calculate summary scenarios
+        const scenarios = [
+          { upfrontPayment: 'No Upfront', durationMonths: 12 },
+          { upfrontPayment: 'Partial Upfront', durationMonths: 12 },
+          { upfrontPayment: 'All Upfront', durationMonths: 12 },
+          { upfrontPayment: 'No Upfront', durationMonths: 36 },
+          { upfrontPayment: 'Partial Upfront', durationMonths: 36 },
+          { upfrontPayment: 'All Upfront', durationMonths: 36 }
+        ];
+        const summaryScenarios = scenarios.map(opts => {
+          const scenarioAggregates = this.riCostAggregationService.aggregateMonthlyCosts(rows, pricingRecords, opts);
+          const scenarioChartData = this.calculateChartData(scenarioAggregates, error, missingPricing);
+          const scenarioYearData = scenarioChartData.yearSavingsBreakdown.find(y => y.year === targetYear);
+          const savings = scenarioYearData?.savingsAmount || 0;
+          const onDemandCost = scenarioYearData?.onDemandCost || 0;
+          const savingsPercentage = onDemandCost > 0 ? (savings / onDemandCost) * 100 : 0;
+
+          // Calculate maximum monthly RI spending
+          let maxMonthlyRiSpending = 0;
+          if (scenarioAggregates) {
+            for (const month of Object.keys(scenarioAggregates)) {
+              const monthData = scenarioAggregates[month];
+              const monthlyRiCost = Object.values(monthData).reduce((sum: number, group: any) =>
+                sum + (group.riCost || 0) + (group.renewalCost || 0), 0);
+              maxMonthlyRiSpending = Math.max(maxMonthlyRiSpending, monthlyRiCost);
+            }
+          }
+
+          return {
+            scenario: `${opts.upfrontPayment} ${opts.durationMonths / 12} Year`,
+            upfrontPayment: opts.upfrontPayment,
+            durationMonths: opts.durationMonths,
+            firstFullYear: targetYear,
+            firstFullYearSavings: savings,
+            firstFullYearSavingsPercentage: savingsPercentage,
+            firstFullYearRiCost: scenarioYearData?.riCost || 0,
+            firstFullYearOnDemandCost: onDemandCost,
+            maxMonthlyRiSpending
+          };
+        });
+        normalChartData.summaryScenarios = summaryScenarios;
 
         this.chartDataSubject.next(normalChartData);
         this.modifiedChartDataSubject.next(modifiedChartData);
@@ -235,7 +304,8 @@ export class MonthlyCostChartService {
           totalSavingsPercentage: 0,
           totalRiCost: 0,
           totalOnDemandCost: 0,
-          yearSavingsBreakdown: []
+          yearSavingsBreakdown: [],
+          summaryScenarios: []
         };
         this.chartDataSubject.next(errorData);
         this.modifiedChartDataSubject.next(errorData);

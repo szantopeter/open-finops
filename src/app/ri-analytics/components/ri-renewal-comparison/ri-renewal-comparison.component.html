@@ -1,0 +1,25 @@
+<div *ngIf="summaryScenarios && summaryScenarios.length > 0" class="summary-table">
+    <h3>RI Renewal Scenario Comparison (Year After Latest Expiry: {{ summaryScenarios[0]?.firstFullYear }})</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Scenario</th>
+        <th>Savings Amount</th>
+        <th>Savings %</th>
+        <th>RI Cost</th>
+        <th>On-Demand Cost</th>
+        <th>Max Monthly RI Spending</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let scenario of summaryScenarios">
+        <td>{{ scenario.scenario }}</td>
+        <td>${{ scenario.firstFullYearSavings | number:'1.2-2' }}</td>
+        <td>{{ scenario.firstFullYearSavingsPercentage | number:'1.1-1' }}%</td>
+        <td>${{ scenario.firstFullYearRiCost | number:'1.2-2' }}</td>
+        <td>${{ scenario.firstFullYearOnDemandCost | number:'1.2-2' }}</td>
+        <td>${{ scenario.maxMonthlyRiSpending | number:'1.2-2' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

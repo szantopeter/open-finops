@@ -9,12 +9,13 @@ import { Subscription } from 'rxjs';
 import { MonthlyCostData } from '../../models/monthly-cost-data.model';
 import { MonthlyCostChartService, ChartData } from '../../services/monthly-cost-chart.service';
 import { RiCostAggregationService } from '../../services/ri-cost-aggregation.service';
+import { RiRenewalComparisonComponent } from '../ri-renewal-comparison/ri-renewal-comparison.component';
 
 
 @Component({
   selector: 'app-monthly-cost-chart',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RiRenewalComparisonComponent],
   templateUrl: './monthly-cost-chart.component.html',
   styleUrls: ['./monthly-cost-chart.component.scss']
 })
@@ -45,6 +46,9 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
   modifiedTotalOnDemandCost = 0;
   modifiedYearSavingsBreakdown: Array<{ year: number; savingsAmount: number; savingsPercentage: number; riCost: number; onDemandCost: number; isPartial: boolean }> = [];
 
+  // Summary scenarios for first full year
+  summaryScenarios: Array<{scenario: string, upfrontPayment: string, durationMonths: number, firstFullYear: number, firstFullYearSavings: number, firstFullYearSavingsPercentage: number, firstFullYearRiCost: number, firstFullYearOnDemandCost: number, maxMonthlyRiSpending: number}> = [];
+
   constructor(
     private readonly monthlyCostChartService: MonthlyCostChartService,
     private readonly changeDetectorRef: ChangeDetectorRef,
@@ -63,6 +67,7 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
       this.totalRiCost = chartData.totalRiCost;
       this.totalOnDemandCost = chartData.totalOnDemandCost;
       this.yearSavingsBreakdown = chartData.yearSavingsBreakdown;
+      this.summaryScenarios = chartData.summaryScenarios;
 
       // Trigger change detection
       this.changeDetectorRef.detectChanges();

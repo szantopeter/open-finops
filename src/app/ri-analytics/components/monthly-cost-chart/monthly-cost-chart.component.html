@@ -30,6 +30,7 @@
       <li *ngFor="let p of missingPricing">{{ p }}</li>
     </ul>
   </div>
+  <app-ri-renewal-comparison [summaryScenarios]="summaryScenarios"></app-ri-renewal-comparison>
   <div *ngIf="!data && !error" class="empty">No reservation data available for the selected period.</div>
   <div *ngIf="data" class="chart-and-widget-container">
     <div class="chart-container">
