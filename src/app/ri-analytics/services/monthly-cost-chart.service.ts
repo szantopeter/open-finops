@@ -40,7 +40,19 @@ export class MonthlyCostChartService {
     yearSavingsBreakdown: []
   });
 
+  private modifiedChartDataSubject = new BehaviorSubject<ChartData>({
+    aggregates: null,
+    error: null,
+    missingPricing: [],
+    totalSavingsAmount: 0,
+    totalSavingsPercentage: 0,
+    totalRiCost: 0,
+    totalOnDemandCost: 0,
+    yearSavingsBreakdown: []
+  });
+
   public chartData$: Observable<ChartData> = this.chartDataSubject.asObservable();
+  public modifiedChartData$: Observable<ChartData> = this.modifiedChartDataSubject.asObservable();
 
   constructor(
     private readonly riDataService: RiDataService,
@@ -48,6 +60,79 @@ export class MonthlyCostChartService {
     private readonly riCostAggregationService: RiCostAggregationService
   ) {
     this.initialize();
+  }
+
+  private calculateChartData(aggregates: Record<string, Record<string, MonthlyCostData>> | null, error: string | null, missingPricing: string[]): ChartData {
+    if (!aggregates) {
+      return {
+        aggregates: null,
+        error: null,
+        missingPricing: [],
+        totalSavingsAmount: 0,
+        totalSavingsPercentage: 0,
+        totalRiCost: 0,
+        totalOnDemandCost: 0,
+        yearSavingsBreakdown: []
+      };
+    }
+
+    // Calculate totals and breakdowns
+    const months = Object.keys(aggregates).sort();
+
+    const totalRiCost = months.reduce((total, month) => {
+      const groupsData = aggregates[month] || {};
+      return total + (Object.values(groupsData) as MonthlyCostData[]).reduce((sum: number, g: MonthlyCostData) => sum + (g.riCost || 0) + (g.renewalCost || 0), 0);
+    }, 0);
+
+    const totalOnDemandCost = months.reduce((total, month) => {
+      const groupsData = aggregates[month] || {};
+      return total + (Object.values(groupsData) as MonthlyCostData[]).reduce((sum: number, g: MonthlyCostData) => sum + (g.onDemandCost || 0), 0);
+    }, 0);
+
+    const totalSavingsAmount = totalOnDemandCost - totalRiCost;
+    const totalSavingsPercentage = totalOnDemandCost > 0 ? (totalSavingsAmount / totalOnDemandCost) * 100 : 0;
+
+    // Calculate year-by-year savings breakdown
+    const yearData: Record<number, { riCost: number; onDemandCost: number; months: string[] }> = {};
+    for (const month of months) {
+      const year = Number.parseInt(month.split('-')[0]);
+      if (!yearData[year]) {
+        yearData[year] = { riCost: 0, onDemandCost: 0, months: [] };
+      }
+      yearData[year].months.push(month);
+
+      const groupsData = aggregates[month] || {};
+      yearData[year].riCost += (Object.values(groupsData) as MonthlyCostData[]).reduce((sum: number, g: MonthlyCostData) => sum + (g.riCost || 0) + (g.renewalCost || 0), 0);
+      yearData[year].onDemandCost += (Object.values(groupsData) as MonthlyCostData[]).reduce((sum: number, g: MonthlyCostData) => sum + (g.onDemandCost || 0), 0);
+    }
+
+    const sortedYears = Object.keys(yearData).map(Number).sort((a, b) => a - b);
+    const yearSavingsBreakdown = sortedYears.map(year => {
+      const data = yearData[year];
+      const savingsAmount = data.onDemandCost - data.riCost;
+      const savingsPercentage = data.onDemandCost > 0 ? (savingsAmount / data.onDemandCost) * 100 : 0;
+      const isPartial = data.months.length < 12;
+
+      return {
+        year,
+        savingsAmount,
+        savingsPercentage,
+        riCost: data.riCost,
+        onDemandCost: data.onDemandCost,
+        isPartial
+      };
+    });
+
+    return {
+      aggregates,
+      error,
+      missingPricing,
+      totalSavingsAmount,
+      totalSavingsPercentage,
+      totalRiCost,
+      totalOnDemandCost,
+      yearSavingsBreakdown
+    };
   }
 
   private initialize(): void {
@@ -84,8 +169,9 @@ export class MonthlyCostChartService {
             const missingPricing: string[] = missingFiles || [];
             this.riCostAggregationService.loadPricingData(pricingRecords as any);
             const aggregates = this.riCostAggregationService.aggregateMonthlyCosts(rows as any, pricingRecords as any);
+            const modifiedAggregates = this.riCostAggregationService.aggregateMonthlyCosts(rows as any, pricingRecords as any, { upfrontPayment: 'All Upfront', durationMonths: 36 });
 
-            // Check for all types of errors
+            // Check for all types of errors (using normal aggregates for error reporting)
             const allErrors = [
               ...this.riCostAggregationService.lastErrors.unmatchedPricing,
               ...this.riCostAggregationService.lastErrors.invalidPricing,
@@ -128,86 +214,20 @@ export class MonthlyCostChartService {
               error = `Calculation errors found: ${errorMessages.join('; ')}`;
             }
 
-            return { aggregates, error, missingPricing };
+            return { aggregates, modifiedAggregates, error, missingPricing };
           })
         );
       })
     ).subscribe({
-      next: ({ aggregates, error, missingPricing }) => {
-        if (!aggregates) {
-          this.chartDataSubject.next({
-            aggregates: null,
-            error: null,
-            missingPricing: [],
-            totalSavingsAmount: 0,
-            totalSavingsPercentage: 0,
-            totalRiCost: 0,
-            totalOnDemandCost: 0,
-            yearSavingsBreakdown: []
-          });
-          return;
-        }
+      next: ({ aggregates, modifiedAggregates, error, missingPricing }: { aggregates: any; modifiedAggregates: any; error: any; missingPricing: any[] }) => {
+        const normalChartData = this.calculateChartData(aggregates, error, missingPricing);
+        const modifiedChartData = this.calculateChartData(modifiedAggregates, error, missingPricing); // Use same error for modified
 
-        // Calculate totals and breakdowns
-        const months = Object.keys(aggregates).sort();
-
-        const totalRiCost = months.reduce((total, month) => {
-          const groupsData = aggregates[month] || {};
-          return total + (Object.values(groupsData) as MonthlyCostData[]).reduce((sum: number, g: MonthlyCostData) => sum + (g.riCost || 0) + (g.renewalCost || 0), 0);
-        }, 0);
-
-        const totalOnDemandCost = months.reduce((total, month) => {
-          const groupsData = aggregates[month] || {};
-          return total + (Object.values(groupsData) as MonthlyCostData[]).reduce((sum: number, g: MonthlyCostData) => sum + (g.onDemandCost || 0), 0);
-        }, 0);
-
-        const totalSavingsAmount = totalOnDemandCost - totalRiCost;
-        const totalSavingsPercentage = totalOnDemandCost > 0 ? (totalSavingsAmount / totalOnDemandCost) * 100 : 0;
-
-        // Calculate year-by-year savings breakdown
-        const yearData: Record<number, { riCost: number; onDemandCost: number; months: string[] }> = {};
-        for (const month of months) {
-          const year = Number.parseInt(month.split('-')[0]);
-          if (!yearData[year]) {
-            yearData[year] = { riCost: 0, onDemandCost: 0, months: [] };
-          }
-          yearData[year].months.push(month);
-
-          const groupsData = aggregates[month] || {};
-          yearData[year].riCost += (Object.values(groupsData) as MonthlyCostData[]).reduce((sum: number, g: MonthlyCostData) => sum + (g.riCost || 0) + (g.renewalCost || 0), 0);
-          yearData[year].onDemandCost += (Object.values(groupsData) as MonthlyCostData[]).reduce((sum: number, g: MonthlyCostData) => sum + (g.onDemandCost || 0), 0);
-        }
-
-        const sortedYears = Object.keys(yearData).map(Number).sort((a, b) => a - b);
-        const yearSavingsBreakdown = sortedYears.map(year => {
-          const data = yearData[year];
-          const savingsAmount = data.onDemandCost - data.riCost;
-          const savingsPercentage = data.onDemandCost > 0 ? (savingsAmount / data.onDemandCost) * 100 : 0;
-          const isPartial = data.months.length < 12;
-
-          return {
-            year,
-            savingsAmount,
-            savingsPercentage,
-            riCost: data.riCost,
-            onDemandCost: data.onDemandCost,
-            isPartial
-          };
-        });
-
-        this.chartDataSubject.next({
-          aggregates,
-          error,
-          missingPricing,
-          totalSavingsAmount,
-          totalSavingsPercentage,
-          totalRiCost,
-          totalOnDemandCost,
-          yearSavingsBreakdown
-        });
+        this.chartDataSubject.next(normalChartData);
+        this.modifiedChartDataSubject.next(modifiedChartData);
       },
       error: (err) => {
-        this.chartDataSubject.next({
+        const errorData: ChartData = {
           aggregates: null,
           error: String(err?.message ?? err),
           missingPricing: [],
@@ -216,7 +236,9 @@ export class MonthlyCostChartService {
           totalRiCost: 0,
           totalOnDemandCost: 0,
           yearSavingsBreakdown: []
-        });
+        };
+        this.chartDataSubject.next(errorData);
+        this.modifiedChartDataSubject.next(errorData);
       }
     });
   }

@@ -157,7 +157,7 @@ export class RiCostAggregationService {
     });
   }
 
-  private calculateRenewalProjection(originalRi: RiRow, pricingIndex: Map<string, PricingRecord>): RenewalProjection | null {
+  private calculateRenewalProjection(originalRi: RiRow, pricingIndex: Map<string, PricingRecord>, renewalOptions?: { upfrontPayment: string, durationMonths: number }): RenewalProjection | null {
     if (!originalRi.endDate) return null; // Cannot renew ongoing RI
 
     const criteria = new RiMatchingCriteria({
@@ -166,8 +166,8 @@ export class RiCostAggregationService {
       multiAz: originalRi.multiAz,
       engine: originalRi.engine,
       edition: originalRi.edition ?? null,
-      upfrontPayment: originalRi.upfrontPayment as any,
-      durationMonths: originalRi.durationMonths
+      upfrontPayment: renewalOptions?.upfrontPayment || originalRi.upfrontPayment as any,
+      durationMonths: renewalOptions?.durationMonths || originalRi.durationMonths
     });
     const key = criteria.toKey();
     const pricing = pricingIndex.get(key);
@@ -201,16 +201,23 @@ export class RiCostAggregationService {
 
     // Calculate renewal end date (if duration is specified)
     let renewalEnd: Date | undefined;
-    if (originalRi.durationMonths) {
+    const renewalDuration = renewalOptions?.durationMonths || originalRi.durationMonths;
+    if (renewalDuration) {
       renewalEnd = new Date(renewalStart);
-      renewalEnd.setUTCMonth(renewalEnd.getUTCMonth() + originalRi.durationMonths);
+      renewalEnd.setUTCMonth(renewalEnd.getUTCMonth() + renewalDuration);
     }
+
+    // Calculate monthly cost (assuming 30 days for simplicity, as in tests)
+    const dailyRate = pricing.dailyReservedRate ?? 0;
+    const count = originalRi.count || 1;
+    const monthlyCost = dailyRate * 30 * count;
 
     return {
       originalRi,
       renewalStart,
       renewalEnd,
-      pricing
+      pricing,
+      monthlyCost
     };
   }
 
@@ -367,7 +374,7 @@ export class RiCostAggregationService {
     }
   }
 
-  aggregateMonthlyCosts(rows: RiRow[], pricingRecords: PricingRecord[]): Record<string, Record<string, MonthlyCostData>> {
+  aggregateMonthlyCosts(rows: RiRow[], pricingRecords: PricingRecord[], renewalOptions?: { upfrontPayment: string, durationMonths: number }): Record<string, Record<string, MonthlyCostData>> {
     console.log(`[RiCostAggregation] Starting aggregation with ${rows.length} RI rows and ${pricingRecords.length} pricing records`);
     // Load pricing into index
     this.loadPricingData(pricingRecords);
@@ -560,7 +567,7 @@ export class RiCostAggregationService {
     console.log('[RiCostAggregation] Found', expiringRis.length, 'expiring RIs for renewal projection');
 
     for (const expiringRi of expiringRis) {
-      const renewalProjection = this.calculateRenewalProjection(expiringRi, this.matcherIndex);
+      const renewalProjection = this.calculateRenewalProjection(expiringRi, this.matcherIndex, renewalOptions);
       if (!renewalProjection) continue; // Skip if renewal calculation failed
 
       // Calculate months where renewal is active
@@ -568,7 +575,7 @@ export class RiCostAggregationService {
       const renewalCurrent = new Date(renewalProjection.renewalStart);
 
       // Project renewal for up to the duration or until projection end
-      const maxMonths = expiringRi.durationMonths || 12; // Default to 1 year if no duration
+      const maxMonths = renewalOptions?.durationMonths || expiringRi.durationMonths || 12; // Default to 1 year if no duration
       let renewalMonthCount = 0;
 
       while (renewalCurrent <= projectionEnd && renewalMonthCount < maxMonths) {
@@ -588,8 +595,8 @@ export class RiCostAggregationService {
           multiAz: expiringRi.multiAz,
           engine: expiringRi.engine,
           edition: expiringRi.edition ?? null,
-          upfrontPayment: expiringRi.upfrontPayment as any,
-          durationMonths: expiringRi.durationMonths
+          upfrontPayment: renewalOptions?.upfrontPayment || expiringRi.upfrontPayment as any,
+          durationMonths: renewalOptions?.durationMonths || expiringRi.durationMonths
         });
         const groupKey = this.toHumanReadableKey(criteria);
 

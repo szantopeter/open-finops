@@ -33,6 +33,7 @@
   <div *ngIf="!data && !error" class="empty">No reservation data available for the selected period.</div>
   <div *ngIf="data" class="chart-and-widget-container">
     <div class="chart-container">
+      <h2>Current RI Portfolio</h2>
       <!-- ECharts will be initialized here -->
       <div id="monthly-cost-chart-root" style="width:100%;height:600px;"></div>
     </div>
@@ -63,6 +64,46 @@
               <tr>
                 <td>Savings Percentage</td>
                 <td *ngFor="let yearData of yearSavingsBreakdown">{{ yearData.savingsPercentage | number:'1.2-2' }}%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="modifiedData" class="chart-and-widget-container">
+    <div class="chart-container">
+      <h2>Scenario: 3-Year Full Upfront Renewals</h2>
+      <!-- ECharts will be initialized here -->
+      <div id="monthly-cost-chart-renewal-root" style="width:100%;height:600px;"></div>
+    </div>
+    <div class="savings-widget">
+      <div class="savings-card">
+        <h3>Savings Summary</h3>
+        <div class="year-breakdown" *ngIf="modifiedYearSavingsBreakdown.length > 0">
+          <table class="savings-table">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th *ngFor="let yearData of modifiedYearSavingsBreakdown">{{ yearData.year }} {{ yearData.isPartial ? '(Partial)' : '(Full)' }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>RI Cost</td>
+                <td *ngFor="let yearData of modifiedYearSavingsBreakdown">${{ yearData.riCost | number:'1.2-2' }}</td>
+              </tr>
+              <tr>
+                <td>On-Demand Cost</td>
+                <td *ngFor="let yearData of modifiedYearSavingsBreakdown">${{ yearData.onDemandCost | number:'1.2-2' }}</td>
+              </tr>
+              <tr>
+                <td>Savings Amount</td>
+                <td *ngFor="let yearData of modifiedYearSavingsBreakdown">${{ yearData.savingsAmount | number:'1.2-2' }}</td>
+              </tr>
+              <tr>
+                <td>Savings Percentage</td>
+                <td *ngFor="let yearData of modifiedYearSavingsBreakdown">{{ yearData.savingsPercentage | number:'1.2-2' }}%</td>
               </tr>
             </tbody>
           </table>
