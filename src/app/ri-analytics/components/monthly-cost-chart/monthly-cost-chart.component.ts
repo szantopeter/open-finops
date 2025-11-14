@@ -56,8 +56,8 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log('[MonthlyCostChart] init - subscribing to chartData$');
-    this.sub = this.monthlyCostChartService.chartData$.subscribe((chartData: ChartData) => {
+    console.log('[MonthlyCostChart] init - subscribing to baselineChartData$');
+    this.sub = this.monthlyCostChartService.baselineChartData$.subscribe((chartData: ChartData) => {
       console.log('[MonthlyCostChart] chartData emitted');
       this.data = chartData.aggregates;
       this.error = chartData.error;
@@ -77,8 +77,8 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
       }
     });
 
-    console.log('[MonthlyCostChart] init - subscribing to modifiedChartData$');
-    this.modifiedSub = this.monthlyCostChartService.modifiedChartData$.subscribe((chartData: ChartData) => {
+    console.log('[MonthlyCostChart] init - subscribing to renewalChartData$');
+    this.modifiedSub = this.monthlyCostChartService.renewalChartData$.subscribe((chartData: ChartData) => {
       console.log('[MonthlyCostChart] modifiedChartData emitted');
       this.modifiedData = chartData.aggregates;
 

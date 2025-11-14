@@ -122,7 +122,17 @@
                 "src/styles"
               ]
             },
-            "scripts": []
+            "scripts": [],
+            "watch": false
+          },
+          "configurations": {
+            "ci": {
+              "watch": false,
+              "browsers": "ChromeHeadlessCI"
+            },
+            "watch": {
+              "watch": true
+            }
           }
         },
         "lint": {

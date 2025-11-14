@@ -40,7 +40,7 @@ export interface ChartData {
   providedIn: 'root'
 })
 export class MonthlyCostChartService {
-  private chartDataSubject = new BehaviorSubject<ChartData>({
+  private baselineChartDataSubject = new BehaviorSubject<ChartData>({
     aggregates: null,
     error: null,
     missingPricing: [],
@@ -52,7 +52,7 @@ export class MonthlyCostChartService {
     summaryScenarios: []
   });
 
-  private modifiedChartDataSubject = new BehaviorSubject<ChartData>({
+  private renewalChartDataSubject = new BehaviorSubject<ChartData>({
     aggregates: null,
     error: null,
     missingPricing: [],
@@ -64,8 +64,8 @@ export class MonthlyCostChartService {
     summaryScenarios: []
   });
 
-  public chartData$: Observable<ChartData> = this.chartDataSubject.asObservable();
-  public modifiedChartData$: Observable<ChartData> = this.modifiedChartDataSubject.asObservable();
+  public baselineChartData$: Observable<ChartData> = this.baselineChartDataSubject.asObservable();
+  public renewalChartData$: Observable<ChartData> = this.renewalChartDataSubject.asObservable();
 
   constructor(
     private readonly riDataService: RiDataService,
@@ -292,8 +292,8 @@ export class MonthlyCostChartService {
         });
         normalChartData.summaryScenarios = summaryScenarios;
 
-        this.chartDataSubject.next(normalChartData);
-        this.modifiedChartDataSubject.next(modifiedChartData);
+        this.baselineChartDataSubject.next(normalChartData);
+        this.renewalChartDataSubject.next(modifiedChartData);
       },
       error: (err) => {
         const errorData: ChartData = {
@@ -307,8 +307,8 @@ export class MonthlyCostChartService {
           yearSavingsBreakdown: [],
           summaryScenarios: []
         };
-        this.chartDataSubject.next(errorData);
-        this.modifiedChartDataSubject.next(errorData);
+        this.baselineChartDataSubject.next(errorData);
+        this.renewalChartDataSubject.next(errorData);
       }
     });
   }

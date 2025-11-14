@@ -89,7 +89,7 @@ describe('MonthlyCostChartService - End-to-End Business Logic Test', () => {
 
     // Wait for chartData
     return new Promise<void>((resolve) => {
-      service.chartData$.subscribe(chartData => {
+      service.baselineChartData$.subscribe(chartData => {
         if (chartData.aggregates && chartData.yearSavingsBreakdown.length > 0) {
           // Validate that savings percentages are correctly calculated
           chartData.yearSavingsBreakdown.forEach(yearData => {

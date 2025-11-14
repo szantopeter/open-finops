@@ -11,7 +11,7 @@ describe('MonthlyCostChartComponent', () => {
 
   beforeEach(async () => {
     const monthlyCostChartServiceSpy = jasmine.createSpyObj('MonthlyCostChartService', [], {
-      chartData$: new BehaviorSubject({
+      baselineChartData$: new BehaviorSubject({
         aggregates: null,
         error: null,
         missingPricing: [],
