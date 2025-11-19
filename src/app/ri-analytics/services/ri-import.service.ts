@@ -226,12 +226,8 @@ export class RiCSVParserService {
     try {
       console.debug('[RiCSVParserService] parsed rows:', rows.length, 'columns:', headers.length, 'sampleRow:', rows[0] ? { startDate: rows[0].startDate, instanceClass: rows[0].instanceClass, region: rows[0].region } : null);
       console.info('[RiCSVParserService] parsed rows:', rows.length, 'columns:', headers.length, 'sampleRow:', rows[0] ? { startDate: rows[0].startDate, instanceClass: rows[0].instanceClass, region: rows[0].region } : null);
-    } catch (e) {
-      // swallow diagnostics errors
-      // eslint-disable-next-line no-console
-      console.debug('[RiCSVParserService] diagnostics error', e);
-      // eslint-disable-next-line no-console
-      console.info('[RiCSVParserService] diagnostics error', e);
+    } catch {
+      // If diagnostics logging fails, ignore to avoid impacting parser
     }
 
     return { riPortfolio: { metadata, rows } };
@@ -304,7 +300,9 @@ export class RiImportService {
       try {
         console.debug('[RiImportService] import errors:', riImportParseResult.errors.slice(0, 10));
         console.info('[RiImportService] import errors:', riImportParseResult.errors.slice(0, 10));
-      } catch {}
+      } catch {
+        // ignore diagnostics logging failures
+      }
       return riImportParseResult.errors.join('; ');
     }
     if (riImportParseResult.riPortfolio) {
@@ -315,7 +313,9 @@ export class RiImportService {
       try {
         console.debug('[RiImportService] saved import result:', riImportParseResult.riPortfolio.metadata.rowsCount, 'rows, key:', this.RI_IMPORT_KEY);
         console.info('[RiImportService] saved import result:', riImportParseResult.riPortfolio.metadata.rowsCount, 'rows, key:', this.RI_IMPORT_KEY);
-      } catch {}
+      } catch {
+        // ignore logging failures
+      }
     }
     return null;
   }

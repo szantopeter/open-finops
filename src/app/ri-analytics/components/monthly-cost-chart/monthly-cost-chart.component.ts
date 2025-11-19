@@ -7,7 +7,7 @@ import * as echarts from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
 import { Subscription } from 'rxjs';
 
-import { AggregationRequest } from '../../models/aggregation-request.model';
+// AggregationRequest not used in this component
 import { MonthlyCostData } from '../../models/monthly-cost-data.model';
 import { MonthlyCostChartService, ChartData } from '../../services/monthly-cost-chart.service';
 import { RiCostAggregationService } from '../../services/ri-cost-aggregation.service';

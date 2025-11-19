@@ -91,7 +91,7 @@ describe('Capture unmatched diagnostics (headless)', () => {
         console.warn('[CaptureSpec] Pricing load failed:', e?.message ?? e);
       }
 
-      const aggregates = service.calculateAggregation({ groupingMode: 'ri-type' }, rows, loaded.pricingRecords as any);
+      service.calculateAggregation({ groupingMode: 'ri-type' }, rows, loaded.pricingRecords as any);
     } catch (e) {
       console.error('[CaptureSpec] Exception during fetch/parse:', e);
     }

@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { RiDataService } from './ri-data.service';
-import { RiPorftolio } from '../models/ri-import.model';
-import { RiRow } from '../models/ri-row.model';
+
+import { FirstFullYearService } from './first-full-year.service';
 import { PricingDataService } from './pricing-data.service';
 import { RiCostAggregationService } from './ri-cost-aggregation.service';
+// RiDataService intentionally not used in this service implementation
+// import { RiDataService } from './ri-data.service';
 import { RiRenewalComparisonService } from './ri-renewal-comparison.service';
-import { FirstFullYearService } from './first-full-year.service';
+import { RiPorftolio } from '../models/ri-import.model';
+import { RiRow } from '../models/ri-row.model';
 
 @Injectable({ providedIn: 'root' })
 export class RiMonthlySpendingService {
@@ -51,7 +53,7 @@ export class RiMonthlySpendingService {
       }
     } catch (e) {
       // swallow diagnostics errors to avoid impacting normal flow
-      // eslint-disable-next-line no-console
+
       console.debug('[RiMonthlySpendingService] diagnostics error', e);
     }
 
@@ -95,7 +97,7 @@ export class RiMonthlySpendingService {
           }
         }
       } catch (e) {
-        // eslint-disable-next-line no-console
+
         console.debug('[RiMonthlySpendingService] diagnostics error while inspecting agg', e);
       }
 

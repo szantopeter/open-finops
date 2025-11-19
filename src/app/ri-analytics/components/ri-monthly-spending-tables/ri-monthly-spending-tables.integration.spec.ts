@@ -1,13 +1,14 @@
 import { TestBed } from '@angular/core/testing';
-import { RiMonthlySpendingTablesComponent } from './ri-monthly-spending-tables.component';
-import { RiDataService } from '../../services/ri-data.service';
 import { of } from 'rxjs';
+
+import { RiMonthlySpendingTablesComponent } from './ri-monthly-spending-tables.component';
+import { RiRow } from '../../models/ri-row.model';
 import { PricingDataService } from '../../services/pricing-data.service';
 import { RiCostAggregationService } from '../../services/ri-cost-aggregation.service';
-import { RiRow } from '../../models/ri-row.model';
+import { RiDataService } from '../../services/ri-data.service';
 
 describe('RiMonthlySpendingTables Integration', () => {
-  beforeEach(async () => {
+  beforeEach(async (): Promise<void> => {
     const mockRiDataService = {
       riPortfolio$: of({ rows: [
         { startDate: '2025-01-01', endDate: '2025-12-31', count: 1, instanceClass: 'db.r5.large', region: 'eu-west-1', multiAz: false, engine: 'mysql', upfrontPayment: 'No Upfront', durationMonths: 12 }
@@ -19,7 +20,7 @@ describe('RiMonthlySpendingTables Integration', () => {
     };
 
     const mockPricingService = {
-      loadPricingForPaths: () => of(mockPricing)
+      loadPricingForPaths: (): any => of(mockPricing)
     };
 
     await TestBed.configureTestingModule({
@@ -32,7 +33,7 @@ describe('RiMonthlySpendingTables Integration', () => {
     }).compileComponents();
   });
 
-  it('renders tables from live services', async () => {
+  it('renders tables from live services', async (): Promise<void> => {
     const fixture = TestBed.createComponent(RiMonthlySpendingTablesComponent);
     fixture.detectChanges();
     await fixture.whenStable();

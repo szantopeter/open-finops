@@ -1,6 +1,7 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+
 import { RiDataService } from '../../services/ri-data.service';
 import { RiMonthlySpendingService } from '../../services/ri-monthly-spending.service';
 
@@ -10,10 +11,10 @@ import { RiMonthlySpendingService } from '../../services/ri-monthly-spending.ser
   imports: [CommonModule],
   templateUrl: './ri-monthly-spending-tables.component.html',
   styles: [
-    `table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }`
+    'table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }'
   ]
 })
-export class RiMonthlySpendingTablesComponent {
+export class RiMonthlySpendingTablesComponent implements OnInit, OnDestroy {
   @Input() scenarios: any[] = [];
   @Input() aggregatesByScenario: Record<string, Record<string, any>> = {};
   @Input() firstFullYear: number | null = null;

@@ -69,7 +69,7 @@ export class RiImportPreviewComponent implements OnDestroy {
           const maxMs = Math.max(...endDates);
           latestExpiry = new Date(maxMs).toISOString().slice(0, 10);
         }
-      } catch (e) {
+      } catch {
         latestExpiry = null;
       }
 

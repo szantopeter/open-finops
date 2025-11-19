@@ -22,7 +22,7 @@ export interface RenewalScenario {
   providedIn: 'root'
 })
 export class RiRenewalComparisonService {
-  private sourceData$: Observable<{
+  private readonly sourceData$: Observable<{
     rows: any[];
     pricingRecords: any[];
     missingPricing: string[];
@@ -139,7 +139,7 @@ export class RiRenewalComparisonService {
         try {
           const endDates = rows
             .map((r: any) => r.endDate)
-            .filter((d: any) => d)
+            .filter(Boolean as any)
             .map((d: any) => Date.parse(d))
             .filter((n: number) => !Number.isNaN(n));
 
@@ -156,7 +156,7 @@ export class RiRenewalComparisonService {
           } else {
             firstFullYear = new Date().getUTCFullYear() + 1;
           }
-        } catch (e) {
+        } catch {
           firstFullYear = new Date().getUTCFullYear() + 1;
         }
 
@@ -176,13 +176,12 @@ export class RiRenewalComparisonService {
           pricingRecords
         );
 
-        const baselineMonths = Object.keys(baselineAggregates).sort();
+        const baselineMonths = Object.keys(baselineAggregates).sort((a, b) => a.localeCompare(b));
         const baselineYearMonths = baselineMonths.filter(month => month.startsWith(`${firstFullYear}-`));
         let baselineFirstFullYearOnDemandCost = 0;
         for (const month of baselineYearMonths) {
           const groupsData = baselineAggregates[month] || {};
-          const monthlyOnDemandCost = (Object.values(groupsData) as any[]).reduce((sum: number, g: any) => sum + (g.onDemandCost || 0), 0);
-          baselineFirstFullYearOnDemandCost += monthlyOnDemandCost;
+          baselineFirstFullYearOnDemandCost += (Object.values(groupsData) as any[]).reduce((sum: number, g: any) => sum + (g.onDemandCost || 0), 0);
         }
 
         return scenarios.map(scenario => {
@@ -196,22 +195,20 @@ export class RiRenewalComparisonService {
           // No longer needed as amortization is done in the aggregation service
 
           // Calculate metrics
-          const months = Object.keys(aggregates).sort();
-          const yearMonths = months.filter(month => month.startsWith(`${firstFullYear}-`));
+          const months = Object.keys(aggregates).sort((a,b) => a.localeCompare(b));
+          const yearMonthsSet = new Set(months.filter(month => month.startsWith(`${firstFullYear}-`)));
 
           let firstFullYearRiCost = 0;
           // Use baseline on-demand total computed once above to ensure comparability across scenarios
-          let firstFullYearOnDemandCost = baselineFirstFullYearOnDemandCost;
+          const firstFullYearOnDemandCost = baselineFirstFullYearOnDemandCost;
           let maxMonthlyRiSpending = 0;
 
           for (const month of months) {
             const groupsData = aggregates[month] || {};
             const monthlyRiCost = (Object.values(groupsData) as any[]).reduce((sum: number, g: any) => sum + (g.riCost || 0) + (g.renewalCost || 0), 0);
-            const monthlyOnDemandCost = (Object.values(groupsData) as any[]).reduce((sum: number, g: any) => sum + (g.onDemandCost || 0), 0);
-
             maxMonthlyRiSpending = Math.max(maxMonthlyRiSpending, monthlyRiCost);
 
-            if (yearMonths.includes(month)) {
+            if (yearMonthsSet.has(month)) {
               firstFullYearRiCost += monthlyRiCost;
             }
           }
@@ -236,60 +233,68 @@ export class RiRenewalComparisonService {
   }
 
   private amortizeUpfrontCosts(aggregates: Record<string, Record<string, any>>, durationMonths: number): void {
-    // Find all upfront costs that were lumped into single months and amortize them
-    const upfrontCostsByGroup: Record<string, { totalUpfront: number, months: string[] }> = {};
+    const upfrontCostsByGroup = this.collectUpfrontCosts(aggregates);
+    this.applyAmortization(aggregates, upfrontCostsByGroup, durationMonths);
+  }
 
-    // First pass: collect upfront costs and the months they appear in
+  private collectUpfrontCosts(aggregates: Record<string, Record<string, any>>): Record<string, { totalUpfront: number; months: string[] }> {
+    const upfrontCostsByGroup: Record<string, { totalUpfront: number; months: string[] }> = {};
     for (const monthKey of Object.keys(aggregates)) {
-      for (const groupKey of Object.keys(aggregates[monthKey])) {
-        const group = aggregates[monthKey][groupKey];
-        if (group.renewalCost && group.details) {
-          // Look for details with upfront costs
-          for (const detail of group.details) {
-            if (detail.upfront && detail.upfront > 0 && detail.isRenewal) {
-              if (!upfrontCostsByGroup[groupKey]) {
-                upfrontCostsByGroup[groupKey] = { totalUpfront: 0, months: [] };
-              }
-              upfrontCostsByGroup[groupKey].totalUpfront += detail.upfront;
-              if (!upfrontCostsByGroup[groupKey].months.includes(monthKey)) {
-                upfrontCostsByGroup[groupKey].months.push(monthKey);
-              }
-            }
-          }
-        }
+      const groups = aggregates[monthKey] || {};
+      for (const groupKey of Object.keys(groups)) {
+        const group = groups[groupKey];
+        this.processGroupForMonth(monthKey, groupKey, group, upfrontCostsByGroup);
       }
     }
+    return upfrontCostsByGroup;
+  }
 
-    // Second pass: amortize upfront costs over the renewal period
+  private processGroupForMonth(
+    monthKey: string,
+    groupKey: string,
+    group: any,
+    upfrontCostsByGroup: Record<string, { totalUpfront: number; months: string[] }>
+  ): void {
+    if (!group?.details) return;
+
+    for (const detail of group.details) {
+      if (!(detail.upfront > 0 && detail.isRenewal)) continue;
+      if (!upfrontCostsByGroup[groupKey]) {
+        upfrontCostsByGroup[groupKey] = { totalUpfront: 0, months: [] };
+      }
+      upfrontCostsByGroup[groupKey].totalUpfront += detail.upfront;
+      if (!upfrontCostsByGroup[groupKey].months.includes(monthKey)) {
+        upfrontCostsByGroup[groupKey].months.push(monthKey);
+      }
+    }
+  }
+
+  private applyAmortization(
+    aggregates: Record<string, Record<string, any>>,
+    upfrontCostsByGroup: Record<string, { totalUpfront: number; months: string[] }>,
+    durationMonths: number
+  ): void {
     for (const groupKey of Object.keys(upfrontCostsByGroup)) {
       const { totalUpfront, months } = upfrontCostsByGroup[groupKey];
-      if (totalUpfront > 0 && months.length > 0) {
-        // Sort months to find the start month
-        months.sort();
-        const startMonth = months[0];
+      if (totalUpfront <= 0 || months.length === 0) continue;
 
-        // Calculate monthly amortized amount
-        const monthlyAmortizedCost = totalUpfront / durationMonths;
+      months.sort((a, b) => a.localeCompare(b));
+      const startMonth = months[0];
+      const monthlyAmortizedCost = totalUpfront / durationMonths;
 
-        // Remove the lumped upfront cost from the first month and replace with amortized cost
-        if (aggregates[startMonth] && aggregates[startMonth][groupKey]) {
-          // Subtract the total upfront cost that was lumped in, and add back the first month's amortization
-          aggregates[startMonth][groupKey].renewalCost = (aggregates[startMonth][groupKey].renewalCost || 0) - totalUpfront + monthlyAmortizedCost;
-        }
+      const firstGroup = aggregates[startMonth]?.[groupKey];
+      if (firstGroup) {
+        firstGroup.renewalCost = (firstGroup.renewalCost || 0) - totalUpfront + monthlyAmortizedCost;
+      }
 
-        // Add amortized cost to the remaining months of the renewal period (starting from month 1, not 0)
-        const [startYear, startMonthNum] = startMonth.split('-').map(Number);
-        for (let i = 1; i < durationMonths; i++) {
-          const currentYear = startYear + Math.floor((startMonthNum - 1 + i) / 12);
-          const currentMonth = ((startMonthNum - 1 + i) % 12) + 1;
-          const monthKey = `${currentYear}-${String(currentMonth).padStart(2, '0')}`;
-
-          // Only add amortized cost to months that already exist (have renewal activity)
-          if (aggregates[monthKey] && aggregates[monthKey][groupKey]) {
-            const before = aggregates[monthKey][groupKey].renewalCost || 0;
-            aggregates[monthKey][groupKey].renewalCost = before + monthlyAmortizedCost;
-          }
-        }
+      const [startYear, startMonthNum] = startMonth.split('-').map(Number);
+      for (let i = 1; i < durationMonths; i++) {
+        const currentYear = startYear + Math.floor((startMonthNum - 1 + i) / 12);
+        const currentMonth = ((startMonthNum - 1 + i) % 12) + 1;
+        const monthKey = `${currentYear}-${String(currentMonth).padStart(2, '0')}`;
+        const target = aggregates[monthKey]?.[groupKey];
+        if (!target) continue;
+        target.renewalCost = (target.renewalCost || 0) + monthlyAmortizedCost;
       }
     }
   }

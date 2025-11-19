@@ -1,15 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 import { of, BehaviorSubject } from 'rxjs';
 
-import { RiRenewalComparisonService } from './ri-renewal-comparison.service';
 import { PricingDataService } from './pricing-data.service';
 import { RiCostAggregationService } from './ri-cost-aggregation.service';
 import { RiDataService } from './ri-data.service';
 import { RiCSVParserService } from './ri-import.service';
-import { PricingRecord } from '../models/pricing-record.model';
+import { RiRenewalComparisonService } from './ri-renewal-comparison.service';
 import { MonthlyCostData } from '../models/monthly-cost-data.model';
+import { PricingRecord } from '../models/pricing-record.model';
 import { RiPorftolio } from '../models/ri-import.model';
-import { RiRow } from '../models/ri-row.model';
+// RiRow not used in this spec
 
 describe('RiRenewalComparisonService', () => {
   let service: RiRenewalComparisonService;

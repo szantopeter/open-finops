@@ -8,9 +8,9 @@ describe('PricingDataService', () => {
   let http: HttpTestingController;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({ 
-      imports: [HttpClientTestingModule], 
-      providers: [PricingDataService] 
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [PricingDataService]
     });
     svc = TestBed.inject(PricingDataService);
     http = TestBed.inject(HttpTestingController);

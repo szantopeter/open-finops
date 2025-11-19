@@ -386,9 +386,9 @@ export class RiCostAggregationService {
       console.info('[RiCostAggregation] matcher sample keys:', sample);
     } catch (e) {
       // swallow diagnostics
-      // eslint-disable-next-line no-console
+
       console.debug('[RiCostAggregation] diagnostics error', e);
-      // eslint-disable-next-line no-console
+
       console.info('[RiCostAggregation] diagnostics error', e);
     }
   }
@@ -410,7 +410,6 @@ export class RiCostAggregationService {
 
     const result: Record<string, Record<string, MonthlyCostData>> = {};
 
-    let matchedCount = 0;
     let unmatchedCount = 0;
     this.lastUnmatchedCount = 0;
     this.lastUnmatchedSamples = [];
@@ -805,7 +804,6 @@ export class RiCostAggregationService {
 
     const result: Record<string, Record<string, MonthlyCostData>> = {};
 
-    let matchedCount = 0;
     let unmatchedCount = 0;
     this.lastUnmatchedCount = 0;
     this.lastUnmatchedSamples = [];

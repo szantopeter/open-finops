@@ -5,8 +5,8 @@ import { firstValueFrom } from 'rxjs';
 import { PricingDataService } from './pricing-data.service';
 import { RiCostAggregationService } from './ri-cost-aggregation.service';
 import { RiDataService } from './ri-data.service';
-import { RiRenewalComparisonService, RenewalScenario } from './ri-renewal-comparison.service';
 import { RiCSVParserService } from './ri-import.service';
+import { RiRenewalComparisonService, RenewalScenario } from './ri-renewal-comparison.service';
 import { StorageService } from '../../core/services/storage.service';
 
 
@@ -94,7 +94,7 @@ describe('RiCostAggregationService one-line cloudability CSV', () => {
     // Fetch the one-line CSV asset served by Karma
     const inputFileName = '/assets/cloudability-one-line.csv';
     console.warn('DEBUG: Input file name:', inputFileName);
-    
+
     const res = await fetch(inputFileName);
     expect(res.ok).toBeTrue();
     const txt = await res.text();
@@ -111,7 +111,7 @@ describe('RiCostAggregationService one-line cloudability CSV', () => {
     // Get renewal scenarios
     const scenarios = await firstValueFrom(renewalSvc.getRenewalScenarios());
     console.warn('DEBUG: Renewal comparison table content:', JSON.stringify(scenarios, null, 2));
-    
+
     expect(scenarios.length).toBe(6); // 3 upfront options × 2 durations
 
     // Ensure the on-demand cost for the first full year is the same for all scenarios

@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { RiImportPreviewComponent } from '../../ri-analytics/components/ri-import-preview/ri-import-preview.component';
 import { RiImportUploadComponent } from '../../ri-analytics/components/ri-import-upload/ri-import-upload.component';
-import { RiRenewalComparisonComponent } from '../../ri-analytics/components/ri-renewal-comparison/ri-renewal-comparison.component';
 import { RiMonthlySpendingTablesComponent } from '../../ri-analytics/components/ri-monthly-spending-tables/ri-monthly-spending-tables.component';
+import { RiRenewalComparisonComponent } from '../../ri-analytics/components/ri-renewal-comparison/ri-renewal-comparison.component';
 import { RiDataService } from '../../ri-analytics/services/ri-data.service';
 import { RiMonthlySpendingService } from '../../ri-analytics/services/ri-monthly-spending.service';
 

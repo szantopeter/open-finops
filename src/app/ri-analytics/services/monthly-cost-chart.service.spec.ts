@@ -55,15 +55,15 @@ describe('MonthlyCostChartService - End-to-End Business Logic Test', () => {
     expect(parseResult.errors).toBeUndefined();
     expect(parseResult.riPortfolio).toBeDefined();
 
-    pricingDataService.loadPricingForPaths.and.callFake((paths: string[]) => {
-      const pricingRecords = paths.map(path => {
+    pricingDataService.loadPricingForPaths.and.callFake((_paths: string[]) => {
+      const pricingRecords = _paths.map((path: string) => {
         // Parse path like 'eu-west-1/db.r5.xlarge/eu-west-1_db.r5.xlarge_multi-az-oracle-se2-byol.json'
         const parts = path.split('/');
         const region = parts[0];
         const instanceClass = parts[1];
         const fileName = parts[2];
         const fileParts = fileName.split('_');
-        const lastPart = fileParts[fileParts.length - 1]; // 'multi-az-oracle-se2-byol.json'
+        const lastPart = fileParts.at(-1); // 'multi-az-oracle-se2-byol.json'
         const lastParts = lastPart.split('-');
         const multiAz = lastParts[0] + '-' + lastParts[1] === 'multi-az';
         const engineEdition = lastParts.slice(2).join('-').replace('.json', ''); // 'oracle-se2-byol'
@@ -152,7 +152,7 @@ describe('MonthlyCostChartService - End-to-End Business Logic Test', () => {
     ];
 
     // Mock pricing data for different upfront payment options
-    pricingDataService.loadPricingForPaths.and.callFake((paths: string[]) => {
+    pricingDataService.loadPricingForPaths.and.callFake(() => {
       const pricingRecords = [
         new PricingRecord({
           instanceClass: 'db.r5.large',
@@ -196,8 +196,8 @@ describe('MonthlyCostChartService - End-to-End Business Logic Test', () => {
 
     // Set the test RI portfolio
     riDataService.setRiPortfolio({
-      metadata: { 
-        source: 'test', 
+      metadata: {
+        source: 'test',
         importedAt: new Date().toISOString(),
         columns: [],
         rowsCount: testRiRows.length
