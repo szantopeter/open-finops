@@ -21,10 +21,11 @@ describe('RiImportPreviewComponent', () => {
           provide: RiPortfolioDataService,
           useValue: {
             riPortfolio$: of({
-              metadata: { source: 'test', importedAt: '2024-11-21T12:00:00.000Z', columns: ['Reservation ID', 'Instance Type', 'Region', 'Start'], rowsCount: 2 },
+              metadata: { source: 'test', importedAt: '2024-11-21T12:00:00.000Z', columns: ['Reservation ID', 'Instance Type', 'Region', 'Start'], rowsCount: 3 },
               rows: [
-                { raw: { 'Reservation ID': 'r1', 'Instance Type': 'db.t3.small', 'Region': 'eu-west-1', 'Start': '2024-11-01' }, startDate: '2024-11-01', endDate: '2025-12-31', count: 2, instanceClass: 'db.t3.small', region: 'eu-west-1' },
-                { raw: { 'Reservation ID': 'r2', 'Instance Type': 'db.t3.small', 'Region': 'eu-west-1', 'Start': '2024-11-01' }, startDate: '2024-11-01', endDate: '2026-03-15', count: 1, instanceClass: 'db.t3.small', region: 'eu-west-1' }
+                { riRow: { raw: { 'Reservation ID': 'r1', 'Instance Type': 'db.t3.small', 'Region': 'eu-west-1', 'Start': '2024-11-01' }, startDate: '2024-11-01', endDate: '2025-12-31', count: 1, instanceClass: 'db.t3.small', region: 'eu-west-1', multiAz: false, engine: 'mysql' }, pricingData: {} },
+                { riRow: { raw: { 'Reservation ID': 'r2', 'Instance Type': 'db.t3.small', 'Region': 'eu-west-1', 'Start': '2024-11-01' }, startDate: '2024-11-01', endDate: '2026-03-15', count: 1, instanceClass: 'db.t3.small', region: 'eu-west-1', multiAz: false, engine: 'mysql' }, pricingData: {} },
+                { riRow: { raw: { 'Reservation ID': 'r3', 'Instance Type': 'db.t3.medium', 'Region': 'us-east-1', 'Start': '2024-11-01' }, startDate: '2024-11-01', endDate: '2026-03-15', count: 1, instanceClass: 'db.t3.medium', region: 'us-east-1', multiAz: false, engine: 'mysql' }, pricingData: {} }
               ]
             })
           }
@@ -47,7 +48,7 @@ describe('RiImportPreviewComponent', () => {
     // ensure strong tags are used for the numbers in the rendered HTML
     const html = el.innerHTML;
     expect(html).toMatch(/<strong>\s*3\s*<\/strong>/);
-    expect(html).toMatch(/<strong>\s*2\s*<\/strong>/);
+    expect(html).toMatch(/<strong>\s*3\s*<\/strong>/);
   });
 
   it('shows latest RI expiry when endDate present', () => {

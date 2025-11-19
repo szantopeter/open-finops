@@ -11,19 +11,14 @@ export interface RiImportParseResult {
   errors?: string[];
 }
 
-const REQUIRED_HEADERS = ['Start', 'Instance Type', 'Region', 'Count'];
+const REQUIRED_HEADERS = ['Start', 'Instance Type', 'Region', 'Count', 'Term', 'Product', 'End', 'multiAZ', 'RI Type'];
 
 @Injectable({ providedIn: 'root' })
 export class RiCSVParserService {
 
   constructor(private readonly pricingLoader: PricingLoaderService) {}
 
-  // Public method to parse CSV text, internally calls private parseText
-  async parseCsvText(text: string, source = 'clipboard', fileLastModifiedIso?: string): Promise<RiImportParseResult> {
-    return this.parseText(text, source, fileLastModifiedIso);
-  }
-
-  private async parseText(text: string, source = 'clipboard', fileLastModifiedIso?: string): Promise<RiImportParseResult> {
+  async parseText(text: string, source = 'clipboard', fileLastModifiedIso?: string): Promise<RiImportParseResult> {
     if (!text) return { errors: ['empty input'] };
 
     const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
@@ -33,7 +28,7 @@ export class RiCSVParserService {
     const headers = header.map(h => h.trim());
 
     const missing = REQUIRED_HEADERS.filter(h => !headers.includes(h));
-    if (missing.length) return { errors: [`missing required headers: ${missing.join(',')}`] };
+    if (missing.length) return { errors: [`missing required headers: ${missing.join(', ')}`] };
 
     const rows: RiRow[] = [];
     const errors: string[] = [];
@@ -47,6 +42,14 @@ export class RiCSVParserService {
         objRaw[headers[j]] = row[j] ?? '';
       }
 
+      // check required fields are not empty
+      const requiredFields = ['Start', 'Instance Type', 'Region', 'Count', 'Term', 'Product', 'End', 'multiAZ', 'RI Type'];
+      const missingFields = requiredFields.filter(f => !objRaw[f]);
+      if (missingFields.length) {
+        errors.push(`missing required fields at line ${i + 1}: ${missingFields.join(', ')}`);
+        continue;
+      }
+
       // basic normalization
       const start = objRaw['Start'];
       const startIso = this.normalizeDate(start);
@@ -55,7 +58,16 @@ export class RiCSVParserService {
         continue;
       }
 
-      const count = Number.parseInt(objRaw['Count'] || '0', 10) || 0;
+      const count = Number.parseInt(objRaw['Count'], 10);
+      if (Number.isNaN(count) || count <= 0) {
+        errors.push(`invalid Count at line ${i + 1}`);
+        continue;
+      }
+
+      if (!objRaw['multiAZ']) {
+        errors.push(`missing multiAZ at line ${i + 1}`);
+        continue;
+      }
 
       // derive duration from Term
       let durationMonths: number | undefined = undefined;
@@ -276,7 +288,7 @@ export class RiImportService {
       if (!res.ok) return;
       const txt = await res.text();
 
-      const parsed = await this.riCSVParserService.parseCsvText(txt, 'default-assets');
+      const parsed = await this.riCSVParserService.parseText(txt, 'default-assets');
 
       await this.saveImportResult(parsed);
 

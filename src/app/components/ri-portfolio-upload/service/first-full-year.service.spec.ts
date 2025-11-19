@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FirstFullYearService } from '../components/ri-portfolio-upload/first-full-year.service';
+import { FirstFullYearService } from './first-full-year.service';
 import { RiRow } from '../models/ri-portfolio.model';
 
 describe('FirstFullYearService', () => {
