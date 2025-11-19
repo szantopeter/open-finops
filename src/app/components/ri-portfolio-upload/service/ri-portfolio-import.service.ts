@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { RiPortfolioDataService } from './ri-portfolio-data.service';
-import { RiRow, RiPortfolio, RiImportMetadata } from '../models/ri-portfolio.model';
-import { StorageService } from '../../../storage-service/storage.service';
 import { PricingLoaderService } from './pricing-loader.service';
+import { RiPortfolioDataService } from './ri-portfolio-data.service';
+import { StorageService } from '../../../storage-service/storage.service';
 import { PricingData } from '../models/pricing.model';
+import { RiRow, RiPortfolio, RiImportMetadata } from '../models/ri-portfolio.model';
 
 export interface RiImportParseResult {
   riPortfolio?: RiPortfolio;

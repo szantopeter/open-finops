@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
+
 import { RiPortfolioDataService } from '../ri-portfolio-upload/service/ri-portfolio-data.service';
 
 @Component({
@@ -80,6 +81,6 @@ export class RiImportPreviewComponent {
   );
 
   constructor(
-    private readonly riPortfolioDataService: RiPortfolioDataService,
+    private readonly riPortfolioDataService: RiPortfolioDataService
   ) {}
 }

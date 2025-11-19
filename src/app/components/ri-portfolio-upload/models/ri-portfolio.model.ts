@@ -1,4 +1,4 @@
-import PricingData from "./pricing.model";
+import PricingData from './pricing.model';
 
 export interface RiImportMetadata {
   source: string;

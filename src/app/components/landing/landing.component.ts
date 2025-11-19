@@ -13,5 +13,7 @@ import { RiImportUploadComponent } from '../ri-portfolio-upload/ri-portfolio-upl
   imports: [RiImportUploadComponent, RiImportPreviewComponent, CommonModule]
 })
 
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class LandingComponent {
+  constructor() {}
 }

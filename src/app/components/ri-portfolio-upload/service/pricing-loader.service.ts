@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
-import { PricingData } from '../models/pricing.model';
 
+import { PricingData } from '../models/pricing.model';
 import { RiRow } from '../models/ri-portfolio.model';
 
 @Injectable({ providedIn: 'root' })
