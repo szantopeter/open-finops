@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RiDataService } from './ri-portfolio-data.service';
-import { RiCSVParserService } from './ri-portfolio-import.service';
+import { RiDataService } from './service/ri-portfolio-data.service';
+import { RiCSVParserService } from './service/ri-portfolio-import.service';
 import { RiImportUploadComponent } from './ri-portfolio-upload.component';
-import { StorageService } from '../../services/storage.service';
+import { StorageService } from '../../storage-service/storage.service';
 
 function makeFile(text: string, name = 'f.csv'): File {
   const blob = new Blob([text], { type: 'text/csv' });

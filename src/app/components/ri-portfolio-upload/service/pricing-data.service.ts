@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { forkJoin, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { PricingRecord } from '../../models/pricing-record.model';
-import { RiPorftolio } from '../../models/ri-portfolio.model';
+import { PricingRecord } from '../models/pricing-record.model';
+import { RiPorftolio } from '../models/ri-portfolio.model';
 
 @Injectable({ providedIn: 'root' })
 export class PricingDataService {

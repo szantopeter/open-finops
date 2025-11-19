@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 
-import { StorageService } from '../../services/storage.service';
-import { RiDataService } from '../ri-portfolio-upload/ri-portfolio-data.service';
-import { RiCSVParserService } from '../ri-portfolio-upload/ri-portfolio-import.service';
+import { StorageService } from '../../storage-service/storage.service';
+import { RiDataService } from '../ri-portfolio-upload/service/ri-portfolio-data.service';
+import { RiCSVParserService } from '../ri-portfolio-upload/service/ri-portfolio-import.service';
 
 @Component({
   selector: 'app-ri-import-preview',

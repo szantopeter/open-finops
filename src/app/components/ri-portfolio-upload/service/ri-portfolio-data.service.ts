@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { RiPorftolio } from '../../models/ri-portfolio.model';
+import { RiPorftolio } from '../models/ri-portfolio.model';
 
 @Injectable({ providedIn: 'root' })
 export class RiDataService {

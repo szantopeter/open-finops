@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { RiRow } from '../../models/ri-portfolio.model';
+import { RiRow } from '../models/ri-portfolio.model';
 
 @Injectable({ providedIn: 'root' })
 export class FirstFullYearService {

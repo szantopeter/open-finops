@@ -1,6 +1,6 @@
 import { Provider } from '@angular/core';
 
-import { RiImportService } from './ri-portfolio-import.service';
+import { RiImportService } from './service/ri-portfolio-import.service';
 
 export const DEFAULT_IMPORT_PROVIDER: Provider = {
   provide: 'APP_INIT_DEFAULT_IMPORT',

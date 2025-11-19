@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { of } from 'rxjs';
 
 import { RiImportPreviewComponent } from './ri-portfolio-preview.component';
-import { StorageService } from '../../services/storage.service';
-import { RiDataService } from '../ri-portfolio-upload/ri-portfolio-data.service';
-import { RiCSVParserService } from '../ri-portfolio-upload/ri-portfolio-import.service';
+import { StorageService } from '../../storage-service/storage.service';
+import { RiDataService } from '../ri-portfolio-upload/service/ri-portfolio-data.service';
+import { RiCSVParserService } from '../ri-portfolio-upload/service/ri-portfolio-import.service';
 
 describe('RiImportPreviewComponent', () => {
   let fixture: ComponentFixture<RiImportPreviewComponent>;

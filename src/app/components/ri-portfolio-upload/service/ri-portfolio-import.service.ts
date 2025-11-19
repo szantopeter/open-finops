@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { RiDataService } from './ri-portfolio-data.service';
-import { RiRow, RiPorftolio, RiImportMetadata } from '../../models/ri-portfolio.model';
-import { StorageService } from '../../services/storage.service';
+import { RiRow, RiPorftolio, RiImportMetadata } from '../models/ri-portfolio.model';
+import { StorageService } from '../../../storage-service/storage.service';
 
 export interface RiImportParseResult {
   riPortfolio?: RiPorftolio;
