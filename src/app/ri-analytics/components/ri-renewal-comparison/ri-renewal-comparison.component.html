@@ -1,25 +1,33 @@
-<div *ngIf="summaryScenarios && summaryScenarios.length > 0" class="summary-table">
-    <h3>RI Renewal Scenario Comparison (Year After Latest Expiry: {{ summaryScenarios[0]?.firstFullYear }})</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Scenario</th>
-        <th>Savings Amount</th>
-        <th>Savings %</th>
-        <th>RI Cost</th>
-        <th>On-Demand Cost</th>
-        <th>Max Monthly RI Spending</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let scenario of summaryScenarios">
-        <td>{{ scenario.scenario }}</td>
-        <td>${{ scenario.firstFullYearSavings | number:'1.2-2' }}</td>
-        <td>{{ scenario.firstFullYearSavingsPercentage | number:'1.1-1' }}%</td>
-        <td>${{ scenario.firstFullYearRiCost | number:'1.2-2' }}</td>
-        <td>${{ scenario.firstFullYearOnDemandCost | number:'1.2-2' }}</td>
-        <td>${{ scenario.maxMonthlyRiSpending | number:'1.2-2' }}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="bg-white rounded-lg shadow-md p-6">
+  <h2 class="text-xl font-semibold mb-4">RI Renewal Comparison</h2>
+  <div class="overflow-x-auto">
+    <table class="min-w-full table-auto">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Scenario</th>
+          <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Upfront Payment</th>
+          <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Duration</th>
+          <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Full Year</th>
+          <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Savings Amount</th>
+          <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Savings %</th>
+          <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">RI Cost</th>
+          <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">On-Demand Cost</th>
+          <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Max Monthly RI Spending</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let scenario of scenarios" class="border-t">
+          <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ scenario.scenario }}</td>
+          <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ scenario.upfrontPayment }}</td>
+          <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ scenario.durationMonths }} months</td>
+          <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ scenario.firstFullYear }}</td>
+          <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ scenario.firstFullYearSavings | number:'1.2-2' }}</td>
+          <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ scenario.firstFullYearSavingsPercentage | number:'1.2-2' }}%</td>
+          <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ scenario.firstFullYearRiCost | number:'1.2-2' }}</td>
+          <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ scenario.firstFullYearOnDemandCost | number:'1.2-2' }}</td>
+          <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ scenario.maxMonthlyRiSpending | number:'1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

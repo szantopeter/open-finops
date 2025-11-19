@@ -11,13 +11,12 @@ import { AggregationRequest } from '../../models/aggregation-request.model';
 import { MonthlyCostData } from '../../models/monthly-cost-data.model';
 import { MonthlyCostChartService, ChartData } from '../../services/monthly-cost-chart.service';
 import { RiCostAggregationService } from '../../services/ri-cost-aggregation.service';
-import { RiRenewalComparisonComponent } from '../ri-renewal-comparison/ri-renewal-comparison.component';
 
 
 @Component({
   selector: 'app-monthly-cost-chart',
   standalone: true,
-  imports: [CommonModule, FormsModule, RiRenewalComparisonComponent],
+  imports: [CommonModule, FormsModule],
   templateUrl: './monthly-cost-chart.component.html',
   styleUrls: ['./monthly-cost-chart.component.scss']
 })
@@ -73,9 +72,7 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
     this.sub?.unsubscribe();
     this.modifiedSub?.unsubscribe();
 
-    console.log(`[MonthlyCostChart] requesting ${this.groupingMode} aggregation for baseline`);
     this.sub = this.monthlyCostChartService.requestAggregation({ groupingMode: this.groupingMode }).subscribe((chartData: ChartData) => {
-      console.log('[MonthlyCostChart] baseline chartData received');
       this.data = chartData.aggregates;
       this.error = chartData.error;
       this.missingPricing = chartData.missingPricing;
@@ -94,12 +91,10 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
       }
     });
 
-    console.log(`[MonthlyCostChart] requesting ${this.groupingMode} aggregation for renewal`);
     this.modifiedSub = this.monthlyCostChartService.requestAggregation({
       groupingMode: this.groupingMode,
       renewalOptions: { upfrontPayment: 'All Upfront', durationMonths: 36 }
     }).subscribe((chartData: ChartData) => {
-      console.log('[MonthlyCostChart] renewal chartData received');
       this.modifiedData = chartData.aggregates;
 
       // Capture modified chart savings data
@@ -123,11 +118,9 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
     this.modifiedSub?.unsubscribe();
     try {
       if (this.chartInstance && typeof this.chartInstance.dispose === 'function') {
-        console.log('[MonthlyCostChart] Disposing echarts instance');
         this.chartInstance.dispose();
       }
       if (this.modifiedChartInstance && typeof this.modifiedChartInstance.dispose === 'function') {
-        console.log('[MonthlyCostChart] Disposing modified echarts instance');
         this.modifiedChartInstance.dispose();
       }
     } catch {
@@ -136,13 +129,11 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
   }
 
   private renderNormalChart(aggregates: Record<string, Record<string, MonthlyCostData>>): void {
-    console.log('[MonthlyCostChart] renderChart start');
     try {
       echarts.use([BarChart, GridComponent, TooltipComponent, LegendComponent, CanvasRenderer]);
       if (!echarts) return;
       // Convert aggregates { 'YYYY-MM': { groupKey: { riCost, onDemandCost, savingsAmount, savingsPercentage } } } to ECharts series
       const months = Object.keys(aggregates).sort();
-      console.log('[MonthlyCostChart] Months found:', months.length);
 
       // Determine group keys and sort by total cost descending
       const groupMap = new Map<string, number>();
@@ -406,21 +397,17 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
 
       // Always dispose of the old chart and create a new one to ensure proper sizing
       if (this.chartInstance && typeof this.chartInstance.dispose === 'function') {
-        console.log('[MonthlyCostChart] Disposing old chart instance');
         this.chartInstance.dispose();
       }
 
-      console.log('[MonthlyCostChart] Creating new echarts instance');
       const chart = echarts.init(container as any);
       this.chartInstance = chart;
       chart.setOption(option, true);
-      console.log('[MonthlyCostChart] Chart option set');
 
       // Force resize to ensure chart renders correctly
       setTimeout(() => {
         try {
           chart.resize();
-          console.log('[MonthlyCostChart] Chart resized');
         } catch {
           console.error('[MonthlyCostChart] Resize error');
         }
@@ -434,13 +421,11 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
   }
 
   private renderModifiedChart(aggregates: Record<string, Record<string, MonthlyCostData>>): void {
-    console.log('[MonthlyCostChart] renderModifiedChart start');
     try {
       echarts.use([BarChart, GridComponent, TooltipComponent, LegendComponent, CanvasRenderer]);
       if (!echarts) return;
       // Convert aggregates { 'YYYY-MM': { groupKey: { riCost, onDemandCost, savingsAmount, savingsPercentage } } } to ECharts series
       const months = Object.keys(aggregates).sort();
-      console.log('[MonthlyCostChart] Months found:', months.length);
 
       // Determine group keys and sort by total cost descending
       const groupMap = new Map<string, number>();
@@ -704,21 +689,17 @@ export class MonthlyCostChartComponent implements OnInit, OnDestroy {
 
       // Always dispose of the old chart and create a new one to ensure proper sizing
       if (this.modifiedChartInstance && typeof this.modifiedChartInstance.dispose === 'function') {
-        console.log('[MonthlyCostChart] Disposing old modified chart instance');
         this.modifiedChartInstance.dispose();
       }
 
-      console.log('[MonthlyCostChart] Creating new modified echarts instance');
       const chart = echarts.init(container as any);
       this.modifiedChartInstance = chart;
       chart.setOption(option, true);
-      console.log('[MonthlyCostChart] Modified chart option set');
 
       // Force resize to ensure chart renders correctly
       setTimeout(() => {
         try {
           chart.resize();
-          console.log('[MonthlyCostChart] Modified chart resized');
         } catch {
           console.error('[MonthlyCostChart] Modified resize error');
         }

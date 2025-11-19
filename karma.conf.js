@@ -4,14 +4,13 @@
 module.exports = function (config) {
   config.set({
     basePath: '',
-    frameworks: ['jasmine', '@angular-devkit/build-angular'],
+    frameworks: ['jasmine'],
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
       require('karma-junit-reporter'),
-      
       require('karma-spec-reporter')
     ],
     client: {
@@ -57,6 +56,12 @@ module.exports = function (config) {
       }
     },
     singleRun: true,
-    restartOnFileChange: true
+    restartOnFileChange: true,
+    // Karma Test Explorer specific configuration
+    hostname: 'localhost',
+    listenAddress: 'localhost',
+    // Additional configuration for test explorer
+    adapters: [],
+    preprocessors: {}
   });
 };

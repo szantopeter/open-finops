@@ -19,6 +19,7 @@ import { RiCSVParserService } from '../../services/ri-import.service';
           <div *ngIf="c.metadata">
             Reserved Instance data overview: Data extract is date {{ c.ageText }} ({{ c.displayDate }}).
             Total RIs <strong>{{ c.total }}</strong> coming from <strong>{{ c.unique }}</strong> purchases.
+            <div *ngIf="c.latestExpiry">Latest RI expiry: <strong>{{ c.latestExpiry }}</strong></div>
           </div>
         </div>
       </ng-container>
@@ -56,7 +57,23 @@ export class RiImportPreviewComponent implements OnDestroy {
         }
       }
 
-      return { total, unique, metadata: imp.metadata, ageText, displayDate };
+      // compute latest expiry date (most distant endDate among rows)
+      let latestExpiry: string | null = null;
+      try {
+        const endDates = imp.rows
+          .map((r: any) => r.endDate)
+          .filter((d: any) => d)
+          .map((d: any) => Date.parse(d))
+          .filter((n: number) => !Number.isNaN(n));
+        if (endDates.length > 0) {
+          const maxMs = Math.max(...endDates);
+          latestExpiry = new Date(maxMs).toISOString().slice(0, 10);
+        }
+      } catch (e) {
+        latestExpiry = null;
+      }
+
+      return { total, unique, metadata: imp.metadata, ageText, displayDate, latestExpiry };
     })
   );
 
@@ -83,7 +100,7 @@ export class RiImportPreviewComponent implements OnDestroy {
             const csvLines = [headers.join(',')];
             for (const row of storedImport.rows) {
               const vals = headers.map(h => {
-                const val = (row as any)[h];
+                const val = row[h];
                 // Quote values that might contain commas or special chars
                 if (val === null || val === undefined) return '';
                 const str = String(val);

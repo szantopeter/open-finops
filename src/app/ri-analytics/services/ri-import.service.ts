@@ -222,6 +222,18 @@ export class RiCSVParserService {
       fileLastModified: fileLastModifiedIso
     };
 
+    // Diagnostics: expose parse summary to console for developer visibility
+    try {
+      console.debug('[RiCSVParserService] parsed rows:', rows.length, 'columns:', headers.length, 'sampleRow:', rows[0] ? { startDate: rows[0].startDate, instanceClass: rows[0].instanceClass, region: rows[0].region } : null);
+      console.info('[RiCSVParserService] parsed rows:', rows.length, 'columns:', headers.length, 'sampleRow:', rows[0] ? { startDate: rows[0].startDate, instanceClass: rows[0].instanceClass, region: rows[0].region } : null);
+    } catch (e) {
+      // swallow diagnostics errors
+      // eslint-disable-next-line no-console
+      console.debug('[RiCSVParserService] diagnostics error', e);
+      // eslint-disable-next-line no-console
+      console.info('[RiCSVParserService] diagnostics error', e);
+    }
+
     return { riPortfolio: { metadata, rows } };
   }
 
@@ -289,6 +301,10 @@ export class RiImportService {
   async saveImportResult(riImportParseResult: RiImportParseResult): Promise<string | null> {
     if (riImportParseResult.errors) {
       this.riDataService.clear();
+      try {
+        console.debug('[RiImportService] import errors:', riImportParseResult.errors.slice(0, 10));
+        console.info('[RiImportService] import errors:', riImportParseResult.errors.slice(0, 10));
+      } catch {}
       return riImportParseResult.errors.join('; ');
     }
     if (riImportParseResult.riPortfolio) {
@@ -296,6 +312,10 @@ export class RiImportService {
       // persist via generic storage and notify the framework coordinator
       await this.storageService.set(this.RI_IMPORT_KEY, riImportParseResult.riPortfolio as any);
       await this.pageState.saveKey(this.RI_IMPORT_KEY);
+      try {
+        console.debug('[RiImportService] saved import result:', riImportParseResult.riPortfolio.metadata.rowsCount, 'rows, key:', this.RI_IMPORT_KEY);
+        console.info('[RiImportService] saved import result:', riImportParseResult.riPortfolio.metadata.rowsCount, 'rows, key:', this.RI_IMPORT_KEY);
+      } catch {}
     }
     return null;
   }

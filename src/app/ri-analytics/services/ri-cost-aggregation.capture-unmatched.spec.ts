@@ -35,28 +35,24 @@ describe('Capture unmatched diagnostics (headless)', () => {
   it('fetches asset CSV and shows first unmatched diagnostic', async () => {
     try {
       await storage.remove('ri-import');
-      console.log('[CaptureSpec] cleared ri-import from storage');
     } catch {
-      console.log('[CaptureSpec] storage remove ignored');
+      // ignore
     }
 
     // Fetch the CSV asset served by Karma (assets/ is available at /assets)
     try {
       const res = await fetch('/assets/cloudability-rds-reservations.csv');
       if (!res.ok) {
-        console.log('[CaptureSpec] failed to fetch asset:', res.status);
         return;
       }
       const txt = await res.text();
       const parsed = importer.parseText(txt, 'capture-spec');
       if (!parsed?.riPortfolio) {
-        console.log('[CaptureSpec] parser returned no import');
         return;
       }
 
       // Set the import into RiDataService as the initializer would do
       (dataService as any).setRiPortfolio(parsed.riPortfolio);
-      console.log('[CaptureSpec] parsed import rows:', (parsed.riPortfolio as any).rows?.length ?? 0);
 
       const imp = parsed.riPortfolio as any;
       const rows = imp.rows.map((r: any) => ({
@@ -85,21 +81,17 @@ describe('Capture unmatched diagnostics (headless)', () => {
         if (!pricingPaths.includes(fileName)) pricingPaths.push(fileName);
       }
 
-      console.log('[CaptureSpec] Requesting pricing files:', pricingPaths.length, 'files', pricingPaths[0] ?? 'none');
-
       // Load pricing files via PricingDataService - non-failing for missing files
       const pricingSvc = TestBed.inject(PricingDataService);
       let loaded: { pricingRecords: any[]; missingFiles: string[] } = { pricingRecords: [], missingFiles: [] };
       try {
         // use firstValueFrom to await the observable
         loaded = await firstValueFrom(pricingSvc.loadPricingForPaths(pricingPaths));
-        console.log('[CaptureSpec] Loaded pricingRecords:', loaded.pricingRecords.length, 'missing:', loaded.missingFiles.length);
       } catch (e) {
         console.warn('[CaptureSpec] Pricing load failed:', e?.message ?? e);
       }
 
       const aggregates = service.calculateAggregation({ groupingMode: 'ri-type' }, rows, loaded.pricingRecords as any);
-      console.log('[CaptureSpec] Aggregates computed (months):', Object.keys(aggregates).length);
     } catch (e) {
       console.error('[CaptureSpec] Exception during fetch/parse:', e);
     }

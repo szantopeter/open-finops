@@ -77,6 +77,24 @@ export class PricingDataService {
           }
         }
         if (!pricingRecords || pricingRecords.length === 0) throw new Error('no pricing files available');
+
+        // Diagnostics: surface what was loaded to help debugging asset lookup
+        try {
+          // limit verbosity in console
+          console.debug('[PricingDataService] requested paths:', paths);
+          console.info('[PricingDataService] requested paths:', paths);
+          console.debug('[PricingDataService] missing files:', missingFiles.slice(0, 10));
+          console.info('[PricingDataService] missing files:', missingFiles.slice(0, 10));
+          console.debug('[PricingDataService] pricingRecords loaded:', pricingRecords.length, 'sample:', pricingRecords.slice(0, 5).map((r: any) => ({ instance: r.instanceClass, region: r.region, duration: r.durationMonths, upfront: r.upfrontCost })));
+          console.info('[PricingDataService] pricingRecords loaded:', pricingRecords.length, 'sample:', pricingRecords.slice(0, 5).map((r: any) => ({ instance: r.instanceClass, region: r.region, duration: r.durationMonths, upfront: r.upfrontCost })));
+        } catch (e) {
+          // swallow diagnostics errors
+          // eslint-disable-next-line no-console
+          console.debug('[PricingDataService] diagnostics error', e);
+          // eslint-disable-next-line no-console
+          console.info('[PricingDataService] diagnostics error', e);
+        }
+
         return { pricingRecords, missingFiles };
       }),
       catchError((err) => throwError(() => new Error(`Failed to load pricing data: ${err?.message ?? err}`)))
