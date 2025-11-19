@@ -59,11 +59,11 @@ export class RiImportPreviewComponent implements OnInit {
       // compute latest expiry date (most distant endDate among rows)
       let latestExpiry: string | null = null;
       try {
-          const endDates = imp.rows
-            .map((r: any) => r.endDate)
-            .filter((d: any) => d != null)
-            .map((d: any) => Date.parse(d))
-            .filter((n: number) => !Number.isNaN(n));
+        const endDates = imp.rows
+          .map((r: any) => r.endDate)
+          .filter((d: any) => d != null)
+          .map((d: any) => Date.parse(d))
+          .filter((n: number) => !Number.isNaN(n));
         if (endDates.length > 0) {
           const maxMs = Math.max(...endDates);
           latestExpiry = new Date(maxMs).toISOString().slice(0, 10);

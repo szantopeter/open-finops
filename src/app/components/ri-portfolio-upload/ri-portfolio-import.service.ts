@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { RiDataService } from './ri-portfolio-data.service';
-import { StorageService } from '../../services/storage.service';
 import { RiRow, RiPorftolio, RiImportMetadata } from '../../models/ri-portfolio.model';
+import { StorageService } from '../../services/storage.service';
 
 export interface RiImportParseResult {
   riPortfolio?: RiPorftolio;
@@ -288,7 +288,7 @@ export class RiImportService {
   constructor(
     private readonly storageService: StorageService,
     private readonly riCSVParserService: RiCSVParserService,
-    private readonly riDataService: RiDataService,
+    private readonly riDataService: RiDataService
   ) {}
 
   async saveImportResult(riImportParseResult: RiImportParseResult): Promise<string | null> {

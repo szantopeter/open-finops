@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+
 import { RiImportPreviewComponent } from '../ri-portfolio-preview/ri-portfolio-preview.component';
 import { RiImportUploadComponent } from '../ri-portfolio-upload/ri-portfolio-upload.component';
 
@@ -12,5 +13,6 @@ import { RiImportUploadComponent } from '../ri-portfolio-upload/ri-portfolio-upl
   imports: [RiImportUploadComponent, RiImportPreviewComponent, CommonModule]
 })
 
-export class LandingComponent  {
+export class LandingComponent {
+  readonly title = 'RDS RI Portfolio Optimizer';
 }

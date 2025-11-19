@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RiImportUploadComponent } from './ri-portfolio-upload.component';
-import { StorageService } from '../../services/storage.service';
 import { RiDataService } from './ri-portfolio-data.service';
 import { RiCSVParserService } from './ri-portfolio-import.service';
+import { RiImportUploadComponent } from './ri-portfolio-upload.component';
+import { StorageService } from '../../services/storage.service';
 
 function makeFile(text: string, name = 'f.csv'): File {
   const blob = new Blob([text], { type: 'text/csv' });
@@ -15,7 +15,7 @@ describe('RiImportUploadComponent', () => {
   let parserSpy: jasmine.SpyObj<RiCSVParserService>;
   let dataSpy: jasmine.SpyObj<RiDataService>;
   let storageSpy: jasmine.SpyObj<StorageService>;
-  let pageStateSpy: undefined;
+  // pageStateService removed; no local spy required
 
   beforeEach(async () => {
     parserSpy = jasmine.createSpyObj('RiImportService', ['parseFile']);
@@ -36,7 +36,7 @@ describe('RiImportUploadComponent', () => {
     fixture.detectChanges();
   });
 
-  
+
 
   it('shows error and clears data when parser returns errors', async () => {
     const file = makeFile('a,b,c\n');
