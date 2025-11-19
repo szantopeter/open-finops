@@ -5,10 +5,8 @@ export interface RiImportMetadata {
   importedAt: string; // ISO
   columns: string[];
   rowsCount: number;
-  // If the import originated from a File the browser exposes the lastModified
-  // timestamp on the File object; this records that (ISO) when available.
   fileLastModified?: string;
-  version?: string;
+  firstFullYear: number;
 }
 
 export interface RiPortfolio {
