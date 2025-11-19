@@ -39,6 +39,7 @@ Use these tools and technologies
 - Husky for Git hooks
 
 ### Frontend coding standards
+- Use strict types, avoid using any. Always declare function return types
 - Business logic has to be clearly separated from UI specific details 
 Always follow clean code best practices
 - Create components by business functionality, not by technical layers. For example instead of creating folders like `shared/components`, `shared/services`, create feature-based modules like `order-management/`, `tracking/`, etc. and put all relevant components, services, and models there

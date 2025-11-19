@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RiDataService } from './service/ri-portfolio-data.service';
+import { RiPortfolioDataService } from './service/ri-portfolio-data.service';
 import { RiCSVParserService } from './service/ri-portfolio-import.service';
 import { RiImportUploadComponent } from './ri-portfolio-upload.component';
 import { StorageService } from '../../storage-service/storage.service';
@@ -13,7 +13,7 @@ function makeFile(text: string, name = 'f.csv'): File {
 describe('RiImportUploadComponent', () => {
   let fixture: ComponentFixture<RiImportUploadComponent>;
   let parserSpy: jasmine.SpyObj<RiCSVParserService>;
-  let dataSpy: jasmine.SpyObj<RiDataService>;
+  let dataSpy: jasmine.SpyObj<RiPortfolioDataService>;
   let storageSpy: jasmine.SpyObj<StorageService>;
   // pageStateService removed; no local spy required
 
@@ -27,7 +27,7 @@ describe('RiImportUploadComponent', () => {
       imports: [RiImportUploadComponent],
       providers: [
         { provide: RiCSVParserService, useValue: parserSpy },
-        { provide: RiDataService, useValue: dataSpy },
+        { provide: RiPortfolioDataService, useValue: dataSpy },
         { provide: StorageService, useValue: storageSpy }
       ]
     }).compileComponents();

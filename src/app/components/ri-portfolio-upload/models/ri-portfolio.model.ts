@@ -1,3 +1,4 @@
+import PricingData from "./pricing.model";
 
 export interface RiImportMetadata {
   source: string;
@@ -10,9 +11,9 @@ export interface RiImportMetadata {
   version?: string;
 }
 
-export interface RiPorftolio {
+export interface RiPortfolio {
   metadata: RiImportMetadata;
-  rows: RiRow[];
+  rows: { riRow: RiRow; pricingData: PricingData }[];
 }
 
 export interface RiRow {

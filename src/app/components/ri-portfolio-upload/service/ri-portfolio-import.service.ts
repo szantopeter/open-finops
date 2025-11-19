@@ -1,20 +1,29 @@
 import { Injectable } from '@angular/core';
 
-import { RiDataService } from './ri-portfolio-data.service';
-import { RiRow, RiPorftolio, RiImportMetadata } from '../models/ri-portfolio.model';
+import { RiPortfolioDataService } from './ri-portfolio-data.service';
+import { RiRow, RiPortfolio, RiImportMetadata } from '../models/ri-portfolio.model';
 import { StorageService } from '../../../storage-service/storage.service';
+import { PricingLoaderService } from './pricing-loader.service';
+import { PricingData } from '../models/pricing.model';
 
 export interface RiImportParseResult {
-  riPortfolio?: RiPorftolio;
+  riPortfolio?: RiPortfolio;
   errors?: string[];
 }
 
-const REQUIRED_COLUMNS = ['startDate', 'instanceClass', 'region', 'count'];
+const REQUIRED_HEADERS = ['Start', 'Instance Type', 'Region', 'Count'];
 
 @Injectable({ providedIn: 'root' })
 export class RiCSVParserService {
-  // optional fileLastModifiedIso can be provided when the source is a File
-  parseText(text: string, source = 'clipboard', fileLastModifiedIso?: string): RiImportParseResult {
+
+  constructor(private readonly pricingLoader: PricingLoaderService) {}
+
+  // Public method to parse CSV text, internally calls private parseText
+  async parseCsvText(text: string, source = 'clipboard', fileLastModifiedIso?: string): Promise<RiImportParseResult> {
+    return this.parseText(text, source, fileLastModifiedIso);
+  }
+
+  private async parseText(text: string, source = 'clipboard', fileLastModifiedIso?: string): Promise<RiImportParseResult> {
     if (!text) return { errors: ['empty input'] };
 
     const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
@@ -23,51 +32,8 @@ export class RiCSVParserService {
     const header = this.parseCsvLine(lines[0]);
     const headers = header.map(h => h.trim());
 
-    // Map common CSV header variants to canonical keys used by the domain model.
-    const headerToKey: Record<string, string> = {};
-    const presentKeys = new Set<string>();
-    const normalize = (s: string): string => this.normalizeHeaderKey(s);
-    for (const h of headers) {
-      const n = normalize(h);
-      let key = h; // default: keep original header
-      if (['start', 'startdate', 'start_date'].includes(n)) key = 'startDate';
-      else if (['end', 'enddate', 'end_date'].includes(n)) key = 'endDate';
-      else if (n.includes('instancetype') || (n.includes('instance') && n.includes('type')) || n === 'instancetype') key = 'instanceClass';
-      else if (n.includes('region')) key = 'region';
-      else if (n.includes('count')) key = 'count';
-      else if (n === 'multiaz' || n === 'multiaz') key = 'multiAZ';
-      else if (n.includes('engine') || n.includes('product')) key = 'engine';
-      else key = h; // fall back to original header
-      headerToKey[h] = key;
-      presentKeys.add(key);
-    }
-
-    // Debug: print detected headers and mapping to help diagnose real-world CSVs
-    // (temporary — will be removed once mapping is reliable)
-    // NOTE: logging removed — parser should be deterministic. Keep headerToKey
-    // built above for further processing.
-
-    let missing = REQUIRED_COLUMNS.filter(c => !presentKeys.has(c));
-    // Fallback: common Cloudability header names (Start, Instance Type, Region, Count)
-    if (missing.length) {
-      const headersLower = headers.map(h => h.toLowerCase());
-      const fallbackMap: Record<string, string> = {};
-      if (headersLower.includes('start')) fallbackMap['start'] = 'startDate';
-      if (headersLower.includes('instance type') || headersLower.includes('instancetype')) fallbackMap['instance type'] = 'instanceClass';
-      if (headersLower.includes('region')) fallbackMap['region'] = 'region';
-      if (headersLower.includes('count')) fallbackMap['count'] = 'count';
-      if (Object.keys(fallbackMap).length > 0) {
-        for (const h of headers) {
-          const hl = h.toLowerCase();
-          if (fallbackMap[hl]) {
-            headerToKey[h] = fallbackMap[hl];
-            presentKeys.add(fallbackMap[hl]);
-          }
-        }
-        missing = REQUIRED_COLUMNS.filter(c => !presentKeys.has(c));
-      }
-    }
-    if (missing.length) return { errors: [`missing required columns: ${missing.join(',')}`] };
+    const missing = REQUIRED_HEADERS.filter(h => !headers.includes(h));
+    if (missing.length) return { errors: [`missing required headers: ${missing.join(',')}`] };
 
     const rows: RiRow[] = [];
     const errors: string[] = [];
@@ -77,163 +43,145 @@ export class RiCSVParserService {
       if (row.length === 0) continue;
 
       const objRaw: Record<string, string> = {};
-      const obj: Record<string, string> = {};
       for (let j = 0; j < headers.length; j++) {
-        const rawHeader = headers[j];
-        const value = row[j] ?? '';
-        objRaw[rawHeader] = value;
-        const mappedKey = headerToKey[rawHeader] ?? rawHeader;
-        obj[mappedKey] = value;
+        objRaw[headers[j]] = row[j] ?? '';
       }
 
       // basic normalization
-      const start = obj['startDate'] ?? obj['Start'] ?? objRaw['Start'];
+      const start = objRaw['Start'];
       const startIso = this.normalizeDate(start);
       if (!startIso) {
-        errors.push(`invalid startDate at line ${i + 1}`);
+        errors.push(`invalid Start at line ${i + 1}`);
         continue;
       }
 
-      const count = Number.parseInt((obj['count'] ?? objRaw['Count'] ?? '0') as string, 10) || 0;
+      const count = Number.parseInt(objRaw['Count'] || '0', 10) || 0;
 
-      // --- Enhanced normalization for engine/edition/license and duration ---
-      const rawEngine = (obj['engine'] ?? objRaw['Product'] ?? objRaw['Product'] ?? '') as string;
-      const rawEditionField = (obj['edition'] ?? objRaw['Edition'] ?? '') as string;
-      // prefer an explicit license field if present (some CSVs expose it)
-      const rawLicenseField = (obj['license'] ?? objRaw['License'] ?? '') as string;
-
-      // derive duration from common Term values (e.g. '1 year' -> 12)
+      // derive duration from Term
       let durationMonths: number | undefined = undefined;
-      const termRaw = (obj['term'] ?? objRaw['Term'] ?? objRaw['term'] ?? '') as string;
+      const termRaw = objRaw['Term'] || '';
       if (termRaw) {
         const t = termRaw.toString().toLowerCase();
         if (t.includes('1 year') || t.includes('1yr') || t.includes('12')) durationMonths = 12;
         else if (t.includes('3 year') || t.includes('3yr') || t.includes('36')) durationMonths = 36;
       }
 
-      // Clean engine string and extract parenthetical license tokens
-      const engineStr = (rawEngine || '').toString();
-      const parenMatch = engineStr.match(/\(([^)]+)\)/);
-      const parenToken = parenMatch ? parenMatch[1].toString().toLowerCase() : null;
-      const engineNoParen = engineStr.replace(/\([^)]+\)/, '').trim();
-      const engineBaseLower = engineNoParen.toString().toLowerCase();
-
-      // Normalize engine family (same rules as used in the chart component)
-      const normalizeEngine = (dbEngine: string): string => {
-        const lower = (dbEngine || '').toString().toLowerCase();
-        if (lower.includes('aurora') && lower.includes('mysql')) return 'aurora-mysql';
-        if (lower.includes('aurora') && (lower.includes('postgres') || lower.includes('postgresql'))) return 'aurora-postgresql';
-        if (lower.includes('mysql')) return 'mysql';
-        if (lower.includes('postgres') || lower.includes('postgresql')) return 'postgresql';
-        if (lower.includes('mariadb')) return 'mariadb';
-        if (lower.includes('oracle')) return 'oracle';
-        if (lower.includes('sql server') || lower.includes('sqlserver')) return 'sqlserver';
-        return dbEngine || '';
-      };
-
-      const enginesWithVariants = new Set(['oracle', 'db2', 'sqlserver']);
-
-      // Derive edition: prefer explicit edition field; else try to extract from engine token
-      let editionOnly: string | null = null;
-      const explicitEdition = (rawEditionField || '').toString();
-      if (explicitEdition) {
-        // strip parentheses inside edition if present
-        editionOnly = explicitEdition.replace(/\([^)]+\)/, '').trim() || null;
-      } else {
-        // if engineNoParen contains hyphenated tokens like 'oracle-se2', take the tail as edition
-        if (engineNoParen.includes('-')) {
-          const parts = engineNoParen.split(/[-\s]+/).map(p => p.trim()).filter(Boolean);
-          if (parts.length > 1) editionOnly = parts.slice(1).join('-');
-        }
-      }
-
-      // Normalize license token: prefer parenthesis content, else license field
-      let licenseToken: string | null = null;
-      if (parenToken) licenseToken = parenToken;
-      else if (rawLicenseField) licenseToken = rawLicenseField.toString().toLowerCase();
-      if (licenseToken) {
-        // normalize common phrases
-        if (licenseToken.includes('bring') || licenseToken.includes('byol')) licenseToken = 'byol';
-        else if (licenseToken.includes('license') || licenseToken.includes('included') || licenseToken.includes('li')) licenseToken = 'li';
-      }
-
-      // Final normalized tokens
-      const engineNormalizedBase = normalizeEngine(engineBaseLower || editionOnly || '');
-
-      // For engines that support editions (oracle, sqlserver, db2), keep engine and edition separate
-      // For other engines, append license to the engine token itself
-      let finalEngineToken = engineNormalizedBase;
-      let finalEdition: string | null = null;
-
-      if (enginesWithVariants.has(engineNormalizedBase)) {
-        // Keep engine as base (e.g., 'oracle')
-        finalEngineToken = engineNormalizedBase;
-        // Build edition with license suffix (e.g., 'se2-byol')
-        if (editionOnly) finalEdition = editionOnly.toString();
-        if (finalEdition && licenseToken) finalEdition = `${finalEdition}-${licenseToken}`;
-        else if (!finalEdition && licenseToken) finalEdition = licenseToken;
-      } else {
-        // For engines without editions (mysql, postgresql, etc.), append license to engine
-        if (licenseToken) finalEngineToken = `${engineNormalizedBase}-${licenseToken}`;
-      }
-
-      // If durationMonths was not derived from Term, attempt to read numeric durationMonths field
-      durationMonths ??= obj['durationMonths'] ? Number.parseInt(obj['durationMonths'], 10) : undefined;
-
-      // Import service already normalized all fields - just pass through with upfront normalization
-      const normalizeUpfront = (u: any): string => {
-        const raw = (u ?? '').toString().trim().toLowerCase();
-        if (!raw) return 'No Upfront';
-        if (raw.includes('no') && raw.includes('up')) return 'No Upfront';
-        if (raw.includes('partial') || raw.includes('partial up')) return 'Partial Upfront';
-        if (raw.includes('all') || raw.includes('all up') || raw.includes('allupfront') || raw.includes('all-upfront')) return 'All Upfront';
-        // common alternate spellings
-        if (raw.includes('no-upfront') || raw.includes('noupfront')) return 'No Upfront';
-        if (raw.includes('partial-upfront')) return 'Partial Upfront';
-        if (raw.includes('all-upfront')) return 'All Upfront';
-        // fallback: title-case the raw value replacing hyphens/underscores with spaces
-        return raw.replaceAll(/[-_]+/g, ' ').replaceAll(/\b\w/g, (c: string) => c.toUpperCase());
-      };
+      const { engine, edition } = this.parseEngine(objRaw['Product']);
 
       rows.push({
         raw: objRaw,
         startDate: startIso,
-        endDate: obj['endDate'] ? this.normalizeDate(obj['endDate']) ?? undefined : undefined,
+        endDate: objRaw['End'] ? this.normalizeDate(objRaw['End']) ?? undefined : undefined,
         count,
-        instanceClass: (obj['instanceClass'] ?? obj['Instance Type'] ?? objRaw['Instance Type'] ?? ''),
-        region: (obj['region'] ?? objRaw['Region'] ?? ''),
-        multiAz: ((obj['multiAZ'] ?? objRaw['multiAZ'] ?? objRaw['multiAz'] ?? '')).toLowerCase() === 'true',
-        engine: finalEngineToken,
-        edition: finalEdition,
-        upfrontPayment: normalizeUpfront(obj['upfront'] ?? obj['RI Type'] ?? objRaw['RI Type'] ?? objRaw['RI Type']),
-        durationMonths: durationMonths
+        instanceClass: objRaw['Instance Type'],
+        region: objRaw['Region'],
+        multiAz: objRaw['multiAZ'].toLowerCase() === 'true',
+        engine,
+        edition,
+        upfrontPayment: this.normalizeUpfront(objRaw['RI Type']),
+        durationMonths
       });
     }
 
+    const rowsWithPricing = await Promise.all(rows.map(async (riRow) => {
+      try {
+        const pricingData = await this.pricingLoader.loadPricingForRiRow(riRow);
+        return { riRow, pricingData };
+      } catch (error) {
+        errors.push(`Failed to load pricing for row: ${riRow.instanceClass} in ${riRow.region} - ${error.message}`);
+        return null; // will filter out
+      }
+    }));
+
     if (errors.length) return { errors };
+
+    const validRows = rowsWithPricing.filter(row => row !== null) as { riRow: RiRow; pricingData: PricingData }[];
 
     const metadata: RiImportMetadata = {
       source,
       importedAt: new Date().toISOString(),
       columns: headers,
-      rowsCount: rows.length,
+      rowsCount: validRows.length,
       fileLastModified: fileLastModifiedIso
     };
 
-    // Diagnostics: expose parse summary to console for developer visibility
-    try {
-      console.debug('[RiCSVParserService] parsed rows:', rows.length, 'columns:', headers.length, 'sampleRow:', rows[0] ? { startDate: rows[0].startDate, instanceClass: rows[0].instanceClass, region: rows[0].region } : null);
-      console.info('[RiCSVParserService] parsed rows:', rows.length, 'columns:', headers.length, 'sampleRow:', rows[0] ? { startDate: rows[0].startDate, instanceClass: rows[0].instanceClass, region: rows[0].region } : null);
-    } catch {
-      // If diagnostics logging fails, ignore to avoid impacting parser
-    }
-
-    return { riPortfolio: { metadata, rows } };
+    return { riPortfolio: { metadata, rows: validRows } };
   }
 
-  private normalizeHeaderKey(s: string): string {
-    // Use split/join to remove non-alphanumerics to avoid replaceAll rule issues
-    return s.split(/[^a-zA-Z0-9]/g).join('').toLowerCase();
+  private normalizeEngine(dbEngine: string): string {
+    const lower = (dbEngine || '').toString().toLowerCase();
+    if (lower.includes('aurora') && lower.includes('mysql')) return 'aurora-mysql';
+    if (lower.includes('aurora') && (lower.includes('postgres') || lower.includes('postgresql'))) return 'aurora-postgresql';
+    if (lower.includes('mysql')) return 'mysql';
+    if (lower.includes('postgres') || lower.includes('postgresql')) return 'postgresql';
+    if (lower.includes('mariadb')) return 'mariadb';
+    if (lower.includes('oracle')) return 'oracle';
+    if (lower.includes('sql server') || lower.includes('sqlserver')) return 'sqlserver';
+    return dbEngine || '';
+  }
+
+  private normalizeUpfront(u: any): string {
+    const raw = (u ?? '').toString().trim().toLowerCase();
+    if (!raw) return 'No Upfront';
+    if (raw.includes('no') && raw.includes('up')) return 'No Upfront';
+    if (raw.includes('partial') || raw.includes('partial up')) return 'Partial Upfront';
+    if (raw.includes('all') || raw.includes('all up') || raw.includes('allupfront') || raw.includes('all-upfront')) return 'All Upfront';
+    // common alternate spellings
+    if (raw.includes('no-upfront') || raw.includes('noupfront')) return 'No Upfront';
+    if (raw.includes('partial-upfront')) return 'Partial Upfront';
+    if (raw.includes('all-upfront')) return 'All Upfront';
+    // fallback: title-case the raw value replacing hyphens/underscores with spaces
+    return raw.replaceAll(/[-_]+/g, ' ').replaceAll(/\b\w/g, (c: string) => c.toUpperCase());
+  }
+
+  private parseEngine(rawEngine: string): { engine: string; edition: string | null } {
+    // Clean engine string and extract parenthetical license tokens
+    const engineStr = (rawEngine || '').toString();
+    const parenMatch = /\(([^)]+)\)/.exec(engineStr);
+    const parenToken = parenMatch ? parenMatch[1].toString().toLowerCase() : null;
+    const engineNoParen = engineStr.replace(/\([^)]+\)/, '').trim();
+    const engineBaseLower = engineNoParen.toString().toLowerCase();
+
+    const enginesWithVariants = new Set(['oracle', 'db2', 'sqlserver']);
+
+    // Derive edition: try to extract from engine token
+    let editionOnly: string | null = null;
+    // if engineNoParen contains hyphenated tokens like 'oracle-se2', take the tail as edition
+    if (engineNoParen.includes('-')) {
+      const parts = engineNoParen.split(/[-\s]+/).map(p => p.trim()).filter(Boolean);
+      if (parts.length > 1) editionOnly = parts.slice(1).join('-');
+    }
+
+    // Normalize license token: prefer parenthesis content
+    let licenseToken: string | null = null;
+    if (parenToken) licenseToken = parenToken;
+    if (licenseToken) {
+      // normalize common phrases
+      if (licenseToken.includes('bring') || licenseToken.includes('byol')) licenseToken = 'byol';
+      else if (licenseToken.includes('license') || licenseToken.includes('included') || licenseToken.includes('li')) licenseToken = 'li';
+    }
+
+    // Final normalized tokens
+    const engineNormalizedBase = this.normalizeEngine(engineBaseLower || editionOnly || '');
+
+    // For engines that support editions (oracle, sqlserver, db2), keep engine and edition separate
+    // For other engines, append license to the engine token itself
+    let finalEngineToken: string;
+    let finalEdition: string | null = null;
+
+    if (enginesWithVariants.has(engineNormalizedBase)) {
+      // Keep engine as base (e.g., 'oracle')
+      finalEngineToken = engineNormalizedBase;
+      // Build edition with license suffix (e.g., 'se2-byol')
+      if (editionOnly) finalEdition = editionOnly.toString();
+      if (finalEdition && licenseToken) finalEdition = `${finalEdition}-${licenseToken}`;
+      else if (!finalEdition && licenseToken) finalEdition = licenseToken;
+    } else {
+      // For engines without editions (mysql, postgresql, etc.), append license to engine
+      finalEngineToken = engineNormalizedBase + (licenseToken ? `-${licenseToken}` : '');
+    }
+
+    return { engine: finalEngineToken, edition: finalEdition };
   }
 
   async parseFile(file: File): Promise<RiImportParseResult> {
@@ -288,7 +236,7 @@ export class RiImportService {
   constructor(
     private readonly storageService: StorageService,
     private readonly riCSVParserService: RiCSVParserService,
-    private readonly riDataService: RiDataService
+    private readonly riDataService: RiPortfolioDataService
   ) {}
 
   async saveImportResult(riImportParseResult: RiImportParseResult): Promise<string | null> {
@@ -320,7 +268,7 @@ export class RiImportService {
     try {
       const existing = await this.storageService.get(this.RI_IMPORT_KEY);
       if (existing) {
-        this.riDataService.setRiPortfolio(existing as RiPorftolio);
+        this.riDataService.setRiPortfolio(existing as RiPortfolio);
         return;
       }
 
@@ -328,7 +276,7 @@ export class RiImportService {
       if (!res.ok) return;
       const txt = await res.text();
 
-      const parsed = this.riCSVParserService.parseText(txt, 'default-assets');
+      const parsed = await this.riCSVParserService.parseCsvText(txt, 'default-assets');
 
       await this.saveImportResult(parsed);
 

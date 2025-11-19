@@ -1,9 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-
-import { RiDataService } from './service/ri-portfolio-data.service';
 import { RiCSVParserService, RiImportService } from './service/ri-portfolio-import.service';
-import { StorageService } from '../../storage-service/storage.service';
 
 @Component({
   selector: 'app-ri-import-upload',
@@ -24,8 +21,6 @@ export class RiImportUploadComponent {
 
   constructor(
     private readonly riCSVParserService: RiCSVParserService,
-    private readonly riDataService: RiDataService,
-    private readonly storageService: StorageService,
     private readonly riImportService: RiImportService
   ) {}
 

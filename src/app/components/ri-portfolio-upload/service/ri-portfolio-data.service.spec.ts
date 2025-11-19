@@ -1,8 +1,8 @@
-import { RiDataService } from './ri-portfolio-data.service';
+import { RiPortfolioDataService } from './ri-portfolio-data.service';
 
 describe('RiDataService', () => {
-  let svc: RiDataService;
-  beforeEach(() => svc = new RiDataService());
+  let svc: RiPortfolioDataService;
+  beforeEach(() => svc = new RiPortfolioDataService());
 
   it('initially null and can set/clear', () => {
     const emissions: Array<any> = [];

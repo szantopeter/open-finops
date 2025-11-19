@@ -14,5 +14,4 @@ import { RiImportUploadComponent } from '../ri-portfolio-upload/ri-portfolio-upl
 })
 
 export class LandingComponent {
-  readonly title = 'RDS RI Portfolio Optimizer';
 }

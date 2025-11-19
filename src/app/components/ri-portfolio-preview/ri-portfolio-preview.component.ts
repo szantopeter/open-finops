@@ -1,10 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
-
-import { StorageService } from '../../storage-service/storage.service';
-import { RiDataService } from '../ri-portfolio-upload/service/ri-portfolio-data.service';
-import { RiCSVParserService } from '../ri-portfolio-upload/service/ri-portfolio-import.service';
+import { RiPortfolioDataService } from '../ri-portfolio-upload/service/ri-portfolio-data.service';
 
 @Component({
   selector: 'app-ri-import-preview',
@@ -12,26 +9,32 @@ import { RiCSVParserService } from '../ri-portfolio-upload/service/ri-portfolio-
   imports: [CommonModule],
   template: `
   <div class="p-4 border rounded">
-      <ng-container *ngIf="counts$ | async as c; else empty">
-        <div *ngIf="c.total === 0">No rows</div>
-        <div *ngIf="c.total > 0">
-          <div *ngIf="c.metadata">
-            Reserved Instance data overview: Data extract is date {{ c.ageText }} ({{ c.displayDate }}).
-            Total RIs <strong>{{ c.total }}</strong> coming from <strong>{{ c.unique }}</strong> purchases.
-            <div *ngIf="c.latestExpiry">Latest RI expiry: <strong>{{ c.latestExpiry }}</strong></div>
+      @if (portfolioStatistics$ | async; as statistics) {
+        @if (statistics.total === 0) {
+          <div>No rows</div>
+        } @else {
+          <div>
+            @if (statistics.metadata) {
+              Reserved Instance data overview: Data extract is date {{ statistics.ageText }} ({{ statistics.displayDate }}).
+              Total RIs <strong>{{ statistics.total }}</strong> coming from <strong>{{ statistics.unique }}</strong> purchases.
+              @if (statistics.latestExpiry) {
+                <div>Latest RI expiry: <strong>{{ statistics.latestExpiry }}</strong></div>
+              }
+            }
           </div>
-        </div>
-      </ng-container>
-      <ng-template #empty><div>No import loaded</div></ng-template>
+        }
+      } @else {
+        <div>No import loaded</div>
+      }
     </div>
   `
 })
-export class RiImportPreviewComponent implements OnInit {
-  import$ = this.data.riPortfolio$;
-  counts$ = this.import$.pipe(
+export class RiImportPreviewComponent {
+  import$ = this.riPortfolioDataService.riPortfolio$;
+  portfolioStatistics$ = this.import$.pipe(
     map((imp) => {
       if (!imp) return { total: 0, unique: 0 };
-      const total = imp.rows.reduce((acc, r) => acc + (r.count ?? 0), 0);
+      const total = imp.rows.reduce((acc, r) => acc + (r?.riRow?.count ?? 0), 0);
       // Prefer Reservation ID if present in raw; otherwise fall back to composite key
       // unique RIs here should reflect number of rows (distinct RI entries)
       const unique = imp.rows.length;
@@ -60,7 +63,7 @@ export class RiImportPreviewComponent implements OnInit {
       let latestExpiry: string | null = null;
       try {
         const endDates = imp.rows
-          .map((r: any) => r.endDate)
+          .map((r: any) => r?.riRow?.endDate)
           .filter((d: any) => d != null)
           .map((d: any) => Date.parse(d))
           .filter((n: number) => !Number.isNaN(n));
@@ -77,44 +80,6 @@ export class RiImportPreviewComponent implements OnInit {
   );
 
   constructor(
-    private readonly data: RiDataService,
-    private readonly storage: StorageService,
-    private readonly importer: RiCSVParserService
+    private readonly riPortfolioDataService: RiPortfolioDataService,
   ) {}
-
-  async ngOnInit(): Promise<void> {
-    try {
-      const stored = await this.storage.get('ri-import');
-      if (stored && this.data && typeof (this.data as any).setRiPortfolio === 'function') {
-        const storedImport = stored as any;
-        if (storedImport.rows && Array.isArray(storedImport.rows)) {
-          const headers = ['startDate', 'endDate', 'count', 'instanceClass', 'region', 'multiAZ', 'engine', 'edition', 'upfront', 'durationMonths'];
-          const csvLines = [headers.join(',')];
-          for (const row of storedImport.rows) {
-            const vals = headers.map((h) => {
-              const val = row[h];
-              if (val === null || val === undefined) return '';
-              const str = String(val);
-              return str.includes(',') || str.includes('"') ? `"${str.replaceAll('"', '""')}"` : str;
-            });
-            csvLines.push(vals.join(','));
-          }
-          const csv = csvLines.join('\n');
-          const parsed = this.importer.parseText(csv, storedImport.metadata?.source ?? 'storage');
-          if (parsed.riPortfolio) {
-            const normalized = {
-              ...parsed.riPortfolio,
-              metadata: storedImport.metadata
-            };
-            (this.data as any).setRiPortfolio(normalized);
-            await this.storage.set('ri-import', normalized);
-            return;
-          }
-        }
-        (this.data as any).setRiPortfolio(storedImport);
-      }
-    } catch (e) {
-      console.debug('[RiImportPreview] load from storage failed', e);
-    }
-  }
 }
