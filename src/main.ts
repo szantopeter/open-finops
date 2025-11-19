@@ -5,7 +5,7 @@ import { provideRouter } from '@angular/router';
 
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
-import { DEFAULT_IMPORT_PROVIDER } from './app/ri-analytics/sample-import-loader';
+import { DEFAULT_IMPORT_PROVIDER } from './app/components/ri-portfolio-upload/default-import-loader';
 
 
 
