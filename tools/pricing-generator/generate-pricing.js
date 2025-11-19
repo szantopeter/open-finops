@@ -382,6 +382,8 @@ function buildEngineKey(engine, license, edition) {
         if (rterms) {
           const target = riByDeployment[deployment] || riByDeployment['Single-AZ'];
           for (const k of Object.keys(rterms)) {
+            // Skip 3-year No Upfront reserved offerings — do not expose them as savings options
+            if (k === '3yr_No Upfront') continue;
             if (!target[k]) target[k] = rterms[k];
           }
         }
@@ -390,7 +392,7 @@ function buildEngineKey(engine, license, edition) {
       const discountedRiByDeployment = {};
       const expectedKeys = [
         '1yr_No Upfront', '1yr_Partial Upfront', '1yr_All Upfront',
-        '3yr_No Upfront', '3yr_Partial Upfront', '3yr_All Upfront'
+        '3yr_Partial Upfront', '3yr_All Upfront'
       ];
       for (const dep of Object.keys(riByDeployment)) {
         const merged = riByDeployment[dep] || {};
