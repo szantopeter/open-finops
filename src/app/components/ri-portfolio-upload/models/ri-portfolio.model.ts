@@ -3,7 +3,6 @@ import PricingData from './pricing.model';
 export interface RiImportMetadata {
   source: string;
   importedAt: string; // ISO
-  columns: string[];
   rowsCount: number;
   fileLastModified?: string;
   firstFullYear: number;

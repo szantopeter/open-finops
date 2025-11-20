@@ -114,7 +114,6 @@ export class RiCSVParserService {
     const metadata: RiImportMetadata = {
       source,
       importedAt: new Date().toISOString(),
-      columns: headers,
       rowsCount: validRows.length,
       fileLastModified: fileLastModifiedIso,
       firstFullYear

@@ -1,7 +1,7 @@
 export interface OnDemandPricing {
-  hourly: number | null;
-  daily: number | null;
-  sku?: string | null;
+  hourly: number;
+  daily: number;
+  sku?: string;
 }
 
 export interface SavingsOption {
@@ -16,7 +16,7 @@ export interface SavingsOption {
 export type SavingsOptionsMap = Record<SavingsKey, SavingsOption | null> | null;
 
 export type SavingsTerm = '1yr' | '3yr';
-export type PurchaseOption = 'No Upfront' | 'Partial Upfront' | 'All Upfront';
+export type PurchaseOption = 'No Upfront' | 'Partial Upfront' | 'All Upfront' | 'On Demand';
 
 export type SavingsKey =
   | '1yr_No Upfront'
@@ -27,7 +27,7 @@ export type SavingsKey =
 
 export type Deployment = 'single-az' | 'multi-az';
 
-export type LicenseToken = 'byol' | 'li' | null;
+export type LicenseToken = 'byol' | 'li';
 
 export interface PricingData {
   region: string;
