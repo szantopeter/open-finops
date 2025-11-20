@@ -1,10 +1,10 @@
-import { RiRow } from '../components/ri-portfolio-upload/models/ri-portfolio.model';
 import { PricingData } from '../components/ri-portfolio-upload/models/pricing.model';
+import { RiRow } from '../components/ri-portfolio-upload/models/ri-portfolio.model';
 
 export interface CostTimeseries {
-    riRow: RiRow; 
+    riRow: RiRow;
     pricingData: PricingData;
-    monthlyCost: { 
+    monthlyCost: {
         year: number;
         month: number;
         cost: {

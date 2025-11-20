@@ -114,7 +114,6 @@ export class RiCSVParserService {
     const metadata: RiImportMetadata = {
       source,
       importedAt: new Date().toISOString(),
-      rowsCount: validRows.length,
       fileLastModified: fileLastModifiedIso,
       firstFullYear
     };
@@ -293,8 +292,8 @@ export class RiImportService {
       // persist via generic storage and notify the framework coordinator
       await this.storageService.set(this.RI_IMPORT_KEY, riImportParseResult.riPortfolio as any);
       try {
-        console.debug('[RiImportService] saved import result:', riImportParseResult.riPortfolio.metadata.rowsCount, 'rows, key:', this.RI_IMPORT_KEY);
-        console.info('[RiImportService] saved import result:', riImportParseResult.riPortfolio.metadata.rowsCount, 'rows, key:', this.RI_IMPORT_KEY);
+        console.debug('[RiImportService] saved import result, key:', this.RI_IMPORT_KEY);
+        console.info('[RiImportService] saved import result, key:', this.RI_IMPORT_KEY);
       } catch {
         // ignore logging failures
       }

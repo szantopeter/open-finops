@@ -1,6 +1,7 @@
-import { RiCSVParserService } from './ri-portfolio-import.service';
-import { PricingLoaderService } from './pricing-loader.service';
 import { HttpClient } from '@angular/common/http';
+
+import { PricingLoaderService } from './pricing-loader.service';
+import { RiCSVParserService } from './ri-portfolio-import.service';
 
 describe('RiImportService', () => {
   let svc: RiCSVParserService;
