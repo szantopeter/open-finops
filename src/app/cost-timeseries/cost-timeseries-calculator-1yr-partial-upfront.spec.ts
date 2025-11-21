@@ -4,7 +4,7 @@ import { RiPortfolio, RiRow } from '../components/ri-portfolio-upload/models/ri-
 
 describe('CostTimeseriesCalculator', () => {
   describe('calculateCostTimeSeries', () => {
-    it('should calculate on 1yr partial upfrot costs from start date to end of firstFullYear', () => {
+    it('should calculate on 1yr partial upfront costs from start date to end of firstFullYear', () => {
       const firstFullYear = 2026;
       const dailyOnDemandPrice0 = 10;
       const dailyOnDemandPrice1 = 20;

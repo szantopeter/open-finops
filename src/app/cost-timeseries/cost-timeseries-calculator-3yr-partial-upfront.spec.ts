@@ -4,11 +4,11 @@ import { RiPortfolio, RiRow } from '../components/ri-portfolio-upload/models/ri-
 
 describe('CostTimeseriesCalculator', () => {
   describe('calculateCostTimeSeries', () => {
-    it('should calculate on 1yr full upfront costs from start date to end of firstFullYear', () => {
+    it('should calculate on 3yr partial upfront costs from start date to end of firstFullYear', () => {
       const firstFullYear = 2026;
       const dailyOnDemandPrice0 = 10;
       const dailyOnDemandPrice1 = 20;
-      const riDiscount = 0;
+      const riDiscount = 0.7;
       const upfrontCost0 = dailyOnDemandPrice0 * (1 - riDiscount) * 365;
       const upfrontCost1 = dailyOnDemandPrice1 * (1 - riDiscount) * 365;
 
@@ -83,15 +83,15 @@ describe('CostTimeseriesCalculator', () => {
         savingsOptions: {
           '1yr_No Upfront': null,
           '1yr_Partial Upfront': null,
-          '1yr_All Upfront' : {
-            term: '1yr',
-            purchaseOption: 'All Upfront',
+          '3yr_Partial Upfront' : {
+            term: '3yr',
+            purchaseOption: 'Partial Upfront',
             upfront: upfrontCost0,
             hourly: dailyOnDemandPrice0 * riDiscount / 24,
             daily: dailyOnDemandPrice0 * riDiscount
           },
-          '3yr_Partial Upfront': null,
-          '3yr_All Upfront': null
+          '3yr_All Upfront': null,
+          '1yr_All Upfront': null
         }
       };
 
@@ -108,15 +108,15 @@ describe('CostTimeseriesCalculator', () => {
         savingsOptions: {
           '1yr_No Upfront': null,
           '1yr_Partial Upfront': null,
-          '1yr_All Upfront' : {
-            term: '1yr',
-            purchaseOption: 'All Upfront',
+          '3yr_Partial Upfront' : {
+            term: '3yr',
+            purchaseOption: 'Partial Upfront',
             upfront: upfrontCost1,
             hourly: dailyOnDemandPrice1 * riDiscount / 24,
             daily: dailyOnDemandPrice1 * riDiscount
           },
-          '3yr_Partial Upfront': null,
-          '3yr_All Upfront': null
+          '3yr_All Upfront': null,
+          '1yr_All Upfront': null
         }
       };
 
@@ -133,8 +133,8 @@ describe('CostTimeseriesCalculator', () => {
       };
 
       const savingsOption: SavingsOption = {
-        term: '1yr',
-        purchaseOption: 'All Upfront'
+        term: '3yr',
+        purchaseOption: 'Partial Upfront'
       };
 
       const expectedCost0 = [
@@ -196,14 +196,14 @@ describe('CostTimeseriesCalculator', () => {
           expect(actualMonth.year).withContext("Year mismatch ri index: " + riIndex + " index: " + index).toBe(expectedMonth.year);
           expect(actualMonth.month).withContext("Month mismatch ri index: " + riIndex + " index: " + index).toBe(expectedMonth.month);
 
-          expect(actualMonth.cost.fullUpfront_1y).toBeDefined();
-          expect((actualMonth.cost.fullUpfront_1y as any).upfrontCost).withContext("Upfront cost mismatch ri index: " + riIndex + " index: " + index).toBe(expectedMonth.upfrontCost * count);
-          expect((actualMonth.cost.fullUpfront_1y as any).monthlyCost).withContext("Monthly cost mismatch ri index: " + riIndex + " index: " + index + " Actual month: " + actualMonth.year + "." + actualMonth.month ) .toBe(expectedMonth.activeDays * onDemandPrice * riDiscount * count);
+          expect(actualMonth.cost.partialUpfront_3y).toBeDefined();
+          expect((actualMonth.cost.partialUpfront_3y as any).upfrontCost).withContext("Upfront cost mismatch ri index: " + riIndex + " index: " + index).toBe(expectedMonth.upfrontCost * count);
+          expect((actualMonth.cost.partialUpfront_3y as any).monthlyCost).withContext("Monthly cost mismatch ri index: " + riIndex + " index: " + index + " Actual month: " + actualMonth.year + "." + actualMonth.month ) .toBe(expectedMonth.activeDays * onDemandPrice * riDiscount * count);
 
           // All other cost types should be null
+          expect(actualMonth.cost.fullUpfront_1y).toBeNull();
+          expect(actualMonth.cost.fullUpfront_1y).toBeNull();
           expect(actualMonth.cost.fullUpfront_3y).toBeNull();
-          expect(actualMonth.cost.partialUpfront_1y).toBeNull();
-          expect(actualMonth.cost.partialUpfront_3y).toBeNull();
           expect(actualMonth.cost.noUpfront_1y).toBeNull();
           expect(actualMonth.cost.onDemand).toBeNull();
         });
