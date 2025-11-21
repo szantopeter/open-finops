@@ -33,6 +33,6 @@ export class RiImportUploadComponent {
 
     const riImportParseResult = await this.riCSVParserService.parseFile(file);
     const error = await this.riImportService.saveImportResult(riImportParseResult);
-    this.lastError = error;
+    this.lastError = error ?? undefined;
   }
 }

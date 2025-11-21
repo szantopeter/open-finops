@@ -9,107 +9,99 @@ export class CostTimeseriesCalculator {
       return [];
     }
 
-    return riPortfolio.rows.map(({ riRow, pricingData }) => {
-      const startDate = new Date(riRow.startDate);
-      const startYear = startDate.getFullYear();
-      const startMonth = startDate.getMonth() + 1; // JS months are 0-based
-      const endYear = riPortfolio.metadata.firstFullYear;
+    const result: CostTimeseries[] = [];
 
-      const endDate = new Date(startDate);
-      endDate.setMonth(endDate.getMonth() + riRow.durationMonths);
-      const riEndYear = endDate.getFullYear();
-      const riEndMonth = endDate.getMonth() + 1;
+    for (const row of riPortfolio.rows) {
+      const riRow = row.riRow;
+      const pricingData = row.pricingData;
+      const startDate = riRow.startDate;
+      const endDate = riRow.endDate;
 
-      const monthlyCosts = [];
+      const monthlyCost: CostTimeseries['monthlyCost'] = [];
 
-      for (let year = startYear; year <= endYear; year++) {
-        const monthStart = year === startYear ? startMonth : 1;
-        const monthEnd = 12;
-        for (let month = monthStart; month <= monthEnd; month++) {
-          const daysInMonth = new Date(year, month, 0).getDate();
-          const isFirstMonth = year === startYear && month === startMonth;
-          const isActive = year < riEndYear || (year === riEndYear && month <= riEndMonth);
-          let activeDays = 0;
-          if (isActive) {
-            if (year === startYear && month === startMonth) {
-              activeDays = daysInMonth - startDate.getDate() + 1;
-            } else if (year === riEndYear && month === riEndMonth) {
-              activeDays = endDate.getDate();
-            } else {
-              activeDays = daysInMonth;
-            }
-          }
-          const cost = this.calculateMonthlyCost(pricingData, savingsOption, riRow.count, isFirstMonth, activeDays);
-          monthlyCosts.push({
-            year,
-            month,
-            cost
-          });
-        }
+      let current = startDate;
+      while (current <= endDate) {
+        const year = current.getFullYear();
+        const month = current.getMonth() + 1;
+        const activeDays = this.getActiveDaysInMonth(year, month, startDate, endDate);
+        const cost = this.calculateCostForMonth(pricingData, savingsOption, activeDays, riRow.count, monthlyCost.length === 0);
+
+        monthlyCost.push({
+          year,
+          month,
+          cost
+        });
+
+        current.setMonth(current.getMonth() + 1);
+        current.setDate(1);
       }
 
-      return {
+      result.push({
         riRow,
         pricingData,
-        monthlyCost: monthlyCosts
-      };
-    });
+        monthlyCost
+      });
+    }
+
+    return result;
   }
 
-    private static calculateMonthlyCost(pricingData: any, savingsOption: SavingsOption, count: number, isFirstMonth: boolean, activeDays: number): CostTimeseries['monthlyCost'][0]['cost'] {
-        if (savingsOption.purchaseOption === 'On Demand') {
-            if (activeDays > 0) {
-                const monthlyCost = pricingData.onDemand.daily * activeDays * count;
-                return {
-                    onDemand: { upfrontCost: 0, monthlyCost },
-                    fullUpfront_3y: null,
-                    fullUpfront_1y: null,
-                    partialUpUpfront_3y: null,
-                    partialUpfront_1y: null,
-                    noUpfront_1y: null
-                };
-            } else {
-                return {
-                    onDemand: null,
-                    fullUpfront_3y: null,
-                    fullUpfront_1y: null,
-                    partialUpUpfront_3y: null,
-                    partialUpfront_1y: null,
-                    noUpfront_1y: null
-                };
-            }
-        } else if (savingsOption.purchaseOption === 'All Upfront' && savingsOption.term === '3yr') {
-            if (isFirstMonth) {
-                const savingsKey = '3yr_All Upfront';
-                const upfront = pricingData.savingsOptions[savingsKey]?.upfront || 0;
-                const upfrontCost = upfront * count;
-                return {
-                    onDemand: null,
-                    fullUpfront_3y: { upfrontCost, monthlyCost: 0 },
-                    fullUpfront_1y: null,
-                    partialUpUpfront_3y: null,
-                    partialUpfront_1y: null,
-                    noUpfront_1y: null
-                };
-            } else {
-                return {
-                    onDemand: null,
-                    fullUpfront_3y: null,
-                    fullUpfront_1y: null,
-                    partialUpUpfront_3y: null,
-                    partialUpfront_1y: null,
-                    noUpfront_1y: null
-                };
-            }
-        } else {
-            // For other options, not implemented yet
-            return {
-                onDemand: null,
-                fullUpfront_3y: null,
-                fullUpfront_1y: null,
-                partialUpUpfront_3y: null,
-                partialUpfront_1y: null,
-                noUpfront_1y: null
-            };
+  private static getActiveDaysInMonth(year: number, month: number, startDate: Date, endDate: Date): number {
+    const monthStart = new Date(year, month - 1, 1);
+    const monthEnd = new Date(year, month, 1);
+    const activeStart = startDate > monthStart ? startDate : monthStart;
+    const activeEnd = endDate < monthEnd ? endDate : monthEnd;
+    if (activeStart >= activeEnd) return 0;
+    return Math.ceil((activeEnd.getTime() - activeStart.getTime()) / (1000 * 60 * 60 * 24));
+  }
+
+  private static calculateCostForMonth(pricingData: any, savingsOption: SavingsOption, activeDays: number, count: number, isFirstMonth: boolean): any {
+    const cost: any = {
+      fullUpfront_3y: null,
+      fullUpfront_1y: null,
+      partialUpfront_3y: null,
+      partialUpfront_1y: null,
+      noUpfront_1y: null,
+      onDemand: null
+    };
+
+    if (savingsOption.purchaseOption === 'On Demand') {
+      const dailyPrice = pricingData.onDemand.daily;
+      cost.onDemand = {
+        upfrontCost: 0,
+        monthlyCost: dailyPrice * activeDays * count
+      };
+    } else {
+      // For RI, find the matching savings option
+      const key = `${savingsOption.term}_${savingsOption.purchaseOption.replace(' ', '')}`;
+      const savings = pricingData.savingsOptions?.[key];
+      if (savings) {
+        const field = this.getCostField(savingsOption);
+        cost[field] = {
+          upfrontCost: isFirstMonth ? savings.upfront * count : 0,
+          monthlyCost: 0 // Assuming no monthly for upfront, but for no upfront, need to calculate
+        };
+        // For no upfront, monthly cost
+        if (savingsOption.purchaseOption === 'No Upfront') {
+          // Assume monthly rate, but since not in model, perhaps 0 for now
+          cost[field].monthlyCost = 0; // TODO: calculate monthly
         }
-    }}
+      }
+    }
+
+    return cost;
+  }
+
+  private static getCostField(savingsOption: SavingsOption): string {
+    if (savingsOption.term === '3yr') {
+      if (savingsOption.purchaseOption === 'All Upfront') return 'fullUpfront_3y';
+      if (savingsOption.purchaseOption === 'Partial Upfront') return 'partialUpfront_3y';
+    } else if (savingsOption.term === '1yr') {
+      if (savingsOption.purchaseOption === 'All Upfront') return 'fullUpfront_1y';
+      if (savingsOption.purchaseOption === 'Partial Upfront') return 'partialUpfront_1y';
+      if (savingsOption.purchaseOption === 'No Upfront') return 'noUpfront_1y';
+    }
+    return 'onDemand'; // fallback
+  }
+
+}

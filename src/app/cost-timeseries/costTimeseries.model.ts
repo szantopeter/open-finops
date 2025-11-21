@@ -10,9 +10,11 @@ export interface CostTimeseries {
         cost: {
             fullUpfront_3y?: RiCost | null;
             fullUpfront_1y?: RiCost | null;
-            partialUpUpfront_3y?: RiCost | null;
+            partialUpfront_3y?: RiCost | null;
             partialUpfront_1y?: RiCost | null;
             noUpfront_1y?: RiCost | null;
+            // Intentionally commented out because this combination doesn't exist in AWS pricing
+            // noUpfront_3y?: RiCost | null;
             onDemand?: RiCost | null;
         }
     }[];

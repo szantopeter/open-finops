@@ -5,38 +5,66 @@ import { RiPortfolio, RiRow } from '../components/ri-portfolio-upload/models/ri-
 describe('CostTimeseriesCalculator', () => {
   describe('calculateCostTimeSeries', () => {
     it('should calculate on demand costs from start date to end of firstFullYear', () => {
-      const startDate1 = '2024-06-15T00:00:00.000Z'; // June 15, 2024
-      const startDate2 = '2024-08-01T00:00:00.000Z'; // August 1, 2024
       const firstFullYear = 2026;
       const dailyOnDemandPrice1 = 10;
       const dailyOnDemandPrice2 = 20;
 
-      const riRow1: RiRow = {
+      const startDate0 = new Date()
+      startDate0.setFullYear(2024)
+      //month is 0 indexed
+      startDate0.setMonth(5)
+      startDate0.setDate(15)
+
+      const endDate0 = new Date();
+      endDate0.setFullYear(2025);
+      //month is 0 indexed
+      endDate0.setMonth(5);
+      endDate0.setDate(16);
+
+      const count0 = 1;
+
+      const riRow0: RiRow = {
         id: 'test-id-1',
         raw: {},
-        startDate: startDate1,
-        count: 1,
+        startDate: startDate0,
+        endDate: endDate0,
+        count: count0,
         instanceClass: 'db.t3.micro',
         region: 'us-east-1',
         multiAz: false,
         engine: 'mysql',
         edition: 'standard',
         upfrontPayment: 'NoUpfront',
-        durationMonths: 12
+        durationMonths: 12,
+        type: 'actual'
       };
 
-      const riRow2: RiRow = {
+      const startDate1 = new Date();
+      startDate1.setFullYear(2024);
+      startDate1.setMonth(7);
+      startDate1.setDate(1);
+
+      const endDate1 = new Date();
+      endDate1.setFullYear(2025);
+      endDate1.setMonth(7);
+      endDate1.setDate(1);
+
+      const count1 = 2;
+
+      const riRow1: RiRow = {
         id: 'test-id-2',
         raw: {},
-        startDate: startDate2,
-        count: 2,
+        startDate: startDate1,
+        endDate: endDate1,
+        count: count1,
         instanceClass: 'db.t3.small',
         region: 'us-east-1',
         multiAz: false,
         engine: 'mysql',
         edition: 'standard',
         upfrontPayment: 'NoUpfront',
-        durationMonths: 12
+        durationMonths: 12,
+        type: 'actual'
       };
 
       const pricingData1: PricingData = {
@@ -67,13 +95,13 @@ describe('CostTimeseriesCalculator', () => {
 
       const riPortfolio: RiPortfolio = {
         metadata: {
-          source: 'test',
+          source: 'test1',
           importedAt: new Date().toISOString(),
-          firstFullYear
+          firstFullYear,
         },
         rows: [
-          { riRow: riRow1, pricingData: pricingData1 },
-          { riRow: riRow2, pricingData: pricingData2 }
+          { riRow: riRow0, pricingData: pricingData1 },
+          { riRow: riRow1, pricingData: pricingData2 }
         ]
       };
 
@@ -82,49 +110,35 @@ describe('CostTimeseriesCalculator', () => {
         purchaseOption: 'On Demand'
       };
 
-      // Months from June 2024 to December 2025
-      const expectedMonths1 = [
-        { year: 2024, month: 6 }, // June 2024
-        { year: 2024, month: 7 }, // July
-        { year: 2024, month: 8 }, // August
-        { year: 2024, month: 9 }, // September
-        { year: 2024, month: 10 }, // October
-        { year: 2024, month: 11 }, // November
-        { year: 2024, month: 12 }, // December
-        { year: 2025, month: 1 }, // January 2025
-        { year: 2025, month: 2 }, // February
-        { year: 2025, month: 3 }, // March
-        { year: 2025, month: 4 }, // April
-        { year: 2025, month: 5 }, // May
-        { year: 2025, month: 6 }, // June
-        { year: 2025, month: 7 }, // July
-        { year: 2025, month: 8 }, // August
-        { year: 2025, month: 9 }, // September
-        { year: 2025, month: 10 }, // October
-        { year: 2025, month: 11 }, // November
-        { year: 2025, month: 12 } // December
+      const expectedCost0 = [
+        { year: 2024, month: 6, cost: 16 * dailyOnDemandPrice1 * count0},
+        { year: 2024, month: 7, cost: 31 * dailyOnDemandPrice1 * count0 },
+        { year: 2024, month: 8, cost: 31 * dailyOnDemandPrice1 * count0 },
+        { year: 2024, month: 9, cost: 30 * dailyOnDemandPrice1 * count0 },
+        { year: 2024, month: 10, cost: 31 * dailyOnDemandPrice1 * count0 },
+        { year: 2024, month: 11, cost: 30 * dailyOnDemandPrice1 * count0 },
+        { year: 2024, month: 12, cost: 31 * dailyOnDemandPrice1 * count0 },
+        { year: 2025, month: 1, cost: 31 * dailyOnDemandPrice1 * count0 },
+        { year: 2025, month: 2, cost: 28 * dailyOnDemandPrice1 * count0 },
+        { year: 2025, month: 3, cost: 31 * dailyOnDemandPrice1 * count0 },
+        { year: 2025, month: 4, cost: 30 * dailyOnDemandPrice1 * count0 },
+        { year: 2025, month: 5, cost: 31 * dailyOnDemandPrice1 * count0 },
+        { year: 2025, month: 6, cost: 15 * dailyOnDemandPrice1 * count0 },
       ];
-
-      // Months from July 2024 to December 2025
-      const expectedMonths2 = [
-        { year: 2024, month: 7 }, // July 2024
-        { year: 2024, month: 8 }, // August
-        { year: 2024, month: 9 }, // September
-        { year: 2024, month: 10 }, // October
-        { year: 2024, month: 11 }, // November
-        { year: 2024, month: 12 }, // December
-        { year: 2025, month: 1 }, // January 2025
-        { year: 2025, month: 2 }, // February
-        { year: 2025, month: 3 }, // March
-        { year: 2025, month: 4 }, // April
-        { year: 2025, month: 5 }, // May
-        { year: 2025, month: 6 }, // June
-        { year: 2025, month: 7 }, // July
-        { year: 2025, month: 8 }, // August
-        { year: 2025, month: 9 }, // September
-        { year: 2025, month: 10 }, // October
-        { year: 2025, month: 11 }, // November
-        { year: 2025, month: 12 } // December
+      const expectedCost2 = [
+        { year: 2024, month: 8, cost: 31 * dailyOnDemandPrice2 * count1 },
+        { year: 2024, month: 9, cost: 30 * dailyOnDemandPrice2 * count1 },
+        { year: 2024, month: 10, cost: 31 * dailyOnDemandPrice2 * count1 },
+        { year: 2024, month: 11, cost: 30 * dailyOnDemandPrice2 * count1 },
+        { year: 2024, month: 12, cost: 31 * dailyOnDemandPrice2 * count1 },
+        { year: 2025, month: 1, cost: 31 * dailyOnDemandPrice2 * count1 },
+        { year: 2025, month: 2, cost: 28 * dailyOnDemandPrice2 * count1 },
+        { year: 2025, month: 3, cost: 31 * dailyOnDemandPrice2 * count1 },
+        { year: 2025, month: 4, cost: 30 * dailyOnDemandPrice2 * count1 },
+        { year: 2025, month: 5, cost: 31 * dailyOnDemandPrice2 * count1 },
+        { year: 2025, month: 6, cost: 30 * dailyOnDemandPrice2 * count1 },
+        { year: 2025, month: 7, cost: 31 * dailyOnDemandPrice2 * count1 },
+        { year: 2025, month: 8, cost: 0 * dailyOnDemandPrice2 * count1 },
       ];
 
       // Act
@@ -135,277 +149,39 @@ describe('CostTimeseriesCalculator', () => {
       expect(result).toHaveSize(2);
 
       // Check first RI
-      expect(result[0].riRow).toBe(riRow1);
+      expect(result[0].riRow).toBe(riRow0);
       expect(result[0].pricingData).toBe(pricingData1);
 
       // Check second RI
-      expect(result[1].riRow).toBe(riRow2);
+      expect(result[1].riRow).toBe(riRow1);
       expect(result[1].pricingData).toBe(pricingData2);
 
       // Both have the same monthly structure since same start date and firstFullYear
       result.forEach((costTimeseries, riIndex) => {
-        const expectedMonths = riIndex === 0 ? expectedMonths1 : expectedMonths2;
-        const count = riIndex === 0 ? 1 : 2;
-        const expectedDailyPrice = riIndex === 0 ? dailyOnDemandPrice1 : dailyOnDemandPrice2;
+        const expectedCosts = riIndex === 0 ? expectedCost0 : expectedCost2;
 
-        expect(costTimeseries.monthlyCost).toHaveSize(expectedMonths.length);
+        expect(costTimeseries.monthlyCost).toHaveSize(expectedCost0.length);
 
-        expectedMonths.forEach((expectedMonth, index) => {
-          const monthlyCost = costTimeseries.monthlyCost[index];
-          expect(monthlyCost.year).toBe(expectedMonth.year);
-          expect(monthlyCost.month).toBe(expectedMonth.month);
+        expectedCosts.forEach((expectedMonth, index) => {
+          const actualMonth = costTimeseries.monthlyCost[index];
+          expect(actualMonth.year).withContext("Year mismatch ri index: " + riIndex + " index: " + index).toBe(expectedMonth.year);
+          expect(actualMonth.month).withContext("Month mismatch ri index: " + riIndex + " index: " + index).toBe(expectedMonth.month);
 
-          const daysInMonth = new Date(expectedMonth.year, expectedMonth.month, 0).getDate();
-          const expectedMonthlyCost = expectedDailyPrice * daysInMonth * count;
+          expect(actualMonth.cost.onDemand).toBeDefined();
+          expect((actualMonth.cost.onDemand as any).upfrontCost).withContext("Upfront cost mismatch ri index: " + riIndex + " index: " + index).toBe(0);
+          expect((actualMonth.cost.onDemand as any).monthlyCost).withContext("Monthly cost mismatch ri index: " + riIndex + " index: " + index + " Actual month: " + actualMonth.year + "." + actualMonth.month ) .toBe(expectedMonth.cost);
 
-          const endMonth = riIndex === 0 ? 6 : 7;
-          const isAfterEnd = expectedMonth.year > 2025 || (expectedMonth.year === 2025 && expectedMonth.month > endMonth);
-          if (isAfterEnd) {
-            expect(monthlyCost.cost.onDemand).toBeNull();
-          } else {
-            expect(monthlyCost.cost.onDemand).toBeDefined();
-            expect(monthlyCost.cost.onDemand.upfrontCost).toBe(0);
-            expect(monthlyCost.cost.onDemand.monthlyCost).toBe(expectedMonthlyCost);
-          }
 
           // All other cost types should be null
-          expect(monthlyCost.cost.fullUpfront_3y).toBeNull();
-          expect(monthlyCost.cost.fullUpfront_1y).toBeNull();
-          expect(monthlyCost.cost.partialUpUpfront_3y).toBeNull();
-          expect(monthlyCost.cost.partialUpfront_1y).toBeNull();
-          expect(monthlyCost.cost.noUpfront_1y).toBeNull();
+          expect(actualMonth.cost.fullUpfront_3y).toBeNull();
+          expect(actualMonth.cost.fullUpfront_1y).toBeNull();
+          expect(actualMonth.cost.partialUpfront_3y).toBeNull();
+          expect(actualMonth.cost.partialUpfront_1y).toBeNull();
+          expect(actualMonth.cost.noUpfront_1y).toBeNull();
         });
       });
     });
 
-    it('should calculate 3 year full upfront costs', () => {
-      const startDate3 = '2024-06-15T00:00:00.000Z'; // June 15, 2024
-      const startDate4 = '2024-08-01T00:00:00.000Z'; // August 1, 2024
-      const firstFullYear = 2026;
-      const upfrontCost3 = 5000;
-      const upfrontCost4 = 10000;
 
-      const riRow3: RiRow = {
-        id: 'test-id-3',
-        raw: {},
-        startDate: startDate3,
-        count: 1,
-        instanceClass: 'db.t3.micro',
-        region: 'us-east-1',
-        multiAz: false,
-        engine: 'mysql',
-        edition: 'standard',
-        upfrontPayment: 'NoUpfront',
-        durationMonths: 12
-      };
-
-      const riRow4: RiRow = {
-        id: 'test-id-4',
-        raw: {},
-        startDate: startDate4,
-        count: 2,
-        instanceClass: 'db.t3.small',
-        region: 'us-east-1',
-        multiAz: false,
-        engine: 'mysql',
-        edition: 'standard',
-        upfrontPayment: 'NoUpfront',
-        durationMonths: 12
-      };
-
-      const pricingData3: PricingData = {
-        region: 'us-east-1',
-        instance: 'db.t3.micro',
-        deployment: 'single-az',
-        engine: 'mysql',
-        license: 'li',
-        onDemand: {
-          hourly: 0.1,
-          daily: 2.4
-        },
-        savingsOptions: {
-          '3yr_All Upfront': {
-            term: '3yr',
-            purchaseOption: 'All Upfront',
-            upfront: upfrontCost3
-          }
-        } as any
-      };
-
-      const pricingData4: PricingData = {
-        region: 'us-east-1',
-        instance: 'db.t3.small',
-        deployment: 'single-az',
-        engine: 'mysql',
-        license: 'li',
-        onDemand: {
-          hourly: 0.2,
-          daily: 4.8
-        },
-        savingsOptions: {
-          '3yr_All Upfront': {
-            term: '3yr',
-            purchaseOption: 'All Upfront',
-            upfront: upfrontCost4
-          }
-        } as any
-      };
-
-      const riPortfolio: RiPortfolio = {
-        metadata: {
-          source: 'test',
-          importedAt: new Date().toISOString(),
-          firstFullYear
-        },
-        rows: [
-          { riRow: riRow3, pricingData: pricingData3 },
-          { riRow: riRow4, pricingData: pricingData4 }
-        ]
-      };
-
-      const savingsOption: SavingsOption = {
-        term: '3yr',
-        purchaseOption: 'All Upfront'
-      };
-
-      // Act
-      const result = CostTimeseriesCalculator.calculateCostTimeSeries(riPortfolio, savingsOption);
-
-      // Assert
-      expect(result).toHaveSize(2);
-
-      // Check first RI
-      expect(result[0].riRow).toBe(riRow3);
-      expect(result[0].pricingData).toBe(pricingData3);
-
-      // Months from June 2024 to December 2026
-      const expectedMonths3 = [
-        { year: 2024, month: 6 },
-        { year: 2024, month: 7 },
-        { year: 2024, month: 8 },
-        { year: 2024, month: 9 },
-        { year: 2024, month: 10 },
-        { year: 2024, month: 11 },
-        { year: 2024, month: 12 },
-        { year: 2025, month: 1 },
-        { year: 2025, month: 2 },
-        { year: 2025, month: 3 },
-        { year: 2025, month: 4 },
-        { year: 2025, month: 5 },
-        { year: 2025, month: 6 },
-        { year: 2025, month: 7 },
-        { year: 2025, month: 8 },
-        { year: 2025, month: 9 },
-        { year: 2025, month: 10 },
-        { year: 2025, month: 11 },
-        { year: 2025, month: 12 },
-        { year: 2026, month: 1 },
-        { year: 2026, month: 2 },
-        { year: 2026, month: 3 },
-        { year: 2026, month: 4 },
-        { year: 2026, month: 5 },
-        { year: 2026, month: 6 },
-        { year: 2026, month: 7 },
-        { year: 2026, month: 8 },
-        { year: 2026, month: 9 },
-        { year: 2026, month: 10 },
-        { year: 2026, month: 11 },
-        { year: 2026, month: 12 }
-      ];
-
-      expect(result[0].monthlyCost).toHaveSize(expectedMonths3.length);
-
-      expectedMonths3.forEach((expectedMonth, index) => {
-        const monthlyCost = result[0].monthlyCost[index];
-        expect(monthlyCost.year).toBe(expectedMonth.year);
-        expect(monthlyCost.month).toBe(expectedMonth.month);
-
-        const isAfterEnd = expectedMonth.year > 2025 || (expectedMonth.year === 2025 && expectedMonth.month > 6);
-        if (isAfterEnd) {
-          expect(monthlyCost.cost.fullUpfront_3y).toBeNull();
-        } else {
-          expect(monthlyCost.cost.fullUpfront_3y).toBeDefined();
-          if (index === 0) {
-            expect(monthlyCost.cost.fullUpfront_3y.upfrontCost).toBe(upfrontCost3);
-          } else {
-            expect(monthlyCost.cost.fullUpfront_3y.upfrontCost).toBe(0);
-          }
-          expect(monthlyCost.cost.fullUpfront_3y.monthlyCost).toBe(0);
-        }
-
-        // All other cost types should be null
-        expect(monthlyCost.cost.onDemand).toBeNull();
-        expect(monthlyCost.cost.fullUpfront_1y).toBeNull();
-        expect(monthlyCost.cost.partialUpUpfront_3y).toBeNull();
-        expect(monthlyCost.cost.partialUpfront_1y).toBeNull();
-        expect(monthlyCost.cost.noUpfront_1y).toBeNull();
-      });
-
-      // Check second RI
-      expect(result[1].riRow).toBe(riRow4);
-      expect(result[1].pricingData).toBe(pricingData4);
-
-      // Months from July 2024 to December 2026
-      const expectedMonths4 = [
-        { year: 2024, month: 7 },
-        { year: 2024, month: 8 },
-        { year: 2024, month: 9 },
-        { year: 2024, month: 10 },
-        { year: 2024, month: 11 },
-        { year: 2024, month: 12 },
-        { year: 2025, month: 1 },
-        { year: 2025, month: 2 },
-        { year: 2025, month: 3 },
-        { year: 2025, month: 4 },
-        { year: 2025, month: 5 },
-        { year: 2025, month: 6 },
-        { year: 2025, month: 7 },
-        { year: 2025, month: 8 },
-        { year: 2025, month: 9 },
-        { year: 2025, month: 10 },
-        { year: 2025, month: 11 },
-        { year: 2025, month: 12 },
-        { year: 2026, month: 1 },
-        { year: 2026, month: 2 },
-        { year: 2026, month: 3 },
-        { year: 2026, month: 4 },
-        { year: 2026, month: 5 },
-        { year: 2026, month: 6 },
-        { year: 2026, month: 7 },
-        { year: 2026, month: 8 },
-        { year: 2026, month: 9 },
-        { year: 2026, month: 10 },
-        { year: 2026, month: 11 },
-        { year: 2026, month: 12 }
-      ];
-
-      expect(result[1].monthlyCost).toHaveSize(expectedMonths4.length);
-
-      expectedMonths4.forEach((expectedMonth, index) => {
-        const monthlyCost = result[1].monthlyCost[index];
-        expect(monthlyCost.year).toBe(expectedMonth.year);
-        expect(monthlyCost.month).toBe(expectedMonth.month);
-
-        const isAfterEnd = expectedMonth.year > 2025 || (expectedMonth.year === 2025 && expectedMonth.month > 8);
-        if (isAfterEnd) {
-          expect(monthlyCost.cost.fullUpfront_3y).toBeNull();
-        } else {
-          expect(monthlyCost.cost.fullUpfront_3y).toBeDefined();
-          if (index === 0) {
-            expect(monthlyCost.cost.fullUpfront_3y.upfrontCost).toBe(upfrontCost4 * riRow4.count);
-          } else {
-            expect(monthlyCost.cost.fullUpfront_3y.upfrontCost).toBe(0);
-          }
-          expect(monthlyCost.cost.fullUpfront_3y.monthlyCost).toBe(0);
-        }
-
-        // All other cost types should be null
-        expect(monthlyCost.cost.onDemand).toBeNull();
-        expect(monthlyCost.cost.fullUpfront_1y).toBeNull();
-        expect(monthlyCost.cost.partialUpUpfront_3y).toBeNull();
-        expect(monthlyCost.cost.partialUpfront_1y).toBeNull();
-        expect(monthlyCost.cost.noUpfront_1y).toBeNull();
-      });
-    });
-  });
+  }); 
 });

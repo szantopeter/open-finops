@@ -12,7 +12,8 @@ describe('App Routes', () => {
 
   it('should lazy load LandingComponent', async () => {
     const route = routes[0];
-    const componentOrModule = await route.loadComponent();
+    expect(route.loadComponent).toBeDefined();
+    const componentOrModule = await (route as any).loadComponent();
     expect(componentOrModule).toBeDefined();
     // If the result is a default export, unwrap it
     const component = (componentOrModule && (componentOrModule as any).default) ? (componentOrModule as any).default : componentOrModule;

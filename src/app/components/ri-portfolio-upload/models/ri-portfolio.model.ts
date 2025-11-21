@@ -13,16 +13,17 @@ export interface RiPortfolio {
 }
 
 export interface RiRow {
-  id?: string;
+  id: string;
   raw: Record<string, string>;
-  startDate: string; // ISO date
-  endDate?: string; // ISO date
+  startDate: Date;
+  endDate: Date;
   count: number;
   instanceClass: string;
   region: string;
   multiAz: boolean;
   engine: string;
-  edition?: string;
-  upfrontPayment?: string; // e.g., NoUpfront, Partial, AllUpfront
-  durationMonths?: number;
+  edition: string;
+  upfrontPayment: string; // e.g., NoUpfront, Partial, AllUpfront
+  durationMonths: number;
+  type: 'actual' | 'projected';
 }

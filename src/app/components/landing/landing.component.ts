@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 
 import { RiImportPreviewComponent } from '../ri-portfolio-preview/ri-portfolio-preview.component';
 import { RiImportUploadComponent } from '../ri-portfolio-upload/ri-portfolio-upload.component';
+import { CostComparisonTableComponent } from '../cost-comparison-table/cost-comparison-table.component';
+import { RiPortfolioDataService } from '../ri-portfolio-upload/service/ri-portfolio-data.service';
 
 @Component({
   selector: 'wk-landing',
@@ -10,10 +12,12 @@ import { RiImportUploadComponent } from '../ri-portfolio-upload/ri-portfolio-upl
   styleUrls: ['./landing.component.scss']
   ,
   standalone: true,
-  imports: [RiImportUploadComponent, RiImportPreviewComponent, CommonModule]
+  imports: [RiImportUploadComponent, RiImportPreviewComponent, CostComparisonTableComponent, CommonModule]
 })
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class LandingComponent {
-  constructor() {}
+  riPortfolio$ = this.riPortfolioDataService.riPortfolio$;
+
+  constructor(private riPortfolioDataService: RiPortfolioDataService) {}
 }

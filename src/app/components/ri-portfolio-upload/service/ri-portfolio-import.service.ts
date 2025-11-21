@@ -52,9 +52,15 @@ export class RiCSVParserService {
 
       // basic normalization
       const start = objRaw['Start'];
-      const startIso = this.normalizeDate(start);
+      const startIso = this.parseDate(start);
       if (!startIso) {
         errors.push(`invalid Start at line ${i + 1}`);
+        continue;
+      }
+
+      const endIso = this.parseDate(objRaw['End']);
+      if (!endIso) {
+        errors.push(`invalid End at line ${i + 1}`);
         continue;
       }
 
@@ -64,26 +70,49 @@ export class RiCSVParserService {
         continue;
       }
 
+      if (!objRaw['Instance Type']) {
+        errors.push(`missing Instance Type at line ${i + 1}`);
+        continue;
+      }
+
+      if (!objRaw['Region']) {
+        errors.push(`missing Region at line ${i + 1}`);
+        continue;
+      }
+
       if (!objRaw['multiAZ']) {
         errors.push(`missing multiAZ at line ${i + 1}`);
         continue;
       }
 
       // derive duration from Term
-      let durationMonths: number | undefined = undefined;
-      const termRaw = objRaw['Term'] || '';
-      if (termRaw) {
-        const t = termRaw.toString().toLowerCase();
-        if (t.includes('1 year') || t.includes('1yr') || t.includes('12')) durationMonths = 12;
-        else if (t.includes('3 year') || t.includes('3yr') || t.includes('36')) durationMonths = 36;
+      let durationMonths: number;
+      const termRaw = objRaw['Term'];
+      const t = termRaw.toString().toLowerCase();
+      if (t.includes('1 year') || t.includes('1yr') || t.includes('12')) durationMonths = 12;
+      else if (t.includes('3 year') || t.includes('3yr') || t.includes('36')) durationMonths = 36
+      else {
+        errors.push(`invalid Term at line ${i + 1}`);
+        continue;
       }
 
       const { engine, edition } = this.parseEngine(objRaw['Product']);
 
+      if (!engine) {
+        errors.push(`invalid engine at line ${i + 1}`);
+        continue;
+      }
+
+      if (!edition) {
+        errors.push(`invalid edition at line ${i + 1}`);
+        continue;
+      }
+
       rows.push({
+        id: objRaw['RI ID'] || `${objRaw['Instance Type']}-${objRaw['Region']}-${i}`,
         raw: objRaw,
         startDate: startIso,
-        endDate: objRaw['End'] ? this.normalizeDate(objRaw['End']) ?? undefined : undefined,
+        endDate: endIso,
         count,
         instanceClass: objRaw['Instance Type'],
         region: objRaw['Region'],
@@ -91,7 +120,8 @@ export class RiCSVParserService {
         engine,
         edition,
         upfrontPayment: this.normalizeUpfront(objRaw['RI Type']),
-        durationMonths
+        durationMonths,
+        type: 'actual'
       });
     }
 
@@ -100,7 +130,7 @@ export class RiCSVParserService {
         const pricingData = await this.pricingLoader.loadPricingForRiRow(riRow);
         return { riRow, pricingData };
       } catch (error) {
-        errors.push(`Failed to load pricing for row: ${riRow.instanceClass} in ${riRow.region} - ${error.message}`);
+        errors.push(`Failed to load pricing for row: ${riRow.instanceClass} in ${riRow.region} - ${(error as Error).message}`);
         return null; // will filter out
       }
     }));
@@ -115,7 +145,7 @@ export class RiCSVParserService {
       source,
       importedAt: new Date().toISOString(),
       fileLastModified: fileLastModifiedIso,
-      firstFullYear
+      firstFullYear,
     };
 
     return { riPortfolio: { metadata, rows: validRows } };
@@ -147,7 +177,7 @@ export class RiCSVParserService {
     return raw.replaceAll(/[-_]+/g, ' ').replaceAll(/\b\w/g, (c: string) => c.toUpperCase());
   }
 
-  private parseEngine(rawEngine: string): { engine: string; edition: string | null } {
+  private parseEngine(rawEngine: string): { engine: string; edition: string | undefined } {
     // Clean engine string and extract parenthetical license tokens
     const engineStr = (rawEngine || '').toString();
     const parenMatch = /\(([^)]+)\)/.exec(engineStr);
@@ -158,7 +188,7 @@ export class RiCSVParserService {
     const enginesWithVariants = new Set(['oracle', 'db2', 'sqlserver']);
 
     // Derive edition: try to extract from engine token
-    let editionOnly: string | null = null;
+    let editionOnly: string | undefined = undefined;
     // if engineNoParen contains hyphenated tokens like 'oracle-se2', take the tail as edition
     if (engineNoParen.includes('-')) {
       const parts = engineNoParen.split(/[-\s]+/).map(p => p.trim()).filter(Boolean);
@@ -166,7 +196,7 @@ export class RiCSVParserService {
     }
 
     // Normalize license token: prefer parenthesis content
-    let licenseToken: string | null = null;
+    let licenseToken: string | undefined = undefined;
     if (parenToken) licenseToken = parenToken;
     if (licenseToken) {
       // normalize common phrases
@@ -180,7 +210,7 @@ export class RiCSVParserService {
     // For engines that support editions (oracle, sqlserver, db2), keep engine and edition separate
     // For other engines, append license to the engine token itself
     let finalEngineToken: string;
-    let finalEdition: string | null = null;
+    let finalEdition: string | undefined = undefined;
 
     if (enginesWithVariants.has(engineNormalizedBase)) {
       // Keep engine as base (e.g., 'oracle')
@@ -193,6 +223,8 @@ export class RiCSVParserService {
       // For engines without editions (mysql, postgresql, etc.), append license to engine
       finalEngineToken = engineNormalizedBase + (licenseToken ? `-${licenseToken}` : '');
     }
+
+    if (!finalEdition) finalEdition = 'standard';
 
     return { engine: finalEngineToken, edition: finalEdition };
   }
@@ -234,11 +266,16 @@ export class RiCSVParserService {
     return result;
   }
 
-  private normalizeDate(input?: string): string | null {
-    if (!input) return null;
-    const d = new Date(input);
-    if (Number.isNaN(d.getTime())) return null;
-    return d.toISOString().slice(0, 10);
+  private parseDate(input: string): Date {
+    const tokens = input.split('-')
+    const date = new Date();
+    
+    date.setFullYear(Number.parseInt(tokens[0]));
+    date.setMonth(Number.parseInt(tokens[1]));
+    date.setMonth(Number.parseInt(tokens[2]));
+    
+    //TODO validate result date
+    return date;
   }
 
   private computeFirstFullYear(rows: RiRow[]): number {
@@ -248,8 +285,8 @@ export class RiCSVParserService {
 
     const endDates = rows
       .map(r => r.endDate)
-      .filter(d => !!d)
-      .map(d => Date.parse(d))
+      // .filter((d): d is string => !!d)
+      .map(d => d.valueOf())
       .filter(n => !Number.isNaN(n));
 
     if (endDates.length === 0) {

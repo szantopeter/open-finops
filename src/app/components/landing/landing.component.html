@@ -329,6 +329,12 @@
         </div>
       </div>
 
+      @if (riPortfolio$ | async; as portfolio) {
+        <div style="width:100%;margin-top:20px;">
+          <app-cost-comparison-table [riPortfolio]="portfolio"></app-cost-comparison-table>
+        </div>
+      }
+
     </section>
 
   </div>
