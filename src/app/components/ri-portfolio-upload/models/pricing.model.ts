@@ -22,7 +22,6 @@ export type SavingsKey =
   | '1yr_No Upfront'
   | '1yr_Partial Upfront'
   | '1yr_All Upfront'
-  | '3yr_No Upfront'
   | '3yr_Partial Upfront'
   | '3yr_All Upfront';
 

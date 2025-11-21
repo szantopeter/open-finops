@@ -66,33 +66,47 @@ export class CostTimeseriesCalculator {
     };
 
     if (savingsOption.purchaseOption === 'On Demand') {
+      
       const dailyPrice = pricingData.onDemand.daily;
       cost.onDemand = {
         upfrontCost: 0,
         monthlyCost: dailyPrice * activeDays * count
       };
+
     } else {
-      // For RI, find the matching savings option
-      const key = `${savingsOption.term}_${savingsOption.purchaseOption.replace(' ', '')}`;
-      const savings = pricingData.savingsOptions?.[key];
+
+      const savingFieldName = this.getSavingFieldName(savingsOption);
+      const savings = pricingData.savingsOptions?.[savingFieldName];
       if (savings) {
-        const field = this.getCostField(savingsOption);
-        cost[field] = {
+        const costFieldName = this.getCostFieldName(savingsOption);
+        cost[costFieldName] = {
           upfrontCost: isFirstMonth ? savings.upfront * count : 0,
-          monthlyCost: 0 // Assuming no monthly for upfront, but for no upfront, need to calculate
+          monthlyCost: savings.daily * count * activeDays
         };
-        // For no upfront, monthly cost
-        if (savingsOption.purchaseOption === 'No Upfront') {
-          // Assume monthly rate, but since not in model, perhaps 0 for now
-          cost[field].monthlyCost = 0; // TODO: calculate monthly
-        }
+      
+      } else {
+        //TODO throw error
       }
     }
 
     return cost;
   }
 
-  private static getCostField(savingsOption: SavingsOption): string {
+    private static getSavingFieldName(savingsOption: SavingsOption): string {
+    if (savingsOption.term === '3yr') {
+      if (savingsOption.purchaseOption === 'All Upfront') return '3yr_All Upfront';
+      if (savingsOption.purchaseOption === 'Partial Upfront') return '3yr_Partial Upfront';
+    } else if (savingsOption.term === '1yr') {
+      if (savingsOption.purchaseOption === 'All Upfront') return '1yr_All Upfront';
+      if (savingsOption.purchaseOption === 'Partial Upfront') return '1yr_Partial Upfront';
+      if (savingsOption.purchaseOption === 'No Upfront') return '1yr_No Upfront';
+    }
+
+    //TODO throw error
+    return 'invalid'; 
+  }
+
+  private static getCostFieldName(savingsOption: SavingsOption): string {
     if (savingsOption.term === '3yr') {
       if (savingsOption.purchaseOption === 'All Upfront') return 'fullUpfront_3y';
       if (savingsOption.purchaseOption === 'Partial Upfront') return 'partialUpfront_3y';

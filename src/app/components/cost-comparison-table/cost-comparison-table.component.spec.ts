@@ -71,7 +71,6 @@ describe('CostComparisonTableComponent', () => {
                 },
                 '1yr_Partial Upfront': null,
                 '1yr_All Upfront': null,
-                '3yr_No Upfront': null,
                 '3yr_Partial Upfront': null,
                 '3yr_All Upfront': {
                   term: '3yr',
