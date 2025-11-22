@@ -40,3 +40,5 @@ export interface PricingData {
 }
 
 export default PricingData;
+
+export type UpfrontPayment = 'No Upfront' | 'Partial' | 'All Upfront';

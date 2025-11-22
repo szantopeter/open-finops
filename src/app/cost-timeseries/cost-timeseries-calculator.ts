@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-extraneous-class */
 import CostTimeseries from './costTimeseries.model';
 import { SavingsOption } from '../components/ri-portfolio-upload/models/pricing.model';
 import { RiPortfolio } from '../components/ri-portfolio-upload/models/ri-portfolio.model';
@@ -21,7 +22,7 @@ export class CostTimeseriesCalculator {
 
       const monthlyCost: CostTimeseries['monthlyCost'] = [];
 
-      const current = startDate;
+      const current = new Date(startDate.getTime());
       while (current <= endDate) {
         const year = current.getFullYear();
         const month = current.getMonth() + 1;
@@ -54,7 +55,11 @@ export class CostTimeseriesCalculator {
     const activeStart = startDate > monthStart ? startDate : monthStart;
     const activeEnd = endDate < monthEnd ? endDate : monthEnd;
     if (activeStart >= activeEnd) return 0;
-    return Math.ceil((activeEnd.getTime() - activeStart.getTime()) / (1000 * 60 * 60 * 24));
+    const msPerDay = 24 * 60 * 60 * 1000;
+    const startUtc = Date.UTC(activeStart.getFullYear(), activeStart.getMonth(), activeStart.getDate());
+    const endUtc = Date.UTC(activeEnd.getFullYear(), activeEnd.getMonth(), activeEnd.getDate());
+    const diffDays = (endUtc - startUtc) / msPerDay;
+    return Math.round(diffDays);
   }
 
   private static calculateCostForMonth(pricingData: any, savingsOption: SavingsOption, activeDays: number, count: number, isFirstMonth: boolean): any {

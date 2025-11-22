@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-extraneous-class */
 import { CostTimeseriesCalculator } from './cost-timeseries-calculator';
 import CostTimeseries from './costTimeseries.model';
 import { SavingsOption } from '../components/ri-portfolio-upload/models/pricing.model';
@@ -23,7 +24,7 @@ export class CostComparisonCalculator {
   private constructor() {}
 
   static calculateCostComparison(riPortfolio: RiPortfolio): CostComparison[] {
-    const firstFullYear = riPortfolio.metadata.firstFullYear;
+    const _firstFullYear = riPortfolio.metadata.firstFullYear;
     const scenarios: { name: string; savingsOption: SavingsOption }[] = [
       { name: 'On Demand', savingsOption: { purchaseOption: 'On Demand', term: '1yr' as any } },
       { name: '1yr No Upfront', savingsOption: { purchaseOption: 'No Upfront', term: '1yr' } },
@@ -35,8 +36,8 @@ export class CostComparisonCalculator {
     //TODO compare on demand to RIs
     for (const scenario of scenarios) {
       const costTimeseries = this.getCostTimeseries(riPortfolio, scenario.savingsOption);
-      const upfrontCosts = this.calculateUpfrontCosts(costTimeseries, firstFullYear);
-      const monthlyCosts = this.calculateMonthlyCosts(costTimeseries, firstFullYear);
+      const upfrontCosts = this.calculateUpfrontCosts(costTimeseries, _firstFullYear);
+      const monthlyCosts = this.calculateMonthlyCosts(costTimeseries, _firstFullYear);
 
       const highestMonthlyCost = monthlyCosts.highestMonthlyCost;
       const totalCost = upfrontCosts.total3yrFullUpfront + upfrontCosts.total1yrFullUpfront + upfrontCosts.total3yrPartialUpfront + upfrontCosts.total1yrPartialUpfront + monthlyCosts.total3yrMonthly + monthlyCosts.total1yrMonthly;

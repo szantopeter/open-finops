@@ -34,7 +34,7 @@ describe('CostTimeseriesCalculator', () => {
         multiAz: false,
         engine: 'mysql',
         edition: 'standard',
-        upfrontPayment: 'NoUpfront',
+        upfrontPayment: 'No Upfront',
         durationMonths: 12,
         type: 'actual'
       };
@@ -62,7 +62,7 @@ describe('CostTimeseriesCalculator', () => {
         multiAz: false,
         engine: 'mysql',
         edition: 'standard',
-        upfrontPayment: 'NoUpfront',
+        upfrontPayment: 'No Upfront',
         durationMonths: 12,
         type: 'actual'
       };

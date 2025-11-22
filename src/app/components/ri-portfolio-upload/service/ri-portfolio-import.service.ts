@@ -4,7 +4,7 @@ import { PricingLoaderService } from './pricing-loader.service';
 import { RiPortfolioDataService } from './ri-portfolio-data.service';
 import { StorageService } from '../../../storage-service/storage.service';
 import { PricingData } from '../models/pricing.model';
-import { RiRow, RiPortfolio, RiImportMetadata } from '../models/ri-portfolio.model';
+import { RiRow, RiPortfolio, RiImportMetadata, UpfrontPayment } from '../models/ri-portfolio.model';
 
 export interface RiImportParseResult {
   riPortfolio?: RiPortfolio;
@@ -163,18 +163,20 @@ export class RiCSVParserService {
     return dbEngine || '';
   }
 
-  private normalizeUpfront(u: any): string {
+  private normalizeUpfront(u: any): UpfrontPayment {
     const raw = (u ?? '').toString().trim().toLowerCase();
     if (!raw) return 'No Upfront';
+    // explicit checks for common patterns
     if (raw.includes('no') && raw.includes('up')) return 'No Upfront';
-    if (raw.includes('partial') || raw.includes('partial up')) return 'Partial Upfront';
+    if (raw.includes('partial') || raw.includes('partial up') || raw.includes('partial-upfront')) return 'Partial';
     if (raw.includes('all') || raw.includes('all up') || raw.includes('allupfront') || raw.includes('all-upfront')) return 'All Upfront';
-    // common alternate spellings
+    // alternate spellings
     if (raw.includes('no-upfront') || raw.includes('noupfront')) return 'No Upfront';
-    if (raw.includes('partial-upfront')) return 'Partial Upfront';
-    if (raw.includes('all-upfront')) return 'All Upfront';
-    // fallback: title-case the raw value replacing hyphens/underscores with spaces
-    return raw.replaceAll(/[-_]+/g, ' ').replaceAll(/\b\w/g, (c: string) => c.toUpperCase());
+    // fallback mapping: prefer Partial when uncertain
+    if (raw.includes('partial')) return 'Partial';
+    if (raw.includes('all')) return 'All Upfront';
+    if (raw.includes('no')) return 'No Upfront';
+    return 'Partial';
   }
 
   private parseEngine(rawEngine: string): { engine: string; edition: string | undefined } {
