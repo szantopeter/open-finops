@@ -1,12 +1,12 @@
 import { RiRenewalProjection } from './ri-renewal-projection';
-import { RiPortfolio, RiRow } from '../components/ri-portfolio-upload/models/ri-portfolio.model';
 import { SavingsKey } from '../components/ri-portfolio-upload/models/pricing.model';
+import { RiPortfolio, RiRow } from '../components/ri-portfolio-upload/models/ri-portfolio.model';
 
 describe('RiRenewalProjection', () => {
   const firstFullYear = 2029;
 
   // Helper to run the common test logic for a given savingsKey
-  const runProjectionTest = (savingsKey: SavingsKey) => {
+  const runProjectionTest = (savingsKey: SavingsKey): void => {
     // Two RIs: one 3-year and one 1-year, same year but different month/day
     const ri1: RiRow = {
       id: 'r1',
@@ -21,7 +21,7 @@ describe('RiRenewalProjection', () => {
       edition: 'standard',
       upfrontPayment: 'All Upfront',
       durationMonths: 36,
-      type: 'actual',
+      type: 'actual'
     };
 
     const ri2: RiRow = {
@@ -37,19 +37,19 @@ describe('RiRenewalProjection', () => {
       edition: 'standard',
       upfrontPayment: 'No Upfront',
       durationMonths: 12,
-      type: 'actual',
+      type: 'actual'
     };
 
     const inputPortfolio: RiPortfolio = {
       metadata: {
         source: 'test',
         importedAt: new Date().toISOString(),
-        firstFullYear,
+        firstFullYear
       },
       rows: [
         { riRow: ri1, pricingData: ({} as any) },
-        { riRow: ri2, pricingData: ({} as any) },
-      ],
+        { riRow: ri2, pricingData: ({} as any) }
+      ]
     };
 
     // Act
@@ -60,7 +60,7 @@ describe('RiRenewalProjection', () => {
     const targetEndOfYear = new Date(firstFullYear, 11, 31);
 
     // Helper to match instance identity
-    const matchesInstance = (a: RiRow, b: RiRow) =>
+    const matchesInstance = (a: RiRow, b: RiRow): boolean =>
       a.instanceClass === b.instanceClass && a.region === b.region && a.multiAz === b.multiAz && a.engine === b.engine && a.edition === b.edition;
 
     for (const inputEntries of inputPortfolio.rows) {

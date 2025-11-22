@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-extraneous-class */
 import { CostTimeseriesCalculator } from './cost-timeseries-calculator';
 import CostTimeseries from './costTimeseries.model';
 import { SavingsOption } from '../components/ri-portfolio-upload/models/pricing.model';
@@ -19,6 +18,8 @@ export interface CostComparison {
   monthlyBreakdown: CostTimeseries[];
 }
 
+// The class is used as a namespace for static helpers; allow this usage explicitly
+/* eslint-disable @typescript-eslint/no-extraneous-class */
 export class CostComparisonCalculator {
   // Prevent instantiation — class used as namespace for static helpers
   private constructor() {}
@@ -36,7 +37,7 @@ export class CostComparisonCalculator {
     //TODO compare on demand to RIs
     for (const scenario of scenarios) {
       const costTimeseries = this.getCostTimeseries(riPortfolio, scenario.savingsOption);
-      const upfrontCosts = this.calculateUpfrontCosts(costTimeseries, _firstFullYear);
+      const upfrontCosts = this.calculateUpfrontCosts(costTimeseries);
       const monthlyCosts = this.calculateMonthlyCosts(costTimeseries, _firstFullYear);
 
       const highestMonthlyCost = monthlyCosts.highestMonthlyCost;
@@ -75,7 +76,7 @@ export class CostComparisonCalculator {
     return CostTimeseriesCalculator.calculateCostTimeSeries(riPortfolio, savingsOption);
   }
 
-  private static calculateUpfrontCosts(costTimeseries: CostTimeseries[], firstFullYear: number): {
+  private static calculateUpfrontCosts(costTimeseries: CostTimeseries[]): {
         total3yrFullUpfront: number;
         total1yrFullUpfront: number;
         total3yrPartialUpfront: number;

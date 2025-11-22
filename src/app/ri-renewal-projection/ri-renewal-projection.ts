@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-extraneous-class */
 import { SavingsKey, UpfrontPayment } from '../components/ri-portfolio-upload/models/pricing.model';
 import { RiPortfolio, RiRow } from '../components/ri-portfolio-upload/models/ri-portfolio.model';
 
@@ -18,7 +19,7 @@ export class RiRenewalProjection {
   static projectRiRenewal(riPortfolio: RiPortfolio, savingsKey: SavingsKey): RiPortfolio {
     const result: RiPortfolio = {
       metadata: { ...riPortfolio.metadata },
-      rows: [],
+      rows: []
     };
 
     const firstFullYear = riPortfolio.metadata.firstFullYear;
@@ -70,7 +71,7 @@ export class RiRenewalProjection {
           edition: originalRiRow.edition,
           upfrontPayment: upfrontFromSavings(savingsKey),
           durationMonths: renewalTermMonths,
-          type: 'projected',
+          type: 'projected'
         };
 
         result.rows.push({ riRow: renewal, pricingData: originalPortfolioEntry.pricingData });

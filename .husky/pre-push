@@ -1,8 +1,13 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo "Running full type-aware lint before push (increasing Node heap to 32GB)"
-export NODE_OPTIONS="--max-old-space-size=32768"
-echo "NODE_OPTIONS=${NODE_OPTIONS}"
-# Run the full Angular lint (type-aware). This can be memory heavy; increase heap above if needed.
-npx ng lint --fix
+echo "Running lint-staged on staged files before push"
+# Run lint-staged which will only lint changed files; this avoids running a full project lint that can OOM.
+npx lint-staged
+rc=$?
+if [ $rc -ne 0 ]; then
+	echo "lint-staged failed. Aborting push."
+	exit $rc
+fi
+
+echo "Pre-push checks passed."
