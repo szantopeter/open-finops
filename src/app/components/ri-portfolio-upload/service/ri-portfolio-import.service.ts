@@ -266,16 +266,20 @@ export class RiCSVParserService {
     return result;
   }
 
-  private parseDate(input: string): Date {
-    const tokens = input.split('-');
-    const date = new Date();
+  private parseDate(input: string): Date | undefined {
+    if (!input) return undefined;
+    const trimmed = input.toString().trim();
+    const m = /^([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})$/.exec(trimmed);
+    if (!m) return undefined;
+    const year = Number(m[1]);
+    const month = Number(m[2]);
+    const day = Number(m[3]);
+    if (Number.isNaN(year) || Number.isNaN(month) || Number.isNaN(day)) return undefined;
+    if (month < 1 || month > 12 || day < 1 || day > 31) return undefined;
 
-    date.setFullYear(Number.parseInt(tokens[0]));
-    date.setMonth(Number.parseInt(tokens[1]));
-    date.setMonth(Number.parseInt(tokens[2]));
-
-    //TODO validate result date
-    return date;
+    const dt = new Date(Date.UTC(year, month - 1, day));
+    if (dt.getUTCFullYear() !== year || dt.getUTCMonth() !== month - 1 || dt.getUTCDate() !== day) return undefined;
+    return dt;
   }
 
   private computeFirstFullYear(rows: RiRow[]): number {
