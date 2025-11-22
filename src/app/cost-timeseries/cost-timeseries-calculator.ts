@@ -3,6 +3,8 @@ import { SavingsOption } from '../components/ri-portfolio-upload/models/pricing.
 import { RiPortfolio } from '../components/ri-portfolio-upload/models/ri-portfolio.model';
 
 export class CostTimeseriesCalculator {
+  // Prevent instantiation — this class only contains static helpers
+  private constructor() {}
 
   static calculateCostTimeSeries(riPortfolio : RiPortfolio, savingsOption : SavingsOption) : CostTimeseries[] {
     if (riPortfolio.rows.length === 0) {
@@ -19,7 +21,7 @@ export class CostTimeseriesCalculator {
 
       const monthlyCost: CostTimeseries['monthlyCost'] = [];
 
-      let current = startDate;
+      const current = startDate;
       while (current <= endDate) {
         const year = current.getFullYear();
         const month = current.getMonth() + 1;
@@ -66,7 +68,7 @@ export class CostTimeseriesCalculator {
     };
 
     if (savingsOption.purchaseOption === 'On Demand') {
-      
+
       const dailyPrice = pricingData.onDemand.daily;
       cost.onDemand = {
         upfrontCost: 0,
@@ -83,7 +85,7 @@ export class CostTimeseriesCalculator {
           upfrontCost: isFirstMonth ? savings.upfront * count : 0,
           monthlyCost: savings.daily * count * activeDays
         };
-      
+
       } else {
         //TODO throw error
       }
@@ -92,7 +94,7 @@ export class CostTimeseriesCalculator {
     return cost;
   }
 
-    private static getSavingFieldName(savingsOption: SavingsOption): string {
+  private static getSavingFieldName(savingsOption: SavingsOption): string {
     if (savingsOption.term === '3yr') {
       if (savingsOption.purchaseOption === 'All Upfront') return '3yr_All Upfront';
       if (savingsOption.purchaseOption === 'Partial Upfront') return '3yr_Partial Upfront';
@@ -103,7 +105,7 @@ export class CostTimeseriesCalculator {
     }
 
     //TODO throw error
-    return 'invalid'; 
+    return 'invalid';
   }
 
   private static getCostFieldName(savingsOption: SavingsOption): string {

@@ -9,11 +9,11 @@ describe('CostTimeseriesCalculator', () => {
       const dailyOnDemandPrice0 = 10;
       const dailyOnDemandPrice1 = 20;
 
-      const startDate0 = new Date()
-      startDate0.setFullYear(2024)
+      const startDate0 = new Date();
+      startDate0.setFullYear(2024);
       //month is 0 indexed
-      startDate0.setMonth(5)
-      startDate0.setDate(15)
+      startDate0.setMonth(5);
+      startDate0.setDate(15);
 
       const endDate0 = new Date();
       endDate0.setFullYear(2025);
@@ -97,7 +97,7 @@ describe('CostTimeseriesCalculator', () => {
         metadata: {
           source: 'test1',
           importedAt: new Date().toISOString(),
-          firstFullYear,
+          firstFullYear
         },
         rows: [
           { riRow: riRow0, pricingData: pricingData1 },
@@ -111,7 +111,7 @@ describe('CostTimeseriesCalculator', () => {
       };
 
       const expectedCost0 = [
-        { year: 2024, month: 6, cost: 16 * dailyOnDemandPrice0 * count0},
+        { year: 2024, month: 6, cost: 16 * dailyOnDemandPrice0 * count0 },
         { year: 2024, month: 7, cost: 31 * dailyOnDemandPrice0 * count0 },
         { year: 2024, month: 8, cost: 31 * dailyOnDemandPrice0 * count0 },
         { year: 2024, month: 9, cost: 30 * dailyOnDemandPrice0 * count0 },
@@ -123,7 +123,7 @@ describe('CostTimeseriesCalculator', () => {
         { year: 2025, month: 3, cost: 31 * dailyOnDemandPrice0 * count0 },
         { year: 2025, month: 4, cost: 30 * dailyOnDemandPrice0 * count0 },
         { year: 2025, month: 5, cost: 31 * dailyOnDemandPrice0 * count0 },
-        { year: 2025, month: 6, cost: 15 * dailyOnDemandPrice0 * count0 },
+        { year: 2025, month: 6, cost: 15 * dailyOnDemandPrice0 * count0 }
       ];
       const expectedCost2 = [
         { year: 2024, month: 8, cost: 31 * dailyOnDemandPrice1 * count1 },
@@ -138,7 +138,7 @@ describe('CostTimeseriesCalculator', () => {
         { year: 2025, month: 5, cost: 31 * dailyOnDemandPrice1 * count1 },
         { year: 2025, month: 6, cost: 30 * dailyOnDemandPrice1 * count1 },
         { year: 2025, month: 7, cost: 31 * dailyOnDemandPrice1 * count1 },
-        { year: 2025, month: 8, cost: 0 * dailyOnDemandPrice1 * count1 },
+        { year: 2025, month: 8, cost: 0 * dailyOnDemandPrice1 * count1 }
       ];
 
       // Act
@@ -164,12 +164,12 @@ describe('CostTimeseriesCalculator', () => {
 
         expectedCosts.forEach((expectedMonth, index) => {
           const actualMonth = costTimeseries.monthlyCost[index];
-          expect(actualMonth.year).withContext("Year mismatch ri index: " + riIndex + " index: " + index).toBe(expectedMonth.year);
-          expect(actualMonth.month).withContext("Month mismatch ri index: " + riIndex + " index: " + index).toBe(expectedMonth.month);
+          expect(actualMonth.year).withContext('Year mismatch ri index: ' + riIndex + ' index: ' + index).toBe(expectedMonth.year);
+          expect(actualMonth.month).withContext('Month mismatch ri index: ' + riIndex + ' index: ' + index).toBe(expectedMonth.month);
 
           expect(actualMonth.cost.onDemand).toBeDefined();
-          expect((actualMonth.cost.onDemand as any).upfrontCost).withContext("Upfront cost mismatch ri index: " + riIndex + " index: " + index).toBe(0);
-          expect((actualMonth.cost.onDemand as any).monthlyCost).withContext("Monthly cost mismatch ri index: " + riIndex + " index: " + index + " Actual month: " + actualMonth.year + "." + actualMonth.month ) .toBe(expectedMonth.cost);
+          expect((actualMonth.cost.onDemand as any).upfrontCost).withContext('Upfront cost mismatch ri index: ' + riIndex + ' index: ' + index).toBe(0);
+          expect((actualMonth.cost.onDemand as any).monthlyCost).withContext('Monthly cost mismatch ri index: ' + riIndex + ' index: ' + index + ' Actual month: ' + actualMonth.year + '.' + actualMonth.month ) .toBe(expectedMonth.cost);
 
 
           // All other cost types should be null
@@ -183,5 +183,5 @@ describe('CostTimeseriesCalculator', () => {
     });
 
 
-  }); 
+  });
 });

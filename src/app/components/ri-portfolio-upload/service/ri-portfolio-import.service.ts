@@ -90,7 +90,7 @@ export class RiCSVParserService {
       const termRaw = objRaw['Term'];
       const t = termRaw.toString().toLowerCase();
       if (t.includes('1 year') || t.includes('1yr') || t.includes('12')) durationMonths = 12;
-      else if (t.includes('3 year') || t.includes('3yr') || t.includes('36')) durationMonths = 36
+      else if (t.includes('3 year') || t.includes('3yr') || t.includes('36')) durationMonths = 36;
       else {
         errors.push(`invalid Term at line ${i + 1}`);
         continue;
@@ -145,7 +145,7 @@ export class RiCSVParserService {
       source,
       importedAt: new Date().toISOString(),
       fileLastModified: fileLastModifiedIso,
-      firstFullYear,
+      firstFullYear
     };
 
     return { riPortfolio: { metadata, rows: validRows } };
@@ -267,13 +267,13 @@ export class RiCSVParserService {
   }
 
   private parseDate(input: string): Date {
-    const tokens = input.split('-')
+    const tokens = input.split('-');
     const date = new Date();
-    
+
     date.setFullYear(Number.parseInt(tokens[0]));
     date.setMonth(Number.parseInt(tokens[1]));
     date.setMonth(Number.parseInt(tokens[2]));
-    
+
     //TODO validate result date
     return date;
   }

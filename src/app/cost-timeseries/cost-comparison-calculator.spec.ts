@@ -1,6 +1,4 @@
-import { CostComparisonCalculator } from './cost-comparison-calculator';
-import { PricingData } from '../components/ri-portfolio-upload/models/pricing.model';
-import { RiPortfolio, RiRow } from '../components/ri-portfolio-upload/models/ri-portfolio.model';
+// Intentionally empty spec skeleton; avoid unused imports to satisfy linter
 
 describe('CostComparisonCalculator', () => {
   describe('calculateCostComparison', () => {

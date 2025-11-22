@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RiPortfolio } from '../ri-portfolio-upload/models/ri-portfolio.model';
 
 import { CostComparisonTableComponent } from './cost-comparison-table.component';
+import { RiPortfolio } from '../ri-portfolio-upload/models/ri-portfolio.model';
+
 
 describe('CostComparisonTableComponent', () => {
   let component: CostComparisonTableComponent;
@@ -11,7 +12,7 @@ describe('CostComparisonTableComponent', () => {
     await TestBed.configureTestingModule({
       imports: [CostComparisonTableComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(CostComparisonTableComponent);
     component = fixture.componentInstance;
@@ -33,7 +34,7 @@ describe('CostComparisonTableComponent', () => {
       metadata: {
         source: 'test',
         importedAt: new Date().toISOString(),
-        firstFullYear: 2025,
+        firstFullYear: 2025
       },
       rows: [
         {
@@ -52,35 +53,35 @@ describe('CostComparisonTableComponent', () => {
             durationMonths: 12,
             type: 'actual'
           },
-            pricingData: {
-              region: 'us-east-1',
-              instance: 'db.t3.micro',
-              deployment: 'single-az',
-              engine: 'mysql',
-              onDemand: {
-                hourly: 0.1,
-                daily: 2.4
+          pricingData: {
+            region: 'us-east-1',
+            instance: 'db.t3.micro',
+            deployment: 'single-az',
+            engine: 'mysql',
+            onDemand: {
+              hourly: 0.1,
+              daily: 2.4
+            },
+            savingsOptions: {
+              '1yr_No Upfront': {
+                term: '1yr',
+                purchaseOption: 'No Upfront',
+                upfront: 0,
+                hourly: 0.08,
+                daily: 1.92
               },
-              savingsOptions: {
-                '1yr_No Upfront': {
-                  term: '1yr',
-                  purchaseOption: 'No Upfront',
-                  upfront: 0,
-                  hourly: 0.08,
-                  daily: 1.92
-                },
-                '1yr_Partial Upfront': null,
-                '1yr_All Upfront': null,
-                '3yr_Partial Upfront': null,
-                '3yr_All Upfront': {
-                  term: '3yr',
-                  purchaseOption: 'All Upfront',
-                  upfront: 1000,
-                  hourly: 0.05,
-                  daily: 1.2
-                }
+              '1yr_Partial Upfront': null,
+              '1yr_All Upfront': null,
+              '3yr_Partial Upfront': null,
+              '3yr_All Upfront': {
+                term: '3yr',
+                purchaseOption: 'All Upfront',
+                upfront: 1000,
+                hourly: 0.05,
+                daily: 1.2
               }
             }
+          }
         }
       ]
     };

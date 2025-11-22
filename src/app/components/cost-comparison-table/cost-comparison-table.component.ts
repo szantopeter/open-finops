@@ -1,8 +1,9 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RiPortfolio } from '../ri-portfolio-upload/models/ri-portfolio.model';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+
 import { CostComparisonCalculator, CostComparison } from '../../cost-timeseries/cost-comparison-calculator';
 import CostTimeseries from '../../cost-timeseries/costTimeseries.model';
+import { RiPortfolio } from '../ri-portfolio-upload/models/ri-portfolio.model';
 
 @Component({
   selector: 'app-cost-comparison-table',
@@ -74,14 +75,14 @@ export class CostComparisonTableComponent implements OnChanges {
 
   private getCostKeyForScenario(scenario: string): keyof CostTimeseries['monthlyCost'][0]['cost'] {
     switch (scenario) {
-      case 'On Demand':
-        return 'onDemand';
-      case '1yr No Upfront':
-        return 'noUpfront_1y';
-      case '3yr Full Upfront':
-        return 'fullUpfront_3y';
-      default:
-        return 'onDemand';
+    case 'On Demand':
+      return 'onDemand';
+    case '1yr No Upfront':
+      return 'noUpfront_1y';
+    case '3yr Full Upfront':
+      return 'fullUpfront_3y';
+    default:
+      return 'onDemand';
     }
   }
 

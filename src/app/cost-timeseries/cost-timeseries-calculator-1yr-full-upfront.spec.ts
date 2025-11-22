@@ -12,11 +12,11 @@ describe('CostTimeseriesCalculator', () => {
       const upfrontCost0 = dailyOnDemandPrice0 * (1 - riDiscount) * 365;
       const upfrontCost1 = dailyOnDemandPrice1 * (1 - riDiscount) * 365;
 
-      const startDate0 = new Date()
-      startDate0.setFullYear(2024)
+      const startDate0 = new Date();
+      startDate0.setFullYear(2024);
       //month is 0 indexed
-      startDate0.setMonth(5)
-      startDate0.setDate(15)
+      startDate0.setMonth(5);
+      startDate0.setDate(15);
 
       const endDate0 = new Date();
       endDate0.setFullYear(2025);
@@ -124,7 +124,7 @@ describe('CostTimeseriesCalculator', () => {
         metadata: {
           source: 'test1',
           importedAt: new Date().toISOString(),
-          firstFullYear,
+          firstFullYear
         },
         rows: [
           { riRow: riRow0, pricingData: pricingData0 },
@@ -138,34 +138,34 @@ describe('CostTimeseriesCalculator', () => {
       };
 
       const expectedCost0 = [
-        { year: 2024, month: 6, upfrontCost: upfrontCost0, activeDays: 16},
-        { year: 2024, month: 7, upfrontCost: 0, activeDays: 31},
-        { year: 2024, month: 8, upfrontCost: 0, activeDays: 31},
-        { year: 2024, month: 9, upfrontCost: 0, activeDays: 30},
-        { year: 2024, month: 10, upfrontCost: 0, activeDays: 31},
-        { year: 2024, month: 11, upfrontCost: 0, activeDays: 30},
-        { year: 2024, month: 12, upfrontCost: 0, activeDays: 31},
+        { year: 2024, month: 6, upfrontCost: upfrontCost0, activeDays: 16 },
+        { year: 2024, month: 7, upfrontCost: 0, activeDays: 31 },
+        { year: 2024, month: 8, upfrontCost: 0, activeDays: 31 },
+        { year: 2024, month: 9, upfrontCost: 0, activeDays: 30 },
+        { year: 2024, month: 10, upfrontCost: 0, activeDays: 31 },
+        { year: 2024, month: 11, upfrontCost: 0, activeDays: 30 },
+        { year: 2024, month: 12, upfrontCost: 0, activeDays: 31 },
         { year: 2025, month: 1, upfrontCost: 0, activeDays: 31 },
         { year: 2025, month: 2, upfrontCost: 0, activeDays: 28 },
         { year: 2025, month: 3, upfrontCost: 0, activeDays: 31 },
         { year: 2025, month: 4, upfrontCost: 0, activeDays: 30 },
         { year: 2025, month: 5, upfrontCost: 0, activeDays: 31 },
-        { year: 2025, month: 6, upfrontCost: 0, activeDays: 15 },
+        { year: 2025, month: 6, upfrontCost: 0, activeDays: 15 }
       ];
       const expectedCost1 = [
-        { year: 2024, month: 8, upfrontCost: upfrontCost1, activeDays: 31},
-        { year: 2024, month: 9, upfrontCost: 0, activeDays: 30},
-        { year: 2024, month: 10, upfrontCost: 0, activeDays: 31},
-        { year: 2024, month: 11, upfrontCost: 0, activeDays: 30},
-        { year: 2024, month: 12, upfrontCost: 0, activeDays: 31},
-        { year: 2025, month: 1, upfrontCost: 0, activeDays: 31},
-        { year: 2025, month: 2, upfrontCost: 0, activeDays: 28},
-        { year: 2025, month: 3, upfrontCost: 0, activeDays: 31},
-        { year: 2025, month: 4, upfrontCost: 0, activeDays: 30},
-        { year: 2025, month: 5, upfrontCost: 0, activeDays: 31},
-        { year: 2025, month: 6, upfrontCost: 0, activeDays: 30},
-        { year: 2025, month: 7, upfrontCost: 0, activeDays: 31},
-        { year: 2025, month: 8, upfrontCost: 0, activeDays: 0},
+        { year: 2024, month: 8, upfrontCost: upfrontCost1, activeDays: 31 },
+        { year: 2024, month: 9, upfrontCost: 0, activeDays: 30 },
+        { year: 2024, month: 10, upfrontCost: 0, activeDays: 31 },
+        { year: 2024, month: 11, upfrontCost: 0, activeDays: 30 },
+        { year: 2024, month: 12, upfrontCost: 0, activeDays: 31 },
+        { year: 2025, month: 1, upfrontCost: 0, activeDays: 31 },
+        { year: 2025, month: 2, upfrontCost: 0, activeDays: 28 },
+        { year: 2025, month: 3, upfrontCost: 0, activeDays: 31 },
+        { year: 2025, month: 4, upfrontCost: 0, activeDays: 30 },
+        { year: 2025, month: 5, upfrontCost: 0, activeDays: 31 },
+        { year: 2025, month: 6, upfrontCost: 0, activeDays: 30 },
+        { year: 2025, month: 7, upfrontCost: 0, activeDays: 31 },
+        { year: 2025, month: 8, upfrontCost: 0, activeDays: 0 }
       ];
 
       // Act
@@ -193,12 +193,12 @@ describe('CostTimeseriesCalculator', () => {
 
         expectedCosts.forEach((expectedMonth, index) => {
           const actualMonth = costTimeseries.monthlyCost[index];
-          expect(actualMonth.year).withContext("Year mismatch ri index: " + riIndex + " index: " + index).toBe(expectedMonth.year);
-          expect(actualMonth.month).withContext("Month mismatch ri index: " + riIndex + " index: " + index).toBe(expectedMonth.month);
+          expect(actualMonth.year).withContext('Year mismatch ri index: ' + riIndex + ' index: ' + index).toBe(expectedMonth.year);
+          expect(actualMonth.month).withContext('Month mismatch ri index: ' + riIndex + ' index: ' + index).toBe(expectedMonth.month);
 
           expect(actualMonth.cost.fullUpfront_1y).toBeDefined();
-          expect((actualMonth.cost.fullUpfront_1y as any).upfrontCost).withContext("Upfront cost mismatch ri index: " + riIndex + " index: " + index).toBe(expectedMonth.upfrontCost * count);
-          expect((actualMonth.cost.fullUpfront_1y as any).monthlyCost).withContext("Monthly cost mismatch ri index: " + riIndex + " index: " + index + " Actual month: " + actualMonth.year + "." + actualMonth.month ) .toBe(expectedMonth.activeDays * onDemandPrice * riDiscount * count);
+          expect((actualMonth.cost.fullUpfront_1y as any).upfrontCost).withContext('Upfront cost mismatch ri index: ' + riIndex + ' index: ' + index).toBe(expectedMonth.upfrontCost * count);
+          expect((actualMonth.cost.fullUpfront_1y as any).monthlyCost).withContext('Monthly cost mismatch ri index: ' + riIndex + ' index: ' + index + ' Actual month: ' + actualMonth.year + '.' + actualMonth.month ) .toBe(expectedMonth.activeDays * onDemandPrice * riDiscount * count);
 
           // All other cost types should be null
           expect(actualMonth.cost.fullUpfront_3y).toBeNull();
@@ -211,5 +211,5 @@ describe('CostTimeseriesCalculator', () => {
     });
 
 
-  }); 
+  });
 });
