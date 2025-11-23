@@ -20,7 +20,9 @@ export class PricingLoaderService {
     const deployment = riRow.multiAz ? 'multi-az' : 'single-az';
 
     let engineKey = riRow.engine;
-    if (riRow.edition) engineKey = `${engineKey}-${riRow.edition}`;
+    if (riRow.edition && riRow.edition.toLowerCase() !== 'standard') {
+      engineKey = `${engineKey}-${riRow.edition}`;
+    }
 
     return `/assets/pricing/${region}/${instance}/${region}_${instance}_${deployment}-${engineKey}.json`;
   }
