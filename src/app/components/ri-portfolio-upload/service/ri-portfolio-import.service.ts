@@ -319,7 +319,7 @@ export class RiImportService {
     private readonly riDataService: RiPortfolioDataService
   ) {}
 
-  async saveImportResult(riImportParseResult: RiImportParseResult): Promise<string | null> {
+  async saveImportResult(riImportParseResult: RiImportParseResult): Promise<string[] | null> {
     if (riImportParseResult.errors) {
       this.riDataService.clear();
       try {
@@ -328,7 +328,7 @@ export class RiImportService {
       } catch {
         // ignore diagnostics logging failures
       }
-      return riImportParseResult.errors.join('; ');
+      return riImportParseResult.errors;
     }
     if (riImportParseResult.riPortfolio) {
       this.riDataService.setRiPortfolio(riImportParseResult.riPortfolio);
