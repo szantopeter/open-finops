@@ -31,7 +31,7 @@
     "reuse-angular-ui": "^20.7.1",
     "rxjs": "~7.8.2",
     "tslib": "^2.3.0",
-    "zone.js": "~0.16.0"
+    "zone.js": "~0.15.0"
   },
   "devDependencies": {
     "@angular/build": "^20.3.10",
@@ -55,7 +55,6 @@
     "karma-spec-reporter": "0.0.36",
     "lint-staged": "^16.2.6",
     "madge": "^8.0.0",
-    "tailwindcss": "^4.0.0",
     "typescript": "~5.9.0"
   },
   "lint-staged": {
