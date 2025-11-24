@@ -37,6 +37,7 @@
     "@angular/build": "^20.3.10",
     "@angular/cli": "~20.3.0",
     "@angular/compiler-cli": "^20.3.12",
+    "@apollo/rover": "^0.35.0",
     "@graphql-codegen/cli": "^6.0.0",
     "@graphql-codegen/typescript": "^5.0.0",
     "@graphql-codegen/typescript-apollo-angular": "^4.0.0",
