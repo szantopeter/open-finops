@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-extraneous-class */
 import CostTimeseries from './costTimeseries.model';
-import { SavingsOption } from '../components/ri-portfolio-upload/models/pricing.model';
+import { UpfrontPayment } from '../components/ri-portfolio-upload/models/pricing.model';
 import { RiPortfolio } from '../components/ri-portfolio-upload/models/ri-portfolio.model';
 
 export class CostTimeseriesCalculator {
   // Prevent instantiation — this class only contains static helpers
   private constructor() {}
 
-  static calculateCostTimeSeries(riPortfolio : RiPortfolio, savingsOption : SavingsOption) : CostTimeseries[] {
+  static calculateCostTimeSeries(riPortfolio : RiPortfolio, calculateOnDemand : boolean) : CostTimeseries[] {
     if (riPortfolio.rows.length === 0) {
       return [];
     }
@@ -22,12 +22,13 @@ export class CostTimeseriesCalculator {
 
       const monthlyCost: CostTimeseries['monthlyCost'] = [];
 
-      const current = new Date(startDate.getTime());
+      const current = new Date(startDate);
       while (current <= endDate) {
         const year = current.getFullYear();
         const month = current.getMonth() + 1;
         const activeDays = this.getActiveDaysInMonth(year, month, startDate, endDate);
-        const cost = this.calculateCostForMonth(pricingData, savingsOption, activeDays, riRow.count, monthlyCost.length === 0);
+        
+        const cost = this.calculateCostForMonth(pricingData, calculateOnDemand, riRow.upfrontPayment, riRow.durationMonths, activeDays, riRow.count, monthlyCost.length === 0);
 
         monthlyCost.push({
           year,
@@ -62,7 +63,7 @@ export class CostTimeseriesCalculator {
     return Math.round(diffDays);
   }
 
-  private static calculateCostForMonth(pricingData: any, savingsOption: SavingsOption, activeDays: number, count: number, isFirstMonth: boolean): any {
+  private static calculateCostForMonth(pricingData: any, calculateOnDemand : boolean, upfrontPayment: UpfrontPayment, durationMonths: number, activeDays: number, count: number, isFirstMonth: boolean): any {
     const cost: any = {
       fullUpfront_3y: null,
       fullUpfront_1y: null,
@@ -72,7 +73,7 @@ export class CostTimeseriesCalculator {
       onDemand: null
     };
 
-    if (savingsOption.purchaseOption === 'On Demand') {
+    if (calculateOnDemand) {
 
       const dailyPrice = pricingData.onDemand.daily;
       cost.onDemand = {
@@ -82,10 +83,10 @@ export class CostTimeseriesCalculator {
 
     } else {
 
-      const savingFieldName = this.getSavingFieldName(savingsOption);
+      const savingFieldName = this.getSavingFieldName(upfrontPayment, durationMonths);
       const savings = pricingData.savingsOptions?.[savingFieldName];
       if (savings) {
-        const costFieldName = this.getCostFieldName(savingsOption);
+        const costFieldName = this.getCostFieldName(upfrontPayment, durationMonths);
         cost[costFieldName] = {
           upfrontCost: isFirstMonth ? savings.upfront * count : 0,
           monthlyCost: savings.daily * count * activeDays
@@ -99,28 +100,29 @@ export class CostTimeseriesCalculator {
     return cost;
   }
 
-  private static getSavingFieldName(savingsOption: SavingsOption): string {
-    if (savingsOption.term === '3yr') {
-      if (savingsOption.purchaseOption === 'All Upfront') return '3yr_All Upfront';
-      if (savingsOption.purchaseOption === 'Partial Upfront') return '3yr_Partial Upfront';
-    } else if (savingsOption.term === '1yr') {
-      if (savingsOption.purchaseOption === 'All Upfront') return '1yr_All Upfront';
-      if (savingsOption.purchaseOption === 'Partial Upfront') return '1yr_Partial Upfront';
-      if (savingsOption.purchaseOption === 'No Upfront') return '1yr_No Upfront';
+  private static getSavingFieldName(upfrontPayment: UpfrontPayment, durationMonths: number) {
+
+    if (durationMonths === 36) {
+      if (upfrontPayment === 'All Upfront') return '3yr_All Upfront';
+      if (upfrontPayment === 'Partial') return '3yr_Partial Upfront';
+    } else if (durationMonths === 12) {
+      if (upfrontPayment === 'All Upfront') return '1yr_All Upfront';
+      if (upfrontPayment === 'Partial') return '1yr_Partial Upfront';
+      if (upfrontPayment === 'No Upfront') return '1yr_No Upfront';
     }
 
     //TODO throw error
     return 'invalid';
   }
 
-  private static getCostFieldName(savingsOption: SavingsOption): string {
-    if (savingsOption.term === '3yr') {
-      if (savingsOption.purchaseOption === 'All Upfront') return 'fullUpfront_3y';
-      if (savingsOption.purchaseOption === 'Partial Upfront') return 'partialUpfront_3y';
-    } else if (savingsOption.term === '1yr') {
-      if (savingsOption.purchaseOption === 'All Upfront') return 'fullUpfront_1y';
-      if (savingsOption.purchaseOption === 'Partial Upfront') return 'partialUpfront_1y';
-      if (savingsOption.purchaseOption === 'No Upfront') return 'noUpfront_1y';
+  private static getCostFieldName(upfrontPayment: UpfrontPayment, durationMonths: number): string {
+    if (durationMonths === 36) {
+      if (upfrontPayment === 'All Upfront') return 'fullUpfront_3y';
+      if (upfrontPayment === 'Partial') return 'partialUpfront_3y';
+    } else if (durationMonths === 12) {
+      if (upfrontPayment === 'All Upfront') return 'fullUpfront_1y';
+      if (upfrontPayment === 'Partial') return 'partialUpfront_1y';
+      if (upfrontPayment === 'No Upfront') return 'noUpfront_1y';
     }
     return 'onDemand'; // fallback
   }

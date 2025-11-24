@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
-import { CostComparisonCalculator, CostComparison } from '../../cost-timeseries/cost-comparison-calculator';
+import { CostComparisonCalculator, CostComparison } from '../../cost-comparision/cost-comparison-calculator';
 import CostTimeseries from '../../cost-timeseries/costTimeseries.model';
 import { RiPortfolio } from '../ri-portfolio-upload/models/ri-portfolio.model';
 

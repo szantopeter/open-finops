@@ -105,11 +105,6 @@ describe('CostTimeseriesCalculator', () => {
         ]
       };
 
-      const savingsOption: SavingsOption = {
-        term: '1yr',
-        purchaseOption: 'On Demand'
-      };
-
       const expectedCost0 = [
         { year: 2024, month: 6, cost: 16 * dailyOnDemandPrice0 * count0 },
         { year: 2024, month: 7, cost: 31 * dailyOnDemandPrice0 * count0 },
@@ -142,7 +137,7 @@ describe('CostTimeseriesCalculator', () => {
       ];
 
       // Act
-      const result = CostTimeseriesCalculator.calculateCostTimeSeries(riPortfolio, savingsOption);
+      const result = CostTimeseriesCalculator.calculateCostTimeSeries(riPortfolio, true);
 
       // Assert
       expect(result).toBeDefined();
@@ -182,6 +177,98 @@ describe('CostTimeseriesCalculator', () => {
       });
     });
 
+    it('should calculate savings costs for all RI types', () => {
+      const startDate = new Date(2024, 5, 1); // June 1, 2024
+      const endDate = new Date(2024, 5, 30); // June 30, 2024
+      const activeDays = 29;
+      const count = 1;
+
+      // Define the RI types and their expected cost fields
+      const riTypes = [
+        { upfrontPayment: 'No Upfront' as const, durationMonths: 12, expectedField: 'noUpfront_1y', savingsKey: '1yr_No Upfront', daily: 1.0 },
+        { upfrontPayment: 'Partial' as const, durationMonths: 12, expectedField: 'partialUpfront_1y', savingsKey: '1yr_Partial Upfront', daily: 1.1 },
+        { upfrontPayment: 'All Upfront' as const, durationMonths: 12, expectedField: 'fullUpfront_1y', savingsKey: '1yr_All Upfront', daily: 1.2 },
+        { upfrontPayment: 'Partial' as const, durationMonths: 36, expectedField: 'partialUpfront_3y', savingsKey: '3yr_Partial Upfront', daily: 1.3 },
+        { upfrontPayment: 'All Upfront' as const, durationMonths: 36, expectedField: 'fullUpfront_3y', savingsKey: '3yr_All Upfront', daily: 1.4 }
+      ];
+
+      const rows = riTypes.map((type, index) => {
+        const riRow: RiRow = {
+          id: `test-id-${index}`,
+          raw: {},
+          startDate,
+          endDate,
+          count,
+          instanceClass: 'db.t3.micro',
+          region: 'us-east-1',
+          multiAz: false,
+          engine: 'mysql',
+          edition: 'standard',
+          upfrontPayment: type.upfrontPayment,
+          durationMonths: type.durationMonths,
+          type: 'actual'
+        };
+
+        const pricingData: PricingData = {
+          region: 'us-east-1',
+          instance: 'db.t3.micro',
+          deployment: 'single-az',
+          engine: 'mysql',
+          license: 'li',
+          onDemand: { hourly: 0.1, daily: 2.4 },
+          savingsOptions: {
+            [type.savingsKey]: {
+              term: type.durationMonths === 36 ? '3yr' : '1yr',
+              purchaseOption: type.upfrontPayment === 'Partial' ? 'Partial Upfront' : type.upfrontPayment,
+              upfront: type.upfrontPayment === 'No Upfront' ? 0 : 100,
+              hourly: 0.05,
+              effectiveHourly: 0.06,
+              daily: type.daily
+            }
+          } as any
+        };
+
+        return { riRow, pricingData };
+      });
+
+      const riPortfolio: RiPortfolio = {
+        metadata: {
+          source: 'test-savings',
+          importedAt: new Date().toISOString(),
+          firstFullYear: 2025
+        },
+        rows
+      };
+
+      // Act
+      const result = CostTimeseriesCalculator.calculateCostTimeSeries(riPortfolio, false);
+
+      // Assert
+      expect(result).toBeDefined();
+      expect(result).toHaveSize(5);
+
+      result.forEach((costTimeseries, index) => {
+        const type = riTypes[index];
+        expect(costTimeseries.monthlyCost).toHaveSize(1); // Only one month
+
+        const monthCost = costTimeseries.monthlyCost[0];
+        expect(monthCost.year).toBe(2024);
+        expect(monthCost.month).toBe(6);
+
+        // Check that the expected field is populated
+        expect((monthCost.cost as any)[type.expectedField]).toBeDefined();
+        expect((monthCost.cost as any)[type.expectedField].upfrontCost).toBe(type.upfrontPayment === 'No Upfront' ? 0 : 100);
+        expect((monthCost.cost as any)[type.expectedField].monthlyCost).toBe(type.daily * activeDays * count);
+
+        // All other cost types should be null
+        const allFields = ['fullUpfront_3y', 'fullUpfront_1y', 'partialUpfront_3y', 'partialUpfront_1y', 'noUpfront_1y', 'onDemand'];
+        allFields.forEach(field => {
+          if (field !== type.expectedField) {
+            expect((monthCost.cost as any)[field]).toBeNull();
+          }
+        });
+      });
+    });
 
   });
 });
