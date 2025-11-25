@@ -1,4 +1,4 @@
-import { Provider } from '@angular/core';
+import type { Provider } from '@angular/core';
 
 import { RiImportService } from './service/ri-portfolio-import.service';
 

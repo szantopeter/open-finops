@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { MonthlyBreakdownTableComponent } from './monthly-breakdown-table.component';
 
@@ -10,7 +11,7 @@ describe('MonthlyBreakdownTableComponent', () => {
     await TestBed.configureTestingModule({
       imports: [MonthlyBreakdownTableComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(MonthlyBreakdownTableComponent);
     component = fixture.componentInstance;

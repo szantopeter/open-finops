@@ -1,4 +1,4 @@
-import CostTimeseries from '../cost-timeseries/costTimeseries.model';
+import type CostTimeseries from '../cost-timeseries/costTimeseries.model';
 
 export interface CostComparison {
   scenario: string;
@@ -10,34 +10,31 @@ export interface CostComparison {
   monthlyBreakdown: CostTimeseries[];
 }
 
-export type CostTimeseriesByScenario = {
+export interface CostTimeseriesByScenario {
   onDemand: CostTimeseries;
   noUpfront_1y: CostTimeseries;
   partialUpfront_1y: CostTimeseries;
   fullUpfront_1y: CostTimeseries;
   partialUpfront_3y: CostTimeseries;
   fullUpfront_3y: CostTimeseries;
-};
+}
 
-export type CostComparisonByScenario = {
+export interface CostComparisonByScenario {
   onDemand: CostComparison;
   noUpfront_1y: CostComparison;
   partialUpfront_1y: CostComparison;
   fullUpfront_1y: CostComparison;
   partialUpfront_3y: CostComparison;
   fullUpfront_3y: CostComparison;
-};
+}
 
-export class CostComparisonCalculator {
-  // Prevent instantiation — class used as namespace for static helpers
-  private constructor() {}
-
+export const CostComparisonCalculator = {
   /**
    * Merges multiple RiRows into a single CostTimeseries, combining rows that represent the same month and year. Values are summed.
-   * @param costTimeseriesArray 
-   * @returns 
+   * @param costTimeseriesArray
+   * @returns
    */
-  static mergeRiRows(costTimeseriesArray: CostTimeseries[]): CostTimeseries {
+  mergeRiRows(costTimeseriesArray: CostTimeseries[]): CostTimeseries {
     if (costTimeseriesArray.length === 0) {
       // Return a default empty CostTimeseries
       return {
@@ -58,7 +55,7 @@ export class CostComparisonCalculator {
     for (const costTimeseries of costTimeseriesArray) {
       for (const monthlyCost of costTimeseries.monthlyCost) {
         const key = `${monthlyCost.year}-${monthlyCost.month}`;
-        
+
         if (!monthlyCostMap.has(key)) {
           monthlyCostMap.set(key, {
             year: monthlyCost.year,
@@ -72,7 +69,7 @@ export class CostComparisonCalculator {
 
         // Merge costs for each saving scenario
         const scenarioKeys: (keyof typeof newCost)[] = ['onDemand', 'noUpfront_1y', 'partialUpfront_1y', 'fullUpfront_1y', 'partialUpfront_3y', 'fullUpfront_3y'];
-        
+
         for (const scenario of scenarioKeys) {
           const scenarioCost = newCost[scenario];
           if (scenarioCost && typeof scenarioCost === 'object') {
@@ -100,15 +97,15 @@ export class CostComparisonCalculator {
     };
 
     return mergedCostTimeseries;
-  }
+  },
 
   /**
    * Calculates cost comparisons from cost timeseries for different scenarios.
    * @param costTimeseriesByScenario timeseries for different scenarios
    * @param firstFullYear The year to consider for total cost calculations.
-   * @returns 
+   * @returns
    */
-  static calculateCostComparison(costTimeseriesByScenario: CostTimeseriesByScenario, firstFullYear: number): CostComparisonByScenario {
+  calculateCostComparison(costTimeseriesByScenario: CostTimeseriesByScenario, firstFullYear: number): CostComparisonByScenario {
     const result: Partial<CostComparisonByScenario> = {};
     const scenarioKeys: (keyof CostTimeseriesByScenario)[] = ['onDemand', 'noUpfront_1y', 'partialUpfront_1y', 'fullUpfront_1y', 'partialUpfront_3y', 'fullUpfront_3y'];
 
@@ -186,6 +183,4 @@ export class CostComparisonCalculator {
 
     return result as CostComparisonByScenario;
   }
-
-
-}
+};

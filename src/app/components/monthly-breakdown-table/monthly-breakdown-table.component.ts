@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Component, Input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
-import CostTimeseries from '../../cost-timeseries/costTimeseries.model';
+import type CostTimeseries from '../../cost-timeseries/costTimeseries.model';
 
 @Component({
   selector: 'app-monthly-breakdown-table',
@@ -23,7 +23,7 @@ export class MonthlyBreakdownTableComponent {
   }
 
   getScenarioName(scenario: string): string {
-    const scenarioNames: { [key: string]: string } = {
+    const scenarioNames: Record<string, string> = {
       'onDemand': 'On Demand',
       'noUpfront_1y': '1yr No Upfront',
       'partialUpfront_1y': '1yr Partial Upfront',
@@ -76,7 +76,7 @@ export class MonthlyBreakdownTableComponent {
     }
     return Array.from(yearMonths).map(ym => {
       const [year, month] = ym.split('-').map(Number);
-      return {year, month};
+      return { year, month };
     }).sort((a, b) => (a.year - b.year) || (a.month - b.month));
   }
 

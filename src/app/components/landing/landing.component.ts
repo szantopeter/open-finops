@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { CostComparisonTableComponent } from '../cost-comparison-table/cost-comparison-table.component';
 import { RiImportPreviewComponent } from '../ri-portfolio-preview/ri-portfolio-preview.component';
 import { RiImportUploadComponent } from '../ri-portfolio-upload/ri-portfolio-upload.component';
-import { RiPortfolioDataService } from '../ri-portfolio-upload/service/ri-portfolio-data.service';
+import type { RiPortfolioDataService } from '../ri-portfolio-upload/service/ri-portfolio-data.service';
 
 @Component({
   selector: 'wk-landing',

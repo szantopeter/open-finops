@@ -49,5 +49,11 @@ module.exports = tseslint.config(
     rules: {
       "@angular-eslint/template/label-has-associated-control": 0
     },
+  },
+  {
+    files: ["**/*.spec.ts"],
+    rules: {
+      "@typescript-eslint/no-non-null-assertion": "off"
+    },
   }
 );

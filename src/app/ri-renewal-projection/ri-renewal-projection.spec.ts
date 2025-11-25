@@ -1,6 +1,6 @@
 import { RiRenewalProjection } from './ri-renewal-projection';
-import { SavingsKey } from '../components/ri-portfolio-upload/models/pricing.model';
-import { RiPortfolio, RiRow } from '../components/ri-portfolio-upload/models/ri-portfolio.model';
+import type { SavingsKey } from '../components/ri-portfolio-upload/models/pricing.model';
+import type { RiPortfolio, RiRow } from '../components/ri-portfolio-upload/models/ri-portfolio.model';
 
 describe('RiRenewalProjection', () => {
   const firstFullYear = 2029;

@@ -1,7 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { CostComparisonTableComponent } from './cost-comparison-table.component';
-import { RiPortfolio } from '../ri-portfolio-upload/models/ri-portfolio.model';
+import type { RiPortfolio } from '../ri-portfolio-upload/models/ri-portfolio.model';
 
 
 describe('CostComparisonTableComponent', () => {

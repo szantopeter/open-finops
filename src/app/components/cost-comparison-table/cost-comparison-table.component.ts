@@ -1,14 +1,15 @@
 import { CommonModule } from '@angular/common';
+import type { OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
-import { CostComparisonCalculator, CostComparison, CostTimeseriesByScenario, CostComparisonByScenario } from '../../cost-comparision/cost-comparison-calculator';
+import type { CostComparison, CostTimeseriesByScenario, CostComparisonByScenario } from '../../cost-comparision/cost-comparison-calculator';
+import { CostComparisonCalculator } from '../../cost-comparision/cost-comparison-calculator';
 import { CostTimeseriesCalculator } from '../../cost-timeseries/cost-timeseries-calculator';
-import CostTimeseries from '../../cost-timeseries/costTimeseries.model';
 import { RiRenewalProjection } from '../../ri-renewal-projection/ri-renewal-projection';
-import { SavingsKey } from '../ri-portfolio-upload/models/pricing.model';
-import { RiPortfolio } from '../ri-portfolio-upload/models/ri-portfolio.model';
 import { MonthlyBreakdownTableComponent } from '../monthly-breakdown-table/monthly-breakdown-table.component';
+import type { SavingsKey } from '../ri-portfolio-upload/models/pricing.model';
+import type { RiPortfolio } from '../ri-portfolio-upload/models/ri-portfolio.model';
 
 @Component({
   selector: 'app-cost-comparison-table',

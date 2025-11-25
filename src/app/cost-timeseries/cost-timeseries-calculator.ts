@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-extraneous-class */
-import CostTimeseries from './costTimeseries.model';
-import { UpfrontPayment } from '../components/ri-portfolio-upload/models/pricing.model';
-import { RiPortfolio } from '../components/ri-portfolio-upload/models/ri-portfolio.model';
+import type CostTimeseries from './costTimeseries.model';
+import type { UpfrontPayment } from '../components/ri-portfolio-upload/models/pricing.model';
+import type { RiPortfolio } from '../components/ri-portfolio-upload/models/ri-portfolio.model';
 
 export class CostTimeseriesCalculator {
   // Prevent instantiation — this class only contains static helpers
@@ -27,7 +27,7 @@ export class CostTimeseriesCalculator {
         const year = current.getFullYear();
         const month = current.getMonth() + 1;
         const activeDays = this.getActiveDaysInMonth(year, month, startDate, endDate);
-        
+
         const cost = this.calculateCostForMonth(pricingData, calculateOnDemand, riRow.upfrontPayment, riRow.durationMonths, activeDays, riRow.count, monthlyCost.length === 0);
 
         monthlyCost.push({
@@ -100,7 +100,7 @@ export class CostTimeseriesCalculator {
     return cost;
   }
 
-  private static getSavingFieldName(upfrontPayment: UpfrontPayment, durationMonths: number) {
+  private static getSavingFieldName(upfrontPayment: UpfrontPayment, durationMonths: number): string {
 
     if (durationMonths === 36) {
       if (upfrontPayment === 'All Upfront') return '3yr_All Upfront';

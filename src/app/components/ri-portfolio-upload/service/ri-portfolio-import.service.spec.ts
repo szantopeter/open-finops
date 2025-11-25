@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import type { HttpClient } from '@angular/common/http';
 
 import { PricingLoaderService } from './pricing-loader.service';
 import { RiCSVParserService } from './ri-portfolio-import.service';

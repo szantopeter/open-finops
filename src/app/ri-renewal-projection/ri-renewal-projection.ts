@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-extraneous-class */
-import { SavingsKey, UpfrontPayment } from '../components/ri-portfolio-upload/models/pricing.model';
-import { RiPortfolio, RiRow } from '../components/ri-portfolio-upload/models/ri-portfolio.model';
+import type { SavingsKey, UpfrontPayment } from '../components/ri-portfolio-upload/models/pricing.model';
+import type { RiPortfolio, RiRow } from '../components/ri-portfolio-upload/models/ri-portfolio.model';
 
 function addMonths(date: Date, months: number): Date {
   const d = new Date(date);

@@ -1,7 +1,7 @@
-import { PricingData } from '../components/ri-portfolio-upload/models/pricing.model';
-import { RiRow } from '../components/ri-portfolio-upload/models/ri-portfolio.model';
+import type { PricingData } from '../components/ri-portfolio-upload/models/pricing.model';
+import type { RiRow } from '../components/ri-portfolio-upload/models/ri-portfolio.model';
 
-type MonthlyCost = {
+interface MonthlyCost {
     year: number;
     month: number;
     cost: {
@@ -14,7 +14,7 @@ type MonthlyCost = {
         // noUpfront_3y?: RiCost | null;
         onDemand?: RiCost | null;
     };
-};
+}
 
 export interface CostTimeseries {
     riRow: RiRow;

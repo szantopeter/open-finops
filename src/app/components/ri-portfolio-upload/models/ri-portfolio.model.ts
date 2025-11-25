@@ -1,4 +1,4 @@
-import {PricingData, UpfrontPayment} from './pricing.model';
+import type { PricingData, UpfrontPayment } from './pricing.model';
 
 export interface RiImportMetadata {
   source: string;
