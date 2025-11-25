@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 8.91992,
     "daily": 214.07808,
+    "effectiveHourly": 8.91992,
+    "effectiveDaily": 214.07808,
     "sku": "ETCUPAR8HV3FUEU9"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 57041.11,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 6.507085,
-      "daily": 156.170043
+      "effectiveDaily": 156.170043
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 64464.26,
       "hourly": 2.452978,
+      "daily": 58.871472,
       "effectiveHourly": 4.904277,
-      "daily": 117.702645
+      "effectiveDaily": 117.702645
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 124240.21,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.724321,
-      "daily": 113.383718
+      "effectiveDaily": 113.383718
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 29301.94,
       "hourly": 3.34497,
+      "daily": 80.27928,
       "effectiveHourly": 6.687651,
-      "daily": 160.503612
+      "effectiveDaily": 160.503612
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 6.868304,
+      "daily": 164.839296,
       "effectiveHourly": 6.868304,
-      "daily": 164.839296
+      "effectiveDaily": 164.839296
     }
   }
 }

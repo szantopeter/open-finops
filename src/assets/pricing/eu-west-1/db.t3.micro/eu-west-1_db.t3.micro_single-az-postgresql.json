@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.0172,
     "daily": 0.4128,
+    "effectiveHourly": 0.0172,
+    "effectiveDaily": 0.4128,
     "sku": "6HA3SDYK235MHBDB"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 93.74,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.010693,
-      "daily": 0.256646
+      "effectiveDaily": 0.256646
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 194.36,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.007391,
-      "daily": 0.177376
+      "effectiveDaily": 0.177376
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 98.9,
       "hourly": 0.003784,
+      "daily": 0.090816,
       "effectiveHourly": 0.007545,
-      "daily": 0.181074
+      "effectiveDaily": 0.181074
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.011438,
+      "daily": 0.274512,
       "effectiveHourly": 0.011438,
-      "daily": 0.274512
+      "effectiveDaily": 0.274512
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 48.16,
       "hourly": 0.005418,
+      "daily": 0.130032,
       "effectiveHourly": 0.010912,
-      "daily": 0.261887
+      "effectiveDaily": 0.261887
     }
   }
 }

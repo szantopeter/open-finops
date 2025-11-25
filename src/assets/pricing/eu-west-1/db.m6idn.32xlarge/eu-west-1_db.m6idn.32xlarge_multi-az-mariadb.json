@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 36.0426,
     "daily": 865.0224,
+    "effectiveHourly": 36.0426,
+    "effectiveDaily": 865.0224,
     "sku": "EM9FAUPW7WVMSMCX"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 502015.75,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 19.089503,
-      "daily": 458.148069
+      "effectiveDaily": 458.148069
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 260481,
       "hourly": 9.911672,
+      "daily": 237.880128,
       "effectiveHourly": 19.816645,
-      "daily": 475.599495
+      "effectiveDaily": 475.599495
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 118400.32,
       "hourly": 13.515932,
+      "daily": 324.382368,
       "effectiveHourly": 27.022699,
-      "daily": 648.544776
+      "effectiveDaily": 648.544776
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 27.752802,
+      "daily": 666.067248,
       "effectiveHourly": 27.752802,
-      "daily": 666.067248
+      "effectiveDaily": 666.067248
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 230485.22,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 26.29309,
-      "daily": 631.034142
+      "effectiveDaily": 631.034142
     }
   }
 }

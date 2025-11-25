@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.85398,
     "daily": 20.49552,
+    "effectiveHourly": 0.85398,
+    "effectiveDaily": 20.49552,
     "sku": "PS2WGBSJQ82EDJEX"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 527.18,
       "hourly": 0.0602,
+      "daily": 1.4448,
       "effectiveHourly": 0.120339,
-      "daily": 2.888141
+      "effectiveDaily": 2.888141
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 1130.04,
       "hourly": 0.043,
+      "daily": 1.032,
       "effectiveHourly": 0.085971,
-      "daily": 2.063294
+      "effectiveDaily": 2.063294
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 1024.26,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.116845,
-      "daily": 2.804271
+      "effectiveDaily": 2.804271
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 2169.78,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.082508,
-      "daily": 1.980178
+      "effectiveDaily": 1.980178
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.12384,
+      "daily": 2.97216,
       "effectiveHourly": 0.12384,
-      "daily": 2.97216
+      "effectiveDaily": 2.97216
     }
   }
 }

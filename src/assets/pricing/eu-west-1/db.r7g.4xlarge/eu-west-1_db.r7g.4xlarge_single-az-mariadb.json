@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 1.84298,
     "daily": 44.23152,
+    "effectiveHourly": 1.84298,
+    "effectiveDaily": 44.23152,
     "sku": "GSM33HA45P2E4UEP"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 25668.42,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.97606,
-      "daily": 23.425434
+      "effectiveDaily": 23.425434
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 13318.82,
       "hourly": 0.506798,
+      "daily": 12.163152,
       "effectiveHourly": 1.013255,
-      "daily": 24.318132
+      "effectiveDaily": 24.318132
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 1.419,
+      "daily": 34.056,
       "effectiveHourly": 1.419,
-      "daily": 34.056
+      "effectiveDaily": 34.056
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 6053.54,
       "hourly": 0.691096,
+      "daily": 16.586304,
       "effectiveHourly": 1.381667,
-      "daily": 33.159994
+      "effectiveDaily": 33.159994
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 11784.58,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.344351,
-      "daily": 32.264421
+      "effectiveDaily": 32.264421
     }
   }
 }

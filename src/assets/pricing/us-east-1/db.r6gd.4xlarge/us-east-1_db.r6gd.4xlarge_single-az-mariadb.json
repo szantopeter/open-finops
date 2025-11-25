@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 1.76902,
     "daily": 42.45648,
+    "effectiveHourly": 1.76902,
+    "effectiveDaily": 42.45648,
     "sku": "DTFCYP9NSVBKD35Y"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 12785.62,
       "hourly": 0.486502,
+      "daily": 11.676048,
       "effectiveHourly": 0.972684,
-      "daily": 23.344421
+      "effectiveDaily": 23.344421
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 1.36224,
+      "daily": 32.69376,
       "effectiveHourly": 1.36224,
-      "daily": 32.69376
+      "effectiveDaily": 32.69376
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 5811.88,
       "hourly": 0.663404,
+      "daily": 15.921696,
       "effectiveHourly": 1.326406,
-      "daily": 31.833757
+      "effectiveDaily": 31.833757
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 11313.3,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.290588,
-      "daily": 30.974127
+      "effectiveDaily": 30.974127
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 24641.58,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.937014,
-      "daily": 22.488323
+      "effectiveDaily": 22.488323
     }
   }
 }

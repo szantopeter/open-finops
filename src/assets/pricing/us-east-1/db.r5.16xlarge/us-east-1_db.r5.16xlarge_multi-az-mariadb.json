@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 13.2096,
     "daily": 317.0304,
+    "effectiveHourly": 13.2096,
+    "effectiveDaily": 317.0304,
     "sku": "PRM838EAGU9NXJ7G"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 125876.48,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.786542,
-      "daily": 114.877007
+      "effectiveDaily": 114.877007
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 62360.32,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 7.113886,
-      "daily": 170.733251
+      "effectiveDaily": 170.733251
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 64227.38,
       "hourly": 2.443948,
+      "daily": 58.654752,
       "effectiveHourly": 4.88624,
-      "daily": 117.269746
+      "effectiveDaily": 117.269746
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 7.628544,
+      "daily": 183.085056,
       "effectiveHourly": 7.628544,
-      "daily": 183.085056
+      "effectiveDaily": 183.085056
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 31817.42,
       "hourly": 3.632124,
+      "daily": 87.170976,
       "effectiveHourly": 7.261763,
-      "daily": 174.282325
+      "effectiveDaily": 174.282325
     }
   }
 }

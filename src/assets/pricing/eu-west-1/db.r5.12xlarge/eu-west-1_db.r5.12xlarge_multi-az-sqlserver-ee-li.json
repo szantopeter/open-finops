@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 38.36804,
     "daily": 920.83296,
+    "effectiveHourly": 38.36804,
+    "effectiveDaily": 920.83296,
     "sku": "MBN467RVTHPVPM9T"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 124891.78,
       "hourly": 14.25708,
+      "daily": 342.16992,
       "effectiveHourly": 28.504374,
-      "daily": 684.104978
+      "effectiveDaily": 684.104978
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 29.939868,
+      "daily": 718.556832,
       "effectiveHourly": 29.939868,
-      "daily": 718.556832
+      "effectiveDaily": 718.556832
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 652769.24,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 24.822011,
-      "daily": 595.728259
+      "effectiveDaily": 595.728259
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 244788.68,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 27.924787,
-      "daily": 670.19488
+      "effectiveDaily": 670.19488
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 333045.32,
       "hourly": 12.67296,
+      "daily": 304.15104,
       "effectiveHourly": 25.337243,
-      "daily": 608.093837
+      "effectiveDaily": 608.093837
     }
   }
 }

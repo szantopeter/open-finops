@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 16.4991,
     "daily": 395.9784,
+    "effectiveHourly": 16.4991,
+    "effectiveDaily": 395.9784,
     "sku": "YR4DRPPD23MS58B2"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 40381.3,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.535527,
-      "daily": 36.852658
+      "effectiveDaily": 36.852658
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 19721.52,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.249774,
-      "daily": 53.994579
+      "effectiveDaily": 53.994579
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 20603.02,
       "hourly": 0.783976,
+      "daily": 18.815424,
       "effectiveHourly": 1.567421,
-      "daily": 37.618089
+      "effectiveDaily": 37.618089
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 10062,
       "hourly": 1.148616,
+      "daily": 27.566784,
       "effectiveHourly": 2.29646,
-      "daily": 55.115038
+      "effectiveDaily": 55.115038
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 2.412128,
+      "daily": 57.891072,
       "effectiveHourly": 2.412128,
-      "daily": 57.891072
+      "effectiveDaily": 57.891072
     }
   }
 }

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 23.1168,
     "daily": 554.8032,
+    "effectiveHourly": 23.1168,
+    "effectiveDaily": 554.8032,
     "sku": "VCT4BA83SKYWARZV"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 15.4886,
+      "daily": 371.7264,
       "effectiveHourly": 15.4886,
-      "daily": 371.7264
+      "effectiveDaily": 371.7264
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 127574.12,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 14.553288,
-      "daily": 349.278904
+      "effectiveDaily": 349.278904
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 65813.22,
       "hourly": 7.51296,
+      "daily": 180.31104,
       "effectiveHourly": 15.020742,
-      "daily": 360.497816
+      "effectiveDaily": 360.497816
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

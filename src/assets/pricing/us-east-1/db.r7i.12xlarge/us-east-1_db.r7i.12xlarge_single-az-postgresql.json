@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 5.16,
     "daily": 123.84,
+    "effectiveHourly": 5.16,
+    "effectiveDaily": 123.84,
     "sku": "N9BQ545U6WMFTX72"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "All Upfront",
       "upfront": 28477.01,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 3.248575,
-      "daily": 77.965799
+      "effectiveDaily": 77.965799
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 3.4572,
+      "daily": 82.9728,
       "effectiveHourly": 3.4572,
-      "daily": 82.9728
+      "effectiveDaily": 82.9728
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 14690.52,
       "hourly": 1.677,
+      "daily": 40.248,
       "effectiveHourly": 3.352852,
-      "daily": 80.468452
+      "effectiveDaily": 80.468452
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

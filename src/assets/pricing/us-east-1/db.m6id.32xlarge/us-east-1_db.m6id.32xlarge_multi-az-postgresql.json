@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 24.67942,
     "daily": 592.30608,
+    "effectiveHourly": 24.67942,
+    "effectiveDaily": 592.30608,
     "sku": "UJT85X9S7ZSQ5AP2"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 157820.32,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 18.003687,
-      "daily": 432.088488
+      "effectiveDaily": 432.088488
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 81072.2,
       "hourly": 9.254804,
+      "daily": 222.115296,
       "effectiveHourly": 18.503287,
-      "daily": 444.078883
+      "effectiveDaily": 444.078883
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 19.003248,
+      "daily": 456.077952,
       "effectiveHourly": 19.003248,
-      "daily": 456.077952
+      "effectiveDaily": 456.077952
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 343746.3,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 13.071196,
-      "daily": 313.708693
+      "effectiveDaily": 313.708693
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 178358.84,
       "hourly": 6.786862,
+      "daily": 162.884688,
       "effectiveHourly": 13.569083,
-      "daily": 325.657984
+      "effectiveDaily": 325.657984
     }
   }
 }

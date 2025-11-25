@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 9.25446,
     "daily": 222.10704,
+    "effectiveHourly": 9.25446,
+    "effectiveDaily": 222.10704,
     "sku": "DYQ8AFRGFPHP5VRF"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 30401.86,
       "hourly": 3.47053,
+      "daily": 83.29272,
       "effectiveHourly": 6.938686,
-      "daily": 166.528476
+      "effectiveDaily": 166.528476
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 66884.78,
       "hourly": 2.545084,
+      "daily": 61.082016,
       "effectiveHourly": 5.088425,
-      "daily": 122.122198
+      "effectiveDaily": 122.122198
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 59182.62,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 6.751383,
-      "daily": 162.033183
+      "effectiveDaily": 162.033183
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 128904.54,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.901686,
-      "daily": 117.640466
+      "effectiveDaily": 117.640466
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 7.126218,
+      "daily": 171.029232,
       "effectiveHourly": 7.126218,
-      "daily": 171.029232
+      "effectiveDaily": 171.029232
     }
   }
 }

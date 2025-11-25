@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 17.00478,
     "daily": 408.11472,
+    "effectiveHourly": 17.00478,
+    "effectiveDaily": 408.11472,
     "sku": "M5ZTMRWAFF452R3W"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 101309.72,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 11.55712,
-      "daily": 277.370896
+      "effectiveDaily": 277.370896
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 52144.38,
       "hourly": 5.952576,
+      "daily": 142.861824,
       "effectiveHourly": 11.901057,
-      "daily": 285.625356
+      "effectiveDaily": 285.625356
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 214537.32,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 8.157933,
-      "daily": 195.79039
+      "effectiveDaily": 195.79039
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 12.245282,
+      "daily": 293.886768,
       "effectiveHourly": 12.245282,
-      "daily": 293.886768
+      "effectiveDaily": 293.886768
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 111738.08,
       "hourly": 4.25184,
+      "daily": 102.04416,
       "effectiveHourly": 8.500759,
-      "daily": 204.018223
+      "effectiveDaily": 204.018223
     }
   }
 }

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 68.82752,
     "daily": 1651.86048,
+    "effectiveHourly": 68.82752,
+    "effectiveDaily": 1651.86048,
     "sku": "ZCM65QJYHMBEHR85"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 286391.46,
       "hourly": 32.693072,
+      "daily": 784.633728,
       "effectiveHourly": 65.363785,
-      "daily": 1568.730831
+      "effectiveDaily": 1568.730831
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 68.655406,
+      "daily": 1647.729735,
       "effectiveHourly": 68.655406,
-      "daily": 1647.729735
+      "effectiveDaily": 1647.729735
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 1595350.46,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 60.664326,
-      "daily": 1455.943832
+      "effectiveDaily": 1455.943832
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 561326.58,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 64.034518,
-      "daily": 1536.828437
+      "effectiveDaily": 1536.828437
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 813954.46,
       "hourly": 30.972384,
+      "daily": 743.337216,
       "effectiveHourly": 61.923576,
-      "daily": 1486.16583
+      "effectiveDaily": 1486.16583
     }
   }
 }

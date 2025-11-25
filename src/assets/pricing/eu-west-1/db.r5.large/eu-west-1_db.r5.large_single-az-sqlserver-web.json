@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.534576,
     "daily": 12.829824,
+    "effectiveHourly": 0.534576,
+    "effectiveDaily": 12.829824,
     "sku": "PP49VB5EHQ747W6A"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.146716,
+      "daily": 3.521184,
       "effectiveHourly": 0.146716,
-      "daily": 3.521184
+      "effectiveDaily": 3.521184
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 1199.7,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.136859,
-      "daily": 3.2846
+      "effectiveDaily": 3.2846
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 2515.5,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.095654,
-      "daily": 2.295688
+      "effectiveDaily": 2.295688
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 1283.98,
       "hourly": 0.048848,
+      "daily": 1.172352,
       "effectiveHourly": 0.097672,
-      "daily": 2.344134
+      "effectiveDaily": 2.344134
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 612.32,
       "hourly": 0.069832,
+      "daily": 1.675968,
       "effectiveHourly": 0.139684,
-      "daily": 3.352409
+      "effectiveDaily": 3.352409
     }
   }
 }

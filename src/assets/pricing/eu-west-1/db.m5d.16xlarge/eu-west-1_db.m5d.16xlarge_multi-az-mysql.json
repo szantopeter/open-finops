@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 12.76842,
     "daily": 306.44208,
+    "effectiveHourly": 12.76842,
+    "effectiveDaily": 306.44208,
     "sku": "DJ2CZUMR5R3UM8CV"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 81650.12,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 9.314411,
-      "daily": 223.545845
+      "effectiveDaily": 223.545845
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 92276.28,
       "hourly": 3.511294,
+      "daily": 84.271056,
       "effectiveHourly": 7.020165,
-      "daily": 168.483951
+      "effectiveDaily": 168.483951
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 177841.12,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 6.762534,
-      "daily": 162.300817
+      "effectiveDaily": 162.300817
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 9.83152,
+      "daily": 235.95648,
       "effectiveHourly": 9.83152,
-      "daily": 235.95648
+      "effectiveDaily": 235.95648
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 41943.92,
       "hourly": 4.788136,
+      "daily": 114.915264,
       "effectiveHourly": 9.572977,
-      "daily": 229.751459
+      "effectiveDaily": 229.751459
     }
   }
 }

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 53.18068,
     "daily": 1276.33632,
+    "effectiveHourly": 53.18068,
+    "effectiveDaily": 1276.33632,
     "sku": "RKMNQ7B2CUNA8R2G"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 675009.7,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 25.66772,
-      "daily": 616.02528
+      "effectiveDaily": 616.02528
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 344393.02,
       "hourly": 13.104766,
+      "daily": 314.514384,
       "effectiveHourly": 26.200554,
-      "daily": 628.813285
+      "effectiveDaily": 628.813285
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 129147.06,
       "hourly": 14.742808,
+      "daily": 353.827392,
       "effectiveHourly": 29.475532,
-      "daily": 707.412772
+      "effectiveDaily": 707.412772
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 253128.96,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 28.876222,
-      "daily": 693.029322
+      "effectiveDaily": 693.029322
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 30.96,
+      "daily": 743.04,
       "effectiveHourly": 30.96,
-      "daily": 743.04
+      "effectiveDaily": 743.04
     }
   }
 }

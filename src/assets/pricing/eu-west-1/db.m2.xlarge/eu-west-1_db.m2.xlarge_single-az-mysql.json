@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.3096,
     "daily": 7.4304,
+    "effectiveHourly": 0.3096,
+    "effectiveDaily": 7.4304,
     "sku": "RX669FTDU3XYBPXZ"
   },
   "savingsOptions": {

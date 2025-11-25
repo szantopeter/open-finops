@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.22102,
     "daily": 5.30448,
+    "effectiveHourly": 0.22102,
+    "effectiveDaily": 5.30448,
     "sku": "VFGBY9BPRHK25RNJ"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.17028,
+      "daily": 4.08672,
       "effectiveHourly": 0.17028,
-      "daily": 4.08672
+      "effectiveDaily": 4.08672
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 1597.88,
       "hourly": 0.060802,
+      "daily": 1.459248,
       "effectiveHourly": 0.121563,
-      "daily": 2.9175
+      "effectiveDaily": 2.9175
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 726.7,
       "hourly": 0.082904,
+      "daily": 1.989696,
       "effectiveHourly": 0.165804,
-      "daily": 3.979292
+      "effectiveDaily": 3.979292
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 1413.84,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.161287,
-      "daily": 3.870883
+      "effectiveDaily": 3.870883
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 3080.52,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.117139,
-      "daily": 2.811335
+      "effectiveDaily": 2.811335
     }
   }
 }

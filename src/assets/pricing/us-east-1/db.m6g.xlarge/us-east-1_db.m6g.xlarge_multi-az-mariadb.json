@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.52288,
     "daily": 12.54912,
+    "effectiveHourly": 0.52288,
+    "effectiveDaily": 12.54912,
     "sku": "GUPVTR2XDNG3Y2WK"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 1397.5,
       "hourly": 0.15953,
+      "daily": 3.82872,
       "effectiveHourly": 0.318953,
-      "daily": 7.654867
+      "effectiveDaily": 7.654867
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 2736.52,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.312174,
-      "daily": 7.492183
+      "effectiveDaily": 7.492183
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 5522.06,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.20998,
-      "daily": 5.039525
+      "effectiveDaily": 5.039525
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.334798,
+      "daily": 8.035152,
       "effectiveHourly": 0.334798,
-      "daily": 8.035152
+      "effectiveDaily": 8.035152
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 2818.22,
       "hourly": 0.107242,
+      "daily": 2.573808,
       "effectiveHourly": 0.214407,
-      "daily": 5.145764
+      "effectiveDaily": 5.145764
     }
   }
 }

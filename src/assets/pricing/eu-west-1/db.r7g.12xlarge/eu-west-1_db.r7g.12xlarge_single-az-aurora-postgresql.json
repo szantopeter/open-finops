@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 6.27456,
     "daily": 150.58944,
+    "effectiveHourly": 6.27456,
+    "effectiveDaily": 150.58944,
     "sku": "GXXXAP46FNA8AH3D"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 4.257086,
+      "daily": 102.170064,
       "effectiveHourly": 4.257086,
-      "daily": 102.170064
+      "effectiveDaily": 102.170064
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 35354.6,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.033151,
-      "daily": 96.79562
+      "effectiveDaily": 96.79562
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 77005.26,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.92818,
-      "daily": 70.276304
+      "effectiveDaily": 70.276304
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 39955.6,
       "hourly": 1.520394,
+      "daily": 36.489456,
       "effectiveHourly": 3.039734,
-      "daily": 72.953613
+      "effectiveDaily": 72.953613
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 18161.48,
       "hourly": 2.073288,
+      "daily": 49.758912,
       "effectiveHourly": 4.145098,
-      "daily": 99.482334
+      "effectiveDaily": 99.482334
     }
   }
 }

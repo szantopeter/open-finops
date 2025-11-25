@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.1677,
     "daily": 4.0248,
+    "effectiveHourly": 0.1677,
+    "effectiveDaily": 4.0248,
     "sku": "NFY388MFUFHFMQX5"
   },
   "savingsOptions": {

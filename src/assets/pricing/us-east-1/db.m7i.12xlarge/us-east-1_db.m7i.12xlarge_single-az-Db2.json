@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 3.67392,
     "daily": 88.17408,
+    "effectiveHourly": 3.67392,
+    "effectiveDaily": 88.17408,
     "sku": "57U6BACHDM5JN9YY"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 2.46132,
+      "daily": 59.07168,
       "effectiveHourly": 2.46132,
-      "daily": 59.07168
+      "effectiveDaily": 59.07168
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 20272.78,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.31266,
-      "daily": 55.503847
+      "effectiveDaily": 55.503847
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 10460.18,
       "hourly": 1.19411,
+      "daily": 28.65864,
       "effectiveHourly": 2.387377,
-      "daily": 57.297052
+      "effectiveDaily": 57.297052
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

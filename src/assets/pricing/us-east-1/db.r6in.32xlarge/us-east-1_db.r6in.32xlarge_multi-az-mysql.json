@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 38.0765,
     "daily": 913.836,
+    "effectiveHourly": 38.0765,
+    "effectiveDaily": 913.836,
     "sku": "U29HNVW2VTTY83QS"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 275179.43,
       "hourly": 10.471016,
+      "daily": 251.304384,
       "effectiveHourly": 20.934908,
-      "daily": 502.437789
+      "effectiveDaily": 502.437789
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 243491.6,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 27.77682,
-      "daily": 666.643675
+      "effectiveDaily": 666.643675
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 530344.72,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 20.166733,
-      "daily": 484.001572
+      "effectiveDaily": 484.001572
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 125081.49,
       "hourly": 14.278666,
+      "daily": 342.687984,
       "effectiveHourly": 28.547601,
-      "daily": 685.142432
+      "effectiveDaily": 685.142432
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 29.318862,
+      "daily": 703.652688,
       "effectiveHourly": 29.318862,
-      "daily": 703.652688
+      "effectiveDaily": 703.652688
     }
   }
 }

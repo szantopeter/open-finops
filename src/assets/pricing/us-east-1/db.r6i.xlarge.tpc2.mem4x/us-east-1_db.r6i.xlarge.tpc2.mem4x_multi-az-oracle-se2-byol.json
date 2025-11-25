@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 3.20608,
     "daily": 76.94592,
+    "effectiveHourly": 3.20608,
+    "effectiveDaily": 76.94592,
     "sku": "SMX2E3EKKP9NSP9G"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 40442.36,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.537849,
-      "daily": 36.908383
+      "effectiveDaily": 36.908383
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 9829.8,
       "hourly": 1.122128,
+      "daily": 26.931072,
       "effectiveHourly": 2.243483,
-      "daily": 53.843597
+      "effectiveDaily": 53.843597
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 2.308412,
+      "daily": 55.401888,
       "effectiveHourly": 2.308412,
-      "daily": 55.401888
+      "effectiveDaily": 55.401888
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 19098.02,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.178647,
-      "daily": 52.287529
+      "effectiveDaily": 52.287529
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 21063.98,
       "hourly": 0.80152,
+      "daily": 19.23648,
       "effectiveHourly": 1.602493,
-      "daily": 38.459824
+      "effectiveDaily": 38.459824
     }
   }
 }

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.03096,
     "daily": 0.74304,
+    "effectiveHourly": 0.03096,
+    "effectiveDaily": 0.74304,
     "sku": "QR32WH5R6HS962S9"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 150.5,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.017168,
-      "daily": 0.412047
+      "effectiveDaily": 0.412047
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 76.54,
       "hourly": 0.008772,
+      "daily": 0.210528,
       "effectiveHourly": 0.017504,
-      "daily": 0.420083
+      "effectiveDaily": 0.420083
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 301,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.011446,
-      "daily": 0.274698
+      "effectiveDaily": 0.274698
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 153.94,
       "hourly": 0.005848,
+      "daily": 0.140352,
       "effectiveHourly": 0.011702,
-      "daily": 0.28084
+      "effectiveDaily": 0.28084
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.018404,
+      "daily": 0.441696,
       "effectiveHourly": 0.018404,
-      "daily": 0.441696
+      "effectiveDaily": 0.441696
     }
   }
 }

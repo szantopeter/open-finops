@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.49536,
     "daily": 11.88864,
+    "effectiveHourly": 0.49536,
+    "effectiveDaily": 11.88864,
     "sku": "US82W2EHAG8DHJP4"
   },
   "savingsOptions": {

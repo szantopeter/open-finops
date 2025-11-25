@@ -1,0 +1,21 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r8gd.48xlarge",
+  "deployment": "single-az",
+  "engine": "sqlserver",
+  "license": null,
+  "onDemand": {
+    "hourly": 25.75872,
+    "daily": 618.20928,
+    "effectiveHourly": 25.75872,
+    "effectiveDaily": 618.20928,
+    "sku": "27TT636N4ZZSQ5WD"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

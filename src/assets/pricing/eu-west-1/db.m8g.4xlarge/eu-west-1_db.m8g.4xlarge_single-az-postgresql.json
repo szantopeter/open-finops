@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 1.27968,
     "daily": 30.71232,
+    "effectiveHourly": 1.27968,
+    "effectiveDaily": 30.71232,
     "sku": "BEBAAZMSUXBNTRJZ"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 3642.1,
       "hourly": 0.41581,
+      "daily": 9.97944,
       "effectiveHourly": 0.831291,
-      "daily": 19.950966
+      "effectiveDaily": 19.950966
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 7058.88,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.805257,
-      "daily": 19.32616
+      "effectiveDaily": 19.32616
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.85742,
+      "daily": 20.57808,
       "effectiveHourly": 0.85742,
-      "daily": 20.57808
+      "effectiveDaily": 20.57808
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

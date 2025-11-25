@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.6708,
     "daily": 16.0992,
+    "effectiveHourly": 0.6708,
+    "effectiveDaily": 16.0992,
     "sku": "YW782FAP5VMENQT5"
   },
   "savingsOptions": {

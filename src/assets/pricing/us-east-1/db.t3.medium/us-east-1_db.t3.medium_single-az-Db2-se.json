@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.06192,
     "daily": 1.48608,
+    "effectiveHourly": 0.06192,
+    "effectiveDaily": 1.48608,
     "sku": "WMH97RJBF2QSBBUM"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 153.94,
       "hourly": 0.017544,
+      "daily": 0.421056,
       "effectiveHourly": 0.035105,
-      "daily": 0.842521
+      "effectiveDaily": 0.842521
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 301,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.034337,
-      "daily": 0.824093
+      "effectiveDaily": 0.824093
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.036808,
+      "daily": 0.883392,
       "effectiveHourly": 0.036808,
-      "daily": 0.883392
+      "effectiveDaily": 0.883392
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 602.86,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.022924,
-      "daily": 0.55018
+      "effectiveDaily": 0.55018
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 307.02,
       "hourly": 0.011696,
+      "daily": 0.280704,
       "effectiveHourly": 0.023371,
-      "daily": 0.560895
+      "effectiveDaily": 0.560895
     }
   }
 }

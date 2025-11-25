@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 54.82844,
     "daily": 1315.88256,
+    "effectiveHourly": 54.82844,
+    "effectiveDaily": 1315.88256,
     "sku": "EP55NDUC6WZY8RTX"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 180110.66,
       "hourly": 20.560536,
+      "daily": 493.452864,
       "effectiveHourly": 41.107041,
-      "daily": 986.568976
+      "effectiveDaily": 986.568976
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 353016.24,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 40.271075,
-      "daily": 966.505791
+      "effectiveDaily": 966.505791
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 43.17716,
+      "daily": 1036.25184,
       "effectiveHourly": 43.17716,
-      "daily": 1036.25184
+      "effectiveDaily": 1036.25184
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 138414.42,
       "hourly": 5.266898,
+      "daily": 126.405552,
       "effectiveHourly": 10.530204,
-      "daily": 252.724895
+      "effectiveDaily": 252.724895
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 266761.68,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 10.143801,
-      "daily": 243.451225
+      "effectiveDaily": 243.451225
     }
   }
 }

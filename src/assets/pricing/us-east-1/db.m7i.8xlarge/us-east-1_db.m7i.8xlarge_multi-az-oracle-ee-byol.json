@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 4.89856,
     "daily": 117.56544,
+    "effectiveHourly": 4.89856,
+    "effectiveDaily": 117.56544,
     "sku": "WAPHRGCMVK9JZXA5"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 3.28176,
+      "daily": 78.76224,
       "effectiveHourly": 3.28176,
-      "daily": 78.76224
+      "effectiveDaily": 78.76224
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 13944.9,
       "hourly": 1.59186,
+      "daily": 38.20464,
       "effectiveHourly": 3.182654,
-      "daily": 76.383696
+      "effectiveDaily": 76.383696
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 27030.66,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 3.08358,
-      "daily": 74.005914
+      "effectiveDaily": 74.005914
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

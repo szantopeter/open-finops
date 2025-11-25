@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 11.26084,
     "daily": 270.26016,
+    "effectiveHourly": 11.26084,
+    "effectiveDaily": 270.26016,
     "sku": "VYSA364GNHCM9AEE"
   },
   "savingsOptions": {

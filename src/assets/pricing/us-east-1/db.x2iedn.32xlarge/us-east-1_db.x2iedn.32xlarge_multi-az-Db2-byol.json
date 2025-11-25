@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 104.68608,
     "daily": 2512.46592,
+    "effectiveHourly": 104.68608,
+    "effectiveDaily": 2512.46592,
     "sku": "VWY2ETUWX2Q6EXVB"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 343893.77,
       "hourly": 39.25728,
+      "daily": 942.17472,
       "effectiveHourly": 78.48769,
-      "daily": 1883.704557
+      "effectiveDaily": 1883.704557
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 669446.54,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 76.368531,
-      "daily": 1832.844738
+      "effectiveDaily": 1832.844738
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 80.60823,
+      "daily": 1934.59752,
       "effectiveHourly": 80.60823,
-      "daily": 1934.59752
+      "effectiveDaily": 1934.59752
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 756566.3,
       "hourly": 28.788672,
+      "daily": 690.928128,
       "effectiveHourly": 57.55764,
-      "daily": 1381.383345
+      "effectiveDaily": 1381.383345
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 1458109.6,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 55.445646,
-      "daily": 1330.695506
+      "effectiveDaily": 1330.695506
     }
   }
 }

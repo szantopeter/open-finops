@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 10.92028,
     "daily": 262.08672,
+    "effectiveHourly": 10.92028,
+    "effectiveDaily": 262.08672,
     "sku": "XTGQBX76JRSCJ3UB"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 84376.32,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 9.625407,
-      "daily": 231.009774
+      "effectiveDaily": 231.009774
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 114797.96,
       "hourly": 4.368284,
+      "daily": 104.838816,
       "effectiveHourly": 8.733557,
-      "daily": 209.605377
+      "effectiveDaily": 209.605377
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 225003.52,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 8.555917,
-      "daily": 205.342021
+      "effectiveDaily": 205.342021
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 43049.02,
       "hourly": 4.914298,
+      "daily": 117.943152,
       "effectiveHourly": 9.825206,
-      "daily": 235.804945
+      "effectiveDaily": 235.804945
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 10.32,
+      "daily": 247.68,
       "effectiveHourly": 10.32,
-      "daily": 247.68
+      "effectiveDaily": 247.68
     }
   }
 }

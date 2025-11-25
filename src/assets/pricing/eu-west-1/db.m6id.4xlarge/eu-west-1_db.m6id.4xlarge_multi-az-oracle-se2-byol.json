@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 3.41248,
     "daily": 81.89952,
+    "effectiveHourly": 3.41248,
+    "effectiveDaily": 81.89952,
     "sku": "75X7U383GJU2KHMA"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 47469.42,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.805058,
-      "daily": 43.321397
+      "effectiveDaily": 43.321397
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 24630.4,
       "hourly": 0.937228,
+      "daily": 22.493472,
       "effectiveHourly": 1.873816,
-      "daily": 44.971592
+      "effectiveDaily": 44.971592
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 11195.48,
       "hourly": 1.278046,
+      "daily": 30.673104,
       "effectiveHourly": 2.555194,
-      "daily": 61.324658
+      "effectiveDaily": 61.324658
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 2.62429,
+      "daily": 62.98296,
       "effectiveHourly": 2.62429,
-      "daily": 62.98296
+      "effectiveDaily": 62.98296
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 21794.12,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.48621,
-      "daily": 59.669049
+      "effectiveDaily": 59.669049
     }
   }
 }

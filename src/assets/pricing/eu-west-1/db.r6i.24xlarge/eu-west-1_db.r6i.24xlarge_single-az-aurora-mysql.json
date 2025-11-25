@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 17.17248,
     "daily": 412.13952,
+    "effectiveHourly": 17.17248,
+    "effectiveDaily": 412.13952,
     "sku": "RRGB4JFGZZ9AHX7V"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 11.948083,
+      "daily": 286.753997,
       "effectiveHourly": 11.948083,
-      "daily": 286.753997
+      "effectiveDaily": 286.753997
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 50878.92,
       "hourly": 5.808096,
+      "daily": 139.394304,
       "effectiveHourly": 11.612216,
-      "daily": 278.693198
+      "effectiveDaily": 278.693198
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 209330.42,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 7.959936,
-      "daily": 191.038483
+      "effectiveDaily": 191.038483
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 109026.26,
       "hourly": 4.14864,
+      "daily": 99.56736,
       "effectiveHourly": 8.29444,
-      "daily": 199.06657
+      "effectiveDaily": 199.06657
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 98850.47,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 11.276577,
-      "daily": 270.637851
+      "effectiveDaily": 270.637851
     }
   }
 }

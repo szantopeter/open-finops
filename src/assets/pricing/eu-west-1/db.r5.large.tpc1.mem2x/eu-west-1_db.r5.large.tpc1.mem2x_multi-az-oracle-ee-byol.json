@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.88752,
     "daily": 21.30048,
+    "effectiveHourly": 0.88752,
+    "effectiveDaily": 21.30048,
     "sku": "VY2SCHR2C8964NY6"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 2448.42,
       "hourly": 0.2795,
+      "daily": 6.708,
       "effectiveHourly": 0.558809,
-      "daily": 13.411408
+      "effectiveDaily": 13.411408
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.58695,
+      "daily": 14.0868,
       "effectiveHourly": 0.58695,
-      "daily": 14.0868
+      "effectiveDaily": 14.0868
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 10062.86,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.382648,
-      "daily": 9.183537
+      "effectiveDaily": 9.183537
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 4798.8,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.547433,
-      "daily": 13.138398
+      "effectiveDaily": 13.138398
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 5134.2,
       "hourly": 0.195392,
+      "daily": 4.689408,
       "effectiveHourly": 0.390623,
-      "daily": 9.374966
+      "effectiveDaily": 9.374966
     }
   }
 }

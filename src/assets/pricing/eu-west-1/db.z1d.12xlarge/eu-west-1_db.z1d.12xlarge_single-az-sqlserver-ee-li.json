@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 28.1736,
     "daily": 676.1664,
+    "effectiveHourly": 28.1736,
+    "effectiveDaily": 676.1664,
     "sku": "AZVVFM36HTUBT8ZK"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 378903.96,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 14.40809,
-      "daily": 345.794168
+      "effectiveDaily": 345.794168
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 17.378794,
+      "daily": 417.091056,
       "effectiveHourly": 17.378794,
-      "daily": 417.091056
+      "effectiveDaily": 417.091056
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 72494.56,
       "hourly": 8.275608,
+      "daily": 198.614592,
       "effectiveHourly": 16.545579,
-      "daily": 397.09388
+      "effectiveDaily": 397.09388
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 142089.2,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 16.209126,
-      "daily": 389.019028
+      "effectiveDaily": 389.019028
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 193318.54,
       "hourly": 7.356096,
+      "daily": 176.546304,
       "effectiveHourly": 14.70717,
-      "daily": 352.972076
+      "effectiveDaily": 352.972076
     }
   }
 }

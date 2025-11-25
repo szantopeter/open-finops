@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 10.23744,
     "daily": 245.69856,
+    "effectiveHourly": 10.23744,
+    "effectiveDaily": 245.69856,
     "sku": "NGU8X535R769PTNE"
   },
   "savingsOptions": {

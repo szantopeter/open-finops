@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 10.5608,
     "daily": 253.4592,
+    "effectiveHourly": 10.5608,
+    "effectiveDaily": 253.4592,
     "sku": "HS2GDGPSZMXM9YE5"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 42669.76,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.622547,
-      "daily": 38.941146
+      "effectiveDaily": 38.941146
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 21768.32,
       "hourly": 0.828352,
+      "daily": 19.880448,
       "effectiveHourly": 1.656108,
-      "daily": 39.746586
+      "effectiveDaily": 39.746586
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 20832.64,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.376527,
-      "daily": 57.036659
+      "effectiveDaily": 57.036659
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 10633.9,
       "hourly": 1.21389,
+      "daily": 29.13336,
       "effectiveHourly": 2.426975,
-      "daily": 58.247391
+      "effectiveDaily": 58.247391
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 2.548352,
+      "daily": 61.160448,
       "effectiveHourly": 2.548352,
-      "daily": 61.160448
+      "effectiveDaily": 61.160448
     }
   }
 }

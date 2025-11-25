@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 15.4112,
     "daily": 369.8688,
+    "effectiveHourly": 15.4112,
+    "effectiveDaily": 369.8688,
     "sku": "HYU4433AGFW9VBD2"
   },
   "savingsOptions": {

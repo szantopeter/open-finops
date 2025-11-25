@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 11.06304,
     "daily": 265.51296,
+    "effectiveHourly": 11.06304,
+    "effectiveDaily": 265.51296,
     "sku": "8UFXWERPTM2S3WGM"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 5.933312,
+      "daily": 142.399488,
       "effectiveHourly": 5.933312,
-      "daily": 142.399488
+      "effectiveDaily": 142.399488
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 25312.9,
       "hourly": 2.8896,
+      "daily": 69.3504,
       "effectiveHourly": 5.777222,
-      "daily": 138.653332
+      "effectiveDaily": 138.653332
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 107326.68,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.081172,
-      "daily": 97.948141
+      "effectiveDaily": 97.948141
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 55688.37,
       "hourly": 2.11904,
+      "daily": 50.85696,
       "effectiveHourly": 4.236629,
-      "daily": 101.679111
+      "effectiveDaily": 101.679111
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 49275.77,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 5.621238,
-      "daily": 134.909713
+      "effectiveDaily": 134.909713
     }
   }
 }

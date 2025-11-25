@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.4816,
     "daily": 11.5584,
+    "effectiveHourly": 0.4816,
+    "effectiveDaily": 11.5584,
     "sku": "HMXMW8BERUXDSEQ6"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 2399.4,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.273716,
-      "daily": 6.569199
+      "effectiveDaily": 6.569199
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 1223.78,
       "hourly": 0.13975,
+      "daily": 3.354,
       "effectiveHourly": 0.279356,
-      "daily": 6.704527
+      "effectiveDaily": 6.704527
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.293432,
+      "daily": 7.042368,
       "effectiveHourly": 0.293432,
-      "daily": 7.042368
+      "effectiveDaily": 7.042368
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 5031.86,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.19134,
-      "daily": 4.592161
+      "effectiveDaily": 4.592161
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 2567.1,
       "hourly": 0.097696,
+      "daily": 2.344704,
       "effectiveHourly": 0.195312,
-      "daily": 4.687483
+      "effectiveDaily": 4.687483
     }
   }
 }

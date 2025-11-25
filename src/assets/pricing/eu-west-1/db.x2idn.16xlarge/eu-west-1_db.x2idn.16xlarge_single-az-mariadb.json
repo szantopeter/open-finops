@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 18.39454,
     "daily": 441.46896,
+    "effectiveHourly": 18.39454,
+    "effectiveDaily": 441.46896,
     "sku": "WG3YX9PNS72GE8AM"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 35438.02,
       "hourly": 4.04544,
+      "daily": 97.09056,
       "effectiveHourly": 8.088107,
-      "daily": 194.114571
+      "effectiveDaily": 194.114571
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 8.322048,
+      "daily": 199.729152,
       "effectiveHourly": 8.322048,
-      "daily": 199.729152
+      "effectiveDaily": 199.729152
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 145802.68,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 5.54425,
-      "daily": 133.061994
+      "effectiveDaily": 133.061994
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 68850.74,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 7.854294,
-      "daily": 188.503053
+      "effectiveDaily": 188.503053
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 75938.86,
       "hourly": 2.8896,
+      "daily": 69.3504,
       "effectiveHourly": 5.777229,
-      "daily": 138.653489
+      "effectiveDaily": 138.653489
     }
   }
 }

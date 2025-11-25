@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 1.52048,
     "daily": 36.49152,
+    "effectiveHourly": 1.52048,
+    "effectiveDaily": 36.49152,
     "sku": "DGBVVK523AH2DE3Z"
   },
   "savingsOptions": {

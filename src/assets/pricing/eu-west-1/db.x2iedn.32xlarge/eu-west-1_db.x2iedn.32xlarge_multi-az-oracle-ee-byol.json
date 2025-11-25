@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 125.65632,
     "daily": 3015.75168,
+    "effectiveHourly": 125.65632,
+    "effectiveDaily": 3015.75168,
     "sku": "D5ET8HSXRBVMHMAF"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 96.755332,
+      "daily": 2322.127968,
       "effectiveHourly": 96.755332,
-      "daily": 2322.127968
+      "effectiveDaily": 2322.127968
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 412781.01,
       "hourly": 47.12112,
+      "daily": 1130.90688,
       "effectiveHourly": 94.209987,
-      "daily": 2261.039696
+      "effectiveDaily": 2261.039696
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 908118.22,
       "hourly": 34.555488,
+      "daily": 829.331712,
       "effectiveHourly": 69.087324,
-      "daily": 1658.095774
+      "effectiveDaily": 1658.095774
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 1750191.49,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 66.552266,
-      "daily": 1597.25438
+      "effectiveDaily": 1597.25438
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 803547.04,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 91.666328,
-      "daily": 2199.991889
+      "effectiveDaily": 2199.991889
     }
   }
 }

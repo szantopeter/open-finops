@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.0301,
     "daily": 0.7224,
+    "effectiveHourly": 0.0301,
+    "effectiveDaily": 0.7224,
     "sku": "CSCK2W9948H3KBF7"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.019608,
+      "daily": 0.470592,
       "effectiveHourly": 0.019608,
-      "daily": 0.470592
+      "effectiveDaily": 0.470592
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 161.68,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.018444,
-      "daily": 0.442656
+      "effectiveDaily": 0.442656
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 81.7,
       "hourly": 0.009374,
+      "daily": 0.224976,
       "effectiveHourly": 0.018694,
-      "daily": 0.448659
+      "effectiveDaily": 0.448659
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 336.26,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.012786,
-      "daily": 0.306876
+      "effectiveDaily": 0.306876
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 172,
       "hourly": 0.006536,
+      "daily": 0.156864,
       "effectiveHourly": 0.013076,
-      "daily": 0.313834
+      "effectiveDaily": 0.313834
     }
   }
 }

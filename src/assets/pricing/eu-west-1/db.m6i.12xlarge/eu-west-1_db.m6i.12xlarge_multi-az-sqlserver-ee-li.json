@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 35.18948,
     "daily": 844.54752,
+    "effectiveHourly": 35.18948,
+    "effectiveDaily": 844.54752,
     "sku": "YSK62S7SE99A4XWP"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 32.726216,
+      "daily": 785.429194,
       "effectiveHourly": 32.726216,
-      "daily": 785.429194
+      "effectiveDaily": 785.429194
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 274351.27,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 31.297201,
-      "daily": 751.132818
+      "effectiveDaily": 751.132818
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 138716.93,
       "hourly": 15.835266,
+      "daily": 380.046384,
       "effectiveHourly": 31.659693,
-      "daily": 759.83264
+      "effectiveDaily": 759.83264
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 58771.12,
       "hourly": 2.236344,
+      "daily": 53.672256,
       "effectiveHourly": 4.471157,
-      "daily": 107.307774
+      "effectiveDaily": 107.307774
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 113267.98,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.307095,
-      "daily": 103.370273
+      "effectiveDaily": 103.370273
     }
   }
 }

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 2.44928,
     "daily": 58.78272,
+    "effectiveHourly": 2.44928,
+    "effectiveDaily": 58.78272,
     "sku": "RJ4FFDKVPST7AUBQ"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "All Upfront",
       "upfront": 13514.9,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.541741,
-      "daily": 37.001779
+      "effectiveDaily": 37.001779
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 1.64088,
+      "daily": 39.38112,
       "effectiveHourly": 1.64088,
-      "daily": 39.38112
+      "effectiveDaily": 39.38112
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 6972.02,
       "hourly": 0.79593,
+      "daily": 19.10232,
       "effectiveHourly": 1.591278,
-      "daily": 38.19067
+      "effectiveDaily": 38.19067
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

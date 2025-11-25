@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 12.82432,
     "daily": 307.78368,
+    "effectiveHourly": 12.82432,
+    "effectiveDaily": 307.78368,
     "sku": "MPU6ARVWHPBX7KQJ"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 84255.92,
       "hourly": 3.20608,
+      "daily": 76.94592,
       "effectiveHourly": 6.40997,
-      "daily": 153.839299
+      "effectiveDaily": 153.839299
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 76392.08,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 8.714588,
-      "daily": 209.150117
+      "effectiveDaily": 209.150117
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 161771.16,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 6.151462,
-      "daily": 147.635099
+      "effectiveDaily": 147.635099
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 9.233476,
+      "daily": 221.603424,
       "effectiveHourly": 9.233476,
-      "daily": 221.603424
+      "effectiveDaily": 221.603424
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 39319.2,
       "hourly": 4.488512,
+      "daily": 107.724288,
       "effectiveHourly": 8.973933,
-      "daily": 215.374391
+      "effectiveDaily": 215.374391
     }
   }
 }

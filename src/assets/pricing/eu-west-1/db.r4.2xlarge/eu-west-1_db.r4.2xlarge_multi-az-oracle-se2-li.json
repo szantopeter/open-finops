@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 3.737216,
     "daily": 89.693184,
+    "effectiveHourly": 3.737216,
+    "effectiveDaily": 89.693184,
     "sku": "UXAV2PY3PSMC4Y97"
   },
   "savingsOptions": {

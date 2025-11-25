@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 30.96,
     "daily": 743.04,
+    "effectiveHourly": 30.96,
+    "effectiveDaily": 743.04,
     "sku": "ZRREJ24A7BTKXPXW"
   },
   "savingsOptions": {

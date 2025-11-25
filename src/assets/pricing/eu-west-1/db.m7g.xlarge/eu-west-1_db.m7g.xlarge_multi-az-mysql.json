@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.6407,
     "daily": 15.3768,
+    "effectiveHourly": 0.6407,
+    "effectiveDaily": 15.3768,
     "sku": "WC4VYNCRXBC8XYHA"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 8923.36,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.339317,
-      "daily": 8.143609
+      "effectiveDaily": 8.143609
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 4630.24,
       "hourly": 0.176214,
+      "daily": 4.229136,
       "effectiveHourly": 0.352282,
-      "daily": 8.454772
+      "effectiveDaily": 8.454772
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 2104.42,
       "hourly": 0.240198,
+      "daily": 5.764752,
       "effectiveHourly": 0.480264,
-      "daily": 11.52634
+      "effectiveDaily": 11.52634
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.493296,
+      "daily": 11.839104,
       "effectiveHourly": 0.493296,
-      "daily": 11.839104
+      "effectiveDaily": 11.839104
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 4097.04,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.467378,
-      "daily": 11.217084
+      "effectiveDaily": 11.217084
     }
   }
 }

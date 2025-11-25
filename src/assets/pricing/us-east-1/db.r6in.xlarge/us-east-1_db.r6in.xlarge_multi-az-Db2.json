@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 1.19024,
     "daily": 28.56576,
+    "effectiveHourly": 1.19024,
+    "effectiveDaily": 28.56576,
     "sku": "KRG7TTVC5AUYCTW3"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 8599.14,
       "hourly": 0.32723,
+      "daily": 7.85352,
       "effectiveHourly": 0.654218,
-      "daily": 15.701241
+      "effectiveDaily": 15.701241
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.916244,
+      "daily": 21.989856,
       "effectiveHourly": 0.916244,
-      "daily": 21.989856
+      "effectiveDaily": 21.989856
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 7609.28,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.868044,
-      "daily": 20.833073
+      "effectiveDaily": 20.833073
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 16573.06,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.630202,
-      "daily": 15.124855
+      "effectiveDaily": 15.124855
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 3908.7,
       "hourly": 0.446254,
+      "daily": 10.710096,
       "effectiveHourly": 0.892147,
-      "daily": 21.411534
+      "effectiveDaily": 21.411534
     }
   }
 }

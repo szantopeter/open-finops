@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 76.73522,
     "daily": 1841.64528,
+    "effectiveHourly": 76.73522,
+    "effectiveDaily": 1841.64528,
     "sku": "GWQBZRAT2FPAX7WV"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 101757.84,
       "hourly": 11.616192,
+      "daily": 278.788608,
       "effectiveHourly": 23.224433,
-      "daily": 557.386396
+      "effectiveDaily": 557.386396
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 23.896166,
+      "daily": 573.507994,
       "effectiveHourly": 23.896166,
-      "daily": 573.507994
+      "effectiveDaily": 573.507994
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 418660.83,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 15.919874,
-      "daily": 382.076966
+      "effectiveDaily": 382.076966
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 197700.95,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 22.553154,
-      "daily": 541.275702
+      "effectiveDaily": 541.275702
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 218052.52,
       "hourly": 8.29728,
+      "daily": 199.13472,
       "effectiveHourly": 16.588881,
-      "daily": 398.133139
+      "effectiveDaily": 398.133139
     }
   }
 }

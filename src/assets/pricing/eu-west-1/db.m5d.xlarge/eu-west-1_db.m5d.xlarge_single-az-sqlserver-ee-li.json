@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 2.0812,
     "daily": 49.9488,
+    "effectiveHourly": 2.0812,
+    "effectiveDaily": 49.9488,
     "sku": "WH59PBH26CXDTFV2"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 2551.62,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.291082,
-      "daily": 6.985955
+      "effectiveDaily": 6.985955
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 5557.32,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.211321,
-      "daily": 5.071705
+      "effectiveDaily": 5.071705
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 2883.58,
       "hourly": 0.109736,
+      "daily": 2.633664,
       "effectiveHourly": 0.219386,
-      "daily": 5.265268
+      "effectiveDaily": 5.265268
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.307278,
+      "daily": 7.374672,
       "effectiveHourly": 0.307278,
-      "daily": 7.374672
+      "effectiveDaily": 7.374672
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 1310.64,
       "hourly": 0.14964,
+      "daily": 3.59136,
       "effectiveHourly": 0.299154,
-      "daily": 7.179697
+      "effectiveDaily": 7.179697
     }
   }
 }

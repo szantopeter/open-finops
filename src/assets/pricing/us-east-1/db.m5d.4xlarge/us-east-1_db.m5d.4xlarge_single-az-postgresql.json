@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 1.44136,
     "daily": 34.59264,
+    "effectiveHourly": 1.44136,
+    "effectiveDaily": 34.59264,
     "sku": "FQENENUD9PH996NB"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 11457.78,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.30707,
-      "daily": 31.369692
+      "effectiveDaily": 31.369692
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 5845.42,
       "hourly": 0.667274,
+      "daily": 16.014576,
       "effectiveHourly": 1.334103,
-      "daily": 32.018464
+      "effectiveDaily": 32.018464
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 1.40137,
+      "daily": 33.63288,
       "effectiveHourly": 1.40137,
-      "daily": 33.63288
+      "effectiveDaily": 33.63288
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 9040.32,
       "hourly": 0.344,
+      "daily": 8.256,
       "effectiveHourly": 0.687764,
-      "daily": 16.506349
+      "effectiveDaily": 16.506349
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 17357.38,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.660027,
-      "daily": 15.840638
+      "effectiveDaily": 15.840638
     }
   }
 }

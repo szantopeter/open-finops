@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 47.5709,
     "daily": 1141.7016,
+    "effectiveHourly": 47.5709,
+    "effectiveDaily": 1141.7016,
     "sku": "VVEKHF8PGPP4PA8W"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 304208.66,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 34.703246,
-      "daily": 832.877919
+      "effectiveDaily": 832.877919
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 156271.46,
       "hourly": 17.839238,
+      "daily": 428.141712,
       "effectiveHourly": 35.666236,
-      "daily": 855.989651
+      "effectiveDaily": 855.989651
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 36.629894,
+      "daily": 879.117456,
       "effectiveHourly": 36.629894,
-      "daily": 879.117456
+      "effectiveDaily": 879.117456
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 662592.16,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 25.195534,
-      "daily": 604.692823
+      "effectiveDaily": 604.692823
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 343797.9,
       "hourly": 13.082148,
+      "daily": 313.971552,
       "effectiveHourly": 26.155306,
-      "daily": 627.727336
+      "effectiveDaily": 627.727336
     }
   }
 }

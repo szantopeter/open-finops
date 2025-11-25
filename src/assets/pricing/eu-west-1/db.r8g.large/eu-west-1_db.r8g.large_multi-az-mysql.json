@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.46096,
     "daily": 11.06304,
+    "effectiveHourly": 0.46096,
+    "effectiveDaily": 11.06304,
     "sku": "THEFEJHPP7S2JEN4"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "All Upfront",
       "upfront": 2546.46,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.290493,
-      "daily": 6.971827
+      "effectiveDaily": 6.971827
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.30874,
+      "daily": 7.40976,
       "effectiveHourly": 0.30874,
-      "daily": 7.40976
+      "effectiveDaily": 7.40976
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 1310.64,
       "hourly": 0.14964,
+      "daily": 3.59136,
       "effectiveHourly": 0.299154,
-      "daily": 7.179697
+      "effectiveDaily": 7.179697
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

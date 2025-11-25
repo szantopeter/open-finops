@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 5.51088,
     "daily": 132.26112,
+    "effectiveHourly": 5.51088,
+    "effectiveDaily": 132.26112,
     "sku": "NCA96M8TFNMEAXSX"
   },
   "savingsOptions": {

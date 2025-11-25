@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 11.80436,
     "daily": 283.30464,
+    "effectiveHourly": 11.80436,
+    "effectiveDaily": 283.30464,
     "sku": "RZ25QPJEJSM66M7Y"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 9.08934,
+      "daily": 218.14416,
       "effectiveHourly": 9.08934,
-      "daily": 218.14416
+      "effectiveDaily": 218.14416
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 38777.4,
       "hourly": 4.426592,
+      "daily": 106.238208,
       "effectiveHourly": 8.850206,
-      "daily": 212.404943
+      "effectiveDaily": 212.404943
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 164415.66,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 6.252021,
-      "daily": 150.048515
+      "effectiveDaily": 150.048515
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 85309.42,
       "hourly": 3.246156,
+      "daily": 77.907744,
       "effectiveHourly": 6.490107,
-      "daily": 155.762565
+      "effectiveDaily": 155.762565
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 75486.5,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 8.611282,
-      "daily": 206.670774
+      "effectiveDaily": 206.670774
     }
   }
 }

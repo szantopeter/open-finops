@@ -1,0 +1,21 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r8gd.4xlarge",
+  "deployment": "single-az",
+  "engine": "aurora-postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 2.790528,
+    "daily": 66.972672,
+    "effectiveHourly": 2.790528,
+    "effectiveDaily": 66.972672,
+    "sku": "HJQHYNJWGJZQS6MY"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

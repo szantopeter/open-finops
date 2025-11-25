@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 7.41578,
     "daily": 177.97872,
+    "effectiveHourly": 7.41578,
+    "effectiveDaily": 177.97872,
     "sku": "SAJZGT58JZP595VT"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 16209.28,
       "hourly": 1.850376,
+      "daily": 44.409024,
       "effectiveHourly": 3.699484,
-      "daily": 88.787614
+      "effectiveDaily": 88.787614
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 3.799394,
+      "daily": 91.185456,
       "effectiveHourly": 3.799394,
-      "daily": 91.185456
+      "effectiveDaily": 91.185456
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 35659.9,
       "hourly": 1.356908,
+      "daily": 32.565792,
       "effectiveHourly": 2.712901,
-      "daily": 65.10962
+      "effectiveDaily": 65.10962
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 31553.4,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 3.599521,
-      "daily": 86.388501
+      "effectiveDaily": 86.388501
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 68726.04,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.613356,
-      "daily": 62.720547
+      "effectiveDaily": 62.720547
     }
   }
 }

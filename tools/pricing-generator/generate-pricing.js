@@ -107,15 +107,18 @@ function extractReservedInstancePricing(product) {
       const effectiveHourly = (upfront / totalHours) + hourly;
       
       const key = `${leaseContractLength}_${purchaseOption}`;
-      // Compute daily price (effective hourly * 24)
-      const daily = Number((effectiveHourly * 24).toFixed(6));
+      // Compute raw daily price (hourly * 24)
+      const daily = Number((hourly * 24).toFixed(6));
+      // Compute effective daily price (effective hourly * 24)
+      const effectiveDaily = Number((effectiveHourly * 24).toFixed(6));
       pricing[key] = {
         term: leaseContractLength,
         purchaseOption: purchaseOption,
         upfront: Number(upfront.toFixed(2)),
         hourly: Number(hourly.toFixed(6)),
+        daily: daily,
         effectiveHourly: Number(effectiveHourly.toFixed(6)),
-        daily: daily
+        effectiveDaily: effectiveDaily
       };
     }
     
@@ -402,8 +405,9 @@ function buildEngineKey(engine, license, edition) {
           const copy = Object.assign({}, v);
           if (copy.upfront !== undefined) copy.upfront = Number((copy.upfront * discountFactor).toFixed(2));
           if (copy.hourly !== undefined) copy.hourly = Number((copy.hourly * discountFactor).toFixed(6));
-          if (copy.effectiveHourly !== undefined) copy.effectiveHourly = Number((copy.effectiveHourly * discountFactor).toFixed(6));
           if (copy.daily !== undefined) copy.daily = Number((copy.daily * discountFactor).toFixed(6));
+          if (copy.effectiveHourly !== undefined) copy.effectiveHourly = Number((copy.effectiveHourly * discountFactor).toFixed(6));
+          if (copy.effectiveDaily !== undefined) copy.effectiveDaily = Number((copy.effectiveDaily * discountFactor).toFixed(6));
           discounted[k] = copy;
         }
         // Ensure all expected keys exist; fill missing with null to indicate absence
@@ -429,6 +433,8 @@ function buildEngineKey(engine, license, edition) {
           onDemand: {
             hourly: rec.hourly,
             daily: rec.daily,
+            effectiveHourly: rec.hourly,
+            effectiveDaily: rec.daily,
             sku: rec.sku
           },
           // savingsOptions: may be null if no RI terms found for that deployment
@@ -439,8 +445,8 @@ function buildEngineKey(engine, license, edition) {
         let isValid = true;
         if (fileObj.onDemand.daily && fileObj.savingsOptions) {
           for (const [key, sav] of Object.entries(fileObj.savingsOptions)) {
-            if (sav && typeof sav.daily === 'number' && sav.daily >= fileObj.onDemand.daily) {
-              errors.push(`Invalid pricing for ${filename}: reserved ${key} daily (${sav.daily}) >= on-demand daily (${fileObj.onDemand.daily})`);
+            if (sav && typeof sav.effectiveDaily === 'number' && sav.effectiveDaily >= fileObj.onDemand.daily) {
+              errors.push(`Invalid pricing for ${filename}: reserved ${key} effectiveDaily (${sav.effectiveDaily}) >= on-demand daily (${fileObj.onDemand.daily})`);
               isValid = false;
               break;
             }
@@ -487,7 +493,7 @@ function buildEngineKey(engine, license, edition) {
                   deployment: dep.toLowerCase(),
                   engine: eng,
                   license: null,
-                  onDemand: { hourly: hourlyDisc, daily: daily, sku: od.product && od.product.product && od.product.product.sku ? od.product.product.sku : null },
+                  onDemand: { hourly: hourlyDisc, daily: daily, effectiveHourly: hourlyDisc, effectiveDaily: daily, sku: od.product && od.product.product && od.product.product.sku ? od.product.product.sku : null },
                   savingsOptions: discountedRiByDeployment[dep] || null
                 };
 
@@ -495,8 +501,8 @@ function buildEngineKey(engine, license, edition) {
                 let isValid = true;
                 if (fileObj.onDemand.daily && fileObj.savingsOptions) {
                   for (const [key, sav] of Object.entries(fileObj.savingsOptions)) {
-                    if (sav && typeof sav.daily === 'number' && sav.daily >= fileObj.onDemand.daily) {
-                      errors.push(`Invalid pricing for ensured ${wantedFilename}: reserved ${key} daily (${sav.daily}) >= on-demand daily (${fileObj.onDemand.daily})`);
+                    if (sav && typeof sav.effectiveDaily === 'number' && sav.effectiveDaily >= fileObj.onDemand.daily) {
+                      errors.push(`Invalid pricing for ensured ${wantedFilename}: reserved ${key} effectiveDaily (${sav.effectiveDaily}) >= on-demand daily (${fileObj.onDemand.daily})`);
                       isValid = false;
                       break;
                     }
@@ -530,7 +536,7 @@ function buildEngineKey(engine, license, edition) {
                   deployment: dep.toLowerCase(),
                   engine: engCap,
                   license: null,
-                  onDemand: { hourly: hourlyDisc, daily: daily, sku: od.product && od.product.product && od.product.product.sku ? od.product.product.sku : null },
+                  onDemand: { hourly: hourlyDisc, daily: daily, effectiveHourly: hourlyDisc, effectiveDaily: daily, sku: od.product && od.product.product && od.product.product.sku ? od.product.product.sku : null },
                   savingsOptions: discountedRiByDeployment[dep] || null
                 };
 
@@ -538,8 +544,8 @@ function buildEngineKey(engine, license, edition) {
                 let isValid = true;
                 if (fileObj.onDemand.daily && fileObj.savingsOptions) {
                   for (const [key, sav] of Object.entries(fileObj.savingsOptions)) {
-                    if (sav && typeof sav.daily === 'number' && sav.daily >= fileObj.onDemand.daily) {
-                      errors.push(`Invalid pricing for ensured capitalized ${wantedFilenameCap}: reserved ${key} daily (${sav.daily}) >= on-demand daily (${fileObj.onDemand.daily})`);
+                    if (sav && typeof sav.effectiveDaily === 'number' && sav.effectiveDaily >= fileObj.onDemand.daily) {
+                      errors.push(`Invalid pricing for ensured capitalized ${wantedFilenameCap}: reserved ${key} effectiveDaily (${sav.effectiveDaily}) >= on-demand daily (${fileObj.onDemand.daily})`);
                       isValid = false;
                       break;
                     }
@@ -578,7 +584,7 @@ function buildEngineKey(engine, license, edition) {
                   deployment: dep.toLowerCase(),
                   engine: baseEng,
                   license: null,
-                  onDemand: { hourly: hourlyDisc, daily: daily, sku: od.product && od.product.product && od.product.product.sku ? od.product.product.sku : null },
+                  onDemand: { hourly: hourlyDisc, daily: daily, effectiveHourly: hourlyDisc, effectiveDaily: daily, sku: od.product && od.product.product && od.product.product.sku ? od.product.product.sku : null },
                   savingsOptions: discountedRiByDeployment[dep] || null
                 };
 
@@ -586,8 +592,8 @@ function buildEngineKey(engine, license, edition) {
                 let isValid = true;
                 if (fileObj.onDemand.daily && fileObj.savingsOptions) {
                   for (const [key, sav] of Object.entries(fileObj.savingsOptions)) {
-                    if (sav && typeof sav.daily === 'number' && sav.daily >= fileObj.onDemand.daily) {
-                      errors.push(`Invalid pricing for base engine ${baseFilename}: reserved ${key} daily (${sav.daily}) >= on-demand daily (${fileObj.onDemand.daily})`);
+                    if (sav && typeof sav.effectiveDaily === 'number' && sav.effectiveDaily >= fileObj.onDemand.daily) {
+                      errors.push(`Invalid pricing for base engine ${baseFilename}: reserved ${key} effectiveDaily (${sav.effectiveDaily}) >= on-demand daily (${fileObj.onDemand.daily})`);
                       isValid = false;
                       break;
                     }
@@ -625,7 +631,7 @@ function buildEngineKey(engine, license, edition) {
                   deployment: dep,
                   engine: baseEng,
                   license: null,
-                  onDemand: { hourly: hourlyDisc, daily: daily, sku: od.product && od.product.product && od.product.product.sku ? od.product.product.sku : null },
+                  onDemand: { hourly: hourlyDisc, daily: daily, effectiveHourly: hourlyDisc, effectiveDaily: daily, sku: od.product && od.product.product && od.product.product.sku ? od.product.product.sku : null },
                   savingsOptions: discountedRiByDeployment[dep] || null
                 };
 
@@ -633,8 +639,8 @@ function buildEngineKey(engine, license, edition) {
                 let isValid = true;
                 if (fileObj.onDemand.daily && fileObj.savingsOptions) {
                   for (const [key, sav] of Object.entries(fileObj.savingsOptions)) {
-                    if (sav && typeof sav.daily === 'number' && sav.daily >= fileObj.onDemand.daily) {
-                      errors.push(`Invalid pricing for base engine ${baseFilename}: reserved ${key} daily (${sav.daily}) >= on-demand daily (${fileObj.onDemand.daily})`);
+                    if (sav && typeof sav.effectiveDaily === 'number' && sav.effectiveDaily >= fileObj.onDemand.daily) {
+                      errors.push(`Invalid pricing for base engine ${baseFilename}: reserved ${key} effectiveDaily (${sav.effectiveDaily}) >= on-demand daily (${fileObj.onDemand.daily})`);
                       isValid = false;
                       break;
                     }

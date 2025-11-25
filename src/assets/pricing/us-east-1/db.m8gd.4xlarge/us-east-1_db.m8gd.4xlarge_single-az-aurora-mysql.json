@@ -1,0 +1,21 @@
+{
+  "region": "us-east-1",
+  "instance": "db.m8gd.4xlarge",
+  "deployment": "single-az",
+  "engine": "aurora-mysql",
+  "license": null,
+  "onDemand": {
+    "hourly": 2.718976,
+    "daily": 65.255424,
+    "effectiveHourly": 2.718976,
+    "effectiveDaily": 65.255424,
+    "sku": "2626ZDGQ3JVYUMS2"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

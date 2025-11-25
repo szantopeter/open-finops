@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 2.09152,
     "daily": 50.19648,
+    "effectiveHourly": 2.09152,
+    "effectiveDaily": 50.19648,
     "sku": "SPNWZK2RT2KVP5AE"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 5251.16,
       "hourly": 0.59942,
+      "daily": 14.38608,
       "effectiveHourly": 1.198457,
-      "daily": 28.762973
+      "effectiveDaily": 28.762973
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 10178.1,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.161089,
-      "daily": 27.866119
+      "effectiveDaily": 27.866119
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 1.23496,
+      "daily": 29.63904,
       "effectiveHourly": 1.23496,
-      "daily": 29.63904
+      "effectiveDaily": 29.63904
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

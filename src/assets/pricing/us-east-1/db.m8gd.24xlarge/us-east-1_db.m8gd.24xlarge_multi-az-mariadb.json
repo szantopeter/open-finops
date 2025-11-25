@@ -1,0 +1,21 @@
+{
+  "region": "us-east-1",
+  "instance": "db.m8gd.24xlarge",
+  "deployment": "multi-az",
+  "engine": "mariadb",
+  "license": null,
+  "onDemand": {
+    "hourly": 16.313856,
+    "daily": 391.532544,
+    "effectiveHourly": 16.313856,
+    "effectiveDaily": 391.532544,
+    "sku": "RYX4JPB9CHEG6B2V"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

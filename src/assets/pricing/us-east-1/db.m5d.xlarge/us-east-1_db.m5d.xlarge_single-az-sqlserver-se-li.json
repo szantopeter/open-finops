@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 1.11026,
     "daily": 26.64624,
+    "effectiveHourly": 1.11026,
+    "effectiveDaily": 26.64624,
     "sku": "ST5Q2SHVN7SUWX74"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 1054.36,
       "hourly": 0.1204,
+      "daily": 2.8896,
       "effectiveHourly": 0.240679,
-      "daily": 5.77628
+      "effectiveDaily": 5.77628
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.24768,
+      "daily": 5.94432,
       "effectiveHourly": 0.24768,
-      "daily": 5.94432
+      "effectiveDaily": 5.94432
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 4339.56,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.165015,
-      "daily": 3.960356
+      "effectiveDaily": 3.960356
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 2049.38,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.233788,
-      "daily": 5.610896
+      "effectiveDaily": 5.610896
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 2260.08,
       "hourly": 0.086,
+      "daily": 2.064,
       "effectiveHourly": 0.171942,
-      "daily": 4.126587
+      "effectiveDaily": 4.126587
     }
   }
 }

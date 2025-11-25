@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 15.70704,
     "daily": 376.96896,
+    "effectiveHourly": 15.70704,
+    "effectiveDaily": 376.96896,
     "sku": "BXN92G587KRRKYGW"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 117276.48,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 13.378562,
-      "daily": 321.085503
+      "effectiveDaily": 321.085503
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 60244.72,
       "hourly": 6.877248,
+      "daily": 165.053952,
       "effectiveHourly": 13.749792,
-      "daily": 329.995006
+      "effectiveDaily": 329.995006
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 132538.04,
       "hourly": 5.043298,
+      "daily": 121.039152,
       "effectiveHourly": 10.083151,
-      "daily": 241.995611
+      "effectiveDaily": 241.995611
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 255437.2,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 9.71318,
-      "daily": 233.116313
+      "effectiveDaily": 233.116313
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 14.121286,
+      "daily": 338.910864,
       "effectiveHourly": 14.121286,
-      "daily": 338.910864
+      "effectiveDaily": 338.910864
     }
   }
 }

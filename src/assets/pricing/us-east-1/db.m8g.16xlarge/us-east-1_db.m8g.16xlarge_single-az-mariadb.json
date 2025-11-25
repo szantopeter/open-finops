@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 4.62336,
     "daily": 110.96064,
+    "effectiveHourly": 4.62336,
+    "effectiveDaily": 110.96064,
     "sku": "DDRU975BH7Q2CWJU"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "All Upfront",
       "upfront": 25516.2,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.910814,
-      "daily": 69.859548
+      "effectiveDaily": 69.859548
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 13161.44,
       "hourly": 1.50242,
+      "daily": 36.05808,
       "effectiveHourly": 3.003839,
-      "daily": 72.092138
+      "effectiveDaily": 72.092138
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 3.09772,
+      "daily": 74.34528,
       "effectiveHourly": 3.09772,
-      "daily": 74.34528
+      "effectiveDaily": 74.34528
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 11.35372,
     "daily": 272.48928,
+    "effectiveHourly": 11.35372,
+    "effectiveDaily": 272.48928,
     "sku": "MT9MB49YMNCHKNG6"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 82056.04,
       "hourly": 3.122402,
+      "daily": 74.937648,
       "effectiveHourly": 6.242641,
-      "daily": 149.82338
+      "effectiveDaily": 149.82338
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 158144.54,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 6.013558,
-      "daily": 144.325384
+      "effectiveDaily": 144.325384
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 72607.22,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 8.282823,
-      "daily": 198.787734
+      "effectiveDaily": 198.787734
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 8.742674,
+      "daily": 209.824176,
       "effectiveHourly": 8.742674,
-      "daily": 209.824176
+      "effectiveDaily": 209.824176
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 37298.2,
       "hourly": 4.257774,
+      "daily": 102.186576,
       "effectiveHourly": 8.512645,
-      "daily": 204.303483
+      "effectiveDaily": 204.303483
     }
   }
 }

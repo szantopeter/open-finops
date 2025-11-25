@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.0645,
     "daily": 1.548,
+    "effectiveHourly": 0.0645,
+    "effectiveDaily": 1.548,
     "sku": "CDD3KRT324AUN3E7"
   },
   "savingsOptions": {

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 14.596608,
     "daily": 350.318592,
+    "effectiveHourly": 14.596608,
+    "effectiveDaily": 350.318592,
     "sku": "FJWZ4R87Z88NYTRA"
   },
   "savingsOptions": {

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 1.9264,
     "daily": 46.2336,
+    "effectiveHourly": 1.9264,
+    "effectiveDaily": 46.2336,
     "sku": "QARYJPMQS63P245N"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "All Upfront",
       "upfront": 10629.6,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.212594,
-      "daily": 29.102259
+      "effectiveDaily": 29.102259
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 1.29086,
+      "daily": 30.98064,
       "effectiveHourly": 1.29086,
-      "daily": 30.98064
+      "effectiveDaily": 30.98064
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 5484.22,
       "hourly": 0.62608,
+      "daily": 15.02592,
       "effectiveHourly": 1.251704,
-      "daily": 30.040896
+      "effectiveDaily": 30.040896
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

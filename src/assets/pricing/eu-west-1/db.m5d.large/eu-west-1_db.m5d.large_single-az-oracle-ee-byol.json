@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.19092,
     "daily": 4.58208,
+    "effectiveHourly": 0.19092,
+    "effectiveDaily": 4.58208,
     "sku": "XTJ7GH52NWBWTQPU"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 1147.24,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.130874,
-      "daily": 3.140972
+      "effectiveDaily": 3.140972
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 590.82,
       "hourly": 0.067424,
+      "daily": 1.618176,
       "effectiveHourly": 0.134823,
-      "daily": 3.235753
+      "effectiveDaily": 3.235753
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 2430.36,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.092416,
-      "daily": 2.217987
+      "effectiveDaily": 2.217987
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.138718,
+      "daily": 3.329232,
       "effectiveHourly": 0.138718,
-      "daily": 3.329232
+      "effectiveDaily": 3.329232
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 1265.92,
       "hourly": 0.04816,
+      "daily": 1.15584,
       "effectiveHourly": 0.096298,
-      "daily": 2.31114
+      "effectiveDaily": 2.31114
     }
   }
 }

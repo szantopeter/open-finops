@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 4.0592,
     "daily": 97.4208,
+    "effectiveHourly": 4.0592,
+    "effectiveDaily": 97.4208,
     "sku": "XP6UNXGPUFJVE74K"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 56538.16,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.149904,
-      "daily": 51.597685
+      "effectiveDaily": 51.597685
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 25957.78,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.961188,
-      "daily": 71.068517
+      "effectiveDaily": 71.068517
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 29335.84,
       "hourly": 1.11628,
+      "daily": 26.79072,
       "effectiveHourly": 2.231796,
-      "daily": 53.563103
+      "effectiveDaily": 53.563103
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 13334.47,
       "hourly": 1.5222,
+      "daily": 36.5328,
       "effectiveHourly": 3.043359,
-      "daily": 73.040595
+      "effectiveDaily": 73.040595
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 3.125584,
+      "daily": 75.014016,
       "effectiveHourly": 3.125584,
-      "daily": 75.014016
+      "effectiveDaily": 75.014016
     }
   }
 }

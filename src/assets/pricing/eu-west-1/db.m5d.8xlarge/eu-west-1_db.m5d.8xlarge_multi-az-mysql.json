@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 6.38378,
     "daily": 153.21072,
+    "effectiveHourly": 6.38378,
+    "effectiveDaily": 153.21072,
     "sku": "Y4REF6M5K5DS88A3"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 46138.14,
       "hourly": 1.755604,
+      "daily": 42.134496,
       "effectiveHourly": 3.510039,
-      "daily": 84.240944
+      "effectiveDaily": 84.240944
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 4.91576,
+      "daily": 117.97824,
       "effectiveHourly": 4.91576,
-      "daily": 117.97824
+      "effectiveDaily": 117.97824
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 40825.06,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.657205,
-      "daily": 111.772923
+      "effectiveDaily": 111.772923
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 20971.96,
       "hourly": 2.394068,
+      "daily": 57.457632,
       "effectiveHourly": 4.786489,
-      "daily": 114.875729
+      "effectiveDaily": 114.875729
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 88920.56,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 3.381267,
-      "daily": 81.150408
+      "effectiveDaily": 81.150408
     }
   }
 }

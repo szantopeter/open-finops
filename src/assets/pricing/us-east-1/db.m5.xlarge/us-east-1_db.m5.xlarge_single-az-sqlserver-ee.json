@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 2.647424,
     "daily": 63.538176,
+    "effectiveHourly": 2.647424,
+    "effectiveDaily": 63.538176,
     "sku": "4VST7FV59GAYFMNC"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 20640.38,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.354595,
-      "daily": 56.510271
+      "effectiveDaily": 56.510271
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 2.462094,
+      "daily": 59.090256,
       "effectiveHourly": 2.462094,
-      "daily": 59.090256
+      "effectiveDaily": 59.090256
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 10436.14,
       "hourly": 1.191341,
+      "daily": 28.592179,
       "effectiveHourly": 2.381866,
-      "daily": 57.164788
+      "effectiveDaily": 57.164788
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 1649.48,
       "hourly": 0.06278,
+      "daily": 1.50672,
       "effectiveHourly": 0.125502,
-      "daily": 3.012063
+      "effectiveDaily": 3.012063
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 3232.74,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.122928,
-      "daily": 2.950253
+      "effectiveDaily": 2.950253
     }
   }
 }

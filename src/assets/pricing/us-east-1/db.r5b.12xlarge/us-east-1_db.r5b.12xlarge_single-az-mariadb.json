@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 6.10944,
     "daily": 146.62656,
+    "effectiveHourly": 6.10944,
+    "effectiveDaily": 146.62656,
     "sku": "2ND7SUNXWDJRA8SV"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 28860.74,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 3.29235,
-      "daily": 79.0164
+      "effectiveDaily": 79.0164
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 57722.34,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.194932,
-      "daily": 52.678385
+      "effectiveDaily": 52.678385
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 14697.4,
       "hourly": 1.67786,
+      "daily": 40.26864,
       "effectiveHourly": 3.354497,
-      "daily": 80.507928
+      "effectiveDaily": 80.507928
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 29663.12,
       "hourly": 1.12875,
+      "daily": 27.09,
       "effectiveHourly": 2.256711,
-      "daily": 54.161065
+      "effectiveDaily": 54.161065
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 3.538728,
+      "daily": 84.929472,
       "effectiveHourly": 3.538728,
-      "daily": 84.929472
+      "effectiveDaily": 84.929472
     }
   }
 }

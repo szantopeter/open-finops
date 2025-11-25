@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 11.45004,
     "daily": 274.80096,
+    "effectiveHourly": 11.45004,
+    "effectiveDaily": 274.80096,
     "sku": "YH6TX476R783QANP"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 34219.87,
       "hourly": 3.906378,
+      "daily": 93.753072,
       "effectiveHourly": 7.810082,
-      "daily": 187.441973
+      "effectiveDaily": 187.441973
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 8.073181,
+      "daily": 193.756349,
       "effectiveHourly": 8.073181,
-      "daily": 193.756349
+      "effectiveDaily": 193.756349
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 67679.3,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 7.720659,
-      "daily": 185.295827
+      "effectiveDaily": 185.295827
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 27120.96,
       "hourly": 1.032,
+      "daily": 24.768,
       "effectiveHourly": 2.063294,
-      "daily": 49.519047
+      "effectiveDaily": 49.519047
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 52072.24,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.980084,
-      "daily": 47.522011
+      "effectiveDaily": 47.522011
     }
   }
 }

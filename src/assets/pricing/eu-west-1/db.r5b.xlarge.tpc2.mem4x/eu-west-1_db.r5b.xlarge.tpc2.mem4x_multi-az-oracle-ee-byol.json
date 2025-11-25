@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 4.25098,
     "daily": 102.02352,
+    "effectiveHourly": 4.25098,
+    "effectiveDaily": 102.02352,
     "sku": "DMRK8T9SP2TK7GGN"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 53634.76,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.039499,
-      "daily": 48.94799
+      "effectiveDaily": 48.94799
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 27934.52,
       "hourly": 1.06296,
+      "daily": 25.51104,
       "effectiveHourly": 2.12519,
-      "daily": 51.004556
+      "effectiveDaily": 51.004556
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 13035.88,
       "hourly": 1.488144,
+      "daily": 35.715456,
       "effectiveHourly": 2.97524,
-      "daily": 71.40575
+      "effectiveDaily": 71.40575
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 3.061342,
+      "daily": 73.472208,
       "effectiveHourly": 3.061342,
-      "daily": 73.472208
+      "effectiveDaily": 73.472208
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 25327,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.889231,
-      "daily": 69.341547
+      "effectiveDaily": 69.341547
     }
   }
 }

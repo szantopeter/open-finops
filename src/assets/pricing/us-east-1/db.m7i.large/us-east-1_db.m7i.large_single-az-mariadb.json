@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.15308,
     "daily": 3.67392,
+    "effectiveHourly": 0.15308,
+    "effectiveDaily": 3.67392,
     "sku": "8PTV343ZZQCD6BJC"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.10234,
+      "daily": 2.45616,
       "effectiveHourly": 0.10234,
-      "daily": 2.45616
+      "effectiveDaily": 2.45616
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 436.88,
       "hourly": 0.04988,
+      "daily": 1.19712,
       "effectiveHourly": 0.099718,
-      "daily": 2.393232
+      "effectiveDaily": 2.393232
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 843.66,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.096243,
-      "daily": 2.309816
+      "effectiveDaily": 2.309816
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

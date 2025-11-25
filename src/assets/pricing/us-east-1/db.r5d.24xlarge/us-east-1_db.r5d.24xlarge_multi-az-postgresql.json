@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 23.58894,
     "daily": 566.13456,
+    "effectiveHourly": 23.58894,
+    "effectiveDaily": 566.13456,
     "sku": "S6HUTV772HA7E8C3"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 170474.36,
       "hourly": 6.486894,
+      "daily": 155.685456,
       "effectiveHourly": 12.969301,
-      "daily": 311.263243
+      "effectiveDaily": 311.263243
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 150844,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 17.207848,
-      "daily": 412.988364
+      "effectiveDaily": 412.988364
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 328550.96,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 12.493382,
-      "daily": 299.841168
+      "effectiveDaily": 299.841168
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 77488.58,
       "hourly": 8.845702,
+      "daily": 212.296848,
       "effectiveHourly": 17.685375,
-      "daily": 424.449017
+      "effectiveDaily": 424.449017
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 18.1632,
+      "daily": 435.9168,
       "effectiveHourly": 18.1632,
-      "daily": 435.9168
+      "effectiveDaily": 435.9168
     }
   }
 }

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 38.558788,
     "daily": 925.410912,
+    "effectiveHourly": 38.558788,
+    "effectiveDaily": 925.410912,
     "sku": "MCMS5C4Q3RV4MA4Z"
   },
   "savingsOptions": {

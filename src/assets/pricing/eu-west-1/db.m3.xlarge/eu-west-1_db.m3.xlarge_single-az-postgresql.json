@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.3612,
     "daily": 8.6688,
+    "effectiveHourly": 0.3612,
+    "effectiveDaily": 8.6688,
     "sku": "RSQ34NYJEC96ZAKC"
   },
   "savingsOptions": {

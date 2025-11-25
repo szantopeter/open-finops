@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 1.01824,
     "daily": 24.43776,
+    "effectiveHourly": 1.01824,
+    "effectiveDaily": 24.43776,
     "sku": "RD98Y96SU9KPY85T"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 6237.58,
       "hourly": 0.23736,
+      "daily": 5.69664,
       "effectiveHourly": 0.474548,
-      "daily": 11.389161
+      "effectiveDaily": 11.389161
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 5655.36,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.645147,
-      "daily": 15.483532
+      "effectiveDaily": 15.483532
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 11976.36,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.45541,
-      "daily": 10.929829
+      "effectiveDaily": 10.929829
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.683614,
+      "daily": 16.406736,
       "effectiveHourly": 0.683614,
-      "daily": 16.406736
+      "effectiveDaily": 16.406736
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 2911.1,
       "hourly": 0.332304,
+      "daily": 7.975296,
       "effectiveHourly": 0.664394,
-      "daily": 15.945454
+      "effectiveDaily": 15.945454
     }
   }
 }

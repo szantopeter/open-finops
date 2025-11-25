@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.13416,
     "daily": 3.21984,
+    "effectiveHourly": 0.13416,
+    "effectiveDaily": 3.21984,
     "sku": "PJBKA445MJWNMGUR"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 857.93,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.09787,
-      "daily": 2.348878
+      "effectiveDaily": 2.348878
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 969.57,
       "hourly": 0.036894,
+      "daily": 0.885456,
       "effectiveHourly": 0.073763,
-      "daily": 1.770304
+      "effectiveDaily": 1.770304
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 1868.63,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.071056,
-      "daily": 1.705346
+      "effectiveDaily": 1.705346
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.103286,
+      "daily": 2.478864,
       "effectiveHourly": 0.103286,
-      "daily": 2.478864
+      "effectiveDaily": 2.478864
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 440.72,
       "hourly": 0.05031,
+      "daily": 1.20744,
       "effectiveHourly": 0.100586,
-      "daily": 2.414054
+      "effectiveDaily": 2.414054
     }
   }
 }

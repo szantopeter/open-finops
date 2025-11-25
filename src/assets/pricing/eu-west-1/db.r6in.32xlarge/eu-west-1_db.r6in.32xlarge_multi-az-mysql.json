@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 42.7119,
     "daily": 1025.0856,
+    "effectiveHourly": 42.7119,
+    "effectiveDaily": 1025.0856,
     "sku": "TA6DBDR4X65443WJ"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 32.88812,
+      "daily": 789.31488,
       "effectiveHourly": 32.88812,
-      "daily": 789.31488
+      "effectiveDaily": 789.31488
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 140309.15,
       "hourly": 16.016898,
+      "daily": 384.405552,
       "effectiveHourly": 32.022962,
-      "daily": 768.551082
+      "effectiveDaily": 768.551082
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 594908.43,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 22.621812,
-      "daily": 542.923506
+      "effectiveDaily": 542.923506
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 308680.6,
       "hourly": 11.745708,
+      "daily": 281.896992,
       "effectiveHourly": 23.483506,
-      "daily": 563.604133
+      "effectiveDaily": 563.604133
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 273134.06,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 31.158345,
-      "daily": 747.800291
+      "effectiveDaily": 747.800291
     }
   }
 }

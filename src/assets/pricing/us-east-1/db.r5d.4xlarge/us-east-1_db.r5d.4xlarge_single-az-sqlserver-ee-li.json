@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 8.81844,
     "daily": 211.64256,
+    "effectiveHourly": 8.81844,
+    "effectiveDaily": 211.64256,
     "sku": "VNV24SCUW3CD66UR"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 5.106336,
+      "daily": 122.552064,
       "effectiveHourly": 5.106336,
-      "daily": 122.552064
+      "effectiveDaily": 122.552064
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 56802.14,
       "hourly": 2.161438,
+      "daily": 51.874512,
       "effectiveHourly": 4.32138,
-      "daily": 103.713107
+      "effectiveDaily": 103.713107
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 111332.16,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.233484,
-      "daily": 101.603614
+      "effectiveDaily": 101.603614
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 41749.56,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.76267,
-      "daily": 114.304065
+      "effectiveDaily": 114.304065
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 21300.48,
       "hourly": 2.431564,
+      "daily": 58.357536,
       "effectiveHourly": 4.861461,
-      "daily": 116.675072
+      "effectiveDaily": 116.675072
     }
   }
 }

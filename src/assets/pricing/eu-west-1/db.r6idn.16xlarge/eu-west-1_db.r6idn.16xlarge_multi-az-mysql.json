@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 35.67882,
     "daily": 856.29168,
+    "effectiveHourly": 35.67882,
+    "effectiveDaily": 856.29168,
     "sku": "DTHU2VZ45SPPN8JA"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 18.315076,
+      "daily": 439.561824,
       "effectiveHourly": 18.315076,
-      "daily": 439.561824
+      "effectiveDaily": 439.561824
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 171901.68,
       "hourly": 6.541074,
+      "daily": 156.985776,
       "effectiveHourly": 13.077757,
-      "daily": 313.866163
+      "effectiveDaily": 313.866163
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 152105.95,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 17.351808,
-      "daily": 416.443387
+      "effectiveDaily": 416.443387
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 331299.25,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 12.597888,
-      "daily": 302.349307
+      "effectiveDaily": 302.349307
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 78136.99,
       "hourly": 8.919662,
+      "daily": 214.071888,
       "effectiveHourly": 17.833305,
-      "daily": 427.999319
+      "effectiveDaily": 427.999319
     }
   }
 }

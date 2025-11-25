@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.57964,
     "daily": 13.91136,
+    "effectiveHourly": 0.57964,
+    "effectiveDaily": 13.91136,
     "sku": "5M867GRZCRG7AP47"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 1904.04,
       "hourly": 0.217322,
+      "daily": 5.215728,
       "effectiveHourly": 0.43453,
-      "daily": 10.428706
+      "effectiveDaily": 10.428706
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.44634,
+      "daily": 10.71216,
       "effectiveHourly": 0.44634,
-      "daily": 10.71216
+      "effectiveDaily": 10.71216
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 8073.68,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.307007,
-      "daily": 7.368177
+      "effectiveDaily": 7.368177
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 3706.6,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.422838,
-      "daily": 10.148118
+      "effectiveDaily": 10.148118
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 4189.06,
       "hourly": 0.159358,
+      "daily": 3.824592,
       "effectiveHourly": 0.31865,
-      "daily": 7.647599
+      "effectiveDaily": 7.647599
     }
   }
 }

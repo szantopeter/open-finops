@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 12.3453,
     "daily": 296.2872,
+    "effectiveHourly": 12.3453,
+    "effectiveDaily": 296.2872,
     "sku": "SYHDVBUNNCMSNVVG"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 55915.48,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 6.378677,
-      "daily": 153.088241
+      "effectiveDaily": 153.088241
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 28724,
       "hourly": 3.279008,
+      "daily": 78.696192,
       "effectiveHourly": 6.555759,
-      "daily": 157.338218
+      "effectiveDaily": 157.338218
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 6.732854,
+      "daily": 161.588496,
       "effectiveHourly": 6.732854,
-      "daily": 161.588496
+      "effectiveDaily": 161.588496
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 121788.9,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.631109,
-      "daily": 111.146612
+      "effectiveDaily": 111.146612
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 63192.8,
       "hourly": 2.40456,
+      "daily": 57.70944,
       "effectiveHourly": 4.807511,
-      "daily": 115.380259
+      "effectiveDaily": 115.380259
     }
   }
 }

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 7.9421,
     "daily": 190.6104,
+    "effectiveHourly": 7.9421,
+    "effectiveDaily": 190.6104,
     "sku": "4BH89HV2AG7GFD32"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 29408.56,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 3.354844,
-      "daily": 80.51625
+      "effectiveDaily": 80.51625
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 4.028584,
+      "daily": 96.686016,
       "effectiveHourly": 4.028584,
-      "daily": 96.686016
+      "effectiveDaily": 96.686016
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 14971.74,
       "hourly": 1.709078,
+      "daily": 41.017872,
       "effectiveHourly": 3.417011,
-      "daily": 82.008262
+      "effectiveDaily": 82.008262
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 57748.14,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.195914,
-      "daily": 52.70193
+      "effectiveDaily": 52.70193
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 31279.92,
       "hourly": 1.19024,
+      "daily": 28.56576,
       "effectiveHourly": 2.379681,
-      "daily": 57.112345
+      "effectiveDaily": 57.112345
     }
   }
 }

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 14.20032,
     "daily": 340.80768,
+    "effectiveHourly": 14.20032,
+    "effectiveDaily": 340.80768,
     "sku": "Y44545SBFVUH5A34"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 102705.5,
       "hourly": 3.908098,
+      "daily": 93.794352,
       "effectiveHourly": 7.813547,
-      "daily": 187.52513
+      "effectiveDaily": 187.52513
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 90878.78,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 10.367189,
-      "daily": 248.812539
+      "effectiveDaily": 248.812539
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 197941.04,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 7.526847,
-      "daily": 180.644344
+      "effectiveDaily": 180.644344
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 46684.24,
       "hourly": 5.329248,
+      "daily": 127.901952,
       "effectiveHourly": 10.654851,
-      "daily": 255.716435
+      "effectiveDaily": 255.716435
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 10.942726,
+      "daily": 262.625424,
       "effectiveHourly": 10.942726,
-      "daily": 262.625424
+      "effectiveDaily": 262.625424
     }
   }
 }

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 2.66686,
     "daily": 64.00464,
+    "effectiveHourly": 2.66686,
+    "effectiveDaily": 64.00464,
     "sku": "FD8HHTVZNN63XC9U"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 2.05368,
+      "daily": 49.28832,
       "effectiveHourly": 2.05368,
-      "daily": 49.28832
+      "effectiveDaily": 49.28832
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 19275.18,
       "hourly": 0.733494,
+      "daily": 17.603856,
       "effectiveHourly": 1.466446,
-      "daily": 35.194711
+      "effectiveDaily": 35.194711
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 37148.56,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.4126,
-      "daily": 33.902405
+      "effectiveDaily": 33.902405
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 17055.52,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.945644,
-      "daily": 46.695469
+      "effectiveDaily": 46.695469
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 8761.68,
       "hourly": 1.00018,
+      "daily": 24.00432,
       "effectiveHourly": 1.999687,
-      "daily": 47.992493
+      "effectiveDaily": 47.992493
     }
   }
 }

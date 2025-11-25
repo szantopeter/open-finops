@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 16.25744,
     "daily": 390.17856,
+    "effectiveHourly": 16.25744,
+    "effectiveDaily": 390.17856,
     "sku": "8K2P5SSWWW7866PM"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 28838.62,
       "hourly": 1.09736,
+      "daily": 26.33664,
       "effectiveHourly": 2.193969,
-      "daily": 52.655254
+      "effectiveDaily": 52.655254
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 3.160397,
+      "daily": 75.849523,
       "effectiveHourly": 3.160397,
-      "daily": 75.849523
+      "effectiveDaily": 75.849523
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 26147.02,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.982776,
-      "daily": 71.586629
+      "effectiveDaily": 71.586629
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 13458.02,
       "hourly": 1.536304,
+      "daily": 36.871296,
       "effectiveHourly": 3.071556,
-      "daily": 73.717355
+      "effectiveDaily": 73.717355
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 55370.15,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.105489,
-      "daily": 50.531738
+      "effectiveDaily": 50.531738
     }
   }
 }

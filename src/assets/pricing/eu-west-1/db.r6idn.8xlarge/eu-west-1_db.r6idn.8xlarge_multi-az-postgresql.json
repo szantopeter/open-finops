@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 17.83898,
     "daily": 428.13552,
+    "effectiveHourly": 17.83898,
+    "effectiveDaily": 428.13552,
     "sku": "DCWX5PUD6APD36RW"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 76052.38,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 8.675837,
-      "daily": 208.220069
+      "effectiveDaily": 208.220069
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 165648.04,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 6.298883,
-      "daily": 151.173205
+      "effectiveDaily": 151.173205
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 85949.26,
       "hourly": 3.270494,
+      "daily": 78.491856,
       "effectiveHourly": 6.538775,
-      "daily": 156.930606
+      "effectiveDaily": 156.930606
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 9.157452,
+      "daily": 219.778848,
       "effectiveHourly": 9.157452,
-      "daily": 219.778848
+      "effectiveDaily": 219.778848
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 39068.08,
       "hourly": 4.459788,
+      "daily": 107.034912,
       "effectiveHourly": 8.916562,
-      "daily": 213.997486
+      "effectiveDaily": 213.997486
     }
   }
 }

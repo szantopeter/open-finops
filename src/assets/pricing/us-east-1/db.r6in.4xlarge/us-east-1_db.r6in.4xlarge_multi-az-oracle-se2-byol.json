@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 4.76096,
     "daily": 114.26304,
+    "effectiveHourly": 4.76096,
+    "effectiveDaily": 114.26304,
     "sku": "945KUFSM2ZUGMX8V"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 66293.1,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.520841,
-      "daily": 60.500205
+      "effectiveDaily": 60.500205
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 30436.26,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 3.472081,
-      "daily": 83.329938
+      "effectiveDaily": 83.329938
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 34397.42,
       "hourly": 1.30892,
+      "daily": 31.41408,
       "effectiveHourly": 2.616906,
-      "daily": 62.805748
+      "effectiveDaily": 62.805748
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 3.66489,
+      "daily": 87.95736,
       "effectiveHourly": 3.66489,
-      "daily": 87.95736
+      "effectiveDaily": 87.95736
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 15635.66,
       "hourly": 1.784844,
+      "daily": 42.836256,
       "effectiveHourly": 3.568515,
-      "daily": 85.64436
+      "effectiveDaily": 85.64436
     }
   }
 }

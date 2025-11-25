@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 5.42144,
     "daily": 130.11456,
+    "effectiveHourly": 5.42144,
+    "effectiveDaily": 130.11456,
     "sku": "DJUA6REGCUFVQ58C"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "All Upfront",
       "upfront": 29923.7,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 3.413609,
-      "daily": 81.926625
+      "effectiveDaily": 81.926625
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 3.63264,
+      "daily": 87.18336,
       "effectiveHourly": 3.63264,
-      "daily": 87.18336
+      "effectiveDaily": 87.18336
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 15436.14,
       "hourly": 1.76214,
+      "daily": 42.29136,
       "effectiveHourly": 3.52305,
-      "daily": 84.553208
+      "effectiveDaily": 84.553208
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

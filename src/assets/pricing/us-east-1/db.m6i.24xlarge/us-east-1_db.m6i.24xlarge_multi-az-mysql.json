@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 14.11776,
     "daily": 338.82624,
+    "effectiveHourly": 14.11776,
+    "effectiveDaily": 338.82624,
     "sku": "NPYPH624YRZH4CTK"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 48275.31,
       "hourly": 5.51088,
+      "daily": 132.26112,
       "effectiveHourly": 11.017988,
-      "daily": 264.431712
+      "effectiveDaily": 264.431712
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 93975.93,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 10.720504,
-      "daily": 257.292081
+      "effectiveDaily": 257.292081
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 204687.31,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 7.783379,
-      "daily": 186.801104
+      "effectiveDaily": 186.801104
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 11.315622,
+      "daily": 271.574928,
       "effectiveHourly": 11.315622,
-      "daily": 271.574928
+      "effectiveDaily": 271.574928
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 106205.68,
       "hourly": 4.041312,
+      "daily": 96.991488,
       "effectiveHourly": 8.079858,
-      "daily": 193.916592
+      "effectiveDaily": 193.916592
     }
   }
 }

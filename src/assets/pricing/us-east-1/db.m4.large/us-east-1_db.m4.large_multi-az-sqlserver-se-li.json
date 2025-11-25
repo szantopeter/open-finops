@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 1.6813,
     "daily": 40.3512,
+    "effectiveHourly": 1.6813,
+    "effectiveDaily": 40.3512,
     "sku": "PHXMADZ7H8JN3RRW"
   },
   "savingsOptions": {

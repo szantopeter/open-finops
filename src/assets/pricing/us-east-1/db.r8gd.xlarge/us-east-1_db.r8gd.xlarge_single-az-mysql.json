@@ -1,0 +1,21 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r8gd.xlarge",
+  "deployment": "single-az",
+  "engine": "mysql",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.46956,
+    "daily": 11.26944,
+    "effectiveHourly": 0.46956,
+    "effectiveDaily": 11.26944,
+    "sku": "35T2VJ373PNUSBN8"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

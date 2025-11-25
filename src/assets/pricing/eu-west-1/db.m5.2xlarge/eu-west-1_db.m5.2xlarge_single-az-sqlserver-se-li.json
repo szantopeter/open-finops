@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 2.2532,
     "daily": 54.0768,
+    "effectiveHourly": 2.2532,
+    "effectiveDaily": 54.0768,
     "sku": "CFHHW8RM95MMWZSV"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 6486.12,
       "hourly": 0.86516,
+      "daily": 20.76384,
       "effectiveHourly": 1.605078,
-      "daily": 38.521869
+      "effectiveDaily": 38.521869
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 1.87824,
+      "daily": 45.07776,
       "effectiveHourly": 1.87824,
-      "daily": 45.07776
+      "effectiveDaily": 45.07776
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 13784.08,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.572448,
-      "daily": 37.738754
+      "effectiveDaily": 37.738754
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 3930.2,
       "hourly": 0.149554,
+      "daily": 3.589296,
       "effectiveHourly": 0.299002,
-      "daily": 7.176063
+      "effectiveDaily": 7.176063
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 7702.16,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.29288,
-      "daily": 7.029121
+      "effectiveDaily": 7.029121
     }
   }
 }

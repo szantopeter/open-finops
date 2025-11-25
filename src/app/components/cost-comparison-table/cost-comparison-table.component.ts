@@ -41,7 +41,11 @@ export class CostComparisonTableComponent implements OnChanges {
 
       // On-demand - no projection needed
       const projected = RiRenewalProjection.projectRiRenewal(this.riPortfolio, '1yr_No Upfront');
-      const onDemandTimeseries = CostTimeseriesCalculator.calculateCostTimeSeries(projected, true);
+      const projectedOnly: RiPortfolio = {
+            ...this.riPortfolio,
+            rows: projected.rows.filter(row => row.riRow.type === 'projected')
+          };      
+      const onDemandTimeseries = CostTimeseriesCalculator.calculateCostTimeSeries(projectedOnly, true);
       const mergedOnDemand = CostComparisonCalculator.mergeRiRows(onDemandTimeseries);
       costTimeseriesByScenario.onDemand = mergedOnDemand;
 
@@ -50,7 +54,11 @@ export class CostComparisonTableComponent implements OnChanges {
       const scenarioKeys: (keyof CostTimeseriesByScenario)[] = ['noUpfront_1y', 'partialUpfront_1y', 'fullUpfront_1y', 'partialUpfront_3y', 'fullUpfront_3y'];
       for (let i = 0; i < savingsKeys.length; i++) {
         const projected1 = RiRenewalProjection.projectRiRenewal(this.riPortfolio, savingsKeys[i]);
-        const timeseries1 = CostTimeseriesCalculator.calculateCostTimeSeries(projected1, false);
+        const projectedOnly1: RiPortfolio = {
+              ...this.riPortfolio,
+              rows: projected1.rows.filter(row => row.riRow.type === 'projected')
+            };
+        const timeseries1 = CostTimeseriesCalculator.calculateCostTimeSeries(projectedOnly1, false);
         const mergedTimeseries1 = CostComparisonCalculator.mergeRiRows(timeseries1);
         costTimeseriesByScenario[scenarioKeys[i]] = mergedTimeseries1;
       }

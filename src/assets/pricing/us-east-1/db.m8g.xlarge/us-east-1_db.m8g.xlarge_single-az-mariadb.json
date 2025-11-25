@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.28896,
     "daily": 6.93504,
+    "effectiveHourly": 0.28896,
+    "effectiveDaily": 6.93504,
     "sku": "HG8CWSESC8VWXYFF"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "All Upfront",
       "upfront": 1597.02,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.182183,
-      "daily": 4.372403
+      "effectiveDaily": 4.372403
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 821.3,
       "hourly": 0.09374,
+      "daily": 2.24976,
       "effectiveHourly": 0.187432,
-      "daily": 4.498357
+      "effectiveDaily": 4.498357
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.1935,
+      "daily": 4.644,
       "effectiveHourly": 0.1935,
-      "daily": 4.644
+      "effectiveDaily": 4.644
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 6.93504,
     "daily": 166.44096,
+    "effectiveHourly": 6.93504,
+    "effectiveDaily": 166.44096,
     "sku": "CD5R3VS4QQHTAKM5"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 41925.86,
       "hourly": 1.5953,
+      "daily": 38.2872,
       "effectiveHourly": 3.18956,
-      "daily": 76.54945
+      "effectiveDaily": 76.54945
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 82156.66,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 3.124065,
-      "daily": 74.977559
+      "effectiveDaily": 74.977559
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 4.880242,
+      "daily": 117.125808,
       "effectiveHourly": 4.880242,
-      "daily": 117.125808
+      "effectiveDaily": 117.125808
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 20356.2,
       "hourly": 2.32372,
+      "daily": 55.76928,
       "effectiveHourly": 4.645896,
-      "daily": 111.501518
+      "effectiveDaily": 111.501518
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 39885.94,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.550073,
-      "daily": 109.201753
+      "effectiveDaily": 109.201753
     }
   }
 }

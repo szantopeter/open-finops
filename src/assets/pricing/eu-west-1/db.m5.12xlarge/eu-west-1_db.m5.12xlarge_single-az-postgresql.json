@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 4.06608,
     "daily": 97.58592,
+    "effectiveHourly": 4.06608,
+    "effectiveDaily": 97.58592,
     "sku": "WUSGBTUP5PS3X3K7"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 11063.9,
       "hourly": 1.262996,
+      "daily": 30.311904,
       "effectiveHourly": 2.525134,
-      "daily": 60.603211
+      "effectiveDaily": 60.603211
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 46329.92,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.761728,
-      "daily": 42.281469
+      "effectiveDaily": 42.281469
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 21685.76,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.473849,
-      "daily": 59.372375
+      "effectiveDaily": 59.372375
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 2.652412,
+      "daily": 63.657888,
       "effectiveHourly": 2.652412,
-      "daily": 63.657888
+      "effectiveDaily": 63.657888
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 23637.96,
       "hourly": 0.899474,
+      "daily": 21.587376,
       "effectiveHourly": 1.798324,
-      "daily": 43.159779
+      "effectiveDaily": 43.159779
     }
   }
 }

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 34.41376,
     "daily": 825.93024,
+    "effectiveHourly": 34.41376,
+    "effectiveDaily": 825.93024,
     "sku": "HAU92PEN9VF9RZSJ"
   },
   "savingsOptions": {

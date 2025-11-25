@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 11.05702,
     "daily": 265.36848,
+    "effectiveHourly": 11.05702,
+    "effectiveDaily": 265.36848,
     "sku": "HEWKFYG7ESBWFG7U"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 70709.2,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 8.066301,
-      "daily": 193.591239
+      "effectiveDaily": 193.591239
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 79911.2,
       "hourly": 3.040788,
+      "daily": 72.978912,
       "effectiveHourly": 6.079468,
-      "daily": 145.907226
+      "effectiveDaily": 145.907226
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 154010.52,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 5.856358,
-      "daily": 140.552608
+      "effectiveDaily": 140.552608
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 8.514172,
+      "daily": 204.340128,
       "effectiveHourly": 8.514172,
-      "daily": 204.340128
+      "effectiveDaily": 204.340128
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 36322.96,
       "hourly": 4.14649,
+      "daily": 99.51576,
       "effectiveHourly": 8.290108,
-      "daily": 198.962605
+      "effectiveDaily": 198.962605
     }
   }
 }

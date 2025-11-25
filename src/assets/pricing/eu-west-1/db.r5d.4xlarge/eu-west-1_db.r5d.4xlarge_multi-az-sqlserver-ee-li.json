@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 13.66712,
     "daily": 328.01088,
+    "effectiveHourly": 13.66712,
+    "effectiveDaily": 328.01088,
     "sku": "3UTYSVMJ438NK5X2"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 117422.68,
       "hourly": 4.46813,
+      "daily": 107.23512,
       "effectiveHourly": 8.93321,
-      "daily": 214.397045
+      "effectiveDaily": 214.397045
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 10.555984,
+      "daily": 253.343616,
       "effectiveHourly": 10.555984,
-      "daily": 253.343616
+      "effectiveDaily": 253.343616
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 86306.16,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 9.845558,
-      "daily": 236.293388
+      "effectiveDaily": 236.293388
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 44033.72,
       "hourly": 5.0267,
+      "daily": 120.6408,
       "effectiveHourly": 10.04994,
-      "daily": 241.198555
+      "effectiveDaily": 241.198555
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 230148.9,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 8.751574,
-      "daily": 210.037782
+      "effectiveDaily": 210.037782
     }
   }
 }

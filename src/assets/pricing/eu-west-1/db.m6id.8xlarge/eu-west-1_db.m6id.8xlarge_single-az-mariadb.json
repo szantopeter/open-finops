@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 3.40818,
     "daily": 81.79632,
+    "effectiveHourly": 3.40818,
+    "effectiveDaily": 81.79632,
     "sku": "UEP57MG5NBAMFKKW"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 11210.1,
       "hourly": 1.27968,
+      "daily": 30.71232,
       "effectiveHourly": 2.558496,
-      "daily": 61.403901
+      "effectiveDaily": 61.403901
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 47529.62,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.807348,
-      "daily": 43.376336
+      "effectiveDaily": 43.376336
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 21825.08,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.489742,
-      "daily": 59.753812
+      "effectiveDaily": 59.753812
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 2.6273,
+      "daily": 63.0552,
       "effectiveHourly": 2.6273,
-      "daily": 63.0552
+      "effectiveDaily": 63.0552
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 24657.06,
       "hourly": 0.93826,
+      "daily": 22.51824,
       "effectiveHourly": 1.875862,
-      "daily": 45.02069
+      "effectiveDaily": 45.02069
     }
   }
 }

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 6.678127,
     "daily": 160.275049,
+    "effectiveHourly": 6.678127,
+    "effectiveDaily": 160.275049,
     "sku": "FTVKYKSF2NF2BRQG"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 22329.9,
       "hourly": 2.54904,
+      "daily": 61.17696,
       "effectiveHourly": 5.09637,
-      "daily": 122.312895
+      "effectiveDaily": 122.312895
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 43667.36,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.981447,
-      "daily": 119.554716
+      "effectiveDaily": 119.554716
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 116116.34,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.415406,
-      "daily": 105.969737
+      "effectiveDaily": 105.969737
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 59546.4,
       "hourly": 2.2661,
+      "daily": 54.3864,
       "effectiveHourly": 4.530394,
-      "daily": 108.729453
+      "effectiveDaily": 108.729453
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 5.32512,
+      "daily": 127.80288,
       "effectiveHourly": 5.32512,
-      "daily": 127.80288
+      "effectiveDaily": 127.80288
     }
   }
 }

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 22.34108,
     "daily": 536.18592,
+    "effectiveHourly": 22.34108,
+    "effectiveDaily": 536.18592,
     "sku": "BGB55VC3JAN2DZKZ"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 88067.44,
       "hourly": 10.053314,
+      "daily": 241.279536,
       "effectiveHourly": 20.099794,
-      "daily": 482.395046
+      "effectiveDaily": 482.395046
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 172611.46,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 19.691018,
-      "daily": 472.584421
+      "effectiveDaily": 472.584421
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 460297.8,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 17.503148,
-      "daily": 420.075565
+      "effectiveDaily": 420.075565
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 234846.22,
       "hourly": 8.93626,
+      "daily": 214.47024,
       "effectiveHourly": 17.866454,
-      "daily": 428.794876
+      "effectiveDaily": 428.794876
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 21.111968,
+      "daily": 506.687232,
       "effectiveHourly": 21.111968,
-      "daily": 506.687232
+      "effectiveDaily": 506.687232
     }
   }
 }

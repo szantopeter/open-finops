@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 9.24672,
     "daily": 221.92128,
+    "effectiveHourly": 9.24672,
+    "effectiveDaily": 221.92128,
     "sku": "BA47AZM7NFJJKSTU"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 55703.92,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 6.354543,
-      "daily": 152.509021
+      "effectiveDaily": 152.509021
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 58542.78,
       "hourly": 2.227658,
+      "daily": 53.463792,
       "effectiveHourly": 4.453789,
-      "daily": 106.890924
+      "effectiveDaily": 106.890924
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 114750.66,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.363475,
-      "daily": 104.723395
+      "effectiveDaily": 104.723395
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 6.814296,
+      "daily": 163.543104,
       "effectiveHourly": 6.814296,
-      "daily": 163.543104
+      "effectiveDaily": 163.543104
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 28421.28,
       "hourly": 3.244436,
+      "daily": 77.866464,
       "effectiveHourly": 6.486654,
-      "daily": 155.679688
+      "effectiveDaily": 155.679688
     }
   }
 }

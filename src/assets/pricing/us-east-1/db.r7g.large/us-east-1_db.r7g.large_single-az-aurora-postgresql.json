@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.30874,
     "daily": 7.40976,
+    "effectiveHourly": 0.30874,
+    "effectiveDaily": 7.40976,
     "sku": "SGKP98G2TSHCWF9A"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.158326,
+      "daily": 3.799824,
       "effectiveHourly": 0.158326,
-      "daily": 3.799824
+      "effectiveDaily": 3.799824
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 1486.08,
       "hourly": 0.056502,
+      "daily": 1.356048,
       "effectiveHourly": 0.113011,
-      "daily": 2.71227
+      "effectiveDaily": 2.71227
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 2863.8,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.108898,
-      "daily": 2.613552
+      "effectiveDaily": 2.613552
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 1314.94,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.150005,
-      "daily": 3.60011
+      "effectiveDaily": 3.60011
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 675.1,
       "hourly": 0.077056,
+      "daily": 1.849344,
       "effectiveHourly": 0.15407,
-      "daily": 3.697667
+      "effectiveDaily": 3.697667
     }
   }
 }

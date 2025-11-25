@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 16.512,
     "daily": 396.288,
+    "effectiveHourly": 16.512,
+    "effectiveDaily": 396.288,
     "sku": "EEMETD549FEP4AJK"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 11.88864,
+      "daily": 285.32736,
       "effectiveHourly": 11.88864,
-      "daily": 285.32736
+      "effectiveDaily": 285.32736
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 108483.84,
       "hourly": 4.128,
+      "daily": 99.072,
       "effectiveHourly": 8.253175,
-      "daily": 198.076189
+      "effectiveDaily": 198.076189
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 98358.68,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 11.220475,
-      "daily": 269.291394
+      "effectiveDaily": 269.291394
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 50625.79,
       "hourly": 5.7792,
+      "daily": 138.7008,
       "effectiveHourly": 11.554444,
-      "daily": 277.306665
+      "effectiveDaily": 277.306665
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 208288.97,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 7.920335,
-      "daily": 190.088043
+      "effectiveDaily": 190.088043
     }
   }
 }

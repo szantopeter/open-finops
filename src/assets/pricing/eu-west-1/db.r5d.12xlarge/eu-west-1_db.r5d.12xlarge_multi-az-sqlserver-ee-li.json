@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 41.0005,
     "daily": 984.012,
+    "effectiveHourly": 41.0005,
+    "effectiveDaily": 984.012,
     "sku": "S5VNGD2T2CEPF9M9"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 31.667952,
+      "daily": 760.030848,
       "effectiveHourly": 31.667952,
-      "daily": 760.030848
+      "effectiveDaily": 760.030848
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 132101.16,
       "hourly": 15.080014,
+      "daily": 361.920336,
       "effectiveHourly": 30.149734,
-      "daily": 723.593601
+      "effectiveDaily": 723.593601
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 258917.62,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 29.536575,
-      "daily": 708.87781
+      "effectiveDaily": 708.87781
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 690446.7,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 26.254722,
-      "daily": 630.113347
+      "effectiveDaily": 630.113347
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 352268.9,
       "hourly": 13.404476,
+      "daily": 321.707424,
       "effectiveHourly": 26.799749,
-      "daily": 643.193985
+      "effectiveDaily": 643.193985
     }
   }
 }

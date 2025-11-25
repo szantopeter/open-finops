@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 11.06304,
     "daily": 265.51296,
+    "effectiveHourly": 11.06304,
+    "effectiveDaily": 265.51296,
     "sku": "RYQMT4DFDZ9Q5WYG"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 19583.06,
       "hourly": 2.235484,
+      "daily": 53.651616,
       "effectiveHourly": 4.469463,
-      "daily": 107.267112
+      "effectiveDaily": 107.267112
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 38382.66,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.378583,
-      "daily": 105.085995
+      "effectiveDaily": 105.085995
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 4.694482,
+      "daily": 112.667568,
       "effectiveHourly": 4.694482,
-      "daily": 112.667568
+      "effectiveDaily": 112.667568
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 80513.2,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 3.061572,
-      "daily": 73.477709
+      "effectiveDaily": 73.477709
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 41077.9,
       "hourly": 1.563136,
+      "daily": 37.515264,
       "effectiveHourly": 3.125152,
-      "daily": 75.003651
+      "effectiveDaily": 75.003651
     }
   }
 }

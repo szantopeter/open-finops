@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.67768,
     "daily": 16.26432,
+    "effectiveHourly": 0.67768,
+    "effectiveDaily": 16.26432,
     "sku": "BWSD2JKRXNHTWXAX"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.45408,
+      "daily": 10.89792,
       "effectiveHourly": 0.45408,
-      "daily": 10.89792
+      "effectiveDaily": 10.89792
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 1928.98,
       "hourly": 0.22016,
+      "daily": 5.28384,
       "effectiveHourly": 0.440212,
-      "daily": 10.565099
+      "effectiveDaily": 10.565099
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 3736.7,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.426272,
-      "daily": 10.230527
+      "effectiveDaily": 10.230527
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

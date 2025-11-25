@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 1.64088,
     "daily": 39.38112,
+    "effectiveHourly": 1.64088,
+    "effectiveDaily": 39.38112,
     "sku": "MRT9TAMHZ4SH32F4"
   },
   "savingsOptions": {

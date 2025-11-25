@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.30616,
     "daily": 7.34784,
+    "effectiveHourly": 0.30616,
+    "effectiveDaily": 7.34784,
     "sku": "AFN964YW7U6U2DTQ"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 1486.08,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.169527,
-      "daily": 4.068665
+      "effectiveDaily": 4.068665
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 1546.28,
       "hourly": 0.058824,
+      "daily": 1.411776,
       "effectiveHourly": 0.117622,
-      "daily": 2.822937
+      "effectiveDaily": 2.822937
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 3029.78,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.11521,
-      "daily": 2.765028
+      "effectiveDaily": 2.765028
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.181718,
+      "daily": 4.361232,
       "effectiveHourly": 0.181718,
-      "daily": 4.361232
+      "effectiveDaily": 4.361232
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 758.52,
       "hourly": 0.086516,
+      "daily": 2.076384,
       "effectiveHourly": 0.173046,
-      "daily": 4.153098
+      "effectiveDaily": 4.153098
     }
   }
 }

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 6.54288,
     "daily": 157.02912,
+    "effectiveHourly": 6.54288,
+    "effectiveDaily": 157.02912,
     "sku": "RT88JSNUU5ZB7QVD"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 106406.94,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.046199,
-      "daily": 97.108775
+      "effectiveDaily": 97.108775
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 55211.14,
       "hourly": 2.100894,
+      "daily": 50.421456,
       "effectiveHourly": 4.200336,
-      "daily": 100.808077
+      "effectiveDaily": 100.808077
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 25095.66,
       "hourly": 2.864832,
+      "daily": 68.755968,
       "effectiveHourly": 5.727672,
-      "daily": 137.464141
+      "effectiveDaily": 137.464141
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 48853.16,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 5.573028,
-      "daily": 133.752663
+      "effectiveDaily": 133.752663
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 5.882486,
+      "daily": 141.179664,
       "effectiveHourly": 5.882486,
-      "daily": 141.179664
+      "effectiveDaily": 141.179664
     }
   }
 }

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 3.63178,
     "daily": 87.16272,
+    "effectiveHourly": 3.63178,
+    "effectiveDaily": 87.16272,
     "sku": "E5AGYPB8FY22ZRU2"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 2.440078,
+      "daily": 58.561872,
       "effectiveHourly": 2.440078,
-      "daily": 58.561872
+      "effectiveDaily": 58.561872
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 10178.1,
       "hourly": 1.16186,
+      "daily": 27.88464,
       "effectiveHourly": 2.322949,
-      "daily": 55.750759
+      "effectiveDaily": 55.750759
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 20962.5,
       "hourly": 0.79765,
+      "daily": 19.1436,
       "effectiveHourly": 1.594764,
-      "daily": 38.274333
+      "effectiveDaily": 38.274333
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 41077.9,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.562016,
-      "daily": 37.488387
+      "effectiveDaily": 37.488387
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 19942.54,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.274987,
-      "daily": 54.599699
+      "effectiveDaily": 54.599699
     }
   }
 }

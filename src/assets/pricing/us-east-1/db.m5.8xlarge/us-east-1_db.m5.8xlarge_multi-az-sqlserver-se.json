@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 8.256,
     "daily": 198.144,
+    "effectiveHourly": 8.256,
+    "effectiveDaily": 198.144,
     "sku": "WFHFNFS84F3K33HJ"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 3.01344,
+      "daily": 72.32256,
       "effectiveHourly": 3.01344,
-      "daily": 72.32256
+      "effectiveDaily": 72.32256
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 25365.7,
       "hourly": 0.965178,
+      "daily": 23.164272,
       "effectiveHourly": 1.929726,
-      "daily": 46.313439
+      "effectiveDaily": 46.313439
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 24630.4,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.809765,
-      "daily": 67.43436
+      "effectiveDaily": 67.43436
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 12580.08,
       "hourly": 1.436114,
+      "daily": 34.466736,
       "effectiveHourly": 2.871213,
-      "daily": 68.909118
+      "effectiveDaily": 68.909118
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 49701.12,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.889921,
-      "daily": 45.358084
+      "effectiveDaily": 45.358084
     }
   }
 }

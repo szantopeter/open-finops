@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 32.03328,
     "daily": 768.79872,
+    "effectiveHourly": 32.03328,
+    "effectiveDaily": 768.79872,
     "sku": "NYFMT497E7MEMQCB"
   },
   "savingsOptions": {

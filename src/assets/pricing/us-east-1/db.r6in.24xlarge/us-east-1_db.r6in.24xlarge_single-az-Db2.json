@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 14.27858,
     "daily": 342.68592,
+    "effectiveHourly": 14.27858,
+    "effectiveDaily": 342.68592,
     "sku": "TVSK3TMC6MMM32QY"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 10.99467,
+      "daily": 263.87208,
       "effectiveHourly": 10.99467,
-      "daily": 263.87208
+      "effectiveDaily": 263.87208
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 103192.26,
       "hourly": 3.926674,
+      "daily": 94.240176,
       "effectiveHourly": 7.850632,
-      "daily": 188.415179
+      "effectiveDaily": 188.415179
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 198880.16,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 7.562559,
-      "daily": 181.501401
+      "effectiveDaily": 181.501401
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 91309.64,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 10.416341,
-      "daily": 249.992169
+      "effectiveDaily": 249.992169
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 46906.12,
       "hourly": 5.354532,
+      "daily": 128.508768,
       "effectiveHourly": 10.705447,
-      "daily": 256.930726
+      "effectiveDaily": 256.930726
     }
   }
 }

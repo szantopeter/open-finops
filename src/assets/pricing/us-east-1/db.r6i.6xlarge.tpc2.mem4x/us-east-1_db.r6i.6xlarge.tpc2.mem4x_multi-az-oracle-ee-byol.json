@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 19.23648,
     "daily": 461.67552,
+    "effectiveHourly": 19.23648,
+    "effectiveDaily": 461.67552,
     "sku": "76R5K79USPD6PMPE"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 242656.74,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 9.227194,
-      "daily": 221.452649
+      "effectiveDaily": 221.452649
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 126383.88,
       "hourly": 4.80912,
+      "daily": 115.41888,
       "effectiveHourly": 9.614957,
-      "daily": 230.758949
+      "effectiveDaily": 230.758949
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 114588.12,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 13.071882,
-      "daily": 313.725175
+      "effectiveDaily": 313.725175
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 58978.8,
       "hourly": 6.732768,
+      "daily": 161.586432,
       "effectiveHourly": 13.4609,
-      "daily": 323.061586
+      "effectiveDaily": 323.061586
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 13.8503,
+      "daily": 332.4072,
       "effectiveHourly": 13.8503,
-      "daily": 332.4072
+      "effectiveDaily": 332.4072
     }
   }
 }

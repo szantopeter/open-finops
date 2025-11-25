@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 20.2745,
     "daily": 486.588,
+    "effectiveHourly": 20.2745,
+    "effectiveDaily": 486.588,
     "sku": "UV975U4KWN4QR89P"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 10.407118,
+      "daily": 249.770832,
       "effectiveHourly": 10.407118,
-      "daily": 249.770832
+      "effectiveDaily": 249.770832
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 97678.4,
       "hourly": 3.716834,
+      "daily": 89.204016,
       "effectiveHourly": 7.431124,
-      "daily": 178.346974
+      "effectiveDaily": 178.346974
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 86430.58,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 9.859752,
-      "daily": 236.634045
+      "effectiveDaily": 236.634045
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 44399.27,
       "hourly": 5.06841,
+      "daily": 121.64184,
       "effectiveHourly": 10.133351,
-      "daily": 243.200421
+      "effectiveDaily": 243.200421
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 188252.91,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 7.15845,
-      "daily": 171.802791
+      "effectiveDaily": 171.802791
     }
   }
 }

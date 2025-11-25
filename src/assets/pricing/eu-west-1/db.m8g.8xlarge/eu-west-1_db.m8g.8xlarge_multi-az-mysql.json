@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 5.11872,
     "daily": 122.84928,
+    "effectiveHourly": 5.11872,
+    "effectiveDaily": 122.84928,
     "sku": "574UBJ9DHFWCSD25"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 14573.56,
       "hourly": 1.66367,
+      "daily": 39.92808,
       "effectiveHourly": 3.32618,
-      "daily": 79.828312
+      "effectiveDaily": 79.828312
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 28251,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 3.222792,
-      "daily": 77.347022
+      "effectiveDaily": 77.347022
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 3.42968,
+      "daily": 82.31232,
       "effectiveHourly": 3.42968,
-      "daily": 82.31232
+      "effectiveDaily": 82.31232
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

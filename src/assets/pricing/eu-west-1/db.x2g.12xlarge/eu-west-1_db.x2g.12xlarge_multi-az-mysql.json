@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 16.14048,
     "daily": 387.37152,
+    "effectiveHourly": 16.14048,
+    "effectiveDaily": 387.37152,
     "sku": "SEACXNPD8GVPK75W"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 44515.32,
       "hourly": 5.081654,
+      "daily": 121.959696,
       "effectiveHourly": 10.159834,
-      "daily": 243.836
+      "effectiveDaily": 243.836
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 87617.66,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 9.99517,
-      "daily": 239.884079
+      "effectiveDaily": 239.884079
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 178061.28,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 6.770906,
-      "daily": 162.501739
+      "effectiveDaily": 162.501739
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 10.64723,
+      "daily": 255.53352,
       "effectiveHourly": 10.64723,
-      "daily": 255.53352
+      "effectiveDaily": 255.53352
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 91150.54,
       "hourly": 3.468466,
+      "daily": 83.243184,
       "effectiveHourly": 6.934529,
-      "daily": 166.42871
+      "effectiveDaily": 166.42871
     }
   }
 }

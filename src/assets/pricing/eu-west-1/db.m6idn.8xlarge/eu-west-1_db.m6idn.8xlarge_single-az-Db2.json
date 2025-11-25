@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 4.49952,
     "daily": 107.98848,
+    "effectiveHourly": 4.49952,
+    "effectiveDaily": 107.98848,
     "sku": "PMSAQM9EKPDMW8A9"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 32518.03,
       "hourly": 1.237368,
+      "daily": 29.696832,
       "effectiveHourly": 2.473889,
-      "daily": 59.373334
+      "effectiveDaily": 59.373334
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 28773.53,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 3.282401,
-      "daily": 78.777625
+      "effectiveDaily": 78.777625
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 62671.12,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.383113,
-      "daily": 57.194721
+      "effectiveDaily": 57.194721
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 3.464596,
+      "daily": 83.150304,
       "effectiveHourly": 3.464596,
-      "daily": 83.150304
+      "effectiveDaily": 83.150304
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 14780.92,
       "hourly": 1.68732,
+      "daily": 40.49568,
       "effectiveHourly": 3.373485,
-      "daily": 80.963642
+      "effectiveDaily": 80.963642
     }
   }
 }

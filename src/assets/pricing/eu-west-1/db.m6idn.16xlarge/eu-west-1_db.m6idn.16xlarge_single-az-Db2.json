@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 9.01108,
     "daily": 216.26592,
+    "effectiveHourly": 9.01108,
+    "effectiveDaily": 216.26592,
     "sku": "Y37XAHFRRERZ3ESA"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 57624.05,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 6.573585,
-      "daily": 157.766052
+      "effectiveDaily": 157.766052
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 125509.93,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.772604,
-      "daily": 114.542488
+      "effectiveDaily": 114.542488
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 29601.78,
       "hourly": 3.379112,
+      "daily": 81.098688,
       "effectiveHourly": 6.755997,
-      "daily": 162.143934
+      "effectiveDaily": 162.143934
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 6.93848,
+      "daily": 166.52352,
       "effectiveHourly": 6.93848,
-      "daily": 166.52352
+      "effectiveDaily": 166.52352
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 65124.21,
       "hourly": 2.478004,
+      "daily": 59.472096,
       "effectiveHourly": 4.954398,
-      "daily": 118.905548
+      "effectiveDaily": 118.905548
     }
   }
 }

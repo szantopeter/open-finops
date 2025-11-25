@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 3.649152,
     "daily": 87.579648,
+    "effectiveHourly": 3.649152,
+    "effectiveDaily": 87.579648,
     "sku": "RP28H2DMRW26PZ38"
   },
   "savingsOptions": {

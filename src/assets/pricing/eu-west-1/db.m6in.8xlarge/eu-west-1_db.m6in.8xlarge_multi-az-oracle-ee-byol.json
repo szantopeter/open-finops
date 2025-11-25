@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 7.87072,
     "daily": 188.89728,
+    "effectiveHourly": 7.87072,
+    "effectiveDaily": 188.89728,
     "sku": "KKAV8MQAM75SU3QP"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 6.06042,
+      "daily": 145.45008,
       "effectiveHourly": 6.06042,
-      "daily": 145.45008
+      "effectiveDaily": 145.45008
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 25855.32,
       "hourly": 2.95152,
+      "daily": 70.83648,
       "effectiveHourly": 5.90102,
-      "daily": 141.624475
+      "effectiveDaily": 141.624475
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 109626.54,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.168626,
-      "daily": 100.047035
+      "effectiveDaily": 100.047035
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 50331.68,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 5.741693,
-      "daily": 137.800631
+      "effectiveDaily": 137.800631
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 56881.69,
       "hourly": 2.164448,
+      "daily": 51.946752,
       "effectiveHourly": 4.327414,
-      "daily": 103.857946
+      "effectiveDaily": 103.857946
     }
   }
 }

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 52.86334,
     "daily": 1268.72016,
+    "effectiveHourly": 52.86334,
+    "effectiveDaily": 1268.72016,
     "sku": "FGRDSV2KQ23QMUKP"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 1089172.8,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 41.416564,
-      "daily": 993.997536
+      "effectiveDaily": 993.997536
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 555700.18,
       "hourly": 21.145336,
+      "daily": 507.488064,
       "effectiveHourly": 42.276227,
-      "daily": 1014.629456
+      "effectiveDaily": 1014.629456
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 208387.46,
       "hourly": 23.788546,
+      "daily": 570.925104,
       "effectiveHourly": 47.560786,
-      "daily": 1141.458875
+      "effectiveDaily": 1141.458875
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 408439.8,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 46.593635,
-      "daily": 1118.247228
+      "effectiveDaily": 1118.247228
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 49.955938,
+      "daily": 1198.942512,
       "effectiveHourly": 49.955938,
-      "daily": 1198.942512
+      "effectiveDaily": 1198.942512
     }
   }
 }

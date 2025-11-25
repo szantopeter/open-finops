@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 7.356096,
     "daily": 176.546304,
+    "effectiveHourly": 7.356096,
+    "effectiveDaily": 176.546304,
     "sku": "RD64JVZNFNWMS5MM"
   },
   "savingsOptions": {

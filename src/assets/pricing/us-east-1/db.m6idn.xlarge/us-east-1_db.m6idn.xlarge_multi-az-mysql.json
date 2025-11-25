@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 1.0148,
     "daily": 24.3552,
+    "effectiveHourly": 1.0148,
+    "effectiveDaily": 24.3552,
     "sku": "XEG5M5QQ9M3WPGHM"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 6489.44,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.740297,
-      "daily": 17.767118
+      "effectiveDaily": 17.767118
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 3333.62,
       "hourly": 0.38055,
+      "daily": 9.1332,
       "effectiveHourly": 0.760839,
-      "daily": 18.260149
+      "effectiveDaily": 18.260149
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.781396,
+      "daily": 18.753504,
       "effectiveHourly": 0.781396,
-      "daily": 18.753504
+      "effectiveDaily": 18.753504
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 7333.96,
       "hourly": 0.27907,
+      "daily": 6.69768,
       "effectiveHourly": 0.557949,
-      "daily": 13.390775
+      "effectiveDaily": 13.390775
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 14134.54,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.537476,
-      "daily": 12.89942
+      "effectiveDaily": 12.89942
     }
   }
 }

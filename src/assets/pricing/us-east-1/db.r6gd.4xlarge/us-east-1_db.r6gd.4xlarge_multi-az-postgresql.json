@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 4.96994,
     "daily": 119.27856,
+    "effectiveHourly": 4.96994,
+    "effectiveDaily": 119.27856,
     "sku": "JBH54DMGFXQ5S87J"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 22626.6,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.581177,
-      "daily": 61.948254
+      "effectiveDaily": 61.948254
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 11622.9,
       "hourly": 1.326894,
+      "daily": 31.845456,
       "effectiveHourly": 2.652801,
-      "daily": 63.667222
+      "effectiveDaily": 63.667222
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 49282.3,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.873994,
-      "daily": 44.975861
+      "effectiveDaily": 44.975861
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 25571.24,
       "hourly": 0.973004,
+      "daily": 23.352096,
       "effectiveHourly": 1.945368,
-      "daily": 46.688843
+      "effectiveDaily": 46.688843
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 2.72448,
+      "daily": 65.38752,
       "effectiveHourly": 2.72448,
-      "daily": 65.38752
+      "effectiveDaily": 65.38752
     }
   }
 }

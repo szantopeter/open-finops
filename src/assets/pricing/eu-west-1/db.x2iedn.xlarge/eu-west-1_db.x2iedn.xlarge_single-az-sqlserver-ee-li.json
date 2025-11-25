@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 3.099268,
     "daily": 74.382432,
+    "effectiveHourly": 3.099268,
+    "effectiveDaily": 74.382432,
     "sku": "73UGGYN23HMB78NR"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 14189.91,
       "hourly": 0.539908,
+      "daily": 12.957792,
       "effectiveHourly": 1.079489,
-      "daily": 25.907748
+      "effectiveDaily": 25.907748
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 27346.74,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.039879,
-      "daily": 24.957102
+      "effectiveDaily": 24.957102
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 12555.42,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.432286,
-      "daily": 34.374877
+      "effectiveDaily": 34.374877
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 1.511794,
+      "daily": 36.283056,
       "effectiveHourly": 1.511794,
-      "daily": 36.283056
+      "effectiveDaily": 36.283056
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 6449.89,
       "hourly": 0.736246,
+      "daily": 17.669904,
       "effectiveHourly": 1.472031,
-      "daily": 35.328736
+      "effectiveDaily": 35.328736
     }
   }
 }

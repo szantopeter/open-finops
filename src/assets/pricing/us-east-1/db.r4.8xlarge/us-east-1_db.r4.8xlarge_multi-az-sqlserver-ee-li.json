@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 34.41376,
     "daily": 825.93024,
+    "effectiveHourly": 34.41376,
+    "effectiveDaily": 825.93024,
     "sku": "AUD2N2F9Z5KKWK87"
   },
   "savingsOptions": {

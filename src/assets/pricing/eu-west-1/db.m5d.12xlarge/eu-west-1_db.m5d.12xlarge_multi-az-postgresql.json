@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 13.37472,
     "daily": 320.99328,
+    "effectiveHourly": 13.37472,
+    "effectiveDaily": 320.99328,
     "sku": "8EB8X9DNCMTV666M"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 7.37364,
+      "daily": 176.96736,
       "effectiveHourly": 7.37364,
-      "daily": 176.96736
+      "effectiveDaily": 176.96736
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 61238.02,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 6.985857,
-      "daily": 167.660561
+      "effectiveDaily": 167.660561
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 31457.94,
       "hourly": 3.591102,
+      "daily": 86.186448,
       "effectiveHourly": 7.179733,
-      "daily": 172.313594
+      "effectiveDaily": 172.313594
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 133380.84,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 5.071901,
-      "daily": 121.725613
+      "effectiveDaily": 121.725613
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 69206.78,
       "hourly": 2.633492,
+      "daily": 63.203808,
       "effectiveHourly": 5.265129,
-      "daily": 126.363087
+      "effectiveDaily": 126.363087
     }
   }
 }

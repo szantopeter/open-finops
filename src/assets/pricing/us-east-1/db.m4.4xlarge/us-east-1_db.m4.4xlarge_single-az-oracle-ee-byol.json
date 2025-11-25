@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 1.20486,
     "daily": 28.91664,
+    "effectiveHourly": 1.20486,
+    "effectiveDaily": 28.91664,
     "sku": "JEG42XSPRDMSQ5TR"
   },
   "savingsOptions": {

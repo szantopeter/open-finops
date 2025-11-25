@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.9632,
     "daily": 23.1168,
+    "effectiveHourly": 0.9632,
+    "effectiveDaily": 23.1168,
     "sku": "H4PECP4W45MHJXTZ"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.645,
+      "daily": 15.48,
       "effectiveHourly": 0.645,
-      "daily": 15.48
+      "effectiveDaily": 15.48
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 5319.1,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.606788,
-      "daily": 14.562902
+      "effectiveDaily": 14.562902
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 2742.54,
       "hourly": 0.31304,
+      "daily": 7.51296,
       "effectiveHourly": 0.625901,
-      "daily": 15.021625
+      "effectiveDaily": 15.021625
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 1.204,
     "daily": 28.896,
+    "effectiveHourly": 1.204,
+    "effectiveDaily": 28.896,
     "sku": "JAETYYWS568RMWU5"
   },
   "savingsOptions": {

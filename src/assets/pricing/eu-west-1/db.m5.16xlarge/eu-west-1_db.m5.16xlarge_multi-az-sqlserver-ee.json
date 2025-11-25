@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 61.98192,
     "daily": 1487.56608,
+    "effectiveHourly": 61.98192,
+    "effectiveDaily": 1487.56608,
     "sku": "U8CYDS6UCFAF927N"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 220538.4,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 25.158385,
-      "daily": 603.801232
+      "effectiveDaily": 603.801232
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 26.973814,
+      "daily": 647.371536,
       "effectiveHourly": 26.973814,
-      "daily": 647.371536
+      "effectiveDaily": 647.371536
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 112518.96,
       "hourly": 12.844702,
+      "daily": 308.272848,
       "effectiveHourly": 25.680541,
-      "daily": 616.332972
+      "effectiveDaily": 616.332972
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 123234.56,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.686081,
-      "daily": 112.465945
+      "effectiveDaily": 112.465945
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 62888.36,
       "hourly": 2.393036,
+      "daily": 57.432864,
       "effectiveHourly": 4.78441,
-      "daily": 114.825846
+      "effectiveDaily": 114.825846
     }
   }
 }

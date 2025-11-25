@@ -1,0 +1,21 @@
+{
+  "region": "us-east-1",
+  "instance": "db.m8gd.8xlarge",
+  "deployment": "multi-az",
+  "engine": "mysql",
+  "license": null,
+  "onDemand": {
+    "hourly": 5.437952,
+    "daily": 130.510848,
+    "effectiveHourly": 5.437952,
+    "effectiveDaily": 130.510848,
+    "sku": "U3S9XDYJ8QARM59T"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

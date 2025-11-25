@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 4.62336,
     "daily": 110.96064,
+    "effectiveHourly": 4.62336,
+    "effectiveDaily": 110.96064,
     "sku": "BDBTKTSFBPZ6VM98"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 33441.96,
       "hourly": 1.272542,
+      "daily": 30.541008,
       "effectiveHourly": 2.544196,
-      "daily": 61.060707
+      "effectiveDaily": 61.060707
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 64452.7,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.450859,
-      "daily": 58.820625
+      "effectiveDaily": 58.820625
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 15201.36,
       "hourly": 1.735308,
+      "daily": 41.647392,
       "effectiveHourly": 3.469435,
-      "daily": 83.266448
+      "effectiveDaily": 83.266448
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 3.563066,
+      "daily": 85.513584,
       "effectiveHourly": 3.563066,
-      "daily": 85.513584
+      "effectiveDaily": 85.513584
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 29591.74,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 3.37574,
-      "daily": 81.017769
+      "effectiveDaily": 81.017769
     }
   }
 }

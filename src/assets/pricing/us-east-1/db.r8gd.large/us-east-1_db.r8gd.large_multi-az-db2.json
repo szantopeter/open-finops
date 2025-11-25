@@ -1,0 +1,21 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r8gd.large",
+  "deployment": "multi-az",
+  "engine": "db2",
+  "license": null,
+  "onDemand": {
+    "hourly": 0.23478,
+    "daily": 5.63472,
+    "effectiveHourly": 0.23478,
+    "effectiveDaily": 5.63472,
+    "sku": "37UX9WP5D29GKWSR"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

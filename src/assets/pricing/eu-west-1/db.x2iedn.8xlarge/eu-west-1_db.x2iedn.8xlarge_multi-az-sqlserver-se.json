@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 39.9814,
     "daily": 959.5536,
+    "effectiveHourly": 39.9814,
+    "effectiveDaily": 959.5536,
     "sku": "QBDRU5DNHHDF3GUJ"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 510875.26,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 19.426392,
-      "daily": 466.233411
+      "effectiveDaily": 466.233411
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 234552.96,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 26.757125,
-      "daily": 642.171006
+      "effectiveDaily": 642.171006
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 265076.94,
       "hourly": 10.086596,
+      "daily": 242.078304,
       "effectiveHourly": 20.166333,
-      "daily": 483.992007
+      "effectiveDaily": 483.992007
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 28.242572,
+      "daily": 677.821728,
       "effectiveHourly": 28.242572,
-      "daily": 677.821728
+      "effectiveDaily": 677.821728
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 120489.44,
       "hourly": 13.754496,
+      "daily": 330.107904,
       "effectiveHourly": 27.499584,
-      "daily": 659.990012
+      "effectiveDaily": 659.990012
     }
   }
 }

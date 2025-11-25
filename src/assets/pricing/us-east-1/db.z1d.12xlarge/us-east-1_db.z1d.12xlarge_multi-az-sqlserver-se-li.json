@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 35.28236,
     "daily": 846.77664,
+    "effectiveHourly": 35.28236,
+    "effectiveDaily": 846.77664,
     "sku": "EZY8S9SXDH77VB97"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 33.341512,
+      "daily": 800.196288,
       "effectiveHourly": 33.341512,
-      "daily": 800.196288
+      "effectiveDaily": 800.196288
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 370884.46,
       "hourly": 14.112772,
+      "daily": 338.706528,
       "effectiveHourly": 28.215915,
-      "daily": 677.181965
+      "effectiveDaily": 677.181965
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 139081.78,
       "hourly": 15.87689,
+      "daily": 381.04536,
       "effectiveHourly": 31.742938,
-      "daily": 761.830521
+      "effectiveDaily": 761.830521
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 272600.22,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 31.097447,
-      "daily": 746.338727
+      "effectiveDaily": 746.338727
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 726933.92,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 27.642175,
-      "daily": 663.412202
+      "effectiveDaily": 663.412202
     }
   }
 }

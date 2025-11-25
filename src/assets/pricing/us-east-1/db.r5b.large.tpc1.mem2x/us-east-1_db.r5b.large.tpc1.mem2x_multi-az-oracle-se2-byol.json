@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.94858,
     "daily": 22.76592,
+    "effectiveHourly": 0.94858,
+    "effectiveDaily": 22.76592,
     "sku": "CMV5TPXB24E7ERPU"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.682324,
+      "daily": 16.375776,
       "effectiveHourly": 0.682324,
-      "daily": 16.375776
+      "effectiveDaily": 16.375776
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 2905.94,
       "hourly": 0.331702,
+      "daily": 7.960848,
       "effectiveHourly": 0.663204,
-      "daily": 15.916878
+      "effectiveDaily": 15.916878
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 5645.04,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.64397,
-      "daily": 15.455278
+      "effectiveDaily": 15.455278
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 11954.86,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.454592,
-      "daily": 10.910208
+      "effectiveDaily": 10.910208
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 6226.4,
       "hourly": 0.23693,
+      "daily": 5.68632,
       "effectiveHourly": 0.473693,
-      "daily": 11.368638
+      "effectiveDaily": 11.368638
     }
   }
 }

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.215,
     "daily": 5.16,
+    "effectiveHourly": 0.215,
+    "effectiveDaily": 5.16,
     "sku": "AFTSSCMA9G265YB9"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "All Upfront",
       "upfront": 1190.24,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.135779,
-      "daily": 3.258699
+      "effectiveDaily": 3.258699
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 610.6,
       "hourly": 0.06966,
+      "daily": 1.67184,
       "effectiveHourly": 0.139316,
-      "daily": 3.343572
+      "effectiveDaily": 3.343572
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.14362,
+      "daily": 3.44688,
       "effectiveHourly": 0.14362,
-      "daily": 3.44688
+      "effectiveDaily": 3.44688
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

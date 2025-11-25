@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 23.45908,
     "daily": 563.01792,
+    "effectiveHourly": 23.45908,
+    "effectiveDaily": 563.01792,
     "sku": "78NYKMBTMT53NFUE"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 97614.3,
       "hourly": 11.143192,
+      "daily": 267.436608,
       "effectiveHourly": 22.27875,
-      "daily": 534.689996
+      "effectiveDaily": 534.689996
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 22.7556,
+      "daily": 546.1344,
       "effectiveHourly": 22.7556,
-      "daily": 546.1344
+      "effectiveDaily": 546.1344
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 191325.06,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 21.825811,
-      "daily": 523.819466
+      "effectiveDaily": 523.819466
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 31439.02,
       "hourly": 1.19626,
+      "daily": 28.71024,
       "effectiveHourly": 2.391751,
-      "daily": 57.402022
+      "effectiveDaily": 57.402022
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 61619.86,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.343139,
-      "daily": 56.235328
+      "effectiveDaily": 56.235328
     }
   }
 }

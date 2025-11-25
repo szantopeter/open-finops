@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 1.64518,
     "daily": 39.48432,
+    "effectiveHourly": 1.64518,
+    "effectiveDaily": 39.48432,
     "sku": "JR7NUET5FW2JMGUS"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 10517.8,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.19984,
-      "daily": 28.796167
+      "effectiveDaily": 28.796167
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 5403.38,
       "hourly": 0.616792,
+      "daily": 14.803008,
       "effectiveHourly": 1.233194,
-      "daily": 29.596656
+      "effectiveDaily": 29.596656
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 1.266436,
+      "daily": 30.394464,
       "effectiveHourly": 1.266436,
-      "daily": 30.394464
+      "effectiveDaily": 30.394464
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 22908.68,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.871119,
-      "daily": 20.906849
+      "effectiveDaily": 20.906849
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 11886.92,
       "hourly": 0.452274,
+      "daily": 10.854576,
       "effectiveHourly": 0.904282,
-      "daily": 21.70278
+      "effectiveDaily": 21.70278
     }
   }
 }

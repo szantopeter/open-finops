@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 74.386302,
     "daily": 1785.271248,
+    "effectiveHourly": 74.386302,
+    "effectiveDaily": 1785.271248,
     "sku": "PVXFPJNEVC4YEG4H"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 397614.98,
       "hourly": 15.12998,
+      "daily": 363.11952,
       "effectiveHourly": 30.24957,
-      "daily": 725.989682
+      "effectiveDaily": 725.989682
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 351828.58,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 40.135589,
-      "daily": 963.254155
+      "effectiveDaily": 963.254155
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 766312.46,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 29.139572,
-      "daily": 699.349724
+      "effectiveDaily": 699.349724
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 180734.16,
       "hourly": 20.631744,
+      "daily": 495.161856,
       "effectiveHourly": 41.249375,
-      "daily": 989.985018
+      "effectiveDaily": 989.985018
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 42.363858,
+      "daily": 1016.732592,
       "effectiveHourly": 42.363858,
-      "daily": 1016.732592
+      "effectiveDaily": 1016.732592
     }
   }
 }

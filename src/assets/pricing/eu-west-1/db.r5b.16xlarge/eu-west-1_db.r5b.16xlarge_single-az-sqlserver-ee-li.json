@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 36.097984,
     "daily": 866.351616,
+    "effectiveHourly": 36.097984,
+    "effectiveDaily": 866.351616,
     "sku": "8TA729WEUWMDAKRB"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 150203.3,
       "hourly": 17.14668,
+      "daily": 411.52032,
       "effectiveHourly": 34.28144,
-      "daily": 822.754543
+      "effectiveDaily": 822.754543
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 36.09764,
+      "daily": 866.34336,
       "effectiveHourly": 36.09764,
-      "daily": 866.34336
+      "effectiveDaily": 866.34336
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 834816.62,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 31.744491,
-      "daily": 761.86778
+      "effectiveDaily": 761.86778
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 294083.02,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 33.548142,
-      "daily": 805.155428
+      "effectiveDaily": 805.155428
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 426894.54,
       "hourly": 16.24368,
+      "daily": 389.84832,
       "effectiveHourly": 32.476646,
-      "daily": 779.439504
+      "effectiveDaily": 779.439504
     }
   }
 }

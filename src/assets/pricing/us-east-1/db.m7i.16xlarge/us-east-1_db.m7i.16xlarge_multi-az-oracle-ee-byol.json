@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 9.79712,
     "daily": 235.13088,
+    "effectiveHourly": 9.79712,
+    "effectiveDaily": 235.13088,
     "sku": "PW5MC573C9K78JEC"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 27893.24,
       "hourly": 3.18415,
+      "daily": 76.4196,
       "effectiveHourly": 6.36613,
-      "daily": 152.787129
+      "effectiveDaily": 152.787129
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 6.56438,
+      "daily": 157.54512,
       "effectiveHourly": 6.56438,
-      "daily": 157.54512
+      "effectiveDaily": 157.54512
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 54069.06,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 6.168042,
-      "daily": 148.033019
+      "effectiveDaily": 148.033019
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

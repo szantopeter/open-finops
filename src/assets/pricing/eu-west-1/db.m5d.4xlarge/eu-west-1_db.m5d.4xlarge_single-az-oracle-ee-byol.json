@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 1.5308,
     "daily": 36.7392,
+    "effectiveHourly": 1.5308,
+    "effectiveDaily": 36.7392,
     "sku": "WGMX2SSJMEA4NGFM"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 12081.28,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.378197,
-      "daily": 33.076742
+      "effectiveDaily": 33.076742
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 1.477652,
+      "daily": 35.463648,
       "effectiveHourly": 1.477652,
-      "daily": 35.463648
+      "effectiveDaily": 35.463648
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 6163.62,
       "hourly": 0.703652,
+      "daily": 16.887648,
       "effectiveHourly": 1.40678,
-      "daily": 33.76272
+      "effectiveDaily": 33.76272
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 22230.14,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.845316,
-      "daily": 20.287602
+      "effectiveDaily": 20.287602
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 11534.32,
       "hourly": 0.438944,
+      "daily": 10.534656,
       "effectiveHourly": 0.877545,
-      "daily": 21.061071
+      "effectiveDaily": 21.061071
     }
   }
 }

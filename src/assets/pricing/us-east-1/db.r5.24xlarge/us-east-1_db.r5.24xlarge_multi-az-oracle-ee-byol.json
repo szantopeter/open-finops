@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 19.23648,
     "daily": 461.67552,
+    "effectiveHourly": 19.23648,
+    "effectiveDaily": 461.67552,
     "sku": "SCP5JDH5MUKQK8PM"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 11.442816,
+      "daily": 274.627584,
       "effectiveHourly": 11.442816,
-      "daily": 274.627584
+      "effectiveDaily": 274.627584
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 96333.76,
       "hourly": 3.665664,
+      "daily": 87.975936,
       "effectiveHourly": 7.328823,
-      "daily": 175.891756
+      "effectiveDaily": 175.891756
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 47732.58,
       "hourly": 5.44896,
+      "daily": 130.77504,
       "effectiveHourly": 10.894155,
-      "daily": 261.459722
+      "effectiveDaily": 261.459722
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 93556.82,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 10.672692,
-      "daily": 256.144614
+      "effectiveDaily": 256.144614
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 188813.86,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 7.179781,
-      "daily": 172.314725
+      "effectiveDaily": 172.314725
     }
   }
 }

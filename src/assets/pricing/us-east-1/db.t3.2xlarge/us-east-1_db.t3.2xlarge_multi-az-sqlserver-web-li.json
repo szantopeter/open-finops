@@ -3,11 +3,13 @@
   "instance": "db.t3.2xlarge",
   "deployment": "multi-az",
   "engine": "sqlserver-web-li",
-  "license": null,
+  "license": "li",
   "onDemand": {
-    "hourly": 0.93568,
-    "daily": 22.45632,
-    "sku": "23456WPDQMMG5BJB"
+    "hourly": 1.259728,
+    "daily": 30.233472,
+    "effectiveHourly": 1.259728,
+    "effectiveDaily": 30.233472,
+    "sku": "T464S5B4SK32TZPB"
   },
   "savingsOptions": {
     "1yr_All Upfront": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 5381.88,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.61395,
-      "daily": 14.734784
+      "effectiveDaily": 14.734784
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 2745.98,
       "hourly": 0.31347,
+      "daily": 7.52328,
       "effectiveHourly": 0.626723,
-      "daily": 15.041364
+      "effectiveDaily": 15.041364
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.658244,
+      "daily": 15.797856,
       "effectiveHourly": 0.658244,
-      "daily": 15.797856
+      "effectiveDaily": 15.797856
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 5901.32,
       "hourly": 0.224546,
+      "daily": 5.389104,
       "effectiveHourly": 0.448948,
-      "daily": 10.774748
+      "effectiveDaily": 10.774748
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 11567,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.439844,
-      "daily": 10.55624
+      "effectiveDaily": 10.55624
     }
   }
 }

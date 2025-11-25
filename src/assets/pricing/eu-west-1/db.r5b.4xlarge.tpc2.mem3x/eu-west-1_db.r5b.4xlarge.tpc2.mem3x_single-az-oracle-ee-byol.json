@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 6.3769,
     "daily": 153.0456,
+    "effectiveHourly": 6.3769,
+    "effectiveDaily": 153.0456,
     "sku": "B33EZRS3EG4JAWC6"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 41901.78,
       "hourly": 1.59444,
+      "daily": 38.26656,
       "effectiveHourly": 3.187784,
-      "daily": 76.506834
+      "effectiveDaily": 76.506834
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 80451.28,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 3.059217,
-      "daily": 73.4212
+      "effectiveDaily": 73.4212
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 19553.82,
       "hourly": 2.232216,
+      "daily": 53.573184,
       "effectiveHourly": 4.462859,
-      "daily": 107.108625
+      "effectiveDaily": 107.108625
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 37991.36,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.333945,
-      "daily": 104.014675
+      "effectiveDaily": 104.014675
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 4.59197,
+      "daily": 110.20728,
       "effectiveHourly": 4.59197,
-      "daily": 110.20728
+      "effectiveDaily": 110.20728
     }
   }
 }

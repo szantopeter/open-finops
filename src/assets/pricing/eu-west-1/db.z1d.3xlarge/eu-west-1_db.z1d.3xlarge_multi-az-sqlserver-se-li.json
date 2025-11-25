@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 9.19512,
     "daily": 220.68288,
+    "effectiveHourly": 9.19512,
+    "effectiveDaily": 220.68288,
     "sku": "5ZYTQDJ6B48D822F"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 189451.98,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 7.204045,
-      "daily": 172.897084
+      "effectiveDaily": 172.897084
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 96658.84,
       "hourly": 3.678048,
+      "daily": 88.273152,
       "effectiveHourly": 7.353568,
-      "daily": 176.485646
+      "effectiveDaily": 176.485646
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 71044.6,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 8.104563,
-      "daily": 194.509514
+      "effectiveDaily": 194.509514
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 8.689354,
+      "daily": 208.544496,
       "effectiveHourly": 8.689354,
-      "daily": 208.544496
+      "effectiveDaily": 208.544496
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 36247.28,
       "hourly": 4.137804,
+      "daily": 99.307296,
       "effectiveHourly": 8.272789,
-      "daily": 198.54694
+      "effectiveDaily": 198.54694
     }
   }
 }

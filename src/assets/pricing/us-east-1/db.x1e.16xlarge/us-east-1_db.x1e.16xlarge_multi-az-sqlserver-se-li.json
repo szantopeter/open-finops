@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 68.02084,
     "daily": 1632.50016,
+    "effectiveHourly": 68.02084,
+    "effectiveDaily": 1632.50016,
     "sku": "VD32KDEW42NEQAE8"
   },
   "savingsOptions": {

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.3956,
     "daily": 9.4944,
+    "effectiveHourly": 0.3956,
+    "effectiveDaily": 9.4944,
     "sku": "MM47U39DATRW2THZ"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 1215.18,
       "hourly": 0.046268,
+      "daily": 1.110432,
       "effectiveHourly": 0.092476,
-      "daily": 2.219426
+      "effectiveDaily": 2.219426
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.1634,
+      "daily": 3.9216,
       "effectiveHourly": 0.1634,
-      "daily": 3.9216
+      "effectiveDaily": 3.9216
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 608.02,
       "hourly": 0.069402,
+      "daily": 1.665648,
       "effectiveHourly": 0.138764,
-      "daily": 3.330316
+      "effectiveDaily": 3.330316
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 2285.02,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.086889,
-      "daily": 2.085348
+      "effectiveDaily": 2.085348
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 1191.1,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.135877,
-      "daily": 3.261054
+      "effectiveDaily": 3.261054
     }
   }
 }

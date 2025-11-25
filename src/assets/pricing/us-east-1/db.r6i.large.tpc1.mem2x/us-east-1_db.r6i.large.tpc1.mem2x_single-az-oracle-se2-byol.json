@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.40076,
     "daily": 9.61824,
+    "effectiveHourly": 0.40076,
+    "effectiveDaily": 9.61824,
     "sku": "Y6FTF663Q2NGSVWF"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 2633.32,
       "hourly": 0.10019,
+      "daily": 2.40456,
       "effectiveHourly": 0.200324,
-      "daily": 4.807772
+      "effectiveDaily": 4.807772
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 5055.08,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.192223,
-      "daily": 4.613351
+      "effectiveDaily": 4.613351
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 1228.94,
       "hourly": 0.140266,
+      "daily": 3.366384,
       "effectiveHourly": 0.28046,
-      "daily": 6.731039
+      "effectiveDaily": 6.731039
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.28853,
+      "daily": 6.92472,
       "effectiveHourly": 0.28853,
-      "daily": 6.92472
+      "effectiveDaily": 6.92472
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 2387.36,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.272343,
-      "daily": 6.536236
+      "effectiveDaily": 6.536236
     }
   }
 }

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 16.00288,
     "daily": 384.06912,
+    "effectiveHourly": 16.00288,
+    "effectiveDaily": 384.06912,
     "sku": "Z28N2A9XNGFPFFGV"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 35045.86,
       "hourly": 4.000634,
+      "daily": 96.015216,
       "effectiveHourly": 7.998565,
-      "daily": 191.965551
+      "effectiveDaily": 191.965551
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 68222.08,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 7.782578,
-      "daily": 186.781875
+      "effectiveDaily": 186.781875
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 148593.38,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 5.650368,
-      "daily": 135.608834
+      "effectiveDaily": 135.608834
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 8.214634,
+      "daily": 197.151216,
       "effectiveHourly": 8.214634,
-      "daily": 197.151216
+      "effectiveDaily": 197.151216
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 77100.72,
       "hourly": 2.933804,
+      "daily": 70.411296,
       "effectiveHourly": 5.865614,
-      "daily": 140.774718
+      "effectiveDaily": 140.774718
     }
   }
 }

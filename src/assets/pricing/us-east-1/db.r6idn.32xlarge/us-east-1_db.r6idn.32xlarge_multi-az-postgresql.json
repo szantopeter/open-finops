@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 64.01066,
     "daily": 1536.25584,
+    "effectiveHourly": 64.01066,
+    "effectiveDaily": 1536.25584,
     "sku": "JABTPSBMYTKTGQRR"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 308402.02,
       "hourly": 11.735216,
+      "daily": 281.645184,
       "effectiveHourly": 23.46242,
-      "daily": 563.098088
+      "effectiveDaily": 563.098088
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 32.858708,
+      "daily": 788.608992,
       "effectiveHourly": 32.858708,
-      "daily": 788.608992
+      "effectiveDaily": 788.608992
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 594375.24,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 22.601538,
-      "daily": 542.436907
+      "effectiveDaily": 542.436907
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 140182.58,
       "hourly": 16.002622,
+      "daily": 384.062928,
       "effectiveHourly": 31.994246,
-      "daily": 767.861915
+      "effectiveDaily": 767.861915
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 272889.18,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 31.130411,
-      "daily": 747.129856
+      "effectiveDaily": 747.129856
     }
   }
 }

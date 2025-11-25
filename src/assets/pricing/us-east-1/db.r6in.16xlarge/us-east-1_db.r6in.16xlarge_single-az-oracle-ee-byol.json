@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 9.52192,
     "daily": 228.52608,
+    "effectiveHourly": 9.52192,
+    "effectiveDaily": 228.52608,
     "sku": "B99AUHUNN8AJ29Z9"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 7.329866,
+      "daily": 175.916784,
       "effectiveHourly": 7.329866,
-      "daily": 175.916784
+      "effectiveDaily": 175.916784
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 68797.96,
       "hourly": 2.617754,
+      "daily": 62.826096,
       "effectiveHourly": 5.233845,
-      "daily": 125.61228
+      "effectiveDaily": 125.61228
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 132589.18,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 5.041797,
-      "daily": 121.003127
+      "effectiveDaily": 121.003127
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 60874.27,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 6.944362,
-      "daily": 166.66468
+      "effectiveDaily": 166.66468
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 31271.6,
       "hourly": 3.569688,
+      "daily": 85.672512,
       "effectiveHourly": 7.137062,
-      "daily": 171.289473
+      "effectiveDaily": 171.289473
     }
   }
 }

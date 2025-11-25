@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 25.50674,
     "daily": 612.16176,
+    "effectiveHourly": 25.50674,
+    "effectiveDaily": 612.16176,
     "sku": "VYMTBZPN73ADTRRW"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 167607.12,
       "hourly": 6.37776,
+      "daily": 153.06624,
       "effectiveHourly": 12.751139,
-      "daily": 306.027336
+      "effectiveDaily": 306.027336
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 321806.84,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 12.236932,
-      "daily": 293.68637
+      "effectiveDaily": 293.68637
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 151964.58,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 17.335681,
-      "daily": 416.056345
+      "effectiveDaily": 416.056345
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 18.367966,
+      "daily": 440.831184,
       "effectiveHourly": 18.367966,
-      "daily": 440.831184
+      "effectiveDaily": 440.831184
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 78217,
       "hourly": 8.928864,
+      "daily": 214.292736,
       "effectiveHourly": 17.851634,
-      "daily": 428.439211
+      "effectiveDaily": 428.439211
     }
   }
 }

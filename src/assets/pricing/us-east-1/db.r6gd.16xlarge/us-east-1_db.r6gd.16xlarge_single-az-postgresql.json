@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 7.07694,
     "daily": 169.84656,
+    "effectiveHourly": 7.07694,
+    "effectiveDaily": 169.84656,
     "sku": "ESAQXWQ3Q25X3KDK"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 119592.46,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.547588,
-      "daily": 109.142104
+      "effectiveDaily": 109.142104
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 54907.56,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 6.263696,
-      "daily": 150.328706
+      "effectiveDaily": 150.328706
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 62052.44,
       "hourly": 2.361216,
+      "daily": 56.669184,
       "effectiveHourly": 4.720804,
-      "daily": 113.299291
+      "effectiveDaily": 113.299291
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 6.611422,
+      "daily": 158.674128,
       "effectiveHourly": 6.611422,
-      "daily": 158.674128
+      "effectiveDaily": 158.674128
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 28205.42,
       "hourly": 3.21984,
+      "daily": 77.27616,
       "effectiveHourly": 6.437433,
-      "daily": 154.498391
+      "effectiveDaily": 154.498391
     }
   }
 }

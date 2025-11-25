@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 7.7056,
     "daily": 184.9344,
+    "effectiveHourly": 7.7056,
+    "effectiveDaily": 184.9344,
     "sku": "XD3ZWMJSS277BRNN"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 5.933398,
+      "daily": 142.401552,
       "effectiveHourly": 5.933398,
-      "daily": 142.401552
+      "effectiveDaily": 142.401552
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 25313.24,
       "hourly": 2.889686,
+      "daily": 69.352464,
       "effectiveHourly": 5.777348,
-      "daily": 138.656338
+      "effectiveDaily": 138.656338
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 55689.3,
       "hourly": 2.11904,
+      "daily": 50.85696,
       "effectiveHourly": 4.236665,
-      "daily": 101.679958
+      "effectiveDaily": 101.679958
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 49276.28,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 5.621296,
-      "daily": 134.911102
+      "effectiveDaily": 134.911102
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 107328.86,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.081256,
-      "daily": 97.950134
+      "effectiveDaily": 97.950134
     }
   }
 }

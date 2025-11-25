@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.47558,
     "daily": 11.41392,
+    "effectiveHourly": 0.47558,
+    "effectiveDaily": 11.41392,
     "sku": "XFTZ7D7PD245SXWF"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.366016,
+      "daily": 8.784384,
       "effectiveHourly": 0.366016,
-      "daily": 8.784384
+      "effectiveDaily": 8.784384
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 1561.76,
       "hourly": 0.178278,
+      "daily": 4.278672,
       "effectiveHourly": 0.356439,
-      "daily": 8.554538
+      "effectiveDaily": 8.554538
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 3435.7,
       "hourly": 0.13072,
+      "daily": 3.13728,
       "effectiveHourly": 0.261365,
-      "daily": 6.272758
+      "effectiveDaily": 6.272758
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 6621.14,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.251774,
-      "daily": 6.042565
+      "effectiveDaily": 6.042565
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 3040.1,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.346806,
-      "daily": 8.323341
+      "effectiveDaily": 8.323341
     }
   }
 }

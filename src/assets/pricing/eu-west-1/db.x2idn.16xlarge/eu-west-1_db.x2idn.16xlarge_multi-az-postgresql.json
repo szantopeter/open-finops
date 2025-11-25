@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 36.78908,
     "daily": 882.93792,
+    "effectiveHourly": 36.78908,
+    "effectiveDaily": 882.93792,
     "sku": "BYA7AQRXZ26PGED3"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 120850.64,
       "hourly": 13.795776,
+      "daily": 331.098624,
       "effectiveHourly": 27.582069,
-      "daily": 661.969644
+      "effectiveDaily": 661.969644
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 28.327368,
+      "daily": 679.856832,
       "effectiveHourly": 28.327368,
-      "daily": 679.856832
+      "effectiveDaily": 679.856832
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 512408.64,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 19.4847,
-      "daily": 467.632799
+      "effectiveDaily": 467.632799
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 235256.44,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 26.837376,
-      "daily": 644.097029
+      "effectiveDaily": 644.097029
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 265872.44,
       "hourly": 10.116868,
+      "daily": 242.804832,
       "effectiveHourly": 20.226855,
-      "daily": 485.444522
+      "effectiveDaily": 485.444522
     }
   }
 }

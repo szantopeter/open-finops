@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 2.71072,
     "daily": 65.05728,
+    "effectiveHourly": 2.71072,
+    "effectiveDaily": 65.05728,
     "sku": "VCW2CHY6XPZY9ENZ"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 7717.42,
       "hourly": 0.880984,
+      "daily": 21.143616,
       "effectiveHourly": 1.761364,
-      "daily": 42.27275
+      "effectiveDaily": 42.27275
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 1.816148,
+      "daily": 43.587552,
       "effectiveHourly": 1.816148,
-      "daily": 43.587552
+      "effectiveDaily": 43.587552
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 14959.92,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.706585,
-      "daily": 40.958038
+      "effectiveDaily": 40.958038
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

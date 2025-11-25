@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 27.29984,
     "daily": 655.19616,
+    "effectiveHourly": 27.29984,
+    "effectiveDaily": 655.19616,
     "sku": "JJW4RRXMHXMAMPMB"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 174353.82,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 19.889781,
-      "daily": 477.354743
+      "effectiveDaily": 477.354743
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 379757.08,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 14.440531,
-      "daily": 346.57274
+      "effectiveDaily": 346.57274
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 197044.06,
       "hourly": 7.497824,
+      "daily": 179.947776,
       "effectiveHourly": 14.990564,
-      "daily": 359.773521
+      "effectiveDaily": 359.773521
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 20.994062,
+      "daily": 503.857488,
       "effectiveHourly": 20.994062,
-      "daily": 503.857488
+      "effectiveDaily": 503.857488
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 89565.56,
       "hourly": 10.224368,
+      "daily": 245.384832,
       "effectiveHourly": 20.441748,
-      "daily": 490.601971
+      "effectiveDaily": 490.601971
     }
   }
 }

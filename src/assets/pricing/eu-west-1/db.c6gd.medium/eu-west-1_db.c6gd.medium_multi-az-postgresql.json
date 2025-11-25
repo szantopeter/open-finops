@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.229878,
     "daily": 5.517072,
+    "effectiveHourly": 0.229878,
+    "effectiveDaily": 5.517072,
     "sku": "GCBFDVME28VVESNY"
   },
   "savingsOptions": {

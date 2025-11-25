@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 3.10632,
     "daily": 74.55168,
+    "effectiveHourly": 3.10632,
+    "effectiveDaily": 74.55168,
     "sku": "4DX2TAKETRZFRS5W"
   },
   "savingsOptions": {

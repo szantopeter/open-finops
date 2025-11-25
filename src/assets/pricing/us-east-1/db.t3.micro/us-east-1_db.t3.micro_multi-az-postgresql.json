@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.03096,
     "daily": 0.74304,
+    "effectiveHourly": 0.03096,
+    "effectiveDaily": 0.74304,
     "sku": "WPKVP35D37F3YZNJ"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 92.88,
       "hourly": 0.010578,
+      "daily": 0.253872,
       "effectiveHourly": 0.021173,
-      "daily": 0.508164
+      "effectiveDaily": 0.508164
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 181.46,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.0207,
-      "daily": 0.496811
+      "effectiveDaily": 0.496811
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.022188,
+      "daily": 0.532512,
       "effectiveHourly": 0.022188,
-      "daily": 0.532512
+      "effectiveDaily": 0.532512
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 385.28,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.014651,
-      "daily": 0.351613
+      "effectiveDaily": 0.351613
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 196.08,
       "hourly": 0.007482,
+      "daily": 0.179568,
       "effectiveHourly": 0.014938,
-      "daily": 0.358514
+      "effectiveDaily": 0.358514
     }
   }
 }

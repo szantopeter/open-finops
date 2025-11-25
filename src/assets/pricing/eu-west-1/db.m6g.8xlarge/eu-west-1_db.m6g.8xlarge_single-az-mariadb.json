@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 2.31168,
     "daily": 55.48032,
+    "effectiveHourly": 2.31168,
+    "effectiveDaily": 55.48032,
     "sku": "FAGUUQPSVXGGRF48"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 1.703574,
+      "daily": 40.885776,
       "effectiveHourly": 1.703574,
-      "daily": 40.885776
+      "effectiveDaily": 40.885776
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 14635.48,
       "hourly": 0.556936,
+      "daily": 13.366464,
       "effectiveHourly": 1.11346,
-      "daily": 26.723051
+      "effectiveDaily": 26.723051
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 28687.88,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.090876,
-      "daily": 26.181045
+      "effectiveDaily": 26.181045
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 7105.32,
       "hourly": 0.811152,
+      "daily": 19.467648,
       "effectiveHourly": 1.621706,
-      "daily": 38.920954
+      "effectiveDaily": 38.920954
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 13925.98,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.588636,
-      "daily": 38.127255
+      "effectiveDaily": 38.127255
     }
   }
 }

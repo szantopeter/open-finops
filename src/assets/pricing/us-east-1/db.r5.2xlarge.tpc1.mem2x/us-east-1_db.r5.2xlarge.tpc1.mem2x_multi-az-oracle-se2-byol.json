@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 3.20608,
     "daily": 76.94592,
+    "effectiveHourly": 3.20608,
+    "effectiveDaily": 76.94592,
     "sku": "KV6Z8KZGDAPT738H"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 30566.12,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.162299,
-      "daily": 27.895159
+      "effectiveDaily": 27.895159
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 15595.24,
       "hourly": 0.5934,
+      "daily": 14.2416,
       "effectiveHourly": 1.18642,
-      "daily": 28.47408
+      "effectiveDaily": 28.47408
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 15161.8,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.729615,
-      "daily": 41.510746
+      "effectiveDaily": 41.510746
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 1.854418,
+      "daily": 44.506032,
       "effectiveHourly": 1.854418,
-      "daily": 44.506032
+      "effectiveDaily": 44.506032
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 7735.7,
       "hourly": 0.883048,
+      "daily": 21.193152,
       "effectiveHourly": 1.765515,
-      "daily": 42.372344
+      "effectiveDaily": 42.372344
     }
   }
 }

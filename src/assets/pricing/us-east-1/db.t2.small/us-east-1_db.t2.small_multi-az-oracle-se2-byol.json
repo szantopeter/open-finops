@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.05848,
     "daily": 1.40352,
+    "effectiveHourly": 0.05848,
+    "effectiveDaily": 1.40352,
     "sku": "PTVXU6PZ32MYMRYT"
   },
   "savingsOptions": {

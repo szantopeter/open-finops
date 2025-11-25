@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.95202,
     "daily": 22.84848,
+    "effectiveHourly": 0.95202,
+    "effectiveDaily": 22.84848,
     "sku": "KY5TVWQM2GYHDMRF"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 5171.18,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.589914,
-      "daily": 14.157919
+      "effectiveDaily": 14.157919
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 2627.3,
       "hourly": 0.299968,
+      "daily": 7.199232,
       "effectiveHourly": 0.599683,
-      "daily": 14.392387
+      "effectiveDaily": 14.392387
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.628488,
+      "daily": 15.083712,
       "effectiveHourly": 0.628488,
-      "daily": 15.083712
+      "effectiveDaily": 15.083712
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 5504.86,
       "hourly": 0.209496,
+      "daily": 5.027904,
       "effectiveHourly": 0.418823,
-      "daily": 10.051732
+      "effectiveDaily": 10.051732
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 10760.32,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.409169,
-      "daily": 9.82005
+      "effectiveDaily": 9.82005
     }
   }
 }

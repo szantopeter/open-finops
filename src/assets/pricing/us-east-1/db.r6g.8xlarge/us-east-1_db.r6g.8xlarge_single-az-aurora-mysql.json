@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 4.64314,
     "daily": 111.43536,
+    "effectiveHourly": 4.64314,
+    "effectiveDaily": 111.43536,
     "sku": "U6RMKDVNE4M569NZ"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 17056.38,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.945742,
-      "daily": 46.697824
+      "effectiveDaily": 46.697824
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 17406.4,
       "hourly": 0.662372,
+      "daily": 15.896928,
       "effectiveHourly": 1.324262,
-      "daily": 31.782304
+      "effectiveDaily": 31.782304
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 32721.28,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.24425,
-      "daily": 29.861994
+      "effectiveDaily": 29.861994
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 2.339888,
+      "daily": 56.157312,
       "effectiveHourly": 2.339888,
-      "daily": 56.157312
+      "effectiveDaily": 56.157312
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 8703.2,
       "hourly": 0.993472,
+      "daily": 23.843328,
       "effectiveHourly": 1.986308,
-      "daily": 47.671391
+      "effectiveDaily": 47.671391
     }
   }
 }

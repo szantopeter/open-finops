@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 2.02874,
     "daily": 48.68976,
+    "effectiveHourly": 2.02874,
+    "effectiveDaily": 48.68976,
     "sku": "NN42QT5BZ7PAV37Z"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 15798.2,
       "hourly": 0.60114,
+      "daily": 14.42736,
       "effectiveHourly": 1.201878,
-      "daily": 28.845065
+      "effectiveDaily": 28.845065
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 30447.44,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.157785,
-      "daily": 27.786849
+      "effectiveDaily": 27.786849
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 7181,
       "hourly": 0.819752,
+      "daily": 19.674048,
       "effectiveHourly": 1.63894,
-      "daily": 39.334554
+      "effectiveDaily": 39.334554
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 1.683192,
+      "daily": 40.396608,
       "effectiveHourly": 1.683192,
-      "daily": 40.396608
+      "effectiveDaily": 40.396608
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 13979.3,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.594719,
-      "daily": 38.273238
+      "effectiveDaily": 38.273238
     }
   }
 }

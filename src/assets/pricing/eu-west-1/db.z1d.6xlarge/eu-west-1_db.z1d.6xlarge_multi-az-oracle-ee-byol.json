@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 7.88448,
     "daily": 189.22752,
+    "effectiveHourly": 7.88448,
+    "effectiveDaily": 189.22752,
     "sku": "NEQG88H6AT5KKSYZ"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 91376.72,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 3.474664,
-      "daily": 83.391942
+      "effectiveDaily": 83.391942
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 5.381192,
+      "daily": 129.148608,
       "effectiveHourly": 5.381192,
-      "daily": 129.148608
+      "effectiveDaily": 129.148608
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 22446.86,
       "hourly": 2.562456,
+      "daily": 61.498944,
       "effectiveHourly": 5.123129,
-      "daily": 122.955097
+      "effectiveDaily": 122.955097
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 43996.74,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 5.019021,
-      "daily": 120.456509
+      "effectiveDaily": 120.456509
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 46620.6,
       "hourly": 1.774008,
+      "daily": 42.576192,
       "effectiveHourly": 3.546789,
-      "daily": 85.122941
+      "effectiveDaily": 85.122941
     }
   }
 }

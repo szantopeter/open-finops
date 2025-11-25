@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 67.847808,
     "daily": 1628.347392,
+    "effectiveHourly": 67.847808,
+    "effectiveDaily": 1628.347392,
     "sku": "V8MTPZN9AXFBTV8X"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 34.178973,
+      "daily": 820.295355,
       "effectiveHourly": 34.178973,
-      "daily": 820.295355
+      "effectiveDaily": 820.295355
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 286530.05,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 32.686521,
-      "daily": 784.476522
+      "effectiveDaily": 784.476522
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 144874.74,
       "hourly": 16.538213,
+      "daily": 396.917107,
       "effectiveHourly": 33.065105,
-      "daily": 793.56254
+      "effectiveDaily": 793.56254
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 121144.76,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.606615,
-      "daily": 110.558759
+      "effectiveDaily": 110.558759
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 61809.06,
       "hourly": 2.351928,
+      "daily": 56.446272,
       "effectiveHourly": 4.702261,
-      "daily": 112.854266
+      "effectiveDaily": 112.854266
     }
   }
 }

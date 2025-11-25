@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 2.16032,
     "daily": 51.84768,
+    "effectiveHourly": 2.16032,
+    "effectiveDaily": 51.84768,
     "sku": "W9XGP269X4225S6M"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 8710.94,
       "hourly": 0.994332,
+      "daily": 23.863968,
       "effectiveHourly": 1.988051,
-      "daily": 47.713222
+      "effectiveDaily": 47.713222
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 2.088166,
+      "daily": 50.115984,
       "effectiveHourly": 2.088166,
-      "daily": 50.115984
+      "effectiveDaily": 50.115984
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 34195.32,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.300301,
-      "daily": 31.207228
+      "effectiveDaily": 31.207228
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 17072.72,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.947607,
-      "daily": 46.74256
+      "effectiveDaily": 46.74256
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 17446.82,
       "hourly": 0.663834,
+      "daily": 15.932016,
       "effectiveHourly": 1.327261,
-      "daily": 31.85428
+      "effectiveDaily": 31.85428
     }
   }
 }

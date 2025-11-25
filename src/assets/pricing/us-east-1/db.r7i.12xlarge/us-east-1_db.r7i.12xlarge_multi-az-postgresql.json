@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 10.32,
     "daily": 247.68,
+    "effectiveHourly": 10.32,
+    "effectiveDaily": 247.68,
     "sku": "D2WAMKE3KNN367FD"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "All Upfront",
       "upfront": 56954.36,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 6.497189,
-      "daily": 155.932539
+      "effectiveDaily": 155.932539
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 29381.04,
       "hourly": 3.354,
+      "daily": 80.496,
       "effectiveHourly": 6.705705,
-      "daily": 160.936903
+      "effectiveDaily": 160.936903
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 6.9144,
+      "daily": 165.9456,
       "effectiveHourly": 6.9144,
-      "daily": 165.9456
+      "effectiveDaily": 165.9456
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

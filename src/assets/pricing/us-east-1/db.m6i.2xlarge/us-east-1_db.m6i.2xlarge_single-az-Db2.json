@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.61232,
     "daily": 14.69568,
+    "effectiveHourly": 0.61232,
+    "effectiveDaily": 14.69568,
     "sku": "FWCHA8GEM5S95H4A"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 3170.82,
       "hourly": 0.120658,
+      "daily": 2.895792,
       "effectiveHourly": 0.241231,
-      "daily": 5.789536
+      "effectiveDaily": 5.789536
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 3078.8,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.351221,
-      "daily": 8.429295
+      "effectiveDaily": 8.429295
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 6212.64,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.23624,
-      "daily": 5.669761
+      "effectiveDaily": 5.669761
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.37668,
+      "daily": 9.04032,
       "effectiveHourly": 0.37668,
-      "daily": 9.04032
+      "effectiveDaily": 9.04032
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 1572.94,
       "hourly": 0.179482,
+      "daily": 4.307568,
       "effectiveHourly": 0.358918,
-      "daily": 8.614043
+      "effectiveDaily": 8.614043
     }
   }
 }

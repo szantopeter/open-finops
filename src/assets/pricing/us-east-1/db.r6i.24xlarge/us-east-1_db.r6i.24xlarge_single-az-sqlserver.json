@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 15.35616,
     "daily": 368.54784,
+    "effectiveHourly": 15.35616,
+    "effectiveDaily": 368.54784,
     "sku": "PYUW58BXMSHC4SRE"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 48170.32,
       "hourly": 1.833004,
+      "daily": 43.992096,
       "effectiveHourly": 3.664715,
-      "daily": 87.953145
+      "effectiveDaily": 87.953145
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 94407.36,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 3.589907,
-      "daily": 86.157755
+      "effectiveDaily": 86.157755
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 5.721408,
+      "daily": 137.313792,
       "effectiveHourly": 5.721408,
-      "daily": 137.313792
+      "effectiveDaily": 137.313792
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 23863.28,
       "hourly": 2.724136,
+      "daily": 65.379264,
       "effectiveHourly": 5.44639,
-      "daily": 130.713364
+      "effectiveDaily": 130.713364
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 46770.24,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 5.335414,
-      "daily": 128.049938
+      "effectiveDaily": 128.049938
     }
   }
 }

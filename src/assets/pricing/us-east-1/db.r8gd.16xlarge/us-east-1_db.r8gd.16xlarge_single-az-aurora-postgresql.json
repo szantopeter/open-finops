@@ -1,0 +1,21 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r8gd.16xlarge",
+  "deployment": "single-az",
+  "engine": "aurora-postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 8.58624,
+    "daily": 206.06976,
+    "effectiveHourly": 8.58624,
+    "effectiveDaily": 206.06976,
+    "sku": "ZEY24PJR62U7ZBPU"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

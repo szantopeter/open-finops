@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 4.37224,
     "daily": 104.93376,
+    "effectiveHourly": 4.37224,
+    "effectiveDaily": 104.93376,
     "sku": "7KR34PEYFPVVD993"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 27957.74,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 3.189338,
-      "daily": 76.54412
+      "effectiveDaily": 76.54412
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 31596.4,
       "hourly": 1.20228,
+      "daily": 28.85472,
       "effectiveHourly": 2.403755,
-      "daily": 57.69013
+      "effectiveDaily": 57.69013
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 60894.88,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.315571,
-      "daily": 55.573699
+      "effectiveDaily": 55.573699
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 14362,
       "hourly": 1.639504,
+      "daily": 39.348096,
       "effectiveHourly": 3.27788,
-      "daily": 78.669109
+      "effectiveDaily": 78.669109
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 3.366384,
+      "daily": 80.793216,
       "effectiveHourly": 3.366384,
-      "daily": 80.793216
+      "effectiveDaily": 80.793216
     }
   }
 }

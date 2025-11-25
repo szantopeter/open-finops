@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 15.35616,
     "daily": 368.54784,
+    "effectiveHourly": 15.35616,
+    "effectiveDaily": 368.54784,
     "sku": "C38SJRRJQS9Q8EAM"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "All Upfront",
       "upfront": 84745.26,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 9.667495,
-      "daily": 232.019876
+      "effectiveDaily": 232.019876
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 43717.24,
       "hourly": 4.99058,
+      "daily": 119.77392,
       "effectiveHourly": 9.977717,
-      "daily": 239.4652
+      "effectiveDaily": 239.4652
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 10.28904,
+      "daily": 246.93696,
       "effectiveHourly": 10.28904,
-      "daily": 246.93696
+      "effectiveDaily": 246.93696
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

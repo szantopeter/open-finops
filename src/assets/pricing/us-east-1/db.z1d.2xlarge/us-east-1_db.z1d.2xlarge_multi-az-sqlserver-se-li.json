@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 5.88068,
     "daily": 141.13632,
+    "effectiveHourly": 5.88068,
+    "effectiveDaily": 141.13632,
     "sku": "T5S23XD5FK72EDA8"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 1.605878,
+      "daily": 38.541072,
       "effectiveHourly": 1.605878,
-      "daily": 38.541072
+      "effectiveDaily": 38.541072
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 13129.62,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.497789,
-      "daily": 35.94694
+      "effectiveDaily": 35.94694
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 27269.74,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.036951,
-      "daily": 24.886826
+      "effectiveDaily": 24.886826
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 13913.08,
       "hourly": 0.529416,
+      "daily": 12.705984,
       "effectiveHourly": 1.058471,
-      "daily": 25.403297
+      "effectiveDaily": 25.403297
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 6698.54,
       "hourly": 0.764712,
+      "daily": 18.353088,
       "effectiveHourly": 1.528862,
-      "daily": 36.692691
+      "effectiveDaily": 36.692691
     }
   }
 }

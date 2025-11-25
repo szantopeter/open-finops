@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 5.12474,
     "daily": 122.99376,
+    "effectiveHourly": 5.12474,
+    "effectiveDaily": 122.99376,
     "sku": "39UHGSP54ED4TBJ9"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 3.946368,
+      "daily": 94.712832,
       "effectiveHourly": 3.946368,
-      "daily": 94.712832
+      "effectiveDaily": 94.712832
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 16836.22,
       "hourly": 1.921928,
+      "daily": 46.126272,
       "effectiveHourly": 3.842556,
-      "daily": 92.22133
+      "effectiveDaily": 92.22133
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 37039.34,
       "hourly": 1.409368,
+      "daily": 33.824832,
       "effectiveHourly": 2.817815,
-      "daily": 67.627561
+      "effectiveDaily": 67.627561
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 71384.3,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.714439,
-      "daily": 65.14652
+      "effectiveDaily": 65.14652
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 32773.74,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 3.738734,
-      "daily": 89.72961
+      "effectiveDaily": 89.72961
     }
   }
 }

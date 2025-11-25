@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 4.7042,
     "daily": 112.9008,
+    "effectiveHourly": 4.7042,
+    "effectiveDaily": 112.9008,
     "sku": "STER8FETUBM45X95"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 3.13728,
+      "daily": 75.29472,
       "effectiveHourly": 3.13728,
-      "daily": 75.29472
+      "effectiveDaily": 75.29472
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 26395.12,
       "hourly": 1.004394,
+      "daily": 24.105456,
       "effectiveHourly": 2.008087,
-      "daily": 48.19409
+      "effectiveDaily": 48.19409
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 25648.64,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.925923,
-      "daily": 70.222149
+      "effectiveDaily": 70.222149
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 51737.6,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 1.967358,
-      "daily": 47.216609
+      "effectiveDaily": 47.216609
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 13095.22,
       "hourly": 1.494852,
+      "daily": 35.876448,
       "effectiveHourly": 2.988717,
-      "daily": 71.729206
+      "effectiveDaily": 71.729206
     }
   }
 }

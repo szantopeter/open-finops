@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 0.919512,
     "daily": 22.068288,
+    "effectiveHourly": 0.919512,
+    "effectiveDaily": 22.068288,
     "sku": "F428A53WE2FMAMBH"
   },
   "savingsOptions": {

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 6.02344,
     "daily": 144.56256,
+    "effectiveHourly": 6.02344,
+    "effectiveDaily": 144.56256,
     "sku": "CHPGT2UTV3DS2YDT"
   },
   "savingsOptions": {

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 10.67776,
     "daily": 256.26624,
+    "effectiveHourly": 10.67776,
+    "effectiveDaily": 256.26624,
     "sku": "SAF7WFU93J3F7MTU"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 68282.14,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 7.78943,
-      "daily": 186.946318
+      "effectiveDaily": 186.946318
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 77168.17,
       "hourly": 2.936384,
+      "daily": 70.473216,
       "effectiveHourly": 5.870758,
-      "daily": 140.898194
+      "effectiveDaily": 140.898194
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 148724.11,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 5.655339,
-      "daily": 135.728139
+      "effectiveDaily": 135.728139
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 35076.44,
       "hourly": 4.00416,
+      "daily": 96.09984,
       "effectiveHourly": 8.005579,
-      "daily": 192.133903
+      "effectiveDaily": 192.133903
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 8.221858,
+      "daily": 197.324592,
       "effectiveHourly": 8.221858,
-      "daily": 197.324592
+      "effectiveDaily": 197.324592
     }
   }
 }

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 6.73036,
     "daily": 161.52864,
+    "effectiveHourly": 6.73036,
+    "effectiveDaily": 161.52864,
     "sku": "NYEW84X47GKDFRGB"
   },
   "savingsOptions": {

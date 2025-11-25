@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 1.3588,
     "daily": 32.6112,
+    "effectiveHourly": 1.3588,
+    "effectiveDaily": 32.6112,
     "sku": "CN62WPKDTGCNZYND"
   },
   "savingsOptions": {
@@ -15,24 +17,27 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 2975.6,
       "hourly": 0.3397,
+      "daily": 8.1528,
       "effectiveHourly": 0.679148,
-      "daily": 16.299549
+      "effectiveDaily": 16.299549
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 0.7009,
+      "daily": 16.8216,
       "effectiveHourly": 0.7009,
-      "daily": 16.8216
+      "effectiveDaily": 16.8216
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 5770.6,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 0.658293,
-      "daily": 15.799042
+      "effectiveDaily": 15.799042
     },
     "3yr_Partial Upfront": null,
     "3yr_All Upfront": null

@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 1.7544,
     "daily": 42.1056,
+    "effectiveHourly": 1.7544,
+    "effectiveDaily": 42.1056,
     "sku": "9BR39CH38E3BRM5G"
   },
   "savingsOptions": {

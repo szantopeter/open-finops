@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 20.47488,
     "daily": 491.39712,
+    "effectiveHourly": 20.47488,
+    "effectiveDaily": 491.39712,
     "sku": "TGGWX6A5D25FD3HD"
   },
   "savingsOptions": {

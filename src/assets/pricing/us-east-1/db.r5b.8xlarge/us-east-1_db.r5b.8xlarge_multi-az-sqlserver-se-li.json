@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 21.84142,
     "daily": 524.19408,
+    "effectiveHourly": 21.84142,
+    "effectiveDaily": 524.19408,
     "sku": "H9V3G7BXMA472GXR"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "Partial Upfront",
       "upfront": 19596.82,
       "hourly": 2.237118,
+      "daily": 53.690832,
       "effectiveHourly": 4.472666,
-      "daily": 107.344001
+      "effectiveDaily": 107.344001
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 38481.56,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.389866,
-      "daily": 105.356769
+      "effectiveDaily": 105.356769
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 39550.54,
       "hourly": 1.505,
+      "daily": 36.12,
       "effectiveHourly": 3.008937,
-      "daily": 72.214492
+      "effectiveDaily": 72.214492
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 76963.12,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 2.926577,
-      "daily": 70.237846
+      "effectiveDaily": 70.237846
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 4.718218,
+      "daily": 113.237232,
       "effectiveHourly": 4.718218,
-      "daily": 113.237232
+      "effectiveDaily": 113.237232
     }
   }
 }

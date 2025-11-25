@@ -1,0 +1,21 @@
+{
+  "region": "us-east-1",
+  "instance": "db.r8gd.xlarge",
+  "deployment": "multi-az",
+  "engine": "postgresql",
+  "license": null,
+  "onDemand": {
+    "hourly": 1.40868,
+    "daily": 33.80832,
+    "effectiveHourly": 1.40868,
+    "effectiveDaily": 33.80832,
+    "sku": "P7CS8QK9T3NQCWTP"
+  },
+  "savingsOptions": {
+    "1yr_No Upfront": null,
+    "1yr_Partial Upfront": null,
+    "1yr_All Upfront": null,
+    "3yr_Partial Upfront": null,
+    "3yr_All Upfront": null
+  }
+}

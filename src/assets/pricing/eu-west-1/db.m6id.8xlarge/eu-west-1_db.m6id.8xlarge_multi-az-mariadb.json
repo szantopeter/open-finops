@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 6.81636,
     "daily": 163.59264,
+    "effectiveHourly": 6.81636,
+    "effectiveDaily": 163.59264,
     "sku": "EN66835R6C4XMKPA"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 95059.24,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 3.614694,
-      "daily": 86.752672
+      "effectiveDaily": 86.752672
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 49326.16,
       "hourly": 1.87695,
+      "daily": 45.0468,
       "effectiveHourly": 3.752612,
-      "daily": 90.062689
+      "effectiveDaily": 90.062689
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 5.25546,
+      "daily": 126.13104,
       "effectiveHourly": 5.25546,
-      "daily": 126.13104
+      "effectiveDaily": 126.13104
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 43642.42,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.978601,
-      "daily": 119.486434
+      "effectiveDaily": 119.486434
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 22420.2,
       "hourly": 2.55936,
+      "daily": 61.42464,
       "effectiveHourly": 5.116991,
-      "daily": 122.807802
+      "effectiveDaily": 122.807802
     }
   }
 }

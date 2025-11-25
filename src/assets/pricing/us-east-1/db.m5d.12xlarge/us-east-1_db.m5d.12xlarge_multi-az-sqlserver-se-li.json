@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 26.63592,
     "daily": 639.26208,
+    "effectiveHourly": 26.63592,
+    "effectiveDaily": 639.26208,
     "sku": "EGB646HX3EYF7VFF"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 6.659754,
+      "daily": 159.834096,
       "effectiveHourly": 6.659754,
-      "daily": 159.834096
+      "effectiveDaily": 159.834096
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 28411.82,
       "hourly": 3.243404,
+      "daily": 77.841696,
       "effectiveHourly": 6.484543,
-      "daily": 155.629019
+      "effectiveDaily": 155.629019
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
       "upfront": 120467.08,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 4.580846,
-      "daily": 109.940296
+      "effectiveDaily": 109.940296
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 55309.18,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 6.309512,
-      "daily": 151.428282
+      "effectiveDaily": 151.428282
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 62506.52,
       "hourly": 2.378502,
+      "daily": 57.084048,
       "effectiveHourly": 4.755356,
-      "daily": 114.128557
+      "effectiveDaily": 114.128557
     }
   }
 }

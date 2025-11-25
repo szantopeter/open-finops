@@ -7,6 +7,8 @@
   "onDemand": {
     "hourly": 55.18276,
     "daily": 1324.38624,
+    "effectiveHourly": 55.18276,
+    "effectiveDaily": 1324.38624,
     "sku": "SQHHT5FAGRWDGV34"
   },
   "savingsOptions": {
@@ -15,40 +17,45 @@
       "purchaseOption": "All Upfront",
       "upfront": 437407.18,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 16.632716,
-      "daily": 399.185197
+      "effectiveDaily": 399.185197
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 227815.72,
       "hourly": 8.6688,
+      "daily": 208.0512,
       "effectiveHourly": 17.331653,
-      "daily": 415.959683
+      "effectiveDaily": 415.959683
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
       "hourly": 24.966144,
+      "daily": 599.187456,
       "effectiveHourly": 24.966144,
-      "daily": 599.187456
+      "effectiveDaily": 599.187456
     },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
       "upfront": 206553.08,
       "hourly": 0,
+      "daily": 0,
       "effectiveHourly": 23.56298,
-      "daily": 565.511512
+      "effectiveDaily": 565.511512
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 106314.06,
       "hourly": 12.13632,
+      "daily": 291.27168,
       "effectiveHourly": 24.264321,
-      "daily": 582.343713
+      "effectiveDaily": 582.343713
     }
   }
 }
