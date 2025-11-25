@@ -26,7 +26,7 @@
       </thead>
       <tbody>
         @for (ym of getYearMonths(); track ym.year + '-' + ym.month) {
-          <tr>
+          <tr [class.highestSpendMonth]="isHighestSpendMonth(ym.year, ym.month)">
             <td class="year-month-cell">{{ ym.year }}-{{ ym.month.toString().padStart(2, '0') }}</td>
             @for (scenario of displayedScenarios; track scenario) {
               <td class="currency-cell" [class.zero-value]="isZeroValue(getMonthlyCost(scenario, ym.year, ym.month))">{{ formatCurrency(getMonthlyCost(scenario, ym.year, ym.month)) }}</td>

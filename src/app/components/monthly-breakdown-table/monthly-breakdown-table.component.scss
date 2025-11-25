@@ -55,6 +55,15 @@
         &:hover {
           background-color: #f8f9fa;
         }
+
+        &.highestSpendMonth {
+          background-color: #ffcccc !important;
+          border-left: 4px solid #cc0000;
+
+          td {
+            font-weight: 600;
+          }
+        }
       }
 
       td {

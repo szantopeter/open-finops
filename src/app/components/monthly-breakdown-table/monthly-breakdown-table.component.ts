@@ -15,6 +15,7 @@ export class MonthlyBreakdownTableComponent {
   @Input() expandedRow: string | null = null;
   @Input() timeseries: CostTimeseries[] = [];
   @Input() firstFullYear: number = 0;
+  @Input() highestSpendMonth?: { year: number; month: number };
 
   savingsScenarios: string[] = ['noUpfront_1y', 'partialUpfront_1y', 'fullUpfront_1y', 'partialUpfront_3y', 'fullUpfront_3y'];
 
@@ -94,5 +95,10 @@ export class MonthlyBreakdownTableComponent {
       total += this.getUpfrontCost(scenario, ym.year, ym.month);
     }
     return total;
+  }
+
+  isHighestSpendMonth(year: number, month: number): boolean {
+    const highest = this.highestSpendMonth || { year: 2025, month: 1 };
+    return highest.year === year && highest.month === month;
   }
 }

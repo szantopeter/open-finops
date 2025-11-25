@@ -76,14 +76,18 @@ describe('CostComparisonCalculator', () => {
       const onDemandTotalMonthly = scenarios[0].monthly * 12;
       const onDemandMaxMonthly = scenarios[0].monthly;
 
-      expect(result.onDemand).withContext('On-demand scenario').toEqual({
+      expect(result.onDemand).withContext('On Demand scenario').toEqual({
         scenario: 'onDemand',
         totalCost: onDemandTotalCost,
         totalUpfront: onDemandTotalUpfront,
         totalMonthlyPayment: onDemandTotalMonthly,
-        maximumMonthlyCost: onDemandMaxMonthly,
+        highestMonthlySpend: onDemandMaxMonthly,
+        highestMonthlySpendMonth: { year: 2025, month: 1 },
         monthlyBreakdown: [onDemandCostTimeseries[0]]
       });
+
+      // Verify total cost formula
+      expect(result.onDemand.totalCost).toBe(result.onDemand.totalMonthlyPayment + result.onDemand.totalUpfront);
 
       // No Upfront 1y
       const noUpfrontTotalCost = (scenarios[1].monthly * 12) + scenarios[1].upfront;
@@ -97,10 +101,14 @@ describe('CostComparisonCalculator', () => {
         totalCost: noUpfrontTotalCost,
         totalUpfront: noUpfrontTotalUpfront,
         totalMonthlyPayment: noUpfrontTotalMonthly,
-        maximumMonthlyCost: noUpfrontMaxMonthly,
+        highestMonthlySpend: noUpfrontMaxMonthly,
+        highestMonthlySpendMonth: { year: 2025, month: 1 },
         savingsPercent: noUpfrontSavingsPercent,
         monthlyBreakdown: [noUpfront1yCostTimeseries[0]]
       });
+
+      // Verify total cost formula
+      expect(result.noUpfront_1y.totalCost).toBe(result.noUpfront_1y.totalMonthlyPayment + result.noUpfront_1y.totalUpfront);
 
       // Partial Upfront 1y
       const partialUpfrontTotalCost = (scenarios[2].monthly * 12) + scenarios[2].upfront;
@@ -114,10 +122,14 @@ describe('CostComparisonCalculator', () => {
         totalCost: partialUpfrontTotalCost,
         totalUpfront: partialUpfrontTotalUpfront,
         totalMonthlyPayment: partialUpfrontTotalMonthly,
-        maximumMonthlyCost: partialUpfrontMaxMonthly,
+        highestMonthlySpend: partialUpfrontMaxMonthly,
+        highestMonthlySpendMonth: { year: 2025, month: 1 },
         savingsPercent: partialUpfrontSavingsPercent,
         monthlyBreakdown: [partialUpfront1yCostTimeseries[0]]
       });
+
+      // Verify total cost formula
+      expect(result.partialUpfront_1y.totalCost).toBe(result.partialUpfront_1y.totalMonthlyPayment + result.partialUpfront_1y.totalUpfront);
 
       // Full Upfront 1y
       const fullUpfront1yTotalCost = (scenarios[3].monthly * 12) + scenarios[3].upfront;
@@ -131,10 +143,14 @@ describe('CostComparisonCalculator', () => {
         totalCost: fullUpfront1yTotalCost,
         totalUpfront: fullUpfront1yTotalUpfront,
         totalMonthlyPayment: fullUpfront1yTotalMonthly,
-        maximumMonthlyCost: fullUpfront1yMaxMonthly,
+        highestMonthlySpend: fullUpfront1yMaxMonthly,
+        highestMonthlySpendMonth: { year: 2025, month: 1 },
         savingsPercent: fullUpfront1ySavingsPercent,
         monthlyBreakdown: [fullUpfront1yCostTimeseries[0]]
       });
+
+      // Verify total cost formula
+      expect(result.fullUpfront_1y.totalCost).toBe(result.fullUpfront_1y.totalMonthlyPayment + result.fullUpfront_1y.totalUpfront);
 
       // Partial Upfront 3y
       const partialUpfront3yTotalCost = (scenarios[4].monthly * 12) + scenarios[4].upfront;
@@ -148,10 +164,14 @@ describe('CostComparisonCalculator', () => {
         totalCost: partialUpfront3yTotalCost,
         totalUpfront: partialUpfront3yTotalUpfront,
         totalMonthlyPayment: partialUpfront3yTotalMonthly,
-        maximumMonthlyCost: partialUpfront3yMaxMonthly,
+        highestMonthlySpend: partialUpfront3yMaxMonthly,
+        highestMonthlySpendMonth: { year: 2025, month: 1 },
         savingsPercent: partialUpfront3ySavingsPercent,
         monthlyBreakdown: [partialUpfront3yCostTimeseries[0]]
       });
+
+      // Verify total cost formula
+      expect(result.partialUpfront_3y.totalCost).toBe(result.partialUpfront_3y.totalMonthlyPayment + result.partialUpfront_3y.totalUpfront);
 
       // Full Upfront 3y
       const fullUpfront3yTotalCost = (scenarios[5].monthly * 12) + scenarios[5].upfront;
@@ -165,10 +185,14 @@ describe('CostComparisonCalculator', () => {
         totalCost: fullUpfront3yTotalCost,
         totalUpfront: fullUpfront3yTotalUpfront,
         totalMonthlyPayment: fullUpfront3yTotalMonthly,
-        maximumMonthlyCost: fullUpfront3yMaxMonthly,
+        highestMonthlySpend: fullUpfront3yMaxMonthly,
+        highestMonthlySpendMonth: { year: 2025, month: 1 },
         savingsPercent: fullUpfront3ySavingsPercent,
         monthlyBreakdown: [fullUpfront3yCostTimeseries[0]]
       });
+
+      // Verify total cost formula
+      expect(result.fullUpfront_3y.totalCost).toBe(result.fullUpfront_3y.totalMonthlyPayment + result.fullUpfront_3y.totalUpfront);
     });
   });
 });

@@ -89,6 +89,15 @@ export class CostComparisonTableComponent implements OnChanges {
     return `${amount.toFixed(0)}%`;
   }
 
+  formatHighestMonthlySpend(comparison: CostComparison): string {
+    const currency = this.formatCurrency(comparison.highestMonthlySpend);
+    if (comparison.highestMonthlySpendMonth) {
+      const { year, month } = comparison.highestMonthlySpendMonth;
+      return `${currency} (${year}-${month.toString().padStart(2, '0')})`;
+    }
+    return currency;
+  }
+
   isZeroValue(amount: number): boolean {
     return amount === 0;
   }

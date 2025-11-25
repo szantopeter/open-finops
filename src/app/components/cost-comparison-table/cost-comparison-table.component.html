@@ -9,7 +9,7 @@
           <th>Scenario</th>
           <th>Total Upfront</th>
           <th>Total Monthly Payment</th>
-          <th>Maximum Monthly Cost</th>
+          <th>Highest monthly spend</th>
           <th>Total Cost</th>
           <th>Savings Percent</th>
           <th>Details</th>
@@ -17,11 +17,11 @@
       </thead>
       <tbody>
         @for (comparison of costComparisonsArray; track comparison.scenario) {
-          <tr [class.baseline-row]="comparison.scenario === 'noUpfront_1y'">
+          <tr [class.baseline-row]="expandedRow === comparison.scenario">
             <td class="scenario-cell">{{ getScenarioName(comparison.scenario) }}</td>
             <td class="currency-cell" [class.zero-value]="isZeroValue(comparison.totalUpfront)">{{ formatCurrency(comparison.totalUpfront) }}</td>
             <td class="currency-cell" [class.zero-value]="isZeroValue(comparison.totalMonthlyPayment)">{{ formatCurrency(comparison.totalMonthlyPayment) }}</td>
-            <td class="currency-cell" [class.zero-value]="isZeroValue(comparison.maximumMonthlyCost)">{{ formatCurrency(comparison.maximumMonthlyCost) }}</td>
+            <td class="currency-cell" [class.zero-value]="isZeroValue(comparison.highestMonthlySpend)">{{ formatHighestMonthlySpend(comparison) }}</td>
             <td class="currency-cell" [class.zero-value]="isZeroValue(comparison.totalCost)">{{ formatCurrency(comparison.totalCost) }}</td>
             <td class="percent-cell" [class.savings]="comparison.savingsPercent && comparison.savingsPercent > 0">
               {{ formatPercent(comparison.savingsPercent) }}
@@ -44,7 +44,8 @@
   <app-monthly-breakdown-table
     [expandedRow]="expandedRow"
     [timeseries]="currentComparison?.monthlyBreakdown || []"
-    [firstFullYear]="riPortfolio.metadata.firstFullYear">
+    [firstFullYear]="riPortfolio.metadata.firstFullYear"
+    [highestSpendMonth]="currentComparison?.highestMonthlySpendMonth">
   </app-monthly-breakdown-table>
 </div>
 
