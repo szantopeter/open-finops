@@ -1,0 +1,52 @@
+<!-- Monthly Breakdown Table -->
+@if (expandedRow) {
+<div class="monthly-breakdown">
+  <h4>Monthly Cost Breakdown for {{ getScenarioName(expandedRow) }}</h4>
+  <div class="table-container">
+    <table class="monthly-breakdown-table">
+      <thead>
+        <tr>
+          <th rowspan="2" scope="col" class="year-month-cell">Year-Month</th>
+          @for (scenario of displayedScenarios; track scenario) {
+            @if (scenario === 'onDemand') {
+              <th scope="col">{{ getScenarioName(scenario) }}</th>
+            } @else {
+              <th colspan="2" scope="col">{{ getScenarioName(scenario) }}</th>
+            }
+          }
+        </tr>
+        <tr>
+          @for (scenario of displayedScenarios; track scenario) {
+            <th scope="col">Monthly</th>
+            @if (scenario !== 'onDemand') {
+              <th scope="col">Upfront</th>
+            }
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (ym of getYearMonths(); track ym.year + '-' + ym.month) {
+          <tr>
+            <td class="year-month-cell">{{ ym.year }}-{{ ym.month.toString().padStart(2, '0') }}</td>
+            @for (scenario of displayedScenarios; track scenario) {
+              <td class="currency-cell" [class.zero-value]="isZeroValue(getMonthlyCost(scenario, ym.year, ym.month))">{{ formatCurrency(getMonthlyCost(scenario, ym.year, ym.month)) }}</td>
+              @if (scenario !== 'onDemand') {
+                <td class="currency-cell" [class.zero-value]="isZeroValue(getUpfrontCost(scenario, ym.year, ym.month))">{{ formatCurrency(getUpfrontCost(scenario, ym.year, ym.month)) }}</td>
+              }
+            }
+          </tr>
+        }
+        <tr class="summary-row">
+          <td class="year-month-cell">Total</td>
+          @for (scenario of displayedScenarios; track scenario) {
+            <td class="currency-cell">{{ formatCurrency(getTotalMonthlyCost(scenario)) }}</td>
+            @if (scenario !== 'onDemand') {
+              <td class="currency-cell">{{ formatCurrency(getTotalUpfrontCost(scenario)) }}</td>
+            }
+          }
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+}

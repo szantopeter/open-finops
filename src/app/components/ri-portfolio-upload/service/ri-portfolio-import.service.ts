@@ -3,15 +3,15 @@ import { Injectable } from '@angular/core';
 import { PricingLoaderService } from './pricing-loader.service';
 import { RiPortfolioDataService } from './ri-portfolio-data.service';
 import { StorageService } from '../../../storage-service/storage.service';
-import { PricingData } from '../models/pricing.model';
-import { RiRow, RiPortfolio, RiImportMetadata, UpfrontPayment } from '../models/ri-portfolio.model';
+import { PricingData, UpfrontPayment } from '../models/pricing.model';
+import { RiRow, RiPortfolio, RiImportMetadata } from '../models/ri-portfolio.model';
 
 export interface RiImportParseResult {
   riPortfolio?: RiPortfolio;
   errors?: string[];
 }
 
-const REQUIRED_HEADERS = ['Start', 'Instance Type', 'Region', 'Count', 'Term', 'Product', 'End', 'multiAZ', 'RI Type'];
+const REQUIRED_HEADERS = ['Start', 'Instance Type', 'Region', 'Count', 'Term', 'Product', 'End', 'multiAZ', 'RI Type', 'Reservation ID'];
 
 @Injectable({ providedIn: 'root' })
 export class RiCSVParserService {
@@ -109,7 +109,7 @@ export class RiCSVParserService {
       }
 
       rows.push({
-        id: objRaw['RI ID'] || `${objRaw['Instance Type']}-${objRaw['Region']}-${i}`,
+        id: objRaw['Reservation ID'],
         raw: objRaw,
         startDate: startIso,
         endDate: endIso,

@@ -1,4 +1,4 @@
-<div class="cost-comparison-container" *ngIf="costComparisons.length > 0">
+<div class="cost-comparison-container" *ngIf="costComparisonsArray.length > 0">
   <h3>Cost Comparison Analysis</h3>
   <p class="subtitle">Comparing different AWS RDS Reserved Instance payment options for {{ riPortfolio.metadata.firstFullYear }}</p>
 
@@ -7,91 +7,47 @@
       <thead>
         <tr>
           <th>Scenario</th>
-          <th>3yr Full Upfront</th>
-          <th>1yr Full Upfront</th>
-          <th>3yr Partial Upfront</th>
-          <th>1yr Partial Upfront</th>
-          <th>3yr Monthly</th>
-          <th>1yr Monthly</th>
-          <th>On Demand</th>
+          <th>Total Upfront</th>
+          <th>Total Monthly Payment</th>
+          <th>Maximum Monthly Cost</th>
           <th>Total Cost</th>
-          <th>Highest Monthly Cost</th>
-          <th>vs RI Baseline</th>
+          <th>Savings Percent</th>
           <th>Details</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let comparison of costComparisons" [class.baseline-row]="comparison.scenario === '1yr No Upfront'">
-          <td class="scenario-cell">{{ comparison.scenario }}</td>
-          <td class="currency-cell" [class.zero-value]="isZeroValue(comparison.total3yrFullUpfront)">{{ formatCurrency(comparison.total3yrFullUpfront) }}</td>
-          <td class="currency-cell" [class.zero-value]="isZeroValue(comparison.total1yrFullUpfront)">{{ formatCurrency(comparison.total1yrFullUpfront) }}</td>
-          <td class="currency-cell" [class.zero-value]="isZeroValue(comparison.total3yrPartialUpfront)">{{ formatCurrency(comparison.total3yrPartialUpfront) }}</td>
-          <td class="currency-cell" [class.zero-value]="isZeroValue(comparison.total1yrPartialUpfront)">{{ formatCurrency(comparison.total1yrPartialUpfront) }}</td>
-          <td class="currency-cell" [class.zero-value]="isZeroValue(comparison.total3yrMonthly)">{{ formatCurrency(comparison.total3yrMonthly) }}</td>
-          <td class="currency-cell" [class.zero-value]="isZeroValue(comparison.total1yrMonthly)">{{ formatCurrency(comparison.total1yrMonthly) }}</td>
-          <td class="currency-cell" [class.zero-value]="isZeroValue(comparison.totalOnDemand)">{{ formatCurrency(comparison.totalOnDemand) }}</td>
-          <td class="currency-cell total-cost" [class.zero-value]="isZeroValue(comparison.totalCost)">{{ formatCurrency(comparison.totalCost) }}</td>
-          <td class="currency-cell" [class.zero-value]="isZeroValue(comparison.highestMonthlyCost)">{{ formatCurrency(comparison.highestMonthlyCost) }}</td>
-          <td class="percent-cell" [class.savings]="comparison.totalCostSavingPercent && comparison.totalCostSavingPercent > 0">
-            {{ formatPercent(comparison.totalCostSavingPercent) }}
-          </td>
-          <td class="action-cell">
-            <button 
-              class="details-button" 
-              (click)="toggleMonthlyBreakdown(comparison.scenario)"
-              [class.expanded]="expandedRow === comparison.scenario">
-              {{ expandedRow === comparison.scenario ? 'Hide' : 'Show' }} Details
-            </button>
-          </td>
-        </tr>
+        @for (comparison of costComparisonsArray; track comparison.scenario) {
+          <tr [class.baseline-row]="comparison.scenario === 'noUpfront_1y'">
+            <td class="scenario-cell">{{ getScenarioName(comparison.scenario) }}</td>
+            <td class="currency-cell" [class.zero-value]="isZeroValue(comparison.totalUpfront)">{{ formatCurrency(comparison.totalUpfront) }}</td>
+            <td class="currency-cell" [class.zero-value]="isZeroValue(comparison.totalMonthlyPayment)">{{ formatCurrency(comparison.totalMonthlyPayment) }}</td>
+            <td class="currency-cell" [class.zero-value]="isZeroValue(comparison.maximumMonthlyCost)">{{ formatCurrency(comparison.maximumMonthlyCost) }}</td>
+            <td class="currency-cell" [class.zero-value]="isZeroValue(comparison.totalCost)">{{ formatCurrency(comparison.totalCost) }}</td>
+            <td class="percent-cell" [class.savings]="comparison.savingsPercent && comparison.savingsPercent > 0">
+              {{ formatPercent(comparison.savingsPercent) }}
+            </td>
+            <td class="action-cell">
+              <button 
+                class="details-button" 
+                (click)="toggleMonthlyBreakdown(comparison.scenario)"
+                [class.expanded]="expandedRow === comparison.scenario">
+                {{ expandedRow === comparison.scenario ? 'Hide' : 'Show' }} Details
+              </button>
+            </td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>
 
   <!-- Monthly Breakdown Table -->
-  <div class="monthly-breakdown" *ngIf="expandedRow">
-    <h4>Monthly Cost Breakdown - {{ expandedRow }}</h4>
-    <div class="table-container">
-      <table class="monthly-breakdown-table">
-        <thead>
-          <tr>
-            <th>Year-Month</th>
-            <th>3yr Full Upfront</th>
-            <th>1yr Full Upfront</th>
-            <th>3yr Partial Upfront</th>
-            <th>1yr Partial Upfront</th>
-            <th>3yr Monthly</th>
-            <th>1yr Monthly</th>
-            <th>On Demand</th>
-            <th>Total Monthly Cost</th>
-          </tr>
-        </thead>
-        <tbody>
-          <ng-container *ngFor="let comparison of costComparisons">
-            <ng-container *ngIf="comparison.scenario === expandedRow">
-              <ng-container *ngFor="let year of getYearsForScenario(comparison.monthlyBreakdown)">
-                <ng-container *ngFor="let month of getMonthsForYear(comparison.monthlyBreakdown, year)">
-                  <tr>
-                    <td>{{ year }}-{{ month.toString().padStart(2, '0') }}</td>
-                    <td class="currency-cell" [class.zero-value]="isZeroValue(getMonthlyCostByType(comparison.monthlyBreakdown, year, month, 'fullUpfront_3y'))">{{ formatCurrency(getMonthlyCostByType(comparison.monthlyBreakdown, year, month, 'fullUpfront_3y')) }}</td>
-                    <td class="currency-cell" [class.zero-value]="isZeroValue(getMonthlyCostByType(comparison.monthlyBreakdown, year, month, 'fullUpfront_1y'))">{{ formatCurrency(getMonthlyCostByType(comparison.monthlyBreakdown, year, month, 'fullUpfront_1y')) }}</td>
-                    <td class="currency-cell" [class.zero-value]="isZeroValue(getMonthlyCostByType(comparison.monthlyBreakdown, year, month, 'partialUpUpfront_3y'))">{{ formatCurrency(getMonthlyCostByType(comparison.monthlyBreakdown, year, month, 'partialUpUpfront_3y')) }}</td>
-                    <td class="currency-cell" [class.zero-value]="isZeroValue(getMonthlyCostByType(comparison.monthlyBreakdown, year, month, 'partialUpfront_1y'))">{{ formatCurrency(getMonthlyCostByType(comparison.monthlyBreakdown, year, month, 'partialUpfront_1y')) }}</td>
-                    <td class="currency-cell" [class.zero-value]="isZeroValue(getMonthlyCostByType(comparison.monthlyBreakdown, year, month, 'fullUpfront_3y') + getMonthlyCostByType(comparison.monthlyBreakdown, year, month, 'partialUpUpfront_3y'))">{{ formatCurrency(getMonthlyCostByType(comparison.monthlyBreakdown, year, month, 'fullUpfront_3y') + getMonthlyCostByType(comparison.monthlyBreakdown, year, month, 'partialUpUpfront_3y')) }}</td>
-                    <td class="currency-cell" [class.zero-value]="isZeroValue(getMonthlyCostByType(comparison.monthlyBreakdown, year, month, 'noUpfront_1y') + getMonthlyCostByType(comparison.monthlyBreakdown, year, month, 'fullUpfront_1y') + getMonthlyCostByType(comparison.monthlyBreakdown, year, month, 'partialUpfront_1y'))">{{ formatCurrency(getMonthlyCostByType(comparison.monthlyBreakdown, year, month, 'noUpfront_1y') + getMonthlyCostByType(comparison.monthlyBreakdown, year, month, 'fullUpfront_1y') + getMonthlyCostByType(comparison.monthlyBreakdown, year, month, 'partialUpfront_1y')) }}</td>
-                    <td class="currency-cell" [class.zero-value]="isZeroValue(getMonthlyCostByType(comparison.monthlyBreakdown, year, month, 'onDemand'))">{{ formatCurrency(getMonthlyCostByType(comparison.monthlyBreakdown, year, month, 'onDemand')) }}</td>
-                    <td class="currency-cell" [class.zero-value]="isZeroValue(getMonthlyCostForScenario(comparison.monthlyBreakdown, comparison.scenario, year, month))">{{ formatCurrency(getMonthlyCostForScenario(comparison.monthlyBreakdown, comparison.scenario, year, month)) }}</td>
-                  </tr>
-                </ng-container>
-              </ng-container>
-            </ng-container>
-          </ng-container>
-        </tbody>
-      </table>
-    </div>
-  </div>
+  <app-monthly-breakdown-table
+    [expandedRow]="expandedRow"
+    [timeseries]="currentComparison?.monthlyBreakdown || []"
+    [firstFullYear]="riPortfolio.metadata.firstFullYear">
+  </app-monthly-breakdown-table>
 </div>
 
-<div class="no-data" *ngIf="costComparisons.length === 0">
+<div class="no-data" *ngIf="costComparisonsArray.length === 0">
   <p>No cost comparison data available. Please import RI portfolio data first.</p>
 </div>

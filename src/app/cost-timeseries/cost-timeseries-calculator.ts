@@ -93,7 +93,7 @@ export class CostTimeseriesCalculator {
         };
 
       } else {
-        //TODO throw error
+        throw new Error(`Savings option not found for upfrontPayment: ${upfrontPayment}, durationMonths: ${durationMonths}`);
       }
     }
 
@@ -111,8 +111,7 @@ export class CostTimeseriesCalculator {
       if (upfrontPayment === 'No Upfront') return '1yr_No Upfront';
     }
 
-    //TODO throw error
-    return 'invalid';
+    throw new Error(`Invalid upfrontPayment: ${upfrontPayment} or durationMonths: ${durationMonths}`);
   }
 
   private static getCostFieldName(upfrontPayment: UpfrontPayment, durationMonths: number): string {

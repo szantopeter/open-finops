@@ -1,4 +1,4 @@
-import PricingData, { UpfrontPayment } from './pricing.model';
+import {PricingData, UpfrontPayment} from './pricing.model';
 
 export interface RiImportMetadata {
   source: string;
@@ -27,5 +27,3 @@ export interface RiRow {
   durationMonths: number;
   type: 'actual' | 'projected';
 }
-
-export { UpfrontPayment };

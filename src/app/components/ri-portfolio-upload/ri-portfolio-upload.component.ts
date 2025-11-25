@@ -10,12 +10,13 @@ import { RiCSVParserService, RiImportService } from './service/ri-portfolio-impo
   template: `
     <div class="p-4 border rounded">
       <h3>Import RIs</h3>
-      <input type="file" (change)="onFile($event)" accept=".csv,text/csv" />
+      <input type="file" class="file-input" (change)="onFile($event)" accept=".csv,text/csv" />
       <ul *ngIf="lastError" class="text-red-600 mt-2 list-disc list-inside">
         <li *ngFor="let error of lastError">{{ error }}</li>
       </ul>
     </div>
-  `
+  `,
+  styleUrls: ['./ri-portfolio-upload.component.scss']
 })
 
 export class RiImportUploadComponent {

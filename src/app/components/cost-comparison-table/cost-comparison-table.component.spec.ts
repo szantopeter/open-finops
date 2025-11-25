@@ -70,9 +70,27 @@ describe('CostComparisonTableComponent', () => {
                 hourly: 0.08,
                 daily: 1.92
               },
-              '1yr_Partial Upfront': null,
-              '1yr_All Upfront': null,
-              '3yr_Partial Upfront': null,
+              '1yr_Partial Upfront': {
+                term: '1yr',
+                purchaseOption: 'Partial Upfront',
+                upfront: 200,
+                hourly: 0.06,
+                daily: 1.44
+              },
+              '1yr_All Upfront': {
+                term: '1yr',
+                purchaseOption: 'All Upfront',
+                upfront: 400,
+                hourly: 0.04,
+                daily: 0.96
+              },
+              '3yr_Partial Upfront': {
+                term: '3yr',
+                purchaseOption: 'Partial Upfront',
+                upfront: 500,
+                hourly: 0.03,
+                daily: 0.72
+              },
               '3yr_All Upfront': {
                 term: '3yr',
                 purchaseOption: 'All Upfront',
@@ -100,9 +118,9 @@ describe('CostComparisonTableComponent', () => {
     fixture.detectChanges();
 
     // Check that cost comparisons are calculated
-    expect(component.costComparisons.length).toBeGreaterThan(0);
-    expect(component.costComparisons[0].scenario).toBeDefined();
-    expect(component.costComparisons[0].totalCost).toBeDefined();
+    expect(Object.keys(component.costComparisons).length).toBeGreaterThan(0);
+    expect(component.costComparisons.onDemand.scenario).toBeDefined();
+    expect(component.costComparisons.onDemand.totalCost).toBeDefined();
   });
 
   it('should format currency correctly', () => {

@@ -3,7 +3,7 @@ import { SavingsKey, UpfrontPayment } from '../components/ri-portfolio-upload/mo
 import { RiPortfolio, RiRow } from '../components/ri-portfolio-upload/models/ri-portfolio.model';
 
 function addMonths(date: Date, months: number): Date {
-  const d = new Date(date.getTime());
+  const d = new Date(date);
   const day = d.getDate();
   d.setMonth(d.getMonth() + months);
   // Handle month overflow where day might be adjusted (leave as is)
@@ -45,7 +45,7 @@ export class RiRenewalProjection {
       result.rows.push({ riRow: { ...originalRiRow }, pricingData: originalPortfolioEntry.pricingData });
 
       // Always create at least one renewal and continue until one ends after firstFullYear
-      let prevEnd = new Date(originalRiRow.endDate.getTime());
+      let prevEnd = new Date(originalRiRow.endDate);
       let idx = 1;
 
       // Create renewals until one ends after the target end of firstFullYear
@@ -55,7 +55,7 @@ export class RiRenewalProjection {
 
         const endCandidate = addMonths(startDate, renewalTermMonths);
         // make endDate inclusive by subtracting one day
-        const endDate = new Date(endCandidate.getTime());
+        const endDate = new Date(endCandidate);
         endDate.setDate(endDate.getDate() - 1);
 
         const renewal: RiRow = {

@@ -23,13 +23,14 @@ describe('RiImportService', () => {
   });
 
   it('parses a minimal CSV', async () => {
-    const csv = 'Start,Instance Type,Region,Count,Term,Product,End,multiAZ,RI Type\n2020-01-01,t3.medium,us-east-1,2,1 year,mysql,2021-01-01,false,No Upfront';
+    const csv = 'Start,Instance Type,Region,Count,Term,Product,End,multiAZ,RI Type,Reservation ID\n2020-01-01,t3.medium,us-east-1,2,1 year,mysql,2021-01-01,false,No Upfront,ri-12345';
     const res = await svc.parseText(csv, 'test');
     expect(res.errors).toBeUndefined();
     expect(res.riPortfolio).toBeDefined();
     if (!res.riPortfolio) throw new Error('expected import');
     expect(res.riPortfolio.rows.length).toBe(1);
     expect(res.riPortfolio.rows[0].riRow.count).toBe(2);
+    expect(res.riPortfolio.rows[0].riRow.id).toBe('ri-12345');
   });
 
   it('reports missing required columns', async () => {
@@ -40,7 +41,7 @@ describe('RiImportService', () => {
   });
 
   it('reports invalid start date', async () => {
-    const csv = 'Start,Instance Type,Region,Count,Term,Product,End,multiAZ,RI Type\nNOTADATE,t3.small,eu-west-1,1,1 year,mysql,2021-01-01,false,No Upfront';
+    const csv = 'Start,Instance Type,Region,Count,Term,Product,End,multiAZ,RI Type,Reservation ID\nNOTADATE,t3.small,eu-west-1,1,1 year,mysql,2021-01-01,false,No Upfront,ri-12345';
     const res = await svc.parseText(csv);
     expect(res.errors).toBeDefined();
     expect(res.errors?.[0]).toContain('invalid Start');
