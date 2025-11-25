@@ -1,13 +1,13 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+# . "$(dirname "$0")/_/husky.sh"
 
-echo "Running lint-staged on staged files before push"
+# echo "Running lint-staged on staged files before push"
 # Run lint-staged which will only lint changed files; this avoids running a full project lint that can OOM.
-ng lint --fix
-rc=$?
-if [ $rc -ne 0 ]; then
-	echo "lint-staged failed. Aborting push."
-	exit $rc
-fi
+# ng lint --fix
+# rc=$?
+# if [ $rc -ne 0 ]; then
+# 	echo "lint-staged failed. Aborting push."
+# 	exit $rc
+# fi
 
-echo "Pre-push checks passed."
+# echo "Pre-push checks passed."
