@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import type { PricingLoaderService } from './pricing-loader.service';
-import type { RiPortfolioDataService } from './ri-portfolio-data.service';
-import type { StorageService } from '../../../storage-service/storage.service';
+import { PricingLoaderService } from './pricing-loader.service';
+import { RiPortfolioDataService } from './ri-portfolio-data.service';
+import { StorageService } from '../../../storage-service/storage.service';
 import type { PricingData, UpfrontPayment } from '../models/pricing.model';
 import type { RiRow, RiPortfolio, RiImportMetadata } from '../models/ri-portfolio.model';
 

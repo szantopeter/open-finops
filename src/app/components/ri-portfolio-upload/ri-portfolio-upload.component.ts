@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
-import type { RiCSVParserService, RiImportService } from './service/ri-portfolio-import.service';
+import { RiCSVParserService, RiImportService } from './service/ri-portfolio-import.service';
 
 @Component({
   selector: 'app-ri-import-upload',

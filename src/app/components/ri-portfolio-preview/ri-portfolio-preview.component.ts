@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 
-import type { RiPortfolioDataService } from '../ri-portfolio-upload/service/ri-portfolio-data.service';
+import { RiPortfolioDataService } from '../ri-portfolio-upload/service/ri-portfolio-data.service';
 
 @Component({
   selector: 'app-ri-import-preview',
