@@ -12,7 +12,7 @@ const { PricingClient, GetProductsCommand } = require('@aws-sdk/client-pricing')
 const minimist = require('minimist');
 
 const argv = minimist(process.argv.slice(2), {
-  string: ['regions', 'instances', 'out', 'service', 'profile', 'discountpercent'],
+  string: ['regions', 'instances', 'out', 'service', 'profile', 'discountpercent', 'csv'],
   // NOTE: --out is now interpreted as an output directory for the new folder-based layout
   // Default output directory will be the project's `src/assets/pricing` so generated files
   // are available under the application's static assets at /assets/pricing
@@ -320,7 +320,130 @@ function buildEngineKey(engine, license, edition) {
   return key;
 }
 
+function parseCSVFromFile(csvPath) {
+  const csvContent = fs.readFileSync(csvPath, 'utf8');
+  const lines = csvContent.split(/\r?\n/).filter(l => l.trim().length > 0);
+  if (lines.length === 0) return [];
+  
+  const header = parseCsvLine(lines[0]);
+  const headers = header.map(h => h.trim());
+  
+  const rows = [];
+  for (let i = 1; i < lines.length; i++) {
+    const row = parseCsvLine(lines[i]);
+    if (row.length === 0) continue;
+    
+    const obj = {};
+    for (let j = 0; j < headers.length; j++) {
+      obj[headers[j]] = row[j] ?? '';
+    }
+    rows.push(obj);
+  }
+  return rows;
+}
+
+function parseCsvLine(line) {
+  const result = [];
+  let cur = '';
+  let inQuotes = false;
+  let i = 0;
+  while (i < line.length) {
+    const ch = line[i];
+    if (ch === '"') {
+      if (inQuotes && line[i + 1] === '"') {
+        cur += '"';
+        i += 2;
+        continue;
+      }
+      inQuotes = !inQuotes;
+      i++;
+      continue;
+    }
+    if (ch === ',' && !inQuotes) {
+      result.push(cur);
+      cur = '';
+      i++;
+      continue;
+    }
+    cur += ch;
+    i++;
+  }
+  result.push(cur);
+  return result;
+}
+
+// Helper: parse product string to extract engine, edition, license
+function parseProduct(product) {
+  const lower = (product || '').toString().toLowerCase().trim();
+  let engine = null;
+  let edition = null;
+  let license = null;
+
+  // Handle Aurora engines
+  if (lower.includes('aurora') && lower.includes('mysql')) {
+    engine = 'aurora-mysql';
+  } else if (lower.includes('aurora') && (lower.includes('postgres') || lower.includes('postgresql'))) {
+    engine = 'aurora-postgresql';
+  } else if (lower.includes('mysql')) {
+    engine = 'mysql';
+  } else if (lower.includes('postgres') || lower.includes('postgresql')) {
+    engine = 'postgresql';
+  } else if (lower.includes('mariadb')) {
+    engine = 'mariadb';
+  } else if (lower.includes('oracle')) {
+    engine = 'oracle';
+    // Extract edition and license for Oracle
+    if (lower.includes('se2')) {
+      edition = 'se2';
+    } else if (lower.includes('ee')) {
+      edition = 'ee';
+    }
+    if (lower.includes('byol') || lower.includes('(byol)')) {
+      license = 'byol';
+    } else if (lower.includes('li') || lower.includes('license included')) {
+      license = 'li';
+    }
+  } else if (lower.includes('sql server') || lower.includes('sqlserver')) {
+    engine = 'sqlserver';
+  } else {
+    // Fallback: use the whole string as engine after cleaning
+    engine = lower.replace(/[()]/g, '').replace(/\s+/g, '-');
+  }
+
+  return { engine, edition, license };
+}
+
 (async function main() {
+  // If --csv is provided, parse it and print needed files
+  if (argv.csv) {
+    console.error(`Parsing CSV file: ${argv.csv}`);
+    const csvData = parseCSVFromFile(argv.csv);
+    const fileSet = new Set();
+    
+    for (const row of csvData) {
+      // Determine deployment and engine for file path
+      const region = row['Region']?.trim();
+      const instanceType = row['Instance Type']?.trim();
+      const multiAZ = row['multiAZ']?.trim().toLowerCase() === 'true';
+      const product = row['Product']?.trim();
+      
+      if (region && instanceType && product) {
+        const deployment = multiAZ ? 'multi-az' : 'single-az';
+        const { engine, edition, license } = parseProduct(product);
+        const engineKey = buildEngineKey(engine, license, edition);
+        const filePath = `${region}/${instanceType}/${region}_${instanceType}_${deployment}-${engineKey}.json`;
+        fileSet.add(filePath);
+      }
+    }
+    
+    const neededFiles = Array.from(fileSet).sort();
+    console.log('Pricing files needed for the CSV:');
+    for (const file of neededFiles) {
+      console.log(file);
+    }
+    process.exit(0);
+  }
+
   // Prepare metadata (minimal manifest)
   const metadata = { fetchedAt: new Date().toISOString(), source: service, discountPercentApplied: discountPercent };
   const summary = { currency: 'USD', regions: {} };
