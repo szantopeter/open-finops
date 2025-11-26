@@ -6,6 +6,7 @@
 
 
 src/assets/pricing_full
+tools/pricing-generator/logs/
 
 # Node artifact files
 source/node_modules/

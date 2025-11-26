@@ -16,12 +16,12 @@ const argv = minimist(process.argv.slice(2), {
   // NOTE: --out is now interpreted as an output directory for the new folder-based layout
   // Default output directory will be the project's `src/assets/pricing` so generated files
   // are available under the application's static assets at /assets/pricing
-  default: { out: '../../src/assets/pricing', service: 'AmazonRDS', discountpercent: '14' },
+  default: { out: '../../src/assets/pricing', service: 'AmazonRDS', discountpercent: '0' },
   boolean: ['all-instances']
 });
 
 const regions = (argv.regions || 'us-east-1').split(',').map(s=>s.trim()).filter(Boolean);
-const instances = argv['all-instances'] ? null : (argv.instances || 'db.t3.medium').split(',').map(s=>s.trim()).filter(Boolean);
+let instances = argv['all-instances'] ? null : (argv.instances || 'db.t3.medium').split(',').map(s=>s.trim()).filter(Boolean);
 // Determine output path. If relative, resolve it relative to this script's directory so
 // running the generator from different CWDs doesn't write into tools/ by accident.
 const outPathRaw = argv.out || '../../src/assets/pricing';
@@ -140,6 +140,25 @@ async function getProductsForFilters(filters, maxResults = 100) {
   try {
     const cmd = new GetProductsCommand(params);
     const resp = await client.send(cmd);
+    
+    // Save full API response to logs
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const filterSummary = filters.map(f => `${f.Field}=${f.Value}`).join('_').replace(/[^a-zA-Z0-9_-]/g, '_');
+    const filename = `logs/getProductsForFilters_${filterSummary}_${timestamp}.json`;
+    
+    // Create a copy of the response with parsed PriceList
+    const responseForLog = {
+      ...resp,
+      PriceList: resp.PriceList ? resp.PriceList.map(p => JSON.parse(p)) : []
+    };
+    
+    fs.writeFileSync(filename, JSON.stringify({
+      apiCall: 'getProductsForFilters',
+      parameters: params,
+      timestamp: new Date().toISOString(),
+      response: responseForLog
+    }, null, 2), 'utf8');
+    
     return resp.PriceList ? resp.PriceList.map(p => JSON.parse(p)) : [];
   } catch (err) {
     const msg = err && (err.message || err.name) ? (err.message || err.name) : String(err);
@@ -168,6 +187,24 @@ async function getProductsForFilters(filters, maxResults = 100) {
         }
         const parsed = JSON.parse(out.stdout || out.stdout);
         // CLI returns a PriceList in parsed.PriceList possibly as strings
+        
+        // Save CLI API response to logs
+        const cliTimestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const cliFilename = `logs/cliFallback_getProducts_${filterSummary}_${cliTimestamp}.json`;
+        
+        // Create a copy of the parsed response with parsed PriceList
+        const cliResponseForLog = {
+          ...parsed,
+          PriceList: parsed.PriceList ? parsed.PriceList.map(p => typeof p === 'string' ? JSON.parse(p) : p) : []
+        };
+        
+        fs.writeFileSync(cliFilename, JSON.stringify({
+          apiCall: 'cliFallback_getProducts',
+          parameters: { cliArgs, service, filters },
+          timestamp: new Date().toISOString(),
+          response: cliResponseForLog
+        }, null, 2), 'utf8');
+        
         if (Array.isArray(parsed.PriceList)) {
           return parsed.PriceList.map(p => typeof p === 'string' ? JSON.parse(p) : p);
         }
@@ -250,6 +287,25 @@ async function getAllInstanceTypes(regionCode) {
     try {
       const cmd = new GetProductsCommand(params);
       const resp = await client.send(cmd);
+      
+      // Save full API response to logs
+      const pageTimestamp = new Date().toISOString().replace(/[:.]/g, '-');
+      const pageFilename = `logs/getAllInstanceTypes_${regionCode}_page${pageCount}_${pageTimestamp}.json`;
+      
+      // Create a copy of the response with parsed PriceList
+      const pageResponseForLog = {
+        ...resp,
+        PriceList: resp.PriceList ? resp.PriceList.map(p => JSON.parse(p)) : []
+      };
+      
+      fs.writeFileSync(pageFilename, JSON.stringify({
+        apiCall: 'getAllInstanceTypes',
+        parameters: params,
+        regionCode: regionCode,
+        pageCount: pageCount,
+        timestamp: new Date().toISOString(),
+        response: pageResponseForLog
+      }, null, 2), 'utf8');
       
       if (resp.PriceList) {
         for (const priceItem of resp.PriceList) {
@@ -414,11 +470,13 @@ function parseProduct(product) {
 }
 
 (async function main() {
-  // If --csv is provided, parse it and print needed files
+  // If --csv is provided, parse it and collect needed files
+  let neededFiles = new Set();
   if (argv.csv) {
     console.error(`Parsing CSV file: ${argv.csv}`);
     const csvData = parseCSVFromFile(argv.csv);
-    const fileSet = new Set();
+    const regionsSet = new Set();
+    const instancesSet = new Set();
     
     for (const row of csvData) {
       // Determine deployment and engine for file path
@@ -428,20 +486,41 @@ function parseProduct(product) {
       const product = row['Product']?.trim();
       
       if (region && instanceType && product) {
+        regionsSet.add(region);
+        instancesSet.add(instanceType);
         const deployment = multiAZ ? 'multi-az' : 'single-az';
         const { engine, edition, license } = parseProduct(product);
         const engineKey = buildEngineKey(engine, license, edition);
         const filePath = `${region}/${instanceType}/${region}_${instanceType}_${deployment}-${engineKey}.json`;
-        fileSet.add(filePath);
+        neededFiles.add(filePath);
+        // Also add SE <-> SE2 variant to guard against CSV using 'SE' while AWS products use 'SE2' (or vice versa)
+        try {
+          if (engineKey && engineKey.includes('se2')) {
+            const alt = engineKey.replace('se2', 'se');
+            const altPath = `${region}/${instanceType}/${region}_${instanceType}_${deployment}-${alt}.json`;
+            neededFiles.add(altPath);
+          } else if (engineKey && /(^|-)se($|-)/.test(engineKey) && !engineKey.includes('se2')) {
+            const alt = engineKey.replace(/(^|-)se($|-)/, (m) => m.replace('se', 'se2'));
+            const altPath = `${region}/${instanceType}/${region}_${instanceType}_${deployment}-${alt}.json`;
+            neededFiles.add(altPath);
+          }
+        } catch (e) {
+          // non-fatal; best-effort alternate key generation
+        }
       }
     }
     
-    const neededFiles = Array.from(fileSet).sort();
+    // Override regions and instances to only those in CSV
+    regions.splice(0, regions.length, ...Array.from(regionsSet));
+    instances = Array.from(instancesSet);
+    
+    console.error(`Found ${regions.length} regions and ${instances.length} instances in CSV`);
     console.log('Pricing files needed for the CSV:');
-    for (const file of neededFiles) {
+    const sortedFiles = Array.from(neededFiles).sort();
+    for (const file of sortedFiles) {
       console.log(file);
     }
-    process.exit(0);
+    console.log(`Will generate ${neededFiles.size} specific pricing files...`);
   }
 
   // Prepare metadata (minimal manifest)
@@ -480,307 +559,103 @@ function parseProduct(product) {
       const instanceDir = path.join(outDir, r, it);
       fs.mkdirSync(instanceDir, { recursive: true });
 
-      // Collect RI terms by deployment and per-variant on-demand records
-      const riByDeployment = { 'Single-AZ': {}, 'Multi-AZ': {} };
-      const perVariant = [];
+      // Collect RI terms and on-demand prices per product SKU
+      const pricingBySku = {};
 
       // For each product, attempt to extract on-demand hourly and record per-variant data
       for (const p of products) {
-        const attrs = (p && p.product && p.product.attributes) || {};
-        const deploymentRaw = attrs.deploymentOption || attrs.deployment || '';
-        const deployment = normalizeDeployment(deploymentRaw) || 'Single-AZ';
-        const engine = normalizeEngine(attrs.databaseEngine || attrs.servicecode || attrs.productFamily || '');
-        const license = normalizeLicense(attrs.licenseModel || attrs.license || '');
-        const edition = (attrs.databaseEdition || attrs.databaseEdition || '') || '';
+        const sku = (p && p.product && p.product.sku) || null;
+        if (!sku) continue;
+
+        if (!pricingBySku[sku]) {
+          const attrs = (p && p.product && p.product.attributes) || {};
+          const deploymentRaw = attrs.deploymentOption || attrs.deployment || '';
+          const deployment = normalizeDeployment(deploymentRaw) || 'Single-AZ';
+          const engine = normalizeEngine(attrs.databaseEngine || attrs.servicecode || attrs.productFamily || '');
+          const license = normalizeLicense(attrs.licenseModel || attrs.license || '');
+          const edition = (attrs.databaseEdition || '') || '';
+          const engineKey = buildEngineKey(engine, license, edition);
+          
+          pricingBySku[sku] = {
+            deployment,
+            engineKey,
+            license,
+            edition,
+            onDemand: null,
+            savingsOptions: null
+          };
+        }
+
         // Extract on-demand hourly for this specific product
         const hourly = extractOnDemandHourlyFromProduct(p);
         if (hourly) {
           const hourlyDisc = typeof hourly === 'number' ? Number((hourly * discountFactor).toFixed(6)) : hourly;
           const daily = typeof hourly === 'number' ? Number((hourly * 24 * discountFactor).toFixed(6)) : null;
-          const sku = (p && p.product && p.product.sku) || null;
-
-          const engineKey = buildEngineKey(engine, license, edition);
-          perVariant.push({ deployment, engineKey, license, edition, hourly: hourlyDisc, daily, sku });
+          pricingBySku[sku].onDemand = {
+            hourly: hourlyDisc,
+            daily,
+            effectiveHourly: hourlyDisc,
+            effectiveDaily: daily,
+            sku: sku
+          };
         }
 
-        // Collect RI terms for this product under its deployment
+        // Collect RI terms for this product
         const rterms = extractReservedInstancePricing(p);
         if (rterms) {
-          const target = riByDeployment[deployment] || riByDeployment['Single-AZ'];
-          for (const k of Object.keys(rterms)) {
-            // Skip 3-year No Upfront reserved offerings — do not expose them as savings options
-            if (k === '3yr_No Upfront') continue;
-            if (!target[k]) target[k] = rterms[k];
-          }
+            const discounted = {};
+            for (const k of Object.keys(rterms)) {
+                if (k === '3yr_No Upfront') continue;
+                const v = rterms[k];
+                const copy = Object.assign({}, v);
+                if (copy.upfront !== undefined) copy.upfront = Number((copy.upfront * discountFactor).toFixed(2));
+                if (copy.hourly !== undefined) copy.hourly = Number((copy.hourly * discountFactor).toFixed(6));
+                if (copy.daily !== undefined) copy.daily = Number((copy.daily * discountFactor).toFixed(6));
+                if (copy.effectiveHourly !== undefined) copy.effectiveHourly = Number((copy.effectiveHourly * discountFactor).toFixed(6));
+                if (copy.effectiveDaily !== undefined) copy.effectiveDaily = Number((copy.effectiveDaily * discountFactor).toFixed(6));
+                discounted[k] = copy;
+            }
+            pricingBySku[sku].savingsOptions = discounted;
         }
-      }
-      // Build discounted RI map per deployment (apply discountFactor to numeric fields)
-      const discountedRiByDeployment = {};
-      const expectedKeys = [
-        '1yr_No Upfront', '1yr_Partial Upfront', '1yr_All Upfront',
-        '3yr_Partial Upfront', '3yr_All Upfront'
-      ];
-      for (const dep of Object.keys(riByDeployment)) {
-        const merged = riByDeployment[dep] || {};
-        const discounted = {};
-        for (const k of Object.keys(merged)) {
-          const v = merged[k];
-          const copy = Object.assign({}, v);
-          if (copy.upfront !== undefined) copy.upfront = Number((copy.upfront * discountFactor).toFixed(2));
-          if (copy.hourly !== undefined) copy.hourly = Number((copy.hourly * discountFactor).toFixed(6));
-          if (copy.daily !== undefined) copy.daily = Number((copy.daily * discountFactor).toFixed(6));
-          if (copy.effectiveHourly !== undefined) copy.effectiveHourly = Number((copy.effectiveHourly * discountFactor).toFixed(6));
-          if (copy.effectiveDaily !== undefined) copy.effectiveDaily = Number((copy.effectiveDaily * discountFactor).toFixed(6));
-          discounted[k] = copy;
-        }
-        // Ensure all expected keys exist; fill missing with null to indicate absence
-        for (const ek of expectedKeys) {
-          if (!Object.prototype.hasOwnProperty.call(discounted, ek)) {
-            discounted[ek] = null;
-          }
-        }
-        discountedRiByDeployment[dep] = discounted;
       }
 
       // Write per-variant files (include on-demand and savingsOptions for all 6 permutations)
       let anyWritten = false;
-      for (const rec of perVariant) {
+      for (const sku of Object.keys(pricingBySku)) {
+        const rec = pricingBySku[sku];
+        if (!rec.onDemand) continue; // Cannot create a file without on-demand price
+
         const filename = `${r}_${it}_${rec.deployment.toLowerCase()}-${rec.engineKey}.json`;
         const filePath = path.join(instanceDir, filename);
+        const fullPath = `${r}/${it}/${filename}`;
+        if (argv.csv && !neededFiles.has(fullPath)) continue; // Skip if not needed
+        
         const fileObj = {
           region: r,
           instance: it,
           deployment: rec.deployment.toLowerCase(),
           engine: rec.engineKey,
           license: rec.license,
-          onDemand: {
-            hourly: rec.hourly,
-            daily: rec.daily,
-            effectiveHourly: rec.hourly,
-            effectiveDaily: rec.daily,
-            sku: rec.sku
-          },
-          // savingsOptions: may be null if no RI terms found for that deployment
-          savingsOptions: discountedRiByDeployment[rec.deployment] || null
+          onDemand: rec.onDemand,
+          savingsOptions: rec.savingsOptions
         };
 
         // Validate that on-demand price > reserved prices
-        let isValid = true;
         if (fileObj.onDemand.daily && fileObj.savingsOptions) {
           for (const [key, sav] of Object.entries(fileObj.savingsOptions)) {
             if (sav && typeof sav.effectiveDaily === 'number' && sav.effectiveDaily >= fileObj.onDemand.daily) {
               errors.push(`Invalid pricing for ${filename}: reserved ${key} effectiveDaily (${sav.effectiveDaily}) >= on-demand daily (${fileObj.onDemand.daily})`);
-              isValid = false;
-              break;
+              // Note: Not skipping invalid files, just logging
             }
           }
         }
 
-        if (isValid) {
-          try {
-            fs.writeFileSync(filePath, JSON.stringify(fileObj, null, 2), 'utf8');
-            anyWritten = true;
-          } catch (e) {
-            console.error('Failed to write per-variant file', filePath, e && e.message);
-          }
-        } else {
-          console.error(`Skipping invalid file: ${filename}`);
-        }
-      }
-
-      // Ensure a broad set of engine variants exist even when not discovered in perVariant.
-      // This creates fallback files (using on-demand hourly as source) for common engines and license variants
-      // so the frontend can find a reasonable pricing file without failing.
-      const enginesToEnsure = [
-        'aurora-postgresql', 'aurora-mysql', 'mysql', 'postgresql', 'mariadb',
-        'oracle-se2', 'oracle-ee', 'oracle-se2-byol', 'oracle-ee-byol',
-        'db2', 'db2-se', 'db2-byol',
-        'sqlserver-web-li', 'sqlserver-ex-li'
-      ];
-
-      const deploymentsToEnsure = ['Single-AZ', 'Multi-AZ'];
-
-      for (const eng of enginesToEnsure) {
-        for (const dep of deploymentsToEnsure) {
-          const wantedFilename = `${r}_${it}_${dep.toLowerCase()}-${eng}.json`;
-          const wantedPath = path.join(instanceDir, wantedFilename);
-          if (!fs.existsSync(wantedPath)) {
-            try {
-              const od = await getOnDemandHourly(it, r);
-              if (od && od.hourly) {
-                const hourlyDisc = typeof od.hourly === 'number' ? Number((od.hourly * discountFactor).toFixed(6)) : od.hourly;
-                const daily = typeof hourlyDisc === 'number' ? Number((hourlyDisc * 24).toFixed(6)) : null;
-                const fileObj = {
-                  region: r,
-                  instance: it,
-                  deployment: dep.toLowerCase(),
-                  engine: eng,
-                  license: null,
-                  onDemand: { hourly: hourlyDisc, daily: daily, effectiveHourly: hourlyDisc, effectiveDaily: daily, sku: od.product && od.product.product && od.product.product.sku ? od.product.product.sku : null },
-                  savingsOptions: discountedRiByDeployment[dep] || null
-                };
-
-                // Validate ensured files too
-                let isValid = true;
-                if (fileObj.onDemand.daily && fileObj.savingsOptions) {
-                  for (const [key, sav] of Object.entries(fileObj.savingsOptions)) {
-                    if (sav && typeof sav.effectiveDaily === 'number' && sav.effectiveDaily >= fileObj.onDemand.daily) {
-                      errors.push(`Invalid pricing for ensured ${wantedFilename}: reserved ${key} effectiveDaily (${sav.effectiveDaily}) >= on-demand daily (${fileObj.onDemand.daily})`);
-                      isValid = false;
-                      break;
-                    }
-                  }
-                }
-
-                if (isValid) {
-                  fs.writeFileSync(wantedPath, JSON.stringify(fileObj, null, 2), 'utf8');
-                  anyWritten = true;
-                } else {
-                  console.error(`Skipping invalid ensured file: ${wantedFilename}`);
-                }
-              }
-            } catch (e) {
-              console.error('Failed to write ensured engine file', wantedPath, e && e.message);
-            }
-          }
-          // Also write a capitalized variant (some existing files use mixed-case engine keys like 'Db2')
-          const engCap = eng.charAt(0).toUpperCase() + eng.slice(1);
-          const wantedFilenameCap = `${r}_${it}_${dep.toLowerCase()}-${engCap}.json`;
-          const wantedPathCap = path.join(instanceDir, wantedFilenameCap);
-          if (!fs.existsSync(wantedPathCap)) {
-            try {
-              const od = await getOnDemandHourly(it, r);
-              if (od && od.hourly) {
-                const hourlyDisc = typeof od.hourly === 'number' ? Number((od.hourly * discountFactor).toFixed(6)) : od.hourly;
-                const daily = typeof hourlyDisc === 'number' ? Number((hourlyDisc * 24).toFixed(6)) : null;
-                const fileObj = {
-                  region: r,
-                  instance: it,
-                  deployment: dep.toLowerCase(),
-                  engine: engCap,
-                  license: null,
-                  onDemand: { hourly: hourlyDisc, daily: daily, effectiveHourly: hourlyDisc, effectiveDaily: daily, sku: od.product && od.product.product && od.product.product.sku ? od.product.product.sku : null },
-                  savingsOptions: discountedRiByDeployment[dep] || null
-                };
-
-                // Validate capitalized variant files too
-                let isValid = true;
-                if (fileObj.onDemand.daily && fileObj.savingsOptions) {
-                  for (const [key, sav] of Object.entries(fileObj.savingsOptions)) {
-                    if (sav && typeof sav.effectiveDaily === 'number' && sav.effectiveDaily >= fileObj.onDemand.daily) {
-                      errors.push(`Invalid pricing for ensured capitalized ${wantedFilenameCap}: reserved ${key} effectiveDaily (${sav.effectiveDaily}) >= on-demand daily (${fileObj.onDemand.daily})`);
-                      isValid = false;
-                      break;
-                    }
-                  }
-                }
-
-                if (isValid) {
-                  fs.writeFileSync(wantedPathCap, JSON.stringify(fileObj, null, 2), 'utf8');
-                  anyWritten = true;
-                } else {
-                  console.error(`Skipping invalid ensured capitalized file: ${wantedFilenameCap}`);
-                }
-              }
-            } catch (e) {
-              console.error('Failed to write ensured engine file (cap variant)', wantedPathCap, e && e.message);
-            }
-          }
-        }
-      }
-
-      // Also ensure a base engine file (no edition/license suffix) exists for common engines
-      const baseEngines = ['oracle', 'mysql', 'postgresql', 'aurora-postgresql', 'aurora-mysql', 'db2', 'mariadb', 'sqlserver'];
-      for (const baseEng of baseEngines) {
-        for (const dep of deploymentsToEnsure) {
-          const baseFilename = `${r}_${it}_${dep.toLowerCase()}-${baseEng}.json`;
-          const basePath = path.join(instanceDir, baseFilename);
-          if (!fs.existsSync(basePath)) {
-            try {
-              const od = await getOnDemandHourly(it, r);
-              if (od && od.hourly) {
-                const hourlyDisc = typeof od.hourly === 'number' ? Number((od.hourly * discountFactor).toFixed(6)) : od.hourly;
-                const daily = typeof hourlyDisc === 'number' ? Number((hourlyDisc * 24).toFixed(6)) : null;
-                const fileObj = {
-                  region: r,
-                  instance: it,
-                  deployment: dep.toLowerCase(),
-                  engine: baseEng,
-                  license: null,
-                  onDemand: { hourly: hourlyDisc, daily: daily, effectiveHourly: hourlyDisc, effectiveDaily: daily, sku: od.product && od.product.product && od.product.product.sku ? od.product.product.sku : null },
-                  savingsOptions: discountedRiByDeployment[dep] || null
-                };
-
-                // Validate base engine files too
-                let isValid = true;
-                if (fileObj.onDemand.daily && fileObj.savingsOptions) {
-                  for (const [key, sav] of Object.entries(fileObj.savingsOptions)) {
-                    if (sav && typeof sav.effectiveDaily === 'number' && sav.effectiveDaily >= fileObj.onDemand.daily) {
-                      errors.push(`Invalid pricing for base engine ${baseFilename}: reserved ${key} effectiveDaily (${sav.effectiveDaily}) >= on-demand daily (${fileObj.onDemand.daily})`);
-                      isValid = false;
-                      break;
-                    }
-                  }
-                }
-
-                if (isValid) {
-                  fs.writeFileSync(basePath, JSON.stringify(fileObj, null, 2), 'utf8');
-                  anyWritten = true;
-                } else {
-                  console.error(`Skipping invalid base engine file: ${baseFilename}`);
-                }
-              }
-            } catch (e) {
-              console.error('Failed to write base engine file', basePath, e && e.message);
-            }
-          }
-        }
-      }
-
-      // Also ensure a base engine file (no edition/license suffix) exists for common engines
-      for (const baseEng of baseEngines) {
-        for (const dep of deploymentsToEnsure) {
-          const baseFilename = `${r}_${it}_${dep.toLowerCase()}-${baseEng}.json`;
-          const basePath = path.join(instanceDir, baseFilename);
-          if (!fs.existsSync(basePath)) {
-            try {
-              const od = await getOnDemandHourly(it, r);
-              if (od && od.hourly) {
-                const hourlyDisc = typeof od.hourly === 'number' ? Number((od.hourly * discountFactor).toFixed(6)) : od.hourly;
-                const daily = typeof hourlyDisc === 'number' ? Number((hourlyDisc * 24).toFixed(6)) : null;
-                const fileObj = {
-                  region: r,
-                  instance: it,
-                  deployment: dep,
-                  engine: baseEng,
-                  license: null,
-                  onDemand: { hourly: hourlyDisc, daily: daily, effectiveHourly: hourlyDisc, effectiveDaily: daily, sku: od.product && od.product.product && od.product.product.sku ? od.product.product.sku : null },
-                  savingsOptions: discountedRiByDeployment[dep] || null
-                };
-
-                // Validate base engine files too
-                let isValid = true;
-                if (fileObj.onDemand.daily && fileObj.savingsOptions) {
-                  for (const [key, sav] of Object.entries(fileObj.savingsOptions)) {
-                    if (sav && typeof sav.effectiveDaily === 'number' && sav.effectiveDaily >= fileObj.onDemand.daily) {
-                      errors.push(`Invalid pricing for base engine ${baseFilename}: reserved ${key} effectiveDaily (${sav.effectiveDaily}) >= on-demand daily (${fileObj.onDemand.daily})`);
-                      isValid = false;
-                      break;
-                    }
-                  }
-                }
-
-                if (isValid) {
-                  fs.writeFileSync(basePath, JSON.stringify(fileObj, null, 2), 'utf8');
-                  anyWritten = true;
-                } else {
-                  console.error(`Skipping invalid base engine file: ${baseFilename}`);
-                }
-              }
-            } catch (e) {
-              console.error('Failed to write base engine file', basePath, e && e.message);
-            }
-          }
+        // Always write the file
+        try {
+          fs.writeFileSync(filePath, JSON.stringify(fileObj, null, 2), 'utf8');
+          anyWritten = true;
+        } catch (e) {
+          console.error('Failed to write per-variant file', filePath, e && e.message);
         }
       }
 
@@ -795,7 +670,7 @@ function parseProduct(product) {
 
   // Display error summary
   if (errors.length > 0) {
-    console.error(`\nValidation Errors Summary (${errors.length} files skipped):`);
+    console.error(`\nValidation Errors Summary (${errors.length} files with validation warnings):`);
     for (const error of errors) {
       console.error(`- ${error}`);
     }
