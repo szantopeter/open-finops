@@ -5,57 +5,57 @@
   "engine": "aurora-mysql",
   "license": null,
   "onDemand": {
-    "hourly": 0.04558,
-    "daily": 1.09392,
-    "effectiveHourly": 0.04558,
-    "effectiveDaily": 1.09392,
-    "sku": "WVWPHF4MFZBS7YSX"
+    "hourly": 0.03526,
+    "daily": 0.84624,
+    "adjustedAmortisedHourly": 0.03526,
+    "adjustedAmortisedDaily": 0.84624,
+    "sku": "FWUA93EGGHBQRBBH"
   },
   "savingsOptions": {
-    "1yr_All Upfront": {
-      "term": "1yr",
-      "purchaseOption": "All Upfront",
-      "upfront": 150.5,
-      "hourly": 0,
-      "daily": 0,
-      "effectiveHourly": 0.017168,
-      "effectiveDaily": 0.412047
-    },
-    "1yr_Partial Upfront": {
-      "term": "1yr",
-      "purchaseOption": "Partial Upfront",
-      "upfront": 76.54,
-      "hourly": 0.008772,
-      "daily": 0.210528,
-      "effectiveHourly": 0.017504,
-      "effectiveDaily": 0.420083
-    },
-    "3yr_All Upfront": {
-      "term": "3yr",
-      "purchaseOption": "All Upfront",
-      "upfront": 301,
-      "hourly": 0,
-      "daily": 0,
-      "effectiveHourly": 0.011446,
-      "effectiveDaily": 0.274698
-    },
-    "3yr_Partial Upfront": {
-      "term": "3yr",
-      "purchaseOption": "Partial Upfront",
-      "upfront": 153.94,
-      "hourly": 0.005848,
-      "daily": 0.140352,
-      "effectiveHourly": 0.011702,
-      "effectiveDaily": 0.28084
-    },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
-      "hourly": 0.018404,
-      "daily": 0.441696,
-      "effectiveHourly": 0.018404,
-      "effectiveDaily": 0.441696
+      "hourly": 0.02838,
+      "daily": 0.68112,
+      "adjustedAmortisedHourly": 0.02838,
+      "adjustedAmortisedDaily": 0.68112
+    },
+    "3yr_All Upfront": {
+      "term": "3yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 415.38,
+      "hourly": 0,
+      "daily": 0,
+      "adjustedAmortisedHourly": 0.015795,
+      "adjustedAmortisedDaily": 0.379083
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 104.06,
+      "hourly": 0.011868,
+      "daily": 0.284832,
+      "adjustedAmortisedHourly": 0.023739,
+      "adjustedAmortisedDaily": 0.569733
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 220.16,
+      "hourly": 0.008428,
+      "daily": 0.202272,
+      "adjustedAmortisedHourly": 0.0168,
+      "adjustedAmortisedDaily": 0.403194
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 204.68,
+      "hourly": 0,
+      "daily": 0,
+      "adjustedAmortisedHourly": 0.023349,
+      "adjustedAmortisedDaily": 0.560383
     }
   }
 }

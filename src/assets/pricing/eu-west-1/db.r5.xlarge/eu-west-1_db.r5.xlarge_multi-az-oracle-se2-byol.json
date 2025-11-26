@@ -7,8 +7,8 @@
   "onDemand": {
     "hourly": 0.88666,
     "daily": 21.27984,
-    "effectiveHourly": 0.88666,
-    "effectiveDaily": 21.27984,
+    "adjustedAmortisedHourly": 0.88666,
+    "adjustedAmortisedDaily": 21.27984,
     "sku": "2DV3WTJK6MPH2ZFQ"
   },
   "savingsOptions": {
@@ -18,8 +18,8 @@
       "upfront": 0,
       "hourly": 0.58695,
       "daily": 14.0868,
-      "effectiveHourly": 0.58695,
-      "effectiveDaily": 14.0868
+      "adjustedAmortisedHourly": 0.58695,
+      "adjustedAmortisedDaily": 14.0868
     },
     "3yr_All Upfront": {
       "term": "3yr",
@@ -27,8 +27,8 @@
       "upfront": 10062.86,
       "hourly": 0,
       "daily": 0,
-      "effectiveHourly": 0.382648,
-      "effectiveDaily": 9.183537
+      "adjustedAmortisedHourly": 0.382648,
+      "adjustedAmortisedDaily": 9.183537
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
@@ -36,8 +36,8 @@
       "upfront": 2448.42,
       "hourly": 0.2795,
       "daily": 6.708,
-      "effectiveHourly": 0.558809,
-      "effectiveDaily": 13.411408
+      "adjustedAmortisedHourly": 0.558809,
+      "adjustedAmortisedDaily": 13.411408
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
@@ -45,8 +45,8 @@
       "upfront": 5134.2,
       "hourly": 0.195392,
       "daily": 4.689408,
-      "effectiveHourly": 0.390623,
-      "effectiveDaily": 9.374966
+      "adjustedAmortisedHourly": 0.390623,
+      "adjustedAmortisedDaily": 9.374966
     },
     "1yr_All Upfront": {
       "term": "1yr",
@@ -54,8 +54,8 @@
       "upfront": 4798.8,
       "hourly": 0,
       "daily": 0,
-      "effectiveHourly": 0.547433,
-      "effectiveDaily": 13.138398
+      "adjustedAmortisedHourly": 0.547433,
+      "adjustedAmortisedDaily": 13.138398
     }
   }
 }

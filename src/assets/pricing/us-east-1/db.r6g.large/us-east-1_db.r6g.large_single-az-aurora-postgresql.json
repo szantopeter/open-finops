@@ -5,11 +5,11 @@
   "engine": "aurora-postgresql",
   "license": null,
   "onDemand": {
-    "hourly": 0.29068,
-    "daily": 6.97632,
-    "effectiveHourly": 0.29068,
-    "effectiveDaily": 6.97632,
-    "sku": "7CFEGM5J3GVAWQ6J"
+    "hourly": 0.2236,
+    "daily": 5.3664,
+    "adjustedAmortisedHourly": 0.2236,
+    "adjustedAmortisedDaily": 5.3664,
+    "sku": "4U9P9G87PY8QVQH5"
   },
   "savingsOptions": {
     "1yr_All Upfront": {
@@ -18,8 +18,8 @@
       "upfront": 1066.4,
       "hourly": 0,
       "daily": 0,
-      "effectiveHourly": 0.121652,
-      "effectiveDaily": 2.919644
+      "adjustedAmortisedHourly": 0.121652,
+      "adjustedAmortisedDaily": 2.919644
     },
     "3yr_All Upfront": {
       "term": "3yr",
@@ -27,8 +27,8 @@
       "upfront": 2045.08,
       "hourly": 0,
       "daily": 0,
-      "effectiveHourly": 0.077766,
-      "effectiveDaily": 1.866375
+      "adjustedAmortisedHourly": 0.077766,
+      "adjustedAmortisedDaily": 1.866375
     },
     "3yr_Partial Upfront": {
       "term": "3yr",
@@ -36,8 +36,8 @@
       "upfront": 1087.9,
       "hourly": 0.041366,
       "daily": 0.992784,
-      "effectiveHourly": 0.082735,
-      "effectiveDaily": 1.98562
+      "adjustedAmortisedHourly": 0.082735,
+      "adjustedAmortisedDaily": 1.98562
     },
     "1yr_Partial Upfront": {
       "term": "1yr",
@@ -45,8 +45,8 @@
       "upfront": 543.52,
       "hourly": 0.062092,
       "daily": 1.490208,
-      "effectiveHourly": 0.124095,
-      "effectiveDaily": 2.978285
+      "adjustedAmortisedHourly": 0.124095,
+      "adjustedAmortisedDaily": 2.978285
     },
     "1yr_No Upfront": {
       "term": "1yr",
@@ -54,8 +54,8 @@
       "upfront": 0,
       "hourly": 0.1462,
       "daily": 3.5088,
-      "effectiveHourly": 0.1462,
-      "effectiveDaily": 3.5088
+      "adjustedAmortisedHourly": 0.1462,
+      "adjustedAmortisedDaily": 3.5088
     }
   }
 }

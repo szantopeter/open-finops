@@ -16,7 +16,8 @@ const argv = minimist(process.argv.slice(2), {
   // NOTE: --out is now interpreted as an output directory for the new folder-based layout
   // Default output directory will be the project's `src/assets/pricing` so generated files
   // are available under the application's static assets at /assets/pricing
-  default: { out: '../../src/assets/pricing', service: 'AmazonRDS', discountpercent: '0' },
+  // Default discount percent is 14 (14% off) unless overridden on the CLI
+  default: { out: '../../src/assets/pricing', service: 'AmazonRDS', discountpercent: '14' },
   boolean: ['all-instances']
 });
 
@@ -46,6 +47,14 @@ if (argv.profile && !process.env.AWS_PROFILE) {
 const regionNameMap = require('./region-mapping.json');
 
 const client = new PricingClient({ region: 'us-east-1' });
+
+// Ensure logs directory exists so we can write API response logs
+try {
+  const logsDir = path.join(__dirname, 'logs');
+  fs.mkdirSync(logsDir, { recursive: true });
+} catch (e) {
+  // Non-fatal; logging will attempt to write and may fail later, but we ensure best-effort
+}
 
 function extractOnDemandHourlyFromProduct(product) {
   try {
@@ -117,8 +126,8 @@ function extractReservedInstancePricing(product) {
         upfront: Number(upfront.toFixed(2)),
         hourly: Number(hourly.toFixed(6)),
         daily: daily,
-        effectiveHourly: Number(effectiveHourly.toFixed(6)),
-        effectiveDaily: effectiveDaily
+        adjustedAmortisedHourly: Number(effectiveHourly.toFixed(6)),
+        adjustedAmortisedDaily: effectiveDaily
       };
     }
     
@@ -567,8 +576,11 @@ function parseProduct(product) {
         const sku = (p && p.product && p.product.sku) || null;
         if (!sku) continue;
 
+        const attrs = (p && p.product && p.product.attributes) || {};
+        const deploymentModel = attrs.deploymentModel || '';
+        const isCustomRds = deploymentModel.toLowerCase() === 'custom';
+
         if (!pricingBySku[sku]) {
-          const attrs = (p && p.product && p.product.attributes) || {};
           const deploymentRaw = attrs.deploymentOption || attrs.deployment || '';
           const deployment = normalizeDeployment(deploymentRaw) || 'Single-AZ';
           const engine = normalizeEngine(attrs.databaseEngine || attrs.servicecode || attrs.productFamily || '');
@@ -582,7 +594,8 @@ function parseProduct(product) {
             license,
             edition,
             onDemand: null,
-            savingsOptions: null
+            savingsOptions: null,
+            isCustomRds
           };
         }
 
@@ -594,8 +607,8 @@ function parseProduct(product) {
           pricingBySku[sku].onDemand = {
             hourly: hourlyDisc,
             daily,
-            effectiveHourly: hourlyDisc,
-            effectiveDaily: daily,
+            adjustedAmortisedHourly: hourlyDisc,
+            adjustedAmortisedDaily: daily,
             sku: sku
           };
         }
@@ -611,21 +624,41 @@ function parseProduct(product) {
                 if (copy.upfront !== undefined) copy.upfront = Number((copy.upfront * discountFactor).toFixed(2));
                 if (copy.hourly !== undefined) copy.hourly = Number((copy.hourly * discountFactor).toFixed(6));
                 if (copy.daily !== undefined) copy.daily = Number((copy.daily * discountFactor).toFixed(6));
-                if (copy.effectiveHourly !== undefined) copy.effectiveHourly = Number((copy.effectiveHourly * discountFactor).toFixed(6));
-                if (copy.effectiveDaily !== undefined) copy.effectiveDaily = Number((copy.effectiveDaily * discountFactor).toFixed(6));
+                  if (copy.adjustedAmortisedHourly !== undefined) copy.adjustedAmortisedHourly = Number((copy.adjustedAmortisedHourly * discountFactor).toFixed(6));
+                  if (copy.adjustedAmortisedDaily !== undefined) copy.adjustedAmortisedDaily = Number((copy.adjustedAmortisedDaily * discountFactor).toFixed(6));
                 discounted[k] = copy;
             }
             pricingBySku[sku].savingsOptions = discounted;
         }
       }
 
-      // Write per-variant files (include on-demand and savingsOptions for all 6 permutations)
-      let anyWritten = false;
+      // Group by deployment+engineKey and prefer standard RDS (non-Custom) over RDS Custom
+      const pricingByVariant = {};
       for (const sku of Object.keys(pricingBySku)) {
         const rec = pricingBySku[sku];
         if (!rec.onDemand) continue; // Cannot create a file without on-demand price
+        
+        const variantKey = `${rec.deployment.toLowerCase()}-${rec.engineKey}`;
+        const existing = pricingByVariant[variantKey];
+        
+        // Prefer standard RDS (non-Custom) over RDS Custom when both exist
+        if (!existing || (existing.isCustomRds && !rec.isCustomRds)) {
+          pricingByVariant[variantKey] = rec;
+        } else if (!existing.isCustomRds && rec.isCustomRds) {
+          // Keep standard RDS, skip RDS Custom
+          continue;
+        } else if (rec.savingsOptions && !existing.savingsOptions) {
+          // Prefer SKU with Reserved terms if the existing one doesn't have them
+          pricingByVariant[variantKey] = rec;
+        }
+      }
 
-        const filename = `${r}_${it}_${rec.deployment.toLowerCase()}-${rec.engineKey}.json`;
+      // Write per-variant files
+      let anyWritten = false;
+      for (const variantKey of Object.keys(pricingByVariant)) {
+        const rec = pricingByVariant[variantKey];
+
+        const filename = `${r}_${it}_${variantKey}.json`;
         const filePath = path.join(instanceDir, filename);
         const fullPath = `${r}/${it}/${filename}`;
         if (argv.csv && !neededFiles.has(fullPath)) continue; // Skip if not needed
@@ -643,8 +676,8 @@ function parseProduct(product) {
         // Validate that on-demand price > reserved prices
         if (fileObj.onDemand.daily && fileObj.savingsOptions) {
           for (const [key, sav] of Object.entries(fileObj.savingsOptions)) {
-            if (sav && typeof sav.effectiveDaily === 'number' && sav.effectiveDaily >= fileObj.onDemand.daily) {
-              errors.push(`Invalid pricing for ${filename}: reserved ${key} effectiveDaily (${sav.effectiveDaily}) >= on-demand daily (${fileObj.onDemand.daily})`);
+            if (sav && typeof sav.adjustedAmortisedDaily === 'number' && sav.adjustedAmortisedDaily >= fileObj.onDemand.daily) {
+              errors.push(`Invalid pricing for ${filename}: reserved ${key} adjustedAmortisedDaily (${sav.adjustedAmortisedDaily}) >= on-demand daily (${fileObj.onDemand.daily})`);
               // Note: Not skipping invalid files, just logging
             }
           }

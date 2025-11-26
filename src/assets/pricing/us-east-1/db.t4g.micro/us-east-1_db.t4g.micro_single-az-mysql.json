@@ -7,46 +7,19 @@
   "onDemand": {
     "hourly": 0.01376,
     "daily": 0.33024,
-    "effectiveHourly": 0.01376,
-    "effectiveDaily": 0.33024,
+    "adjustedAmortisedHourly": 0.01376,
+    "adjustedAmortisedDaily": 0.33024,
     "sku": "U4AUM7WC9VCSGAY9"
   },
   "savingsOptions": {
-    "1yr_No Upfront": {
-      "term": "1yr",
-      "purchaseOption": "No Upfront",
-      "upfront": 0,
-      "hourly": 0.009976,
-      "daily": 0.239424,
-      "effectiveHourly": 0.009976,
-      "effectiveDaily": 0.239424
-    },
     "3yr_Partial Upfront": {
       "term": "3yr",
       "purchaseOption": "Partial Upfront",
       "upfront": 87.72,
       "hourly": 0.003354,
       "daily": 0.080496,
-      "effectiveHourly": 0.00669,
-      "effectiveDaily": 0.160551
-    },
-    "1yr_Partial Upfront": {
-      "term": "1yr",
-      "purchaseOption": "Partial Upfront",
-      "upfront": 42.14,
-      "hourly": 0.004816,
-      "daily": 0.115584,
-      "effectiveHourly": 0.009623,
-      "effectiveDaily": 0.230957
-    },
-    "1yr_All Upfront": {
-      "term": "1yr",
-      "purchaseOption": "All Upfront",
-      "upfront": 81.7,
-      "hourly": 0,
-      "daily": 0,
-      "effectiveHourly": 0.00932,
-      "effectiveDaily": 0.223683
+      "adjustedAmortisedHourly": 0.00669,
+      "adjustedAmortisedDaily": 0.160551
     },
     "3yr_All Upfront": {
       "term": "3yr",
@@ -54,8 +27,35 @@
       "upfront": 171.14,
       "hourly": 0,
       "daily": 0,
-      "effectiveHourly": 0.006508,
-      "effectiveDaily": 0.156185
+      "adjustedAmortisedHourly": 0.006508,
+      "adjustedAmortisedDaily": 0.156185
+    },
+    "1yr_No Upfront": {
+      "term": "1yr",
+      "purchaseOption": "No Upfront",
+      "upfront": 0,
+      "hourly": 0.009976,
+      "daily": 0.239424,
+      "adjustedAmortisedHourly": 0.009976,
+      "adjustedAmortisedDaily": 0.239424
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 42.14,
+      "hourly": 0.004816,
+      "daily": 0.115584,
+      "adjustedAmortisedHourly": 0.009623,
+      "adjustedAmortisedDaily": 0.230957
+    },
+    "1yr_All Upfront": {
+      "term": "1yr",
+      "purchaseOption": "All Upfront",
+      "upfront": 81.7,
+      "hourly": 0,
+      "daily": 0,
+      "adjustedAmortisedHourly": 0.00932,
+      "adjustedAmortisedDaily": 0.223683
     }
   }
 }

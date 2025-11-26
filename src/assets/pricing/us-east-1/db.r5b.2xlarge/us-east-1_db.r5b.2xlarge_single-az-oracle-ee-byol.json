@@ -7,55 +7,55 @@
   "onDemand": {
     "hourly": 0.94858,
     "daily": 22.76592,
-    "effectiveHourly": 0.94858,
-    "effectiveDaily": 22.76592,
+    "adjustedAmortisedHourly": 0.94858,
+    "adjustedAmortisedDaily": 22.76592,
     "sku": "4FDHJRXYTNAGDHZ9"
   },
   "savingsOptions": {
-    "3yr_Partial Upfront": {
-      "term": "3yr",
-      "purchaseOption": "Partial Upfront",
-      "upfront": 6237.58,
-      "hourly": 0.23736,
-      "daily": 5.69664,
-      "effectiveHourly": 0.474548,
-      "effectiveDaily": 11.389161
-    },
     "1yr_All Upfront": {
       "term": "1yr",
       "purchaseOption": "All Upfront",
-      "upfront": 5655.36,
+      "upfront": 4883.94,
       "hourly": 0,
       "daily": 0,
-      "effectiveHourly": 0.645147,
-      "effectiveDaily": 15.483532
+      "adjustedAmortisedHourly": 0.557146,
+      "adjustedAmortisedDaily": 13.371499
+    },
+    "1yr_Partial Upfront": {
+      "term": "1yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 2492.28,
+      "hourly": 0.284488,
+      "daily": 6.827712,
+      "adjustedAmortisedHourly": 0.5688,
+      "adjustedAmortisedDaily": 13.651203
     },
     "3yr_All Upfront": {
       "term": "3yr",
       "purchaseOption": "All Upfront",
-      "upfront": 11976.36,
+      "upfront": 9768.74,
       "hourly": 0,
       "daily": 0,
-      "effectiveHourly": 0.45541,
-      "effectiveDaily": 10.929829
+      "adjustedAmortisedHourly": 0.371463,
+      "adjustedAmortisedDaily": 8.915118
+    },
+    "3yr_Partial Upfront": {
+      "term": "3yr",
+      "purchaseOption": "Partial Upfront",
+      "upfront": 4983.7,
+      "hourly": 0.18963,
+      "daily": 4.55112,
+      "adjustedAmortisedHourly": 0.379139,
+      "adjustedAmortisedDaily": 9.099329
     },
     "1yr_No Upfront": {
       "term": "1yr",
       "purchaseOption": "No Upfront",
       "upfront": 0,
-      "hourly": 0.683614,
-      "daily": 16.406736,
-      "effectiveHourly": 0.683614,
-      "effectiveDaily": 16.406736
-    },
-    "1yr_Partial Upfront": {
-      "term": "1yr",
-      "purchaseOption": "Partial Upfront",
-      "upfront": 2911.1,
-      "hourly": 0.332304,
-      "daily": 7.975296,
-      "effectiveHourly": 0.664394,
-      "effectiveDaily": 15.945454
+      "hourly": 0.597356,
+      "daily": 14.336544,
+      "adjustedAmortisedHourly": 0.597356,
+      "adjustedAmortisedDaily": 14.336544
     }
   }
 }
