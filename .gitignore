@@ -4,6 +4,9 @@
 # Learn more about .gitignore:
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
+
+src/assets/pricing_full
+
 # Node artifact files
 source/node_modules/
 dist/
