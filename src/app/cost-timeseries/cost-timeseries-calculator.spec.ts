@@ -185,11 +185,46 @@ describe('CostTimeseriesCalculator', () => {
 
       // Define the RI types and their expected cost fields
       const riTypes = [
-        { upfrontPayment: 'No Upfront' as const, durationMonths: 12, expectedField: 'noUpfront_1y', savingsKey: '1yr_No Upfront', daily: 1.0 },
-        { upfrontPayment: 'Partial' as const, durationMonths: 12, expectedField: 'partialUpfront_1y', savingsKey: '1yr_Partial Upfront', daily: 1.1 },
-        { upfrontPayment: 'All Upfront' as const, durationMonths: 12, expectedField: 'fullUpfront_1y', savingsKey: '1yr_All Upfront', daily: 1.2 },
-        { upfrontPayment: 'Partial' as const, durationMonths: 36, expectedField: 'partialUpfront_3y', savingsKey: '3yr_Partial Upfront', daily: 1.3 },
-        { upfrontPayment: 'All Upfront' as const, durationMonths: 36, expectedField: 'fullUpfront_3y', savingsKey: '3yr_All Upfront', daily: 1.4 }
+        {
+          upfrontPayment: 'No Upfront' as const,
+          durationMonths: 12,
+          expectedField: 'noUpfront_1y',
+          savingsKey: '1yr_No Upfront',
+          daily: 1,
+          adjusted: 1
+        },
+        {
+          upfrontPayment: 'Partial' as const,
+          durationMonths: 12,
+          expectedField: 'partialUpfront_1y',
+          savingsKey: '1yr_Partial Upfront',
+          daily: 1.1,
+          adjusted: 1.1 * 1.2
+        },
+        {
+          upfrontPayment: 'All Upfront' as const,
+          durationMonths: 12,
+          expectedField: 'fullUpfront_1y',
+          savingsKey: '1yr_All Upfront',
+          daily: 1.2,
+          adjusted: 1.2 * 1.4
+        },
+        {
+          upfrontPayment: 'Partial' as const,
+          durationMonths: 36,
+          expectedField: 'partialUpfront_3y',
+          savingsKey: '3yr_Partial Upfront',
+          daily: 1.3,
+          adjusted: 1.3 * 1.2
+        },
+        {
+          upfrontPayment: 'All Upfront' as const,
+          durationMonths: 36,
+          expectedField: 'fullUpfront_3y',
+          savingsKey: '3yr_All Upfront',
+          daily: 1.4,
+          adjusted: 1.4 * 1.4
+        }
       ];
 
       const rows = riTypes.map((type, index) => {
@@ -217,15 +252,16 @@ describe('CostTimeseriesCalculator', () => {
           license: 'li',
           onDemand: { hourly: 0.1, daily: 2.4 },
           savingsOptions: {
-            [type.savingsKey]: {
-              term: type.durationMonths === 36 ? '3yr' : '1yr',
-              purchaseOption: type.upfrontPayment === 'Partial' ? 'Partial Upfront' : type.upfrontPayment,
-              upfront: type.upfrontPayment === 'No Upfront' ? 0 : 100,
-              hourly: 0.05,
-              effectiveHourly: 0.06,
-              daily: type.daily
-            }
-          } as any
+              [type.savingsKey]: {
+                    term: type.durationMonths === 36 ? '3yr' : '1yr',
+                    purchaseOption: type.upfrontPayment === 'Partial' ? 'Partial Upfront' : type.upfrontPayment,
+                    upfront: type.upfrontPayment === 'No Upfront' ? 0 : 100,
+                    hourly: 0.05,
+                    effectiveHourly: 0.06,
+                    daily: type.daily,
+                    adjustedAmortisedDaily: type.adjusted
+                  }
+            } as any
         };
 
         return { riRow, pricingData };
@@ -256,17 +292,21 @@ describe('CostTimeseriesCalculator', () => {
         expect(monthCost.month).toBe(6);
 
         // Check that the expected field is populated
-        expect((monthCost.cost as any)[type.expectedField]).toBeDefined();
-        expect((monthCost.cost as any)[type.expectedField].upfrontCost).toBe(type.upfrontPayment === 'No Upfront' ? 0 : 100);
-        expect((monthCost.cost as any)[type.expectedField].monthlyCost).toBe(type.daily * activeDays * count);
+        const field = (monthCost.cost as any)[type.expectedField];
+        expect(field).toBeDefined();
+        expect(field.upfrontCost).toBe(type.upfrontPayment === 'No Upfront' ? 0 : 100);
+        expect(field.monthlyCost).toBe(type.daily * activeDays * count);
+
+        // adjustedAmortisedCost should be derived from SavingsOption.adjustedAmortisedDaily * activeDays
+        expect(field.adjustedAmortisedCost).toBe((type as any).adjusted * activeDays * count);
 
         // All other cost types should be null
         const allFields = ['fullUpfront_3y', 'fullUpfront_1y', 'partialUpfront_3y', 'partialUpfront_1y', 'noUpfront_1y', 'onDemand'];
-        allFields.forEach(field => {
-          if (field !== type.expectedField) {
-            expect((monthCost.cost as any)[field]).toBeNull();
+        for (const f of allFields) {
+          if (f !== type.expectedField) {
+            expect((monthCost.cost as any)[f]).toBeNull();
           }
-        });
+        }
       });
     });
 

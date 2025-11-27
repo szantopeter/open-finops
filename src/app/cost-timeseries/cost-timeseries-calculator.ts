@@ -78,7 +78,8 @@ export class CostTimeseriesCalculator {
       const dailyPrice = pricingData.onDemand.daily;
       cost.onDemand = {
         upfrontCost: 0,
-        monthlyCost: dailyPrice * activeDays * count
+        monthlyCost: dailyPrice * activeDays * count,
+        adjustedAmortisedCost: dailyPrice * activeDays * count
       };
 
     } else {
@@ -87,9 +88,11 @@ export class CostTimeseriesCalculator {
       const savings = pricingData.savingsOptions?.[savingFieldName];
       if (savings) {
         const costFieldName = this.getCostFieldName(upfrontPayment, durationMonths);
+        const adjustedDaily = savings.adjustedAmortisedDaily ?? null;
         cost[costFieldName] = {
           upfrontCost: isFirstMonth ? savings.upfront * count : 0,
-          monthlyCost: savings.daily * count * activeDays
+          monthlyCost: savings.daily * count * activeDays,
+          adjustedAmortisedCost: adjustedDaily * activeDays * count
         };
 
       } else {

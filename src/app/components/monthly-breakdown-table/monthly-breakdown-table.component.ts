@@ -16,11 +16,13 @@ export class MonthlyBreakdownTableComponent {
   @Input() timeseries: CostTimeseries[] = [];
   @Input() firstFullYear: number = 0;
   @Input() highestSpendMonth?: { year: number; month: number };
+  showFirstFullYearOnly = true;
 
   savingsScenarios: string[] = ['noUpfront_1y', 'partialUpfront_1y', 'fullUpfront_1y', 'partialUpfront_3y', 'fullUpfront_3y'];
 
   get displayedScenarios(): string[] {
-    return this.expandedRow === 'onDemand' ? ['onDemand'] : this.savingsScenarios;
+    if (!this.expandedRow) return [];
+    return [this.expandedRow];
   }
 
   getScenarioName(scenario: string): string {
@@ -57,6 +59,17 @@ export class MonthlyBreakdownTableComponent {
     return 0;
   }
 
+  getAdjustedAmortised(scenario: string, year: number, month: number): number {
+    for (const ts of this.timeseries) {
+      const mc = ts.monthlyCost.find(m => m.year === year && m.month === month);
+      if (mc) {
+        const cost = (mc.cost as any)[scenario];
+        return cost ? cost.adjustedAmortisedCost : 0;
+      }
+    }
+    return 0;
+  }
+
   getUpfrontCost(scenario: string, year: number, month: number): number {
     for (const ts of this.timeseries) {
       const mc = ts.monthlyCost.find(m => m.year === year && m.month === month);
@@ -72,7 +85,13 @@ export class MonthlyBreakdownTableComponent {
     const yearMonths = new Set<string>();
     for (const ts of this.timeseries) {
       for (const monthlyCost of ts.monthlyCost) {
-        yearMonths.add(`${monthlyCost.year}-${monthlyCost.month}`);
+        if (this.showFirstFullYearOnly && this.firstFullYear) {
+          if (monthlyCost.year === this.firstFullYear) {
+            yearMonths.add(`${monthlyCost.year}-${monthlyCost.month}`);
+          }
+        } else {
+          yearMonths.add(`${monthlyCost.year}-${monthlyCost.month}`);
+        }
       }
     }
     return Array.from(yearMonths).map(ym => {
@@ -89,6 +108,14 @@ export class MonthlyBreakdownTableComponent {
     return total;
   }
 
+  getTotalAdjustedAmortised(scenario: string): number {
+    let total = 0;
+    for (const ym of this.getYearMonths()) {
+      total += this.getAdjustedAmortised(scenario, ym.year, ym.month);
+    }
+    return total;
+  }
+
   getTotalUpfrontCost(scenario: string): number {
     let total = 0;
     for (const ym of this.getYearMonths()) {
@@ -97,24 +124,6 @@ export class MonthlyBreakdownTableComponent {
     return total;
   }
 
-  getMonthlyTotal(year: number, month: number): number {
-    let total = 0;
-    for (const scenario of this.displayedScenarios) {
-      total += this.getMonthlyCost(scenario, year, month);
-      if (scenario !== 'onDemand') {
-        total += this.getUpfrontCost(scenario, year, month);
-      }
-    }
-    return total;
-  }
-
-  getGrandTotal(): number {
-    let total = 0;
-    for (const ym of this.getYearMonths()) {
-      total += this.getMonthlyTotal(ym.year, ym.month);
-    }
-    return total;
-  }
 
   isHighestSpendMonth(year: number, month: number): boolean {
     const highest = this.highestSpendMonth || { year: 2025, month: 1 };

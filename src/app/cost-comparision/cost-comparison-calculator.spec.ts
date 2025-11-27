@@ -216,8 +216,8 @@ describe('CostComparisonCalculator', () => {
         riRow: {} as any,
         pricingData: {} as any,
         monthlyCost: [
-          { year, month: 1, cost: { fullUpfront_1y: { upfrontCost: 1000, monthlyCost: 0 } } },
-          { year, month: 2, cost: { fullUpfront_1y: { upfrontCost: 0, monthlyCost: 0 } } }
+          { year, month: 1, cost: { fullUpfront_1y: { upfrontCost: 1000, monthlyCost: 0, adjustedAmortisedCost: 0 } } },
+          { year, month: 2, cost: { fullUpfront_1y: { upfrontCost: 0, monthlyCost: 0, adjustedAmortisedCost: 0 } } }
         ]
       };
 
@@ -225,8 +225,8 @@ describe('CostComparisonCalculator', () => {
         riRow: {} as any,
         pricingData: {} as any,
         monthlyCost: [
-          { year, month: 1, cost: { fullUpfront_1y: { upfrontCost: 0, monthlyCost: 0 } } },
-          { year, month: 2, cost: { fullUpfront_1y: { upfrontCost: 2000, monthlyCost: 0 } } }
+          { year, month: 1, cost: { fullUpfront_1y: { upfrontCost: 0, monthlyCost: 0, adjustedAmortisedCost: 0 } } },
+          { year, month: 2, cost: { fullUpfront_1y: { upfrontCost: 2000, monthlyCost: 0, adjustedAmortisedCost: 0 } } }
         ]
       };
 
@@ -237,7 +237,7 @@ describe('CostComparisonCalculator', () => {
       const onDemandTs: any = {
         riRow: {} as any,
         pricingData: {} as any,
-        monthlyCost: merged.monthlyCost.map((mc: any) => ({ year: mc.year, month: mc.month, cost: { onDemand: { upfrontCost: 0, monthlyCost: 10 } } }))
+        monthlyCost: merged.monthlyCost.map((mc: any) => ({ year: mc.year, month: mc.month, cost: { onDemand: { upfrontCost: 0, monthlyCost: 10, adjustedAmortisedCost: 0 } } }))
       };
 
       const byScenario: any = {
@@ -284,14 +284,14 @@ describe('mergeRiRows', () => {
           year,
           month: 1,
           cost: {
-            onDemand: { upfrontCost: row1JanOnDemandUpfront, monthlyCost: row1JanOnDemandMonthly }
+            onDemand: { upfrontCost: row1JanOnDemandUpfront, monthlyCost: row1JanOnDemandMonthly, adjustedAmortisedCost: 0 }
           }
         },
         {
           year,
           month: 2,
           cost: {
-            onDemand: { upfrontCost: row1FebOnDemandUpfront, monthlyCost: row1FebOnDemandMonthly }
+            onDemand: { upfrontCost: row1FebOnDemandUpfront, monthlyCost: row1FebOnDemandMonthly, adjustedAmortisedCost: 0 }
           }
         }
       ]
@@ -306,14 +306,14 @@ describe('mergeRiRows', () => {
           year,
           month: 1,
           cost: {
-            onDemand: { upfrontCost: row2JanOnDemandUpfront, monthlyCost: row2JanOnDemandMonthly }
+            onDemand: { upfrontCost: row2JanOnDemandUpfront, monthlyCost: row2JanOnDemandMonthly, adjustedAmortisedCost: 0 }
           }
         },
         {
           year,
           month: 2,
           cost: {
-            onDemand: { upfrontCost: row2FebOnDemandUpfront, monthlyCost: row2FebOnDemandMonthly }
+            onDemand: { upfrontCost: row2FebOnDemandUpfront, monthlyCost: row2FebOnDemandMonthly, adjustedAmortisedCost: 0 }
           }
         }
       ]
@@ -328,7 +328,7 @@ describe('mergeRiRows', () => {
           year,
           month: 3,
           cost: {
-            onDemand: { upfrontCost: row3MarOnDemandUpfront, monthlyCost: row3MarOnDemandMonthly }
+            onDemand: { upfrontCost: row3MarOnDemandUpfront, monthlyCost: row3MarOnDemandMonthly, adjustedAmortisedCost: 0 }
           }
         }
       ]
@@ -347,19 +347,19 @@ describe('mergeRiRows', () => {
     const janData = result.monthlyCost.find(mc => mc.year === year && mc.month === 1);
     expect(janData).toBeDefined();
     expect(janData!.cost).toEqual({
-      onDemand: { upfrontCost: row1JanOnDemandUpfront + row2JanOnDemandUpfront, monthlyCost: row1JanOnDemandMonthly + row2JanOnDemandMonthly }
+      onDemand: { upfrontCost: row1JanOnDemandUpfront + row2JanOnDemandUpfront, monthlyCost: row1JanOnDemandMonthly + row2JanOnDemandMonthly, adjustedAmortisedCost: 0 }
     });
 
     const febData = result.monthlyCost.find(mc => mc.year === year && mc.month === 2);
     expect(febData).toBeDefined();
     expect(febData!.cost).toEqual({
-      onDemand: { upfrontCost: row1FebOnDemandUpfront + row2FebOnDemandUpfront, monthlyCost: row1FebOnDemandMonthly + row2FebOnDemandMonthly }
+      onDemand: { upfrontCost: row1FebOnDemandUpfront + row2FebOnDemandUpfront, monthlyCost: row1FebOnDemandMonthly + row2FebOnDemandMonthly, adjustedAmortisedCost: 0 }
     });
 
     const marData = result.monthlyCost.find(mc => mc.year === year && mc.month === 3);
     expect(marData).toBeDefined();
     expect(marData!.cost).toEqual({
-      onDemand: { upfrontCost: row3MarOnDemandUpfront, monthlyCost: row3MarOnDemandMonthly }
+      onDemand: { upfrontCost: row3MarOnDemandUpfront, monthlyCost: row3MarOnDemandMonthly, adjustedAmortisedCost: 0 }
     });
 
     // Ensure no other months
@@ -389,14 +389,14 @@ describe('mergeRiRows', () => {
           year,
           month: 1,
           cost: {
-            noUpfront_1y: { upfrontCost: ts1JanNoUpfrontUpfront, monthlyCost: ts1JanNoUpfrontMonthly }
+            noUpfront_1y: { upfrontCost: ts1JanNoUpfrontUpfront, monthlyCost: ts1JanNoUpfrontMonthly, adjustedAmortisedCost: 0 }
           }
         },
         {
           year,
           month: 2,
           cost: {
-            noUpfront_1y: { upfrontCost: ts1FebNoUpfrontUpfront, monthlyCost: ts1FebNoUpfrontMonthly }
+            noUpfront_1y: { upfrontCost: ts1FebNoUpfrontUpfront, monthlyCost: ts1FebNoUpfrontMonthly, adjustedAmortisedCost: 0 }
           }
         }
       ]
@@ -410,14 +410,14 @@ describe('mergeRiRows', () => {
           year,
           month: 1,
           cost: {
-            noUpfront_1y: { upfrontCost: ts2JanNoUpfrontUpfront, monthlyCost: ts2JanNoUpfrontMonthly }
+            noUpfront_1y: { upfrontCost: ts2JanNoUpfrontUpfront, monthlyCost: ts2JanNoUpfrontMonthly, adjustedAmortisedCost: 0 }
           }
         },
         {
           year,
           month: 2,
           cost: {
-            noUpfront_1y: { upfrontCost: ts2FebNoUpfrontUpfront, monthlyCost: ts2FebNoUpfrontMonthly }
+            noUpfront_1y: { upfrontCost: ts2FebNoUpfrontUpfront, monthlyCost: ts2FebNoUpfrontMonthly, adjustedAmortisedCost: 0 }
           }
         }
       ]
@@ -434,12 +434,12 @@ describe('mergeRiRows', () => {
 
     const janData = mergedTs.monthlyCost.find((mc: any) => mc.year === year && mc.month === 1);
     expect(janData!.cost).toEqual({
-      noUpfront_1y: { upfrontCost: ts1JanNoUpfrontUpfront + ts2JanNoUpfrontUpfront, monthlyCost: ts1JanNoUpfrontMonthly + ts2JanNoUpfrontMonthly }
+      noUpfront_1y: { upfrontCost: ts1JanNoUpfrontUpfront + ts2JanNoUpfrontUpfront, monthlyCost: ts1JanNoUpfrontMonthly + ts2JanNoUpfrontMonthly, adjustedAmortisedCost: 0 }
     });
 
     const febData = mergedTs.monthlyCost.find((mc: any) => mc.year === year && mc.month === 2);
     expect(febData!.cost).toEqual({
-      noUpfront_1y: { upfrontCost: ts1FebNoUpfrontUpfront + ts2FebNoUpfrontUpfront, monthlyCost: ts1FebNoUpfrontMonthly + ts2FebNoUpfrontMonthly }
+      noUpfront_1y: { upfrontCost: ts1FebNoUpfrontUpfront + ts2FebNoUpfrontUpfront, monthlyCost: ts1FebNoUpfrontMonthly + ts2FebNoUpfrontMonthly, adjustedAmortisedCost: 0 }
     });
   });
 
@@ -465,14 +465,14 @@ describe('mergeRiRows', () => {
           year,
           month: 1,
           cost: {
-            partialUpfront_1y: { upfrontCost: ts1JanPartialUpfront, monthlyCost: ts1JanPartialMonthly }
+            partialUpfront_1y: { upfrontCost: ts1JanPartialUpfront, monthlyCost: ts1JanPartialMonthly, adjustedAmortisedCost: 0 }
           }
         },
         {
           year,
           month: 2,
           cost: {
-            partialUpfront_1y: { upfrontCost: ts1FebPartialUpfront, monthlyCost: ts1FebPartialMonthly }
+            partialUpfront_1y: { upfrontCost: ts1FebPartialUpfront, monthlyCost: ts1FebPartialMonthly, adjustedAmortisedCost: 0 }
           }
         }
       ]
@@ -486,14 +486,14 @@ describe('mergeRiRows', () => {
           year,
           month: 1,
           cost: {
-            partialUpfront_1y: { upfrontCost: ts2JanPartialUpfront, monthlyCost: ts2JanPartialMonthly }
+            partialUpfront_1y: { upfrontCost: ts2JanPartialUpfront, monthlyCost: ts2JanPartialMonthly, adjustedAmortisedCost: 0 }
           }
         },
         {
           year,
           month: 2,
           cost: {
-            partialUpfront_1y: { upfrontCost: ts2FebPartialUpfront, monthlyCost: ts2FebPartialMonthly }
+            partialUpfront_1y: { upfrontCost: ts2FebPartialUpfront, monthlyCost: ts2FebPartialMonthly, adjustedAmortisedCost: 0 }
           }
         }
       ]
@@ -510,12 +510,12 @@ describe('mergeRiRows', () => {
 
     const janData = mergedTs.monthlyCost.find((mc: any) => mc.year === year && mc.month === 1);
     expect(janData!.cost).toEqual({
-      partialUpfront_1y: { upfrontCost: ts1JanPartialUpfront + ts2JanPartialUpfront, monthlyCost: ts1JanPartialMonthly + ts2JanPartialMonthly }
+      partialUpfront_1y: { upfrontCost: ts1JanPartialUpfront + ts2JanPartialUpfront, monthlyCost: ts1JanPartialMonthly + ts2JanPartialMonthly, adjustedAmortisedCost: 0 }
     });
 
     const febData = mergedTs.monthlyCost.find((mc: any) => mc.year === year && mc.month === 2);
     expect(febData!.cost).toEqual({
-      partialUpfront_1y: { upfrontCost: ts1FebPartialUpfront + ts2FebPartialUpfront, monthlyCost: ts1FebPartialMonthly + ts2FebPartialMonthly }
+      partialUpfront_1y: { upfrontCost: ts1FebPartialUpfront + ts2FebPartialUpfront, monthlyCost: ts1FebPartialMonthly + ts2FebPartialMonthly, adjustedAmortisedCost: 0 }
     });
   });
 
@@ -541,14 +541,14 @@ describe('mergeRiRows', () => {
           year,
           month: 1,
           cost: {
-            fullUpfront_1y: { upfrontCost: ts1JanFullUpfront, monthlyCost: ts1JanFullMonthly }
+            fullUpfront_1y: { upfrontCost: ts1JanFullUpfront, monthlyCost: ts1JanFullMonthly, adjustedAmortisedCost: 0 }
           }
         },
         {
           year,
           month: 2,
           cost: {
-            fullUpfront_1y: { upfrontCost: ts1FebFullUpfront, monthlyCost: ts1FebFullMonthly }
+            fullUpfront_1y: { upfrontCost: ts1FebFullUpfront, monthlyCost: ts1FebFullMonthly, adjustedAmortisedCost: 0 }
           }
         }
       ]
@@ -562,14 +562,14 @@ describe('mergeRiRows', () => {
           year,
           month: 1,
           cost: {
-            fullUpfront_1y: { upfrontCost: ts2JanFullUpfront, monthlyCost: ts2JanFullMonthly }
+            fullUpfront_1y: { upfrontCost: ts2JanFullUpfront, monthlyCost: ts2JanFullMonthly, adjustedAmortisedCost: 0 }
           }
         },
         {
           year,
           month: 2,
           cost: {
-            fullUpfront_1y: { upfrontCost: ts2FebFullUpfront, monthlyCost: ts2FebFullMonthly }
+            fullUpfront_1y: { upfrontCost: ts2FebFullUpfront, monthlyCost: ts2FebFullMonthly, adjustedAmortisedCost: 0 }
           }
         }
       ]
@@ -586,12 +586,12 @@ describe('mergeRiRows', () => {
 
     const janData = mergedTs.monthlyCost.find((mc: any) => mc.year === year && mc.month === 1);
     expect(janData!.cost).toEqual({
-      fullUpfront_1y: { upfrontCost: ts1JanFullUpfront + ts2JanFullUpfront, monthlyCost: ts1JanFullMonthly + ts2JanFullMonthly }
+      fullUpfront_1y: { upfrontCost: ts1JanFullUpfront + ts2JanFullUpfront, monthlyCost: ts1JanFullMonthly + ts2JanFullMonthly, adjustedAmortisedCost: 0 }
     });
 
     const febData = mergedTs.monthlyCost.find((mc: any) => mc.year === year && mc.month === 2);
     expect(febData!.cost).toEqual({
-      fullUpfront_1y: { upfrontCost: ts1FebFullUpfront + ts2FebFullUpfront, monthlyCost: ts1FebFullMonthly + ts2FebFullMonthly }
+      fullUpfront_1y: { upfrontCost: ts1FebFullUpfront + ts2FebFullUpfront, monthlyCost: ts1FebFullMonthly + ts2FebFullMonthly, adjustedAmortisedCost: 0 }
     });
   });
 
@@ -617,14 +617,14 @@ describe('mergeRiRows', () => {
           year,
           month: 1,
           cost: {
-            partialUpfront_3y: { upfrontCost: ts1JanPartial3yUpfront, monthlyCost: ts1JanPartial3yMonthly }
+            partialUpfront_3y: { upfrontCost: ts1JanPartial3yUpfront, monthlyCost: ts1JanPartial3yMonthly, adjustedAmortisedCost: 0 }
           }
         },
         {
           year,
           month: 2,
           cost: {
-            partialUpfront_3y: { upfrontCost: ts1FebPartial3yUpfront, monthlyCost: ts1FebPartial3yMonthly }
+            partialUpfront_3y: { upfrontCost: ts1FebPartial3yUpfront, monthlyCost: ts1FebPartial3yMonthly, adjustedAmortisedCost: 0 }
           }
         }
       ]
@@ -638,14 +638,14 @@ describe('mergeRiRows', () => {
           year,
           month: 1,
           cost: {
-            partialUpfront_3y: { upfrontCost: ts2JanPartial3yUpfront, monthlyCost: ts2JanPartial3yMonthly }
+            partialUpfront_3y: { upfrontCost: ts2JanPartial3yUpfront, monthlyCost: ts2JanPartial3yMonthly, adjustedAmortisedCost: 0 }
           }
         },
         {
           year,
           month: 2,
           cost: {
-            partialUpfront_3y: { upfrontCost: ts2FebPartial3yUpfront, monthlyCost: ts2FebPartial3yMonthly }
+            partialUpfront_3y: { upfrontCost: ts2FebPartial3yUpfront, monthlyCost: ts2FebPartial3yMonthly, adjustedAmortisedCost: 0 }
           }
         }
       ]
@@ -662,12 +662,12 @@ describe('mergeRiRows', () => {
 
     const janData = mergedTs.monthlyCost.find((mc: any) => mc.year === year && mc.month === 1);
     expect(janData!.cost).toEqual({
-      partialUpfront_3y: { upfrontCost: ts1JanPartial3yUpfront + ts2JanPartial3yUpfront, monthlyCost: ts1JanPartial3yMonthly + ts2JanPartial3yMonthly }
+      partialUpfront_3y: { upfrontCost: ts1JanPartial3yUpfront + ts2JanPartial3yUpfront, monthlyCost: ts1JanPartial3yMonthly + ts2JanPartial3yMonthly, adjustedAmortisedCost: 0 }
     });
 
     const febData = mergedTs.monthlyCost.find((mc: any) => mc.year === year && mc.month === 2);
     expect(febData!.cost).toEqual({
-      partialUpfront_3y: { upfrontCost: ts1FebPartial3yUpfront + ts2FebPartial3yUpfront, monthlyCost: ts1FebPartial3yMonthly + ts2FebPartial3yMonthly }
+      partialUpfront_3y: { upfrontCost: ts1FebPartial3yUpfront + ts2FebPartial3yUpfront, monthlyCost: ts1FebPartial3yMonthly + ts2FebPartial3yMonthly, adjustedAmortisedCost: 0 }
     });
   });
 
@@ -693,8 +693,8 @@ describe('mergeRiRows', () => {
           year,
           month: 1,
           cost: {
-            onDemand: { upfrontCost: ts1JanOnDemandUpfront, monthlyCost: ts1JanOnDemandMonthly },
-            noUpfront_1y: { upfrontCost: ts1JanNoUpfrontUpfront, monthlyCost: ts1JanNoUpfrontMonthly }
+            onDemand: { upfrontCost: ts1JanOnDemandUpfront, monthlyCost: ts1JanOnDemandMonthly, adjustedAmortisedCost: 0 },
+            noUpfront_1y: { upfrontCost: ts1JanNoUpfrontUpfront, monthlyCost: ts1JanNoUpfrontMonthly, adjustedAmortisedCost: 0 }
           }
         }
       ]
@@ -708,8 +708,8 @@ describe('mergeRiRows', () => {
           year,
           month: 1,
           cost: {
-            onDemand: { upfrontCost: ts2JanOnDemandUpfront, monthlyCost: ts2JanOnDemandMonthly },
-            partialUpfront_1y: { upfrontCost: ts2JanPartialUpfront, monthlyCost: ts2JanPartialMonthly }
+            onDemand: { upfrontCost: ts2JanOnDemandUpfront, monthlyCost: ts2JanOnDemandMonthly, adjustedAmortisedCost: 0 },
+            partialUpfront_1y: { upfrontCost: ts2JanPartialUpfront, monthlyCost: ts2JanPartialMonthly, adjustedAmortisedCost: 0 }
           }
         }
       ]
@@ -726,9 +726,9 @@ describe('mergeRiRows', () => {
 
     const janData = mergedTs.monthlyCost.find((mc: any) => mc.year === year && mc.month === 1);
     expect(janData!.cost).toEqual({
-      onDemand: { upfrontCost: ts1JanOnDemandUpfront + ts2JanOnDemandUpfront, monthlyCost: ts1JanOnDemandMonthly + ts2JanOnDemandMonthly },
-      noUpfront_1y: { upfrontCost: ts1JanNoUpfrontUpfront, monthlyCost: ts1JanNoUpfrontMonthly },
-      partialUpfront_1y: { upfrontCost: ts2JanPartialUpfront, monthlyCost: ts2JanPartialMonthly }
+      onDemand: { upfrontCost: ts1JanOnDemandUpfront + ts2JanOnDemandUpfront, monthlyCost: ts1JanOnDemandMonthly + ts2JanOnDemandMonthly, adjustedAmortisedCost: 0 },
+      noUpfront_1y: { upfrontCost: ts1JanNoUpfrontUpfront, monthlyCost: ts1JanNoUpfrontMonthly, adjustedAmortisedCost: 0 },
+      partialUpfront_1y: { upfrontCost: ts2JanPartialUpfront, monthlyCost: ts2JanPartialMonthly, adjustedAmortisedCost: 0 }
     });
   });
 
@@ -747,7 +747,7 @@ describe('mergeRiRows', () => {
           year,
           month: 1,
           cost: {
-            onDemand: { upfrontCost: 10, monthlyCost: 100 }
+            onDemand: { upfrontCost: 10, monthlyCost: 100, adjustedAmortisedCost: 0 }
           }
         }
       ]
@@ -772,7 +772,7 @@ describe('mergeRiRows', () => {
           year: 2025,
           month: 1,
           cost: {
-            onDemand: { upfrontCost: 10, monthlyCost: 100 }
+            onDemand: { upfrontCost: 10, monthlyCost: 100, adjustedAmortisedCost: 0 }
           }
         }
       ]
@@ -788,7 +788,7 @@ describe('mergeRiRows', () => {
     const mergedTs = result;
     expect(mergedTs.monthlyCost.length).toBe(1);
     expect(mergedTs.monthlyCost[0].cost).toEqual({
-      onDemand: { upfrontCost: 10, monthlyCost: 100 }
+      onDemand: { upfrontCost: 10, monthlyCost: 100, adjustedAmortisedCost: 0 }
     });
   });
 
@@ -802,7 +802,7 @@ describe('mergeRiRows', () => {
           year,
           month: 1,
           cost: {
-            onDemand: { upfrontCost: 10, monthlyCost: 100 }
+            onDemand: { upfrontCost: 10, monthlyCost: 100, adjustedAmortisedCost: 0 }
           }
         }
       ]
@@ -833,7 +833,7 @@ describe('mergeRiRows', () => {
 
     const janData = mergedTs.monthlyCost.find((mc: any) => mc.year === year && mc.month === 1);
     expect(janData!.cost).toEqual({
-      onDemand: { upfrontCost: 10, monthlyCost: 100 }
+      onDemand: { upfrontCost: 10, monthlyCost: 100, adjustedAmortisedCost: 0 }
     });
   });
 
@@ -846,14 +846,14 @@ describe('mergeRiRows', () => {
           year: 2024,
           month: 12,
           cost: {
-            onDemand: { upfrontCost: 0, monthlyCost: 100 }
+            onDemand: { upfrontCost: 0, monthlyCost: 100, adjustedAmortisedCost: 0 }
           }
         },
         {
           year: 2025,
           month: 1,
           cost: {
-            onDemand: { upfrontCost: 10, monthlyCost: 100 }
+            onDemand: { upfrontCost: 10, monthlyCost: 100, adjustedAmortisedCost: 0 }
           }
         }
       ]
@@ -867,14 +867,14 @@ describe('mergeRiRows', () => {
           year: 2025,
           month: 1,
           cost: {
-            onDemand: { upfrontCost: 5, monthlyCost: 50 }
+            onDemand: { upfrontCost: 5, monthlyCost: 50, adjustedAmortisedCost: 0 }
           }
         },
         {
           year: 2025,
           month: 2,
           cost: {
-            onDemand: { upfrontCost: 0, monthlyCost: 75 }
+            onDemand: { upfrontCost: 0, monthlyCost: 75, adjustedAmortisedCost: 0 }
           }
         }
       ]
@@ -893,19 +893,19 @@ describe('mergeRiRows', () => {
     // Check December 2024
     const dec2024Data = mergedTs.monthlyCost.find((mc: any) => mc.year === 2024 && mc.month === 12);
     expect(dec2024Data!.cost).toEqual({
-      onDemand: { upfrontCost: 0, monthlyCost: 100 }
+      onDemand: { upfrontCost: 0, monthlyCost: 100, adjustedAmortisedCost: 0 }
     });
 
     // Check January 2025 (merged)
     const jan2025Data = mergedTs.monthlyCost.find((mc: any) => mc.year === 2025 && mc.month === 1);
     expect(jan2025Data!.cost).toEqual({
-      onDemand: { upfrontCost: 15, monthlyCost: 150 }
+      onDemand: { upfrontCost: 15, monthlyCost: 150, adjustedAmortisedCost: 0 }
     });
 
     // Check February 2025
     const feb2025Data = mergedTs.monthlyCost.find((mc: any) => mc.year === 2025 && mc.month === 2);
     expect(feb2025Data!.cost).toEqual({
-      onDemand: { upfrontCost: 0, monthlyCost: 75 }
+      onDemand: { upfrontCost: 0, monthlyCost: 75, adjustedAmortisedCost: 0 }
     });
   });
 });

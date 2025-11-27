@@ -40,7 +40,7 @@
 
       th {
         padding: 12px 8px;
-        text-align: right;
+        text-align: center;
         font-weight: 600;
         color: #495057;
         border-bottom: 2px solid #dee2e6;
@@ -68,11 +68,11 @@
 
       td {
         padding: 10px 8px;
-        vertical-align: middle;
+        vertical-align: center;
       }
 
       .currency-cell {
-        text-align: right;
+        text-align: center;
         font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
         min-width: 100px;
 
@@ -86,7 +86,7 @@
       }
 
       .year-month-cell {
-        text-align: right;
+        text-align: center;
         font-weight: 500;
         color: #495057;
       }

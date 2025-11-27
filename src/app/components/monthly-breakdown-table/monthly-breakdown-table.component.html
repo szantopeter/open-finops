@@ -2,6 +2,12 @@
 @if (expandedRow) {
 <div class="monthly-breakdown">
   <h4>Monthly Cost Breakdown for {{ getScenarioName(expandedRow) }}</h4>
+  <div class="filter-controls">
+    <label>
+      <input type="checkbox" [(ngModel)]="showFirstFullYearOnly" />
+      Show first full year only
+    </label>
+  </div>
   <div class="table-container">
     <table class="monthly-breakdown-table">
       <thead>
@@ -11,7 +17,7 @@
             @if (scenario === 'onDemand') {
               <th scope="col">{{ getScenarioName(scenario) }}</th>
             } @else {
-              <th colspan="2" scope="col">{{ getScenarioName(scenario) }}</th>
+              <th colspan="3" scope="col">{{ getScenarioName(scenario) }}</th>
             }
           }
         </tr>
@@ -20,9 +26,9 @@
             <th scope="col">Monthly</th>
             @if (scenario !== 'onDemand') {
               <th scope="col">Upfront</th>
+              <th scope="col">Adjusted Amortised</th>
             }
           }
-          <th scope="col">Total</th>
         </tr>
       </thead>
       <tbody>
@@ -33,9 +39,10 @@
               <td class="currency-cell" [class.zero-value]="isZeroValue(getMonthlyCost(scenario, ym.year, ym.month))">{{ formatCurrency(getMonthlyCost(scenario, ym.year, ym.month)) }}</td>
               @if (scenario !== 'onDemand') {
                 <td class="currency-cell" [class.zero-value]="isZeroValue(getUpfrontCost(scenario, ym.year, ym.month))">{{ formatCurrency(getUpfrontCost(scenario, ym.year, ym.month)) }}</td>
+                <td class="currency-cell" [class.zero-value]="isZeroValue(getAdjustedAmortised(scenario, ym.year, ym.month))">{{ formatCurrency(getAdjustedAmortised(scenario, ym.year, ym.month)) }}</td>
               }
             }
-            <td class="currency-cell">{{ formatCurrency(getMonthlyTotal(ym.year, ym.month)) }}</td>
+            <!-- Total column removed -->
           </tr>
         }
         <tr class="summary-row">
@@ -44,9 +51,10 @@
             <td class="currency-cell">{{ formatCurrency(getTotalMonthlyCost(scenario)) }}</td>
             @if (scenario !== 'onDemand') {
               <td class="currency-cell">{{ formatCurrency(getTotalUpfrontCost(scenario)) }}</td>
+              <td class="currency-cell">{{ formatCurrency(getTotalAdjustedAmortised(scenario)) }}</td>
             }
           }
-          <td class="currency-cell">{{ formatCurrency(getGrandTotal()) }}</td>
+          <!-- Grand total column removed -->
         </tr>
       </tbody>
     </table>

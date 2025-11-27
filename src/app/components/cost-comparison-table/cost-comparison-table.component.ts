@@ -48,7 +48,7 @@ export class CostComparisonTableComponent implements OnChanges {
     if (changes['riPortfolio'] && this.riPortfolio) {
       const costTimeseriesByScenario: CostTimeseriesByScenario = {} as CostTimeseriesByScenario;
 
-      // On-demand - no projection needed
+      // On-demand 
       const projected = RiRenewalProjection.projectRiRenewal(this.riPortfolio, '1yr_No Upfront');
       const projectedOnly: RiPortfolio = {
             ...this.riPortfolio,
@@ -58,7 +58,7 @@ export class CostComparisonTableComponent implements OnChanges {
       const mergedOnDemand = CostComparisonCalculator.mergeRiRows(onDemandTimeseries);
       costTimeseriesByScenario.onDemand = mergedOnDemand;
 
-      // Current projection (no savingsKey) - separate reference
+      // Current projection
       const projectedCurrent = RiRenewalProjection.projectRiRenewal(this.riPortfolio);
       const projectedOnlyCurrent: RiPortfolio = {
         ...this.riPortfolio,
@@ -90,29 +90,41 @@ export class CostComparisonTableComponent implements OnChanges {
         const accumulate = (tsInner: any) => {
           let totalUpfront = 0;
           let totalMonthly = 0;
+          let totalAdjustedAmortised = 0;
           let highestMonthly = 0;
           let highestMonth: { year: number; month: number } | undefined;
 
           for (const mc of tsInner.monthlyCost || []) {
-            const costDataAny: any = Object.values(mc.cost || {})[0];
+            // Filter by firstFullYear to match the calculator behavior
+            if (this.riPortfolio.metadata.firstFullYear && mc.year !== this.riPortfolio.metadata.firstFullYear) continue;
+            
+            // Use the scenario key to get the correct cost data. For 'current', fall back to first value.
+            let costDataAny: any;
+            if (scenarioName === 'current') {
+              costDataAny = Object.values(mc.cost || {})[0];
+            } else {
+              costDataAny = mc.cost?.[scenarioName];
+            }
             if (!costDataAny) continue;
             const monthlyCostVal = (typeof costDataAny.monthlyCost === 'number') ? costDataAny.monthlyCost : 0;
             const upfrontCostVal = (typeof costDataAny.upfrontCost === 'number') ? costDataAny.upfrontCost : 0;
+            const adjustedAmortisedVal = (typeof costDataAny.adjustedAmortisedCost === 'number') ? costDataAny.adjustedAmortisedCost : 0;
             totalMonthly += monthlyCostVal;
+            totalUpfront += upfrontCostVal;
+            totalAdjustedAmortised += adjustedAmortisedVal;
             const monthlyCost = monthlyCostVal + upfrontCostVal;
             if (monthlyCost > highestMonthly) {
               highestMonthly = monthlyCost;
               highestMonth = { year: mc.year, month: mc.month };
             }
-            totalUpfront += upfrontCostVal;
           }
 
-          return { totalUpfront, totalMonthly, highestMonthly, highestMonth };
+          return { totalUpfront, totalMonthly, totalAdjustedAmortised, highestMonthly, highestMonth };
         };
 
-        const { totalUpfront, totalMonthly, highestMonthly, highestMonth } = accumulate(ts);
+        const { totalUpfront, totalMonthly, totalAdjustedAmortised, highestMonthly, highestMonth } = accumulate(ts);
 
-        const totalCost = totalMonthly + totalUpfront;
+        const totalCost = totalAdjustedAmortised;
         const savingsValueOnDemand = (baselineTotalCostOnDemand !== null && typeof baselineTotalCostOnDemand === 'number') ? (baselineTotalCostOnDemand - totalCost) : undefined;
         const savingsPercentOnDemand = (savingsValueOnDemand !== undefined && baselineTotalCostOnDemand && baselineTotalCostOnDemand > 0) ? (savingsValueOnDemand / baselineTotalCostOnDemand) * 100 : undefined;
 
