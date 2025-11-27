@@ -9,6 +9,13 @@
     font-weight: 600;
   }
 
+  h4 {
+    color: #2c3e50;
+    margin-bottom: 6px;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
   .subtitle {
     color: #6c757d;
     margin-bottom: 20px;
@@ -72,6 +79,30 @@
     color: #2c3e50;
     min-width: 140px;
   }
+
+    .savings-cell {
+    text-align: right;
+
+    span {
+      display: inline-block;
+      width: 100%;
+      text-align: right;
+    }
+      background-color: #eaf7ec; /* light green */
+      border-left: 4px solid rgba(40,167,69,0.08);
+  }
+      td.savings-current-cell {
+        text-align: right !important;
+        font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+
+        span {
+          display: inline-block;
+          width: 100%;
+          text-align: right;
+        }
+        background-color: #eaf7ec; /* light green */
+        border-left: 4px solid rgba(40,167,69,0.08);
+      }
 
   .currency-cell {
     text-align: right;

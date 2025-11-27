@@ -8,6 +8,11 @@ export interface CostComparison {
   highestMonthlySpend: number;
   highestMonthlySpendMonth?: { year: number; month: number };
   savingsPercent?: number;
+  savingsValue?: number;
+  savingsValueOnDemand?: number;
+  savingsPercentOnDemand?: number;
+  savingsValueCurrent?: number;
+  savingsPercentCurrent?: number;
   monthlyBreakdown: CostTimeseries[];
 }
 
@@ -110,72 +115,63 @@ export const CostComparisonCalculator = {
     const result: Partial<CostComparisonByScenario> = {};
     const scenarioKeys: (keyof CostTimeseriesByScenario)[] = ['onDemand', 'noUpfront_1y', 'partialUpfront_1y', 'fullUpfront_1y', 'partialUpfront_3y', 'fullUpfront_3y'];
 
+    // Helper to accumulate totals for a given CostTimeseries and scenario key
+    const accumulateTotals = (ts: CostTimeseries, scenarioKey: keyof CostTimeseries['monthlyCost'][0]['cost']) => {
+      let totalUpfront = 0;
+      let totalMonthlyPayment = 0;
+      let maxMonthly = 0;
+      let highestMonth: { year: number; month: number } | undefined;
+
+      for (const mc of ts.monthlyCost) {
+        const costData = mc.cost[scenarioKey as string as keyof typeof mc.cost];
+        if (costData) {
+          totalMonthlyPayment += costData.monthlyCost;
+          const monthlyCost = costData.monthlyCost + costData.upfrontCost;
+          if (monthlyCost > maxMonthly) {
+            maxMonthly = monthlyCost;
+            highestMonth = { year: mc.year, month: mc.month };
+          }
+          totalUpfront += costData.upfrontCost;
+        }
+      }
+
+      return { totalUpfront, totalMonthlyPayment, maxMonthly, highestMonth };
+    };
+
     // First, calculate onDemand to use for savings percent
     const onDemandScenario = 'onDemand';
     const onDemandTs = costTimeseriesByScenario[onDemandScenario];
-    let onDemandTotalUpfront = 0;
-    let onDemandTotalMonthly = 0;
-    let onDemandMaxMonthly = 0;
-    let onDemandHighestMonth: { year: number; month: number } | undefined;
-
-    for (const mc of onDemandTs.monthlyCost) {
-      const costData = mc.cost[onDemandScenario];
-      if (costData) {
-        onDemandTotalMonthly += costData.monthlyCost;
-        const monthlyCost = costData.monthlyCost + costData.upfrontCost;
-        if (monthlyCost > onDemandMaxMonthly) {
-          onDemandMaxMonthly = monthlyCost;
-          onDemandHighestMonth = { year: mc.year, month: mc.month };
-        }
-        onDemandTotalUpfront += costData.upfrontCost;
-      }
-    }
-
-    const onDemandTotalCost = onDemandTotalMonthly + onDemandTotalUpfront;
+    const onDemandTotals = accumulateTotals(onDemandTs, onDemandScenario);
+    const onDemandTotalCost = onDemandTotals.totalMonthlyPayment + onDemandTotals.totalUpfront;
 
     result[onDemandScenario] = {
       scenario: onDemandScenario,
       totalCost: onDemandTotalCost,
-      totalUpfront: onDemandTotalUpfront,
-      totalMonthlyPayment: onDemandTotalMonthly,
-      highestMonthlySpend: onDemandMaxMonthly,
-      highestMonthlySpendMonth: onDemandHighestMonth,
+      totalUpfront: onDemandTotals.totalUpfront,
+      totalMonthlyPayment: onDemandTotals.totalMonthlyPayment,
+      highestMonthlySpend: onDemandTotals.maxMonthly,
+      highestMonthlySpendMonth: onDemandTotals.highestMonth,
+      savingsValue: undefined,
       monthlyBreakdown: [onDemandTs]
     };
 
     // Now calculate other scenarios
     for (const scenario of scenarioKeys.slice(1)) {
       const ts = costTimeseriesByScenario[scenario];
-      let totalUpfront = 0;
-      let totalMonthlyPayment = 0;
-      let highestMonthlySpend = 0;
-      let highestMonthlySpendMonth: { year: number; month: number } | undefined;
-
-      for (const mc of ts.monthlyCost) {
-        const costData = mc.cost[scenario];
-        if (costData) {
-          totalMonthlyPayment += costData.monthlyCost;
-          const monthlyCost = costData.monthlyCost + costData.upfrontCost;
-          if (monthlyCost > highestMonthlySpend) {
-            highestMonthlySpend = monthlyCost;
-            highestMonthlySpendMonth = { year: mc.year, month: mc.month };
-          }
-          totalUpfront += costData.upfrontCost;
-        }
-      }
-
-      const totalCost = totalMonthlyPayment + totalUpfront;
-
+      const totals = accumulateTotals(ts, scenario);
+      const totalCost = totals.totalMonthlyPayment + totals.totalUpfront;
       const savingsPercent = onDemandTotalCost > 0 ? ((onDemandTotalCost - totalCost) / onDemandTotalCost) * 100 : 0;
+      const savingsValue = onDemandTotalCost - totalCost;
 
       result[scenario] = {
         scenario,
         totalCost,
-        totalUpfront,
-        totalMonthlyPayment,
-        highestMonthlySpend,
-        highestMonthlySpendMonth,
+        totalUpfront: totals.totalUpfront,
+        totalMonthlyPayment: totals.totalMonthlyPayment,
+        highestMonthlySpend: totals.maxMonthly,
+        highestMonthlySpendMonth: totals.highestMonth,
         savingsPercent,
+        savingsValue,
         monthlyBreakdown: [ts]
       };
     }

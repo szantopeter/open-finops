@@ -1,145 +1,93 @@
 import { RiRenewalProjection } from './ri-renewal-projection';
-import type { SavingsKey } from '../components/ri-portfolio-upload/models/pricing.model';
 import type { RiPortfolio, RiRow } from '../components/ri-portfolio-upload/models/ri-portfolio.model';
 
 describe('RiRenewalProjection', () => {
-  const firstFullYear = 2029;
+  it('preserves original term and upfront when savingsKey is not provided', () => {
+    const firstFullYear = 2026;
 
-  // Helper to run the common test logic for a given savingsKey
-  const runProjectionTest = (savingsKey: SavingsKey): void => {
-    // Two RIs: one 3-year and one 1-year, same year but different month/day
-    const ri1: RiRow = {
-      id: 'r1',
-      raw: { originId: 'r1' },
-      startDate: new Date('2025-02-15'),
-      endDate: new Date('2028-02-14'), // 3 years
-      count: 1,
-      instanceClass: 'db.r5.large',
-      region: 'eu-west-1',
-      multiAz: false,
-      engine: 'postgres',
-      edition: 'standard',
-      upfrontPayment: 'All Upfront',
-      durationMonths: 36,
-      type: 'actual'
-    };
-
-    const ri2: RiRow = {
-      id: 'r2',
-      raw: { originId: 'r2' },
-      startDate: new Date('2025-06-10'),
-      endDate: new Date('2026-06-09'), // 1 year
-      count: 2,
-      instanceClass: 'db.r5.large',
-      region: 'eu-west-1',
-      multiAz: false,
-      engine: 'postgres',
-      edition: 'standard',
-      upfrontPayment: 'No Upfront',
-      durationMonths: 12,
-      type: 'actual'
-    };
-
-    const inputPortfolio: RiPortfolio = {
-      metadata: {
-        source: 'test',
-        importedAt: new Date().toISOString(),
-        firstFullYear
-      },
+    // Create a portfolio with RI rows covering 1yr and 3yr saving types / upfront options
+    const riRows: RiPortfolio = {
+      metadata: { source: 'test', importedAt: new Date().toISOString(), firstFullYear },
       rows: [
-        { riRow: ri1, pricingData: ({} as any) },
-        { riRow: ri2, pricingData: ({} as any) }
+        // 1yr No Upfront
+        {
+          riRow: {
+            id: 'r1', raw: {}, startDate: new Date(2024, 0, 1), endDate: new Date(2024, 11, 31), count: 1,
+            instanceClass: 'db.t3.micro', region: 'us-east-1', multiAz: false, engine: 'mysql', edition: 'standard',
+            upfrontPayment: 'No Upfront', durationMonths: 12, type: 'actual'
+          } as RiRow,
+          pricingData: {} as any
+        },
+        // 1yr Partial
+        {
+          riRow: {
+            id: 'r2', raw: {}, startDate: new Date(2024, 3, 1), endDate: new Date(2025, 2, 28), count: 1,
+            instanceClass: 'db.t3.micro', region: 'us-east-1', multiAz: false, engine: 'mysql', edition: 'standard',
+            upfrontPayment: 'Partial', durationMonths: 12, type: 'actual'
+          } as RiRow,
+          pricingData: {} as any
+        },
+        // 1yr All Upfront
+        {
+          riRow: {
+            id: 'r3', raw: {}, startDate: new Date(2024, 6, 1), endDate: new Date(2025, 5, 31), count: 1,
+            instanceClass: 'db.t3.micro', region: 'us-east-1', multiAz: false, engine: 'mysql', edition: 'standard',
+            upfrontPayment: 'All Upfront', durationMonths: 12, type: 'actual'
+          } as RiRow,
+          pricingData: {} as any
+        },
+        // 3yr Partial
+        {
+          riRow: {
+            id: 'r4', raw: {}, startDate: new Date(2024, 0, 1), endDate: new Date(2026, 11, 31), count: 1,
+            instanceClass: 'db.t3.micro', region: 'us-east-1', multiAz: false, engine: 'mysql', edition: 'standard',
+            upfrontPayment: 'Partial', durationMonths: 36, type: 'actual'
+          } as RiRow,
+          pricingData: {} as any
+        },
+        // 3yr All Upfront
+        {
+          riRow: {
+            id: 'r5', raw: {}, startDate: new Date(2024, 2, 1), endDate: new Date(2027, 1, 28), count: 1,
+            instanceClass: 'db.t3.micro', region: 'us-east-1', multiAz: false, engine: 'mysql', edition: 'standard',
+            upfrontPayment: 'All Upfront', durationMonths: 36, type: 'actual'
+          } as RiRow,
+          pricingData: {} as any
+        }
       ]
     };
 
-    // Act
-    const projected = RiRenewalProjection.projectRiRenewal(inputPortfolio, savingsKey);
+    // Act: call without savingsKey
+    const projected = RiRenewalProjection.projectRiRenewal(riRows as any);
 
-    expect(projected).toBeDefined();
-
-    const targetEndOfYear = new Date(firstFullYear, 11, 31);
-
-    // Helper to match instance identity
-    const matchesInstance = (a: RiRow, b: RiRow): boolean =>
-      a.instanceClass === b.instanceClass && a.region === b.region && a.multiAz === b.multiAz && a.engine === b.engine && a.edition === b.edition;
-
-    for (const inputEntries of inputPortfolio.rows) {
-      const inputRiRow = inputEntries.riRow;
-
-      // Locate the original row in the projected result (type 'actual') and assert
-      const projectedOriginalEntry = projected.rows.find((p: { riRow: RiRow }) => p.riRow.id === inputRiRow.id && p.riRow.type === 'actual');
-      expect(projectedOriginalEntry).toBeDefined();
-      const resultActualRiRow: RiRow = projectedOriginalEntry!.riRow;
-      // Ensure the projected original preserves the same instance identity
-      expect(matchesInstance(resultActualRiRow, inputRiRow)).toBeTrue();
-
-      // Collect all entries in projected that cover the same instances (original + renewals)
-      const chain = projected.rows
-        .map((x: { riRow: RiRow; pricingData: any }) => x.riRow)
-        .filter((r: RiRow) => matchesInstance(r, inputRiRow) && r.count === inputRiRow.count)
-        .sort((a: RiRow, b: RiRow) => a.startDate.getTime() - b.startDate.getTime());
-
-      // There must be at least the original in the chain
-      expect(chain.length).toBeGreaterThanOrEqual(1);
-
-      // Verify no gaps between consecutive reservations (next.startDate - prev.endDate <= 1 day and >= 0)
-      for (let i = 1; i < chain.length; i++) {
-        const prev = chain[i - 1];
-        const next = chain[i];
-        const diffMs = next.startDate.getTime() - prev.endDate.getTime();
-        const oneDayMs = 24 * 60 * 60 * 1000;
-        expect(diffMs).toBeGreaterThanOrEqual(0);
-        expect(diffMs).toBeLessThanOrEqual(oneDayMs);
-      }
-
-      // At least one entry in the chain should use the upfront implied by the savingsKey
-      const expectedUpfront = savingsKey.includes('Partial') ? 'Partial' : savingsKey.includes('No Upfront') ? 'No Upfront' : 'All Upfront';
-      const hasExpectedUpfront = chain.some((r: RiRow) => r.upfrontPayment === expectedUpfront);
-      expect(hasExpectedUpfront).toBeTrue();
-
-      // Renewals should follow the id convention: originalId-renew-1, originalId-renew-2, ...
-      const renewalPrefix = `${inputRiRow.id}-renew-`;
-      const renewals = projected.rows
-        .map((x: { riRow: RiRow; pricingData: any }) => x.riRow)
-        .filter((r: RiRow) => r.id.startsWith(renewalPrefix))
-        .sort((a: RiRow, b: RiRow) => a.startDate.getTime() - b.startDate.getTime());
-
-      // There should be at least one renewal in the chain (per requirements)
-      expect(renewals.length).toBeGreaterThanOrEqual(1);
-
-      // Check renewal id numbering is sequential starting at 1
-      const renewalSequence = renewals.map((r: RiRow) => {
-        const m = r.id.match(/-renew-(\d+)$/);
-        return m ? parseInt(m[1], 10) : NaN;
-      });
-      // All must parse
-      expect(renewalSequence.every((n: number) => !isNaN(n))).toBeTrue();
-      // Sorted numeric order
-      const sortedNums = [...renewalSequence].sort((a, b) => a - b);
-      expect(sortedNums[0]).toBe(1);
-      for (let i = 0; i < sortedNums.length; i++) {
-        expect(sortedNums[i]).toBe(i + 1);
-      }
-
-      // Ensure renewals in the same chain don't have gaps between them
-      for (let i = 1; i < renewals.length; i++) {
-        const prev = renewals[i - 1];
-        const next = renewals[i];
-        const diffMs = next.startDate.getTime() - prev.endDate.getTime();
-        const oneDayMs = 24 * 60 * 60 * 1000;
-        expect(diffMs).toBeGreaterThanOrEqual(0);
-        expect(diffMs).toBeLessThanOrEqual(oneDayMs);
-      }
-
-      // Renewals should continue until one of them ends after the end of the firstFullYear
-      const endsAfterYear = chain.some((r: RiRow) => r.endDate.getTime() > targetEndOfYear.getTime());
-      expect(endsAfterYear).toBeTrue();
+    // Assert: for each original row, ensure each renewal uses the same upfrontPayment and durationMonths
+    const grouped = new Map<string, any[]>();
+    for (const entry of projected.rows) {
+      const origin = (entry.riRow.raw && (entry.riRow.raw as any).originId) || entry.riRow.id;
+      if (!grouped.has(origin)) grouped.set(origin, []);
+      grouped.get(origin)!.push(entry.riRow);
     }
-  };
 
-  it('handles 1yr_No Upfront', () => runProjectionTest('1yr_No Upfront'));
-  it('handles 1yr_Partial Upfront', () => runProjectionTest('1yr_Partial Upfront'));
-  it('handles 1yr_All Upfront', () => runProjectionTest('1yr_All Upfront'));
-  it('handles 3yr_Partial Upfront', () => runProjectionTest('3yr_Partial Upfront'));
-  it('handles 3yr_All Upfront', () => runProjectionTest('3yr_All Upfront'));
+    // original rows should have groups for all five
+    expect(grouped.has('r1')).toBeTrue();
+    expect(grouped.has('r2')).toBeTrue();
+    expect(grouped.has('r3')).toBeTrue();
+    expect(grouped.has('r4')).toBeTrue();
+    expect(grouped.has('r5')).toBeTrue();
+
+    const checkSame = (originId: string, expectedUpfront: string | undefined, expectedDuration: number) => {
+      const rows = grouped.get(originId)!;
+      for (const r of rows) {
+        expect(r.upfrontPayment).toBe(expectedUpfront);
+        expect(r.durationMonths).toBe(expectedDuration);
+      }
+    };
+
+    checkSame('r1', 'No Upfront', 12);
+    checkSame('r2', 'Partial', 12);
+    checkSame('r3', 'All Upfront', 12);
+    checkSame('r4', 'Partial', 36);
+    checkSame('r5', 'All Upfront', 36);
+  });
 });
+

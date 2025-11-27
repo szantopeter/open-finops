@@ -97,6 +97,25 @@ export class MonthlyBreakdownTableComponent {
     return total;
   }
 
+  getMonthlyTotal(year: number, month: number): number {
+    let total = 0;
+    for (const scenario of this.displayedScenarios) {
+      total += this.getMonthlyCost(scenario, year, month);
+      if (scenario !== 'onDemand') {
+        total += this.getUpfrontCost(scenario, year, month);
+      }
+    }
+    return total;
+  }
+
+  getGrandTotal(): number {
+    let total = 0;
+    for (const ym of this.getYearMonths()) {
+      total += this.getMonthlyTotal(ym.year, ym.month);
+    }
+    return total;
+  }
+
   isHighestSpendMonth(year: number, month: number): boolean {
     const highest = this.highestSpendMonth || { year: 2025, month: 1 };
     return highest.year === year && highest.month === month;

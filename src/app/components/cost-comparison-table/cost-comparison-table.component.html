@@ -3,6 +3,7 @@
   <p class="subtitle">Comparing different AWS RDS Reserved Instance payment options for {{ riPortfolio.metadata.firstFullYear }}</p>
 
   <div class="table-container">
+    <h4>Reference scenarios</h4>
     <table class="cost-comparison-table">
       <thead>
         <tr>
@@ -11,31 +12,66 @@
           <th>Total Monthly Payment</th>
           <th>Highest monthly spend</th>
           <th>Total Cost</th>
-          <th>Savings Percent</th>
+          <th>Savings (On Demand)</th>
+          <th>Savings (Current)</th>
           <th>Details</th>
         </tr>
       </thead>
       <tbody>
-        @for (comparison of costComparisonsArray; track comparison.scenario) {
-          <tr [class.baseline-row]="expandedRow === comparison.scenario">
-            <td class="scenario-cell">{{ getScenarioName(comparison.scenario) }}</td>
-            <td class="currency-cell" [class.zero-value]="isZeroValue(comparison.totalUpfront)">{{ formatCurrency(comparison.totalUpfront) }}</td>
-            <td class="currency-cell" [class.zero-value]="isZeroValue(comparison.totalMonthlyPayment)">{{ formatCurrency(comparison.totalMonthlyPayment) }}</td>
-            <td class="currency-cell" [class.zero-value]="isZeroValue(comparison.highestMonthlySpend)">{{ formatHighestMonthlySpend(comparison) }}</td>
-            <td class="currency-cell" [class.zero-value]="isZeroValue(comparison.totalCost)">{{ formatCurrency(comparison.totalCost) }}</td>
-            <td class="percent-cell" [class.savings]="comparison.savingsPercent && comparison.savingsPercent > 0">
-              {{ formatPercent(comparison.savingsPercent) }}
-            </td>
-            <td class="action-cell">
-              <button 
-                class="details-button" 
-                (click)="toggleMonthlyBreakdown(comparison.scenario)"
-                [class.expanded]="expandedRow === comparison.scenario">
-                {{ expandedRow === comparison.scenario ? 'Hide' : 'Show' }} Details
-              </button>
-            </td>
-          </tr>
-        }
+        <tr *ngFor="let c of referenceComparisons" [class.baseline-row]="expandedRow === c.scenario">
+          <td class="scenario-cell">{{ getScenarioName(c.scenario) }}</td>
+          <td class="currency-cell" [class.zero-value]="isZeroValue(c.totalUpfront)">{{ formatCurrency(c.totalUpfront) }}</td>
+          <td class="currency-cell" [class.zero-value]="isZeroValue(c.totalMonthlyPayment)">{{ formatCurrency(c.totalMonthlyPayment) }}</td>
+          <td class="currency-cell" [class.zero-value]="isZeroValue(c.highestMonthlySpend)">{{ formatHighestMonthlySpend(c) }}</td>
+          <td class="currency-cell" [class.zero-value]="isZeroValue(c.totalCost)">{{ formatCurrency(c.totalCost) }}</td>
+          <td class="savings-cell" [class.savings]="c.savingsPercentOnDemand && c.savingsPercentOnDemand > 0">
+            <span *ngIf="c.savingsValueOnDemand !== undefined">{{ formatCurrency(c.savingsValueOnDemand) }} ({{ formatPercent(c.savingsPercentOnDemand) }})</span>
+            <span *ngIf="c.savingsValueOnDemand === undefined">-</span>
+          </td>
+          <td class="savings-current-cell" [class.savings]="c.savingsPercentCurrent && c.savingsPercentCurrent > 0">
+            <span *ngIf="c.savingsValueCurrent !== undefined">{{ formatCurrency(c.savingsValueCurrent) }} ({{ formatPercent(c.savingsPercentCurrent) }})</span>
+            <span *ngIf="c.savingsValueCurrent === undefined">-</span>
+          </td>
+          <td class="action-cell">
+            <button class="details-button" (click)="toggleMonthlyBreakdown(c.scenario)" [class.expanded]="expandedRow === c.scenario">{{ expandedRow === c.scenario ? 'Hide' : 'Show' }} Details</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>Savings Scenarios</h4>
+    <table class="cost-comparison-table">
+      <thead>
+        <tr>
+          <th>Scenario</th>
+          <th>Total Upfront</th>
+          <th>Total Monthly Payment</th>
+          <th>Highest monthly spend</th>
+          <th>Total Cost</th>
+          <th>Savings (On Demand)</th>
+          <th>Savings (Current)</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of savingsComparisons" [class.baseline-row]="expandedRow === c.scenario">
+          <td class="scenario-cell">{{ getScenarioName(c.scenario) }}</td>
+          <td class="currency-cell" [class.zero-value]="isZeroValue(c.totalUpfront)">{{ formatCurrency(c.totalUpfront) }}</td>
+          <td class="currency-cell" [class.zero-value]="isZeroValue(c.totalMonthlyPayment)">{{ formatCurrency(c.totalMonthlyPayment) }}</td>
+          <td class="currency-cell" [class.zero-value]="isZeroValue(c.highestMonthlySpend)">{{ formatHighestMonthlySpend(c) }}</td>
+          <td class="currency-cell" [class.zero-value]="isZeroValue(c.totalCost)">{{ formatCurrency(c.totalCost) }}</td>
+          <td class="savings-cell" [class.savings]="c.savingsPercentOnDemand && c.savingsPercentOnDemand > 0">
+            <span *ngIf="c.savingsValueOnDemand !== undefined">{{ formatCurrency(c.savingsValueOnDemand) }} ({{ formatPercent(c.savingsPercentOnDemand) }})</span>
+            <span *ngIf="c.savingsValueOnDemand === undefined">-</span>
+          </td>
+          <td class="savings-current-cell" [class.savings]="c.savingsPercentCurrent && c.savingsPercentCurrent > 0">
+            <span *ngIf="c.savingsValueCurrent !== undefined">{{ formatCurrency(c.savingsValueCurrent) }} ({{ formatPercent(c.savingsPercentCurrent) }})</span>
+            <span *ngIf="c.savingsValueCurrent === undefined">-</span>
+          </td>
+          <td class="action-cell">
+            <button class="details-button" (click)="toggleMonthlyBreakdown(c.scenario)" [class.expanded]="expandedRow === c.scenario">{{ expandedRow === c.scenario ? 'Hide' : 'Show' }} Details</button>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>

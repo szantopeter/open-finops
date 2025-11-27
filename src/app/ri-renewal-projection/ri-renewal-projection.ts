@@ -16,7 +16,13 @@ function addMonths(date: Date, months: number): Date {
 export class RiRenewalProjection {
   private constructor() {}
 
-  static projectRiRenewal(riPortfolio: RiPortfolio, savingsKey: SavingsKey): RiPortfolio {
+  /**
+   * Projects renewals for all RIs in the given portfolio until at least the end of the first full year.
+   * @param riPortfolio 
+   * @param savingsKey If savingsKey is provided, it determines the renewal term and upfront payment. If not provided then it will renew every RI with it's own original term and upfront.
+   * @returns 
+   */
+  static projectRiRenewal(riPortfolio: RiPortfolio, savingsKey?: SavingsKey): RiPortfolio {
     const result: RiPortfolio = {
       metadata: { ...riPortfolio.metadata },
       rows: []
@@ -31,7 +37,6 @@ export class RiRenewalProjection {
       return 12;
     };
 
-    const renewalTermMonths = termMonthsFromSavings(savingsKey);
     const upfrontFromSavings = (key: SavingsKey): UpfrontPayment => {
       if (key.includes('No Upfront')) return 'No Upfront';
       if (key.includes('Partial')) return 'Partial';
@@ -53,7 +58,12 @@ export class RiRenewalProjection {
         const startMs = prevEnd.getTime() + 1; // start just after previous end
         const startDate = new Date(startMs);
 
-        const endCandidate = addMonths(startDate, renewalTermMonths);
+          // determine renewal term and upfront for this original row: if savingsKey is provided use it,
+          // otherwise preserve the original riRow's duration and upfrontPayment
+          const renewalTermMonths = savingsKey ? termMonthsFromSavings(savingsKey) : originalRiRow.durationMonths;
+          const renewalUpfront = savingsKey ? upfrontFromSavings(savingsKey) : originalRiRow.upfrontPayment;
+
+          const endCandidate = addMonths(startDate, renewalTermMonths);
         // make endDate inclusive by subtracting one day
         const endDate = new Date(endCandidate);
         endDate.setDate(endDate.getDate() - 1);
@@ -69,7 +79,7 @@ export class RiRenewalProjection {
           multiAz: originalRiRow.multiAz,
           engine: originalRiRow.engine,
           edition: originalRiRow.edition,
-          upfrontPayment: upfrontFromSavings(savingsKey),
+          upfrontPayment: renewalUpfront,
           durationMonths: renewalTermMonths,
           type: 'projected'
         };

@@ -22,6 +22,7 @@
               <th scope="col">Upfront</th>
             }
           }
+          <th scope="col">Total</th>
         </tr>
       </thead>
       <tbody>
@@ -34,6 +35,7 @@
                 <td class="currency-cell" [class.zero-value]="isZeroValue(getUpfrontCost(scenario, ym.year, ym.month))">{{ formatCurrency(getUpfrontCost(scenario, ym.year, ym.month)) }}</td>
               }
             }
+            <td class="currency-cell">{{ formatCurrency(getMonthlyTotal(ym.year, ym.month)) }}</td>
           </tr>
         }
         <tr class="summary-row">
@@ -44,6 +46,7 @@
               <td class="currency-cell">{{ formatCurrency(getTotalUpfrontCost(scenario)) }}</td>
             }
           }
+          <td class="currency-cell">{{ formatCurrency(getGrandTotal()) }}</td>
         </tr>
       </tbody>
     </table>
