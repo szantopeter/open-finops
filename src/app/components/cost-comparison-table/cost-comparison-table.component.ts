@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import type { OnChanges, SimpleChanges } from '@angular/core';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import type { CostComparison, CostTimeseriesByScenario, CostComparisonByScenario } from '../../cost-comparision/cost-comparison-calculator';
@@ -27,6 +27,7 @@ export class CostComparisonTableComponent implements OnChanges {
   referenceComparisons: CostComparison[] = [];
   savingsComparisons: CostComparison[] = [];
   expandedRow: string | null = null;
+  @ViewChild('monthlyBreakdown', { read: ElementRef }) monthlyBreakdownEl?: ElementRef<HTMLElement>;
   scenarios: string[] = ['onDemand', 'noUpfront_1y', 'partialUpfront_1y', 'fullUpfront_1y', 'partialUpfront_3y', 'fullUpfront_3y'];
   scenarioNames: string[] = ['On Demand', '1yr No Upfront', '1yr Partial Upfront', '1yr All Upfront', '3yr Partial Upfront', '3yr All Upfront'];
 
@@ -161,6 +162,16 @@ export class CostComparisonTableComponent implements OnChanges {
 
   toggleMonthlyBreakdown(scenario: string): void {
     this.expandedRow = this.expandedRow === scenario ? null : scenario;
+    if (this.expandedRow === scenario) {
+      // wait for the monthly breakdown to render, then scroll into view
+      setTimeout(() => {
+        try {
+          this.monthlyBreakdownEl?.nativeElement?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } catch (e) {
+          console.debug('scrollIntoView failed', e);
+        }
+      }, 50);
+    }
   }
 
   getScenarioName(scenario: string): string {
