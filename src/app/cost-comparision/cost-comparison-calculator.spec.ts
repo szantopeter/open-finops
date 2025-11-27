@@ -83,6 +83,7 @@ describe('CostComparisonCalculator', () => {
         totalMonthlyPayment: onDemandTotalMonthly,
         highestMonthlySpend: onDemandMaxMonthly,
         highestMonthlySpendMonth: { year: 2025, month: 1 },
+        savingsValue: undefined,
         monthlyBreakdown: [onDemandCostTimeseries[0]]
       });
 
@@ -95,6 +96,7 @@ describe('CostComparisonCalculator', () => {
       const noUpfrontTotalMonthly = scenarios[1].monthly * 12;
       const noUpfrontMaxMonthly = scenarios[1].monthly;
       const noUpfrontSavingsPercent = ((onDemandTotalCost - noUpfrontTotalCost) / onDemandTotalCost) * 100;
+      const noUpfrontSavingsValue = onDemandTotalCost - noUpfrontTotalCost;
 
       expect(result.noUpfront_1y).withContext('No Upfront 1y scenario').toEqual({
         scenario: 'noUpfront_1y',
@@ -104,6 +106,7 @@ describe('CostComparisonCalculator', () => {
         highestMonthlySpend: noUpfrontMaxMonthly,
         highestMonthlySpendMonth: { year: 2025, month: 1 },
         savingsPercent: noUpfrontSavingsPercent,
+        savingsValue: noUpfrontSavingsValue,
         monthlyBreakdown: [noUpfront1yCostTimeseries[0]]
       });
 
@@ -116,6 +119,7 @@ describe('CostComparisonCalculator', () => {
       const partialUpfrontTotalMonthly = scenarios[2].monthly * 12;
       const partialUpfrontMaxMonthly = scenarios[2].upfront + scenarios[2].monthly;
       const partialUpfrontSavingsPercent = ((onDemandTotalCost - partialUpfrontTotalCost) / onDemandTotalCost) * 100;
+      const partialUpfrontSavingsValue = onDemandTotalCost - partialUpfrontTotalCost;
 
       expect(result.partialUpfront_1y).withContext('Partial Upfront 1y scenario').toEqual({
         scenario: 'partialUpfront_1y',
@@ -125,6 +129,7 @@ describe('CostComparisonCalculator', () => {
         highestMonthlySpend: partialUpfrontMaxMonthly,
         highestMonthlySpendMonth: { year: 2025, month: 1 },
         savingsPercent: partialUpfrontSavingsPercent,
+        savingsValue: partialUpfrontSavingsValue,
         monthlyBreakdown: [partialUpfront1yCostTimeseries[0]]
       });
 
@@ -137,6 +142,7 @@ describe('CostComparisonCalculator', () => {
       const fullUpfront1yTotalMonthly = scenarios[3].monthly * 12;
       const fullUpfront1yMaxMonthly = scenarios[3].upfront + scenarios[3].monthly;
       const fullUpfront1ySavingsPercent = ((onDemandTotalCost - fullUpfront1yTotalCost) / onDemandTotalCost) * 100;
+      const fullUpfront1ySavingsValue = onDemandTotalCost - fullUpfront1yTotalCost;
 
       expect(result.fullUpfront_1y).withContext('Full Upfront 1y scenario').toEqual({
         scenario: 'fullUpfront_1y',
@@ -146,6 +152,7 @@ describe('CostComparisonCalculator', () => {
         highestMonthlySpend: fullUpfront1yMaxMonthly,
         highestMonthlySpendMonth: { year: 2025, month: 1 },
         savingsPercent: fullUpfront1ySavingsPercent,
+        savingsValue: fullUpfront1ySavingsValue,
         monthlyBreakdown: [fullUpfront1yCostTimeseries[0]]
       });
 
@@ -158,6 +165,7 @@ describe('CostComparisonCalculator', () => {
       const partialUpfront3yTotalMonthly = scenarios[4].monthly * 12;
       const partialUpfront3yMaxMonthly = scenarios[4].upfront + scenarios[4].monthly;
       const partialUpfront3ySavingsPercent = ((onDemandTotalCost - partialUpfront3yTotalCost) / onDemandTotalCost) * 100;
+      const partialUpfront3ySavingsValue = onDemandTotalCost - partialUpfront3yTotalCost;
 
       expect(result.partialUpfront_3y).withContext('Partial Upfront 3y scenario').toEqual({
         scenario: 'partialUpfront_3y',
@@ -167,6 +175,7 @@ describe('CostComparisonCalculator', () => {
         highestMonthlySpend: partialUpfront3yMaxMonthly,
         highestMonthlySpendMonth: { year: 2025, month: 1 },
         savingsPercent: partialUpfront3ySavingsPercent,
+        savingsValue: partialUpfront3ySavingsValue,
         monthlyBreakdown: [partialUpfront3yCostTimeseries[0]]
       });
 
@@ -179,6 +188,7 @@ describe('CostComparisonCalculator', () => {
       const fullUpfront3yTotalMonthly = scenarios[5].monthly * 12;
       const fullUpfront3yMaxMonthly = scenarios[5].upfront + scenarios[5].monthly;
       const fullUpfront3ySavingsPercent = ((onDemandTotalCost - fullUpfront3yTotalCost) / onDemandTotalCost) * 100;
+      const fullUpfront3ySavingsValue = onDemandTotalCost - fullUpfront3yTotalCost;
 
       expect(result.fullUpfront_3y).withContext('Full Upfront 3y scenario').toEqual({
         scenario: 'fullUpfront_3y',
@@ -188,6 +198,7 @@ describe('CostComparisonCalculator', () => {
         highestMonthlySpend: fullUpfront3yMaxMonthly,
         highestMonthlySpendMonth: { year: 2025, month: 1 },
         savingsPercent: fullUpfront3ySavingsPercent,
+        savingsValue: fullUpfront3ySavingsValue,
         monthlyBreakdown: [fullUpfront3yCostTimeseries[0]]
       });
 
