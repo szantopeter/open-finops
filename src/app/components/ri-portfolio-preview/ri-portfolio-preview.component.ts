@@ -16,11 +16,8 @@ import { RiPortfolioDataService } from '../ri-portfolio-upload/service/ri-portfo
         } @else {
           <div>
             @if (statistics.metadata) {
-              Reserved Instance data overview: Data extract is date {{ statistics.ageText }} ({{ statistics.displayDate }}).
-              Total RIs <strong>{{ statistics.total }}</strong> coming from <strong>{{ statistics.unique }}</strong> purchases.
-              @if (statistics.latestExpiry) {
-                <div>Latest RI expiry: <strong>{{ statistics.latestExpiry }}</strong></div>
-              }
+              Reserved Instance data extracted {{ statistics.ageText }} ({{ statistics.displayDate }})
+              <strong>{{ statistics.unique }}</strong> purchases containing <strong>{{ statistics.total }}</strong> RIs
             }
           </div>
         }

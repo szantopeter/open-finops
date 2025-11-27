@@ -1,5 +1,5 @@
 .cost-comparison-container {
-  margin: 20px 0;
+  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   h3 {
@@ -92,7 +92,7 @@
     background-color: #eaf7ec; /* light green */
     border-left: 4px solid rgba(40,167,69,0.08);
   }
-  
+
   td.savings-current-cell {
       text-align: right !important;
       font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;

@@ -34,6 +34,7 @@ export class RiImportUploadComponent implements AfterViewInit, OnDestroy {
   @ViewChild('helpIcon', { read: ElementRef }) helpIcon?: ElementRef;
   private readonly _removeListener?: () => void;
   private _tippy?: Instance | null;
+  private _removeHelpListeners?: () => void;
   // no-op; tippy cleanup handled via instance.destroy()
 
   constructor(
@@ -52,8 +53,23 @@ export class RiImportUploadComponent implements AfterViewInit, OnDestroy {
             allowHTML: false,
             placement: 'bottom',
             maxWidth: 320,
-            appendTo: document.body
+            appendTo: document.body,
+            theme: 'wk-help',
+            animation: 'shift-away'
           });
+          // ensure tooltip appears even if tippy listeners don't fire in some environments
+          const enter = () => this._tippy?.show();
+          const leave = () => this._tippy?.hide();
+          helpEl.addEventListener('mouseenter', enter);
+          helpEl.addEventListener('mouseleave', leave);
+          helpEl.addEventListener('focus', enter);
+          helpEl.addEventListener('blur', leave);
+          this._removeHelpListeners = () => {
+            helpEl.removeEventListener('mouseenter', enter);
+            helpEl.removeEventListener('mouseleave', leave);
+            helpEl.removeEventListener('focus', enter);
+            helpEl.removeEventListener('blur', leave);
+          };
         } catch (err) {
           console.warn('ri-import: tippy init failed', err);
         }
@@ -73,7 +89,7 @@ export class RiImportUploadComponent implements AfterViewInit, OnDestroy {
       }
       this._tippy = null;
     }
-    // no extra tippy listeners to remove
+    if (this._removeHelpListeners) this._removeHelpListeners();
   }
 
   triggerFile(): void {

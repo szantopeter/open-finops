@@ -1,2 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @use "tailwindcss";
+
+/* Tippy custom theme: wk-help */
+.tippy-box[data-theme~='wk-help'] {
+	background: linear-gradient(90deg,#6b46c1,#b83280);
+	color: #fff;
+	border-radius: 8px;
+	padding: 8px 12px;
+	box-shadow: 0 8px 24px rgba(11,14,22,0.6);
+	font-weight: 600;
+}
+.tippy-box[data-theme~='wk-help'] .tippy-content {
+	font-size: 0.9rem;
+}
