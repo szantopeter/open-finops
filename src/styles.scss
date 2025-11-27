@@ -13,3 +13,6 @@
 .tippy-box[data-theme~='wk-help'] .tippy-content {
 	font-size: 0.9rem;
 }
+
+/* animate.css import so we can use rubberBand animation */
+@import 'animate.css/animate.min.css';

@@ -55,7 +55,20 @@ export class RiImportUploadComponent implements AfterViewInit, OnDestroy {
             maxWidth: 320,
             appendTo: document.body,
             theme: 'wk-help',
-            animation: 'shift-away'
+            animation: 'shift-away',
+            onShow(instance) {
+              const box = instance.popper.querySelector('.tippy-box');
+              if (box) {
+                box.classList.remove('animate__animated', 'animate__rubberBand');
+                // force reflow
+                const _ = (box as HTMLElement).offsetWidth;
+                box.classList.add('animate__animated', 'animate__rubberBand');
+              }
+            },
+            onHidden(instance) {
+              const box = instance.popper.querySelector('.tippy-box');
+              if (box) box.classList.remove('animate__animated', 'animate__rubberBand');
+            }
           });
           // ensure tooltip appears even if tippy listeners don't fire in some environments
           const enter = () => this._tippy?.show();
