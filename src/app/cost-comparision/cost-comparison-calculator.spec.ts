@@ -195,6 +195,55 @@ describe('CostComparisonCalculator', () => {
       expect(result.fullUpfront_3y.totalCost).toBe(result.fullUpfront_3y.totalMonthlyPayment + result.fullUpfront_3y.totalUpfront);
     });
   });
+
+  describe('calculateCostComparison - multiple upfronts', () => {
+    it('sums multiple upfront payments when RiRows start in different months', () => {
+      const year = 2025;
+
+      // Create two RiRows that have fullUpfront_1y upfronts in different months
+      const ct1: any = {
+        riRow: {} as any,
+        pricingData: {} as any,
+        monthlyCost: [
+          { year, month: 1, cost: { fullUpfront_1y: { upfrontCost: 1000, monthlyCost: 0 } } },
+          { year, month: 2, cost: { fullUpfront_1y: { upfrontCost: 0, monthlyCost: 0 } } }
+        ]
+      };
+
+      const ct2: any = {
+        riRow: {} as any,
+        pricingData: {} as any,
+        monthlyCost: [
+          { year, month: 1, cost: { fullUpfront_1y: { upfrontCost: 0, monthlyCost: 0 } } },
+          { year, month: 2, cost: { fullUpfront_1y: { upfrontCost: 2000, monthlyCost: 0 } } }
+        ]
+      };
+
+      // mergeRiRows should sum upfronts per month
+      const merged = CostComparisonCalculator.mergeRiRows([ct1, ct2]);
+
+      // Build onDemand timeseries for savings calculation (small monthly values)
+      const onDemandTs: any = {
+        riRow: {} as any,
+        pricingData: {} as any,
+        monthlyCost: merged.monthlyCost.map((mc: any) => ({ year: mc.year, month: mc.month, cost: { onDemand: { upfrontCost: 0, monthlyCost: 10 } } }))
+      };
+
+      const byScenario: any = {
+        onDemand: onDemandTs,
+        noUpfront_1y: merged,
+        partialUpfront_1y: merged,
+        fullUpfront_1y: merged,
+        partialUpfront_3y: merged,
+        fullUpfront_3y: merged
+      };
+
+      const result = CostComparisonCalculator.calculateCostComparison(byScenario, year);
+
+      // Expect totalUpfront to be summed from both RiRows (1000 + 2000)
+      expect(result.fullUpfront_1y.totalUpfront).toBe(3000);
+    });
+  });
 });
 
 describe('mergeRiRows', () => {

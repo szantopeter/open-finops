@@ -1,6 +1,8 @@
 export interface OnDemandPricing {
   hourly: number;
   daily: number;
+  adjustedAmortisedHourly?: number;
+  adjustedAmortisedDaily?: number;
   sku?: string;
 }
 
@@ -9,8 +11,9 @@ export interface SavingsOption {
   purchaseOption: PurchaseOption;
   upfront?: number | null;
   hourly?: number | null;
-  effectiveHourly?: number | null;
+  adjustedAmortisedHourly?: number | null;
   daily?: number | null;
+  adjustedAmortisedDaily?: number | null;
 }
 
 export type SavingsOptionsMap = Record<SavingsKey, SavingsOption | null> | null;

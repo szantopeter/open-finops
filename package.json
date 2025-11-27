@@ -7,6 +7,7 @@
     "test": "ng test",
     "test:ci": "ng test --watch=false --no-progress --code-coverage --browsers ChromeHeadlessCI",
     "prod": "ng build",
+    "compile-all": "npx tsc -p tsconfig.json --noEmit && npx tsc -p tsconfig.spec.json --noEmit && npx ng build --configuration production",
     "lint": "ng lint",
     "lint:staged": "lint-staged",
     "prepare": "husky",

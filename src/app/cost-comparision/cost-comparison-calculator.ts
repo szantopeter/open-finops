@@ -117,7 +117,6 @@ export const CostComparisonCalculator = {
     let onDemandTotalMonthly = 0;
     let onDemandMaxMonthly = 0;
     let onDemandHighestMonth: { year: number; month: number } | undefined;
-    let onDemandUpfrontAdded = false;
 
     for (const mc of onDemandTs.monthlyCost) {
       const costData = mc.cost[onDemandScenario];
@@ -128,10 +127,7 @@ export const CostComparisonCalculator = {
           onDemandMaxMonthly = monthlyCost;
           onDemandHighestMonth = { year: mc.year, month: mc.month };
         }
-        if (!onDemandUpfrontAdded) {
-          onDemandTotalUpfront += costData.upfrontCost;
-          onDemandUpfrontAdded = true;
-        }
+        onDemandTotalUpfront += costData.upfrontCost;
       }
     }
 
@@ -154,7 +150,6 @@ export const CostComparisonCalculator = {
       let totalMonthlyPayment = 0;
       let highestMonthlySpend = 0;
       let highestMonthlySpendMonth: { year: number; month: number } | undefined;
-      let upfrontAdded = false;
 
       for (const mc of ts.monthlyCost) {
         const costData = mc.cost[scenario];
@@ -165,10 +160,7 @@ export const CostComparisonCalculator = {
             highestMonthlySpend = monthlyCost;
             highestMonthlySpendMonth = { year: mc.year, month: mc.month };
           }
-          if (!upfrontAdded) {
-            totalUpfront += costData.upfrontCost;
-            upfrontAdded = true;
-          }
+          totalUpfront += costData.upfrontCost;
         }
       }
 
