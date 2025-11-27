@@ -40,11 +40,12 @@ describe('CostComparisonCalculator', () => {
           year: firstFullYear,
           month: i + 1,
           cost: {
-            [scenario]: {
-              upfrontCost: i === 0 ? upfrontCost : 0, // upfront only in first month
-              monthlyCost
+              [scenario]: {
+                upfrontCost: i === 0 ? upfrontCost : 0, // upfront only in first month
+                monthlyCost,
+                adjustedAmortisedCost: i === 0 ? monthlyCost + upfrontCost : monthlyCost
+              }
             }
-          }
         }))
       });
 
@@ -79,6 +80,7 @@ describe('CostComparisonCalculator', () => {
       expect(result.onDemand).withContext('On Demand scenario').toEqual({
         scenario: 'onDemand',
         totalCost: onDemandTotalCost,
+        totalAdjustedAmortised: onDemandTotalCost,
         totalUpfront: onDemandTotalUpfront,
         totalMonthlyPayment: onDemandTotalMonthly,
         highestMonthlySpend: onDemandMaxMonthly,
@@ -101,6 +103,7 @@ describe('CostComparisonCalculator', () => {
       expect(result.noUpfront_1y).withContext('No Upfront 1y scenario').toEqual({
         scenario: 'noUpfront_1y',
         totalCost: noUpfrontTotalCost,
+        totalAdjustedAmortised: noUpfrontTotalCost,
         totalUpfront: noUpfrontTotalUpfront,
         totalMonthlyPayment: noUpfrontTotalMonthly,
         highestMonthlySpend: noUpfrontMaxMonthly,
@@ -124,6 +127,7 @@ describe('CostComparisonCalculator', () => {
       expect(result.partialUpfront_1y).withContext('Partial Upfront 1y scenario').toEqual({
         scenario: 'partialUpfront_1y',
         totalCost: partialUpfrontTotalCost,
+        totalAdjustedAmortised: partialUpfrontTotalCost,
         totalUpfront: partialUpfrontTotalUpfront,
         totalMonthlyPayment: partialUpfrontTotalMonthly,
         highestMonthlySpend: partialUpfrontMaxMonthly,
@@ -147,6 +151,7 @@ describe('CostComparisonCalculator', () => {
       expect(result.fullUpfront_1y).withContext('Full Upfront 1y scenario').toEqual({
         scenario: 'fullUpfront_1y',
         totalCost: fullUpfront1yTotalCost,
+        totalAdjustedAmortised: fullUpfront1yTotalCost,
         totalUpfront: fullUpfront1yTotalUpfront,
         totalMonthlyPayment: fullUpfront1yTotalMonthly,
         highestMonthlySpend: fullUpfront1yMaxMonthly,
@@ -170,6 +175,7 @@ describe('CostComparisonCalculator', () => {
       expect(result.partialUpfront_3y).withContext('Partial Upfront 3y scenario').toEqual({
         scenario: 'partialUpfront_3y',
         totalCost: partialUpfront3yTotalCost,
+        totalAdjustedAmortised: partialUpfront3yTotalCost,
         totalUpfront: partialUpfront3yTotalUpfront,
         totalMonthlyPayment: partialUpfront3yTotalMonthly,
         highestMonthlySpend: partialUpfront3yMaxMonthly,
@@ -193,6 +199,7 @@ describe('CostComparisonCalculator', () => {
       expect(result.fullUpfront_3y).withContext('Full Upfront 3y scenario').toEqual({
         scenario: 'fullUpfront_3y',
         totalCost: fullUpfront3yTotalCost,
+        totalAdjustedAmortised: fullUpfront3yTotalCost,
         totalUpfront: fullUpfront3yTotalUpfront,
         totalMonthlyPayment: fullUpfront3yTotalMonthly,
         highestMonthlySpend: fullUpfront3yMaxMonthly,
