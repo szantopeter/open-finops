@@ -1,16 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 
 import { RiCSVParserService, RiImportService } from './service/ri-portfolio-import.service';
+import tippy from 'tippy.js';
+import type { Instance } from 'tippy.js';
+import 'tippy.js/dist/tippy.css';
 
 @Component({
   selector: 'app-ri-import-upload',
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="p-4 border rounded">
-      <h3>Import RIs</h3>
-      <input type="file" class="file-input" (change)="onFile($event)" accept=".csv,text/csv" />
+    <div>
+      <div class="flex items-center gap-2">
+        <input #fileInput type="file" accept=".csv" hidden (change)="onFile($event)" />
+        <button #uploadBtn class="file-input" type="button" (click)="triggerFile()" aria-label="Upload new RI data">Upload new RI data</button>
+        <button #helpIcon class="help-icon ml-2" type="button" aria-label="RI CSV export instructions">?</button>
+      </div>
       <ul *ngIf="lastError" class="text-red-600 mt-2 list-disc list-inside">
         <li *ngFor="let error of lastError">{{ error }}</li>
       </ul>
@@ -19,14 +25,61 @@ import { RiCSVParserService, RiImportService } from './service/ri-portfolio-impo
   styleUrls: ['./ri-portfolio-upload.component.scss']
 })
 
-export class RiImportUploadComponent {
+export class RiImportUploadComponent implements AfterViewInit, OnDestroy {
   lastError?: string[];
   RI_IMPORT_KEY = 'ri-import';
+  helpText = 'To generate a new RI file go to cloudability select Optimise / Commitment Portfolio then choose RDS Reserved Instances from the Commitment Type dropdown. Then click the "Export Reservations CSV" button above the table';
+
+  @ViewChild('fileInput', { read: ElementRef }) fileInput?: ElementRef<HTMLInputElement>;
+  @ViewChild('helpIcon', { read: ElementRef }) helpIcon?: ElementRef;
+  private readonly _removeListener?: () => void;
+  private _tippy?: Instance | null;
+  // no-op; tippy cleanup handled via instance.destroy()
 
   constructor(
     private readonly riCSVParserService: RiCSVParserService,
     private readonly riImportService: RiImportService
   ) {}
+
+  ngAfterViewInit(): void {
+    try {
+      // nothing to wire for the upload button; the native input change is bound in template
+      const helpEl = this.helpIcon?.nativeElement;
+      if (helpEl instanceof HTMLElement) {
+        try {
+          this._tippy = tippy(helpEl, {
+            content: this.helpText,
+            allowHTML: false,
+            placement: 'bottom',
+            maxWidth: 320,
+            appendTo: document.body
+          });
+        } catch (err) {
+          console.warn('ri-import: tippy init failed', err);
+        }
+      }
+    } catch (e) {
+      console.warn('ri-import: could not initialize upload control', e);
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this._removeListener) this._removeListener();
+    if (this._tippy) {
+      try {
+        this._tippy.destroy();
+      } catch {
+        // ignore
+      }
+      this._tippy = null;
+    }
+    // no extra tippy listeners to remove
+  }
+
+  triggerFile(): void {
+    const input = this.fileInput?.nativeElement;
+    if (input) input.click();
+  }
 
   async onFile(event: Event): Promise<void> {
     this.lastError = undefined;
