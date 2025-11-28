@@ -3,28 +3,28 @@ import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 import { RiPortfolioDataService } from '../ri-portfolio-upload/service/ri-portfolio-data.service';
+import { QuestionTooltipComponent } from '../question-tooltip/question-tooltip.component';
 
 @Component({
   selector: 'app-ri-import-preview',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, QuestionTooltipComponent],
   template: `
   <div class="p-4 border rounded">
-      @if (portfolioStatistics$ | async; as statistics) {
-        @if (statistics.total === 0) {
-          <div>No rows</div>
-        } @else {
-          <div>
-            @if (statistics.metadata) {
-              Reserved Instance data extracted {{ statistics.ageText }} ({{ statistics.displayDate }})
-              <strong>{{ statistics.unique }}</strong> purchases containing <strong>{{ statistics.total }}</strong> RIs
-            }
-          </div>
-        }
-      } @else {
-        <div>No import loaded</div>
-      }
-    </div>
+    <ng-container *ngIf="portfolioStatistics$ | async as statistics; else noImport">
+      <div *ngIf="statistics.total === 0">No rows</div>
+      <div *ngIf="statistics.total !== 0">
+        <div *ngIf="statistics.metadata">
+          Reserved Instance data extracted {{ statistics.ageText }} ({{ statistics.displayDate }})
+          <strong>{{ statistics.unique }}</strong> purchases containing <strong>{{ statistics.total }}</strong> RIs
+          <app-question-tooltip text="Imported at: {{ statistics.displayDate }}"></app-question-tooltip>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #noImport>
+      <div>No import loaded</div>
+    </ng-template>
+  </div>
   `
 })
 export class RiImportPreviewComponent {
