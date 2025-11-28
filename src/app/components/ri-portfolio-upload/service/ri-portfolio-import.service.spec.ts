@@ -23,14 +23,23 @@ describe('RiImportService', () => {
   });
 
   it('parses a minimal CSV', async () => {
-    const csv = 'Start,Instance Type,Region,Count,Term,Product,End,multiAZ,RI Type,Reservation ID\n2020-01-01,t3.medium,us-east-1,2,1 year,mysql,2021-01-01,false,No Upfront,ri-12345';
+    const csv = 'Start,Instance Type,Region,Count,Term,Product,End,multiAZ,RI Type,Reservation ID\n'
+      + '2019-05-01,t3.medium,us-east-1,2,1 year,mysql,2020-05-01,false,No Upfront,ri-11111\n'
+      + '2020-01-01,t3.medium,us-east-1,1,1 year,mysql,2021-01-01,false,No Upfront,ri-12345';
     const res = await svc.parseText(csv, 'test');
     expect(res.errors).toBeUndefined();
     expect(res.riPortfolio).toBeDefined();
     if (!res.riPortfolio) throw new Error('expected import');
-    expect(res.riPortfolio.rows.length).toBe(1);
+    expect(res.riPortfolio.rows.length).toBe(2);
     expect(res.riPortfolio.rows[0].riRow.count).toBe(2);
-    expect(res.riPortfolio.rows[0].riRow.id).toBe('ri-12345');
+    expect(res.riPortfolio.rows[0].riRow.id).toBe('ri-11111');
+    expect(res.riPortfolio.rows[1].riRow.count).toBe(1);
+    expect(res.riPortfolio.rows[1].riRow.id).toBe('ri-12345');
+    // projectionEndDate should be latest end date (2021-01-01) + 3 years - 1 day => 2023-12-31 (UTC)
+    const proj = res.riPortfolio.metadata.projectionEndDate;
+    expect(proj).toBeDefined();
+    const projIso = new Date(proj).toISOString().slice(0, 10);
+    expect(projIso).toBe('2023-12-31');
   });
 
   it('reports missing required columns', async () => {

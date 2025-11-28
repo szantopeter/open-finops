@@ -97,7 +97,8 @@ describe('CostTimeseriesCalculator', () => {
         metadata: {
           source: 'test1',
           importedAt: new Date().toISOString(),
-          firstFullYear
+          firstFullYear,
+            projectionStartDate: new Date(2025,0,1), projectionEndDate: new Date()
         },
         rows: [
           { riRow: riRow0, pricingData: pricingData1 },
@@ -271,7 +272,8 @@ describe('CostTimeseriesCalculator', () => {
         metadata: {
           source: 'test-savings',
           importedAt: new Date().toISOString(),
-          firstFullYear: 2025
+          firstFullYear: 2025,
+            projectionStartDate: new Date(2025,0,1), projectionEndDate: new Date()
         },
         rows
       };

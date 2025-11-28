@@ -35,7 +35,9 @@ describe('CostComparisonTableComponent', () => {
       metadata: {
         source: 'test',
         importedAt: new Date().toISOString(),
-        firstFullYear: 2025
+        firstFullYear: 2025,
+        projectionStartDate: new Date(2024,0,1),
+        projectionEndDate: new Date()
       },
       rows: [
         {

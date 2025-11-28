@@ -5,9 +5,12 @@ describe('RiRenewalProjection', () => {
   it('preserves original term and upfront when savingsKey is not provided', () => {
     const firstFullYear = 2026;
 
+    // We'll set a concrete projection end date and assert the projection includes that date (inclusive)
+    const projectionEnd = new Date(Date.UTC(2027, 11, 31)); // 2027-12-31 UTC
+
     // Create a portfolio with RI rows covering 1yr and 3yr saving types / upfront options
-    const riRows: RiPortfolio = {
-      metadata: { source: 'test', importedAt: new Date().toISOString(), firstFullYear },
+      const riRows: RiPortfolio = {
+        metadata: { source: 'test', importedAt: new Date().toISOString(), firstFullYear, projectionStartDate: new Date(2024,0,1) as any, projectionEndDate: projectionEnd},
       rows: [
         // 1yr No Upfront
         {
@@ -88,6 +91,20 @@ describe('RiRenewalProjection', () => {
     checkSame('r3', 'All Upfront', 12);
     checkSame('r4', 'Partial', 36);
     checkSame('r5', 'All Upfront', 36);
+
+    // The projection should include renewals up to and including the projectionEndDate.
+    const projectionIso = projectionEnd.toISOString().slice(0, 10);
+    // DEBUG: list all projected end dates (ISO)
+    // eslint-disable-next-line no-console
+    console.debug('projected end dates:', projected.rows.map(e => e.riRow.endDate.toISOString()));
+    const hasProjectionDate = projected.rows.some(entry => {
+      const d = entry.riRow.endDate.toISOString().slice(0, 10);
+      return d === projectionIso;
+    });
+
+    // Expect at least one projected row ends exactly on the projection end date (inclusive)
+    expect(hasProjectionDate).toBeTrue();
+
   });
 });
 

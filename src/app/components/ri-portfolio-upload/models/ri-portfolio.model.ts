@@ -5,6 +5,8 @@ export interface RiImportMetadata {
   importedAt: string; // ISO
   fileLastModified?: string;
   firstFullYear: number;
+  projectionStartDate: Date;
+  projectionEndDate: Date;
 }
 
 export interface RiPortfolio {

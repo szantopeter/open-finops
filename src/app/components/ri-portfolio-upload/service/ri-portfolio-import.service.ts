@@ -140,12 +140,16 @@ export class RiCSVParserService {
     const validRows = rowsWithPricing.filter(row => row !== null) as { riRow: RiRow; pricingData: PricingData }[];
 
     const firstFullYear = this.computeFirstFullYear(validRows.map(r => r.riRow));
+    const projectionStartDate = this.computeProjectionStartDate(validRows.map(r => r.riRow));
+    const projectionEndDate = this.computeProjectionEndDate(projectionStartDate);
 
     const metadata: RiImportMetadata = {
       source,
       importedAt: new Date().toISOString(),
       fileLastModified: fileLastModifiedIso,
-      firstFullYear
+      firstFullYear,
+      projectionStartDate,
+      projectionEndDate
     };
 
     return { riPortfolio: { metadata, rows: validRows } };
@@ -307,7 +311,44 @@ export class RiCSVParserService {
 
     return (month === 1 && day === 1) ? year : year + 1;
   }
+
+
+  private computeProjectionStartDate(rows: RiRow[]): Date {
+        if (!rows || rows.length === 0) {
+      return new Date();
+    }
+
+    const endDates = rows
+      .map(r => r.endDate)
+      .map(d => d.valueOf())
+      .filter(n => !Number.isNaN(n));
+
+    if (endDates.length === 0) return new Date();
+
+    const maxMs = Math.max(...endDates);
+    return new Date(maxMs);
+  }
+  /**
+   * Projection end daterepresents the day when the longest running RI renewal projection ends.
+   * Calculation is the latest end date among all rows + 3 years - 1 day. 
+   * @param rows 
+   * @returns 
+   */
+  private computeProjectionEndDate(startDate : Date): Date {
+
+    const year = startDate.getUTCFullYear();
+    const month = startDate.getUTCMonth(); // 0-based
+    const day = startDate.getUTCDate();
+
+    // Compute the same month/day three years later in UTC, then subtract one day
+    const threeYearsLaterMs = Date.UTC(year + 3, month, day);
+    const oneDayMs = 24 * 60 * 60 * 1000;
+    const projectionMs = threeYearsLaterMs - oneDayMs;
+
+    return new Date(projectionMs);
+  }
 }
+
 
 @Injectable({ providedIn: 'root' })
 export class RiImportService {

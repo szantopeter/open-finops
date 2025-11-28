@@ -11,7 +11,7 @@ describe('RiDataService', () => {
     // initial emission from BehaviorSubject
     expect(emissions[0]).toBeNull();
 
-    svc.setRiPortfolio({ metadata: { source: 't', importedAt: new Date().toISOString(), firstFullYear: 2025 }, rows: [] });
+    svc.setRiPortfolio({ metadata: { source: 't', importedAt: new Date().toISOString(), firstFullYear: 2025, projectionStartDate: new Date(2025,0,1), projectionEndDate: new Date() }, rows: [] });
     expect(emissions[1]).toBeDefined();
 
     svc.clear();

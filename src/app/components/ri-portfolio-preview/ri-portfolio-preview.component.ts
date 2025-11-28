@@ -3,12 +3,11 @@ import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 import { RiPortfolioDataService } from '../ri-portfolio-upload/service/ri-portfolio-data.service';
-import { QuestionTooltipComponent } from '../question-tooltip/question-tooltip.component';
 
 @Component({
   selector: 'app-ri-import-preview',
   standalone: true,
-  imports: [CommonModule, QuestionTooltipComponent],
+  imports: [CommonModule],
   template: `
   <div class="p-4 border rounded">
     <ng-container *ngIf="portfolioStatistics$ | async as statistics; else noImport">
@@ -17,7 +16,7 @@ import { QuestionTooltipComponent } from '../question-tooltip/question-tooltip.c
         <div *ngIf="statistics.metadata">
           Reserved Instance data extracted {{ statistics.ageText }} ({{ statistics.displayDate }})
           <strong>{{ statistics.unique }}</strong> purchases containing <strong>{{ statistics.total }}</strong> RIs
-          <app-question-tooltip text="Imported at: {{ statistics.displayDate }}"></app-question-tooltip>
+          Imported at: <strong>{{ statistics.displayDate }}</strong> Projection date range : {{ statistics.projectionStartDate | date:'yyyy-MM-dd' }} to {{ statistics.projectionEndDate | date:'yyyy-MM-dd' }}
         </div>
       </div>
     </ng-container>
@@ -72,8 +71,7 @@ export class RiImportPreviewComponent {
       } catch {
         latestExpiry = null;
       }
-
-      return { total, unique, metadata: imp.metadata, ageText, displayDate, latestExpiry };
+      return { total, unique, metadata: imp.metadata, ageText, displayDate, latestExpiry, projectionStartDate: imp.metadata.projectionStartDate, projectionEndDate: imp.metadata.projectionEndDate };
     })
   );
 
