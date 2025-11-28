@@ -114,10 +114,10 @@ export const CostComparisonCalculator = {
   /**
    * Calculates cost comparisons from cost timeseries for different scenarios.
    * @param costTimeseriesByScenario timeseries for different scenarios
-   * @param firstFullYear The year to consider for total cost calculations.
+  *
    * @returns
    */
-  calculateAnnualisedCostComparison(costTimeseriesByScenario: CostTimeseriesByScenario, _firstFullYear: number): CostComparisonByScenario {
+  calculateAnnualisedCostComparison(costTimeseriesByScenario: CostTimeseriesByScenario): CostComparisonByScenario {
     const result: Partial<CostComparisonByScenario> = {};
     const scenarioKeys: (keyof CostTimeseriesByScenario)[] = ['onDemand', 'noUpfront_1y', 'partialUpfront_1y', 'fullUpfront_1y', 'partialUpfront_3y', 'fullUpfront_3y'];
 

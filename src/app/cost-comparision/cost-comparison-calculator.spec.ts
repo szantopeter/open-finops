@@ -67,7 +67,7 @@ describe('CostComparisonCalculator', () => {
       };
 
       // Act
-      const result = CostComparisonCalculator.calculateAnnualisedCostComparison(costTimeseriesByScenario, firstFullYear);
+      const result = CostComparisonCalculator.calculateAnnualisedCostComparison(costTimeseriesByScenario);
 
       // Assert
       expect(result).toBeDefined();
@@ -278,7 +278,7 @@ describe('CostComparisonCalculator', () => {
         fullUpfront_3y: merged
       };
 
-      const result = CostComparisonCalculator.calculateAnnualisedCostComparison(byScenario, year);
+      const result = CostComparisonCalculator.calculateAnnualisedCostComparison(byScenario);
 
       // Expect totalUpfront to be summed from both RiRows and annualised across timeseries months
       const months = merged.monthlyCost.length;

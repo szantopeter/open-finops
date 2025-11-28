@@ -13,7 +13,6 @@ import type CostTimeseries from '../../cost-timeseries/costTimeseries.model';
 export class MonthlyBreakdownTableComponent {
   @Input() expandedRow: string | null = null;
   @Input() timeseries: CostTimeseries[] = [];
-  @Input() firstFullYear: number = 0;
   @Input() highestSpendMonth?: { year: number; month: number };
   
 

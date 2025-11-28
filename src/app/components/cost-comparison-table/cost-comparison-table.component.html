@@ -1,6 +1,6 @@
 <div class="cost-comparison-container" *ngIf="costComparisonsArray.length > 0">
   <h3>Cost Comparison Analysis</h3>
-  <p class="subtitle">Comparing different AWS RDS Reserved Instance payment scenarios for {{ riPortfolio.metadata.firstFullYear }}</p>
+  <p class="subtitle">Comparing different AWS RDS Reserved Instance payment scenarios for {{ riPortfolio.metadata.projectionStartDate.getUTCFullYear() }} - {{ riPortfolio.metadata.projectionEndDate.getUTCFullYear() }}</p>
 
   <div class="table-container">
     <h4>Annualised reference scenarios</h4>
@@ -80,7 +80,6 @@
   <app-monthly-breakdown-table
     [expandedRow]="expandedRow"
     [timeseries]="currentComparison?.monthlyBreakdown || []"
-    [firstFullYear]="riPortfolio.metadata.firstFullYear"
     [highestSpendMonth]="currentComparison?.highestMonthlySpendMonth" #monthlyBreakdown>
   </app-monthly-breakdown-table>
 </div>

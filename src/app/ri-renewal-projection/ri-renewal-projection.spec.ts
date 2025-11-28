@@ -3,14 +3,12 @@ import type { RiPortfolio, RiRow } from '../components/ri-portfolio-upload/model
 
 describe('RiRenewalProjection', () => {
   it('preserves original term and upfront when savingsKey is not provided', () => {
-    const firstFullYear = 2026;
-
     // We'll set a concrete projection end date and assert the projection includes that date (inclusive)
     const projectionEnd = new Date(Date.UTC(2027, 11, 31)); // 2027-12-31 UTC
 
     // Create a portfolio with RI rows covering 1yr and 3yr saving types / upfront options
       const riRows: RiPortfolio = {
-        metadata: { source: 'test', importedAt: new Date().toISOString(), firstFullYear, projectionStartDate: new Date(2024,0,1) as any, projectionEndDate: projectionEnd},
+        metadata: { source: 'test', importedAt: new Date().toISOString(), projectionStartDate: new Date(2024,0,1) as any, projectionEndDate: projectionEnd},
       rows: [
         // 1yr No Upfront
         {

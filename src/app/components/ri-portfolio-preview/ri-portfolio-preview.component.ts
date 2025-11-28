@@ -16,7 +16,7 @@ import { RiPortfolioDataService } from '../ri-portfolio-upload/service/ri-portfo
         <div *ngIf="statistics.metadata">
           Reserved Instance data extracted {{ statistics.ageText }} ({{ statistics.displayDate }})
           <strong>{{ statistics.unique }}</strong> purchases containing <strong>{{ statistics.total }}</strong> RIs
-          Imported at: <strong>{{ statistics.displayDate }}</strong> Projection date range : {{ statistics.projectionStartDate | date:'yyyy-MM-dd' }} to {{ statistics.projectionEndDate | date:'yyyy-MM-dd' }}
+          Imported at: <strong>{{ statistics.displayDate }}</strong> Projection date range : <strong>{{ statistics.projectionStartDate | date:'yyyy-MM-dd' }}</strong> to <strong>{{ statistics.projectionEndDate | date:'yyyy-MM-dd' }}</strong> 
         </div>
       </div>
     </ng-container>

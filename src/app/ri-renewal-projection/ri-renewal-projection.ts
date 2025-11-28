@@ -35,9 +35,7 @@ export class RiRenewalProjection {
       rows: []
     };
 
-    const firstFullYear = riPortfolio.metadata.firstFullYear;
-    const defaultProjectionEnd = new Date(firstFullYear, 11, 31);
-    const projectionEnd = (riPortfolio.metadata as any).projectionEndDate || defaultProjectionEnd;
+    const projectionEnd = riPortfolio.metadata.projectionEndDate;
 
     const termMonthsFromSavings = (key: SavingsKey): number => {
       if (key.startsWith('3yr')) return 36;

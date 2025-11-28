@@ -83,7 +83,7 @@ export class CostComparisonTableComponent implements OnChanges {
       }
 
       // Build comparisons using onDemand as baseline
-      this.costComparisons = CostComparisonCalculator.calculateAnnualisedCostComparison(costTimeseriesByScenario, this.riPortfolio.metadata.firstFullYear);
+      this.costComparisons = CostComparisonCalculator.calculateAnnualisedCostComparison(costTimeseriesByScenario);
       this.costTimeseriesByScenario = costTimeseriesByScenario;
 
       // The calculator returns all required annualised totals and savings.

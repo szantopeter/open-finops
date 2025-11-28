@@ -139,7 +139,6 @@ export class RiCSVParserService {
 
     const validRows = rowsWithPricing.filter(row => row !== null) as { riRow: RiRow; pricingData: PricingData }[];
 
-    const firstFullYear = this.computeFirstFullYear(validRows.map(r => r.riRow));
     const projectionStartDate = this.computeProjectionStartDate(validRows.map(r => r.riRow));
     const projectionEndDate = this.computeProjectionEndDate(projectionStartDate);
 
@@ -147,7 +146,6 @@ export class RiCSVParserService {
       source,
       importedAt: new Date().toISOString(),
       fileLastModified: fileLastModifiedIso,
-      firstFullYear,
       projectionStartDate,
       projectionEndDate
     };
@@ -286,30 +284,6 @@ export class RiCSVParserService {
     const dt = new Date(Date.UTC(year, month - 1, day));
     if (dt.getUTCFullYear() !== year || dt.getUTCMonth() !== month - 1 || dt.getUTCDate() !== day) return undefined;
     return dt;
-  }
-
-  private computeFirstFullYear(rows: RiRow[]): number {
-    if (!rows || rows.length === 0) {
-      return new Date().getUTCFullYear() + 1;
-    }
-
-    const endDates = rows
-      .map(r => r.endDate)
-      // .filter((d): d is string => !!d)
-      .map(d => d.valueOf())
-      .filter(n => !Number.isNaN(n));
-
-    if (endDates.length === 0) {
-      return new Date().getUTCFullYear() + 1;
-    }
-
-    const maxMs = Math.max(...endDates);
-    const dt = new Date(maxMs);
-    const year = dt.getUTCFullYear();
-    const month = dt.getUTCMonth() + 1;
-    const day = dt.getUTCDate();
-
-    return (month === 1 && day === 1) ? year : year + 1;
   }
 
 

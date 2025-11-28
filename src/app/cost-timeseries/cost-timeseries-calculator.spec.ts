@@ -5,7 +5,7 @@ import type { RiPortfolio, RiRow } from '../components/ri-portfolio-upload/model
 describe('CostTimeseriesCalculator', () => {
   describe('calculateCostTimeSeries', () => {
     it('should calculate on demand costs from start date to end of firstFullYear', () => {
-      const firstFullYear = 2026;
+      // projection dates not required for this test
       const dailyOnDemandPrice0 = 10;
       const dailyOnDemandPrice1 = 20;
 
@@ -97,7 +97,6 @@ describe('CostTimeseriesCalculator', () => {
         metadata: {
           source: 'test1',
           importedAt: new Date().toISOString(),
-          firstFullYear,
             projectionStartDate: new Date(2025,0,1), projectionEndDate: new Date()
         },
         rows: [
@@ -272,7 +271,6 @@ describe('CostTimeseriesCalculator', () => {
         metadata: {
           source: 'test-savings',
           importedAt: new Date().toISOString(),
-          firstFullYear: 2025,
             projectionStartDate: new Date(2025,0,1), projectionEndDate: new Date()
         },
         rows

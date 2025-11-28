@@ -4,7 +4,6 @@ export interface RiImportMetadata {
   source: string;
   importedAt: string; // ISO
   fileLastModified?: string;
-  firstFullYear: number;
   projectionStartDate: Date;
   projectionEndDate: Date;
 }

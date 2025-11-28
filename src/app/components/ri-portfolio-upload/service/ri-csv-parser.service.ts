@@ -137,13 +137,15 @@ export class RiCSVParserService {
 
         const validRows = rowsWithPricing.filter(row => row !== null) as { riRow: RiRow; pricingData: PricingData }[];
 
-        const firstFullYear = this.computeFirstFullYear(validRows.map(r => r.riRow));
+        const projectionStartDate = this.computeProjectionStartDate(validRows.map(r => r.riRow));
+        const projectionEndDate = this.computeProjectionEndDate(projectionStartDate);
 
         const metadata: RiImportMetadata = {
             source,
             importedAt: new Date().toISOString(),
             fileLastModified: fileLastModifiedIso,
-            firstFullYear
+            projectionStartDate,
+            projectionEndDate
         };
 
         return { riPortfolio: { metadata, rows: validRows } };
@@ -282,27 +284,22 @@ export class RiCSVParserService {
         return dt;
     }
 
-    private computeFirstFullYear(rows: RiRow[]): number {
+    // computeProjectionStartDate/projectionEndDate used for projection window
+    private computeProjectionStartDate(rows: RiRow[]): Date {
+        // If no rows, default to start of next year
         if (!rows || rows.length === 0) {
-            return new Date().getUTCFullYear() + 1;
+            const now = new Date();
+            return new Date(Date.UTC(now.getUTCFullYear() + 1, 0, 1));
         }
 
-        const endDates = rows
-            .map(r => r.endDate)
-            // .filter((d): d is string => !!d)
-            .map(d => d.valueOf())
-            .filter(n => !Number.isNaN(n));
+        const startDates = rows.map(r => r.startDate.valueOf()).filter(n => !Number.isNaN(n));
+        const minMs = Math.min(...startDates);
+        const dt = new Date(minMs);
+        return new Date(Date.UTC(dt.getUTCFullYear(), 0, 1));
+    }
 
-        if (endDates.length === 0) {
-            return new Date().getUTCFullYear() + 1;
-        }
-
-        const maxMs = Math.max(...endDates);
-        const dt = new Date(maxMs);
-        const year = dt.getUTCFullYear();
-        const month = dt.getUTCMonth() + 1;
-        const day = dt.getUTCDate();
-
-        return (month === 1 && day === 1) ? year : year + 1;
+    private computeProjectionEndDate(projectionStart: Date): Date {
+        // Default projection is one year from projectionStart end
+        return new Date(Date.UTC(projectionStart.getUTCFullYear(), 11, 31));
     }
 }
