@@ -14,11 +14,13 @@ export interface CostComparison {
   savingsPercentOnDemand?: number;
   savingsValueCurrent?: number;
   savingsPercentCurrent?: number;
+  
   monthlyBreakdown: CostTimeseries[];
 }
 
 export interface CostTimeseriesByScenario {
   onDemand: CostTimeseries;
+  current: CostTimeseries;
   noUpfront_1y: CostTimeseries;
   partialUpfront_1y: CostTimeseries;
   fullUpfront_1y: CostTimeseries;
@@ -28,6 +30,7 @@ export interface CostTimeseriesByScenario {
 
 export interface CostComparisonByScenario {
   onDemand: CostComparison;
+  current: CostComparison;
   noUpfront_1y: CostComparison;
   partialUpfront_1y: CostComparison;
   fullUpfront_1y: CostComparison;
@@ -114,44 +117,57 @@ export const CostComparisonCalculator = {
    * @param firstFullYear The year to consider for total cost calculations.
    * @returns
    */
-  calculateCostComparison(costTimeseriesByScenario: CostTimeseriesByScenario, _firstFullYear: number): CostComparisonByScenario {
+  calculateAnnualisedCostComparison(costTimeseriesByScenario: CostTimeseriesByScenario, _firstFullYear: number): CostComparisonByScenario {
     const result: Partial<CostComparisonByScenario> = {};
     const scenarioKeys: (keyof CostTimeseriesByScenario)[] = ['onDemand', 'noUpfront_1y', 'partialUpfront_1y', 'fullUpfront_1y', 'partialUpfront_3y', 'fullUpfront_3y'];
 
     // Helper to accumulate totals for a given CostTimeseries and scenario key
-    // If firstFullYear is provided, only months from that year are considered.
-    const accumulateTotals = (ts: CostTimeseries, scenarioKey: keyof CostTimeseries['monthlyCost'][0]['cost'], firstFullYear?: number) => {
-      let totalUpfront = 0;
-      let totalMonthlyPayment = 0;
-      let totalAdjustedAmortised = 0;
+    const accumulateTotals = (ts: CostTimeseries, scenarioKey?: keyof CostTimeseries['monthlyCost'][0]['cost']) => {
+      let sumUpfront = 0;
+      let sumMonthly = 0;
+      let sumAdjusted = 0;
       let maxMonthly = 0;
       let highestMonth: { year: number; month: number } | undefined;
 
+      const months = ts.monthlyCost.length;
+
       for (const mc of ts.monthlyCost) {
-        if (firstFullYear && mc.year !== firstFullYear) continue;
-        const costData = mc.cost[scenarioKey as string as keyof typeof mc.cost];
+        let key: any = scenarioKey as string | undefined;
+        if (!key) {
+          const keys = Object.keys(mc.cost || {});
+          key = keys.length > 0 ? keys[0] : undefined;
+        }
+        const costData = key ? (mc.cost as any)[key] : undefined;
         if (costData) {
-          totalMonthlyPayment += costData.monthlyCost || 0;
-          totalAdjustedAmortised += (typeof costData.adjustedAmortisedCost === 'number') ? costData.adjustedAmortisedCost : 0;
+          sumMonthly += costData.monthlyCost || 0;
+          sumAdjusted += (typeof costData.adjustedAmortisedCost === 'number') ? costData.adjustedAmortisedCost : 0;
           const monthlyCost = (costData.monthlyCost || 0) + (costData.upfrontCost || 0);
           if (monthlyCost > maxMonthly) {
             maxMonthly = monthlyCost;
             highestMonth = { year: mc.year, month: mc.month };
           }
-          totalUpfront += costData.upfrontCost || 0;
+          sumUpfront += costData.upfrontCost || 0;
         }
       }
 
-      return { totalUpfront, totalMonthlyPayment, totalAdjustedAmortised, maxMonthly, highestMonth };
+      const factor = 12 / Math.max(1, months);
+
+      return {
+        totalUpfront: sumUpfront * factor,
+        totalMonthlyPayment: sumMonthly * factor,
+        totalAdjustedAmortised: sumAdjusted * factor,
+        maxMonthly,
+        highestMonth
+      };
     };
 
     // First, calculate onDemand to use for savings percent
     const onDemandScenario = 'onDemand';
     const onDemandTs = costTimeseriesByScenario[onDemandScenario];
-    const onDemandTotals = accumulateTotals(onDemandTs, onDemandScenario, _firstFullYear);
+    const onDemandTotals = accumulateTotals(onDemandTs, onDemandScenario);
     const onDemandTotalAdjusted = onDemandTotals.totalAdjustedAmortised;
 
-    result[onDemandScenario] = {
+      result[onDemandScenario] = {
       scenario: onDemandScenario,
       totalCost: onDemandTotalAdjusted,
       totalAdjustedAmortised: onDemandTotalAdjusted,
@@ -159,19 +175,46 @@ export const CostComparisonCalculator = {
       totalMonthlyPayment: onDemandTotals.totalMonthlyPayment,
       highestMonthlySpend: onDemandTotals.maxMonthly,
       highestMonthlySpendMonth: onDemandTotals.highestMonth,
-      savingsValue: undefined,
-      monthlyBreakdown: [onDemandTs]
+        savingsValue: undefined,
+        savingsValueOnDemand: 0,
+        savingsPercentOnDemand: 0,
+        monthlyBreakdown: onDemandTs ? [onDemandTs] : []
     };
 
-    // Now calculate other scenarios
+
+    // Calculate 'current' scenario (required)
+      const currentTotals = accumulateTotals(costTimeseriesByScenario.current);
+      const currentTotalAdjusted = currentTotals.totalAdjustedAmortised;
+      const savingsValueOnDemandForCurrent = onDemandTotalAdjusted - currentTotalAdjusted;
+      const savingsPercentOnDemandForCurrent = onDemandTotalAdjusted > 0 ? (savingsValueOnDemandForCurrent / onDemandTotalAdjusted) * 100 : 0;
+      result.current = {
+        scenario: 'current',
+        totalCost: currentTotalAdjusted,
+        totalAdjustedAmortised: currentTotalAdjusted,
+        totalUpfront: currentTotals.totalUpfront,
+        totalMonthlyPayment: currentTotals.totalMonthlyPayment,
+        highestMonthlySpend: currentTotals.maxMonthly,
+        highestMonthlySpendMonth: currentTotals.highestMonth,
+        savingsValue: undefined,
+        savingsValueOnDemand: savingsValueOnDemandForCurrent,
+        savingsPercentOnDemand: savingsPercentOnDemandForCurrent,
+        monthlyBreakdown: [costTimeseriesByScenario.current]
+      };
+
+    // Now calculate other scenarios and compute savings vs onDemand and vs current
     for (const scenario of scenarioKeys.slice(1)) {
       const ts = costTimeseriesByScenario[scenario];
-      const totals = accumulateTotals(ts, scenario, _firstFullYear);
+      const totals = accumulateTotals(ts, scenario as any);
       const totalAdjusted = totals.totalAdjustedAmortised;
       const savingsPercent = onDemandTotalAdjusted > 0 ? ((onDemandTotalAdjusted - totalAdjusted) / onDemandTotalAdjusted) * 100 : 0;
       const savingsValue = onDemandTotalAdjusted - totalAdjusted;
 
-      result[scenario] = {
+      // compute savings vs current
+      const currentTotal = result.current.totalAdjustedAmortised || result.current.totalCost || 0;
+      const savingsPercentCurrent = currentTotal > 0 ? ((currentTotal - totalAdjusted) / currentTotal) * 100 : 0;
+      const savingsValueCurrent = currentTotal - totalAdjusted;
+
+      const comparison: any = {
         scenario,
         totalCost: totalAdjusted,
         totalAdjustedAmortised: totalAdjusted,
@@ -181,8 +224,15 @@ export const CostComparisonCalculator = {
         highestMonthlySpendMonth: totals.highestMonth,
         savingsPercent,
         savingsValue,
+        savingsValueOnDemand: savingsValue,
+        savingsPercentOnDemand: savingsPercent,
         monthlyBreakdown: [ts]
       };
+
+      comparison.savingsPercentCurrent = savingsPercentCurrent;
+      comparison.savingsValueCurrent = savingsValueCurrent;
+
+      result[scenario] = comparison;
     }
 
     return result as CostComparisonByScenario;

@@ -66,6 +66,7 @@ export class CostComparisonTableComponent implements OnChanges {
       };
       const currentTimeseries = CostTimeseriesCalculator.calculateCostTimeSeries(projectedOnlyCurrent, false);
       const mergedCurrent = CostComparisonCalculator.mergeRiRows(currentTimeseries);
+      costTimeseriesByScenario.current = mergedCurrent;
 
       // Savings types
       const savingsKeys: SavingsKey[] = ['1yr_No Upfront', '1yr_Partial Upfront', '1yr_All Upfront', '3yr_Partial Upfront', '3yr_All Upfront'];
@@ -82,93 +83,34 @@ export class CostComparisonTableComponent implements OnChanges {
       }
 
       // Build comparisons using onDemand as baseline
-      this.costComparisons = CostComparisonCalculator.calculateCostComparison(costTimeseriesByScenario, this.riPortfolio.metadata.firstFullYear);
+      this.costComparisons = CostComparisonCalculator.calculateAnnualisedCostComparison(costTimeseriesByScenario, this.riPortfolio.metadata.firstFullYear);
       this.costTimeseriesByScenario = costTimeseriesByScenario;
 
-      // Helper to create a CostComparison from a merged timeseries
-      const buildComparison = (scenarioName: string, ts: any, baselineTotalCostOnDemand: number | null, baselineTotalCostCurrent: number | null): CostComparison => {
-        const accumulate = (tsInner: any) => {
-          let totalUpfront = 0;
-          let totalMonthly = 0;
-          let totalAdjustedAmortised = 0;
-          let highestMonthly = 0;
-          let highestMonth: { year: number; month: number } | undefined;
+      // The calculator returns all required annualised totals and savings.
+      // Use its output directly for display.
+      const onDemandComparison = this.costComparisons.onDemand;
+      const currentComparison = this.costComparisons.current || ({} as any);
 
-          for (const mc of tsInner.monthlyCost || []) {
-            // Filter by firstFullYear to match the calculator behavior
-            if (this.riPortfolio.metadata.firstFullYear && mc.year !== this.riPortfolio.metadata.firstFullYear) continue;
-            
-            // Use the scenario key to get the correct cost data. For 'current', fall back to first value.
-            let costDataAny: any;
-            if (scenarioName === 'current') {
-              costDataAny = Object.values(mc.cost || {})[0];
-            } else {
-              costDataAny = mc.cost?.[scenarioName];
-            }
-            if (!costDataAny) continue;
-            const monthlyCostVal = (typeof costDataAny.monthlyCost === 'number') ? costDataAny.monthlyCost : 0;
-            const upfrontCostVal = (typeof costDataAny.upfrontCost === 'number') ? costDataAny.upfrontCost : 0;
-            const adjustedAmortisedVal = (typeof costDataAny.adjustedAmortisedCost === 'number') ? costDataAny.adjustedAmortisedCost : 0;
-            totalMonthly += monthlyCostVal;
-            totalUpfront += upfrontCostVal;
-            totalAdjustedAmortised += adjustedAmortisedVal;
-            const monthlyCost = monthlyCostVal + upfrontCostVal;
-            if (monthlyCost > highestMonthly) {
-              highestMonthly = monthlyCost;
-              highestMonth = { year: mc.year, month: mc.month };
-            }
-          }
+      // Ensure onDemand has zero savings vs itself
+      if (onDemandComparison) {
+        onDemandComparison.savingsValueOnDemand = 0;
+        onDemandComparison.savingsPercentOnDemand = 0;
+        if (currentComparison && typeof currentComparison.totalCost === 'number') {
+          onDemandComparison.savingsValueCurrent = (currentComparison.totalCost || 0) - onDemandComparison.totalCost;
+          onDemandComparison.savingsPercentCurrent = onDemandComparison.totalCost > 0 ? (onDemandComparison.savingsValueCurrent! / onDemandComparison.totalCost) * 100 : undefined;
+        }
+      }
 
-          return { totalUpfront, totalMonthly, totalAdjustedAmortised, highestMonthly, highestMonth };
-        };
+      if (currentComparison) {
+        currentComparison.savingsValueCurrent = 0;
+        currentComparison.savingsPercentCurrent = 0;
+      }
 
-        const { totalUpfront, totalMonthly, totalAdjustedAmortised, highestMonthly, highestMonth } = accumulate(ts);
+      this.referenceComparisons = [onDemandComparison, currentComparison].filter(Boolean) as CostComparison[];
 
-        const totalCost = totalAdjustedAmortised;
-        const savingsValueOnDemand = (baselineTotalCostOnDemand !== null && typeof baselineTotalCostOnDemand === 'number') ? (baselineTotalCostOnDemand - totalCost) : undefined;
-        const savingsPercentOnDemand = (savingsValueOnDemand !== undefined && baselineTotalCostOnDemand && baselineTotalCostOnDemand > 0) ? (savingsValueOnDemand / baselineTotalCostOnDemand) * 100 : undefined;
-
-        const savingsValueCurrent = (baselineTotalCostCurrent !== null && typeof baselineTotalCostCurrent === 'number') ? (baselineTotalCostCurrent - totalCost) : undefined;
-        const savingsPercentCurrent = (savingsValueCurrent !== undefined && baselineTotalCostCurrent && baselineTotalCostCurrent > 0) ? (savingsValueCurrent / baselineTotalCostCurrent) * 100 : undefined;
-
-        return {
-          scenario: scenarioName,
-          totalCost,
-          totalUpfront: totalUpfront,
-          totalMonthlyPayment: totalMonthly,
-          highestMonthlySpend: highestMonthly,
-          highestMonthlySpendMonth: highestMonth,
-          savingsPercent: savingsPercentOnDemand,
-          savingsValue: savingsValueOnDemand,
-          savingsValueOnDemand,
-          savingsPercentOnDemand,
-          savingsValueCurrent,
-          savingsPercentCurrent,
-          monthlyBreakdown: [ts]
-        } as CostComparison;
-      };
-
-      const onDemandComparison = buildComparison('onDemand', mergedOnDemand, null, null);
-      const currentComparison = buildComparison('current', mergedCurrent, onDemandComparison.totalCost, null);
-
-      // Ensure both reference comparisons have savings calculated against both baselines
-      // onDemand: savings vs onDemand = 0, savings vs current = currentTotal - onDemandTotal
-      onDemandComparison.savingsValueOnDemand = 0;
-      onDemandComparison.savingsPercentOnDemand = 0;
-      onDemandComparison.savingsValueCurrent = currentComparison.totalCost - onDemandComparison.totalCost;
-      onDemandComparison.savingsPercentCurrent = onDemandComparison.totalCost > 0 ? (onDemandComparison.savingsValueCurrent / onDemandComparison.totalCost) * 100 : undefined;
-
-      // current: savings vs current = 0 (self), savings vs onDemand already calculated by buildComparison
-      currentComparison.savingsValueCurrent = 0;
-      currentComparison.savingsPercentCurrent = 0;
-
-      this.referenceComparisons = [onDemandComparison, currentComparison];
-
-      // Build savings comparisons and attach savings percent based on onDemand baseline
       this.savingsComparisons = scenarioKeys.map((k) => {
-        const ts = costTimeseriesByScenario[k];
-        return buildComparison(k as string, ts, onDemandComparison.totalCost, currentComparison.totalCost);
-      });
+        return this.costComparisons[k];
+      }).filter(Boolean) as CostComparison[];
     }
   }
 

@@ -58,6 +58,7 @@ describe('CostComparisonCalculator', () => {
 
       const costTimeseriesByScenario: CostTimeseriesByScenario = {
         onDemand: onDemandCostTimeseries[0],
+        current: onDemandCostTimeseries[0],
         noUpfront_1y: noUpfront1yCostTimeseries[0],
         partialUpfront_1y: partialUpfront1yCostTimeseries[0],
         fullUpfront_1y: fullUpfront1yCostTimeseries[0],
@@ -66,151 +67,171 @@ describe('CostComparisonCalculator', () => {
       };
 
       // Act
-      const result = CostComparisonCalculator.calculateCostComparison(costTimeseriesByScenario, firstFullYear);
+      const result = CostComparisonCalculator.calculateAnnualisedCostComparison(costTimeseriesByScenario, firstFullYear);
 
       // Assert
       expect(result).toBeDefined();
 
-      // Expected calculations
-      const onDemandTotalCost = (scenarios[0].monthly * 12) + scenarios[0].upfront;
-      const onDemandTotalUpfront = scenarios[0].upfront;
-      const onDemandTotalMonthly = scenarios[0].monthly * 12;
+      // Expected calculations: sum all months across the full timeseries and annualise (avg monthly * 12)
+      const computeAnnualisedForKey = (ts: CostTimeseries, key: string) => {
+        const months = ts.monthlyCost.length;
+        const sumUpfront = ts.monthlyCost.reduce((s, m) => s + (((m.cost as any)[key] && (m.cost as any)[key].upfrontCost) || 0), 0);
+        const sumMonthly = ts.monthlyCost.reduce((s, m) => s + (((m.cost as any)[key] && (m.cost as any)[key].monthlyCost) || 0), 0);
+        const sumAdjusted = ts.monthlyCost.reduce((s, m) => s + (((m.cost as any)[key] && (m.cost as any)[key].adjustedAmortisedCost) || 0), 0);
+        const factor = 12 / Math.max(1, months);
+        return {
+          annualUpfront: sumUpfront * factor,
+          annualMonthly: sumMonthly * factor,
+          annualAdjusted: sumAdjusted * factor
+        };
+      };
+
+      const onDemandAnnual = computeAnnualisedForKey(onDemandCostTimeseries[0], 'onDemand');
       const onDemandMaxMonthly = scenarios[0].monthly;
 
       expect(result.onDemand).withContext('On Demand scenario').toEqual({
         scenario: 'onDemand',
-        totalCost: onDemandTotalCost,
-        totalAdjustedAmortised: onDemandTotalCost,
-        totalUpfront: onDemandTotalUpfront,
-        totalMonthlyPayment: onDemandTotalMonthly,
+        totalCost: onDemandAnnual.annualAdjusted,
+        totalAdjustedAmortised: onDemandAnnual.annualAdjusted,
+        totalUpfront: onDemandAnnual.annualUpfront,
+        totalMonthlyPayment: onDemandAnnual.annualMonthly,
         highestMonthlySpend: onDemandMaxMonthly,
         highestMonthlySpendMonth: { year: 2025, month: 1 },
         savingsValue: undefined,
+        savingsValueOnDemand: 0,
+        savingsPercentOnDemand: 0,
         monthlyBreakdown: [onDemandCostTimeseries[0]]
       });
 
-      // Verify total cost formula
-      expect(result.onDemand.totalCost).toBe(result.onDemand.totalMonthlyPayment + result.onDemand.totalUpfront);
+      // Verify total cost formula (annualised monthly + annualised upfront == totalCost)
+      expect(result.onDemand.totalCost).toBeCloseTo(result.onDemand.totalMonthlyPayment + result.onDemand.totalUpfront, 6);
 
       // No Upfront 1y
-      const noUpfrontTotalCost = (scenarios[1].monthly * 12) + scenarios[1].upfront;
-      const noUpfrontTotalUpfront = scenarios[1].upfront;
-      const noUpfrontTotalMonthly = scenarios[1].monthly * 12;
-      const noUpfrontMaxMonthly = scenarios[1].monthly;
-      const noUpfrontSavingsPercent = ((onDemandTotalCost - noUpfrontTotalCost) / onDemandTotalCost) * 100;
-      const noUpfrontSavingsValue = onDemandTotalCost - noUpfrontTotalCost;
+      const onDemandTotalAdjusted = onDemandAnnual.annualAdjusted;
+
+      const noUpfrontAnnual = computeAnnualisedForKey(noUpfront1yCostTimeseries[0], 'noUpfront_1y');
+      const noUpfrontSavingsPercent = onDemandTotalAdjusted > 0 ? ((onDemandTotalAdjusted - noUpfrontAnnual.annualAdjusted) / onDemandTotalAdjusted) * 100 : 0;
+      const noUpfrontSavingsValue = onDemandTotalAdjusted - noUpfrontAnnual.annualAdjusted;
 
       expect(result.noUpfront_1y).withContext('No Upfront 1y scenario').toEqual({
         scenario: 'noUpfront_1y',
-        totalCost: noUpfrontTotalCost,
-        totalAdjustedAmortised: noUpfrontTotalCost,
-        totalUpfront: noUpfrontTotalUpfront,
-        totalMonthlyPayment: noUpfrontTotalMonthly,
-        highestMonthlySpend: noUpfrontMaxMonthly,
+        totalCost: noUpfrontAnnual.annualAdjusted,
+        totalAdjustedAmortised: noUpfrontAnnual.annualAdjusted,
+        totalUpfront: noUpfrontAnnual.annualUpfront,
+        totalMonthlyPayment: noUpfrontAnnual.annualMonthly,
+        highestMonthlySpend: scenarios[1].monthly,
         highestMonthlySpendMonth: { year: 2025, month: 1 },
         savingsPercent: noUpfrontSavingsPercent,
         savingsValue: noUpfrontSavingsValue,
+        savingsValueOnDemand: noUpfrontSavingsValue,
+        savingsPercentOnDemand: noUpfrontSavingsPercent,
+        savingsPercentCurrent: noUpfrontSavingsPercent,
+        savingsValueCurrent: noUpfrontSavingsValue,
         monthlyBreakdown: [noUpfront1yCostTimeseries[0]]
       });
 
       // Verify total cost formula
-      expect(result.noUpfront_1y.totalCost).toBe(result.noUpfront_1y.totalMonthlyPayment + result.noUpfront_1y.totalUpfront);
+      expect(result.noUpfront_1y.totalCost).toBeCloseTo(result.noUpfront_1y.totalMonthlyPayment + result.noUpfront_1y.totalUpfront, 6);
 
       // Partial Upfront 1y
-      const partialUpfrontTotalCost = (scenarios[2].monthly * 12) + scenarios[2].upfront;
-      const partialUpfrontTotalUpfront = scenarios[2].upfront;
-      const partialUpfrontTotalMonthly = scenarios[2].monthly * 12;
-      const partialUpfrontMaxMonthly = scenarios[2].upfront + scenarios[2].monthly;
-      const partialUpfrontSavingsPercent = ((onDemandTotalCost - partialUpfrontTotalCost) / onDemandTotalCost) * 100;
-      const partialUpfrontSavingsValue = onDemandTotalCost - partialUpfrontTotalCost;
+      const partialUpfrontAnnual = computeAnnualisedForKey(partialUpfront1yCostTimeseries[0], 'partialUpfront_1y');
+      const partialUpfrontSavingsPercent = onDemandTotalAdjusted > 0 ? ((onDemandTotalAdjusted - partialUpfrontAnnual.annualAdjusted) / onDemandTotalAdjusted) * 100 : 0;
+      const partialUpfrontSavingsValue = onDemandTotalAdjusted - partialUpfrontAnnual.annualAdjusted;
 
       expect(result.partialUpfront_1y).withContext('Partial Upfront 1y scenario').toEqual({
         scenario: 'partialUpfront_1y',
-        totalCost: partialUpfrontTotalCost,
-        totalAdjustedAmortised: partialUpfrontTotalCost,
-        totalUpfront: partialUpfrontTotalUpfront,
-        totalMonthlyPayment: partialUpfrontTotalMonthly,
-        highestMonthlySpend: partialUpfrontMaxMonthly,
+        totalCost: partialUpfrontAnnual.annualAdjusted,
+        totalAdjustedAmortised: partialUpfrontAnnual.annualAdjusted,
+        totalUpfront: partialUpfrontAnnual.annualUpfront,
+        totalMonthlyPayment: partialUpfrontAnnual.annualMonthly,
+        highestMonthlySpend: scenarios[2].upfront + scenarios[2].monthly,
         highestMonthlySpendMonth: { year: 2025, month: 1 },
         savingsPercent: partialUpfrontSavingsPercent,
         savingsValue: partialUpfrontSavingsValue,
+        savingsValueOnDemand: partialUpfrontSavingsValue,
+        savingsPercentOnDemand: partialUpfrontSavingsPercent,
+        savingsPercentCurrent: partialUpfrontSavingsPercent,
+        savingsValueCurrent: partialUpfrontSavingsValue,
         monthlyBreakdown: [partialUpfront1yCostTimeseries[0]]
       });
 
       // Verify total cost formula
-      expect(result.partialUpfront_1y.totalCost).toBe(result.partialUpfront_1y.totalMonthlyPayment + result.partialUpfront_1y.totalUpfront);
+      expect(result.partialUpfront_1y.totalCost).toBeCloseTo(result.partialUpfront_1y.totalMonthlyPayment + result.partialUpfront_1y.totalUpfront, 6);
 
       // Full Upfront 1y
-      const fullUpfront1yTotalCost = (scenarios[3].monthly * 12) + scenarios[3].upfront;
-      const fullUpfront1yTotalUpfront = scenarios[3].upfront;
-      const fullUpfront1yTotalMonthly = scenarios[3].monthly * 12;
-      const fullUpfront1yMaxMonthly = scenarios[3].upfront + scenarios[3].monthly;
-      const fullUpfront1ySavingsPercent = ((onDemandTotalCost - fullUpfront1yTotalCost) / onDemandTotalCost) * 100;
-      const fullUpfront1ySavingsValue = onDemandTotalCost - fullUpfront1yTotalCost;
+      const fullUpfront1yAnnual = computeAnnualisedForKey(fullUpfront1yCostTimeseries[0], 'fullUpfront_1y');
+      const fullUpfront1ySavingsPercent = onDemandTotalAdjusted > 0 ? ((onDemandTotalAdjusted - fullUpfront1yAnnual.annualAdjusted) / onDemandTotalAdjusted) * 100 : 0;
+      const fullUpfront1ySavingsValue = onDemandTotalAdjusted - fullUpfront1yAnnual.annualAdjusted;
 
       expect(result.fullUpfront_1y).withContext('Full Upfront 1y scenario').toEqual({
         scenario: 'fullUpfront_1y',
-        totalCost: fullUpfront1yTotalCost,
-        totalAdjustedAmortised: fullUpfront1yTotalCost,
-        totalUpfront: fullUpfront1yTotalUpfront,
-        totalMonthlyPayment: fullUpfront1yTotalMonthly,
-        highestMonthlySpend: fullUpfront1yMaxMonthly,
+        totalCost: fullUpfront1yAnnual.annualAdjusted,
+        totalAdjustedAmortised: fullUpfront1yAnnual.annualAdjusted,
+        totalUpfront: fullUpfront1yAnnual.annualUpfront,
+        totalMonthlyPayment: fullUpfront1yAnnual.annualMonthly,
+        highestMonthlySpend: scenarios[3].upfront + scenarios[3].monthly,
         highestMonthlySpendMonth: { year: 2025, month: 1 },
         savingsPercent: fullUpfront1ySavingsPercent,
         savingsValue: fullUpfront1ySavingsValue,
+        savingsValueOnDemand: fullUpfront1ySavingsValue,
+        savingsPercentOnDemand: fullUpfront1ySavingsPercent,
+        savingsPercentCurrent: fullUpfront1ySavingsPercent,
+        savingsValueCurrent: fullUpfront1ySavingsValue,
         monthlyBreakdown: [fullUpfront1yCostTimeseries[0]]
       });
 
       // Verify total cost formula
-      expect(result.fullUpfront_1y.totalCost).toBe(result.fullUpfront_1y.totalMonthlyPayment + result.fullUpfront_1y.totalUpfront);
+      expect(result.fullUpfront_1y.totalCost).toBeCloseTo(result.fullUpfront_1y.totalMonthlyPayment + result.fullUpfront_1y.totalUpfront, 6);
 
       // Partial Upfront 3y
-      const partialUpfront3yTotalCost = (scenarios[4].monthly * 12) + scenarios[4].upfront;
-      const partialUpfront3yTotalUpfront = scenarios[4].upfront;
-      const partialUpfront3yTotalMonthly = scenarios[4].monthly * 12;
-      const partialUpfront3yMaxMonthly = scenarios[4].upfront + scenarios[4].monthly;
-      const partialUpfront3ySavingsPercent = ((onDemandTotalCost - partialUpfront3yTotalCost) / onDemandTotalCost) * 100;
-      const partialUpfront3ySavingsValue = onDemandTotalCost - partialUpfront3yTotalCost;
+      const partialUpfront3yAnnual = computeAnnualisedForKey(partialUpfront3yCostTimeseries[0], 'partialUpfront_3y');
+      const partialUpfront3ySavingsPercent = onDemandTotalAdjusted > 0 ? ((onDemandTotalAdjusted - partialUpfront3yAnnual.annualAdjusted) / onDemandTotalAdjusted) * 100 : 0;
+      const partialUpfront3ySavingsValue = onDemandTotalAdjusted - partialUpfront3yAnnual.annualAdjusted;
 
       expect(result.partialUpfront_3y).withContext('Partial Upfront 3y scenario').toEqual({
         scenario: 'partialUpfront_3y',
-        totalCost: partialUpfront3yTotalCost,
-        totalAdjustedAmortised: partialUpfront3yTotalCost,
-        totalUpfront: partialUpfront3yTotalUpfront,
-        totalMonthlyPayment: partialUpfront3yTotalMonthly,
-        highestMonthlySpend: partialUpfront3yMaxMonthly,
+        totalCost: partialUpfront3yAnnual.annualAdjusted,
+        totalAdjustedAmortised: partialUpfront3yAnnual.annualAdjusted,
+        totalUpfront: partialUpfront3yAnnual.annualUpfront,
+        totalMonthlyPayment: partialUpfront3yAnnual.annualMonthly,
+        highestMonthlySpend: scenarios[4].upfront + scenarios[4].monthly,
         highestMonthlySpendMonth: { year: 2025, month: 1 },
         savingsPercent: partialUpfront3ySavingsPercent,
         savingsValue: partialUpfront3ySavingsValue,
+        savingsValueOnDemand: partialUpfront3ySavingsValue,
+        savingsPercentOnDemand: partialUpfront3ySavingsPercent,
+        savingsPercentCurrent: partialUpfront3ySavingsPercent,
+        savingsValueCurrent: partialUpfront3ySavingsValue,
         monthlyBreakdown: [partialUpfront3yCostTimeseries[0]]
       });
 
       // Verify total cost formula
-      expect(result.partialUpfront_3y.totalCost).toBe(result.partialUpfront_3y.totalMonthlyPayment + result.partialUpfront_3y.totalUpfront);
+      expect(result.partialUpfront_3y.totalCost).toBeCloseTo(result.partialUpfront_3y.totalMonthlyPayment + result.partialUpfront_3y.totalUpfront, 6);
 
       // Full Upfront 3y
-      const fullUpfront3yTotalCost = (scenarios[5].monthly * 12) + scenarios[5].upfront;
-      const fullUpfront3yTotalUpfront = scenarios[5].upfront;
-      const fullUpfront3yTotalMonthly = scenarios[5].monthly * 12;
-      const fullUpfront3yMaxMonthly = scenarios[5].upfront + scenarios[5].monthly;
-      const fullUpfront3ySavingsPercent = ((onDemandTotalCost - fullUpfront3yTotalCost) / onDemandTotalCost) * 100;
-      const fullUpfront3ySavingsValue = onDemandTotalCost - fullUpfront3yTotalCost;
+      const fullUpfront3yAnnual = computeAnnualisedForKey(fullUpfront3yCostTimeseries[0], 'fullUpfront_3y');
+      const fullUpfront3ySavingsPercent = onDemandTotalAdjusted > 0 ? ((onDemandTotalAdjusted - fullUpfront3yAnnual.annualAdjusted) / onDemandTotalAdjusted) * 100 : 0;
+      const fullUpfront3ySavingsValue = onDemandTotalAdjusted - fullUpfront3yAnnual.annualAdjusted;
 
       expect(result.fullUpfront_3y).withContext('Full Upfront 3y scenario').toEqual({
         scenario: 'fullUpfront_3y',
-        totalCost: fullUpfront3yTotalCost,
-        totalAdjustedAmortised: fullUpfront3yTotalCost,
-        totalUpfront: fullUpfront3yTotalUpfront,
-        totalMonthlyPayment: fullUpfront3yTotalMonthly,
-        highestMonthlySpend: fullUpfront3yMaxMonthly,
+        totalCost: fullUpfront3yAnnual.annualAdjusted,
+        totalAdjustedAmortised: fullUpfront3yAnnual.annualAdjusted,
+        totalUpfront: fullUpfront3yAnnual.annualUpfront,
+        totalMonthlyPayment: fullUpfront3yAnnual.annualMonthly,
+        highestMonthlySpend: scenarios[5].upfront + scenarios[5].monthly,
         highestMonthlySpendMonth: { year: 2025, month: 1 },
         savingsPercent: fullUpfront3ySavingsPercent,
         savingsValue: fullUpfront3ySavingsValue,
+        savingsValueOnDemand: fullUpfront3ySavingsValue,
+        savingsPercentOnDemand: fullUpfront3ySavingsPercent,
+        savingsPercentCurrent: fullUpfront3ySavingsPercent,
+        savingsValueCurrent: fullUpfront3ySavingsValue,
         monthlyBreakdown: [fullUpfront3yCostTimeseries[0]]
       });
 
       // Verify total cost formula
-      expect(result.fullUpfront_3y.totalCost).toBe(result.fullUpfront_3y.totalMonthlyPayment + result.fullUpfront_3y.totalUpfront);
+      expect(result.fullUpfront_3y.totalCost).toBeCloseTo(result.fullUpfront_3y.totalMonthlyPayment + result.fullUpfront_3y.totalUpfront, 6);
     });
   });
 
@@ -249,6 +270,7 @@ describe('CostComparisonCalculator', () => {
 
       const byScenario: any = {
         onDemand: onDemandTs,
+        current: onDemandTs,
         noUpfront_1y: merged,
         partialUpfront_1y: merged,
         fullUpfront_1y: merged,
@@ -256,10 +278,13 @@ describe('CostComparisonCalculator', () => {
         fullUpfront_3y: merged
       };
 
-      const result = CostComparisonCalculator.calculateCostComparison(byScenario, year);
+      const result = CostComparisonCalculator.calculateAnnualisedCostComparison(byScenario, year);
 
-      // Expect totalUpfront to be summed from both RiRows (1000 + 2000)
-      expect(result.fullUpfront_1y.totalUpfront).toBe(3000);
+      // Expect totalUpfront to be summed from both RiRows and annualised across timeseries months
+      const months = merged.monthlyCost.length;
+      const sumUpfront = merged.monthlyCost.reduce((s: number, m: any) => s + ((m.cost.fullUpfront_1y && m.cost.fullUpfront_1y.upfrontCost) || 0), 0);
+      const expectedAnnualisedUpfront = sumUpfront * (12 / Math.max(1, months));
+      expect(result.fullUpfront_1y.totalUpfront).toBeCloseTo(expectedAnnualisedUpfront, 6);
     });
   });
 });

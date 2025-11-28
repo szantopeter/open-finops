@@ -1,22 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 
 import type CostTimeseries from '../../cost-timeseries/costTimeseries.model';
 
 @Component({
   selector: 'app-monthly-breakdown-table',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule],
   templateUrl: './monthly-breakdown-table.component.html',
-  styleUrl: './monthly-breakdown-table.component.scss'
+  styleUrls: ['./monthly-breakdown-table.component.scss']
 })
 export class MonthlyBreakdownTableComponent {
   @Input() expandedRow: string | null = null;
   @Input() timeseries: CostTimeseries[] = [];
   @Input() firstFullYear: number = 0;
   @Input() highestSpendMonth?: { year: number; month: number };
-  showFirstFullYearOnly = true;
+  
 
   savingsScenarios: string[] = ['noUpfront_1y', 'partialUpfront_1y', 'fullUpfront_1y', 'partialUpfront_3y', 'fullUpfront_3y'];
 
@@ -85,13 +84,7 @@ export class MonthlyBreakdownTableComponent {
     const yearMonths = new Set<string>();
     for (const ts of this.timeseries) {
       for (const monthlyCost of ts.monthlyCost) {
-        if (this.showFirstFullYearOnly && this.firstFullYear) {
-          if (monthlyCost.year === this.firstFullYear) {
-            yearMonths.add(`${monthlyCost.year}-${monthlyCost.month}`);
-          }
-        } else {
-          yearMonths.add(`${monthlyCost.year}-${monthlyCost.month}`);
-        }
+        yearMonths.add(`${monthlyCost.year}-${monthlyCost.month}`);
       }
     }
     return Array.from(yearMonths).map(ym => {
