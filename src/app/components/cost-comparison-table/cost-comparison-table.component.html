@@ -1,6 +1,24 @@
 <div class="cost-comparison-container" *ngIf="costComparisonsArray.length > 0">
   <h3>Cost Comparison Analysis</h3>
-  <p class="subtitle">Comparing different AWS RDS Reserved Instance payment scenarios for {{ riPortfolio.metadata.projectionStartDate.getUTCFullYear() }} - {{ riPortfolio.metadata.projectionEndDate.getUTCFullYear() }}</p>
+  <p class="subtitle">Comparing different AWS RDS Reserved Instance payment scenarios for {{ riPortfolio.metadata.projectionStartDate.getUTCFullYear() }} - {{ riPortfolio.metadata.projectionEndDate.getUTCFullYear() }} <app-question-tooltip [text]="helpHtml.innerHTML"></app-question-tooltip></p>
+  <div #helpHtml style="display:none">
+    <p>This table shows the annualised cost and savings for different Reserved Instance payment options over the projection period.</p>
+
+    <b><h4>How the numbers are produced:</h4></b>
+    <ul>
+      <li>Each reservation is paired with the correct price for its instance type, location and payment option.</li>
+      <li>Costs are prorated by the days a reservation was active in each month and multiplied by the number of identical reservations when applicable.</li>
+      <li>Monthly costs are summed across the entire projection period and converted to a consistent annual figure so different options can be compared fairly.</li>
+      <li>Savings are shown against two references: running without any reservations, and your current reservation mix.</li>
+    </ul>
+
+    <h4>Adjusted amortised:</h4>
+    <ul>
+      <li>Some payment options include upfront fees. To compare them fairly we spread (amortise) those upfront fees over the time the reservation is active so they contribute to an annual cost.</li>
+      <li>The "adjusted amortised" amount further accounts for changes in coverage during the projection (for example reservations that start or end mid-period or partial-coverage situations) so the reported annual figure reflects the effective cost you actually experience.</li>
+      <li>Showing adjusted amortised costs ensures an apples-to-apples comparison between no-upfront, partial-upfront and all-upfront options.</li>
+    </ul>
+  </div>
 
   <div class="table-container">
     <h4>Annualised reference scenarios</h4>

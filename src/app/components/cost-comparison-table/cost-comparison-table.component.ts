@@ -10,16 +10,19 @@ import { RiRenewalProjection } from '../../ri-renewal-projection/ri-renewal-proj
 import { MonthlyBreakdownTableComponent } from '../monthly-breakdown-table/monthly-breakdown-table.component';
 import type { SavingsKey } from '../ri-portfolio-upload/models/pricing.model';
 import type { RiPortfolio } from '../ri-portfolio-upload/models/ri-portfolio.model';
+import { QuestionTooltipComponent } from '../question-tooltip/question-tooltip.component';
 
 @Component({
   selector: 'app-cost-comparison-table',
   standalone: true,
-  imports: [CommonModule, FormsModule, MonthlyBreakdownTableComponent],
+  imports: [CommonModule, FormsModule, MonthlyBreakdownTableComponent, QuestionTooltipComponent],
   templateUrl: './cost-comparison-table.component.html',
   styleUrl: './cost-comparison-table.component.scss'
 })
 export class CostComparisonTableComponent implements OnChanges {
   @Input() riPortfolio!: RiPortfolio;
+
+  // Help HTML moved to component template; tooltip receives the HTML via a hidden div.
 
   costComparisons: CostComparisonByScenario = {} as CostComparisonByScenario;
   costTimeseriesByScenario: CostTimeseriesByScenario = {} as CostTimeseriesByScenario;

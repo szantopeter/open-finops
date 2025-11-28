@@ -13,7 +13,10 @@ import { QuestionTooltipComponent } from '../question-tooltip/question-tooltip.c
       <div class="flex items-center gap-2">
         <input #fileInput type="file" accept=".csv" hidden (change)="onFile($event)" />
         <button #uploadBtn class="file-input" type="button" (click)="triggerFile()" aria-label="Upload new RI data">Upload new RI data</button>
-        <app-question-tooltip [text]="helpText" class="ml-2"></app-question-tooltip>
+        <app-question-tooltip [text]="helpHtml.innerHTML" class="ml-2"></app-question-tooltip>
+      </div>
+      <div #helpHtml style="display:none">
+        <p>To generate a new RI file go to cloudability, select <strong>Optimise / Commitment Portfolio</strong> then choose <strong>RDS Reserved Instances</strong> from the Commitment Type dropdown. Click the <strong>Export Reservations CSV</strong> button above the table.</p>
       </div>
       <ul *ngIf="lastError" class="text-red-600 mt-2 list-disc list-inside">
         <li *ngFor="let error of lastError">{{ error }}</li>
@@ -26,7 +29,7 @@ import { QuestionTooltipComponent } from '../question-tooltip/question-tooltip.c
 export class RiImportUploadComponent {
   lastError?: string[];
   RI_IMPORT_KEY = 'ri-import';
-  helpText = 'To generate a new RI file go to cloudability select Optimise / Commitment Portfolio then choose RDS Reserved Instances from the Commitment Type dropdown. Then click the "Export Reservations CSV" button above the table';
+  // help HTML moved to template; tooltip receives the HTML via hidden div.
 
   @ViewChild('fileInput', { read: ElementRef }) fileInput?: ElementRef<HTMLInputElement>;
 

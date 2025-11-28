@@ -18,10 +18,18 @@ import 'tippy.js/dist/tippy.css';
       >
         ?
       </span>
+      <div #tooltipContent style="display:none" [innerHTML]="text"></div>
     </span>
   `,
   styles: [
     `
+    :host {
+      display: inline-block;
+    }
+    /* Allow callers to apply spacing classes on the host (e.g. class="ml-2") */
+    :host(.ml-2) {
+      margin-left: 0.5rem;
+    }
     :host ::ng-deep .help-icon {
       display: inline-flex;
       align-items: center;
@@ -41,6 +49,49 @@ import 'tippy.js/dist/tippy.css';
       pointer-events: auto;
       line-height: 1;
     }
+    :host ::ng-deep .help-icon--wk {
+      background: linear-gradient(90deg,#6b46c1,#b83280);
+      color: #fff;
+      border-color: transparent;
+    }
+    /* Ensure tooltip content preserves normal flow: lists, headings and paragraphs */
+    :host ::ng-deep .tippy-box[data-theme~="wk-help"] .tippy-content {
+      white-space: normal;
+      color: #fff;
+      font-size: 0.95rem;
+    }
+    :host ::ng-deep .tippy-box[data-theme~="wk-help"] .tippy-content p {
+      margin: 0 0 0.5rem 0;
+      line-height: 1.35;
+    }
+    :host ::ng-deep .tippy-box[data-theme~="wk-help"] .tippy-content h4 {
+      margin: 0 0 0.35rem 0;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    :host ::ng-deep .tippy-box[data-theme~="wk-help"] .tippy-content ul {
+      margin: 0 0 0.5rem 1.25rem;
+      padding-left: 1.25rem;
+      list-style-type: disc !important;
+      list-style-position: outside !important;
+      list-style: disc outside !important;
+      padding-left: 1.25rem !important;
+      margin-left: 0 !important;
+    }
+    :host ::ng-deep .tippy-box[data-theme~="wk-help"] .tippy-content li {
+      margin-bottom: 0.25rem;
+    }
+    :host ::ng-deep .tippy-box[data-theme~="wk-help"] .tippy-content li::marker {
+      color: inherit;
+      font-size: 1em;
+    }
+    /* Force bullets to be visible even if global CSS removed them */
+    :host ::ng-deep .tippy-box[data-theme~="wk-help"] .tippy-content ul,
+    :host ::ng-deep .tippy-box[data-theme~="wk-help"] .tippy-content li {
+      -webkit-margin-before: 0px !important;
+      -webkit-margin-after: 0px !important;
+      -webkit-padding-start: 1.25rem !important;
+    }
     `
   ]
 })
@@ -56,25 +107,54 @@ export class QuestionTooltipComponent implements AfterViewInit, OnDestroy {
   get _helpClasses(): string {
     // default: small gray circular badge (matches the original appearance)
     if (this.variant === 'badge') {
-      return 'help-icon';
+      return this.theme === 'wk-help' ? 'help-icon help-icon--wk' : 'help-icon';
     }
     // inline compact variant (not used by default)
     return 'inline-block text-white text-sm font-medium cursor-default';
   }
 
   @ViewChild('helpEl', { read: ElementRef }) helpEl?: ElementRef<HTMLElement>;
+  @ViewChild('tooltipContent', { read: ElementRef }) tooltipContent?: ElementRef<HTMLElement>;
   private _tippy?: Instance | null;
 
   ngAfterViewInit(): void {
     try {
       const el = this.helpEl?.nativeElement;
       if (!el) return;
-
+      const desiredMaxWidth = this._computeMaxWidth(this.text);
+      // Prefer passing a cloned DOM node so tippy renders exact markup (lists, markers)
+      const clonedNode = this.tooltipContent?.nativeElement?.cloneNode(true) as HTMLElement | undefined;
+      if (clonedNode && clonedNode.style) {
+        // cloned node inherits `display:none` from the hidden template; make it visible
+        clonedNode.style.display = '';
+        try {
+          // Ensure bullet markers and spacing are visible by applying inline styles
+          const uls = (clonedNode as HTMLElement).querySelectorAll('ul');
+          uls.forEach((u) => {
+            const el = u as HTMLElement;
+            el.style.listStyleType = 'disc';
+            el.style.listStylePosition = 'outside';
+            el.style.listStyle = 'disc outside';
+            el.style.paddingLeft = '1.25rem';
+            el.style.margin = '0 0 0.5rem 0';
+          });
+          const lis = (clonedNode as HTMLElement).querySelectorAll('li');
+          lis.forEach((li) => {
+            const lel = li as HTMLElement;
+            lel.style.marginBottom = '0.25rem';
+          });
+        } catch (e) {
+          // ignore styling errors
+        }
+      }
+      const contentValue = clonedNode ?? (this.tooltipContent?.nativeElement?.innerHTML ?? this.text);
       this._tippy = tippy(el, {
-        content: this.text,
-        allowHTML: false,
+        interactive: true,
+        // content is a DOM node or HTML string
+        content: contentValue,
+        allowHTML: true,
         placement: this.placement,
-        maxWidth: this.maxWidth,
+        maxWidth: desiredMaxWidth,
         appendTo: document.body,
         theme: this.theme,
         animation: this.animation,
@@ -125,5 +205,23 @@ export class QuestionTooltipComponent implements AfterViewInit, OnDestroy {
       this._tippy = null;
     }
     if (this._removeListeners) this._removeListeners();
+  }
+
+  // Note: content is provided by the static hidden DOM node `#tooltipContent`.
+  // Previous inline text->HTML renderer removed in favor of Angular's `[innerHTML]`.
+
+  // Compute a sensible max width: use a larger width when the text is long
+  // or contains long lines. Clamp between 320 and 800 px.
+  private _computeMaxWidth(text: string): number {
+    if (!text) return this.maxWidth;
+    const normalized = text.replace(/\r\n/g, '\n');
+    const lines = normalized.split('\n');
+    const longestLine = lines.reduce((a, b) => a.length > b.length ? a : b, '');
+    // approximate char width in px (conservative): 8px per char
+    const approxPx = Math.min(800, Math.max(this.maxWidth, Math.ceil(longestLine.length * 8)));
+    // if overall text is very long, slightly increase width to avoid excessive wrapping
+    if (text.length > 800) return Math.min(800, approxPx + 120);
+    if (text.length > 400) return Math.min(700, approxPx + 80);
+    return Math.max(this.maxWidth, approxPx);
   }
 }
