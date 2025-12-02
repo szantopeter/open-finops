@@ -30,6 +30,7 @@ export class CostComparisonTableComponent implements OnChanges {
   referenceComparisons: CostComparison[] = [];
   savingsComparisons: CostComparison[] = [];
   expandedRow: string | null = null;
+  showOnDemand = false;
   @ViewChild('monthlyBreakdown', { read: ElementRef }) monthlyBreakdownEl?: ElementRef<HTMLElement>;
   scenarios: string[] = ['onDemand', 'noUpfront_1y', 'partialUpfront_1y', 'fullUpfront_1y', 'partialUpfront_3y', 'fullUpfront_3y'];
   scenarioNames: string[] = ['On Demand', '1yr No Upfront', '1yr Partial Upfront', '1yr All Upfront', '3yr Partial Upfront', '3yr All Upfront'];
@@ -160,5 +161,12 @@ export class CostComparisonTableComponent implements OnChanges {
 
   isZeroValue(amount: number): boolean {
     return amount === 0;
+  }
+
+  get filteredReferenceComparisons(): CostComparison[] {
+    if (this.showOnDemand) {
+      return this.referenceComparisons;
+    }
+    return this.referenceComparisons.filter(c => c.scenario !== 'onDemand');
   }
 }
