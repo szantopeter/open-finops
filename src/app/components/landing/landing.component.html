@@ -305,10 +305,10 @@
   <!-- Toolbar -->
   <div class="toolbar" role="banner">
 
-    <span style="width: 240px; padding: right 5px; text-align: center;"><strong>AWS RDS Reserved Instance Portfolio Optimiser</strong></span>
+    <span style="width: 240px; padding-right: 5px; text-align: center;"><strong>AWS RDS Reserved Instance Portfolio Optimiser</strong></span>
       <div class="spacer"></div>   
-  <div style="width:100%;display:flex;gap:12px;align-items:flex-start;justify-content:center;flex-wrap:wrap;">
-        <div style="width:100%;max-width:200px;">
+  <div style="display:flex;gap:12px;align-items:flex-start;justify-content:center;flex-wrap:wrap;">
+        <div style="max-width:200px;">
           <app-ri-import-upload></app-ri-import-upload>
         </div>
         <div style="flex:1;min-width:280px;">
@@ -322,11 +322,11 @@
 
     <section style="width:100%;display:flex;flex-direction:column;gap:16px;align-items:center;">
 
-      @if (riPortfolio$ | async; as portfolio) {
+      <ng-container *ngIf="riPortfolio$ | async as portfolio">
         <div style="width:100%;">
           <app-cost-comparison-table [riPortfolio]="portfolio"></app-cost-comparison-table>
         </div>
-      }
+      </ng-container>
 
     </section>
 

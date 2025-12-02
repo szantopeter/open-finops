@@ -18,7 +18,7 @@ describe('PricingMetadataService', () => {
   afterEach(() => http.verify());
 
   it('parses fetchedAt and returns ageText', async () => {
-    const fake = { fetchedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), source: 'AmazonRDS' };
+    const fake = { fetchedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), source: 'AmazonRDS', discountPercentApplied: 14 };
     const obs = service.getMetadata();
     obs.subscribe((m) => {
       expect(m.raw).toBeTruthy();

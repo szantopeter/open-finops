@@ -1,7 +1,7 @@
 
 import type { CostTimeseriesByScenario } from './cost-comparison-calculator';
 import { CostComparisonCalculator } from './cost-comparison-calculator';
-import type CostTimeseries from '../../cost-timeseries/costTimeseries.model';
+import type CostTimeseries from '../cost-timeseries/costTimeseries.model';
 
 describe('CostComparisonCalculator', () => {
   describe('calculateCostComparison', () => {
@@ -76,9 +76,9 @@ describe('CostComparisonCalculator', () => {
       // Expected calculations: sum all months across the full timeseries and annualise (avg monthly * 12)
       const computeAnnualisedForKey = (ts: CostTimeseries, key: string) => {
         const months = ts.monthlyCost.length;
-        const sumUpfront = ts.monthlyCost.reduce((s, m) => s + (((m.cost as any)[key] && (m.cost as any)[key].upfrontCost) || 0), 0);
-        const sumMonthly = ts.monthlyCost.reduce((s, m) => s + (((m.cost as any)[key] && (m.cost as any)[key].monthlyCost) || 0), 0);
-        const sumAdjusted = ts.monthlyCost.reduce((s, m) => s + (((m.cost as any)[key] && (m.cost as any)[key].adjustedAmortisedCost) || 0), 0);
+        const sumUpfront = ts.monthlyCost.reduce((s: number, m: any) => s + (((m.cost as any)[key] && (m.cost as any)[key].upfrontCost) || 0), 0);
+        const sumMonthly = ts.monthlyCost.reduce((s: number, m: any) => s + (((m.cost as any)[key] && (m.cost as any)[key].monthlyCost) || 0), 0);
+        const sumAdjusted = ts.monthlyCost.reduce((s: number, m: any) => s + (((m.cost as any)[key] && (m.cost as any)[key].adjustedAmortisedCost) || 0), 0);
         const factor = 12 / Math.max(1, months);
         return {
           annualUpfront: sumUpfront * factor,
