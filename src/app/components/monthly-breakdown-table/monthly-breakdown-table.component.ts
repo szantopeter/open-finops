@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
-import type CostTimeseries from '../../cost-timeseries/costTimeseries.model';
+import type CostTimeseries from '../../calculators/cost-timeseries/costTimeseries.model';
 
 @Component({
   selector: 'app-monthly-breakdown-table',

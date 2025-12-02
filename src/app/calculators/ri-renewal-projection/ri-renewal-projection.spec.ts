@@ -1,5 +1,5 @@
 import { RiRenewalProjection } from './ri-renewal-projection';
-import type { RiPortfolio, RiRow } from '../components/ri-portfolio-upload/models/ri-portfolio.model';
+import type { RiPortfolio, RiRow } from '../../components/ri-portfolio-upload/models/ri-portfolio.model';
 
 describe('RiRenewalProjection', () => {
   it('preserves original term and upfront when savingsKey is not provided', () => {

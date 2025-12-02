@@ -1,7 +1,7 @@
 
 import type { CostTimeseriesByScenario } from './cost-comparison-calculator';
 import { CostComparisonCalculator } from './cost-comparison-calculator';
-import type CostTimeseries from '../cost-timeseries/costTimeseries.model';
+import type CostTimeseries from '../../cost-timeseries/costTimeseries.model';
 
 describe('CostComparisonCalculator', () => {
   describe('calculateCostComparison', () => {

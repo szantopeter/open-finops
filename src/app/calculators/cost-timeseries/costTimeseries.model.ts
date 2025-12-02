@@ -1,5 +1,5 @@
-import type { PricingData } from '../components/ri-portfolio-upload/models/pricing.model';
-import type { RiRow } from '../components/ri-portfolio-upload/models/ri-portfolio.model';
+import type { PricingData } from '../../components/ri-portfolio-upload/models/pricing.model';
+import type { RiRow } from '../../components/ri-portfolio-upload/models/ri-portfolio.model';
 
 interface MonthlyCost {
     year: number;

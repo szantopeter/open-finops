@@ -3,10 +3,10 @@ import type { OnChanges, SimpleChanges } from '@angular/core';
 import { Component, Input, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import type { CostComparison, CostTimeseriesByScenario, CostComparisonByScenario } from '../../cost-comparision/cost-comparison-calculator';
-import { CostComparisonCalculator } from '../../cost-comparision/cost-comparison-calculator';
-import { CostTimeseriesCalculator } from '../../cost-timeseries/cost-timeseries-calculator';
-import { RiRenewalProjection } from '../../ri-renewal-projection/ri-renewal-projection';
+import type { CostComparison, CostTimeseriesByScenario, CostComparisonByScenario } from '../../calculators/cost-comparision/cost-comparison-calculator';
+import { CostComparisonCalculator } from '../../calculators/cost-comparision/cost-comparison-calculator';
+import { CostTimeseriesCalculator } from '../../calculators/cost-timeseries/cost-timeseries-calculator';
+import { RiRenewalProjection } from '../../calculators/ri-renewal-projection/ri-renewal-projection';
 import { MonthlyBreakdownTableComponent } from '../monthly-breakdown-table/monthly-breakdown-table.component';
 import { ToggleDetailComponent } from '../toggle/toggle-detail.component';
 import type { SavingsKey } from '../ri-portfolio-upload/models/pricing.model';
