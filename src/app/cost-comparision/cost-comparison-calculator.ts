@@ -87,13 +87,18 @@ export const CostComparisonCalculator = {
               existingCost[scenario] = {
                 upfrontCost: 0,
                 monthlyCost: 0,
-                adjustedAmortisedCost: 0
+                adjustedAmortisedCost: 0,
+                totalMonthlyCost: 0
               };
             }
 
             existingCost[scenario].upfrontCost += scenarioCost.upfrontCost || 0;
             existingCost[scenario].monthlyCost += scenarioCost.monthlyCost || 0;
             existingCost[scenario].adjustedAmortisedCost += scenarioCost.adjustedAmortisedCost || 0;
+            const incomingTotal = (typeof scenarioCost.totalMonthlyCost === 'number')
+              ? scenarioCost.totalMonthlyCost
+              : ((scenarioCost.upfrontCost || 0) + (scenarioCost.monthlyCost || 0));
+            existingCost[scenario].totalMonthlyCost = (existingCost[scenario].totalMonthlyCost || 0) + incomingTotal;
           }
         }
       }

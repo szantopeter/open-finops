@@ -26,6 +26,7 @@ export interface RiCost {
     upfrontCost: number;
     monthlyCost: number;
     adjustedAmortisedCost: number;
+    totalMonthlyCost: number;
 }
 
 export default CostTimeseries;

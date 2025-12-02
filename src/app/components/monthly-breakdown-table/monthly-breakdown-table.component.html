@@ -13,15 +13,16 @@
             @if (scenario === 'onDemand') {
               <th scope="col">{{ getScenarioName(scenario) }}</th>
             } @else {
-              <th colspan="3" scope="col">{{ getScenarioName(scenario) }}</th>
+              <th colspan="4" scope="col">{{ getScenarioName(scenario) }}</th>
             }
           }
         </tr>
         <tr>
           @for (scenario of displayedScenarios; track scenario) {
-            <th scope="col">Monthly</th>
+            <th scope="col">Monthly fees</th>
             @if (scenario !== 'onDemand') {
-              <th scope="col">Upfront</th>
+              <th scope="col">Upfront fees</th>
+              <th scope="col">Total Monthly Spend</th>
               <th scope="col">Adjusted Amortised</th>
             }
           }
@@ -35,6 +36,7 @@
               <td class="currency-cell" [class.zero-value]="isZeroValue(getMonthlyCost(scenario, ym.year, ym.month))">{{ formatCurrency(getMonthlyCost(scenario, ym.year, ym.month)) }}</td>
               @if (scenario !== 'onDemand') {
                 <td class="currency-cell" [class.zero-value]="isZeroValue(getUpfrontCost(scenario, ym.year, ym.month))">{{ formatCurrency(getUpfrontCost(scenario, ym.year, ym.month)) }}</td>
+                <td class="currency-cell" [class.zero-value]="isZeroValue(getTotalMonthlySpend(scenario, ym.year, ym.month))">{{ formatCurrency(getTotalMonthlySpend(scenario, ym.year, ym.month)) }}</td>
                 <td class="currency-cell" [class.zero-value]="isZeroValue(getAdjustedAmortised(scenario, ym.year, ym.month))">{{ formatCurrency(getAdjustedAmortised(scenario, ym.year, ym.month)) }}</td>
               }
             }
@@ -47,6 +49,7 @@
             <td class="currency-cell">{{ formatCurrency(getTotalMonthlyCost(scenario)) }}</td>
             @if (scenario !== 'onDemand') {
               <td class="currency-cell">{{ formatCurrency(getTotalUpfrontCost(scenario)) }}</td>
+              <td class="currency-cell">{{ formatCurrency(getTotalMonthlySpendTotal(scenario)) }}</td>
               <td class="currency-cell">{{ formatCurrency(getTotalAdjustedAmortised(scenario)) }}</td>
             }
           }

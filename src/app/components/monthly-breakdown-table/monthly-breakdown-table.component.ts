@@ -79,6 +79,19 @@ export class MonthlyBreakdownTableComponent {
     return 0;
   }
 
+  getTotalMonthlySpend(scenario: string, year: number, month: number): number {
+    for (const ts of this.timeseries) {
+      const mc = ts.monthlyCost.find(m => m.year === year && m.month === month);
+      if (mc) {
+        const cost = (mc.cost as any)[scenario] as { totalMonthlyCost: number } | null | undefined;
+        if (cost) {
+          return cost.totalMonthlyCost;
+        }
+      }
+    }
+    return 0;
+  }
+
   getYearMonths(): {year: number, month: number}[] {
     const yearMonths = new Set<string>();
     for (const ts of this.timeseries) {
@@ -112,6 +125,15 @@ export class MonthlyBreakdownTableComponent {
     let total = 0;
     for (const ym of this.getYearMonths()) {
       total += this.getUpfrontCost(scenario, ym.year, ym.month);
+    }
+    return total;
+  }
+
+  // New: total of monthly + upfront over the entire period for a scenario
+  getTotalMonthlySpendTotal(scenario: string): number {
+    let total = 0;
+    for (const ym of this.getYearMonths()) {
+      total += this.getTotalMonthlySpend(scenario, ym.year, ym.month);
     }
     return total;
   }
