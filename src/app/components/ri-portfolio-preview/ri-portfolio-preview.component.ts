@@ -15,10 +15,8 @@ import { RiPortfolioDataService } from '../ri-portfolio-upload/service/ri-portfo
       <div *ngIf="statistics.total === 0">No rows</div>
       <div *ngIf="statistics.total !== 0">
         <div *ngIf="statistics.metadata">
-            Reserved Instance data extracted {{ statistics.ageText }} ({{ statistics.displayDate }})
-            <strong>{{ statistics.unique }}</strong> purchases containing <strong>{{ statistics.total }}</strong> RIs
-            Imported at: <strong>{{ statistics.displayDate }}</strong> Projection date range : <strong>{{ statistics.projectionStartDate | date:'yyyy-MM-dd' }}</strong> to <strong>{{ statistics.projectionEndDate | date:'yyyy-MM-dd' }}</strong>
-            <div *ngIf="pricing$ | async as pricing"> <strong>{{ pricing.discountPercentApplied }}%</strong> AWS Discount Applied</div>
+            <strong>{{ statistics.unique }}</strong> purchases containing <strong>{{ statistics.total }}</strong> RIs |
+            <span *ngIf="pricing$ | async as pricing"> <strong>{{ pricing.discountPercentApplied }}%</strong> AWS Discount Applied</span>
           </div>
       </div>
     </ng-container>
