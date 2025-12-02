@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { PricingMetadataService } from '../../services/pricing-metadata/pricing-metadata.service';
 
 import { RiPortfolioDataService } from '../ri-portfolio-upload/service/ri-portfolio-data.service';
 
@@ -14,10 +15,11 @@ import { RiPortfolioDataService } from '../ri-portfolio-upload/service/ri-portfo
       <div *ngIf="statistics.total === 0">No rows</div>
       <div *ngIf="statistics.total !== 0">
         <div *ngIf="statistics.metadata">
-          Reserved Instance data extracted {{ statistics.ageText }} ({{ statistics.displayDate }})
-          <strong>{{ statistics.unique }}</strong> purchases containing <strong>{{ statistics.total }}</strong> RIs
-          Imported at: <strong>{{ statistics.displayDate }}</strong> Projection date range : <strong>{{ statistics.projectionStartDate | date:'yyyy-MM-dd' }}</strong> to <strong>{{ statistics.projectionEndDate | date:'yyyy-MM-dd' }}</strong> 
-        </div>
+            Reserved Instance data extracted {{ statistics.ageText }} ({{ statistics.displayDate }})
+            <strong>{{ statistics.unique }}</strong> purchases containing <strong>{{ statistics.total }}</strong> RIs
+            Imported at: <strong>{{ statistics.displayDate }}</strong> Projection date range : <strong>{{ statistics.projectionStartDate | date:'yyyy-MM-dd' }}</strong> to <strong>{{ statistics.projectionEndDate | date:'yyyy-MM-dd' }}</strong>
+            <div *ngIf="pricing$ | async as pricing"> <strong>{{ pricing.discountPercentApplied }}%</strong> AWS Discount Applied</div>
+          </div>
       </div>
     </ng-container>
     <ng-template #noImport>
@@ -28,6 +30,7 @@ import { RiPortfolioDataService } from '../ri-portfolio-upload/service/ri-portfo
 })
 export class RiImportPreviewComponent {
   import$ = this.riPortfolioDataService.riPortfolio$;
+  pricing$ = this.pricingMetadataService.getMetadata();
   portfolioStatistics$ = this.import$.pipe(
     map((imp) => {
       if (!imp) return { total: 0, unique: 0 };
@@ -76,6 +79,9 @@ export class RiImportPreviewComponent {
   );
 
   constructor(
-    private readonly riPortfolioDataService: RiPortfolioDataService
+    private readonly riPortfolioDataService: RiPortfolioDataService,
+    private readonly pricingMetadataService: PricingMetadataService
   ) {}
 }
+
+
