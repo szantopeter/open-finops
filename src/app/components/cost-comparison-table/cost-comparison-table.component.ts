@@ -8,6 +8,7 @@ import { CostComparisonCalculator } from '../../cost-comparision/cost-comparison
 import { CostTimeseriesCalculator } from '../../cost-timeseries/cost-timeseries-calculator';
 import { RiRenewalProjection } from '../../ri-renewal-projection/ri-renewal-projection';
 import { MonthlyBreakdownTableComponent } from '../monthly-breakdown-table/monthly-breakdown-table.component';
+import { ToggleDetailComponent } from '../toggle/toggle-detail.component';
 import type { SavingsKey } from '../ri-portfolio-upload/models/pricing.model';
 import type { RiPortfolio } from '../ri-portfolio-upload/models/ri-portfolio.model';
 import { QuestionTooltipComponent } from '../question-tooltip/question-tooltip.component';
@@ -15,7 +16,7 @@ import { QuestionTooltipComponent } from '../question-tooltip/question-tooltip.c
 @Component({
   selector: 'app-cost-comparison-table',
   standalone: true,
-  imports: [CommonModule, FormsModule, MonthlyBreakdownTableComponent, QuestionTooltipComponent],
+  imports: [CommonModule, FormsModule, MonthlyBreakdownTableComponent, QuestionTooltipComponent, ToggleDetailComponent],
   templateUrl: './cost-comparison-table.component.html',
   styleUrl: './cost-comparison-table.component.scss'
 })
@@ -30,7 +31,8 @@ export class CostComparisonTableComponent implements OnChanges {
   referenceComparisons: CostComparison[] = [];
   savingsComparisons: CostComparison[] = [];
   expandedRow: string | null = null;
-  showOnDemand = false;
+  // When false the table shows Overview (minimal columns). When true it shows Full details.
+  showFullDetails = false;
   @ViewChild('monthlyBreakdown', { read: ElementRef }) monthlyBreakdownEl?: ElementRef<HTMLElement>;
   scenarios: string[] = ['onDemand', 'noUpfront_1y', 'partialUpfront_1y', 'fullUpfront_1y', 'partialUpfront_3y', 'fullUpfront_3y'];
   scenarioNames: string[] = ['On Demand', '1yr No Upfront', '1yr Partial Upfront', '1yr All Upfront', '3yr Partial Upfront', '3yr All Upfront'];
@@ -164,9 +166,7 @@ export class CostComparisonTableComponent implements OnChanges {
   }
 
   get filteredReferenceComparisons(): CostComparison[] {
-    if (this.showOnDemand) {
-      return this.referenceComparisons;
-    }
+    if (this.showFullDetails) return this.referenceComparisons;
     return this.referenceComparisons.filter(c => c.scenario !== 'onDemand');
   }
 }

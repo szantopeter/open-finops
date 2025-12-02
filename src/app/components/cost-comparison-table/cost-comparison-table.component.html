@@ -1,6 +1,10 @@
 <div class="cost-comparison-container" *ngIf="costComparisonsArray.length > 0">
   <h3>Cost Comparison Analysis</h3>
-  <p class="subtitle">Comparing different AWS RDS Reserved Instance payment scenarios for {{ riPortfolio.metadata.projectionStartDate.getUTCFullYear() }} - {{ riPortfolio.metadata.projectionEndDate.getUTCFullYear() }} <app-question-tooltip [text]="helpHtml.innerHTML"></app-question-tooltip></p>
+    <p class="subtitle" style="display:flex; align-items:center; gap:12px;">
+    <span>Comparing different AWS RDS Reserved Instance payment scenarios for {{ riPortfolio.metadata.projectionStartDate.getUTCFullYear() }} - {{ riPortfolio.metadata.projectionEndDate.getUTCFullYear() }}</span>
+    <app-question-tooltip [text]="helpHtml.innerHTML"></app-question-tooltip>
+    <app-toggle-detail [(checked)]="showFullDetails" [leftLabel]="'Overview'" [rightLabel]="'Full details'" style="margin-left:12px;"></app-toggle-detail>
+  </p>
   <div #helpHtml style="display:none">
     <p>This table shows the annualised cost and savings for different Reserved Instance payment options over the projection period.</p>
 
@@ -23,20 +27,16 @@
   <div class="table-container">
     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
       <h4 style="margin: 0;">Annualised reference scenarios</h4>
-      <label style="display: flex; align-items: center; gap: 4px; font-size: 14px; cursor: pointer;">
-        <input type="checkbox" [(ngModel)]="showOnDemand" style="cursor: pointer;">
-        Show on-demand prices
-      </label>
     </div>
     <table class="cost-comparison-table">
       <thead>
         <tr>
           <th>Scenario</th>
-          <th>Total Upfront</th>
-          <th>Total Monthly Payment</th>
+          <th *ngIf="showFullDetails">Total Upfront</th>
+          <th *ngIf="showFullDetails">Total Monthly Payment</th>
           <th>Highest monthly spend</th>
-          <th>Total Adjusted Amortised</th>
-          <th *ngIf="showOnDemand">Annual savings vs On Demand</th>
+          <th>Annualised cost</th>
+          <th *ngIf="showFullDetails">Annual savings vs On Demand</th>
           <th>Annual savings vs Current</th>
           <th>Details</th>
         </tr>
@@ -44,11 +44,11 @@
       <tbody>
         <tr *ngFor="let c of filteredReferenceComparisons" [class.baseline-row]="expandedRow === c.scenario">
           <td class="scenario-cell">{{ getScenarioName(c.scenario) }}</td>
-          <td class="currency-cell" [class.zero-value]="isZeroValue(c.totalUpfront)">{{ formatCurrency(c.totalUpfront) }}</td>
-          <td class="currency-cell" [class.zero-value]="isZeroValue(c.totalMonthlyPayment)">{{ formatCurrency(c.totalMonthlyPayment) }}</td>
+          <td *ngIf="showFullDetails" class="currency-cell" [class.zero-value]="isZeroValue(c.totalUpfront)">{{ formatCurrency(c.totalUpfront) }}</td>
+          <td *ngIf="showFullDetails" class="currency-cell" [class.zero-value]="isZeroValue(c.totalMonthlyPayment)">{{ formatCurrency(c.totalMonthlyPayment) }}</td>
           <td class="currency-cell" [class.zero-value]="isZeroValue(c.highestMonthlySpend)">{{ formatHighestMonthlySpend(c) }}</td>
           <td class="currency-cell" [class.zero-value]="isZeroValue(c.totalCost)">{{ formatCurrency(c.totalCost) }}</td>
-          <td *ngIf="showOnDemand" class="savings-cell" [class.savings]="c.savingsPercentOnDemand && c.savingsPercentOnDemand > 0">
+          <td *ngIf="showFullDetails" class="savings-cell" [class.savings]="c.savingsPercentOnDemand && c.savingsPercentOnDemand > 0">
             <span *ngIf="c.savingsValueOnDemand !== undefined">{{ formatCurrency(c.savingsValueOnDemand) }} ({{ formatPercent(c.savingsPercentOnDemand) }})</span>
             <span *ngIf="c.savingsValueOnDemand === undefined">-</span>
           </td>
@@ -68,11 +68,11 @@
       <thead>
         <tr>
           <th>Scenario</th>
-          <th>Total Upfront</th>
-          <th>Total Monthly Payment</th>
+          <th *ngIf="showFullDetails">Total Upfront</th>
+          <th *ngIf="showFullDetails">Total Monthly Payment</th>
           <th>Highest monthly spend</th>
-          <th>Total Adjusted Amortised</th>
-          <th *ngIf="showOnDemand">Annual savings vs On Demand</th>
+          <th>Annualised cost</th>
+          <th *ngIf="showFullDetails">Annual savings vs On Demand</th>
           <th>Annual savings vs Current</th>
           <th>Details</th>
         </tr>
@@ -80,11 +80,11 @@
       <tbody>
         <tr *ngFor="let c of savingsComparisons" [class.baseline-row]="expandedRow === c.scenario">
           <td class="scenario-cell">{{ getScenarioName(c.scenario) }}</td>
-          <td class="currency-cell" [class.zero-value]="isZeroValue(c.totalUpfront)">{{ formatCurrency(c.totalUpfront) }}</td>
-          <td class="currency-cell" [class.zero-value]="isZeroValue(c.totalMonthlyPayment)">{{ formatCurrency(c.totalMonthlyPayment) }}</td>
+          <td *ngIf="showFullDetails" class="currency-cell" [class.zero-value]="isZeroValue(c.totalUpfront)">{{ formatCurrency(c.totalUpfront) }}</td>
+          <td *ngIf="showFullDetails" class="currency-cell" [class.zero-value]="isZeroValue(c.totalMonthlyPayment)">{{ formatCurrency(c.totalMonthlyPayment) }}</td>
           <td class="currency-cell" [class.zero-value]="isZeroValue(c.highestMonthlySpend)">{{ formatHighestMonthlySpend(c) }}</td>
           <td class="currency-cell" [class.zero-value]="isZeroValue(c.totalCost)">{{ formatCurrency(c.totalCost) }}</td>
-          <td *ngIf="showOnDemand" class="savings-cell" [class.savings]="c.savingsPercentOnDemand && c.savingsPercentOnDemand > 0">
+          <td *ngIf="showFullDetails" class="savings-cell" [class.savings]="c.savingsPercentOnDemand && c.savingsPercentOnDemand > 0">
             <span *ngIf="c.savingsValueOnDemand !== undefined">{{ formatCurrency(c.savingsValueOnDemand) }} ({{ formatPercent(c.savingsPercentOnDemand) }})</span>
             <span *ngIf="c.savingsValueOnDemand === undefined">-</span>
           </td>
