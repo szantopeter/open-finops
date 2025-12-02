@@ -48,8 +48,8 @@ export class RiImportPreviewComponent {
           const diffMs = Date.now() - parsed;
           const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
           if (days <= 0) ageText = 'today';
-          else if (days === 1) ageText = '1 day old';
-          else ageText = `${days} days old`;
+          else if (days === 1) ageText = '1 day ago';
+          else ageText = `${days} days ago`;
           // display only the date part in YYYY-MM-DD
           const d = new Date(parsed);
           displayDate = d.toISOString().slice(0, 10);
