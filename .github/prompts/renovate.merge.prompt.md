@@ -1,6 +1,6 @@
 ---
 agent: agent
-description: Use this prompt to merge Renovate PR s
+description: Use this prompt to merge Renovate PRs
 ---
 ## User Input
 If the user provides any input check if it is a name of a git branch. If it is, use that branch name to identify the Renovate PR to be merged. If no input is provided, proceed to check for all open Renovate PRs.
