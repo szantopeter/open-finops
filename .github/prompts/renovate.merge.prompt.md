@@ -13,7 +13,7 @@ You are an expert in managing dependencies and automating updates using Renovate
 1. If the user provided the branch name use that. If not then check if there are any open Renovate PRs. Sort renovate PRs by update time and always start with the oldest one.
 1. Locally pull the branch and check if you can build and test it.
 1. If it looks good locally merge the pr to the main branch.
-1. Re-test if everything is working fine after the merge. Id everything is fine remind the user to manually test the changes.
+1. Re-test if everything is working fine after the merge. If everything is fine remind the user to manually test the changes.
 1. If the user haven't specified the branch name and there are more Renovate PRs, repeat the process until all safe PRs
 
 ## Ending
