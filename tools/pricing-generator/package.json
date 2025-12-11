@@ -13,9 +13,10 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "prepare": "npm run build",
-    "start": "npm run build && node dist/index.js"
+    "start": "npm run build && node dist/index.js \"$@\""
   },
   "devDependencies": {
+    "@aws-sdk/client-pricing": "^3.948.0",
     "@aws-sdk/client-sts": "^3.0.0",
     "@aws-sdk/shared-ini-file-loader": "^3.0.0",
     "typescript": "^5.0.0"

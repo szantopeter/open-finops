@@ -1,0 +1,7 @@
+type,region,instance,deployment,engine,license,term,purchaseOption,upfront,hourly,daily,adjustedAmortisedHourly,adjustedAmortisedDaily,sku
+onDemand,us-east-1,db.r5b.8xlarge,multi-az,oracle-ee-byol,byol,,,7.58606,182.06544,7.58606,182.06544,BXZWJREAVF2BNANC
+savings,us-east-1,db.r5b.8xlarge,multi-az,oracle-ee-byol,byol,3yr,All Upfront,78148.2,0,0,2.971641,71.31937,
+savings,us-east-1,db.r5b.8xlarge,multi-az,oracle-ee-byol,byol,3yr,Partial Upfront,39871.32,1.517212,36.413088,3.033347,72.80033,
+savings,us-east-1,db.r5b.8xlarge,multi-az,oracle-ee-byol,byol,1yr,All Upfront,39074.1,0,0,4.457461,106.979056,
+savings,us-east-1,db.r5b.8xlarge,multi-az,oracle-ee-byol,byol,1yr,Partial Upfront,19935.66,2.275732,54.617568,4.549935,109.19843,
+savings,us-east-1,db.r5b.8xlarge,multi-az,oracle-ee-byol,byol,1yr,No Upfront,0,4.779106,114.698544,4.779106,114.698544,

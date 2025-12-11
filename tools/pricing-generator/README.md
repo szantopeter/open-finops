@@ -1,7 +1,7 @@
 
 # pricing-generator
 
-A standalone TypeScript CLI that calls an AWS API using the first profile from your AWS configuration.
+A standalone TypeScript CLI that generates pricing files
 
 ## Requirements
 
@@ -17,18 +17,13 @@ npm install
 npm run build
 ```
 
-## Run the tool
+## Run the tool with default settings
 
 ```bash
 npm start
 ```
+## Run the tool with parameters
 
-## What it does
-
-- Loads the first AWS profile from `~/.aws/config`
-- Uses AWS STS `GetCallerIdentity` to prove API access
-- Prints account ID, user ID, and ARN on success
-
-## Notes
-
-- If credentials are expired (e.g., SSO), run `aws sso login --profile <profile-name>`
+```bash
+npm start -- -csv cloudability-one-line.csv
+```
