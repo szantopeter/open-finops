@@ -1,23 +1,34 @@
-# Pricing map generator
 
-This script fetches prices from the AWS Pricing API and writes a normalized JSON map at `src/assets/pricing`
+# pricing-generator
 
-## Prerequisites
-- Node.js 18+ (or LTS)
-- AWS credentials available in environment or profile (the script calls AWS Pricing via the AWS SDK). Run
+A standalone TypeScript CLI that calls an AWS API using the first profile from your AWS configuration.
 
-```bash
-aws configure sso
-```
+## Requirements
 
-## Install dependencies:
+- Node.js >= 14
+- npm
+- AWS CLI configured with profiles (run `aws configure sso` or `aws configure` if needed)
+- Valid AWS credentials (run `aws sso login` if using SSO)
+
+## Install & build
+
 ```bash
 npm install
+npm run build
 ```
 
-## Run the generator with the included shell wrapper that sets up node invocation and AWS SSO authentication
+## Run the tool
 
 ```bash
-cd tools/pricing-generator
-./generate-pricing.sh -csv ../assets/cloudability-rds-reservations.csv
+npm start
 ```
+
+## What it does
+
+- Loads the first AWS profile from `~/.aws/config`
+- Uses AWS STS `GetCallerIdentity` to prove API access
+- Prints account ID, user ID, and ARN on success
+
+## Notes
+
+- If credentials are expired (e.g., SSO), run `aws sso login --profile <profile-name>`
