@@ -1,80 +1,80 @@
 type,region,instance,deployment,engine,license,term,purchaseOption,upfront,hourly,daily,adjustedAmortisedHourly,adjustedAmortisedDaily,sku
-onDemand,us-east-1,db.t2.medium,single-az,mysql,mysql,,,,0.068000,1.632000,0.068000,1.632000,4CDJJFQHW6NQ7T2B
-onDemand,us-east-1,db.t3.large,single-az,mysql,mysql,,,,0.136000,3.264000,0.136000,3.264000,8M69JFENFPCVW9UF
-savings,us-east-1,db.t3.large,single-az,mysql,mysql,1yr,No Upfront,0.00,0.095700,2.296800,0.095700,2.296800,8M69JFENFPCVW9UF
-savings,us-east-1,db.t3.large,single-az,mysql,mysql,3yr,Partial Upfront,858.00,0.032600,0.782400,0.065226,1.565425,8M69JFENFPCVW9UF
-savings,us-east-1,db.t3.large,single-az,mysql,mysql,1yr,All Upfront,782.00,0.000000,0.000000,0.089208,2.140999,8M69JFENFPCVW9UF
-savings,us-east-1,db.t3.large,single-az,mysql,mysql,1yr,Partial Upfront,399.00,0.045600,1.094400,0.091117,2.186802,8M69JFENFPCVW9UF
-savings,us-east-1,db.t3.large,single-az,mysql,mysql,3yr,All Upfront,1681.00,0.000000,0.000000,0.063921,1.534109,8M69JFENFPCVW9UF
-onDemand,us-east-1,db.t3.xlarge,single-az,mysql,mysql,,,,0.272000,6.528000,0.272000,6.528000,8SKGV7SKT8WUDKZ6
-savings,us-east-1,db.t3.xlarge,single-az,mysql,mysql,3yr,All Upfront,3362.00,0.000000,0.000000,0.127842,3.068218,8SKGV7SKT8WUDKZ6
-savings,us-east-1,db.t3.xlarge,single-az,mysql,mysql,1yr,No Upfront,0.00,0.191400,4.593600,0.191400,4.593600,8SKGV7SKT8WUDKZ6
-savings,us-east-1,db.t3.xlarge,single-az,mysql,mysql,1yr,Partial Upfront,798.00,0.091100,2.186400,0.182134,4.371205,8SKGV7SKT8WUDKZ6
-savings,us-east-1,db.t3.xlarge,single-az,mysql,mysql,1yr,All Upfront,1564.00,0.000000,0.000000,0.178417,4.281999,8SKGV7SKT8WUDKZ6
-savings,us-east-1,db.t3.xlarge,single-az,mysql,mysql,3yr,Partial Upfront,1716.00,0.065300,1.567200,0.130552,3.133251,8SKGV7SKT8WUDKZ6
-onDemand,us-east-1,db.t2.small,single-az,mysql,mysql,,,,0.034000,0.816000,0.034000,0.816000,9JMMHY2TVQPWXYB7
-onDemand,us-east-1,db.t2.2xlarge,single-az,mysql,mysql,,,,0.544000,13.056000,0.544000,13.056000,ANXVR95CXX62SYKA
-onDemand,us-east-1,db.t3.micro,single-az,mysql,mysql,,,,0.017000,0.408000,0.017000,0.408000,AXC2TYPWXFK88MVY
-savings,us-east-1,db.t3.micro,single-az,mysql,mysql,1yr,All Upfront,98.00,0.000000,0.000000,0.011180,0.268309,AXC2TYPWXFK88MVY
-savings,us-east-1,db.t3.micro,single-az,mysql,mysql,3yr,Partial Upfront,107.00,0.004100,0.098400,0.008169,0.196050,AXC2TYPWXFK88MVY
-savings,us-east-1,db.t3.micro,single-az,mysql,mysql,3yr,All Upfront,210.00,0.000000,0.000000,0.007985,0.191650,AXC2TYPWXFK88MVY
-savings,us-east-1,db.t3.micro,single-az,mysql,mysql,1yr,No Upfront,0.00,0.012000,0.288000,0.012000,0.288000,AXC2TYPWXFK88MVY
-savings,us-east-1,db.t3.micro,single-az,mysql,mysql,1yr,Partial Upfront,50.00,0.005700,0.136800,0.011404,0.273693,AXC2TYPWXFK88MVY
-onDemand,us-east-1,db.t3.2xlarge,single-az,mysql,mysql,,,,0.544000,13.056000,0.544000,13.056000,AYQF7J6MD4XN2QD9
-savings,us-east-1,db.t3.2xlarge,single-az,mysql,mysql,3yr,All Upfront,6725.00,0.000000,0.000000,0.255723,6.137349,AYQF7J6MD4XN2QD9
-savings,us-east-1,db.t3.2xlarge,single-az,mysql,mysql,1yr,All Upfront,3129.00,0.000000,0.000000,0.356947,8.566735,AYQF7J6MD4XN2QD9
-savings,us-east-1,db.t3.2xlarge,single-az,mysql,mysql,3yr,Partial Upfront,3431.00,0.130600,3.134400,0.261066,6.265589,AYQF7J6MD4XN2QD9
-savings,us-east-1,db.t3.2xlarge,single-az,mysql,mysql,1yr,No Upfront,0.00,0.382700,9.184800,0.382700,9.184800,AYQF7J6MD4XN2QD9
-savings,us-east-1,db.t3.2xlarge,single-az,mysql,mysql,1yr,Partial Upfront,1596.00,0.182200,4.372800,0.364267,8.742410,AYQF7J6MD4XN2QD9
-onDemand,us-east-1,db.t3.small,single-az,mysql,mysql,,,,0.034000,0.816000,0.034000,0.816000,JS6E2TQ5Z5Y3GBYT
-savings,us-east-1,db.t3.small,single-az,mysql,mysql,3yr,Partial Upfront,214.00,0.008200,0.196800,0.016338,0.392100,JS6E2TQ5Z5Y3GBYT
-savings,us-east-1,db.t3.small,single-az,mysql,mysql,1yr,All Upfront,196.00,0.000000,0.000000,0.022359,0.536619,JS6E2TQ5Z5Y3GBYT
-savings,us-east-1,db.t3.small,single-az,mysql,mysql,3yr,All Upfront,420.00,0.000000,0.000000,0.015971,0.383299,JS6E2TQ5Z5Y3GBYT
-savings,us-east-1,db.t3.small,single-az,mysql,mysql,1yr,No Upfront,0.00,0.023900,0.573600,0.023900,0.573600,JS6E2TQ5Z5Y3GBYT
-savings,us-east-1,db.t3.small,single-az,mysql,mysql,1yr,Partial Upfront,100.00,0.011400,0.273600,0.022808,0.547385,JS6E2TQ5Z5Y3GBYT
-onDemand,us-east-1,db.t2.large,single-az,mysql,mysql,,,,0.136000,3.264000,0.136000,3.264000,KTXQMEUM2K6EFG7M
-onDemand,us-east-1,db.t4g.2xlarge,single-az,mysql,mysql,,,,0.517000,12.408000,0.517000,12.408000,M2VVTMZSSSESJK82
-savings,us-east-1,db.t4g.2xlarge,single-az,mysql,mysql,1yr,All Upfront,3033.00,0.000000,0.000000,0.345996,8.303901,M2VVTMZSSSESJK82
-savings,us-east-1,db.t4g.2xlarge,single-az,mysql,mysql,1yr,Partial Upfront,1562.00,0.178300,4.279200,0.356488,8.555723,M2VVTMZSSSESJK82
-savings,us-east-1,db.t4g.2xlarge,single-az,mysql,mysql,3yr,Partial Upfront,3260.00,0.124000,2.976000,0.247964,5.951131,M2VVTMZSSSESJK82
-savings,us-east-1,db.t4g.2xlarge,single-az,mysql,mysql,3yr,All Upfront,6383.00,0.000000,0.000000,0.242718,5.825234,M2VVTMZSSSESJK82
-savings,us-east-1,db.t4g.2xlarge,single-az,mysql,mysql,1yr,No Upfront,0.00,0.372100,8.930400,0.372100,8.930400,M2VVTMZSSSESJK82
-onDemand,us-east-1,db.t4g.xlarge,single-az,mysql,mysql,,,,0.258000,6.192000,0.258000,6.192000,PV89PHSYGXUP9SNR
-savings,us-east-1,db.t4g.xlarge,single-az,mysql,mysql,3yr,All Upfront,3192.00,0.000000,0.000000,0.121378,2.913073,PV89PHSYGXUP9SNR
-savings,us-east-1,db.t4g.xlarge,single-az,mysql,mysql,3yr,Partial Upfront,1630.00,0.062000,1.488000,0.123982,2.975566,PV89PHSYGXUP9SNR
-savings,us-east-1,db.t4g.xlarge,single-az,mysql,mysql,1yr,Partial Upfront,781.00,0.089100,2.138400,0.178194,4.276661,PV89PHSYGXUP9SNR
-savings,us-east-1,db.t4g.xlarge,single-az,mysql,mysql,1yr,All Upfront,1517.00,0.000000,0.000000,0.173055,4.153320,PV89PHSYGXUP9SNR
-savings,us-east-1,db.t4g.xlarge,single-az,mysql,mysql,1yr,No Upfront,0.00,0.186000,4.464000,0.186000,4.464000,PV89PHSYGXUP9SNR
-onDemand,us-east-1,db.t1.micro,single-az,mysql,mysql,,,,0.025000,0.600000,0.025000,0.600000,QFPX5RRCXBZYGD4U
-onDemand,us-east-1,db.t4g.large,single-az,mysql,mysql,,,,0.129000,3.096000,0.129000,3.096000,QV8RSZYM6NCGN4CT
-savings,us-east-1,db.t4g.large,single-az,mysql,mysql,1yr,Partial Upfront,390.00,0.044600,1.070400,0.089090,2.138162,QV8RSZYM6NCGN4CT
-savings,us-east-1,db.t4g.large,single-az,mysql,mysql,1yr,All Upfront,758.00,0.000000,0.000000,0.086470,2.075291,QV8RSZYM6NCGN4CT
-savings,us-east-1,db.t4g.large,single-az,mysql,mysql,3yr,All Upfront,1596.00,0.000000,0.000000,0.060689,1.456537,QV8RSZYM6NCGN4CT
-savings,us-east-1,db.t4g.large,single-az,mysql,mysql,3yr,Partial Upfront,815.00,0.031000,0.744000,0.061991,1.487783,QV8RSZYM6NCGN4CT
-savings,us-east-1,db.t4g.large,single-az,mysql,mysql,1yr,No Upfront,0.00,0.093000,2.232000,0.093000,2.232000,QV8RSZYM6NCGN4CT
-onDemand,us-east-1,db.t4g.small,single-az,mysql,mysql,,,,0.032000,0.768000,0.032000,0.768000,T3Q9GS9SNACZAUSP
-savings,us-east-1,db.t4g.small,single-az,mysql,mysql,1yr,No Upfront,0.00,0.023300,0.559200,0.023300,0.559200,T3Q9GS9SNACZAUSP
-savings,us-east-1,db.t4g.small,single-az,mysql,mysql,1yr,Partial Upfront,98.00,0.011100,0.266400,0.022280,0.534709,T3Q9GS9SNACZAUSP
-savings,us-east-1,db.t4g.small,single-az,mysql,mysql,1yr,All Upfront,190.00,0.000000,0.000000,0.021675,0.520192,T3Q9GS9SNACZAUSP
-savings,us-east-1,db.t4g.small,single-az,mysql,mysql,3yr,All Upfront,399.00,0.000000,0.000000,0.015172,0.364134,T3Q9GS9SNACZAUSP
-savings,us-east-1,db.t4g.small,single-az,mysql,mysql,3yr,Partial Upfront,204.00,0.007800,0.187200,0.015557,0.373374,T3Q9GS9SNACZAUSP
-onDemand,us-east-1,db.t2.xlarge,single-az,mysql,mysql,,,,0.272000,6.528000,0.272000,6.528000,T4XXRA5BZSFZ5GWT
-onDemand,us-east-1,db.t3.medium,single-az,mysql,mysql,,,,0.068000,1.632000,0.068000,1.632000,TSK7J2Y3CBVXPUQ2
-savings,us-east-1,db.t3.medium,single-az,mysql,mysql,1yr,Partial Upfront,200.00,0.022800,0.547200,0.045615,1.094770,TSK7J2Y3CBVXPUQ2
-savings,us-east-1,db.t3.medium,single-az,mysql,mysql,1yr,All Upfront,391.00,0.000000,0.000000,0.044604,1.070500,TSK7J2Y3CBVXPUQ2
-savings,us-east-1,db.t3.medium,single-az,mysql,mysql,1yr,No Upfront,0.00,0.047800,1.147200,0.047800,1.147200,TSK7J2Y3CBVXPUQ2
-savings,us-east-1,db.t3.medium,single-az,mysql,mysql,3yr,All Upfront,841.00,0.000000,0.000000,0.031980,0.767511,TSK7J2Y3CBVXPUQ2
-savings,us-east-1,db.t3.medium,single-az,mysql,mysql,3yr,Partial Upfront,429.00,0.016300,0.391200,0.032613,0.782713,TSK7J2Y3CBVXPUQ2
-onDemand,us-east-1,db.t4g.micro,single-az,mysql,mysql,,,,0.016000,0.384000,0.016000,0.384000,U4AUM7WC9VCSGAY9
-savings,us-east-1,db.t4g.micro,single-az,mysql,mysql,3yr,Partial Upfront,102.00,0.003900,0.093600,0.007779,0.186687,U4AUM7WC9VCSGAY9
-savings,us-east-1,db.t4g.micro,single-az,mysql,mysql,3yr,All Upfront,199.00,0.000000,0.000000,0.007567,0.181611,U4AUM7WC9VCSGAY9
-savings,us-east-1,db.t4g.micro,single-az,mysql,mysql,1yr,No Upfront,0.00,0.011600,0.278400,0.011600,0.278400,U4AUM7WC9VCSGAY9
-savings,us-east-1,db.t4g.micro,single-az,mysql,mysql,1yr,Partial Upfront,49.00,0.005600,0.134400,0.011190,0.268555,U4AUM7WC9VCSGAY9
-savings,us-east-1,db.t4g.micro,single-az,mysql,mysql,1yr,All Upfront,95.00,0.000000,0.000000,0.010837,0.260096,U4AUM7WC9VCSGAY9
-onDemand,us-east-1,db.t2.micro,single-az,mysql,mysql,,,,0.017000,0.408000,0.017000,0.408000,U8CHYD2W2TU6YXYD
-onDemand,us-east-1,db.t4g.medium,single-az,mysql,mysql,,,,0.065000,1.560000,0.065000,1.560000,UQ79SE25SFFPAFCG
-savings,us-east-1,db.t4g.medium,single-az,mysql,mysql,1yr,Partial Upfront,195.00,0.022300,0.535200,0.044545,1.069081,UQ79SE25SFFPAFCG
-savings,us-east-1,db.t4g.medium,single-az,mysql,mysql,1yr,All Upfront,379.00,0.000000,0.000000,0.043235,1.037645,UQ79SE25SFFPAFCG
-savings,us-east-1,db.t4g.medium,single-az,mysql,mysql,3yr,All Upfront,798.00,0.000000,0.000000,0.030345,0.728268,UQ79SE25SFFPAFCG
-savings,us-east-1,db.t4g.medium,single-az,mysql,mysql,3yr,Partial Upfront,407.00,0.015500,0.372000,0.030976,0.743435,UQ79SE25SFFPAFCG
-savings,us-east-1,db.t4g.medium,single-az,mysql,mysql,1yr,No Upfront,0.00,0.046500,1.116000,0.046500,1.116000,UQ79SE25SFFPAFCG
+onDemand,us-east-1,db.t2.medium,single-az,mysql,mysql,,,,0.058480,1.403520,0.058480,1.403520,4CDJJFQHW6NQ7T2B
+onDemand,us-east-1,db.t3.large,single-az,mysql,mysql,,,,0.116960,2.807040,0.116960,2.807040,8M69JFENFPCVW9UF
+savings,us-east-1,db.t3.large,single-az,mysql,mysql,1yr,No Upfront,0.00,0.082302,1.975248,0.082302,1.975248,8M69JFENFPCVW9UF
+savings,us-east-1,db.t3.large,single-az,mysql,mysql,3yr,Partial Upfront,737.88,0.028036,0.672864,0.056094,1.346266,8M69JFENFPCVW9UF
+savings,us-east-1,db.t3.large,single-az,mysql,mysql,1yr,All Upfront,672.52,0.000000,0.000000,0.076719,1.841259,8M69JFENFPCVW9UF
+savings,us-east-1,db.t3.large,single-az,mysql,mysql,1yr,Partial Upfront,343.14,0.039216,0.941184,0.078360,1.880650,8M69JFENFPCVW9UF
+savings,us-east-1,db.t3.large,single-az,mysql,mysql,3yr,All Upfront,1445.66,0.000000,0.000000,0.054972,1.319334,8M69JFENFPCVW9UF
+onDemand,us-east-1,db.t3.xlarge,single-az,mysql,mysql,,,,0.233920,5.614080,0.233920,5.614080,8SKGV7SKT8WUDKZ6
+savings,us-east-1,db.t3.xlarge,single-az,mysql,mysql,3yr,All Upfront,2891.32,0.000000,0.000000,0.109944,2.638668,8SKGV7SKT8WUDKZ6
+savings,us-east-1,db.t3.xlarge,single-az,mysql,mysql,1yr,No Upfront,0.00,0.164604,3.950496,0.164604,3.950496,8SKGV7SKT8WUDKZ6
+savings,us-east-1,db.t3.xlarge,single-az,mysql,mysql,1yr,Partial Upfront,686.28,0.078346,1.880304,0.156635,3.759236,8SKGV7SKT8WUDKZ6
+savings,us-east-1,db.t3.xlarge,single-az,mysql,mysql,1yr,All Upfront,1345.04,0.000000,0.000000,0.153438,3.682519,8SKGV7SKT8WUDKZ6
+savings,us-east-1,db.t3.xlarge,single-az,mysql,mysql,3yr,Partial Upfront,1475.76,0.056158,1.347792,0.112275,2.694596,8SKGV7SKT8WUDKZ6
+onDemand,us-east-1,db.t2.small,single-az,mysql,mysql,,,,0.029240,0.701760,0.029240,0.701760,9JMMHY2TVQPWXYB7
+onDemand,us-east-1,db.t2.2xlarge,single-az,mysql,mysql,,,,0.467840,11.228160,0.467840,11.228160,ANXVR95CXX62SYKA
+onDemand,us-east-1,db.t3.micro,single-az,mysql,mysql,,,,0.014620,0.350880,0.014620,0.350880,AXC2TYPWXFK88MVY
+savings,us-east-1,db.t3.micro,single-az,mysql,mysql,1yr,All Upfront,84.28,0.000000,0.000000,0.009614,0.230746,AXC2TYPWXFK88MVY
+savings,us-east-1,db.t3.micro,single-az,mysql,mysql,3yr,Partial Upfront,92.02,0.003526,0.084624,0.007025,0.168603,AXC2TYPWXFK88MVY
+savings,us-east-1,db.t3.micro,single-az,mysql,mysql,3yr,All Upfront,180.60,0.000000,0.000000,0.006867,0.164819,AXC2TYPWXFK88MVY
+savings,us-east-1,db.t3.micro,single-az,mysql,mysql,1yr,No Upfront,0.00,0.010320,0.247680,0.010320,0.247680,AXC2TYPWXFK88MVY
+savings,us-east-1,db.t3.micro,single-az,mysql,mysql,1yr,Partial Upfront,43.00,0.004902,0.117648,0.009807,0.235376,AXC2TYPWXFK88MVY
+onDemand,us-east-1,db.t3.2xlarge,single-az,mysql,mysql,,,,0.467840,11.228160,0.467840,11.228160,AYQF7J6MD4XN2QD9
+savings,us-east-1,db.t3.2xlarge,single-az,mysql,mysql,3yr,All Upfront,5783.50,0.000000,0.000000,0.219922,5.278120,AYQF7J6MD4XN2QD9
+savings,us-east-1,db.t3.2xlarge,single-az,mysql,mysql,1yr,All Upfront,2690.94,0.000000,0.000000,0.306975,7.367392,AYQF7J6MD4XN2QD9
+savings,us-east-1,db.t3.2xlarge,single-az,mysql,mysql,3yr,Partial Upfront,2950.66,0.112316,2.695584,0.224517,5.388406,AYQF7J6MD4XN2QD9
+savings,us-east-1,db.t3.2xlarge,single-az,mysql,mysql,1yr,No Upfront,0.00,0.329122,7.898928,0.329122,7.898928,AYQF7J6MD4XN2QD9
+savings,us-east-1,db.t3.2xlarge,single-az,mysql,mysql,1yr,Partial Upfront,1372.56,0.156692,3.760608,0.313270,7.518472,AYQF7J6MD4XN2QD9
+onDemand,us-east-1,db.t3.small,single-az,mysql,mysql,,,,0.029240,0.701760,0.029240,0.701760,JS6E2TQ5Z5Y3GBYT
+savings,us-east-1,db.t3.small,single-az,mysql,mysql,3yr,Partial Upfront,184.04,0.007052,0.169248,0.014050,0.337206,JS6E2TQ5Z5Y3GBYT
+savings,us-east-1,db.t3.small,single-az,mysql,mysql,1yr,All Upfront,168.56,0.000000,0.000000,0.019229,0.461492,JS6E2TQ5Z5Y3GBYT
+savings,us-east-1,db.t3.small,single-az,mysql,mysql,3yr,All Upfront,361.20,0.000000,0.000000,0.013735,0.329637,JS6E2TQ5Z5Y3GBYT
+savings,us-east-1,db.t3.small,single-az,mysql,mysql,1yr,No Upfront,0.00,0.020554,0.493296,0.020554,0.493296,JS6E2TQ5Z5Y3GBYT
+savings,us-east-1,db.t3.small,single-az,mysql,mysql,1yr,Partial Upfront,86.00,0.009804,0.235296,0.019615,0.470751,JS6E2TQ5Z5Y3GBYT
+onDemand,us-east-1,db.t2.large,single-az,mysql,mysql,,,,0.116960,2.807040,0.116960,2.807040,KTXQMEUM2K6EFG7M
+onDemand,us-east-1,db.t4g.2xlarge,single-az,mysql,mysql,,,,0.444620,10.670880,0.444620,10.670880,M2VVTMZSSSESJK82
+savings,us-east-1,db.t4g.2xlarge,single-az,mysql,mysql,1yr,All Upfront,2608.38,0.000000,0.000000,0.297556,7.141355,M2VVTMZSSSESJK82
+savings,us-east-1,db.t4g.2xlarge,single-az,mysql,mysql,1yr,Partial Upfront,1343.32,0.153338,3.680112,0.306580,7.357922,M2VVTMZSSSESJK82
+savings,us-east-1,db.t4g.2xlarge,single-az,mysql,mysql,3yr,Partial Upfront,2803.60,0.106640,2.559360,0.213249,5.117973,M2VVTMZSSSESJK82
+savings,us-east-1,db.t4g.2xlarge,single-az,mysql,mysql,3yr,All Upfront,5489.38,0.000000,0.000000,0.208738,5.009701,M2VVTMZSSSESJK82
+savings,us-east-1,db.t4g.2xlarge,single-az,mysql,mysql,1yr,No Upfront,0.00,0.320006,7.680144,0.320006,7.680144,M2VVTMZSSSESJK82
+onDemand,us-east-1,db.t4g.xlarge,single-az,mysql,mysql,,,,0.221880,5.325120,0.221880,5.325120,PV89PHSYGXUP9SNR
+savings,us-east-1,db.t4g.xlarge,single-az,mysql,mysql,3yr,All Upfront,2745.12,0.000000,0.000000,0.104385,2.505243,PV89PHSYGXUP9SNR
+savings,us-east-1,db.t4g.xlarge,single-az,mysql,mysql,3yr,Partial Upfront,1401.80,0.053320,1.279680,0.106624,2.558986,PV89PHSYGXUP9SNR
+savings,us-east-1,db.t4g.xlarge,single-az,mysql,mysql,1yr,Partial Upfront,671.66,0.076626,1.839024,0.153247,3.677929,PV89PHSYGXUP9SNR
+savings,us-east-1,db.t4g.xlarge,single-az,mysql,mysql,1yr,All Upfront,1304.62,0.000000,0.000000,0.148827,3.571855,PV89PHSYGXUP9SNR
+savings,us-east-1,db.t4g.xlarge,single-az,mysql,mysql,1yr,No Upfront,0.00,0.159960,3.839040,0.159960,3.839040,PV89PHSYGXUP9SNR
+onDemand,us-east-1,db.t1.micro,single-az,mysql,mysql,,,,0.021500,0.516000,0.021500,0.516000,QFPX5RRCXBZYGD4U
+onDemand,us-east-1,db.t4g.large,single-az,mysql,mysql,,,,0.110940,2.662560,0.110940,2.662560,QV8RSZYM6NCGN4CT
+savings,us-east-1,db.t4g.large,single-az,mysql,mysql,1yr,Partial Upfront,335.40,0.038356,0.920544,0.076617,1.838819,QV8RSZYM6NCGN4CT
+savings,us-east-1,db.t4g.large,single-az,mysql,mysql,1yr,All Upfront,651.88,0.000000,0.000000,0.074365,1.784750,QV8RSZYM6NCGN4CT
+savings,us-east-1,db.t4g.large,single-az,mysql,mysql,3yr,All Upfront,1372.56,0.000000,0.000000,0.052193,1.252621,QV8RSZYM6NCGN4CT
+savings,us-east-1,db.t4g.large,single-az,mysql,mysql,3yr,Partial Upfront,700.90,0.026660,0.639840,0.053312,1.279493,QV8RSZYM6NCGN4CT
+savings,us-east-1,db.t4g.large,single-az,mysql,mysql,1yr,No Upfront,0.00,0.079980,1.919520,0.079980,1.919520,QV8RSZYM6NCGN4CT
+onDemand,us-east-1,db.t4g.small,single-az,mysql,mysql,,,,0.027520,0.660480,0.027520,0.660480,T3Q9GS9SNACZAUSP
+savings,us-east-1,db.t4g.small,single-az,mysql,mysql,1yr,No Upfront,0.00,0.020038,0.480912,0.020038,0.480912,T3Q9GS9SNACZAUSP
+savings,us-east-1,db.t4g.small,single-az,mysql,mysql,1yr,Partial Upfront,84.28,0.009546,0.229104,0.019160,0.459850,T3Q9GS9SNACZAUSP
+savings,us-east-1,db.t4g.small,single-az,mysql,mysql,1yr,All Upfront,163.40,0.000000,0.000000,0.018640,0.447365,T3Q9GS9SNACZAUSP
+savings,us-east-1,db.t4g.small,single-az,mysql,mysql,3yr,All Upfront,343.14,0.000000,0.000000,0.013048,0.313155,T3Q9GS9SNACZAUSP
+savings,us-east-1,db.t4g.small,single-az,mysql,mysql,3yr,Partial Upfront,175.44,0.006708,0.160992,0.013379,0.321102,T3Q9GS9SNACZAUSP
+onDemand,us-east-1,db.t2.xlarge,single-az,mysql,mysql,,,,0.233920,5.614080,0.233920,5.614080,T4XXRA5BZSFZ5GWT
+onDemand,us-east-1,db.t3.medium,single-az,mysql,mysql,,,,0.058480,1.403520,0.058480,1.403520,TSK7J2Y3CBVXPUQ2
+savings,us-east-1,db.t3.medium,single-az,mysql,mysql,1yr,Partial Upfront,172.00,0.019608,0.470592,0.039229,0.941502,TSK7J2Y3CBVXPUQ2
+savings,us-east-1,db.t3.medium,single-az,mysql,mysql,1yr,All Upfront,336.26,0.000000,0.000000,0.038360,0.920630,TSK7J2Y3CBVXPUQ2
+savings,us-east-1,db.t3.medium,single-az,mysql,mysql,1yr,No Upfront,0.00,0.041108,0.986592,0.041108,0.986592,TSK7J2Y3CBVXPUQ2
+savings,us-east-1,db.t3.medium,single-az,mysql,mysql,3yr,All Upfront,723.26,0.000000,0.000000,0.027502,0.660059,TSK7J2Y3CBVXPUQ2
+savings,us-east-1,db.t3.medium,single-az,mysql,mysql,3yr,Partial Upfront,368.94,0.014018,0.336432,0.028047,0.673133,TSK7J2Y3CBVXPUQ2
+onDemand,us-east-1,db.t4g.micro,single-az,mysql,mysql,,,,0.013760,0.330240,0.013760,0.330240,U4AUM7WC9VCSGAY9
+savings,us-east-1,db.t4g.micro,single-az,mysql,mysql,3yr,Partial Upfront,87.72,0.003354,0.080496,0.006690,0.160551,U4AUM7WC9VCSGAY9
+savings,us-east-1,db.t4g.micro,single-az,mysql,mysql,3yr,All Upfront,171.14,0.000000,0.000000,0.006508,0.156185,U4AUM7WC9VCSGAY9
+savings,us-east-1,db.t4g.micro,single-az,mysql,mysql,1yr,No Upfront,0.00,0.009976,0.239424,0.009976,0.239424,U4AUM7WC9VCSGAY9
+savings,us-east-1,db.t4g.micro,single-az,mysql,mysql,1yr,Partial Upfront,42.14,0.004816,0.115584,0.009623,0.230957,U4AUM7WC9VCSGAY9
+savings,us-east-1,db.t4g.micro,single-az,mysql,mysql,1yr,All Upfront,81.70,0.000000,0.000000,0.009320,0.223682,U4AUM7WC9VCSGAY9
+onDemand,us-east-1,db.t2.micro,single-az,mysql,mysql,,,,0.014620,0.350880,0.014620,0.350880,U8CHYD2W2TU6YXYD
+onDemand,us-east-1,db.t4g.medium,single-az,mysql,mysql,,,,0.055900,1.341600,0.055900,1.341600,UQ79SE25SFFPAFCG
+savings,us-east-1,db.t4g.medium,single-az,mysql,mysql,1yr,Partial Upfront,167.70,0.019178,0.460272,0.038309,0.919410,UQ79SE25SFFPAFCG
+savings,us-east-1,db.t4g.medium,single-az,mysql,mysql,1yr,All Upfront,325.94,0.000000,0.000000,0.037182,0.892375,UQ79SE25SFFPAFCG
+savings,us-east-1,db.t4g.medium,single-az,mysql,mysql,3yr,All Upfront,686.28,0.000000,0.000000,0.026096,0.626311,UQ79SE25SFFPAFCG
+savings,us-east-1,db.t4g.medium,single-az,mysql,mysql,3yr,Partial Upfront,350.02,0.013330,0.319920,0.026640,0.639354,UQ79SE25SFFPAFCG
+savings,us-east-1,db.t4g.medium,single-az,mysql,mysql,1yr,No Upfront,0.00,0.039990,0.959760,0.039990,0.959760,UQ79SE25SFFPAFCG

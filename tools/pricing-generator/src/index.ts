@@ -8,6 +8,12 @@ import { join } from 'node:path';
 import { PricingClient, GetProductsCommand } from '@aws-sdk/client-pricing';
 import type { Filter } from '@aws-sdk/client-pricing';
 
+const DISCOUNT_PERCENT = 14; // Default discount percentage
+
+function applyDiscount(price: number): number {
+  return price * (1 - DISCOUNT_PERCENT / 100);
+}
+
 function parseArgs(): string {
   const args = process.argv.slice(2);
   for (let i = 0; i < args.length; i++) {
@@ -34,6 +40,9 @@ async function main(): Promise<void> {
       process.exit(1);
     }
   }
+
+  // Generate metadata.json
+  generateMetadata();
 }
 
 main();
@@ -191,6 +200,11 @@ async function generatePricingCSV(key: string) {
 
     const csvLines: string[] = ['type,region,instance,deployment,engine,license,term,purchaseOption,upfront,hourly,daily,adjustedAmortisedHourly,adjustedAmortisedDaily,sku'];
 
+    // Track instance types and their record counts for validation
+    const instanceRecordCounts = new Map<string, number>();
+    // Track covered categories per instance type to avoid duplicates from multiple SKUs
+    const instanceCoveredCategories = new Map<string, Set<string>>();
+
     for (const product of products) {
       const attrs = product.product.attributes;
       const instanceType = attrs.instanceType;
@@ -205,9 +219,21 @@ async function generatePricingCSV(key: string) {
       if (license === 'byol' && attrs.licenseModel !== 'Bring your own license') continue;
       if (license === 'li' && attrs.licenseModel !== 'License Included') continue;
 
-      console.log(`Processing matched product: ${instanceType} - ${attrs.deploymentOption} - ${attrs.databaseEdition} - ${attrs.licenseModel}`);
+      // Filter out Custom deployment models
+      if (attrs.deploymentModel === 'Custom') continue;
 
       const sku = product.product.sku;
+
+      // Debug logging for db.r6i.large instances
+      if (instanceType === 'db.r6i.large') {
+        console.log(`\n=== DEBUG: Found db.r6i.large product ===`);
+        console.log(`SKU: ${sku}`);
+        console.log(`Instance Type: ${instanceType}`);
+        console.log(`Full attributes:`, JSON.stringify(attrs, null, 2));
+        console.log(`=====================================\n`);
+      }
+
+      console.log(`Processing matched product: ${instanceType} - ${attrs.deploymentOption} - ${attrs.databaseEdition} - ${attrs.licenseModel}`);
 
       // OnDemand
       const onDemand = product.terms.OnDemand;
@@ -218,9 +244,18 @@ async function generatePricingCSV(key: string) {
           for (const pdKey in onDemandTerm.priceDimensions) {
             const pd = onDemandTerm.priceDimensions[pdKey];
             if (pd.unit === 'Hrs') {
-              const hourly = parseFloat(pd.pricePerUnit.USD);
+              const category = 'onDemand';
+              const covered = instanceCoveredCategories.get(instanceType) || new Set();
+              if (covered.has(category)) {
+                console.log(`Skipping duplicate onDemand record for ${instanceType} from SKU ${sku} - category already covered`);
+                continue;
+              }
+              const hourly = applyDiscount(parseFloat(pd.pricePerUnit.USD));
               const daily = hourly * 24;
               csvLines.push(`onDemand,${region},${instanceType},${deployment},${engine},${license},,,,${hourly.toFixed(6)},${daily.toFixed(6)},${hourly.toFixed(6)},${daily.toFixed(6)},${sku}`);
+              instanceRecordCounts.set(instanceType, (instanceRecordCounts.get(instanceType) || 0) + 1);
+              covered.add(category);
+              instanceCoveredCategories.set(instanceType, covered);
             }
           }
         }
@@ -238,13 +273,19 @@ async function generatePricingCSV(key: string) {
 
           const leaseContractLength = termAttributes.LeaseContractLength;
           const purchaseOption = termAttributes.PurchaseOption;
+          const category = `reserved-${leaseContractLength}-${purchaseOption}`;
+          const covered = instanceCoveredCategories.get(instanceType) || new Set();
+          if (covered.has(category)) {
+            console.log(`Skipping duplicate reserved record for ${instanceType} from SKU ${sku} - category ${category} already covered`);
+            continue;
+          }
 
           let hourly = 0;
           let upfront = 0;
 
           for (const pdKey in reservedTerm.priceDimensions) {
             const pd = reservedTerm.priceDimensions[pdKey];
-            const price = parseFloat(pd.pricePerUnit.USD);
+            const price = applyDiscount(parseFloat(pd.pricePerUnit.USD));
             if (pd.unit === 'Hrs') {
               hourly = price;
             } else if (pd.unit === 'Quantity') {
@@ -259,6 +300,9 @@ async function generatePricingCSV(key: string) {
           const effectiveDaily = effectiveHourly * 24;
 
           csvLines.push(`savings,${region},${instanceType},${deployment},${engine},${license},${leaseContractLength},${purchaseOption},${upfront.toFixed(2)},${hourly.toFixed(6)},${daily.toFixed(6)},${effectiveHourly.toFixed(6)},${effectiveDaily.toFixed(6)},${sku}`);
+          instanceRecordCounts.set(instanceType, (instanceRecordCounts.get(instanceType) || 0) + 1);
+          covered.add(category);
+          instanceCoveredCategories.set(instanceType, covered);
         }
       }
     }
@@ -269,6 +313,14 @@ async function generatePricingCSV(key: string) {
     const filePath = join(pricingDir, fileName);
     writeFileSync(filePath, csvLines.join('\n'));
     console.log(`Pricing CSV written to ${filePath}`);
+
+    for (const [instanceType, count] of instanceRecordCounts) {
+      if (count !== 6 && count !== 1 && count !== 4) {
+        console.error(`ERROR: Instance type '${instanceType}' has ${count} records, expected 6 (full pricing), 4 (partial reserved), or 1 (on-demand only).`);
+        console.error(`Instance record counts:`, Object.fromEntries(instanceRecordCounts));
+        throw new Error(`Validation failed: Instance type '${instanceType}' has ${count} records, expected 6, 4, or 1.`);
+      }
+    }
 
     return { records: csvLines.length - 1, filePath };
 
@@ -325,4 +377,17 @@ function parseCSVLine(line: string): string[] {
   fields.push(current); // Last field
 
   return fields;
+}
+
+function generateMetadata(): void {
+  const metadata = {
+    fetchedAt: new Date().toISOString(),
+    source: 'AmazonRDS',
+    discountPercentApplied: DISCOUNT_PERCENT
+  };
+
+  const pricingDir = join(__dirname, '../../../src/assets/pricing');
+  const metadataPath = join(pricingDir, 'metadata.json');
+  writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
+  console.log(`Metadata written to ${metadataPath}`);
 }

@@ -1,2 +1,0 @@
-Account Name,Account ID,Reservation ID,RI Type,Instance Type,Region,multiAZ,Product,State,Term,Utilization,Count,Units,Currency Code,Net Savings,Unrealized Savings,Start,End
-Example Account,123456789012,ri-example-001,No Upfront,db.r5b.2xlarge,eu-west-1,false,"oracle-ee (byol)",active,1 year,0.9684340,1,8.0000000,USD,125.7000000,4.3750000,2024-11-21,2025-11-21
