@@ -45,3 +45,16 @@ export interface PricingData {
 export default PricingData;
 
 export type UpfrontPayment = 'No Upfront' | 'Partial' | 'All Upfront';
+
+export class PricingKey {
+  constructor(
+    public region: string,
+    public instanceClass: string,
+    public deployment: string,
+    public engineKey: string
+  ) {}
+
+  public toString(): string {
+    return `${this.region}/${this.instanceClass}/${this.region}_${this.instanceClass}_${this.deployment}-${this.engineKey}`;
+  }
+}

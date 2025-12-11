@@ -16,7 +16,7 @@ export class PricingLoaderService {
   }
 
   private getPricingFilePath(riRow: RiRow) : string {
-    const riKey = RiCategorizatorCalculator.getRiKey(riRow);
+    const riKey = RiCategorizatorCalculator.getPricingKey(riRow);
     return `/assets/pricing/${riKey}.json`;
   }
 

@@ -1,11 +1,5 @@
+import { PricingKey } from "src/app/components/ri-portfolio-upload/models/pricing.model";
 import { RiPortfolio, RiRow } from "src/app/components/ri-portfolio-upload/models/ri-portfolio.model";
-
-export interface  RiKey {
-  region : string;
-  instanceClass : string;
-  deployment : string;
-  engineKey : string;
-}
 
 export class RiCategorizatorCalculator {
   // Prevent instantiation — this class only contains static helpers
@@ -20,16 +14,17 @@ export class RiCategorizatorCalculator {
   static categorizeRiPortfolio(riPortfolio: RiPortfolio): Map<string, number> {
     const categoryCounts = new Map<string, number>();
     for (const row of riPortfolio.rows) {
-      const key = RiCategorizatorCalculator.getRiKey(row.riRow);
-      const currentCount = categoryCounts.get(key) || 0;
-      categoryCounts.set(key, currentCount + row.riRow.count);
+      const riKey = RiCategorizatorCalculator.getPricingKey(row.riRow);
+      const riKeyString = riKey.toString();
+      const currentCount = categoryCounts.get(riKeyString) || 0;
+      categoryCounts.set(riKeyString, currentCount + row.riRow.count);
     }
     return categoryCounts;
   }
 
-  public static getRiKey(riRow: RiRow) {
+  public static getPricingKey(riRow: RiRow): PricingKey {
     const region = riRow.region;
-    const instance = riRow.instanceClass;
+    const instanceClass = riRow.instanceClass;
     const deployment = riRow.multiAz ? 'multi-az' : 'single-az';
 
     let engineKey = riRow.engine;
@@ -37,8 +32,7 @@ export class RiCategorizatorCalculator {
       engineKey = `${engineKey}-${riRow.edition}`;
     }
 
-    const riKey = `${region}/${instance}/${region}_${instance}_${deployment}-${engineKey}`;
-    return riKey;
-  }  
+    return new PricingKey(region, instanceClass, deployment, engineKey);
+  }
 
 }
