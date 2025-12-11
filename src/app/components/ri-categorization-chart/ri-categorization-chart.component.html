@@ -1,0 +1,7 @@
+<div class="chart-container">
+  <echarts 
+    *ngIf="chartOptions && chartOptions.series" 
+    [options]="chartOptions" 
+    [merge]="chartOptions"
+    class="chart"></echarts>
+</div>

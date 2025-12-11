@@ -4,6 +4,7 @@ import { lastValueFrom } from 'rxjs';
 
 import type { PricingData } from '../models/pricing.model';
 import type { RiRow } from '../models/ri-portfolio.model';
+import { RiCategorizatorCalculator } from 'src/app/calculators/ri-categorizator/ri-categorizator-calculator';
 
 @Injectable({ providedIn: 'root' })
 export class PricingLoaderService {
@@ -15,16 +16,10 @@ export class PricingLoaderService {
   }
 
   private getPricingFilePath(riRow: RiRow) : string {
-    const region = riRow.region;
-    const instance = riRow.instanceClass;
-    const deployment = riRow.multiAz ? 'multi-az' : 'single-az';
-
-    let engineKey = riRow.engine;
-    if (riRow.edition && riRow.edition.toLowerCase() !== 'standard') {
-      engineKey = `${engineKey}-${riRow.edition}`;
-    }
-
-    return `/assets/pricing/${region}/${instance}/${region}_${instance}_${deployment}-${engineKey}.json`;
+    const riKey = RiCategorizatorCalculator.getRiKey(riRow);
+    return `/assets/pricing/${riKey}.json`;
   }
+
+
 
 }

@@ -2,6 +2,8 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { APP_INITIALIZER } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
+import * as echarts from 'echarts';
+import { provideEchartsCore } from 'ngx-echarts';
 
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
@@ -11,6 +13,7 @@ import { DEFAULT_IMPORT_PROVIDER } from './app/components/ri-portfolio-upload/de
 
 bootstrapApplication(AppComponent, {
   providers: [
+    provideEchartsCore({ echarts }),
 
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),

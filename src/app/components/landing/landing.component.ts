@@ -5,6 +5,8 @@ import { CostComparisonTableComponent } from '../cost-comparison-table/cost-comp
 import { RiImportPreviewComponent } from '../ri-portfolio-preview/ri-portfolio-preview.component';
 import { RiImportUploadComponent } from '../ri-portfolio-upload/ri-portfolio-upload.component';
 import { RiPortfolioDataService } from '../ri-portfolio-upload/service/ri-portfolio-data.service';
+import { RiCategorizationChartComponent } from '../ri-categorization-chart/ri-categorization-chart.component';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @Component({
   selector: 'wk-landing',
@@ -12,7 +14,7 @@ import { RiPortfolioDataService } from '../ri-portfolio-upload/service/ri-portfo
   styleUrls: ['./landing.component.scss']
   ,
   standalone: true,
-  imports: [RiImportUploadComponent, RiImportPreviewComponent, CostComparisonTableComponent, CommonModule]
+  imports: [RiImportUploadComponent, RiImportPreviewComponent, CostComparisonTableComponent, RiCategorizationChartComponent, NgxEchartsModule, CommonModule]
 })
 
 
