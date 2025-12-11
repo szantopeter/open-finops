@@ -1,1 +1,50 @@
 type,region,instance,deployment,engine,license,term,purchaseOption,upfront,hourly,daily,adjustedAmortisedHourly,adjustedAmortisedDaily,sku
+onDemand,us-east-1,db.x2g.4xlarge,single-az,aurora-postgresql,postgresql,,,,3.016000,72.384000,3.016000,72.384000,88U7UQDGWJCES4EY
+savings,us-east-1,db.x2g.4xlarge,single-az,aurora-postgresql,postgresql,3yr,All Upfront,27726.00,0.000000,0.000000,1.054301,25.303217,88U7UQDGWJCES4EY
+savings,us-east-1,db.x2g.4xlarge,single-az,aurora-postgresql,postgresql,1yr,Partial Upfront,7394.00,0.844000,20.256000,1.687486,40.499669,88U7UQDGWJCES4EY
+savings,us-east-1,db.x2g.4xlarge,single-az,aurora-postgresql,postgresql,3yr,Partial Upfront,14655.00,0.557700,13.384800,1.114967,26.759201,88U7UQDGWJCES4EY
+savings,us-east-1,db.x2g.4xlarge,single-az,aurora-postgresql,postgresql,1yr,No Upfront,0.00,1.959400,47.025600,1.959400,47.025600,88U7UQDGWJCES4EY
+savings,us-east-1,db.x2g.4xlarge,single-az,aurora-postgresql,postgresql,1yr,All Upfront,14259.00,0.000000,0.000000,1.626626,39.039014,88U7UQDGWJCES4EY
+onDemand,us-east-1,db.x2g.8xlarge,single-az,aurora-postgresql,postgresql,,,,7.842000,188.208000,7.842000,188.208000,8DRZJGW3NFMUA8HB
+onDemand,us-east-1,db.x2g.xlarge,single-az,aurora-postgresql,postgresql,,,,0.980000,23.520000,0.980000,23.520000,95MU5BD8DCWBHK7P
+onDemand,us-east-1,db.x2g.xlarge,single-az,aurora-postgresql,postgresql,,,,0.754000,18.096000,0.754000,18.096000,AFMCVPKZZQWXG7T5
+savings,us-east-1,db.x2g.xlarge,single-az,aurora-postgresql,postgresql,1yr,No Upfront,0.00,0.489800,11.755200,0.489800,11.755200,AFMCVPKZZQWXG7T5
+savings,us-east-1,db.x2g.xlarge,single-az,aurora-postgresql,postgresql,3yr,Partial Upfront,3664.00,0.139400,3.345600,0.278726,6.689428,AFMCVPKZZQWXG7T5
+savings,us-east-1,db.x2g.xlarge,single-az,aurora-postgresql,postgresql,1yr,All Upfront,3565.00,0.000000,0.000000,0.406685,9.760438,AFMCVPKZZQWXG7T5
+savings,us-east-1,db.x2g.xlarge,single-az,aurora-postgresql,postgresql,1yr,Partial Upfront,1848.00,0.211000,5.064000,0.421815,10.123548,AFMCVPKZZQWXG7T5
+savings,us-east-1,db.x2g.xlarge,single-az,aurora-postgresql,postgresql,3yr,All Upfront,6932.00,0.000000,0.000000,0.263594,6.326261,AFMCVPKZZQWXG7T5
+onDemand,us-east-1,db.x2g.16xlarge,single-az,aurora-postgresql,postgresql,,,,12.064000,289.536000,12.064000,289.536000,B85HMPDRSB4ZETS6
+savings,us-east-1,db.x2g.16xlarge,single-az,aurora-postgresql,postgresql,1yr,No Upfront,0.00,7.837400,188.097600,7.837400,188.097600,B85HMPDRSB4ZETS6
+savings,us-east-1,db.x2g.16xlarge,single-az,aurora-postgresql,postgresql,1yr,Partial Upfront,29575.00,3.376100,81.026400,6.749931,161.998337,B85HMPDRSB4ZETS6
+savings,us-east-1,db.x2g.16xlarge,single-az,aurora-postgresql,postgresql,3yr,All Upfront,110906.00,0.000000,0.000000,4.217279,101.214693,B85HMPDRSB4ZETS6
+savings,us-east-1,db.x2g.16xlarge,single-az,aurora-postgresql,postgresql,1yr,All Upfront,57037.00,0.000000,0.000000,6.506616,156.158795,B85HMPDRSB4ZETS6
+savings,us-east-1,db.x2g.16xlarge,single-az,aurora-postgresql,postgresql,3yr,Partial Upfront,58622.00,2.230700,53.536800,4.459843,107.036230,B85HMPDRSB4ZETS6
+onDemand,us-east-1,db.x2g.2xlarge,single-az,aurora-postgresql,postgresql,,,,1.960000,47.040000,1.960000,47.040000,D8U9DBAHD3NCF4CG
+onDemand,us-east-1,db.x2g.2xlarge,single-az,aurora-postgresql,postgresql,,,,1.508000,36.192000,1.508000,36.192000,DT2A5MBP2EB83N5G
+savings,us-east-1,db.x2g.2xlarge,single-az,aurora-postgresql,postgresql,1yr,All Upfront,7130.00,0.000000,0.000000,0.813370,19.520876,DT2A5MBP2EB83N5G
+savings,us-east-1,db.x2g.2xlarge,single-az,aurora-postgresql,postgresql,1yr,Partial Upfront,3697.00,0.422000,10.128000,0.843743,20.249834,DT2A5MBP2EB83N5G
+savings,us-east-1,db.x2g.2xlarge,single-az,aurora-postgresql,postgresql,1yr,No Upfront,0.00,0.979700,23.512800,0.979700,23.512800,DT2A5MBP2EB83N5G
+savings,us-east-1,db.x2g.2xlarge,single-az,aurora-postgresql,postgresql,3yr,Partial Upfront,7328.00,0.278800,6.691200,0.557452,13.378857,DT2A5MBP2EB83N5G
+savings,us-east-1,db.x2g.2xlarge,single-az,aurora-postgresql,postgresql,3yr,All Upfront,13863.00,0.000000,0.000000,0.527150,12.651608,DT2A5MBP2EB83N5G
+onDemand,us-east-1,db.x2g.4xlarge,single-az,aurora-postgresql,postgresql,,,,3.921000,94.104000,3.921000,94.104000,FHKSGG2X5USWDSNX
+onDemand,us-east-1,db.x2g.12xlarge,single-az,aurora-postgresql,postgresql,,,,11.762000,282.288000,11.762000,282.288000,JZTGJ6BSSNG9GD4R
+onDemand,us-east-1,db.x2g.12xlarge,single-az,aurora-postgresql,postgresql,,,,9.048000,217.152000,9.048000,217.152000,KP2Z84JG9DRDB3AJ
+savings,us-east-1,db.x2g.12xlarge,single-az,aurora-postgresql,postgresql,1yr,Partial Upfront,22181.00,2.532100,60.770400,5.062445,121.498668,KP2Z84JG9DRDB3AJ
+savings,us-east-1,db.x2g.12xlarge,single-az,aurora-postgresql,postgresql,3yr,All Upfront,83179.00,0.000000,0.000000,3.162940,75.910564,KP2Z84JG9DRDB3AJ
+savings,us-east-1,db.x2g.12xlarge,single-az,aurora-postgresql,postgresql,1yr,All Upfront,42778.00,0.000000,0.000000,4.879991,117.119781,KP2Z84JG9DRDB3AJ
+savings,us-east-1,db.x2g.12xlarge,single-az,aurora-postgresql,postgresql,1yr,No Upfront,0.00,5.878100,141.074400,5.878100,141.074400,KP2Z84JG9DRDB3AJ
+savings,us-east-1,db.x2g.12xlarge,single-az,aurora-postgresql,postgresql,3yr,Partial Upfront,43966.00,1.673000,40.152000,3.344838,80.276116,KP2Z84JG9DRDB3AJ
+onDemand,us-east-1,db.x2g.8xlarge,single-az,aurora-postgresql,postgresql,,,,6.032000,144.768000,6.032000,144.768000,MVXV7QZQVP7BJXUX
+savings,us-east-1,db.x2g.8xlarge,single-az,aurora-postgresql,postgresql,1yr,No Upfront,0.00,3.918700,94.048800,3.918700,94.048800,MVXV7QZQVP7BJXUX
+savings,us-east-1,db.x2g.8xlarge,single-az,aurora-postgresql,postgresql,3yr,Partial Upfront,29311.00,1.115300,26.767200,2.229871,53.516915,MVXV7QZQVP7BJXUX
+savings,us-east-1,db.x2g.8xlarge,single-az,aurora-postgresql,postgresql,1yr,All Upfront,28519.00,0.000000,0.000000,3.253365,78.080767,MVXV7QZQVP7BJXUX
+savings,us-east-1,db.x2g.8xlarge,single-az,aurora-postgresql,postgresql,3yr,All Upfront,55453.00,0.000000,0.000000,2.108639,50.607347,MVXV7QZQVP7BJXUX
+savings,us-east-1,db.x2g.8xlarge,single-az,aurora-postgresql,postgresql,1yr,Partial Upfront,14787.00,1.688100,40.514400,3.374958,80.999000,MVXV7QZQVP7BJXUX
+onDemand,us-east-1,db.x2g.16xlarge,single-az,aurora-postgresql,postgresql,,,,15.683000,376.392000,15.683000,376.392000,PNX5RENV3SDWG7TP
+onDemand,us-east-1,db.x2g.large,single-az,aurora-postgresql,postgresql,,,,0.377000,9.048000,0.377000,9.048000,TCVQ8XC2YZVPD5U6
+savings,us-east-1,db.x2g.large,single-az,aurora-postgresql,postgresql,1yr,All Upfront,1782.00,0.000000,0.000000,0.203285,4.878850,TCVQ8XC2YZVPD5U6
+savings,us-east-1,db.x2g.large,single-az,aurora-postgresql,postgresql,3yr,All Upfront,3466.00,0.000000,0.000000,0.131797,3.163130,TCVQ8XC2YZVPD5U6
+savings,us-east-1,db.x2g.large,single-az,aurora-postgresql,postgresql,1yr,Partial Upfront,924.00,0.105500,2.532000,0.210907,5.061774,TCVQ8XC2YZVPD5U6
+savings,us-east-1,db.x2g.large,single-az,aurora-postgresql,postgresql,1yr,No Upfront,0.00,0.244900,5.877600,0.244900,5.877600,TCVQ8XC2YZVPD5U6
+savings,us-east-1,db.x2g.large,single-az,aurora-postgresql,postgresql,3yr,Partial Upfront,1832.00,0.069700,1.672800,0.139363,3.344714,TCVQ8XC2YZVPD5U6
+onDemand,us-east-1,db.x2g.large,single-az,aurora-postgresql,postgresql,,,,0.490000,11.760000,0.490000,11.760000,ZMCV7WAXZG35ZG4Y

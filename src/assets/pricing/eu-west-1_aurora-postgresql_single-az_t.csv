@@ -1,1 +1,29 @@
 type,region,instance,deployment,engine,license,term,purchaseOption,upfront,hourly,daily,adjustedAmortisedHourly,adjustedAmortisedDaily,sku
+onDemand,eu-west-1,db.t3.medium,single-az,aurora-postgresql,postgresql,,,,0.088000,2.112000,0.088000,2.112000,2NK9NTEX26F8VBVJ
+savings,eu-west-1,db.t3.medium,single-az,aurora-postgresql,postgresql,3yr,All Upfront,1035.00,0.000000,0.000000,0.039357,0.944559,2NK9NTEX26F8VBVJ
+savings,eu-west-1,db.t3.medium,single-az,aurora-postgresql,postgresql,1yr,All Upfront,510.00,0.000000,0.000000,0.058179,1.396304,2NK9NTEX26F8VBVJ
+savings,eu-west-1,db.t3.medium,single-az,aurora-postgresql,postgresql,3yr,Partial Upfront,564.00,0.021500,0.516000,0.042946,1.030716,2NK9NTEX26F8VBVJ
+savings,eu-west-1,db.t3.medium,single-az,aurora-postgresql,postgresql,1yr,Partial Upfront,261.00,0.029800,0.715200,0.059574,1.429779,2NK9NTEX26F8VBVJ
+savings,eu-west-1,db.t3.medium,single-az,aurora-postgresql,postgresql,1yr,No Upfront,0.00,0.069000,1.656000,0.069000,1.656000,2NK9NTEX26F8VBVJ
+onDemand,eu-west-1,db.t3.large,single-az,aurora-postgresql,postgresql,,,,0.229000,5.496000,0.229000,5.496000,GH7G2UTBNJ6DM864
+onDemand,eu-west-1,db.t4g.medium,single-az,aurora-postgresql,postgresql,,,,0.078000,1.872000,0.078000,1.872000,M8BZVKDHH2YN9F35
+savings,eu-west-1,db.t4g.medium,single-az,aurora-postgresql,postgresql,1yr,No Upfront,0.00,0.060800,1.459200,0.060800,1.459200,M8BZVKDHH2YN9F35
+savings,eu-west-1,db.t4g.medium,single-az,aurora-postgresql,postgresql,3yr,Partial Upfront,502.00,0.019100,0.458400,0.038189,0.916534,M8BZVKDHH2YN9F35
+savings,eu-west-1,db.t4g.medium,single-az,aurora-postgresql,postgresql,3yr,All Upfront,922.00,0.000000,0.000000,0.035060,0.841433,M8BZVKDHH2YN9F35
+savings,eu-west-1,db.t4g.medium,single-az,aurora-postgresql,postgresql,1yr,All Upfront,451.00,0.000000,0.000000,0.051449,1.234771,M8BZVKDHH2YN9F35
+savings,eu-west-1,db.t4g.medium,single-az,aurora-postgresql,postgresql,1yr,Partial Upfront,232.00,0.026500,0.636000,0.052966,1.271181,M8BZVKDHH2YN9F35
+onDemand,eu-west-1,db.t3.medium,single-az,aurora-postgresql,postgresql,,,,0.114000,2.736000,0.114000,2.736000,NHEKNQMQFXBHXKRC
+onDemand,eu-west-1,db.t3.large,single-az,aurora-postgresql,postgresql,,,,0.176000,4.224000,0.176000,4.224000,PMMNFQGKVXMYEW2J
+savings,eu-west-1,db.t3.large,single-az,aurora-postgresql,postgresql,1yr,All Upfront,1020.00,0.000000,0.000000,0.116359,2.792608,PMMNFQGKVXMYEW2J
+savings,eu-west-1,db.t3.large,single-az,aurora-postgresql,postgresql,1yr,Partial Upfront,523.00,0.059700,1.432800,0.119362,2.864696,PMMNFQGKVXMYEW2J
+savings,eu-west-1,db.t3.large,single-az,aurora-postgresql,postgresql,3yr,All Upfront,2070.00,0.000000,0.000000,0.078713,1.889117,PMMNFQGKVXMYEW2J
+savings,eu-west-1,db.t3.large,single-az,aurora-postgresql,postgresql,1yr,No Upfront,0.00,0.138000,3.312000,0.138000,3.312000,PMMNFQGKVXMYEW2J
+savings,eu-west-1,db.t3.large,single-az,aurora-postgresql,postgresql,3yr,Partial Upfront,1128.00,0.042900,1.029600,0.085793,2.059032,PMMNFQGKVXMYEW2J
+onDemand,eu-west-1,db.t4g.medium,single-az,aurora-postgresql,postgresql,,,,0.101000,2.424000,0.101000,2.424000,RT9CATGARTANK7GQ
+onDemand,eu-west-1,db.t4g.large,single-az,aurora-postgresql,postgresql,,,,0.156000,3.744000,0.156000,3.744000,UJRF8K9XQXB7JETR
+savings,eu-west-1,db.t4g.large,single-az,aurora-postgresql,postgresql,1yr,Partial Upfront,465.00,0.053000,1.272000,0.106046,2.545101,UJRF8K9XQXB7JETR
+savings,eu-west-1,db.t4g.large,single-az,aurora-postgresql,postgresql,1yr,All Upfront,902.00,0.000000,0.000000,0.102898,2.469541,UJRF8K9XQXB7JETR
+savings,eu-west-1,db.t4g.large,single-az,aurora-postgresql,postgresql,3yr,Partial Upfront,1004.00,0.038200,0.916800,0.076378,1.833067,UJRF8K9XQXB7JETR
+savings,eu-west-1,db.t4g.large,single-az,aurora-postgresql,postgresql,3yr,All Upfront,1845.00,0.000000,0.000000,0.070157,1.683778,UJRF8K9XQXB7JETR
+savings,eu-west-1,db.t4g.large,single-az,aurora-postgresql,postgresql,1yr,No Upfront,0.00,0.121700,2.920800,0.121700,2.920800,UJRF8K9XQXB7JETR
+onDemand,eu-west-1,db.t4g.large,single-az,aurora-postgresql,postgresql,,,,0.203000,4.872000,0.203000,4.872000,W4VW5HC4GR39WRA5

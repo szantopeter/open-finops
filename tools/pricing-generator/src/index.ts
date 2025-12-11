@@ -4,7 +4,7 @@ import { STSClient, GetCallerIdentityCommand } from '@aws-sdk/client-sts';
 import { loadSharedConfigFiles } from '@aws-sdk/shared-ini-file-loader';
 import { spawn } from 'node:child_process';
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { join } from 'node:path';
 import { PricingClient, GetProductsCommand } from '@aws-sdk/client-pricing';
 import type { Filter } from '@aws-sdk/client-pricing';
 
@@ -27,7 +27,12 @@ async function main(): Promise<void> {
 
   // Generate pricing CSVs for each category
   for (const key of uniqueKeys) {
-    await generatePricingCSV(key);
+    const result = await generatePricingCSV(key);
+    if (result.records === 0) {
+      console.log(`ERROR: ${key} - 0 records written to ${result.filePath}`);
+      console.log('Stopping execution due to error.');
+      process.exit(1);
+    }
   }
 }
 
@@ -101,7 +106,7 @@ async function awsLogin() {
 
 function normalizeDatabaseEdition(edition: string): string {
   const lower = edition.toLowerCase();
-  if (lower.includes('enterprise')) return 'Enterprise';
+  if (lower === 'ee' || lower.includes('enterprise')) return 'Enterprise';
   if (lower.includes('standard two') || lower.includes('se2')) return 'Standard Two';
   if (lower.includes('standard one') || lower.includes('se1')) return 'Standard One';
   if (lower.includes('standard')) return 'Standard';
@@ -118,16 +123,43 @@ async function generatePricingCSV(key: string) {
 
   const deploymentApi = deployment === 'multi-az' ? 'Multi-AZ' : 'Single-AZ';
   const productParts = productKey.split('-');
-  const engine = productParts[0];
+  const engine = productKey.startsWith('aurora') ? productKey : productParts[0];
   const edition = productParts.length > 2 ? productParts[1] : '';
   const license = productParts[productParts.length - 1];
+
+  const isAurora = productKey.startsWith('aurora');
+  let productFamily: string | undefined;
+  let databaseEngine: string;
+  if (isAurora) {
+    if (productKey === 'aurora-postgresql') {
+      productFamily = undefined; // No productFamily for Aurora
+      databaseEngine = 'Aurora PostgreSQL';
+    } else if (productKey === 'aurora-mysql') {
+      productFamily = undefined;
+      databaseEngine = 'Aurora MySQL';
+    } else {
+      productFamily = 'Database Instance';
+      databaseEngine = engine;
+    }
+  } else {
+    productFamily = 'Database Instance';
+    databaseEngine = engine;
+  }
 
   const filters: Filter[] = [
     { Type: 'TERM_MATCH', Field: 'regionCode', Value: region },
     { Type: 'TERM_MATCH', Field: 'serviceCode', Value: 'AmazonRDS' },
-    { Type: 'TERM_MATCH', Field: 'productFamily', Value: 'Database Instance' },
-    { Type: 'TERM_MATCH', Field: 'databaseEngine', Value: engine },
   ];
+  if (productFamily) {
+    filters.push({ Type: 'TERM_MATCH', Field: 'productFamily', Value: productFamily });
+  }
+  filters.push({ Type: 'TERM_MATCH', Field: 'databaseEngine', Value: databaseEngine });
+  if (edition) {
+    const normalizedEdition = normalizeDatabaseEdition(edition);
+    filters.push({ Type: 'TERM_MATCH', Field: 'databaseEdition', Value: normalizedEdition });
+  }
+
+  console.log('Filters:', filters);
 
   try {
     let products: any[] = [];
@@ -163,7 +195,7 @@ async function generatePricingCSV(key: string) {
       const attrs = product.product.attributes;
       const instanceType = attrs.instanceType;
 
-      if (!instanceType.startsWith(`db.${instanceFamily}`)) continue;
+      if (!instanceType || !instanceType.startsWith(`db.${instanceFamily}`)) continue;
       if (attrs.deploymentOption !== deploymentApi) continue;
       
       const apiEdition = attrs.databaseEdition;
@@ -238,8 +270,11 @@ async function generatePricingCSV(key: string) {
     writeFileSync(filePath, csvLines.join('\n'));
     console.log(`Pricing CSV written to ${filePath}`);
 
+    return { records: csvLines.length - 1, filePath };
+
   } catch (error) {
     console.error(`Error generating pricing for ${key}:`, error);
+    return { records: 0, filePath: '' };
   }
 }
 
@@ -291,4 +326,3 @@ function parseCSVLine(line: string): string[] {
 
   return fields;
 }
-

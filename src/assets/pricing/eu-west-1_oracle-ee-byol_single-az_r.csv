@@ -1,1 +1,654 @@
 type,region,instance,deployment,engine,license,term,purchaseOption,upfront,hourly,daily,adjustedAmortisedHourly,adjustedAmortisedDaily,sku
+onDemand,eu-west-1,db.r6i.large,single-az,oracle,byol,,,,0.258000,6.192000,0.258000,6.192000,23F6GY38D8B2RXH8
+savings,eu-west-1,db.r6i.large,single-az,oracle,byol,3yr,Partial Upfront,1493.00,0.056800,1.363200,0.113572,2.725737,23F6GY38D8B2RXH8
+savings,eu-west-1,db.r6i.large,single-az,oracle,byol,3yr,All Upfront,2925.00,0.000000,0.000000,0.111225,2.669405,23F6GY38D8B2RXH8
+savings,eu-west-1,db.r6i.large,single-az,oracle,byol,1yr,All Upfront,1395.00,0.000000,0.000000,0.159138,3.819302,23F6GY38D8B2RXH8
+savings,eu-west-1,db.r6i.large,single-az,oracle,byol,1yr,No Upfront,0.00,0.170600,4.094400,0.170600,4.094400,23F6GY38D8B2RXH8
+savings,eu-west-1,db.r6i.large,single-az,oracle,byol,1yr,Partial Upfront,712.00,0.081200,1.948800,0.162423,3.898150,23F6GY38D8B2RXH8
+onDemand,eu-west-1,db.r6i.xlarge,single-az,oracle,byol,,,,0.516000,12.384000,0.516000,12.384000,24C6N46GGBJWE65T
+savings,eu-west-1,db.r6i.xlarge,single-az,oracle,byol,1yr,All Upfront,2790.00,0.000000,0.000000,0.318275,7.638604,24C6N46GGBJWE65T
+savings,eu-west-1,db.r6i.xlarge,single-az,oracle,byol,1yr,Partial Upfront,1423.00,0.162500,3.900000,0.324832,7.795962,24C6N46GGBJWE65T
+savings,eu-west-1,db.r6i.xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,0.341200,8.188800,0.341200,8.188800,24C6N46GGBJWE65T
+savings,eu-west-1,db.r6i.xlarge,single-az,oracle,byol,3yr,All Upfront,5851.00,0.000000,0.000000,0.222488,5.339722,24C6N46GGBJWE65T
+savings,eu-west-1,db.r6i.xlarge,single-az,oracle,byol,3yr,Partial Upfront,2985.00,0.113600,2.726400,0.227107,5.450562,24C6N46GGBJWE65T
+onDemand,eu-west-1,db.r4.xlarge,single-az,oracle,byol,,,,0.530400,12.729600,0.530400,12.729600,2VGFUAFGM3HCT796
+onDemand,eu-west-1,db.r7i.large,single-az,oracle,byol,,,,0.280000,6.720000,0.280000,6.720000,2W5ETCPSBBV5TMQS
+onDemand,eu-west-1,db.r7i.8xlarge.tpc2.mem3x,single-az,oracle,byol,,,,13.440000,322.560000,13.440000,322.560000,37VDCCEETJX8D8YX
+onDemand,eu-west-1,db.r5b.4xlarge.tpc2.mem2x,single-az,oracle,byol,,,,4.943000,118.632000,4.943000,118.632000,3CDAKMRRR5HNJ62R
+savings,eu-west-1,db.r5b.4xlarge.tpc2.mem2x,single-az,oracle,byol,1yr,No Upfront,0.00,3.559700,85.432800,3.559700,85.432800,3CDAKMRRR5HNJ62R
+savings,eu-west-1,db.r5b.4xlarge.tpc2.mem2x,single-az,oracle,byol,3yr,All Upfront,62366.00,0.000000,0.000000,2.371511,56.916267,3CDAKMRRR5HNJ62R
+savings,eu-west-1,db.r5b.4xlarge.tpc2.mem2x,single-az,oracle,byol,1yr,All Upfront,29450.00,0.000000,0.000000,3.359571,80.629706,3CDAKMRRR5HNJ62R
+savings,eu-west-1,db.r5b.4xlarge.tpc2.mem2x,single-az,oracle,byol,3yr,Partial Upfront,32482.00,1.236000,29.664000,2.471151,59.307623,3CDAKMRRR5HNJ62R
+savings,eu-west-1,db.r5b.4xlarge.tpc2.mem2x,single-az,oracle,byol,1yr,Partial Upfront,15158.00,1.730400,41.529600,3.459581,83.029942,3CDAKMRRR5HNJ62R
+onDemand,eu-west-1,db.r4.2xlarge,single-az,oracle,byol,,,,1.060800,25.459200,1.060800,25.459200,3CSS6KA4UZ5YCE4S
+onDemand,eu-west-1,db.r6i.4xlarge.tpc2.mem4x,single-az,oracle,byol,,,,8.256000,198.144000,8.256000,198.144000,3D5NUZ3872H3QFHD
+savings,eu-west-1,db.r6i.4xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,Partial Upfront,54242.00,2.064000,49.536000,4.126590,99.038167,3D5NUZ3872H3QFHD
+savings,eu-west-1,db.r6i.4xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,All Upfront,104144.00,0.000000,0.000000,3.960149,95.043577,3D5NUZ3872H3QFHD
+savings,eu-west-1,db.r6i.4xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,All Upfront,49179.00,0.000000,0.000000,5.610198,134.644764,3D5NUZ3872H3QFHD
+savings,eu-west-1,db.r6i.4xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,Partial Upfront,25313.00,2.889600,69.350400,5.777234,138.653617,3D5NUZ3872H3QFHD
+savings,eu-west-1,db.r6i.4xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,No Upfront,0.00,5.944300,142.663200,5.944300,142.663200,3D5NUZ3872H3QFHD
+onDemand,eu-west-1,db.r5.4xlarge.tpc2.mem4x,single-az,oracle,byol,,,,8.256000,198.144000,8.256000,198.144000,3H27NH9NEQP4Q8WQ
+savings,eu-west-1,db.r5.4xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,Partial Upfront,22771.00,2.599400,62.385600,5.197050,124.729200,3H27NH9NEQP4Q8WQ
+savings,eu-west-1,db.r5.4xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,All Upfront,44631.00,0.000000,0.000000,5.091376,122.193018,3H27NH9NEQP4Q8WQ
+savings,eu-west-1,db.r5.4xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,Partial Upfront,47765.00,1.817600,43.622400,3.633898,87.213548,3H27NH9NEQP4Q8WQ
+savings,eu-west-1,db.r5.4xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,No Upfront,0.00,5.458700,131.008800,5.458700,131.008800,3H27NH9NEQP4Q8WQ
+savings,eu-west-1,db.r5.4xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,All Upfront,93620.00,0.000000,0.000000,3.559967,85.439197,3H27NH9NEQP4Q8WQ
+onDemand,eu-west-1,db.r6in.24xlarge,single-az,oracle,byol,,,,18.624000,446.976000,18.624000,446.976000,3KCYPWCTFKTPPCFX
+onDemand,eu-west-1,db.r6id.4xlarge,single-az,oracle,byol,,,,2.656000,63.744000,2.656000,63.744000,3ZDRAGCTTWNH8AV8
+savings,eu-west-1,db.r6id.4xlarge,single-az,oracle,byol,3yr,Partial Upfront,19198.00,0.730500,17.532000,1.460517,35.052420,3ZDRAGCTTWNH8AV8
+savings,eu-west-1,db.r6id.4xlarge,single-az,oracle,byol,3yr,All Upfront,37002.00,0.000000,0.000000,1.407027,33.768652,3ZDRAGCTTWNH8AV8
+savings,eu-west-1,db.r6id.4xlarge,single-az,oracle,byol,1yr,Partial Upfront,8725.00,0.996000,23.904000,1.991323,47.791748,3ZDRAGCTTWNH8AV8
+savings,eu-west-1,db.r6id.4xlarge,single-az,oracle,byol,1yr,All Upfront,16986.00,0.000000,0.000000,1.937714,46.505133,3ZDRAGCTTWNH8AV8
+savings,eu-west-1,db.r6id.4xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,2.045000,49.080000,2.045000,49.080000,3ZDRAGCTTWNH8AV8
+onDemand,eu-west-1,db.r6in.4xlarge,single-az,oracle,byol,,,,3.104000,74.496000,3.104000,74.496000,45NVUU6ZZFHWKWCJ
+onDemand,eu-west-1,db.r5d.12xlarge,single-az,oracle,byol,,,,7.077000,169.848000,7.077000,169.848000,473R5K4KCRUBSHPJ
+savings,eu-west-1,db.r5d.12xlarge,single-az,oracle,byol,1yr,Partial Upfront,21781.00,2.486400,59.673600,4.971114,119.306728,473R5K4KCRUBSHPJ
+savings,eu-west-1,db.r5d.12xlarge,single-az,oracle,byol,3yr,Partial Upfront,46673.00,1.776000,42.624000,3.550774,85.218570,473R5K4KCRUBSHPJ
+savings,eu-west-1,db.r5d.12xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,5.114900,122.757600,5.114900,122.757600,473R5K4KCRUBSHPJ
+savings,eu-west-1,db.r5d.12xlarge,single-az,oracle,byol,1yr,All Upfront,42317.00,0.000000,0.000000,4.827401,115.857632,473R5K4KCRUBSHPJ
+savings,eu-west-1,db.r5d.12xlarge,single-az,oracle,byol,3yr,All Upfront,89613.00,0.000000,0.000000,3.407598,81.782341,473R5K4KCRUBSHPJ
+onDemand,eu-west-1,db.r7i.2xlarge,single-az,oracle,byol,,,,1.120000,26.880000,1.120000,26.880000,4AHH9HYKQDERCM3E
+savings,eu-west-1,db.r7i.2xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,0.750000,18.000000,0.750000,18.000000,4AHH9HYKQDERCM3E
+savings,eu-west-1,db.r7i.2xlarge,single-az,oracle,byol,1yr,All Upfront,6185.00,0.000000,0.000000,0.705567,16.933607,4AHH9HYKQDERCM3E
+savings,eu-west-1,db.r7i.2xlarge,single-az,oracle,byol,1yr,Partial Upfront,3189.00,0.364000,8.736000,0.727792,17.467006,4AHH9HYKQDERCM3E
+onDemand,eu-west-1,db.r6in.xlarge,single-az,oracle,byol,,,,0.776000,18.624000,0.776000,18.624000,4J9KB23SH86BSWJD
+onDemand,eu-west-1,db.r5.6xlarge.tpc2.mem4x,single-az,oracle,byol,,,,12.374000,296.976000,12.374000,296.976000,4KYXD45WT8J9R3NY
+savings,eu-west-1,db.r5.6xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,Partial Upfront,71642.00,2.726100,65.426400,5.450338,130.808102,4KYXD45WT8J9R3NY
+savings,eu-west-1,db.r5.6xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,All Upfront,140418.00,0.000000,0.000000,5.339493,128.147844,4KYXD45WT8J9R3NY
+savings,eu-west-1,db.r5.6xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,Partial Upfront,34163.00,3.899900,93.597600,7.797117,187.130796,4KYXD45WT8J9R3NY
+savings,eu-west-1,db.r5.6xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,No Upfront,0.00,8.189900,196.557600,8.189900,196.557600,4KYXD45WT8J9R3NY
+savings,eu-west-1,db.r5.6xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,All Upfront,66960.00,0.000000,0.000000,7.638604,183.326489,4KYXD45WT8J9R3NY
+onDemand,eu-west-1,db.r6i.16xlarge,single-az,oracle,byol,,,,8.256000,198.144000,8.256000,198.144000,4S5YRR36YBMMVN9R
+savings,eu-west-1,db.r6i.16xlarge,single-az,oracle,byol,3yr,All Upfront,104144.00,0.000000,0.000000,3.960149,95.043577,4S5YRR36YBMMVN9R
+savings,eu-west-1,db.r6i.16xlarge,single-az,oracle,byol,3yr,Partial Upfront,54242.00,2.064000,49.536000,4.126590,99.038167,4S5YRR36YBMMVN9R
+savings,eu-west-1,db.r6i.16xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,5.944300,142.663200,5.944300,142.663200,4S5YRR36YBMMVN9R
+savings,eu-west-1,db.r6i.16xlarge,single-az,oracle,byol,1yr,All Upfront,49179.00,0.000000,0.000000,5.610198,134.644764,4S5YRR36YBMMVN9R
+savings,eu-west-1,db.r6i.16xlarge,single-az,oracle,byol,1yr,Partial Upfront,25313.00,2.889600,69.350400,5.777234,138.653617,4S5YRR36YBMMVN9R
+onDemand,eu-west-1,db.r5b.large.tpc1.mem2x,single-az,oracle,byol,,,,0.618000,14.832000,0.618000,14.832000,57H4W6Z4475JMAUZ
+savings,eu-west-1,db.r5b.large.tpc1.mem2x,single-az,oracle,byol,3yr,Partial Upfront,4060.00,0.154500,3.708000,0.308884,7.413225,57H4W6Z4475JMAUZ
+savings,eu-west-1,db.r5b.large.tpc1.mem2x,single-az,oracle,byol,3yr,All Upfront,7796.00,0.000000,0.000000,0.296448,7.114762,57H4W6Z4475JMAUZ
+savings,eu-west-1,db.r5b.large.tpc1.mem2x,single-az,oracle,byol,1yr,No Upfront,0.00,0.445000,10.680000,0.445000,10.680000,57H4W6Z4475JMAUZ
+savings,eu-west-1,db.r5b.large.tpc1.mem2x,single-az,oracle,byol,1yr,Partial Upfront,1895.00,0.216300,5.191200,0.432476,10.379427,57H4W6Z4475JMAUZ
+savings,eu-west-1,db.r5b.large.tpc1.mem2x,single-az,oracle,byol,1yr,All Upfront,3681.00,0.000000,0.000000,0.419918,10.078029,57H4W6Z4475JMAUZ
+onDemand,eu-west-1,db.r5.xlarge,single-az,oracle,byol,,,,0.619000,14.856000,0.619000,14.856000,57MMQPDSSHCTGYSP
+onDemand,eu-west-1,db.r5b.xlarge.tpc2.mem2x,single-az,oracle,byol,,,,1.236000,29.664000,1.236000,29.664000,5SX35TVK537U43J7
+savings,eu-west-1,db.r5b.xlarge.tpc2.mem2x,single-az,oracle,byol,3yr,Partial Upfront,8121.00,0.309000,7.416000,0.617807,14.827362,5SX35TVK537U43J7
+savings,eu-west-1,db.r5b.xlarge.tpc2.mem2x,single-az,oracle,byol,3yr,All Upfront,15591.00,0.000000,0.000000,0.592859,14.228611,5SX35TVK537U43J7
+savings,eu-west-1,db.r5b.xlarge.tpc2.mem2x,single-az,oracle,byol,1yr,All Upfront,7363.00,0.000000,0.000000,0.839950,20.158795,5SX35TVK537U43J7
+savings,eu-west-1,db.r5b.xlarge.tpc2.mem2x,single-az,oracle,byol,1yr,Partial Upfront,3790.00,0.432600,10.382400,0.864952,20.758854,5SX35TVK537U43J7
+savings,eu-west-1,db.r5b.xlarge.tpc2.mem2x,single-az,oracle,byol,1yr,No Upfront,0.00,0.889900,21.357600,0.889900,21.357600,5SX35TVK537U43J7
+onDemand,eu-west-1,db.r5.large,single-az,oracle,byol,,,,0.258000,6.192000,0.258000,6.192000,68NGR9GHC49W62UR
+savings,eu-west-1,db.r5.large,single-az,oracle,byol,1yr,No Upfront,0.00,0.170600,4.094400,0.170600,4.094400,68NGR9GHC49W62UR
+savings,eu-west-1,db.r5.large,single-az,oracle,byol,1yr,All Upfront,1395.00,0.000000,0.000000,0.159138,3.819302,68NGR9GHC49W62UR
+savings,eu-west-1,db.r5.large,single-az,oracle,byol,3yr,All Upfront,2925.00,0.000000,0.000000,0.111225,2.669405,68NGR9GHC49W62UR
+savings,eu-west-1,db.r5.large,single-az,oracle,byol,3yr,Partial Upfront,1493.00,0.056800,1.363200,0.113572,2.725737,68NGR9GHC49W62UR
+savings,eu-west-1,db.r5.large,single-az,oracle,byol,1yr,Partial Upfront,712.00,0.081200,1.948800,0.162423,3.898150,68NGR9GHC49W62UR
+onDemand,eu-west-1,db.r6i.xlarge.tpc2.mem4x,single-az,oracle,byol,,,,2.062000,49.488000,2.062000,49.488000,6A97J9ZN8DJP5FMS
+savings,eu-west-1,db.r6i.xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,Partial Upfront,13560.00,0.516000,12.384000,1.031629,24.759086,6A97J9ZN8DJP5FMS
+savings,eu-west-1,db.r6i.xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,All Upfront,12295.00,0.000000,0.000000,1.402578,33.661875,6A97J9ZN8DJP5FMS
+savings,eu-west-1,db.r6i.xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,All Upfront,26036.00,0.000000,0.000000,0.990037,23.760894,6A97J9ZN8DJP5FMS
+savings,eu-west-1,db.r6i.xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,Partial Upfront,6328.00,0.722400,17.337600,1.444280,34.662720,6A97J9ZN8DJP5FMS
+savings,eu-west-1,db.r6i.xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,No Upfront,0.00,1.486100,35.666400,1.486100,35.666400,6A97J9ZN8DJP5FMS
+onDemand,eu-west-1,db.r6in.12xlarge,single-az,oracle,byol,,,,9.312000,223.488000,9.312000,223.488000,6ADKHT3ZAY2PCFGP
+onDemand,eu-west-1,db.r7i.xlarge.tpc2.mem2x,single-az,oracle,byol,,,,1.120000,26.880000,1.120000,26.880000,6N5PMJ75WKS2RX29
+onDemand,eu-west-1,db.r5.8xlarge.tpc2.mem3x,single-az,oracle,byol,,,,12.374000,296.976000,12.374000,296.976000,6ZNRAHGDHCERKGWV
+savings,eu-west-1,db.r5.8xlarge.tpc2.mem3x,single-az,oracle,byol,1yr,No Upfront,0.00,8.189900,196.557600,8.189900,196.557600,6ZNRAHGDHCERKGWV
+savings,eu-west-1,db.r5.8xlarge.tpc2.mem3x,single-az,oracle,byol,3yr,All Upfront,140418.00,0.000000,0.000000,5.339493,128.147844,6ZNRAHGDHCERKGWV
+savings,eu-west-1,db.r5.8xlarge.tpc2.mem3x,single-az,oracle,byol,3yr,Partial Upfront,71642.00,2.726100,65.426400,5.450338,130.808102,6ZNRAHGDHCERKGWV
+savings,eu-west-1,db.r5.8xlarge.tpc2.mem3x,single-az,oracle,byol,1yr,Partial Upfront,34163.00,3.899900,93.597600,7.797117,187.130796,6ZNRAHGDHCERKGWV
+savings,eu-west-1,db.r5.8xlarge.tpc2.mem3x,single-az,oracle,byol,1yr,All Upfront,66960.00,0.000000,0.000000,7.638604,183.326489,6ZNRAHGDHCERKGWV
+onDemand,eu-west-1,db.r6id.24xlarge,single-az,oracle,byol,,,,15.936000,382.464000,15.936000,382.464000,75HA5H9N2HW3857V
+savings,eu-west-1,db.r6id.24xlarge,single-az,oracle,byol,3yr,All Upfront,221961.00,0.000000,0.000000,8.440224,202.565366,75HA5H9N2HW3857V
+savings,eu-west-1,db.r6id.24xlarge,single-az,oracle,byol,1yr,All Upfront,101905.00,0.000000,0.000000,11.625029,279.000684,75HA5H9N2HW3857V
+savings,eu-west-1,db.r6id.24xlarge,single-az,oracle,byol,1yr,Partial Upfront,52350.00,5.976000,143.424000,11.947937,286.750489,75HA5H9N2HW3857V
+savings,eu-west-1,db.r6id.24xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,12.271000,294.504000,12.271000,294.504000,75HA5H9N2HW3857V
+savings,eu-west-1,db.r6id.24xlarge,single-az,oracle,byol,3yr,Partial Upfront,115172.00,4.382500,105.180000,8.761997,210.287917,75HA5H9N2HW3857V
+onDemand,eu-west-1,db.r7i.4xlarge.tpc2.mem4x,single-az,oracle,byol,,,,8.960000,215.040000,8.960000,215.040000,79GYP6TG7BNESU7Y
+onDemand,eu-west-1,db.r5b.24xlarge,single-az,oracle,byol,,,,14.832000,355.968000,14.832000,355.968000,79YGPY98KZBE9D3G
+savings,eu-west-1,db.r5b.24xlarge,single-az,oracle,byol,3yr,All Upfront,187097.00,0.000000,0.000000,7.114495,170.747890,79YGPY98KZBE9D3G
+savings,eu-west-1,db.r5b.24xlarge,single-az,oracle,byol,1yr,All Upfront,88351.00,0.000000,0.000000,10.078827,241.891855,79YGPY98KZBE9D3G
+savings,eu-west-1,db.r5b.24xlarge,single-az,oracle,byol,3yr,Partial Upfront,97446.00,3.708000,88.992000,7.413453,177.922869,79YGPY98KZBE9D3G
+savings,eu-west-1,db.r5b.24xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,10.679000,256.296000,10.679000,256.296000,79YGPY98KZBE9D3G
+savings,eu-west-1,db.r5b.24xlarge,single-az,oracle,byol,1yr,Partial Upfront,45475.00,5.191200,124.588800,10.378857,249.092565,79YGPY98KZBE9D3G
+onDemand,eu-west-1,db.r6i.4xlarge,single-az,oracle,byol,,,,2.062000,49.488000,2.062000,49.488000,7HUVJNNMYHG6Q5Z5
+savings,eu-west-1,db.r6i.4xlarge,single-az,oracle,byol,3yr,Partial Upfront,11940.00,0.454300,10.903200,0.908327,21.799846,7HUVJNNMYHG6Q5Z5
+savings,eu-west-1,db.r6i.4xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,1.365000,32.760000,1.365000,32.760000,7HUVJNNMYHG6Q5Z5
+savings,eu-west-1,db.r6i.4xlarge,single-az,oracle,byol,3yr,All Upfront,23403.00,0.000000,0.000000,0.889916,21.357974,7HUVJNNMYHG6Q5Z5
+savings,eu-west-1,db.r6i.4xlarge,single-az,oracle,byol,1yr,Partial Upfront,5694.00,0.650000,15.600000,1.299555,31.189322,7HUVJNNMYHG6Q5Z5
+savings,eu-west-1,db.r6i.4xlarge,single-az,oracle,byol,1yr,All Upfront,11160.00,0.000000,0.000000,1.273101,30.554415,7HUVJNNMYHG6Q5Z5
+onDemand,eu-west-1,db.r6in.metal,single-az,oracle,byol,,,,18.624000,446.976000,18.624000,446.976000,7RHNZWJD8T6NMV65
+onDemand,eu-west-1,db.r4.large,single-az,oracle,byol,,,,0.265200,6.364800,0.265200,6.364800,7UKZ6V78SYPAJKSU
+onDemand,eu-west-1,db.r6i.12xlarge,single-az,oracle,byol,,,,6.192000,148.608000,6.192000,148.608000,848JWPE4ZGTCGFJX
+savings,eu-west-1,db.r6i.12xlarge,single-az,oracle,byol,3yr,Partial Upfront,40681.00,1.548000,37.152000,3.094924,74.278169,848JWPE4ZGTCGFJX
+savings,eu-west-1,db.r6i.12xlarge,single-az,oracle,byol,3yr,All Upfront,78108.00,0.000000,0.000000,2.970112,71.282683,848JWPE4ZGTCGFJX
+savings,eu-west-1,db.r6i.12xlarge,single-az,oracle,byol,1yr,Partial Upfront,18985.00,2.167200,52.012800,4.332954,103.990897,848JWPE4ZGTCGFJX
+savings,eu-west-1,db.r6i.12xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,4.458200,106.996800,4.458200,106.996800,848JWPE4ZGTCGFJX
+savings,eu-west-1,db.r6i.12xlarge,single-az,oracle,byol,1yr,All Upfront,36885.00,0.000000,0.000000,4.207734,100.985626,848JWPE4ZGTCGFJX
+onDemand,eu-west-1,db.r7i.4xlarge,single-az,oracle,byol,,,,2.240000,53.760000,2.240000,53.760000,8ENXH7NZ4BRWQU49
+savings,eu-west-1,db.r7i.4xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,1.501000,36.024000,1.501000,36.024000,8ENXH7NZ4BRWQU49
+savings,eu-west-1,db.r7i.4xlarge,single-az,oracle,byol,1yr,Partial Upfront,6377.00,0.728000,17.472000,1.455470,34.931274,8ENXH7NZ4BRWQU49
+savings,eu-west-1,db.r7i.4xlarge,single-az,oracle,byol,1yr,All Upfront,12360.00,0.000000,0.000000,1.409993,33.839836,8ENXH7NZ4BRWQU49
+onDemand,eu-west-1,db.r7i.metal-24xl,single-az,oracle,byol,,,,10.080000,241.920000,10.080000,241.920000,8M6BAAHST5SHQCPP
+onDemand,eu-west-1,db.r6id.8xlarge,single-az,oracle,byol,,,,5.312000,127.488000,5.312000,127.488000,8MS8P93CB5GTBJJG
+savings,eu-west-1,db.r6id.8xlarge,single-az,oracle,byol,3yr,All Upfront,73978.00,0.000000,0.000000,2.813066,67.513575,8MS8P93CB5GTBJJG
+savings,eu-west-1,db.r6id.8xlarge,single-az,oracle,byol,3yr,Partial Upfront,38395.00,1.461000,35.064000,2.920997,70.103927,8MS8P93CB5GTBJJG
+savings,eu-west-1,db.r6id.8xlarge,single-az,oracle,byol,1yr,All Upfront,33971.00,0.000000,0.000000,3.875314,93.007529,8MS8P93CB5GTBJJG
+savings,eu-west-1,db.r6id.8xlarge,single-az,oracle,byol,1yr,Partial Upfront,17450.00,1.992000,47.808000,3.982646,95.583496,8MS8P93CB5GTBJJG
+savings,eu-west-1,db.r6id.8xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,4.090000,98.160000,4.090000,98.160000,8MS8P93CB5GTBJJG
+onDemand,eu-west-1,db.r5b.16xlarge,single-az,oracle,byol,,,,9.886000,237.264000,9.886000,237.264000,8VT92VE78GXMRCEK
+savings,eu-west-1,db.r5b.16xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,6.228400,149.481600,6.228400,149.481600,8VT92VE78GXMRCEK
+savings,eu-west-1,db.r5b.16xlarge,single-az,oracle,byol,3yr,Partial Upfront,51963.00,1.977300,47.455200,3.953230,94.877513,8VT92VE78GXMRCEK
+savings,eu-west-1,db.r5b.16xlarge,single-az,oracle,byol,3yr,All Upfront,101847.00,0.000000,0.000000,3.872804,92.947296,8VT92VE78GXMRCEK
+savings,eu-west-1,db.r5b.16xlarge,single-az,oracle,byol,1yr,All Upfront,50924.00,0.000000,0.000000,5.809263,139.422313,8VT92VE78GXMRCEK
+savings,eu-west-1,db.r5b.16xlarge,single-az,oracle,byol,1yr,Partial Upfront,25982.00,2.965900,71.181600,5.929852,142.316439,8VT92VE78GXMRCEK
+onDemand,eu-west-1,db.r6id.metal,single-az,oracle,byol,,,,15.936000,382.464000,15.936000,382.464000,8W3A3THACT48Q4H6
+onDemand,eu-west-1,db.r6i.2xlarge.tpc2.mem8x,single-az,oracle,byol,,,,8.256000,198.144000,8.256000,198.144000,9EUHERMM9JG74Y6V
+savings,eu-west-1,db.r6i.2xlarge.tpc2.mem8x,single-az,oracle,byol,3yr,Partial Upfront,54242.00,2.064000,49.536000,4.126590,99.038167,9EUHERMM9JG74Y6V
+savings,eu-west-1,db.r6i.2xlarge.tpc2.mem8x,single-az,oracle,byol,1yr,No Upfront,0.00,5.944300,142.663200,5.944300,142.663200,9EUHERMM9JG74Y6V
+savings,eu-west-1,db.r6i.2xlarge.tpc2.mem8x,single-az,oracle,byol,3yr,All Upfront,104144.00,0.000000,0.000000,3.960149,95.043577,9EUHERMM9JG74Y6V
+savings,eu-west-1,db.r6i.2xlarge.tpc2.mem8x,single-az,oracle,byol,1yr,All Upfront,49179.00,0.000000,0.000000,5.610198,134.644764,9EUHERMM9JG74Y6V
+savings,eu-west-1,db.r6i.2xlarge.tpc2.mem8x,single-az,oracle,byol,1yr,Partial Upfront,25313.00,2.889600,69.350400,5.777234,138.653617,9EUHERMM9JG74Y6V
+onDemand,eu-west-1,db.r5b.xlarge,single-az,oracle,byol,,,,0.618000,14.832000,0.618000,14.832000,9F8PTZDVEAEJ5AM5
+savings,eu-west-1,db.r5b.xlarge,single-az,oracle,byol,3yr,All Upfront,6365.00,0.000000,0.000000,0.242034,5.808807,9F8PTZDVEAEJ5AM5
+savings,eu-west-1,db.r5b.xlarge,single-az,oracle,byol,1yr,All Upfront,3183.00,0.000000,0.000000,0.363107,8.714579,9F8PTZDVEAEJ5AM5
+savings,eu-west-1,db.r5b.xlarge,single-az,oracle,byol,3yr,Partial Upfront,3248.00,0.123600,2.966400,0.247107,5.930580,9F8PTZDVEAEJ5AM5
+savings,eu-west-1,db.r5b.xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,0.389300,9.343200,0.389300,9.343200,9F8PTZDVEAEJ5AM5
+savings,eu-west-1,db.r5b.xlarge,single-az,oracle,byol,1yr,Partial Upfront,1624.00,0.185400,4.449600,0.370661,8.895870,9F8PTZDVEAEJ5AM5
+onDemand,eu-west-1,db.r5.12xlarge.tpc2.mem2x,single-az,oracle,byol,,,,12.374000,296.976000,12.374000,296.976000,9M6V2RWZZ5BCCQ6F
+savings,eu-west-1,db.r5.12xlarge.tpc2.mem2x,single-az,oracle,byol,3yr,Partial Upfront,71642.00,2.726100,65.426400,5.450338,130.808102,9M6V2RWZZ5BCCQ6F
+savings,eu-west-1,db.r5.12xlarge.tpc2.mem2x,single-az,oracle,byol,1yr,No Upfront,0.00,8.189900,196.557600,8.189900,196.557600,9M6V2RWZZ5BCCQ6F
+savings,eu-west-1,db.r5.12xlarge.tpc2.mem2x,single-az,oracle,byol,3yr,All Upfront,140418.00,0.000000,0.000000,5.339493,128.147844,9M6V2RWZZ5BCCQ6F
+savings,eu-west-1,db.r5.12xlarge.tpc2.mem2x,single-az,oracle,byol,1yr,All Upfront,66960.00,0.000000,0.000000,7.638604,183.326489,9M6V2RWZZ5BCCQ6F
+savings,eu-west-1,db.r5.12xlarge.tpc2.mem2x,single-az,oracle,byol,1yr,Partial Upfront,34163.00,3.899900,93.597600,7.797117,187.130796,9M6V2RWZZ5BCCQ6F
+onDemand,eu-west-1,db.r5b.12xlarge,single-az,oracle,byol,,,,7.415000,177.960000,7.415000,177.960000,9QFFW9KZD6TUNB8U
+savings,eu-west-1,db.r5b.12xlarge,single-az,oracle,byol,3yr,All Upfront,76386.00,0.000000,0.000000,2.904632,69.711157,9QFFW9KZD6TUNB8U
+savings,eu-west-1,db.r5b.12xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,4.671300,112.111200,4.671300,112.111200,9QFFW9KZD6TUNB8U
+savings,eu-west-1,db.r5b.12xlarge,single-az,oracle,byol,1yr,Partial Upfront,19486.00,2.224500,53.388000,4.447407,106.737760,9QFFW9KZD6TUNB8U
+savings,eu-west-1,db.r5b.12xlarge,single-az,oracle,byol,1yr,All Upfront,38193.00,0.000000,0.000000,4.356947,104.566735,9QFFW9KZD6TUNB8U
+savings,eu-west-1,db.r5b.12xlarge,single-az,oracle,byol,3yr,Partial Upfront,38972.00,1.483000,35.592000,2.964938,71.158507,9QFFW9KZD6TUNB8U
+onDemand,eu-west-1,db.r5b.2xlarge,single-az,oracle,byol,,,,1.236000,29.664000,1.236000,29.664000,9S5ZAU3X3M68BSHT
+savings,eu-west-1,db.r5b.2xlarge,single-az,oracle,byol,3yr,All Upfront,15591.00,0.000000,0.000000,0.592859,14.228611,9S5ZAU3X3M68BSHT
+savings,eu-west-1,db.r5b.2xlarge,single-az,oracle,byol,1yr,All Upfront,7363.00,0.000000,0.000000,0.839950,20.158795,9S5ZAU3X3M68BSHT
+savings,eu-west-1,db.r5b.2xlarge,single-az,oracle,byol,3yr,Partial Upfront,8121.00,0.309000,7.416000,0.617807,14.827362,9S5ZAU3X3M68BSHT
+savings,eu-west-1,db.r5b.2xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,0.889900,21.357600,0.889900,21.357600,9S5ZAU3X3M68BSHT
+savings,eu-west-1,db.r5b.2xlarge,single-az,oracle,byol,1yr,Partial Upfront,3790.00,0.432600,10.382400,0.864952,20.758854,9S5ZAU3X3M68BSHT
+onDemand,eu-west-1,db.r5b.large,single-az,oracle,byol,,,,0.309000,7.416000,0.309000,7.416000,9T2SCYSHWNSDXTFE
+savings,eu-west-1,db.r5b.large,single-az,oracle,byol,1yr,Partial Upfront,947.00,0.108200,2.596800,0.216231,5.189545,9T2SCYSHWNSDXTFE
+savings,eu-west-1,db.r5b.large,single-az,oracle,byol,1yr,No Upfront,0.00,0.222500,5.340000,0.222500,5.340000,9T2SCYSHWNSDXTFE
+savings,eu-west-1,db.r5b.large,single-az,oracle,byol,3yr,All Upfront,3898.00,0.000000,0.000000,0.148224,3.557381,9T2SCYSHWNSDXTFE
+savings,eu-west-1,db.r5b.large,single-az,oracle,byol,1yr,All Upfront,1841.00,0.000000,0.000000,0.210016,5.040383,9T2SCYSHWNSDXTFE
+savings,eu-west-1,db.r5b.large,single-az,oracle,byol,3yr,Partial Upfront,2030.00,0.077300,1.855200,0.154492,3.707812,9T2SCYSHWNSDXTFE
+onDemand,eu-west-1,db.r5.xlarge,single-az,oracle,byol,,,,0.516000,12.384000,0.516000,12.384000,9V3DKSDEWAKVAAFV
+savings,eu-west-1,db.r5.xlarge,single-az,oracle,byol,1yr,All Upfront,2790.00,0.000000,0.000000,0.318275,7.638604,9V3DKSDEWAKVAAFV
+savings,eu-west-1,db.r5.xlarge,single-az,oracle,byol,1yr,Partial Upfront,1423.00,0.162500,3.900000,0.324832,7.795962,9V3DKSDEWAKVAAFV
+savings,eu-west-1,db.r5.xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,0.341200,8.188800,0.341200,8.188800,9V3DKSDEWAKVAAFV
+savings,eu-west-1,db.r5.xlarge,single-az,oracle,byol,3yr,All Upfront,5851.00,0.000000,0.000000,0.222488,5.339722,9V3DKSDEWAKVAAFV
+savings,eu-west-1,db.r5.xlarge,single-az,oracle,byol,3yr,Partial Upfront,2985.00,0.113600,2.726400,0.227107,5.450562,9V3DKSDEWAKVAAFV
+onDemand,eu-west-1,db.r7i.16xlarge,single-az,oracle,byol,,,,8.960000,215.040000,8.960000,215.040000,A45R3HV96TES4RPN
+onDemand,eu-west-1,db.r7i.2xlarge.tpc2.mem4x,single-az,oracle,byol,,,,4.480000,107.520000,4.480000,107.520000,A9TGNRSMETE83G3G
+onDemand,eu-west-1,db.r5.8xlarge,single-az,oracle,byol,,,,4.954000,118.896000,4.954000,118.896000,AUWCJ89NHXFN4J3W
+onDemand,eu-west-1,db.r7i.24xlarge,single-az,oracle,byol,,,,13.440000,322.560000,13.440000,322.560000,AVWVVM5JE33U87V4
+savings,eu-west-1,db.r7i.24xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,9.005000,216.120000,9.005000,216.120000,AVWVVM5JE33U87V4
+savings,eu-west-1,db.r7i.24xlarge,single-az,oracle,byol,1yr,All Upfront,74171.00,0.000000,0.000000,8.461214,203.069131,AVWVVM5JE33U87V4
+savings,eu-west-1,db.r7i.24xlarge,single-az,oracle,byol,1yr,Partial Upfront,38264.00,4.368000,104.832000,8.733047,209.593123,AVWVVM5JE33U87V4
+onDemand,eu-west-1,db.r6i.metal,single-az,oracle,byol,,,,12.384000,297.216000,12.384000,297.216000,AX6GCXQWVQYY2PKF
+onDemand,eu-west-1,db.r5b.4xlarge.tpc2.mem3x,single-az,oracle,byol,,,,7.415000,177.960000,7.415000,177.960000,B33EZRS3EG4JAWC6
+savings,eu-west-1,db.r5b.4xlarge.tpc2.mem3x,single-az,oracle,byol,3yr,Partial Upfront,48723.00,1.854000,44.496000,3.706726,88.961435,B33EZRS3EG4JAWC6
+savings,eu-west-1,db.r5b.4xlarge.tpc2.mem3x,single-az,oracle,byol,3yr,All Upfront,93548.00,0.000000,0.000000,3.557229,85.373488,B33EZRS3EG4JAWC6
+savings,eu-west-1,db.r5b.4xlarge.tpc2.mem3x,single-az,oracle,byol,1yr,Partial Upfront,22737.00,2.595600,62.294400,5.189371,124.544913,B33EZRS3EG4JAWC6
+savings,eu-west-1,db.r5b.4xlarge.tpc2.mem3x,single-az,oracle,byol,1yr,All Upfront,44176.00,0.000000,0.000000,5.039471,120.947296,B33EZRS3EG4JAWC6
+savings,eu-west-1,db.r5b.4xlarge.tpc2.mem3x,single-az,oracle,byol,1yr,No Upfront,0.00,5.339500,128.148000,5.339500,128.148000,B33EZRS3EG4JAWC6
+onDemand,eu-west-1,db.r6i.large,single-az,oracle,byol,,,,0.258000,6.192000,0.258000,6.192000,B3837M6PA3C4J5VF
+savings,eu-west-1,db.r6i.large,single-az,oracle,byol,3yr,Partial Upfront,1695.00,0.064500,1.548000,0.128954,3.094886,B3837M6PA3C4J5VF
+savings,eu-west-1,db.r6i.large,single-az,oracle,byol,1yr,No Upfront,0.00,0.185800,4.459200,0.185800,4.459200,B3837M6PA3C4J5VF
+savings,eu-west-1,db.r6i.large,single-az,oracle,byol,3yr,All Upfront,3255.00,0.000000,0.000000,0.123774,2.970568,B3837M6PA3C4J5VF
+savings,eu-west-1,db.r6i.large,single-az,oracle,byol,1yr,All Upfront,1537.00,0.000000,0.000000,0.175337,4.208077,B3837M6PA3C4J5VF
+savings,eu-west-1,db.r6i.large,single-az,oracle,byol,1yr,Partial Upfront,791.00,0.090300,2.167200,0.180535,4.332840,B3837M6PA3C4J5VF
+onDemand,eu-west-1,db.r6i.32xlarge,single-az,oracle,byol,,,,16.512000,396.288000,16.512000,396.288000,B9VRF828GVFVDY43
+savings,eu-west-1,db.r6i.32xlarge,single-az,oracle,byol,1yr,Partial Upfront,45542.00,5.198800,124.771200,10.394100,249.458401,B9VRF828GVFVDY43
+savings,eu-west-1,db.r6i.32xlarge,single-az,oracle,byol,1yr,All Upfront,89262.00,0.000000,0.000000,10.182752,244.386037,B9VRF828GVFVDY43
+savings,eu-west-1,db.r6i.32xlarge,single-az,oracle,byol,3yr,All Upfront,187240.00,0.000000,0.000000,7.119933,170.878394,B9VRF828GVFVDY43
+savings,eu-west-1,db.r6i.32xlarge,single-az,oracle,byol,3yr,Partial Upfront,95530.00,3.635200,87.244800,7.267796,174.427095,B9VRF828GVFVDY43
+savings,eu-west-1,db.r6i.32xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,10.917400,262.017600,10.917400,262.017600,B9VRF828GVFVDY43
+onDemand,eu-west-1,db.r7i.xlarge,single-az,oracle,byol,,,,0.560000,13.440000,0.560000,13.440000,BD84XEAM934FSGV9
+savings,eu-west-1,db.r7i.xlarge,single-az,oracle,byol,1yr,Partial Upfront,1594.00,0.182000,4.368000,0.363839,8.732134,BD84XEAM934FSGV9
+savings,eu-west-1,db.r7i.xlarge,single-az,oracle,byol,1yr,All Upfront,3092.00,0.000000,0.000000,0.352726,8.465435,BD84XEAM934FSGV9
+savings,eu-west-1,db.r7i.xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,0.375000,9.000000,0.375000,9.000000,BD84XEAM934FSGV9
+onDemand,eu-west-1,db.r5.24xlarge,single-az,oracle,byol,,,,12.374000,296.976000,12.374000,296.976000,BDNC37HC8892Q5P9
+savings,eu-west-1,db.r5.24xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,8.189900,196.557600,8.189900,196.557600,BDNC37HC8892Q5P9
+savings,eu-west-1,db.r5.24xlarge,single-az,oracle,byol,3yr,Partial Upfront,71642.00,2.726100,65.426400,5.450338,130.808102,BDNC37HC8892Q5P9
+savings,eu-west-1,db.r5.24xlarge,single-az,oracle,byol,3yr,All Upfront,140418.00,0.000000,0.000000,5.339493,128.147844,BDNC37HC8892Q5P9
+savings,eu-west-1,db.r5.24xlarge,single-az,oracle,byol,1yr,All Upfront,66960.00,0.000000,0.000000,7.638604,183.326489,BDNC37HC8892Q5P9
+savings,eu-west-1,db.r5.24xlarge,single-az,oracle,byol,1yr,Partial Upfront,34163.00,3.899900,93.597600,7.797117,187.130796,BDNC37HC8892Q5P9
+onDemand,eu-west-1,db.r5.16xlarge,single-az,oracle,byol,,,,9.907000,237.768000,9.907000,237.768000,BGK8BZ9SXGK5DHXZ
+onDemand,eu-west-1,db.r5b.2xlarge.tpc1.mem2x,single-az,oracle,byol,,,,2.472000,59.328000,2.472000,59.328000,BJQUHD63BUSDY25Z
+savings,eu-west-1,db.r5b.2xlarge.tpc1.mem2x,single-az,oracle,byol,1yr,All Upfront,14725.00,0.000000,0.000000,1.679786,40.314853,BJQUHD63BUSDY25Z
+savings,eu-west-1,db.r5b.2xlarge.tpc1.mem2x,single-az,oracle,byol,3yr,All Upfront,31183.00,0.000000,0.000000,1.185756,28.458134,BJQUHD63BUSDY25Z
+savings,eu-west-1,db.r5b.2xlarge.tpc1.mem2x,single-az,oracle,byol,3yr,Partial Upfront,16241.00,0.618000,14.832000,1.235575,29.653812,BJQUHD63BUSDY25Z
+savings,eu-west-1,db.r5b.2xlarge.tpc1.mem2x,single-az,oracle,byol,1yr,No Upfront,0.00,1.779800,42.715200,1.779800,42.715200,BJQUHD63BUSDY25Z
+savings,eu-west-1,db.r5b.2xlarge.tpc1.mem2x,single-az,oracle,byol,1yr,Partial Upfront,7579.00,0.865200,20.764800,1.729790,41.514971,BJQUHD63BUSDY25Z
+onDemand,eu-west-1,db.r7i.4xlarge.tpc2.mem3x,single-az,oracle,byol,,,,6.720000,161.280000,6.720000,161.280000,BQFK76HNWPM6FQ64
+onDemand,eu-west-1,db.r6i.16xlarge,single-az,oracle,byol,,,,8.256000,198.144000,8.256000,198.144000,BTQM9V67VPAHYZKS
+savings,eu-west-1,db.r6i.16xlarge,single-az,oracle,byol,1yr,Partial Upfront,22771.00,2.599400,62.385600,5.197050,124.729200,BTQM9V67VPAHYZKS
+savings,eu-west-1,db.r6i.16xlarge,single-az,oracle,byol,1yr,All Upfront,44631.00,0.000000,0.000000,5.091376,122.193018,BTQM9V67VPAHYZKS
+savings,eu-west-1,db.r6i.16xlarge,single-az,oracle,byol,3yr,All Upfront,93620.00,0.000000,0.000000,3.559967,85.439197,BTQM9V67VPAHYZKS
+savings,eu-west-1,db.r6i.16xlarge,single-az,oracle,byol,3yr,Partial Upfront,47765.00,1.817600,43.622400,3.633898,87.213548,BTQM9V67VPAHYZKS
+savings,eu-west-1,db.r6i.16xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,5.458700,131.008800,5.458700,131.008800,BTQM9V67VPAHYZKS
+onDemand,eu-west-1,db.r5d.16xlarge,single-az,oracle,byol,,,,9.437000,226.488000,9.437000,226.488000,BXVWZQJ47EEXZR4C
+savings,eu-west-1,db.r5d.16xlarge,single-az,oracle,byol,3yr,Partial Upfront,62231.00,2.368000,56.832000,4.734378,113.625064,BXVWZQJ47EEXZR4C
+savings,eu-west-1,db.r5d.16xlarge,single-az,oracle,byol,3yr,All Upfront,119484.00,0.000000,0.000000,4.543463,109.043121,BXVWZQJ47EEXZR4C
+savings,eu-west-1,db.r5d.16xlarge,single-az,oracle,byol,1yr,All Upfront,56423.00,0.000000,0.000000,6.436573,154.477755,BXVWZQJ47EEXZR4C
+savings,eu-west-1,db.r5d.16xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,6.819800,163.675200,6.819800,163.675200,BXVWZQJ47EEXZR4C
+savings,eu-west-1,db.r5d.16xlarge,single-az,oracle,byol,1yr,Partial Upfront,29041.00,3.315200,79.564800,6.628114,159.074725,BXVWZQJ47EEXZR4C
+onDemand,eu-west-1,db.r5b.8xlarge,single-az,oracle,byol,,,,4.943000,118.632000,4.943000,118.632000,C8VHY35KCT5FEB3Z
+savings,eu-west-1,db.r5b.8xlarge,single-az,oracle,byol,1yr,All Upfront,25462.00,0.000000,0.000000,2.904632,69.711157,C8VHY35KCT5FEB3Z
+savings,eu-west-1,db.r5b.8xlarge,single-az,oracle,byol,1yr,Partial Upfront,12991.00,1.483000,35.592000,2.964976,71.159420,C8VHY35KCT5FEB3Z
+savings,eu-west-1,db.r5b.8xlarge,single-az,oracle,byol,3yr,All Upfront,50924.00,0.000000,0.000000,1.936421,46.474104,C8VHY35KCT5FEB3Z
+savings,eu-west-1,db.r5b.8xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,3.114200,74.740800,3.114200,74.740800,C8VHY35KCT5FEB3Z
+savings,eu-west-1,db.r5b.8xlarge,single-az,oracle,byol,3yr,Partial Upfront,25981.00,0.988600,23.726400,1.976546,47.437100,C8VHY35KCT5FEB3Z
+onDemand,eu-west-1,db.r5b.2xlarge,single-az,oracle,byol,,,,1.236000,29.664000,1.236000,29.664000,CESRQZGMSR8CT434
+savings,eu-west-1,db.r5b.2xlarge,single-az,oracle,byol,1yr,Partial Upfront,3248.00,0.370700,8.896800,0.741222,17.789339,CESRQZGMSR8CT434
+savings,eu-west-1,db.r5b.2xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,0.778600,18.686400,0.778600,18.686400,CESRQZGMSR8CT434
+savings,eu-west-1,db.r5b.2xlarge,single-az,oracle,byol,3yr,Partial Upfront,6495.00,0.247200,5.932800,0.494177,11.860247,CESRQZGMSR8CT434
+savings,eu-west-1,db.r5b.2xlarge,single-az,oracle,byol,1yr,All Upfront,6365.00,0.000000,0.000000,0.726101,17.426420,CESRQZGMSR8CT434
+savings,eu-west-1,db.r5b.2xlarge,single-az,oracle,byol,3yr,All Upfront,12731.00,0.000000,0.000000,0.484105,11.618526,CESRQZGMSR8CT434
+onDemand,eu-west-1,db.r7i.16xlarge,single-az,oracle,byol,,,,8.960000,215.040000,8.960000,215.040000,CFU9YWM899DVQU9W
+savings,eu-west-1,db.r7i.16xlarge,single-az,oracle,byol,1yr,Partial Upfront,25509.00,2.912000,69.888000,5.821993,139.727836,CFU9YWM899DVQU9W
+savings,eu-west-1,db.r7i.16xlarge,single-az,oracle,byol,1yr,All Upfront,49450.00,0.000000,0.000000,5.641113,135.386721,CFU9YWM899DVQU9W
+savings,eu-west-1,db.r7i.16xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,6.003000,144.072000,6.003000,144.072000,CFU9YWM899DVQU9W
+onDemand,eu-west-1,db.r3.4xlarge,single-az,oracle,byol,,,,2.110000,50.640000,2.110000,50.640000,CJRUMNVSZUXDGUYS
+onDemand,eu-west-1,db.r5.4xlarge.tpc2.mem2x,single-az,oracle,byol,,,,4.128000,99.072000,4.128000,99.072000,CMZG4JKHRZ7A2V5E
+savings,eu-west-1,db.r5.4xlarge.tpc2.mem2x,single-az,oracle,byol,1yr,Partial Upfront,11385.00,1.299700,31.192800,2.598468,62.363231,CMZG4JKHRZ7A2V5E
+savings,eu-west-1,db.r5.4xlarge.tpc2.mem2x,single-az,oracle,byol,3yr,All Upfront,46810.00,0.000000,0.000000,1.779983,42.719598,CMZG4JKHRZ7A2V5E
+savings,eu-west-1,db.r5.4xlarge.tpc2.mem2x,single-az,oracle,byol,3yr,Partial Upfront,23883.00,0.908800,21.811200,1.816968,43.607230,CMZG4JKHRZ7A2V5E
+savings,eu-west-1,db.r5.4xlarge.tpc2.mem2x,single-az,oracle,byol,1yr,No Upfront,0.00,2.729400,65.505600,2.729400,65.505600,CMZG4JKHRZ7A2V5E
+savings,eu-west-1,db.r5.4xlarge.tpc2.mem2x,single-az,oracle,byol,1yr,All Upfront,22315.00,0.000000,0.000000,2.545631,61.095140,CMZG4JKHRZ7A2V5E
+onDemand,eu-west-1,db.r6id.12xlarge,single-az,oracle,byol,,,,7.968000,191.232000,7.968000,191.232000,CND3ZHJWXX589VWY
+savings,eu-west-1,db.r6id.12xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,6.135000,147.240000,6.135000,147.240000,CND3ZHJWXX589VWY
+savings,eu-west-1,db.r6id.12xlarge,single-az,oracle,byol,1yr,Partial Upfront,26175.00,2.988000,71.712000,5.973969,143.375244,CND3ZHJWXX589VWY
+savings,eu-west-1,db.r6id.12xlarge,single-az,oracle,byol,3yr,Partial Upfront,57579.00,2.191000,52.584000,4.380482,105.131570,CND3ZHJWXX589VWY
+savings,eu-west-1,db.r6id.12xlarge,single-az,oracle,byol,1yr,All Upfront,50957.00,0.000000,0.000000,5.813028,139.512663,CND3ZHJWXX589VWY
+savings,eu-west-1,db.r6id.12xlarge,single-az,oracle,byol,3yr,All Upfront,110980.00,0.000000,0.000000,4.220093,101.282227,CND3ZHJWXX589VWY
+onDemand,eu-west-1,db.r5.large,single-az,oracle,byol,,,,0.310000,7.440000,0.310000,7.440000,DAH35NM9GTDWWRXX
+onDemand,eu-west-1,db.r7i.metal-48xl,single-az,oracle,byol,,,,20.160000,483.840000,20.160000,483.840000,DHBJMYHJ2BXW5JWW
+onDemand,eu-west-1,db.r6id.large,single-az,oracle,byol,,,,0.332000,7.968000,0.332000,7.968000,DMSMXT6HHGQ4VQQX
+savings,eu-west-1,db.r6id.large,single-az,oracle,byol,1yr,No Upfront,0.00,0.256000,6.144000,0.256000,6.144000,DMSMXT6HHGQ4VQQX
+savings,eu-west-1,db.r6id.large,single-az,oracle,byol,3yr,Partial Upfront,2405.00,0.091500,2.196000,0.182952,4.390844,DMSMXT6HHGQ4VQQX
+savings,eu-west-1,db.r6id.large,single-az,oracle,byol,1yr,Partial Upfront,1091.00,0.124500,2.988000,0.248958,5.974995,DMSMXT6HHGQ4VQQX
+savings,eu-west-1,db.r6id.large,single-az,oracle,byol,1yr,All Upfront,2120.00,0.000000,0.000000,0.241843,5.804244,DMSMXT6HHGQ4VQQX
+savings,eu-west-1,db.r6id.large,single-az,oracle,byol,3yr,All Upfront,4625.00,0.000000,0.000000,0.175869,4.220853,DMSMXT6HHGQ4VQQX
+onDemand,eu-west-1,db.r5.4xlarge,single-az,oracle,byol,,,,2.477000,59.448000,2.477000,59.448000,DSQTYX6MFWDP7AKM
+onDemand,eu-west-1,db.r5.24xlarge,single-az,oracle,byol,,,,14.861000,356.664000,14.861000,356.664000,ER8M36H6ESX6PF8W
+onDemand,eu-west-1,db.r5.xlarge.tpc2.mem4x,single-az,oracle,byol,,,,2.062000,49.488000,2.062000,49.488000,EXGST6WT9MSPVHF6
+savings,eu-west-1,db.r5.xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,All Upfront,11160.00,0.000000,0.000000,1.273101,30.554415,EXGST6WT9MSPVHF6
+savings,eu-west-1,db.r5.xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,Partial Upfront,5694.00,0.650000,15.600000,1.299555,31.189322,EXGST6WT9MSPVHF6
+savings,eu-west-1,db.r5.xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,No Upfront,0.00,1.365000,32.760000,1.365000,32.760000,EXGST6WT9MSPVHF6
+savings,eu-west-1,db.r5.xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,Partial Upfront,11940.00,0.454300,10.903200,0.908327,21.799846,EXGST6WT9MSPVHF6
+savings,eu-west-1,db.r5.xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,All Upfront,23403.00,0.000000,0.000000,0.889916,21.357974,EXGST6WT9MSPVHF6
+onDemand,eu-west-1,db.r6i.large.tpc1.mem2x,single-az,oracle,byol,,,,0.516000,12.384000,0.516000,12.384000,EXJ3WKKKDKG6XNP9
+savings,eu-west-1,db.r6i.large.tpc1.mem2x,single-az,oracle,byol,1yr,No Upfront,0.00,0.371500,8.916000,0.371500,8.916000,EXJ3WKKKDKG6XNP9
+savings,eu-west-1,db.r6i.large.tpc1.mem2x,single-az,oracle,byol,3yr,Partial Upfront,3390.00,0.129000,3.096000,0.257907,6.189771,EXJ3WKKKDKG6XNP9
+savings,eu-west-1,db.r6i.large.tpc1.mem2x,single-az,oracle,byol,1yr,All Upfront,3074.00,0.000000,0.000000,0.350673,8.416153,EXJ3WKKKDKG6XNP9
+savings,eu-west-1,db.r6i.large.tpc1.mem2x,single-az,oracle,byol,1yr,Partial Upfront,1582.00,0.180600,4.334400,0.361070,8.665680,EXJ3WKKKDKG6XNP9
+savings,eu-west-1,db.r6i.large.tpc1.mem2x,single-az,oracle,byol,3yr,All Upfront,6509.00,0.000000,0.000000,0.247509,5.940224,EXJ3WKKKDKG6XNP9
+onDemand,eu-west-1,db.r6i.6xlarge.tpc2.mem4x,single-az,oracle,byol,,,,12.374000,296.976000,12.374000,296.976000,EXWTEKNC3V2D9KCU
+savings,eu-west-1,db.r6i.6xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,All Upfront,156217.00,0.000000,0.000000,5.940262,142.566279,EXWTEKNC3V2D9KCU
+savings,eu-west-1,db.r6i.6xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,Partial Upfront,81363.00,3.096000,74.304000,6.189885,148.557251,EXWTEKNC3V2D9KCU
+savings,eu-west-1,db.r6i.6xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,Partial Upfront,37969.00,4.334400,104.025600,8.665794,207.979057,EXWTEKNC3V2D9KCU
+savings,eu-west-1,db.r6i.6xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,All Upfront,73769.00,0.000000,0.000000,8.415355,201.968515,EXWTEKNC3V2D9KCU
+savings,eu-west-1,db.r6i.6xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,No Upfront,0.00,8.916500,213.996000,8.916500,213.996000,EXWTEKNC3V2D9KCU
+onDemand,eu-west-1,db.r7i.8xlarge,single-az,oracle,byol,,,,4.480000,107.520000,4.480000,107.520000,EZGWZC56MHJ4RAXN
+savings,eu-west-1,db.r7i.8xlarge,single-az,oracle,byol,1yr,All Upfront,24721.00,0.000000,0.000000,2.820100,67.682409,EZGWZC56MHJ4RAXN
+savings,eu-west-1,db.r7i.8xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,3.002000,72.048000,3.002000,72.048000,EZGWZC56MHJ4RAXN
+savings,eu-west-1,db.r7i.8xlarge,single-az,oracle,byol,1yr,Partial Upfront,12755.00,1.456000,34.944000,2.911054,69.865287,EZGWZC56MHJ4RAXN
+onDemand,eu-west-1,db.r6i.4xlarge.tpc2.mem3x,single-az,oracle,byol,,,,6.187000,148.488000,6.187000,148.488000,F92YR7GRPZVR7BRB
+savings,eu-west-1,db.r6i.4xlarge.tpc2.mem3x,single-az,oracle,byol,3yr,All Upfront,78108.00,0.000000,0.000000,2.970112,71.282683,F92YR7GRPZVR7BRB
+savings,eu-west-1,db.r6i.4xlarge.tpc2.mem3x,single-az,oracle,byol,3yr,Partial Upfront,40681.00,1.548000,37.152000,3.094924,74.278169,F92YR7GRPZVR7BRB
+savings,eu-west-1,db.r6i.4xlarge.tpc2.mem3x,single-az,oracle,byol,1yr,All Upfront,36885.00,0.000000,0.000000,4.207734,100.985626,F92YR7GRPZVR7BRB
+savings,eu-west-1,db.r6i.4xlarge.tpc2.mem3x,single-az,oracle,byol,1yr,Partial Upfront,18985.00,2.167200,52.012800,4.332954,103.990897,F92YR7GRPZVR7BRB
+savings,eu-west-1,db.r6i.4xlarge.tpc2.mem3x,single-az,oracle,byol,1yr,No Upfront,0.00,4.458200,106.996800,4.458200,106.996800,F92YR7GRPZVR7BRB
+onDemand,eu-west-1,db.r6i.24xlarge,single-az,oracle,byol,,,,12.384000,297.216000,12.384000,297.216000,F9FQ2BEMQJY22ZBQ
+savings,eu-west-1,db.r6i.24xlarge,single-az,oracle,byol,1yr,All Upfront,73769.00,0.000000,0.000000,8.415355,201.968515,F9FQ2BEMQJY22ZBQ
+savings,eu-west-1,db.r6i.24xlarge,single-az,oracle,byol,3yr,Partial Upfront,81363.00,3.096000,74.304000,6.189885,148.557251,F9FQ2BEMQJY22ZBQ
+savings,eu-west-1,db.r6i.24xlarge,single-az,oracle,byol,3yr,All Upfront,156217.00,0.000000,0.000000,5.940262,142.566279,F9FQ2BEMQJY22ZBQ
+savings,eu-west-1,db.r6i.24xlarge,single-az,oracle,byol,1yr,Partial Upfront,37969.00,4.334400,104.025600,8.665794,207.979057,F9FQ2BEMQJY22ZBQ
+savings,eu-west-1,db.r6i.24xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,8.916500,213.996000,8.916500,213.996000,F9FQ2BEMQJY22ZBQ
+onDemand,eu-west-1,db.r6i.2xlarge.tpc2.mem4x,single-az,oracle,byol,,,,4.128000,99.072000,4.128000,99.072000,FHBVFXY3GDGUPQQG
+savings,eu-west-1,db.r6i.2xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,No Upfront,0.00,2.972200,71.332800,2.972200,71.332800,FHBVFXY3GDGUPQQG
+savings,eu-west-1,db.r6i.2xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,Partial Upfront,27121.00,1.032000,24.768000,2.063295,49.519084,FHBVFXY3GDGUPQQG
+savings,eu-west-1,db.r6i.2xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,All Upfront,24590.00,0.000000,0.000000,2.805156,67.323751,FHBVFXY3GDGUPQQG
+savings,eu-west-1,db.r6i.2xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,All Upfront,52072.00,0.000000,0.000000,1.980075,47.521789,FHBVFXY3GDGUPQQG
+savings,eu-west-1,db.r6i.2xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,Partial Upfront,12656.00,1.444800,34.675200,2.888560,69.325440,FHBVFXY3GDGUPQQG
+onDemand,eu-west-1,db.r4.4xlarge,single-az,oracle,byol,,,,2.121600,50.918400,2.121600,50.918400,FRVQP2S6BV886NQE
+onDemand,eu-west-1,db.r5b.4xlarge.tpc2.mem4x,single-az,oracle,byol,,,,9.886000,237.264000,9.886000,237.264000,G24ZY2WBBF6DWB4Q
+savings,eu-west-1,db.r5b.4xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,All Upfront,124731.00,0.000000,0.000000,4.742984,113.831622,G24ZY2WBBF6DWB4Q
+savings,eu-west-1,db.r5b.4xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,Partial Upfront,64964.00,2.472000,59.328000,4.942302,118.615246,G24ZY2WBBF6DWB4Q
+savings,eu-west-1,db.r5b.4xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,Partial Upfront,30317.00,3.460800,83.059200,6.919276,166.062622,G24ZY2WBBF6DWB4Q
+savings,eu-west-1,db.r5b.4xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,All Upfront,58901.00,0.000000,0.000000,6.719256,161.262149,G24ZY2WBBF6DWB4Q
+savings,eu-west-1,db.r5b.4xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,No Upfront,0.00,7.119400,170.865600,7.119400,170.865600,G24ZY2WBBF6DWB4Q
+onDemand,eu-west-1,db.r5.2xlarge.tpc1.mem2x,single-az,oracle,byol,,,,2.062000,49.488000,2.062000,49.488000,G79HKPR29ES6X6ZK
+savings,eu-west-1,db.r5.2xlarge.tpc1.mem2x,single-az,oracle,byol,1yr,Partial Upfront,5694.00,0.650000,15.600000,1.299555,31.189322,G79HKPR29ES6X6ZK
+savings,eu-west-1,db.r5.2xlarge.tpc1.mem2x,single-az,oracle,byol,3yr,All Upfront,23403.00,0.000000,0.000000,0.889916,21.357974,G79HKPR29ES6X6ZK
+savings,eu-west-1,db.r5.2xlarge.tpc1.mem2x,single-az,oracle,byol,1yr,All Upfront,11160.00,0.000000,0.000000,1.273101,30.554415,G79HKPR29ES6X6ZK
+savings,eu-west-1,db.r5.2xlarge.tpc1.mem2x,single-az,oracle,byol,3yr,Partial Upfront,11940.00,0.454300,10.903200,0.908327,21.799846,G79HKPR29ES6X6ZK
+savings,eu-west-1,db.r5.2xlarge.tpc1.mem2x,single-az,oracle,byol,1yr,No Upfront,0.00,1.365000,32.760000,1.365000,32.760000,G79HKPR29ES6X6ZK
+onDemand,eu-west-1,db.r3.xlarge,single-az,oracle,byol,,,,0.530000,12.720000,0.530000,12.720000,GBY2U2YSCR4DREFG
+onDemand,eu-west-1,db.r6i.32xlarge,single-az,oracle,byol,,,,16.512000,396.288000,16.512000,396.288000,GF4JBJRW9CFZ2BXB
+savings,eu-west-1,db.r6i.32xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,11.888600,285.326400,11.888600,285.326400,GF4JBJRW9CFZ2BXB
+savings,eu-west-1,db.r6i.32xlarge,single-az,oracle,byol,3yr,Partial Upfront,108484.00,4.128000,99.072000,8.253181,198.076335,GF4JBJRW9CFZ2BXB
+savings,eu-west-1,db.r6i.32xlarge,single-az,oracle,byol,3yr,All Upfront,208289.00,0.000000,0.000000,7.920336,190.088068,GF4JBJRW9CFZ2BXB
+savings,eu-west-1,db.r6i.32xlarge,single-az,oracle,byol,1yr,All Upfront,98359.00,0.000000,0.000000,11.220511,269.292266,GF4JBJRW9CFZ2BXB
+savings,eu-west-1,db.r6i.32xlarge,single-az,oracle,byol,1yr,Partial Upfront,50626.00,5.779200,138.700800,11.554468,277.307234,GF4JBJRW9CFZ2BXB
+onDemand,eu-west-1,db.r7i.6xlarge.tpc2.mem4x,single-az,oracle,byol,,,,13.440000,322.560000,13.440000,322.560000,GV3VR2JXYH243DBW
+onDemand,eu-west-1,db.r7i.2xlarge,single-az,oracle,byol,,,,1.120000,26.880000,1.120000,26.880000,H4PECP4W45MHJXTZ
+onDemand,eu-west-1,db.r5d.2xlarge,single-az,oracle,byol,,,,1.180000,28.320000,1.180000,28.320000,HBHZMNPZYHBGQC97
+savings,eu-west-1,db.r5d.2xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,0.852500,20.460000,0.852500,20.460000,HBHZMNPZYHBGQC97
+savings,eu-west-1,db.r5d.2xlarge,single-az,oracle,byol,1yr,All Upfront,7053.00,0.000000,0.000000,0.804586,19.310062,HBHZMNPZYHBGQC97
+savings,eu-west-1,db.r5d.2xlarge,single-az,oracle,byol,3yr,All Upfront,14935.00,0.000000,0.000000,0.567914,13.629934,HBHZMNPZYHBGQC97
+savings,eu-west-1,db.r5d.2xlarge,single-az,oracle,byol,1yr,Partial Upfront,3630.00,0.414400,9.945600,0.828500,19.883998,HBHZMNPZYHBGQC97
+savings,eu-west-1,db.r5d.2xlarge,single-az,oracle,byol,3yr,Partial Upfront,7779.00,0.296000,7.104000,0.591802,14.203247,HBHZMNPZYHBGQC97
+onDemand,eu-west-1,db.r5b.6xlarge.tpc2.mem4x,single-az,oracle,byol,,,,14.830000,355.920000,14.830000,355.920000,HBPNJJ9QNJWTDRCT
+savings,eu-west-1,db.r5b.6xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,Partial Upfront,45475.00,5.191200,124.588800,10.378857,249.092565,HBPNJJ9QNJWTDRCT
+savings,eu-west-1,db.r5b.6xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,All Upfront,88351.00,0.000000,0.000000,10.078827,241.891855,HBPNJJ9QNJWTDRCT
+savings,eu-west-1,db.r5b.6xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,Partial Upfront,97446.00,3.708000,88.992000,7.413453,177.922869,HBPNJJ9QNJWTDRCT
+savings,eu-west-1,db.r5b.6xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,All Upfront,187097.00,0.000000,0.000000,7.114495,170.747890,HBPNJJ9QNJWTDRCT
+savings,eu-west-1,db.r5b.6xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,No Upfront,0.00,10.679000,256.296000,10.679000,256.296000,HBPNJJ9QNJWTDRCT
+onDemand,eu-west-1,db.r7i.8xlarge.tpc2.mem2x,single-az,oracle,byol,,,,8.960000,215.040000,8.960000,215.040000,JBFF8J62F2YEF2E7
+onDemand,eu-west-1,db.r5.2xlarge.tpc2.mem4x,single-az,oracle,byol,,,,4.128000,99.072000,4.128000,99.072000,JDAQ7854DQD7S6AR
+savings,eu-west-1,db.r5.2xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,Partial Upfront,11385.00,1.299700,31.192800,2.598468,62.363231,JDAQ7854DQD7S6AR
+savings,eu-west-1,db.r5.2xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,All Upfront,46810.00,0.000000,0.000000,1.779983,42.719598,JDAQ7854DQD7S6AR
+savings,eu-west-1,db.r5.2xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,All Upfront,22315.00,0.000000,0.000000,2.545631,61.095140,JDAQ7854DQD7S6AR
+savings,eu-west-1,db.r5.2xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,Partial Upfront,23883.00,0.908800,21.811200,1.816968,43.607230,JDAQ7854DQD7S6AR
+savings,eu-west-1,db.r5.2xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,No Upfront,0.00,2.729400,65.505600,2.729400,65.505600,JDAQ7854DQD7S6AR
+onDemand,eu-west-1,db.r6in.32xlarge,single-az,oracle,byol,,,,24.832000,595.968000,24.832000,595.968000,JHN7GY3JRBP8NV8A
+onDemand,eu-west-1,db.r5.4xlarge,single-az,oracle,byol,,,,2.062000,49.488000,2.062000,49.488000,K4BCBWWX3K4H9YGU
+savings,eu-west-1,db.r5.4xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,1.365000,32.760000,1.365000,32.760000,K4BCBWWX3K4H9YGU
+savings,eu-west-1,db.r5.4xlarge,single-az,oracle,byol,1yr,Partial Upfront,5694.00,0.650000,15.600000,1.299555,31.189322,K4BCBWWX3K4H9YGU
+savings,eu-west-1,db.r5.4xlarge,single-az,oracle,byol,3yr,Partial Upfront,11940.00,0.454300,10.903200,0.908327,21.799846,K4BCBWWX3K4H9YGU
+savings,eu-west-1,db.r5.4xlarge,single-az,oracle,byol,3yr,All Upfront,23403.00,0.000000,0.000000,0.889916,21.357974,K4BCBWWX3K4H9YGU
+savings,eu-west-1,db.r5.4xlarge,single-az,oracle,byol,1yr,All Upfront,11160.00,0.000000,0.000000,1.273101,30.554415,K4BCBWWX3K4H9YGU
+onDemand,eu-west-1,db.r6i.8xlarge,single-az,oracle,byol,,,,4.128000,99.072000,4.128000,99.072000,K52RFD9Z2X9PZHPG
+savings,eu-west-1,db.r6i.8xlarge,single-az,oracle,byol,1yr,All Upfront,22315.00,0.000000,0.000000,2.545631,61.095140,K52RFD9Z2X9PZHPG
+savings,eu-west-1,db.r6i.8xlarge,single-az,oracle,byol,1yr,Partial Upfront,11385.00,1.299700,31.192800,2.598468,62.363231,K52RFD9Z2X9PZHPG
+savings,eu-west-1,db.r6i.8xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,2.729400,65.505600,2.729400,65.505600,K52RFD9Z2X9PZHPG
+savings,eu-west-1,db.r6i.8xlarge,single-az,oracle,byol,3yr,Partial Upfront,23883.00,0.908800,21.811200,1.816968,43.607230,K52RFD9Z2X9PZHPG
+savings,eu-west-1,db.r6i.8xlarge,single-az,oracle,byol,3yr,All Upfront,46810.00,0.000000,0.000000,1.779983,42.719598,K52RFD9Z2X9PZHPG
+onDemand,eu-west-1,db.r7i.large,single-az,oracle,byol,,,,0.280000,6.720000,0.280000,6.720000,KHMVPBEQRZWH2SAJ
+savings,eu-west-1,db.r7i.large,single-az,oracle,byol,1yr,No Upfront,0.00,0.188000,4.512000,0.188000,4.512000,KHMVPBEQRZWH2SAJ
+savings,eu-west-1,db.r7i.large,single-az,oracle,byol,1yr,Partial Upfront,797.00,0.091000,2.184000,0.181919,4.366067,KHMVPBEQRZWH2SAJ
+savings,eu-west-1,db.r7i.large,single-az,oracle,byol,1yr,All Upfront,1542.00,0.000000,0.000000,0.175907,4.221766,KHMVPBEQRZWH2SAJ
+onDemand,eu-west-1,db.r3.large,single-az,oracle,byol,,,,0.265000,6.360000,0.265000,6.360000,KR6UXJK2FNGZQB4X
+onDemand,eu-west-1,db.r7i.6xlarge.tpc2.mem2x,single-az,oracle,byol,,,,6.720000,161.280000,6.720000,161.280000,KS47FNRD7R2R8TSZ
+onDemand,eu-west-1,db.r7i.48xlarge,single-az,oracle,byol,,,,26.880000,645.120000,26.880000,645.120000,KXMMGEZD63C5X4P5
+savings,eu-west-1,db.r7i.48xlarge,single-az,oracle,byol,1yr,All Upfront,148342.00,0.000000,0.000000,16.922428,406.138261,KXMMGEZD63C5X4P5
+savings,eu-west-1,db.r7i.48xlarge,single-az,oracle,byol,1yr,Partial Upfront,76527.00,8.736000,209.664000,17.465979,419.183507,KXMMGEZD63C5X4P5
+savings,eu-west-1,db.r7i.48xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,18.010000,432.240000,18.010000,432.240000,KXMMGEZD63C5X4P5
+onDemand,eu-west-1,db.r7i.8xlarge,single-az,oracle,byol,,,,4.480000,107.520000,4.480000,107.520000,MDZ64TBGRERAYM6A
+onDemand,eu-west-1,db.r6i.2xlarge.tpc1.mem2x,single-az,oracle,byol,,,,2.062000,49.488000,2.062000,49.488000,MP4AFUFFN23JE9PH
+savings,eu-west-1,db.r6i.2xlarge.tpc1.mem2x,single-az,oracle,byol,3yr,All Upfront,26036.00,0.000000,0.000000,0.990037,23.760894,MP4AFUFFN23JE9PH
+savings,eu-west-1,db.r6i.2xlarge.tpc1.mem2x,single-az,oracle,byol,1yr,No Upfront,0.00,1.486100,35.666400,1.486100,35.666400,MP4AFUFFN23JE9PH
+savings,eu-west-1,db.r6i.2xlarge.tpc1.mem2x,single-az,oracle,byol,1yr,Partial Upfront,6328.00,0.722400,17.337600,1.444280,34.662720,MP4AFUFFN23JE9PH
+savings,eu-west-1,db.r6i.2xlarge.tpc1.mem2x,single-az,oracle,byol,1yr,All Upfront,12295.00,0.000000,0.000000,1.402578,33.661875,MP4AFUFFN23JE9PH
+savings,eu-west-1,db.r6i.2xlarge.tpc1.mem2x,single-az,oracle,byol,3yr,Partial Upfront,13560.00,0.516000,12.384000,1.031629,24.759086,MP4AFUFFN23JE9PH
+onDemand,eu-west-1,db.r7i.2xlarge.tpc2.mem8x,single-az,oracle,byol,,,,8.960000,215.040000,8.960000,215.040000,MVP9EMHR3CBN283D
+onDemand,eu-west-1,db.r5b.24xlarge,single-az,oracle,byol,,,,14.830000,355.920000,14.830000,355.920000,NS3J5CF52C899F5A
+savings,eu-west-1,db.r5b.24xlarge,single-az,oracle,byol,3yr,All Upfront,152771.00,0.000000,0.000000,5.809225,139.421401,NS3J5CF52C899F5A
+savings,eu-west-1,db.r5b.24xlarge,single-az,oracle,byol,3yr,Partial Upfront,77944.00,2.965900,71.181600,5.929776,142.314614,NS3J5CF52C899F5A
+savings,eu-west-1,db.r5b.24xlarge,single-az,oracle,byol,1yr,All Upfront,76386.00,0.000000,0.000000,8.713895,209.133470,NS3J5CF52C899F5A
+savings,eu-west-1,db.r5b.24xlarge,single-az,oracle,byol,1yr,Partial Upfront,38972.00,4.448900,106.773600,8.894713,213.473121,NS3J5CF52C899F5A
+savings,eu-west-1,db.r5b.24xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,9.342600,224.222400,9.342600,224.222400,NS3J5CF52C899F5A
+onDemand,eu-west-1,db.r7i.4xlarge.tpc2.mem2x,single-az,oracle,byol,,,,4.480000,107.520000,4.480000,107.520000,NTA9562NWRXEKVJV
+onDemand,eu-west-1,db.r5b.8xlarge,single-az,oracle,byol,,,,4.944000,118.656000,4.944000,118.656000,NVQ8SD2MEM46RNQ8
+savings,eu-west-1,db.r5b.8xlarge,single-az,oracle,byol,1yr,Partial Upfront,15158.00,1.730400,41.529600,3.459581,83.029942,NVQ8SD2MEM46RNQ8
+savings,eu-west-1,db.r5b.8xlarge,single-az,oracle,byol,1yr,All Upfront,29450.00,0.000000,0.000000,3.359571,80.629706,NVQ8SD2MEM46RNQ8
+savings,eu-west-1,db.r5b.8xlarge,single-az,oracle,byol,3yr,All Upfront,62366.00,0.000000,0.000000,2.371511,56.916267,NVQ8SD2MEM46RNQ8
+savings,eu-west-1,db.r5b.8xlarge,single-az,oracle,byol,3yr,Partial Upfront,32482.00,1.236000,29.664000,2.471151,59.307623,NVQ8SD2MEM46RNQ8
+savings,eu-west-1,db.r5b.8xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,3.559700,85.432800,3.559700,85.432800,NVQ8SD2MEM46RNQ8
+onDemand,eu-west-1,db.r7i.3xlarge.tpc2.mem4x,single-az,oracle,byol,,,,6.720000,161.280000,6.720000,161.280000,NZEDKFV9DQW6CQKJ
+onDemand,eu-west-1,db.r6id.32xlarge,single-az,oracle,byol,,,,21.248000,509.952000,21.248000,509.952000,P2EGN7X2DAHX8Q6M
+savings,eu-west-1,db.r6id.32xlarge,single-az,oracle,byol,3yr,All Upfront,295939.00,0.000000,0.000000,11.253289,270.078941,P2EGN7X2DAHX8Q6M
+savings,eu-west-1,db.r6id.32xlarge,single-az,oracle,byol,3yr,Partial Upfront,153554.00,5.843000,140.232000,11.681999,280.367980,P2EGN7X2DAHX8Q6M
+savings,eu-west-1,db.r6id.32xlarge,single-az,oracle,byol,1yr,All Upfront,135876.00,0.000000,0.000000,15.500342,372.008214,P2EGN7X2DAHX8Q6M
+savings,eu-west-1,db.r6id.32xlarge,single-az,oracle,byol,1yr,Partial Upfront,69800.00,7.968000,191.232000,15.930583,382.333985,P2EGN7X2DAHX8Q6M
+savings,eu-west-1,db.r6id.32xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,16.361000,392.664000,16.361000,392.664000,P2EGN7X2DAHX8Q6M
+onDemand,eu-west-1,db.r7i.48xlarge,single-az,oracle,byol,,,,26.880000,645.120000,26.880000,645.120000,P58RESH3Q6UTPNUA
+onDemand,eu-west-1,db.r6id.16xlarge,single-az,oracle,byol,,,,10.624000,254.976000,10.624000,254.976000,PAT6FPF23SATD77K
+savings,eu-west-1,db.r6id.16xlarge,single-az,oracle,byol,3yr,Partial Upfront,76777.00,2.921500,70.116000,5.841000,140.183990,PAT6FPF23SATD77K
+savings,eu-west-1,db.r6id.16xlarge,single-az,oracle,byol,3yr,All Upfront,147983.00,0.000000,0.000000,5.627158,135.051791,PAT6FPF23SATD77K
+savings,eu-west-1,db.r6id.16xlarge,single-az,oracle,byol,1yr,All Upfront,67943.00,0.000000,0.000000,7.750742,186.017796,PAT6FPF23SATD77K
+savings,eu-west-1,db.r6id.16xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,8.180000,196.320000,8.180000,196.320000,PAT6FPF23SATD77K
+savings,eu-west-1,db.r6id.16xlarge,single-az,oracle,byol,1yr,Partial Upfront,34900.00,3.984000,95.616000,7.965291,191.166992,PAT6FPF23SATD77K
+onDemand,eu-west-1,db.r5b.8xlarge.tpc2.mem3x,single-az,oracle,byol,,,,14.830000,355.920000,14.830000,355.920000,PK75M5U6QS3M8236
+savings,eu-west-1,db.r5b.8xlarge.tpc2.mem3x,single-az,oracle,byol,1yr,Partial Upfront,45475.00,5.191200,124.588800,10.378857,249.092565,PK75M5U6QS3M8236
+savings,eu-west-1,db.r5b.8xlarge.tpc2.mem3x,single-az,oracle,byol,1yr,No Upfront,0.00,10.679000,256.296000,10.679000,256.296000,PK75M5U6QS3M8236
+savings,eu-west-1,db.r5b.8xlarge.tpc2.mem3x,single-az,oracle,byol,3yr,Partial Upfront,97446.00,3.708000,88.992000,7.413453,177.922869,PK75M5U6QS3M8236
+savings,eu-west-1,db.r5b.8xlarge.tpc2.mem3x,single-az,oracle,byol,1yr,All Upfront,88351.00,0.000000,0.000000,10.078827,241.891855,PK75M5U6QS3M8236
+savings,eu-west-1,db.r5b.8xlarge.tpc2.mem3x,single-az,oracle,byol,3yr,All Upfront,187097.00,0.000000,0.000000,7.114495,170.747890,PK75M5U6QS3M8236
+onDemand,eu-west-1,db.r6in.16xlarge,single-az,oracle,byol,,,,12.416000,297.984000,12.416000,297.984000,PS3U5JNBN6KR7EXV
+onDemand,eu-west-1,db.r6id.2xlarge,single-az,oracle,byol,,,,1.328000,31.872000,1.328000,31.872000,PZ6SDTMA8722MFD4
+savings,eu-west-1,db.r6id.2xlarge,single-az,oracle,byol,3yr,All Upfront,18501.00,0.000000,0.000000,0.703514,16.884326,PZ6SDTMA8722MFD4
+savings,eu-west-1,db.r6id.2xlarge,single-az,oracle,byol,1yr,Partial Upfront,4362.00,0.498000,11.952000,0.995604,23.894505,PZ6SDTMA8722MFD4
+savings,eu-west-1,db.r6id.2xlarge,single-az,oracle,byol,3yr,Partial Upfront,9592.00,0.365000,8.760000,0.729743,17.513822,PZ6SDTMA8722MFD4
+savings,eu-west-1,db.r6id.2xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,1.023000,24.552000,1.023000,24.552000,PZ6SDTMA8722MFD4
+savings,eu-west-1,db.r6id.2xlarge,single-az,oracle,byol,1yr,All Upfront,8488.00,0.000000,0.000000,0.968287,23.238877,PZ6SDTMA8722MFD4
+onDemand,eu-west-1,db.r5b.16xlarge,single-az,oracle,byol,,,,9.888000,237.312000,9.888000,237.312000,QCU645J8PDYF9875
+savings,eu-west-1,db.r5b.16xlarge,single-az,oracle,byol,1yr,Partial Upfront,30317.00,3.460800,83.059200,6.919276,166.062622,QCU645J8PDYF9875
+savings,eu-west-1,db.r5b.16xlarge,single-az,oracle,byol,3yr,All Upfront,124731.00,0.000000,0.000000,4.742984,113.831622,QCU645J8PDYF9875
+savings,eu-west-1,db.r5b.16xlarge,single-az,oracle,byol,3yr,Partial Upfront,64964.00,2.472000,59.328000,4.942302,118.615246,QCU645J8PDYF9875
+savings,eu-west-1,db.r5b.16xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,7.119400,170.865600,7.119400,170.865600,QCU645J8PDYF9875
+savings,eu-west-1,db.r5b.16xlarge,single-az,oracle,byol,1yr,All Upfront,58901.00,0.000000,0.000000,6.719256,161.262149,QCU645J8PDYF9875
+onDemand,eu-west-1,db.r6in.2xlarge,single-az,oracle,byol,,,,1.552000,37.248000,1.552000,37.248000,QJM7W23G2HE2867K
+onDemand,eu-west-1,db.r5b.4xlarge,single-az,oracle,byol,,,,2.472000,59.328000,2.472000,59.328000,QQTEJ6Q3BJ7HHAMX
+savings,eu-west-1,db.r5b.4xlarge,single-az,oracle,byol,1yr,Partial Upfront,6495.00,0.741500,17.796000,1.482431,35.578341,QQTEJ6Q3BJ7HHAMX
+savings,eu-west-1,db.r5b.4xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,1.557100,37.370400,1.557100,37.370400,QQTEJ6Q3BJ7HHAMX
+savings,eu-west-1,db.r5b.4xlarge,single-az,oracle,byol,3yr,Partial Upfront,12991.00,0.494300,11.863200,0.988292,23.719007,QQTEJ6Q3BJ7HHAMX
+savings,eu-west-1,db.r5b.4xlarge,single-az,oracle,byol,3yr,All Upfront,25462.00,0.000000,0.000000,0.968211,23.237052,QQTEJ6Q3BJ7HHAMX
+savings,eu-west-1,db.r5b.4xlarge,single-az,oracle,byol,1yr,All Upfront,12731.00,0.000000,0.000000,1.452316,34.855578,QQTEJ6Q3BJ7HHAMX
+onDemand,eu-west-1,db.r6i.8xlarge.tpc2.mem4x,single-az,oracle,byol,,,,16.512000,396.288000,16.512000,396.288000,QR7EASS3FH888C39
+savings,eu-west-1,db.r6i.8xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,No Upfront,0.00,11.888600,285.326400,11.888600,285.326400,QR7EASS3FH888C39
+savings,eu-west-1,db.r6i.8xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,Partial Upfront,108484.00,4.128000,99.072000,8.253181,198.076335,QR7EASS3FH888C39
+savings,eu-west-1,db.r6i.8xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,All Upfront,208289.00,0.000000,0.000000,7.920336,190.088068,QR7EASS3FH888C39
+savings,eu-west-1,db.r6i.8xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,All Upfront,98359.00,0.000000,0.000000,11.220511,269.292266,QR7EASS3FH888C39
+savings,eu-west-1,db.r6i.8xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,Partial Upfront,50626.00,5.779200,138.700800,11.554468,277.307234,QR7EASS3FH888C39
+onDemand,eu-west-1,db.r6i.xlarge,single-az,oracle,byol,,,,0.516000,12.384000,0.516000,12.384000,QSR3S364QZFRD8J5
+savings,eu-west-1,db.r6i.xlarge,single-az,oracle,byol,3yr,All Upfront,6509.00,0.000000,0.000000,0.247509,5.940224,QSR3S364QZFRD8J5
+savings,eu-west-1,db.r6i.xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,0.371500,8.916000,0.371500,8.916000,QSR3S364QZFRD8J5
+savings,eu-west-1,db.r6i.xlarge,single-az,oracle,byol,1yr,Partial Upfront,1582.00,0.180600,4.334400,0.361070,8.665680,QSR3S364QZFRD8J5
+savings,eu-west-1,db.r6i.xlarge,single-az,oracle,byol,1yr,All Upfront,3074.00,0.000000,0.000000,0.350673,8.416153,QSR3S364QZFRD8J5
+savings,eu-west-1,db.r6i.xlarge,single-az,oracle,byol,3yr,Partial Upfront,3390.00,0.129000,3.096000,0.257907,6.189771,QSR3S364QZFRD8J5
+onDemand,eu-west-1,db.r5b.4xlarge,single-az,oracle,byol,,,,2.472000,59.328000,2.472000,59.328000,QWMDJPUV5CDDBTRU
+savings,eu-west-1,db.r5b.4xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,1.779800,42.715200,1.779800,42.715200,QWMDJPUV5CDDBTRU
+savings,eu-west-1,db.r5b.4xlarge,single-az,oracle,byol,3yr,All Upfront,31183.00,0.000000,0.000000,1.185756,28.458134,QWMDJPUV5CDDBTRU
+savings,eu-west-1,db.r5b.4xlarge,single-az,oracle,byol,3yr,Partial Upfront,16241.00,0.618000,14.832000,1.235575,29.653812,QWMDJPUV5CDDBTRU
+savings,eu-west-1,db.r5b.4xlarge,single-az,oracle,byol,1yr,Partial Upfront,7579.00,0.865200,20.764800,1.729790,41.514971,QWMDJPUV5CDDBTRU
+savings,eu-west-1,db.r5b.4xlarge,single-az,oracle,byol,1yr,All Upfront,14725.00,0.000000,0.000000,1.679786,40.314853,QWMDJPUV5CDDBTRU
+onDemand,eu-west-1,db.r6i.4xlarge.tpc2.mem2x,single-az,oracle,byol,,,,4.128000,99.072000,4.128000,99.072000,RFJ99UZAKYHQQBWW
+savings,eu-west-1,db.r6i.4xlarge.tpc2.mem2x,single-az,oracle,byol,3yr,All Upfront,52072.00,0.000000,0.000000,1.980075,47.521789,RFJ99UZAKYHQQBWW
+savings,eu-west-1,db.r6i.4xlarge.tpc2.mem2x,single-az,oracle,byol,1yr,All Upfront,24590.00,0.000000,0.000000,2.805156,67.323751,RFJ99UZAKYHQQBWW
+savings,eu-west-1,db.r6i.4xlarge.tpc2.mem2x,single-az,oracle,byol,3yr,Partial Upfront,27121.00,1.032000,24.768000,2.063295,49.519084,RFJ99UZAKYHQQBWW
+savings,eu-west-1,db.r6i.4xlarge.tpc2.mem2x,single-az,oracle,byol,1yr,No Upfront,0.00,2.972200,71.332800,2.972200,71.332800,RFJ99UZAKYHQQBWW
+savings,eu-west-1,db.r6i.4xlarge.tpc2.mem2x,single-az,oracle,byol,1yr,Partial Upfront,12656.00,1.444800,34.675200,2.888560,69.325440,RFJ99UZAKYHQQBWW
+onDemand,eu-west-1,db.r7i.12xlarge,single-az,oracle,byol,,,,6.720000,161.280000,6.720000,161.280000,RHBSA4N7Y32EGWQM
+savings,eu-west-1,db.r7i.12xlarge,single-az,oracle,byol,1yr,Partial Upfront,19132.00,2.184000,52.416000,4.366523,104.796561,RHBSA4N7Y32EGWQM
+savings,eu-west-1,db.r7i.12xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,4.502000,108.048000,4.502000,108.048000,RHBSA4N7Y32EGWQM
+savings,eu-west-1,db.r7i.12xlarge,single-az,oracle,byol,1yr,All Upfront,37090.00,0.000000,0.000000,4.231120,101.546886,RHBSA4N7Y32EGWQM
+onDemand,eu-west-1,db.r4.8xlarge,single-az,oracle,byol,,,,4.243200,101.836800,4.243200,101.836800,RP28H2DMRW26PZ38
+onDemand,eu-west-1,db.r5.large.tpc1.mem2x,single-az,oracle,byol,,,,0.516000,12.384000,0.516000,12.384000,RS49RZNBS8289X5E
+savings,eu-west-1,db.r5.large.tpc1.mem2x,single-az,oracle,byol,1yr,Partial Upfront,1423.00,0.162500,3.900000,0.324832,7.795962,RS49RZNBS8289X5E
+savings,eu-west-1,db.r5.large.tpc1.mem2x,single-az,oracle,byol,1yr,All Upfront,2790.00,0.000000,0.000000,0.318275,7.638604,RS49RZNBS8289X5E
+savings,eu-west-1,db.r5.large.tpc1.mem2x,single-az,oracle,byol,1yr,No Upfront,0.00,0.341200,8.188800,0.341200,8.188800,RS49RZNBS8289X5E
+savings,eu-west-1,db.r5.large.tpc1.mem2x,single-az,oracle,byol,3yr,Partial Upfront,2985.00,0.113600,2.726400,0.227107,5.450562,RS49RZNBS8289X5E
+savings,eu-west-1,db.r5.large.tpc1.mem2x,single-az,oracle,byol,3yr,All Upfront,5851.00,0.000000,0.000000,0.222488,5.339722,RS49RZNBS8289X5E
+onDemand,eu-west-1,db.r5b.12xlarge,single-az,oracle,byol,,,,7.416000,177.984000,7.416000,177.984000,RTEMCG5NH7NZ4VGN
+savings,eu-west-1,db.r5b.12xlarge,single-az,oracle,byol,1yr,All Upfront,44176.00,0.000000,0.000000,5.039471,120.947296,RTEMCG5NH7NZ4VGN
+savings,eu-west-1,db.r5b.12xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,5.339500,128.148000,5.339500,128.148000,RTEMCG5NH7NZ4VGN
+savings,eu-west-1,db.r5b.12xlarge,single-az,oracle,byol,1yr,Partial Upfront,22737.00,2.595600,62.294400,5.189371,124.544913,RTEMCG5NH7NZ4VGN
+savings,eu-west-1,db.r5b.12xlarge,single-az,oracle,byol,3yr,Partial Upfront,48723.00,1.854000,44.496000,3.706726,88.961435,RTEMCG5NH7NZ4VGN
+savings,eu-west-1,db.r5b.12xlarge,single-az,oracle,byol,3yr,All Upfront,93548.00,0.000000,0.000000,3.557229,85.373488,RTEMCG5NH7NZ4VGN
+onDemand,eu-west-1,db.r5b.2xlarge.tpc2.mem8x,single-az,oracle,byol,,,,9.886000,237.264000,9.886000,237.264000,S3F7A76UD9PHAQG4
+savings,eu-west-1,db.r5b.2xlarge.tpc2.mem8x,single-az,oracle,byol,3yr,Partial Upfront,64964.00,2.472000,59.328000,4.942302,118.615246,S3F7A76UD9PHAQG4
+savings,eu-west-1,db.r5b.2xlarge.tpc2.mem8x,single-az,oracle,byol,3yr,All Upfront,124731.00,0.000000,0.000000,4.742984,113.831622,S3F7A76UD9PHAQG4
+savings,eu-west-1,db.r5b.2xlarge.tpc2.mem8x,single-az,oracle,byol,1yr,No Upfront,0.00,7.119400,170.865600,7.119400,170.865600,S3F7A76UD9PHAQG4
+savings,eu-west-1,db.r5b.2xlarge.tpc2.mem8x,single-az,oracle,byol,1yr,Partial Upfront,30317.00,3.460800,83.059200,6.919276,166.062622,S3F7A76UD9PHAQG4
+savings,eu-west-1,db.r5b.2xlarge.tpc2.mem8x,single-az,oracle,byol,1yr,All Upfront,58901.00,0.000000,0.000000,6.719256,161.262149,S3F7A76UD9PHAQG4
+onDemand,eu-west-1,db.r6i.8xlarge.tpc2.mem3x,single-az,oracle,byol,,,,12.374000,296.976000,12.374000,296.976000,S4NPTAJQ4UTBKKN8
+savings,eu-west-1,db.r6i.8xlarge.tpc2.mem3x,single-az,oracle,byol,3yr,Partial Upfront,81363.00,3.096000,74.304000,6.189885,148.557251,S4NPTAJQ4UTBKKN8
+savings,eu-west-1,db.r6i.8xlarge.tpc2.mem3x,single-az,oracle,byol,3yr,All Upfront,156217.00,0.000000,0.000000,5.940262,142.566279,S4NPTAJQ4UTBKKN8
+savings,eu-west-1,db.r6i.8xlarge.tpc2.mem3x,single-az,oracle,byol,1yr,All Upfront,73769.00,0.000000,0.000000,8.415355,201.968515,S4NPTAJQ4UTBKKN8
+savings,eu-west-1,db.r6i.8xlarge.tpc2.mem3x,single-az,oracle,byol,1yr,No Upfront,0.00,8.916500,213.996000,8.916500,213.996000,S4NPTAJQ4UTBKKN8
+savings,eu-west-1,db.r6i.8xlarge.tpc2.mem3x,single-az,oracle,byol,1yr,Partial Upfront,37969.00,4.334400,104.025600,8.665794,207.979057,S4NPTAJQ4UTBKKN8
+onDemand,eu-west-1,db.r4.16xlarge,single-az,oracle,byol,,,,8.486400,203.673600,8.486400,203.673600,S7M8DXJ2J36BQFK4
+onDemand,eu-west-1,db.r5b.xlarge.tpc2.mem4x,single-az,oracle,byol,,,,2.472000,59.328000,2.472000,59.328000,SC26ZKSYZH9CMXS4
+savings,eu-west-1,db.r5b.xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,No Upfront,0.00,1.779800,42.715200,1.779800,42.715200,SC26ZKSYZH9CMXS4
+savings,eu-west-1,db.r5b.xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,Partial Upfront,7579.00,0.865200,20.764800,1.729790,41.514971,SC26ZKSYZH9CMXS4
+savings,eu-west-1,db.r5b.xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,Partial Upfront,16241.00,0.618000,14.832000,1.235575,29.653812,SC26ZKSYZH9CMXS4
+savings,eu-west-1,db.r5b.xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,All Upfront,14725.00,0.000000,0.000000,1.679786,40.314853,SC26ZKSYZH9CMXS4
+savings,eu-west-1,db.r5b.xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,All Upfront,31183.00,0.000000,0.000000,1.185756,28.458134,SC26ZKSYZH9CMXS4
+onDemand,eu-west-1,db.r5d.large,single-az,oracle,byol,,,,0.295000,7.080000,0.295000,7.080000,SHG3Q38GACRZ633R
+savings,eu-west-1,db.r5d.large,single-az,oracle,byol,1yr,No Upfront,0.00,0.213100,5.114400,0.213100,5.114400,SHG3Q38GACRZ633R
+savings,eu-west-1,db.r5d.large,single-az,oracle,byol,1yr,Partial Upfront,908.00,0.103600,2.486400,0.207182,4.972369,SHG3Q38GACRZ633R
+savings,eu-west-1,db.r5d.large,single-az,oracle,byol,1yr,All Upfront,1763.00,0.000000,0.000000,0.201118,4.826831,SHG3Q38GACRZ633R
+savings,eu-west-1,db.r5d.large,single-az,oracle,byol,3yr,All Upfront,3734.00,0.000000,0.000000,0.141988,3.407712,SHG3Q38GACRZ633R
+savings,eu-west-1,db.r5d.large,single-az,oracle,byol,3yr,Partial Upfront,1945.00,0.074000,1.776000,0.147960,3.551040,SHG3Q38GACRZ633R
+onDemand,eu-west-1,db.r5b.2xlarge.tpc2.mem4x,single-az,oracle,byol,,,,4.943000,118.632000,4.943000,118.632000,SN26UF89947T4GQV
+savings,eu-west-1,db.r5b.2xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,No Upfront,0.00,3.559700,85.432800,3.559700,85.432800,SN26UF89947T4GQV
+savings,eu-west-1,db.r5b.2xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,Partial Upfront,15158.00,1.730400,41.529600,3.459581,83.029942,SN26UF89947T4GQV
+savings,eu-west-1,db.r5b.2xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,All Upfront,62366.00,0.000000,0.000000,2.371511,56.916267,SN26UF89947T4GQV
+savings,eu-west-1,db.r5b.2xlarge.tpc2.mem4x,single-az,oracle,byol,1yr,All Upfront,29450.00,0.000000,0.000000,3.359571,80.629706,SN26UF89947T4GQV
+savings,eu-west-1,db.r5b.2xlarge.tpc2.mem4x,single-az,oracle,byol,3yr,Partial Upfront,32482.00,1.236000,29.664000,2.471151,59.307623,SN26UF89947T4GQV
+onDemand,eu-west-1,db.r7i.24xlarge,single-az,oracle,byol,,,,13.440000,322.560000,13.440000,322.560000,SP59P4K2BQE7CXM4
+onDemand,eu-west-1,db.r5d.4xlarge,single-az,oracle,byol,,,,2.359000,56.616000,2.359000,56.616000,SQPXN7JJNXPFUVUP
+savings,eu-west-1,db.r5d.4xlarge,single-az,oracle,byol,3yr,All Upfront,29871.00,0.000000,0.000000,1.135866,27.260780,SQPXN7JJNXPFUVUP
+savings,eu-west-1,db.r5d.4xlarge,single-az,oracle,byol,1yr,Partial Upfront,7260.00,0.828800,19.891200,1.657000,39.767997,SQPXN7JJNXPFUVUP
+savings,eu-west-1,db.r5d.4xlarge,single-az,oracle,byol,3yr,Partial Upfront,15558.00,0.592000,14.208000,1.183604,28.406494,SQPXN7JJNXPFUVUP
+savings,eu-west-1,db.r5d.4xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,1.705000,40.920000,1.705000,40.920000,SQPXN7JJNXPFUVUP
+savings,eu-west-1,db.r5d.4xlarge,single-az,oracle,byol,1yr,All Upfront,14106.00,0.000000,0.000000,1.609172,38.620123,SQPXN7JJNXPFUVUP
+onDemand,eu-west-1,db.r5.xlarge.tpc2.mem2x,single-az,oracle,byol,,,,1.031000,24.744000,1.031000,24.744000,SR4PWEG9V6U4ZJ6H
+savings,eu-west-1,db.r5.xlarge.tpc2.mem2x,single-az,oracle,byol,3yr,All Upfront,11701.00,0.000000,0.000000,0.444939,10.678531,SR4PWEG9V6U4ZJ6H
+savings,eu-west-1,db.r5.xlarge.tpc2.mem2x,single-az,oracle,byol,3yr,Partial Upfront,5970.00,0.227200,5.452800,0.454213,10.901123,SR4PWEG9V6U4ZJ6H
+savings,eu-west-1,db.r5.xlarge.tpc2.mem2x,single-az,oracle,byol,1yr,Partial Upfront,2847.00,0.325000,7.800000,0.649778,15.594661,SR4PWEG9V6U4ZJ6H
+savings,eu-west-1,db.r5.xlarge.tpc2.mem2x,single-az,oracle,byol,1yr,All Upfront,5580.00,0.000000,0.000000,0.636550,15.277207,SR4PWEG9V6U4ZJ6H
+savings,eu-west-1,db.r5.xlarge.tpc2.mem2x,single-az,oracle,byol,1yr,No Upfront,0.00,0.682500,16.380000,0.682500,16.380000,SR4PWEG9V6U4ZJ6H
+onDemand,eu-west-1,db.r5d.xlarge,single-az,oracle,byol,,,,0.590000,14.160000,0.590000,14.160000,T56TRG36YW99V5M5
+savings,eu-west-1,db.r5d.xlarge,single-az,oracle,byol,3yr,Partial Upfront,3889.00,0.148000,3.552000,0.295882,7.101167,T56TRG36YW99V5M5
+savings,eu-west-1,db.r5d.xlarge,single-az,oracle,byol,3yr,All Upfront,7468.00,0.000000,0.000000,0.283976,6.815423,T56TRG36YW99V5M5
+savings,eu-west-1,db.r5d.xlarge,single-az,oracle,byol,1yr,All Upfront,3526.00,0.000000,0.000000,0.402236,9.653662,T56TRG36YW99V5M5
+savings,eu-west-1,db.r5d.xlarge,single-az,oracle,byol,1yr,Partial Upfront,1815.00,0.207200,4.972800,0.414250,9.941999,T56TRG36YW99V5M5
+savings,eu-west-1,db.r5d.xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,0.426200,10.228800,0.426200,10.228800,T56TRG36YW99V5M5
+onDemand,eu-west-1,db.r5.12xlarge,single-az,oracle,byol,,,,7.430000,178.320000,7.430000,178.320000,TC7MARTXE4UPJD5U
+onDemand,eu-west-1,db.r6i.24xlarge,single-az,oracle,byol,,,,12.374000,296.976000,12.374000,296.976000,TD72VGQVJ2T8TY66
+savings,eu-west-1,db.r6i.24xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,8.189900,196.557600,8.189900,196.557600,TD72VGQVJ2T8TY66
+savings,eu-west-1,db.r6i.24xlarge,single-az,oracle,byol,1yr,Partial Upfront,34163.00,3.899900,93.597600,7.797117,187.130796,TD72VGQVJ2T8TY66
+savings,eu-west-1,db.r6i.24xlarge,single-az,oracle,byol,3yr,Partial Upfront,71642.00,2.726100,65.426400,5.450338,130.808102,TD72VGQVJ2T8TY66
+savings,eu-west-1,db.r6i.24xlarge,single-az,oracle,byol,3yr,All Upfront,140418.00,0.000000,0.000000,5.339493,128.147844,TD72VGQVJ2T8TY66
+savings,eu-west-1,db.r6i.24xlarge,single-az,oracle,byol,1yr,All Upfront,66960.00,0.000000,0.000000,7.638604,183.326489,TD72VGQVJ2T8TY66
+onDemand,eu-west-1,db.r7i.xlarge,single-az,oracle,byol,,,,0.560000,13.440000,0.560000,13.440000,TN7R7H4BT7FFQHC7
+onDemand,eu-west-1,db.r6i.2xlarge,single-az,oracle,byol,,,,1.032000,24.768000,1.032000,24.768000,TQ6NT4MFCCUWJA5D
+savings,eu-west-1,db.r6i.2xlarge,single-az,oracle,byol,3yr,Partial Upfront,6780.00,0.258000,6.192000,0.515814,12.379543,TQ6NT4MFCCUWJA5D
+savings,eu-west-1,db.r6i.2xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,0.743000,17.832000,0.743000,17.832000,TQ6NT4MFCCUWJA5D
+savings,eu-west-1,db.r6i.2xlarge,single-az,oracle,byol,1yr,Partial Upfront,3164.00,0.361200,8.668800,0.722140,17.331360,TQ6NT4MFCCUWJA5D
+savings,eu-west-1,db.r6i.2xlarge,single-az,oracle,byol,3yr,All Upfront,13018.00,0.000000,0.000000,0.495019,11.880447,TQ6NT4MFCCUWJA5D
+savings,eu-west-1,db.r6i.2xlarge,single-az,oracle,byol,1yr,All Upfront,6147.00,0.000000,0.000000,0.701232,16.829569,TQ6NT4MFCCUWJA5D
+onDemand,eu-west-1,db.r5.2xlarge,single-az,oracle,byol,,,,1.031000,24.744000,1.031000,24.744000,TX7JQ3W94R95ZMGZ
+savings,eu-west-1,db.r5.2xlarge,single-az,oracle,byol,1yr,Partial Upfront,2847.00,0.325000,7.800000,0.649778,15.594661,TX7JQ3W94R95ZMGZ
+savings,eu-west-1,db.r5.2xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,0.682500,16.380000,0.682500,16.380000,TX7JQ3W94R95ZMGZ
+savings,eu-west-1,db.r5.2xlarge,single-az,oracle,byol,3yr,Partial Upfront,5970.00,0.227200,5.452800,0.454213,10.901123,TX7JQ3W94R95ZMGZ
+savings,eu-west-1,db.r5.2xlarge,single-az,oracle,byol,3yr,All Upfront,11701.00,0.000000,0.000000,0.444939,10.678531,TX7JQ3W94R95ZMGZ
+savings,eu-west-1,db.r5.2xlarge,single-az,oracle,byol,1yr,All Upfront,5580.00,0.000000,0.000000,0.636550,15.277207,TX7JQ3W94R95ZMGZ
+onDemand,eu-west-1,db.r6i.xlarge.tpc2.mem2x,single-az,oracle,byol,,,,1.031000,24.744000,1.031000,24.744000,TY7XVNFGGFTND4R6
+savings,eu-west-1,db.r6i.xlarge.tpc2.mem2x,single-az,oracle,byol,1yr,All Upfront,6147.00,0.000000,0.000000,0.701232,16.829569,TY7XVNFGGFTND4R6
+savings,eu-west-1,db.r6i.xlarge.tpc2.mem2x,single-az,oracle,byol,1yr,Partial Upfront,3164.00,0.361200,8.668800,0.722140,17.331360,TY7XVNFGGFTND4R6
+savings,eu-west-1,db.r6i.xlarge.tpc2.mem2x,single-az,oracle,byol,1yr,No Upfront,0.00,0.743000,17.832000,0.743000,17.832000,TY7XVNFGGFTND4R6
+savings,eu-west-1,db.r6i.xlarge.tpc2.mem2x,single-az,oracle,byol,3yr,All Upfront,13018.00,0.000000,0.000000,0.495019,11.880447,TY7XVNFGGFTND4R6
+savings,eu-west-1,db.r6i.xlarge.tpc2.mem2x,single-az,oracle,byol,3yr,Partial Upfront,6780.00,0.258000,6.192000,0.515814,12.379543,TY7XVNFGGFTND4R6
+onDemand,eu-west-1,db.r5.16xlarge,single-az,oracle,byol,,,,8.256000,198.144000,8.256000,198.144000,UQ4BMXYB3J965RDM
+savings,eu-west-1,db.r5.16xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,5.458700,131.008800,5.458700,131.008800,UQ4BMXYB3J965RDM
+savings,eu-west-1,db.r5.16xlarge,single-az,oracle,byol,1yr,Partial Upfront,22771.00,2.599400,62.385600,5.197050,124.729200,UQ4BMXYB3J965RDM
+savings,eu-west-1,db.r5.16xlarge,single-az,oracle,byol,3yr,Partial Upfront,47765.00,1.817600,43.622400,3.633898,87.213548,UQ4BMXYB3J965RDM
+savings,eu-west-1,db.r5.16xlarge,single-az,oracle,byol,3yr,All Upfront,93620.00,0.000000,0.000000,3.559967,85.439197,UQ4BMXYB3J965RDM
+savings,eu-west-1,db.r5.16xlarge,single-az,oracle,byol,1yr,All Upfront,44631.00,0.000000,0.000000,5.091376,122.193018,UQ4BMXYB3J965RDM
+onDemand,eu-west-1,db.r5.4xlarge.tpc2.mem3x,single-az,oracle,byol,,,,6.187000,148.488000,6.187000,148.488000,UU5WFVGBWKKHAN76
+savings,eu-west-1,db.r5.4xlarge.tpc2.mem3x,single-az,oracle,byol,1yr,No Upfront,0.00,4.094900,98.277600,4.094900,98.277600,UU5WFVGBWKKHAN76
+savings,eu-west-1,db.r5.4xlarge.tpc2.mem3x,single-az,oracle,byol,1yr,Partial Upfront,17082.00,1.950000,46.800000,3.898665,93.567967,UU5WFVGBWKKHAN76
+savings,eu-west-1,db.r5.4xlarge.tpc2.mem3x,single-az,oracle,byol,3yr,All Upfront,70209.00,0.000000,0.000000,2.669747,64.073922,UU5WFVGBWKKHAN76
+savings,eu-west-1,db.r5.4xlarge.tpc2.mem3x,single-az,oracle,byol,1yr,All Upfront,33480.00,0.000000,0.000000,3.819302,91.663244,UU5WFVGBWKKHAN76
+savings,eu-west-1,db.r5.4xlarge.tpc2.mem3x,single-az,oracle,byol,3yr,Partial Upfront,35821.00,1.363000,32.712000,2.725119,65.402851,UU5WFVGBWKKHAN76
+onDemand,eu-west-1,db.r6i.12xlarge,single-az,oracle,byol,,,,6.187000,148.488000,6.187000,148.488000,UUJJ94EG8EUDCJHM
+savings,eu-west-1,db.r6i.12xlarge,single-az,oracle,byol,1yr,Partial Upfront,17082.00,1.950000,46.800000,3.898665,93.567967,UUJJ94EG8EUDCJHM
+savings,eu-west-1,db.r6i.12xlarge,single-az,oracle,byol,1yr,All Upfront,33480.00,0.000000,0.000000,3.819302,91.663244,UUJJ94EG8EUDCJHM
+savings,eu-west-1,db.r6i.12xlarge,single-az,oracle,byol,3yr,All Upfront,70209.00,0.000000,0.000000,2.669747,64.073922,UUJJ94EG8EUDCJHM
+savings,eu-west-1,db.r6i.12xlarge,single-az,oracle,byol,3yr,Partial Upfront,35821.00,1.363000,32.712000,2.725119,65.402851,UUJJ94EG8EUDCJHM
+savings,eu-west-1,db.r6i.12xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,4.094900,98.277600,4.094900,98.277600,UUJJ94EG8EUDCJHM
+onDemand,eu-west-1,db.r5d.24xlarge,single-az,oracle,byol,,,,14.155000,339.720000,14.155000,339.720000,V4KK8F3X92M9YSWW
+savings,eu-west-1,db.r5d.24xlarge,single-az,oracle,byol,3yr,All Upfront,179225.00,0.000000,0.000000,6.815157,163.563769,V4KK8F3X92M9YSWW
+savings,eu-west-1,db.r5d.24xlarge,single-az,oracle,byol,3yr,Partial Upfront,93347.00,3.552000,85.248000,7.101586,170.438052,V4KK8F3X92M9YSWW
+savings,eu-west-1,db.r5d.24xlarge,single-az,oracle,byol,1yr,All Upfront,84634.00,0.000000,0.000000,9.654803,231.715264,V4KK8F3X92M9YSWW
+savings,eu-west-1,db.r5d.24xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,10.229800,245.515200,10.229800,245.515200,V4KK8F3X92M9YSWW
+savings,eu-west-1,db.r5d.24xlarge,single-az,oracle,byol,1yr,Partial Upfront,43562.00,4.972800,119.347200,9.942227,238.613456,V4KK8F3X92M9YSWW
+onDemand,eu-west-1,db.r7i.12xlarge,single-az,oracle,byol,,,,6.720000,161.280000,6.720000,161.280000,V6KXWFV2W2QNHHFK
+onDemand,eu-west-1,db.r6i.4xlarge,single-az,oracle,byol,,,,2.064000,49.536000,2.064000,49.536000,VGWSVW275RSXJDVD
+savings,eu-west-1,db.r6i.4xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,1.486100,35.666400,1.486100,35.666400,VGWSVW275RSXJDVD
+savings,eu-west-1,db.r6i.4xlarge,single-az,oracle,byol,3yr,Partial Upfront,13560.00,0.516000,12.384000,1.031629,24.759086,VGWSVW275RSXJDVD
+savings,eu-west-1,db.r6i.4xlarge,single-az,oracle,byol,1yr,Partial Upfront,6328.00,0.722400,17.337600,1.444280,34.662720,VGWSVW275RSXJDVD
+savings,eu-west-1,db.r6i.4xlarge,single-az,oracle,byol,1yr,All Upfront,12295.00,0.000000,0.000000,1.402578,33.661875,VGWSVW275RSXJDVD
+savings,eu-west-1,db.r6i.4xlarge,single-az,oracle,byol,3yr,All Upfront,26036.00,0.000000,0.000000,0.990037,23.760894,VGWSVW275RSXJDVD
+onDemand,eu-west-1,db.r5b.large,single-az,oracle,byol,,,,0.309000,7.416000,0.309000,7.416000,VP7ZTWWC3TU8UB98
+savings,eu-west-1,db.r5b.large,single-az,oracle,byol,1yr,No Upfront,0.00,0.194600,4.670400,0.194600,4.670400,VP7ZTWWC3TU8UB98
+savings,eu-west-1,db.r5b.large,single-az,oracle,byol,3yr,All Upfront,3183.00,0.000000,0.000000,0.121036,2.904860,VP7ZTWWC3TU8UB98
+savings,eu-west-1,db.r5b.large,single-az,oracle,byol,3yr,Partial Upfront,1624.00,0.061800,1.483200,0.123554,2.965290,VP7ZTWWC3TU8UB98
+savings,eu-west-1,db.r5b.large,single-az,oracle,byol,1yr,All Upfront,1591.00,0.000000,0.000000,0.181497,4.355921,VP7ZTWWC3TU8UB98
+savings,eu-west-1,db.r5b.large,single-az,oracle,byol,1yr,Partial Upfront,812.00,0.092700,2.224800,0.185331,4.447935,VP7ZTWWC3TU8UB98
+onDemand,eu-west-1,db.r5d.8xlarge,single-az,oracle,byol,,,,4.718000,113.232000,4.718000,113.232000,VPY8TC7C7ZVWZXA7
+savings,eu-west-1,db.r5d.8xlarge,single-az,oracle,byol,3yr,All Upfront,59742.00,0.000000,0.000000,2.271732,54.521561,VPY8TC7C7ZVWZXA7
+savings,eu-west-1,db.r5d.8xlarge,single-az,oracle,byol,3yr,Partial Upfront,31116.00,1.184000,28.416000,2.367208,56.812988,VPY8TC7C7ZVWZXA7
+savings,eu-west-1,db.r5d.8xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,3.409900,81.837600,3.409900,81.837600,VPY8TC7C7ZVWZXA7
+savings,eu-west-1,db.r5d.8xlarge,single-az,oracle,byol,1yr,Partial Upfront,14521.00,1.657600,39.782400,3.314114,79.538731,VPY8TC7C7ZVWZXA7
+savings,eu-west-1,db.r5d.8xlarge,single-az,oracle,byol,1yr,All Upfront,28211.00,0.000000,0.000000,3.218230,77.237509,VPY8TC7C7ZVWZXA7
+onDemand,eu-west-1,db.r6i.8xlarge,single-az,oracle,byol,,,,4.128000,99.072000,4.128000,99.072000,W9VX6SQ6E5QPQDS6
+savings,eu-west-1,db.r6i.8xlarge,single-az,oracle,byol,3yr,All Upfront,52072.00,0.000000,0.000000,1.980075,47.521789,W9VX6SQ6E5QPQDS6
+savings,eu-west-1,db.r6i.8xlarge,single-az,oracle,byol,1yr,Partial Upfront,12656.00,1.444800,34.675200,2.888560,69.325440,W9VX6SQ6E5QPQDS6
+savings,eu-west-1,db.r6i.8xlarge,single-az,oracle,byol,3yr,Partial Upfront,27121.00,1.032000,24.768000,2.063295,49.519084,W9VX6SQ6E5QPQDS6
+savings,eu-west-1,db.r6i.8xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,2.972200,71.332800,2.972200,71.332800,W9VX6SQ6E5QPQDS6
+savings,eu-west-1,db.r6i.8xlarge,single-az,oracle,byol,1yr,All Upfront,24590.00,0.000000,0.000000,2.805156,67.323751,W9VX6SQ6E5QPQDS6
+onDemand,eu-west-1,db.r6id.xlarge,single-az,oracle,byol,,,,0.664000,15.936000,0.664000,15.936000,WE7VA5FV9QB3BSR9
+savings,eu-west-1,db.r6id.xlarge,single-az,oracle,byol,1yr,All Upfront,4249.00,0.000000,0.000000,0.484714,11.633128,WE7VA5FV9QB3BSR9
+savings,eu-west-1,db.r6id.xlarge,single-az,oracle,byol,1yr,Partial Upfront,2181.00,0.249000,5.976000,0.497802,11.947253,WE7VA5FV9QB3BSR9
+savings,eu-west-1,db.r6id.xlarge,single-az,oracle,byol,3yr,Partial Upfront,4796.00,0.182500,4.380000,0.364871,8.756911,WE7VA5FV9QB3BSR9
+savings,eu-west-1,db.r6id.xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,0.511000,12.264000,0.511000,12.264000,WE7VA5FV9QB3BSR9
+savings,eu-west-1,db.r6id.xlarge,single-az,oracle,byol,3yr,All Upfront,9251.00,0.000000,0.000000,0.351776,8.442619,WE7VA5FV9QB3BSR9
+onDemand,eu-west-1,db.r5.12xlarge,single-az,oracle,byol,,,,6.187000,148.488000,6.187000,148.488000,WRXAGPXZTVSGEVDK
+savings,eu-west-1,db.r5.12xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,4.094900,98.277600,4.094900,98.277600,WRXAGPXZTVSGEVDK
+savings,eu-west-1,db.r5.12xlarge,single-az,oracle,byol,3yr,Partial Upfront,35821.00,1.363000,32.712000,2.725119,65.402851,WRXAGPXZTVSGEVDK
+savings,eu-west-1,db.r5.12xlarge,single-az,oracle,byol,1yr,All Upfront,33480.00,0.000000,0.000000,3.819302,91.663244,WRXAGPXZTVSGEVDK
+savings,eu-west-1,db.r5.12xlarge,single-az,oracle,byol,1yr,Partial Upfront,17082.00,1.950000,46.800000,3.898665,93.567967,WRXAGPXZTVSGEVDK
+savings,eu-west-1,db.r5.12xlarge,single-az,oracle,byol,3yr,All Upfront,70209.00,0.000000,0.000000,2.669747,64.073922,WRXAGPXZTVSGEVDK
+onDemand,eu-west-1,db.r6i.2xlarge,single-az,oracle,byol,,,,1.031000,24.744000,1.031000,24.744000,WWH7P3C326XEK4C5
+savings,eu-west-1,db.r6i.2xlarge,single-az,oracle,byol,1yr,All Upfront,5580.00,0.000000,0.000000,0.636550,15.277207,WWH7P3C326XEK4C5
+savings,eu-west-1,db.r6i.2xlarge,single-az,oracle,byol,1yr,Partial Upfront,2847.00,0.325000,7.800000,0.649778,15.594661,WWH7P3C326XEK4C5
+savings,eu-west-1,db.r6i.2xlarge,single-az,oracle,byol,3yr,All Upfront,11701.00,0.000000,0.000000,0.444939,10.678531,WWH7P3C326XEK4C5
+savings,eu-west-1,db.r6i.2xlarge,single-az,oracle,byol,3yr,Partial Upfront,5970.00,0.227200,5.452800,0.454213,10.901123,WWH7P3C326XEK4C5
+savings,eu-west-1,db.r6i.2xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,0.682500,16.380000,0.682500,16.380000,WWH7P3C326XEK4C5
+onDemand,eu-west-1,db.r5b.xlarge,single-az,oracle,byol,,,,0.618000,14.832000,0.618000,14.832000,X5XDSFAVKGFR2GD2
+savings,eu-west-1,db.r5b.xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,0.445000,10.680000,0.445000,10.680000,X5XDSFAVKGFR2GD2
+savings,eu-west-1,db.r5b.xlarge,single-az,oracle,byol,1yr,All Upfront,3681.00,0.000000,0.000000,0.419918,10.078029,X5XDSFAVKGFR2GD2
+savings,eu-west-1,db.r5b.xlarge,single-az,oracle,byol,3yr,All Upfront,7796.00,0.000000,0.000000,0.296448,7.114762,X5XDSFAVKGFR2GD2
+savings,eu-west-1,db.r5b.xlarge,single-az,oracle,byol,3yr,Partial Upfront,4060.00,0.154500,3.708000,0.308884,7.413225,X5XDSFAVKGFR2GD2
+savings,eu-west-1,db.r5b.xlarge,single-az,oracle,byol,1yr,Partial Upfront,1895.00,0.216300,5.191200,0.432476,10.379427,X5XDSFAVKGFR2GD2
+onDemand,eu-west-1,db.r7i.4xlarge,single-az,oracle,byol,,,,2.240000,53.760000,2.240000,53.760000,X8AMBFKJR2U4MMF5
+onDemand,eu-west-1,db.r5.2xlarge.tpc2.mem8x,single-az,oracle,byol,,,,8.256000,198.144000,8.256000,198.144000,X9976JPN3MYRDHD4
+savings,eu-west-1,db.r5.2xlarge.tpc2.mem8x,single-az,oracle,byol,1yr,No Upfront,0.00,5.458700,131.008800,5.458700,131.008800,X9976JPN3MYRDHD4
+savings,eu-west-1,db.r5.2xlarge.tpc2.mem8x,single-az,oracle,byol,1yr,Partial Upfront,22771.00,2.599400,62.385600,5.197050,124.729200,X9976JPN3MYRDHD4
+savings,eu-west-1,db.r5.2xlarge.tpc2.mem8x,single-az,oracle,byol,3yr,All Upfront,93620.00,0.000000,0.000000,3.559967,85.439197,X9976JPN3MYRDHD4
+savings,eu-west-1,db.r5.2xlarge.tpc2.mem8x,single-az,oracle,byol,3yr,Partial Upfront,47765.00,1.817600,43.622400,3.633898,87.213548,X9976JPN3MYRDHD4
+savings,eu-west-1,db.r5.2xlarge.tpc2.mem8x,single-az,oracle,byol,1yr,All Upfront,44631.00,0.000000,0.000000,5.091376,122.193018,X9976JPN3MYRDHD4
+onDemand,eu-west-1,db.r6in.8xlarge,single-az,oracle,byol,,,,6.208000,148.992000,6.208000,148.992000,XDHTSRJVKXZKCYJW
+onDemand,eu-west-1,db.r3.2xlarge,single-az,oracle,byol,,,,1.055000,25.320000,1.055000,25.320000,XER9Y6EJWNKHKVN9
+onDemand,eu-west-1,db.r5.2xlarge,single-az,oracle,byol,,,,1.238000,29.712000,1.238000,29.712000,Z48J4PPWCHKVCJVB
+onDemand,eu-west-1,db.r5.8xlarge,single-az,oracle,byol,,,,4.128000,99.072000,4.128000,99.072000,Z5RZTKQTA86DRM3F
+savings,eu-west-1,db.r5.8xlarge,single-az,oracle,byol,1yr,All Upfront,22315.00,0.000000,0.000000,2.545631,61.095140,Z5RZTKQTA86DRM3F
+savings,eu-west-1,db.r5.8xlarge,single-az,oracle,byol,1yr,Partial Upfront,11385.00,1.299700,31.192800,2.598468,62.363231,Z5RZTKQTA86DRM3F
+savings,eu-west-1,db.r5.8xlarge,single-az,oracle,byol,3yr,Partial Upfront,23883.00,0.908800,21.811200,1.816968,43.607230,Z5RZTKQTA86DRM3F
+savings,eu-west-1,db.r5.8xlarge,single-az,oracle,byol,3yr,All Upfront,46810.00,0.000000,0.000000,1.779983,42.719598,Z5RZTKQTA86DRM3F
+savings,eu-west-1,db.r5.8xlarge,single-az,oracle,byol,1yr,No Upfront,0.00,2.729400,65.505600,2.729400,65.505600,Z5RZTKQTA86DRM3F
+onDemand,eu-west-1,db.r6in.large,single-az,oracle,byol,,,,0.388000,9.312000,0.388000,9.312000,ZQN98VCTZJM4NRW8
+onDemand,eu-west-1,db.r7i.xlarge.tpc2.mem4x,single-az,oracle,byol,,,,2.240000,53.760000,2.240000,53.760000,ZY9SKJDJD736MA7P
