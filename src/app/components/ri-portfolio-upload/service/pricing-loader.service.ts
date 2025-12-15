@@ -26,10 +26,10 @@ export class PricingLoaderService {
     const onDemandRowTyped = onDemandRow as Record<string, string>;
 
     const onDemand: OnDemandPricing = {
-      hourly: parseFloat(onDemandRowTyped.hourly),
-      daily: parseFloat(onDemandRowTyped.daily),
-      adjustedAmortisedHourly: parseFloat(onDemandRowTyped.adjustedAmortisedHourly),
-      adjustedAmortisedDaily: parseFloat(onDemandRowTyped.adjustedAmortisedDaily),
+      hourly: Number.parseFloat(onDemandRowTyped.hourly),
+      daily: Number.parseFloat(onDemandRowTyped.daily),
+      adjustedAmortisedHourly: Number.parseFloat(onDemandRowTyped.adjustedAmortisedHourly),
+      adjustedAmortisedDaily: Number.parseFloat(onDemandRowTyped.adjustedAmortisedDaily),
       sku: onDemandRowTyped.sku
     };
 
@@ -40,11 +40,11 @@ export class PricingLoaderService {
       savingsOptions[key] = {
         term: row.term as SavingsTerm,
         purchaseOption: row.purchaseOption as PurchaseOption,
-        upfront: row.upfront ? parseFloat(row.upfront) : null,
-        hourly: row.hourly ? parseFloat(row.hourly) : null,
-        daily: row.daily ? parseFloat(row.daily) : null,
-        adjustedAmortisedHourly: row.adjustedAmortisedHourly ? parseFloat(row.adjustedAmortisedHourly) : null,
-        adjustedAmortisedDaily: row.adjustedAmortisedDaily ? parseFloat(row.adjustedAmortisedDaily) : null,
+        upfront: row.upfront ? Number.parseFloat(row.upfront) : null,
+        hourly: row.hourly ? Number.parseFloat(row.hourly) : null,
+        daily: row.daily ? Number.parseFloat(row.daily) : null,
+        adjustedAmortisedHourly: row.adjustedAmortisedHourly ? Number.parseFloat(row.adjustedAmortisedHourly) : null,
+        adjustedAmortisedDaily: row.adjustedAmortisedDaily ? Number.parseFloat(row.adjustedAmortisedDaily) : null,
       };
     }
 

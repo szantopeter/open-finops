@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { RiPortfolio } from '../../components/ri-portfolio-upload/models/ri-portfolio.model';
 import { RiCategorizatorCalculator } from '../../calculators/ri-categorizator/ri-categorizator-calculator';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { MigrationRecommendationsComponent } from '../migration-recommendations/migration-recommendations.component';
 
 @Component({
   selector: 'app-ri-categorization-chart',
   templateUrl: './ri-categorization-chart.component.html',
   styleUrls: ['./ri-categorization-chart.component.scss'],
   standalone: true,
-  imports: [NgxEchartsModule, CommonModule]
+  imports: [NgxEchartsModule, CommonModule, MigrationRecommendationsComponent]
 })
 export class RiCategorizationChartComponent implements OnChanges, AfterViewInit {
   @Input() riPortfolio!: RiPortfolio;
@@ -35,6 +36,9 @@ export class RiCategorizationChartComponent implements OnChanges, AfterViewInit 
   private updateChart(): void {
     const categoryCounts = RiCategorizatorCalculator.categorizeRiPortfolio(this.riPortfolio);
     
+    // Always update the category counts for the child component
+    this.lastCategoryCounts = categoryCounts;
+    
     if (categoryCounts.size === 0) {
       this.chartOptions = {
         title: {
@@ -48,12 +52,9 @@ export class RiCategorizationChartComponent implements OnChanges, AfterViewInit 
     }
 
     const data = Array.from(categoryCounts.entries()).map(([key, value]) => ({
-      name: this.formatCategoryName(key),
+      name: this.formatCategoryName(key.toString()),
       value
     }));
-
-    // Sort descending by count so the largest slices appear first
-    data.sort((a, b) => (b.value as number) - (a.value as number));
 
     // Sort categories by value descending so largest slices appear first
     data.sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
@@ -119,6 +120,9 @@ export class RiCategorizationChartComponent implements OnChanges, AfterViewInit 
       ]
     };
   }
+
+  // expose the categoryCounts as a property so the child can use it
+  public lastCategoryCounts: Map<any, number> = new Map();
 
   private formatCategoryName(key: string): string {
     const parts = key.split('/');

@@ -1,5 +1,6 @@
 import { RiCategorizatorCalculator } from './ri-categorizator-calculator';
 import type { RiPortfolio } from '../../components/ri-portfolio-upload/models/ri-portfolio.model';
+import { PricingKey } from '../../components/ri-portfolio-upload/models/pricing.model';
 
 describe('RiCategorizatorCalculator', () => {
   describe('categorizeRiPortfolio', () => {
@@ -115,14 +116,38 @@ describe('RiCategorizatorCalculator', () => {
       expect(result).toBeInstanceOf(Map);
       expect(result.size).toBe(3); // Three unique categories
 
+      // Convert map to array of entries for easier testing
+      const entries = Array.from(result.entries());
+      
       // Category for us-east-1/db.t3.micro/single-az-mysql (standard edition)
-      expect(result.get('us-east-1/db.t3.micro/us-east-1_db.t3.micro_single-az-mysql')).toBe(3); // 1 + 2
+      const mysqlKey = entries.find(([key]) => 
+        key.region === 'us-east-1' && 
+        key.instanceClass === 'db.t3.micro' && 
+        key.deployment === 'single-az' && 
+        key.engineKey === 'mysql'
+      );
+      expect(mysqlKey).toBeDefined();
+      expect(mysqlKey![1]).toBe(3); // 1 + 2
 
       // Category for eu-west-1/db.r5.large/multi-az-postgresql (standard edition)
-      expect(result.get('eu-west-1/db.r5.large/eu-west-1_db.r5.large_multi-az-postgresql')).toBe(1);
+      const postgresqlKey = entries.find(([key]) => 
+        key.region === 'eu-west-1' && 
+        key.instanceClass === 'db.r5.large' && 
+        key.deployment === 'multi-az' && 
+        key.engineKey === 'postgresql'
+      );
+      expect(postgresqlKey).toBeDefined();
+      expect(postgresqlKey![1]).toBe(1);
 
       // Category for eu-west-1/db.r5.large/multi-az-oracle-ee (edition included)
-      expect(result.get('eu-west-1/db.r5.large/eu-west-1_db.r5.large_multi-az-oracle-ee')).toBe(1);
+      const oracleKey = entries.find(([key]) => 
+        key.region === 'eu-west-1' && 
+        key.instanceClass === 'db.r5.large' && 
+        key.deployment === 'multi-az' && 
+        key.engineKey === 'oracle-ee'
+      );
+      expect(oracleKey).toBeDefined();
+      expect(oracleKey![1]).toBe(1);
     });
 
     it('should handle RI rows with count greater than 1 correctly', () => {
@@ -162,7 +187,14 @@ describe('RiCategorizatorCalculator', () => {
       // Assert
       expect(result).toBeInstanceOf(Map);
       expect(result.size).toBe(1);
-      expect(result.get('us-west-2/db.t3.small/us-west-2_db.t3.small_single-az-mariadb')).toBe(5);
+      
+      const entries = Array.from(result.entries());
+      const entry = entries[0];
+      expect(entry[0].region).toBe('us-west-2');
+      expect(entry[0].instanceClass).toBe('db.t3.small');
+      expect(entry[0].deployment).toBe('single-az');
+      expect(entry[0].engineKey).toBe('mariadb');
+      expect(entry[1]).toBe(5);
     });
   });
 });

@@ -11,14 +11,27 @@ export class RiCategorizatorCalculator {
    * @param riPortfolio The RI portfolio to categorize.
    * @returns The RiCategories and the number of RI rows matching the categories.
    */
-  static categorizeRiPortfolio(riPortfolio: RiPortfolio): Map<string, number> {
-    const categoryCounts = new Map<string, number>();
+  static categorizeRiPortfolio(riPortfolio: RiPortfolio): Map<PricingKey, number> {
+    const categoryCountsByString = new Map<string, { key: PricingKey; count: number }>();
+    
     for (const row of riPortfolio.rows) {
-      const riKey = RiCategorizatorCalculator.getPricingKey(row.riRow);
-      const riKeyString = riKey.toString();
-      const currentCount = categoryCounts.get(riKeyString) || 0;
-      categoryCounts.set(riKeyString, currentCount + row.riRow.count);
+      const riPricingKey = RiCategorizatorCalculator.getPricingKey(row.riRow);
+      const keyString = riPricingKey.toString();
+      const existing = categoryCountsByString.get(keyString);
+      
+      if (existing) {
+        existing.count += row.riRow.count;
+      } else {
+        categoryCountsByString.set(keyString, { key: riPricingKey, count: row.riRow.count });
+      }
     }
+    
+    const categoryCounts = new Map<PricingKey, number>();
+    for (const { key, count } of categoryCountsByString.values()) {
+      categoryCounts.set(key, count);
+      console.log(`${key.toString()}: ${count}`);
+    }
+    
     return categoryCounts;
   }
 

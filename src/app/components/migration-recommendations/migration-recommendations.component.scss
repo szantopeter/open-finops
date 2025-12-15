@@ -1,0 +1,25 @@
+.migration-rec {
+  margin-top: 16px;
+}
+
+.migration-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.migration-table th,
+.migration-table td {
+  border: 1px solid #e5e7eb;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.migration-table thead th {
+  background: #f3f4f6;
+  font-weight: 600;
+}
+
+.migration-table .total-row {
+  font-weight: bold;
+  background-color: #f9f9f9;
+}
