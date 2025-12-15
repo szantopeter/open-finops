@@ -1,47 +1,21 @@
 <div class="migration-rec">
-  <h3>Migration Recommendations</h3>
+  <div class="section-header">
+    <h4>Migration Recommendations</h4>
+  </div>
 
   <div *ngIf="loading">Loading recommendations...</div>
 
-  <table *ngIf="!loading && recommendations.length > 0" class="migration-table">
-    <thead>
-      <tr>
-        <th>Region</th>
-        <th>Original Instance Class</th>
-        <th>New Instance Class</th>
-        <th>Deployment</th>
-        <th>Engine</th>
-        <th>Original Price (1yr AU)</th>
-        <th>New Price (1yr AU)</th>
-        <th>Saving (Amount)</th>
-        <th>Saving (%)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let r of sortedRecommendations">
-        <td>{{ r.originalPricingKey.region }}</td>
-        <td>{{ r.originalPricingKey.instanceClass }}</td>
-        <td>{{ r.recommendedPricingData.instance }}</td>
-        <td>{{ r.originalPricingKey.deployment }}</td>
-        <td>{{ r.originalPricingKey.engineKey }}</td>
-        <td>{{ yearlyPrice(r, false) | number:'1.0-0' }}</td>
-        <td>{{ yearlyPrice(r, true) | number:'1.0-0' }}</td>
-        <td>{{ savingAmount(r) | number:'1.0-0' }}</td>
-        <td>{{ savingPercentage(r) | number:'1.0-0' }}%</td>
-      </tr>
-      <tr class="total-row">
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>{{ totalOriginalPrice | number:'1.0-0' }}</td>
-        <td>{{ totalNewPrice | number:'1.0-0' }}</td>
-        <td>{{ totalSavingAmount | number:'1.0-0' }}</td>
-        <td>{{ totalSavingPercentage | number:'1.0-0' }}%</td>
-      </tr>
-    </tbody>
-  </table>
+    <div *ngIf="!loading && recommendations.length > 0" class="migration-table ag-theme-alpine grid-wrapper">
+      <ag-grid-angular
+        class="ag-theme-alpine"
+        [columnDefs]="columnDefs"
+        [defaultColDef]="defaultColDef"
+        [rowData]="rowData"
+        [pinnedTopRowData]="pinnedTopRowData"
+        [getRowClass]="getRowClass"
+        [animateRows]="true">
+      </ag-grid-angular>
+    </div>
 
   <div *ngIf="!loading && recommendations.length === 0">No migration recommendations available.</div>
 </div>

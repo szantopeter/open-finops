@@ -2,6 +2,23 @@
   margin-top: 16px;
 }
 
+.section-header h4 {
+  color: #2c3e50;
+  margin-bottom: 6px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.grid-wrapper {
+  width: 100%;
+  height: 500px;
+}
+
+.ag-theme-alpine {
+  width: 100%;
+  height: 100%; /* grid will fill the wrapper */
+}
+
 .migration-table {
   width: 100%;
   border-collapse: collapse;
@@ -22,4 +39,34 @@
 .migration-table .total-row {
   font-weight: bold;
   background-color: #f9f9f9;
+}
+
+.pinned-total-row {
+  font-weight: 700;
+}
+
+/* Ensure styling penetrates the ag-grid DOM where ViewEncapsulation scopes component CSS */
+::ng-deep .ag-root .pinned-total-row, ::ng-deep .ag-root-wrapper .pinned-total-row {
+  font-weight: 700;
+}
+
+/* Stronger selectors to prevent theme or later rules from overriding the wrapper sizing */
+:host ::ng-deep .grid-wrapper.ag-theme-alpine,
+:host ::ng-deep .grid-wrapper.ag-theme-alpine .ag-root,
+:host ::ng-deep .grid-wrapper.ag-theme-alpine .ag-root-wrapper {
+  width: 100% !important;
+  height: 500px !important;
+}
+
+:host ::ng-deep .grid-wrapper.ag-theme-alpine .ag-root,
+:host ::ng-deep .grid-wrapper.ag-theme-alpine .ag-center-cols-container {
+  height: 100% !important;
+}
+
+/* Allow text selection inside AG Grid cells for easier copy/paste */
+:host ::ng-deep .ag-cell, :host ::ng-deep .ag-header-cell-label {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }

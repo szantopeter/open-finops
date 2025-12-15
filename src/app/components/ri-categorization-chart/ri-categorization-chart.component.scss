@@ -57,3 +57,11 @@
 .table-view .ag-theme-alpine .ag-grid-instance {
   height: 100%;
 }
+
+/* Allow text selection inside AG Grid cells for easier copy/paste */
+:host ::ng-deep .ag-cell, :host ::ng-deep .ag-header-cell-label {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
