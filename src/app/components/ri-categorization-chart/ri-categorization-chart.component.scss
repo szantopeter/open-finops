@@ -4,6 +4,13 @@
   min-height: 800px;
 }
 
+.section-header h4 {
+  color: #2c3e50;
+  margin: 0 0 6px 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
 .chart-container {
   width: 100%;
   height: 800px;
@@ -14,4 +21,39 @@
   width: 100% !important;
   height: 100% !important;
   display: block;
+}
+
+.view-toggle {
+  margin-bottom: 12px;
+}
+
+.view-toggle button {
+  margin-right: 8px;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+}
+
+.view-toggle button.active {
+  background: #1f2937;
+  color: white;
+  border-color: #1f2937;
+}
+
+.table-view .ri-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-view th, .table-view td {
+  border: 1px solid #e5e7eb;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+/* Ensure the ag-grid element fills the themed wrapper (wrapper provides fixed height) */
+.table-view .ag-theme-alpine ag-grid-angular,
+.table-view .ag-theme-alpine .ag-grid-instance {
+  height: 100%;
 }

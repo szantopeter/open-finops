@@ -1,9 +1,30 @@
-<div class="chart-container">
+<div class="section-header">
+  <h4>RI Type Distribution</h4>
+</div>
+
+<div class="view-toggle">
+  <app-toggle-detail [(checked)]="isTableView" [leftLabel]="'Donut'" [rightLabel]="'Table'"></app-toggle-detail>
+</div>
+
+<div class="chart-container" *ngIf="viewMode === 'donut'">
   <echarts 
     *ngIf="chartOptions && chartOptions.series" 
     [options]="chartOptions" 
     [merge]="chartOptions"
     class="chart"></echarts>
+</div>
+
+<div *ngIf="viewMode === 'table'" class="table-view">
+  <div class="ag-theme-alpine" style="width: 100%; height: 400px;">
+    <ag-grid-angular
+      [columnDefs]="columnDefs"
+      [defaultColDef]="defaultColDef"
+      [rowData]="rowData"
+      class="ag-grid-instance"
+      [rowSelection]="{ mode: 'singleRow' }"
+      [animateRows]="true"
+      ></ag-grid-angular>
+  </div>
 </div>
 
 <app-migration-recommendations [categoryCounts]="lastCategoryCounts"></app-migration-recommendations>
