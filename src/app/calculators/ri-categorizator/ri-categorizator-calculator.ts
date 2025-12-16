@@ -29,7 +29,6 @@ export class RiCategorizatorCalculator {
     const categoryCounts = new Map<PricingKey, number>();
     for (const { key, count } of categoryCountsByString.values()) {
       categoryCounts.set(key, count);
-      console.log(`${key.toString()}: ${count}`);
     }
     
     return categoryCounts;

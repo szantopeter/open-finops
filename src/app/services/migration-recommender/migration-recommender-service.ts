@@ -40,38 +40,103 @@ export class MigrationRecommender {
     const recommendations: MigrationRecommendation[] = [];
 
     for (const [pricingKey, count] of categoryCounts.entries()) {
+      // Use a simpler algorithm: find cheaper same-size instances in the same pricing file
       const instanceInfo = this.parseInstanceClass(pricingKey.instanceClass);
-      if (!instanceInfo) {
-        continue; // Skip instances that can't be parsed
-      }
+      if (!instanceInfo) continue;
 
       try {
-        // Load pricing data for the current instance
         const originalPricingData = await this.loadPricingData(pricingKey);
-        
-        // Find cheaper alternatives in higher generations
-        const cheaperAlternative = await this.findCheaperHigherGeneration(
-          pricingKey,
-          instanceInfo,
-          originalPricingData
-        );
-
-        if (cheaperAlternative) {
+        const recommendation = await this.findCheaperInstanceClass(pricingKey, instanceInfo, originalPricingData);
+        if (recommendation) {
           recommendations.push(new MigrationRecommendation(
             pricingKey,
             originalPricingData,
             count,
-            cheaperAlternative.key,
-            cheaperAlternative.pricingData
+            recommendation.key,
+            recommendation.pricingData
           ));
         }
       } catch (error) {
-        // Skip instances where pricing data can't be loaded
-        console.warn(`Failed to load pricing data for ${pricingKey.instanceClass}:`, error);
+        console.warn(`Failed to process pricing for ${pricingKey.instanceClass}:`, error);
       }
     }
 
     return recommendations;
+  }
+
+  /**
+   * CSV-based search for a cheaper instance within the same family and size.:
+   * - Read pricing file for the pricing key
+   * - Filter for savings rows that correspond to '1yr' + 'All Upfront'
+   * - Filter rows to the same size suffix (e.g. '.xlarge')
+   * - Sort by instance alphabetically ascending
+   * - Scan from top: when we find the original instance remember price; when we find any row with upfront < originalPrice remember candidate; at the end pick the highest candidate below original
+   */
+  private async findCheaperInstanceClass(pricingKey: PricingKey, instanceInfo: InstanceClassInfo, originalPricingData: PricingData): Promise<{ key: PricingKey; pricingData: PricingData } | null> {
+    const filePath = this.getPricingFilePath(pricingKey);
+    const csvText = await lastValueFrom(this.http.get(filePath, { responseType: 'text' }));
+    const parsed = Papa.parse(csvText, { header: true });
+    const rows = (parsed.data as Record<string, string>[]).filter(Boolean);
+
+    // Filter savings rows for 1yr_All Upfront
+    const savingsRows = rows.filter(r => r.type === 'savings' && `${r.term}_${r.purchaseOption}` === '1yr_All Upfront');
+
+    // Filter to same size suffix: match dot + size at the end
+    const sizeSuffix = `.${instanceInfo.size}`;
+    const sameSizeRows = savingsRows.filter(r => r.instance?.endsWith(sizeSuffix));
+
+    //This is needed because without this db.x2iedn.4xlarge would be recommended to be migrated to db.x2iezn.4xlarge because 'z' comes before 'd' alphabetically
+    //it is cheaper. In reality edn and ezn machines have different spec and not compatible with each other.
+    const sameSizeAndCompatibleSuffixRows = sameSizeRows.filter(r => {
+      const rowInstanceInfo = this.parseInstanceClass(r.instance);
+      if (!rowInstanceInfo) return false;
+      const originalSuffix = instanceInfo.suffix;
+      const rowSuffix = rowInstanceInfo.suffix;
+      if (originalSuffix.length <= 1) {
+        return true;
+      } else {
+        return rowSuffix.length === originalSuffix.length && rowSuffix.slice(1) === originalSuffix.slice(1);
+      }
+    });
+
+    // Sort alphabetically by instance
+    sameSizeAndCompatibleSuffixRows.sort((a, b) => (a.instance || '').localeCompare(b.instance || ''));
+
+    // Scan: find original price then keep a single proposed instance/upfront that is the
+    // highest upfront value below the original price. Avoid storing an array of candidates.
+    let originalUpfront: number | null = null;
+    let proposedInstance: string | null = null;
+    let proposedUpfront: number | null = null;
+
+    for (const row of sameSizeAndCompatibleSuffixRows) {
+      const upfront = row.upfront ? Number.parseFloat(row.upfront) : null;
+      if (upfront === null || Number.isNaN(upfront)) continue;
+
+      // When we encounter the original instance, record its upfront and initialize the proposal
+      if (!originalUpfront && row.instance === pricingKey.instanceClass) {
+        originalUpfront = upfront;
+        proposedUpfront = upfront;
+        proposedInstance = row.instance!;
+        continue;
+      }
+
+      // Only consider proposals after we've seen the original
+      if (originalUpfront !== null && proposedUpfront !== null) {
+        // candidate must be cheaper than original and better (higher) than current proposal
+        if (upfront < proposedUpfront ) {
+          proposedUpfront = upfront;
+          proposedInstance = row.instance!;
+        }
+      }
+    }
+
+    // If we never found the original row or no better proposal was found, return null
+    if (originalUpfront === null || proposedUpfront === null || proposedUpfront === originalUpfront) return null;
+
+    const recommendedKey = new PricingKey(pricingKey.region, proposedInstance!, pricingKey.deployment, pricingKey.engineKey);
+    // reuse loadPricingData to build PricingData for the chosen instance
+    const pricingData = await this.loadPricingData(recommendedKey);
+    return { key: recommendedKey, pricingData };
   }
 
   /**
@@ -97,93 +162,7 @@ export class MigrationRecommender {
     };
   }
 
-  /**
-   * Finds the cheapest higher generation instance within the same family.
-   * Returns null if no cheaper option is found.
-   */
-  private async findCheaperHigherGeneration(
-    originalKey: PricingKey,
-    originalInfo: InstanceClassInfo,
-    originalPricingData: PricingData
-  ): Promise<{ key: PricingKey; pricingData: PricingData } | null> {
-    const originalPrice = this.get1YearAllUpfrontPrice(originalPricingData);
-    if (originalPrice === null) {
-      return null; // Can't compare if original doesn't have 1yr all upfront pricing
-    }
-
-    let cheapestAlternative: { key: PricingKey; pricingData: PricingData; price: number } | null = null;
-
-    // Check generations from current+1 to current+5 (reasonable upper bound to limit HTTP calls)
-    for (let gen = originalInfo.generation + 1; gen <= originalInfo.generation + 5; gen++) {
-      const betterAlternative = await this.findCheaperAlternativeInGeneration(
-        gen,
-        originalKey,
-        originalInfo,
-        originalPrice,
-        cheapestAlternative
-      );
-      
-      if (betterAlternative) {
-        cheapestAlternative = betterAlternative;
-      }
-    }
-
-    return cheapestAlternative ? { key: cheapestAlternative.key, pricingData: cheapestAlternative.pricingData } : null;
-  }
-
-  /**
-   * Searches for cheaper alternatives within a specific generation.
-   */
-  private async findCheaperAlternativeInGeneration(
-    generation: number,
-    originalKey: PricingKey,
-    originalInfo: InstanceClassInfo,
-    originalPrice: number,
-    currentBest: { key: PricingKey; pricingData: PricingData; price: number } | null
-  ): Promise<{ key: PricingKey; pricingData: PricingData; price: number } | null> {
-    const suffixesToTry = ['', 'g', 'i', 'gd', 'id'];
-    let bestAlternative = currentBest;
-
-    for (const suffix of suffixesToTry) {
-      const candidateInstanceClass = `db.${originalInfo.family}${generation}${suffix}.${originalInfo.size}`;
-      const candidateKey = new PricingKey(
-        originalKey.region,
-        candidateInstanceClass,
-        originalKey.deployment,
-        originalKey.engineKey
-      );
-
-      try {
-        const candidatePricingData = await this.loadPricingData(candidateKey);
-        const candidatePrice = this.get1YearAllUpfrontPrice(candidatePricingData);
-
-        if (candidatePrice !== null && candidatePrice < originalPrice) {
-          if (!bestAlternative || candidatePrice < bestAlternative.price) {
-            bestAlternative = {
-              key: candidateKey,
-              pricingData: candidatePricingData,
-              price: candidatePrice
-            };
-          }
-        }
-      } catch (error: unknown) {
-        // Pricing file doesn't exist or instance not found - skip
-        console.debug(`Pricing not found for ${candidateInstanceClass}:`, error);
-      }
-    }
-
-    return bestAlternative;
-  }
-
-  /**
-   * Gets the 1-year all upfront daily amortized price for comparison.
-   * Returns null if this pricing option is not available.
-   */
-  private get1YearAllUpfrontPrice(pricingData: PricingData): number | null {
-    const savingsKey: SavingsKey = '1yr_All Upfront';
-    const savingsOption = pricingData.savingsOptions?.[savingsKey];
-    return savingsOption?.adjustedAmortisedDaily ?? null;
-  }
+  
 
   /**
    * Loads pricing data from a CSV file for a given pricing key.

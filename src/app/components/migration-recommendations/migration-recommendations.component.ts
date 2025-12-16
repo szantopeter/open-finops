@@ -26,13 +26,13 @@ export class MigrationRecommendationsComponent implements OnInit, OnChanges {
     { field: 'engine', headerName: 'Engine', sortable: true, filter: 'agTextColumnFilter', resizable: true },
     { field: 'count', headerName: 'Count', sortable: true, filter: 'agNumberColumnFilter', resizable: true },
     { field: 'originalPrice', headerName: 'Original Price (1yr AU)', sortable: true, filter: 'agNumberColumnFilter', resizable: true,
-      valueFormatter: params => (params.value != null && !isNaN(params.value)) ? Math.round(params.value).toString() : '' },
+      valueFormatter: params => (params.value != null && !Number.isNaN(params.value)) ? Math.round(params.value).toString() : '' },
     { field: 'newPrice', headerName: 'New Price (1yr AU)', sortable: true, filter: 'agNumberColumnFilter', resizable: true,
-      valueFormatter: params => (params.value != null && !isNaN(params.value)) ? Math.round(params.value).toString() : '' },
-    { field: 'savingAmount', headerName: 'Saving (Amount)', sortable: true, filter: 'agNumberColumnFilter', resizable: true,
-      valueFormatter: params => (params.value != null && !isNaN(params.value)) ? Math.round(params.value).toString() : '' },
+      valueFormatter: params => (params.value != null && !Number.isNaN(params.value)) ? Math.round(params.value).toString() : '' },
+    { field: 'savingAmount', headerName: 'Saving (Amount)', sortable: true, filter: 'agNumberColumnFilter', resizable: true, sort: 'desc',
+      valueFormatter: params => (params.value != null && !Number.isNaN(params.value)) ? Math.round(params.value).toString() : '' },
     { field: 'savingPercentage', headerName: 'Saving (%)', sortable: true, filter: 'agNumberColumnFilter', resizable: true,
-      valueFormatter: params => (params.value != null && !isNaN(params.value)) ? Math.round(params.value).toString() + '%' : '' }
+      valueFormatter: params => (params.value != null && !Number.isNaN(params.value)) ? Math.round(params.value).toString() + '%' : '' }
   ];
 
   public defaultColDef = { sortable: true, filter: true, resizable: true };
