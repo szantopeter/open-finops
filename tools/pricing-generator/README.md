@@ -1,7 +1,7 @@
 
 # pricing-generator
 
-A standalone TypeScript CLI that generates pricing files
+A standalone TypeScript CLI that generates pricing files by reading the AWS API
 
 ## Requirements
 
@@ -22,8 +22,8 @@ npm run build
 ```bash
 npm start
 ```
-## Run the tool with parameters
+## Generate pricing files only needed by a given RDS input csv file
 
 ```bash
-npm start -- -csv cloudability-one-line.csv
+npm start -- -csv one-line-example.csv
 ```

@@ -2,7 +2,7 @@
 The purpose of this project is to analyse current AWS RDS Reserved Instance portoflio and show what-if scenarios explaining how different reserved instances would affect the overall cost. Any reference to RI means reserved instance
 
 ## Data sources
-- RDS RI portfolio RDS comes from cloudability as a csv export. The stucture of the csv is fixed and can't be modified. 
+- RDS RI portfolio comes from a cost management platform as a csv export. The structure of the csv is fixed and can't be modified. 
 - AWS RDS pricing data will be downloaded by the pricing-generator tool that has to be run manually. 
 
 ## Business logic
@@ -34,7 +34,7 @@ Use these tools and technologies
 - Auth0 Angular for authentication
 - RxJS for reactive programming
 - Jasmine and Karma for unit testing
-- ESLint with @wk/eslint-config for code linting
+- ESLint for code linting
 - GraphQL Code Generator for type-safe GraphQL operations
 - Husky for Git hooks
 

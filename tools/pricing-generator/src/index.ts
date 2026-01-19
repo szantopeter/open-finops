@@ -21,13 +21,13 @@ function parseArgs(): string {
       return args[i + 1];
     }
   }
-  return 'cloudability-rds-reservations.csv'; // Default
+  return 'demo-data-rds-reservations.csv'; // Default
 }
 
 async function main(): Promise<void> {
   const csvFile = parseArgs();
   await awsLogin();
-  const uniqueKeys = parseCloudabilityCSV(csvFile);
+  const uniqueKeys = parseRICSV(csvFile);
   console.log('Unique region/product/deployment/instance-family combinations:');
   uniqueKeys.forEach(key => console.log(key));
 
@@ -330,7 +330,7 @@ async function generatePricingCSV(key: string) {
   }
 }
 
-function parseCloudabilityCSV(csvFile: string): Set<string> {
+function parseRICSV(csvFile: string): Set<string> {
   const csvPath = join(__dirname, '../../../src/assets', csvFile);
   const csvContent = readFileSync(csvPath, 'utf-8');
   const lines = csvContent.split('\n').filter(line => line.trim());

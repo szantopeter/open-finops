@@ -21,7 +21,7 @@ Sync Impact Report
 ## Core Principles
 
 ### PRINCIPLE 1 — Single source of truth for inputs
-The RDS RI portfolio input is the Cloudability CSV export. The CSV structure is fixed and
+The RDS RI portfolio input is the cost management platform CSV export. The CSV structure is fixed and
 MUST be treated as authoritative. AWS RDS pricing data MUST be stored as static files
 under `assets/pricing` and MUST be consumed only from those files for deterministic
 calculations.
@@ -82,7 +82,7 @@ Rationale: Confidence and regression prevention.
 ### PRINCIPLE 8 — Tooling & tech stack
 Adopt and enforce the project's frontend tech standards: Angular 20+, TypeScript 5.8+
 (strict), Tailwind + SCSS, RxJS, Apollo Angular, Auth0 Angular, Jasmine/Karma,
-ESLint with `@wk/eslint-config`, GraphQL Code Generator, and Husky for Git hooks.
+ESLint with standard configuration, GraphQL Code Generator, and Husky for Git hooks.
 Charting libraries may be chosen per feature (ECharts recommended for heavy
 analytics).
 

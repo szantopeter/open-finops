@@ -80,7 +80,7 @@
 ## Constitution Check *(mandatory)*
 
 Before implementation, each spec MUST include:
-- A clear statement of input sources (e.g., Cloudability CSV) and which fields
+- A clear statement of input sources (e.g., cost management platform CSV) and which fields
   will be used for pricing match.
 - Exact pricing match requirements when applicable (instance class, region,
   multiAZ, engine, edition, upfront, duration).

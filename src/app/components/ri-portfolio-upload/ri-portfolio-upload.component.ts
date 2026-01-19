@@ -16,7 +16,7 @@ import { QuestionTooltipComponent } from '../question-tooltip/question-tooltip.c
         <app-question-tooltip [text]="helpHtml.innerHTML" class="ml-2"></app-question-tooltip>
       </div>
       <div #helpHtml style="display:none">
-        <p>To generate a new RI file go to cloudability, select <strong>Optimise / Commitment Portfolio</strong> then choose <strong>RDS Reserved Instances</strong> from the Commitment Type dropdown. Click the <strong>Export Reservations CSV</strong> button above the table.</p>
+        <p>To generate a new RI file go to your cost management platform, select <strong>Optimise / Commitment Portfolio</strong> then choose <strong>RDS Reserved Instances</strong> from the Commitment Type dropdown. Click the <strong>Export Reservations CSV</strong> button above the table.</p>
       </div>
       <ul *ngIf="lastError" class="text-red-600 mt-2 list-disc list-inside">
         <li *ngFor="let error of lastError">{{ error }}</li>

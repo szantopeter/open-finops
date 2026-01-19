@@ -2,12 +2,9 @@
 const eslint = require("@eslint/js");
 const tseslint = require("typescript-eslint");
 const angular = require("angular-eslint");
-const wkConfig = require("@wk/eslint-config");
 
 module.exports = tseslint.config(
   {
-    extends: [...wkConfig]
-  },
   {
     ignores: ["dist/**", "node_modules/**", "**/coverage/**"],
   },

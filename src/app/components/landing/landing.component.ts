@@ -9,7 +9,7 @@ import { RiCategorizationChartComponent } from '../ri-categorization-chart/ri-ca
 import { NgxEchartsModule } from 'ngx-echarts';
 
 @Component({
-  selector: 'wk-landing',
+  selector: 'app-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss']
   ,

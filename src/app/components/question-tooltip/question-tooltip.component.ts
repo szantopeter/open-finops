@@ -49,27 +49,27 @@ import 'tippy.js/dist/tippy.css';
       pointer-events: auto;
       line-height: 1;
     }
-    :host ::ng-deep .help-icon--wk {
+    :host ::ng-deep .help-icon--gradient {
       background: linear-gradient(90deg,#6b46c1,#b83280);
       color: #fff;
       border-color: transparent;
     }
     /* Ensure tooltip content preserves normal flow: lists, headings and paragraphs */
-    :host ::ng-deep .tippy-box[data-theme~="wk-help"] .tippy-content {
+    :host ::ng-deep .tippy-box[data-theme~="help"] .tippy-content {
       white-space: normal;
       color: #fff;
       font-size: 0.95rem;
     }
-    :host ::ng-deep .tippy-box[data-theme~="wk-help"] .tippy-content p {
+    :host ::ng-deep .tippy-box[data-theme~="help"] .tippy-content p {
       margin: 0 0 0.5rem 0;
       line-height: 1.35;
     }
-    :host ::ng-deep .tippy-box[data-theme~="wk-help"] .tippy-content h4 {
+    :host ::ng-deep .tippy-box[data-theme~="help"] .tippy-content h4 {
       margin: 0 0 0.35rem 0;
       font-size: 0.95rem;
       font-weight: 600;
     }
-    :host ::ng-deep .tippy-box[data-theme~="wk-help"] .tippy-content ul {
+    :host ::ng-deep .tippy-box[data-theme~="help"] .tippy-content ul {
       margin: 0 0 0.5rem 1.25rem;
       padding-left: 1.25rem;
       list-style-type: disc !important;
@@ -78,16 +78,16 @@ import 'tippy.js/dist/tippy.css';
       padding-left: 1.25rem !important;
       margin-left: 0 !important;
     }
-    :host ::ng-deep .tippy-box[data-theme~="wk-help"] .tippy-content li {
+    :host ::ng-deep .tippy-box[data-theme~="help"] .tippy-content li {
       margin-bottom: 0.25rem;
     }
-    :host ::ng-deep .tippy-box[data-theme~="wk-help"] .tippy-content li::marker {
+    :host ::ng-deep .tippy-box[data-theme~="help"] .tippy-content li::marker {
       color: inherit;
       font-size: 1em;
     }
     /* Force bullets to be visible even if global CSS removed them */
-    :host ::ng-deep .tippy-box[data-theme~="wk-help"] .tippy-content ul,
-    :host ::ng-deep .tippy-box[data-theme~="wk-help"] .tippy-content li {
+    :host ::ng-deep .tippy-box[data-theme~="help"] .tippy-content ul,
+    :host ::ng-deep .tippy-box[data-theme~="help"] .tippy-content li {
       -webkit-margin-before: 0px !important;
       -webkit-margin-after: 0px !important;
       -webkit-padding-start: 1.25rem !important;
@@ -101,13 +101,13 @@ export class QuestionTooltipComponent implements AfterViewInit, OnDestroy {
   @Input() variant: 'inline' | 'badge' = 'badge';
   @Input() placement: any = 'bottom';
   @Input() maxWidth = 320;
-  @Input() theme = 'wk-help';
+  @Input() theme = 'help';
   @Input() animation: any = 'shift-away';
 
   get _helpClasses(): string {
     // default: small gray circular badge (matches the original appearance)
     if (this.variant === 'badge') {
-      return this.theme === 'wk-help' ? 'help-icon help-icon--wk' : 'help-icon';
+      return this.theme === 'help' ? 'help-icon help-icon--gradient' : 'help-icon';
     }
     // inline compact variant (not used by default)
     return 'inline-block text-white text-sm font-medium cursor-default';
