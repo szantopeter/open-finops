@@ -367,7 +367,7 @@ export class RiImportService {
         return;
       }
 
-      const res = await fetch('/assets/demo-data-rds-reservations.csv');
+      const res = await fetch('assets/demo-data-rds-reservations.csv');
       if (!res.ok) return;
       const txt = await res.text();
 
