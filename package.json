@@ -68,5 +68,9 @@
       "npx --no-install prettier --write",
       "eslint -c eslint.local.config.cjs --cache --cache-location .eslintcache --fix"
     ]
+  },
+  "overrides": {
+    "chokidar": "3.6.0",
+    "readdirp": "3.6.0"
   }
 }
