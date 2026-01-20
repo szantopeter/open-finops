@@ -81,8 +81,8 @@ Rationale: Confidence and regression prevention.
 
 ### PRINCIPLE 8 — Tooling & tech stack
 Adopt and enforce the project's frontend tech standards: Angular 20+, TypeScript 5.8+
-(strict), Tailwind + SCSS, RxJS, Apollo Angular, Auth0 Angular, Jasmine/Karma,
-ESLint with standard configuration, GraphQL Code Generator, and Husky for Git hooks.
+(strict), Tailwind + SCSS, RxJS, Auth0 Angular, Jasmine/Karma,
+ESLint with standard configuration, and Husky for Git hooks.
 Charting libraries may be chosen per feature (ECharts recommended for heavy
 analytics).
 

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "aws-rds-ri-portfolio-optimiser": {
+    "open-finops": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -83,10 +83,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "aws-rds-ri-portfolio-optimiser:build:production"
+              "buildTarget": "open-finops:build:production"
             },
             "development": {
-              "buildTarget": "aws-rds-ri-portfolio-optimiser:build:development"
+              "buildTarget": "open-finops:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -94,7 +94,7 @@
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n",
           "options": {
-            "buildTarget": "aws-rds-ri-portfolio-optimiser:build"
+            "buildTarget": "open-finops:build"
           }
         },
         "test": {

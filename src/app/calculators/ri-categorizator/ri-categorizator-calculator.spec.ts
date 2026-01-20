@@ -1,6 +1,5 @@
 import { RiCategorizatorCalculator } from './ri-categorizator-calculator';
 import type { RiPortfolio } from '../../components/ri-portfolio-upload/models/ri-portfolio.model';
-import { PricingKey } from '../../components/ri-portfolio-upload/models/pricing.model';
 
 describe('RiCategorizatorCalculator', () => {
   describe('categorizeRiPortfolio', () => {

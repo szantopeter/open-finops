@@ -30,12 +30,10 @@ Use these tools and technologies
 - TypeScript 5.8+ with strict mode enabled
 - Tailwind CSS for styling
 - SCSS for component-specific styles
-- Apollo Angular for GraphQL client
 - Auth0 Angular for authentication
 - RxJS for reactive programming
 - Jasmine and Karma for unit testing
 - ESLint for code linting
-- GraphQL Code Generator for type-safe GraphQL operations
 - Husky for Git hooks
 
 ### Frontend coding standards

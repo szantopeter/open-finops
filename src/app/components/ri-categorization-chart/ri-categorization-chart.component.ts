@@ -138,7 +138,7 @@ export class RiCategorizationChartComponent implements OnChanges, AfterViewInit 
   }
 
   // expose the categoryCounts as a property so the child can use it
-  public lastCategoryCounts: Map<any, number> = new Map();
+  public lastCategoryCounts: Map<any, number> = new Map<any, number>();
 
   public formatCategoryName(key: any): string {
     if (key == null) return '';

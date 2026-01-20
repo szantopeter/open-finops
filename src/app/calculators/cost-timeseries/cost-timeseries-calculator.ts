@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-extraneous-class */
 import type CostTimeseries from './costTimeseries.model';
 import type { UpfrontPayment } from '../../components/ri-portfolio-upload/models/pricing.model';
 import type { RiPortfolio } from '../../components/ri-portfolio-upload/models/ri-portfolio.model';

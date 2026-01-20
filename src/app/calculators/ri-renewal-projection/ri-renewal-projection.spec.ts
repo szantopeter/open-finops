@@ -93,7 +93,7 @@ describe('RiRenewalProjection', () => {
     // The projection should include renewals up to and including the projectionEndDate.
     const projectionIso = projectionEnd.toISOString().slice(0, 10);
     // DEBUG: list all projected end dates (ISO)
-    // eslint-disable-next-line no-console
+    // ignore console.warn in tests
     console.debug('projected end dates:', projected.rows.map(e => e.riRow.endDate.toISOString()));
     const hasProjectionDate = projected.rows.some(entry => {
       const d = entry.riRow.endDate.toISOString().slice(0, 10);

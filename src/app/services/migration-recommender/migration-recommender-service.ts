@@ -46,7 +46,7 @@ export class MigrationRecommender {
 
       try {
         const originalPricingData = await this.loadPricingData(pricingKey);
-        const recommendation = await this.findCheaperInstanceClass(pricingKey, instanceInfo, originalPricingData);
+        const recommendation = await this.findCheaperInstanceClass(pricingKey, instanceInfo);
         if (recommendation) {
           recommendations.push(new MigrationRecommendation(
             pricingKey,
@@ -72,7 +72,7 @@ export class MigrationRecommender {
    * - Sort by instance alphabetically ascending
    * - Scan from top: when we find the original instance remember price; when we find any row with upfront < originalPrice remember candidate; at the end pick the highest candidate below original
    */
-  private async findCheaperInstanceClass(pricingKey: PricingKey, instanceInfo: InstanceClassInfo, originalPricingData: PricingData): Promise<{ key: PricingKey; pricingData: PricingData } | null> {
+  private async findCheaperInstanceClass(pricingKey: PricingKey, instanceInfo: InstanceClassInfo): Promise<{ key: PricingKey; pricingData: PricingData } | null> {
     const filePath = this.getPricingFilePath(pricingKey);
     const csvText = await lastValueFrom(this.http.get(filePath, { responseType: 'text' }));
     const parsed = Papa.parse(csvText, { header: true });

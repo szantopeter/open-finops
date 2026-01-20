@@ -61,6 +61,3 @@ Thumbs.db
 coverage/
 test-reports
 .vscode
-
-# Codegen
-graphql/generated.ts

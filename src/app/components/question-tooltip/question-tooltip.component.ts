@@ -143,7 +143,7 @@ export class QuestionTooltipComponent implements AfterViewInit, OnDestroy {
             const lel = li as HTMLElement;
             lel.style.marginBottom = '0.25rem';
           });
-        } catch (e) {
+        } catch {
           // ignore styling errors
         }
       }
@@ -162,7 +162,7 @@ export class QuestionTooltipComponent implements AfterViewInit, OnDestroy {
           const box = instance.popper.querySelector('.tippy-box');
           if (box) {
             box.classList.remove('animate__animated', 'animate__rubberBand');
-            const _ = (box as HTMLElement).offsetWidth;
+            void (box as HTMLElement).offsetWidth;
             box.classList.add('animate__animated', 'animate__rubberBand');
           }
         },
@@ -188,7 +188,7 @@ export class QuestionTooltipComponent implements AfterViewInit, OnDestroy {
       };
     } catch (err) {
       // ignore tippy init errors
-      // eslint-disable-next-line no-console
+      // ignore console.warn in component
       console.warn('question-tooltip: tippy init failed', err);
     }
   }

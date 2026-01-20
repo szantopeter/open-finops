@@ -1,10 +1,10 @@
 // @ts-check
 const eslint = require("@eslint/js");
 const tseslint = require("typescript-eslint");
-const angular = require("angular-eslint");
+const angular = require("@angular-eslint/eslint-plugin");
+const angularTemplateParser = require("@angular-eslint/template-parser");
 
 module.exports = tseslint.config(
-  {
   {
     ignores: ["dist/**", "node_modules/**", "**/coverage/**"],
   },
@@ -20,9 +20,7 @@ module.exports = tseslint.config(
       eslint.configs.recommended,
       ...tseslint.configs.recommended,
       ...tseslint.configs.stylistic,
-      ...angular.configs.tsRecommended,
     ],
-    processor: angular.processInlineTemplates,
     rules: {
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-require-imports": "off",
@@ -39,12 +37,6 @@ module.exports = tseslint.config(
       "import/no-unresolved": "off",
       "complexity": "off",
       "no-constant-condition": "off",
-    },
-  },
-  {
-    files: ["**/*.html"],
-    rules: {
-      "@angular-eslint/template/label-has-associated-control": 0
     },
   },
   {
